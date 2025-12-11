@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pill } from "../ui";
 import type { PillStatus } from "../ui/Pill";
 
@@ -33,27 +33,44 @@ export const WordMatch = () => {
   const [orderLeft] = useState(shuffled(range(0, WordPairs.length)));
   const [orderRight] = useState(shuffled(range(0, WordPairs.length)));
 
-  useEffect(() => {
-    const indexLeft = selectedPair[0];
-    const indexRight = selectedPair[1];
-    if (indexLeft !== null && indexRight !== null) {
-      setSelectedPair([null, null]);
-      if (indexLeft === indexRight) {
-        setSuccessPairs((pairs) => {
-          pairs[indexLeft] = true;
-          return [...pairs];
-        });
-      } else {
-        setFailPairs((pairs) => [...pairs, [indexLeft, indexRight]]);
+  const handleSelection = (order: number, index: number) => {
+    setSelectedPair((pair) => {
+      const newPair: [number | null, number | null] = [
+        order === 0 ? (pair[0] !== index ? index : null) : pair[0],
+        order === 1 ? (pair[1] !== index ? index : null) : pair[1],
+      ];
 
-        setTimeout(() => {
-          setFailPairs((pairs) =>
-            pairs.filter(([l, r]) => l !== indexLeft || r !== indexRight)
-          );
-        }, 1000);
+      // Check if both are selected after this update
+      const indexLeft = newPair[0];
+      const indexRight = newPair[1];
+
+      if (indexLeft !== null && indexRight !== null) {
+        // Process match immediately without useEffect
+        // Use requestAnimationFrame to ensure state update completes first
+        requestAnimationFrame(() => {
+          if (indexLeft === indexRight) {
+            setSuccessPairs((pairs) => {
+              const newPairs = [...pairs];
+              newPairs[indexLeft] = true;
+              return newPairs;
+            });
+          } else {
+            setFailPairs((pairs) => [...pairs, [indexLeft, indexRight]]);
+
+            setTimeout(() => {
+              setFailPairs((pairs) =>
+                pairs.filter(([l, r]) => l !== indexLeft || r !== indexRight)
+              );
+            }, 1000);
+          }
+        });
+        // Reset selection immediately
+        return [null, null];
       }
-    }
-  }, [selectedPair]);
+
+      return newPair;
+    });
+  };
 
   const wordStatus = (order: number, index: number): PillStatus => {
     if (selectedPair[order] == index && selectedPair[flip(order)] == null) {
@@ -63,6 +80,8 @@ export const WordMatch = () => {
     if (successPairs[index]) return "success";
 
     if (failPairs.some((pair) => pair[order] === index)) return "fail";
+
+    return "blanc"
   };
 
   if (!orderLeft || !orderRight) return null;
@@ -79,12 +98,7 @@ export const WordMatch = () => {
               key={`left-${index}`}
               status={wordStatus(0, index)}
               hidden={successPairs[index]}
-              onClick={() =>
-                setSelectedPair((pair) => [
-                  pair[0] != index ? index : null,
-                  pair[1],
-                ])
-              }
+              onClick={() => handleSelection(0, index)}
             >
               {WordPairs[index][0]}
             </Pill>
@@ -98,12 +112,7 @@ export const WordMatch = () => {
               key={`right-${index}`}
               status={wordStatus(1, index)}
               hidden={successPairs[index]}
-              onClick={() =>
-                setSelectedPair((pair) => [
-                  pair[0],
-                  pair[1] != index ? index : null,
-                ])
-              }
+              onClick={() => handleSelection(1, index)}
             >
               {WordPairs[index][1]}
             </Pill>
