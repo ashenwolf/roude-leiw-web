@@ -1,3 +1,5 @@
 name = "roude-leiw-web"
 compatibility_date = "2025-04-03"
-assets = { not_found_handling = "single-page-application" }
+
+# Note: For Cloudflare Pages, SPA routing is handled automatically
+# The build output directory is specified in the deploy command or dashboard settings
