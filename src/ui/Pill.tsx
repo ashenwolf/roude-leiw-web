@@ -35,9 +35,9 @@ const PillStatusColors = {
 export type PillStatus = keyof typeof PillStatusColors;
 
 const PillSizeMap = {
-  sm: ["text-md", "px-1", "py-3"],
-  md: ["text-lg", "px-3", "py-6"],
-  lg: ["text-xl", "px-4", "py-6"],
+  sm: ["text-sm", "", "h-14"],
+  md: ["text-md", "", "h-18"],
+  lg: ["text-lg", "", "h-22"],
 } as const;
 
 type PillSize = keyof typeof PillSizeMap;
@@ -45,7 +45,7 @@ type PillSize = keyof typeof PillSizeMap;
 export const Pill = ({
   children,
   hidden,
-  onClick = () => {},
+  onClick = () => { },
   status = "blanc",
   size = "md",
 }: {
@@ -77,9 +77,10 @@ export const Pill = ({
         shadow,
         text,
         textSize,
-        "font-bold",
+        // "font-bold",
         px,
         py,
+        "p-1",
         "rounded-lg",
         "cursor-pointer",
         "transition",
