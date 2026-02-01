@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { PillStatus } from "../../ui/Pill";
 
@@ -448,13 +448,8 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
   // Completion Detection
   // ──────────────────────────────────────────────────────────────────────────
 
-  // Game is complete when all slots are empty (all pairs matched and faded out)
-  const isGameComplete = useMemo(() => {
-    if (pairs.length === 0) return false;
-    const allLeftEmpty = gameState.leftSlots.every((slot) => slot.type === "empty");
-    const allRightEmpty = gameState.rightSlots.every((slot) => slot.type === "empty");
-    return allLeftEmpty && allRightEmpty;
-  }, [gameState.leftSlots, gameState.rightSlots, pairs.length]);
+  // Game is complete when all pairs are matched (don't wait for fade animation)
+  const isGameComplete = matchedCount === totalPairs && totalPairs > 0;
 
   useEffect(() => {
     if (isGameComplete) {
