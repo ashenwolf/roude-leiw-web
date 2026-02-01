@@ -44,14 +44,14 @@ type PillSize = keyof typeof PillSizeMap;
 export const Pill = ({
   children,
   className = "",
-  onClick = () => {},
+  onClick = () => { },
   status = "blanc",
   size = "md",
 }: {
   children: React.ReactNode;
   className?: string;
-  status?: PillStatus;
   onClick?: React.Dispatch<void>;
+  status?: PillStatus;
   size?: PillSize;
 }) => {
   const [bg, border, , shadow, text] = PillStatusColors[status];

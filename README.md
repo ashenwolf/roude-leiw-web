@@ -8,9 +8,15 @@ Roude Leiw is a mobile-first language learning app that helps users learn Luxemb
 
 ### Current Features
 
-- **Word Matching Exercise**: Match English words with their Luxembourgish translations
-- **Visual Feedback**: Color-coded status for selected, correct, and incorrect answers
-- **Smooth Animations**: Fading effects for matched pairs
+- **Word Matching Exercise**: Match source words with their target translations
+  - Slot-based state machine: `active` → `selected` → `fading` → `active`/`empty`
+  - Supports unlimited word pairs (displays up to 5 at a time via `DISPLAY_SLOTS`)
+  - Dynamic pair replacement: matched pairs fade out and are replaced with new pairs
+  - Cross-randomization: new pairs appear in reshuffled positions for variety
+  - Fail state with auto-reset after 1 second for incorrect matches
+  - Completion callback when all slots become empty
+- **Visual Feedback**: Color-coded pill status (`blanc`, `selected`, `success`, `fail`)
+- **Smooth Animations**: Fading effects for matched pairs with deferred slot transitions
 - **Mobile-First Design**: Optimized for mobile devices with desktop preview frame
 
 ## Tech Stack
@@ -40,7 +46,10 @@ src/
 │   └── AppExercise.tsx   # Exercise page wrapper
 │
 ├── exercise/            # Exercise components (learning activities)
-│   └── WordMatch.tsx     # Word matching game
+│   └── WordMatch/              # Word matching game
+│       ├── index.tsx           # UI component with WordColumn sub-component
+│       ├── use-game.ts         # Game state hook (slot machine, matching logic, reshuffling)
+│       └── types.ts            # Type definitions (WordPair, SlotState, GameState)
 │
 └── ui/                   # Reusable UI components
     ├── index.ts          # UI exports and color maps
@@ -182,18 +191,53 @@ export const ProgressBar = ({
 export { ProgressBar } from "./ProgressBar";
 ```
 
-### Adding Word Pairs
+### Using the WordMatch Exercise
 
-Edit the `WordPairs` array in `src/exercise/WordMatch.tsx`:
+The `WordMatch` component accepts word pairs as props and supports dynamic replacement:
 
 ```tsx
-const WordPairs = [
+// src/page/AppExercise.tsx
+import { WordMatch } from "../exercise/WordMatch";
+
+import type { WordPair } from "../exercise/WordMatch";
+
+const WordPairs: WordPair[] = [
   ["Hello", "Moien"],
   ["Goodbye", "Äddi"],
   ["Thank you", "Merci"],
-  // Add more pairs here
+  ["Yes", "Jo"],
+  ["No", "Nee"],
+  // Add as many pairs as you want - only 5 are shown at a time
+  ["Please", "Wann ech gelift"],
+  ["Good morning", "Gudde Moien"],
 ];
+
+export const MyExercise = () => {
+  const handleComplete = () => {
+    console.log("All pairs matched!");
+    // Navigate to next exercise, record progress, etc.
+  };
+
+  return (
+    <WordMatch 
+      pairs={WordPairs} 
+      onComplete={handleComplete} 
+    />
+  );
+};
 ```
+
+**Props:**
+- `pairs`: Array of `WordPair` tuples (`[string, string]`) - typically `[source, target]` language
+- `onComplete`: Optional callback fired when all pairs are successfully matched (all slots become empty)
+
+**Behavior:**
+- Displays up to 5 pairs at a time (configurable via `DISPLAY_SLOTS` constant)
+- Each slot has a state machine: `active` → `selected` → `fading` → `active`/`empty`
+- Incorrect matches trigger `fail` state with auto-reset after 1 second
+- When a pair is matched, it fades out and is replaced with a new pair from the pool
+- New pairs appear in cross-randomized positions for variety (Duolingo-inspired)
+- Provisional pair assignments are reshuffled when multiple pairs are matched during fade animation
 
 ## Architecture Decisions
 

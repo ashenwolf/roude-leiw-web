@@ -1,26 +1,63 @@
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pill } from ".";
 import type { PillStatus } from "./Pill";
+
+const FADE_DURATION_MS = 1400;
+const FADE_START_DELAY_MS = 100;
 
 export const FadingPill = ({
   children,
   hidden,
-  onClick = () => { },
+  onClick = () => {},
+  onFadeComplete,
   status = "blanc",
 }: {
   children: React.ReactNode;
   status?: PillStatus;
   onClick?: React.Dispatch<void>;
+  onFadeComplete?: () => void;
   hidden?: boolean;
 }) => {
-  const [fadeClass, setFadeClass] = useState("opacity-100");
+  const [isFading, setIsFading] = useState(false);
+  const fadeCompleteCalledRef = useRef(false);
+
+  // Store callback in ref to avoid effect re-running on every render
+  const onFadeCompleteRef = useRef(onFadeComplete);
+  onFadeCompleteRef.current = onFadeComplete;
 
   useEffect(() => {
-    if (hidden) {
-      setTimeout(() => setFadeClass("duration-1400 ease-in opacity-0"), 100);
+    if (hidden && !fadeCompleteCalledRef.current) {
+      // Start fade animation after a small delay
+      const fadeTimer = setTimeout(() => {
+        setIsFading(true);
+      }, FADE_START_DELAY_MS);
+
+      // Call onFadeComplete after animation ends
+      const completeTimer = setTimeout(() => {
+        if (!fadeCompleteCalledRef.current) {
+          fadeCompleteCalledRef.current = true;
+          onFadeCompleteRef.current?.();
+        }
+      }, FADE_DURATION_MS + FADE_START_DELAY_MS);
+
+      return () => {
+        clearTimeout(fadeTimer);
+        clearTimeout(completeTimer);
+      };
+    }
+
+    // Reset when hidden becomes false (new content)
+    if (!hidden) {
+      fadeCompleteCalledRef.current = false;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsFading(false);
     }
   }, [hidden]);
+
+  const fadeClass = isFading
+    ? "transition-opacity duration-[1400ms] ease-in opacity-0"
+    : "opacity-100";
 
   return (
     <Pill status={status} onClick={onClick} className={fadeClass}>
