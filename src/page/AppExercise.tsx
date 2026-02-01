@@ -1,8 +1,8 @@
 import { useNavigation } from "../context/useNavigation";
-import { WordMatch } from "../excersise/WordMatch";
+import { WordMatch } from "../exercise/WordMatch";
 import { Button } from "../ui/Button";
 
-export const AppExcersise = () => {
+export const AppExercise = () => {
   const { navigateTo } = useNavigation();
   return (
     <div>

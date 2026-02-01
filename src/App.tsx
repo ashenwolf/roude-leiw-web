@@ -1,12 +1,12 @@
 import { AppHome } from "./page/AppHome";
-import { AppExcersise } from "./page/AppExcersise";
+import { AppExercise } from "./page/AppExercise";
 import { useNavigation } from "./context/useNavigation";
 
 import "./App.css";
 
 const PageMapper = {
   home: AppHome,
-  excersise: AppExcersise,
+  exercise: AppExercise,
 };
 
 function App() {

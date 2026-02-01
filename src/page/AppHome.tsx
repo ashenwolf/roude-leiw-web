@@ -5,7 +5,7 @@ export const AppHome = () => {
   const { navigateTo } = useNavigation();
   return (
     <div>
-      <Button onClick={() => navigateTo("excersise")}>Start Excersise</Button>
+      <Button onClick={() => navigateTo("exercise")}>Start Exercise</Button>
     </div>
   );
 };

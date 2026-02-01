@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Pill } from "../ui";
 import type { PillStatus } from "../ui/Pill";
+import { FadingPill } from "../ui/FadingPill";
 
 const WordPairs = [
   ["Hello", "Moien"],
@@ -94,28 +94,28 @@ export const WordMatch = () => {
         {/* Left column */}
         <div className="flex flex-col gap-4 flex-1">
           {orderLeft.map((index) => (
-            <Pill
+            <FadingPill
               key={`left-${index}`}
               status={wordStatus(0, index)}
               hidden={successPairs[index]}
               onClick={() => handleSelection(0, index)}
             >
               {WordPairs[index][0]}
-            </Pill>
+            </FadingPill>
           ))}
         </div>
 
         {/* Right column */}
         <div className="flex flex-col gap-4 flex-1">
           {orderRight.map((index) => (
-            <Pill
+            <FadingPill
               key={`right-${index}`}
               status={wordStatus(1, index)}
               hidden={successPairs[index]}
               onClick={() => handleSelection(1, index)}
             >
               {WordPairs[index][1]}
-            </Pill>
+            </FadingPill>
           ))}
         </div>
       </div>
