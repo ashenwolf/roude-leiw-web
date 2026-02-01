@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Letz",
+  "scopeName": "source.letz",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#lesson-header" },
+    { "include": "#word-pair" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.letz",
+          "match": "^\\s*#.*$"
+        }
+      ]
+    },
+    "lesson-header": {
+      "patterns": [
+        {
+          "name": "meta.lesson-header.letz",
+          "match": "^(@lesson)\\s+(\\S+)\\s+(\"[^\"]*\")",
+          "captures": {
+            "1": { "name": "keyword.control.lesson.letz" },
+            "2": { "name": "entity.name.class.lesson-id.letz" },
+            "3": { "name": "string.quoted.double.lesson-title.letz" }
+          }
+        }
+      ]
+    },
+    "word-pair": {
+      "patterns": [
+        {
+          "name": "meta.word-pair.letz",
+          "match": "^([^=#]+?)\\s*(=)\\s*(.+)$",
+          "captures": {
+            "1": { "name": "variable.other.luxembourgish.letz" },
+            "2": { "name": "keyword.operator.assignment.letz" },
+            "3": { "name": "string.unquoted.english.letz" }
+          }
+        }
+      ]
+    }
+  }
+}

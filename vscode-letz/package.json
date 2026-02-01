@@ -1,0 +1,44 @@
+{
+  "name": "letz-language",
+  "displayName": "Letz Language Support",
+  "description": "Syntax highlighting for .letz Luxembourgish lesson files",
+  "version": "1.0.0",
+  "publisher": "roude-leiw",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "letz",
+        "aliases": [
+          "Letz",
+          "letz"
+        ],
+        "extensions": [
+          ".letz"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/letz-icon.svg",
+          "dark": "./icons/letz-icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "letz",
+        "scopeName": "source.letz",
+        "path": "./syntaxes/letz.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roude-leiw/roude-leiw-web"
+  },
+  "license": "MIT"
+}
