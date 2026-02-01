@@ -119,7 +119,7 @@ export const MilestonePopup = ({
     <div className="text-center">
       <div className="text-4xl mb-2">🎯</div>
       <h3 className="text-xl font-bold text-gray-800">
-        Batch {batchNumber} of {totalBatches} Complete!
+        Set {batchNumber} of {totalBatches} Complete!
       </h3>
       <p className="text-gray-600 mt-1">Keep going!</p>
     </div>

@@ -51,7 +51,7 @@ export const ProgressBar = ({
       {/* Batch labels */}
       <div className="flex justify-between mt-1 px-1">
         <span className="text-xs text-gray-500">
-          Batch {currentBatch + 1} of {totalBatches}
+          {currentBatch + 1} of {totalBatches}
         </span>
         <span className="text-xs text-gray-500">
           {Math.round(batchProgress * 100)}%
