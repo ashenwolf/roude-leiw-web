@@ -277,8 +277,8 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
         const slots = side === "left" ? state.leftSlots : state.rightSlots;
         const slot = slots[position];
 
-        // Only active slots can be selected
-        if (slot.type !== "active" && slot.type !== "selected") {
+        // Only active, selected, or fail slots can be selected
+        if (slot.type !== "active" && slot.type !== "selected" && slot.type !== "fail") {
           return state;
         }
 
