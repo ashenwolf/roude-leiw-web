@@ -58,10 +58,12 @@ const updateSlotAtPosition = (
   newSlot: SlotState
 ): SlotState[] => slots.map((slot, i) => (i === position ? newSlot : slot));
 
+type NonEmptySlotState = Exclude<SlotState, { type: "empty" }>;
+
 const updateSlotByPairIndex = (
   slots: SlotState[],
   pairIndex: number,
-  updater: (slot: SlotState) => SlotState
+  updater: (slot: NonEmptySlotState) => SlotState
 ): SlotState[] =>
   slots.map((slot) =>
     slot.type !== "empty" && slot.pairIndex === pairIndex ? updater(slot) : slot
@@ -177,7 +179,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
   const matchedCount = gameState.matchedCount;
 
   // Fail timeout refs for cleanup
-  const failTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
+  const failTimeoutsRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
   // Store onMatch callback in ref to avoid stale closure
   const onMatchRef = useRef(onMatch);
@@ -297,6 +299,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
         if (sameSideSelectedIdx !== -1) {
           // Deselect the previous selection on same side, select the new one
           const prevSlot = sameSlots[sameSideSelectedIdx];
+          if (prevSlot.type === "empty") return state; // Type guard - should never happen
           const deselectedSlot: SlotState = { type: "active", pairIndex: prevSlot.pairIndex };
           const newSlot: SlotState = { type: "selected", pairIndex };
 
