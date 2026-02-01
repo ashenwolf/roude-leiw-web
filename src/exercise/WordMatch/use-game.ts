@@ -153,6 +153,14 @@ type UseGameProps = {
   onMatch?: (matchedCount: number, totalPairs: number) => void;
 };
 
+/**
+ * Check if two pairs match by comparing actual word values.
+ * A match is valid if the left word's translation equals the right word's translation.
+ * This handles cases where multiple source words have the same translation.
+ */
+const isValueMatch = (pairs: WordPair[], leftPairIndex: number, rightPairIndex: number): boolean =>
+  pairs[leftPairIndex][1] === pairs[rightPairIndex][1];
+
 type UseGameReturn = {
   displayCount: number;
   matchedCount: number;
@@ -324,9 +332,11 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
             : { ...state, rightSlots: updateSlotAtPosition(state.rightSlots, position, newSlot) };
         }
 
-        // Both sides have selection - check for match
+        // Both sides have selection - check for match by value
         const otherPairIndex = otherSelected.pairIndex;
-        const isMatch = pairIndex === otherPairIndex;
+        const leftPairIndex = side === "left" ? pairIndex : otherPairIndex;
+        const rightPairIndex = side === "right" ? pairIndex : otherPairIndex;
+        const isMatch = isValueMatch(pairs, leftPairIndex, rightPairIndex);
 
         if (isMatch) {
           // Match found! Mark both as fading
@@ -334,42 +344,23 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
           const nextPairIndex = state.pairPool.length > 0 ? state.pairPool[0] : null;
           const newPool = state.pairPool.slice(1);
 
-          // Update both slots to fading with next pair assignment
-          const newLeftSlots = updateSlotByPairIndex(state.leftSlots, pairIndex, (s) => ({
+          // Update left slot by leftPairIndex, right slot by rightPairIndex
+          const newLeftSlots = updateSlotByPairIndex(state.leftSlots, leftPairIndex, (s) => ({
             type: "fading",
             pairIndex: s.pairIndex,
             nextPairIndex,
           }));
 
-          const newRightSlots = updateSlotByPairIndex(state.rightSlots, pairIndex, (s) => ({
+          const newRightSlots = updateSlotByPairIndex(state.rightSlots, rightPairIndex, (s) => ({
             type: "fading",
             pairIndex: s.pairIndex,
             nextPairIndex,
           }));
-
-          // Also deselect the other side (it was selected)
-          const finalRightSlots =
-            side === "left"
-              ? updateSlotByPairIndex(newRightSlots, otherPairIndex, (s) => ({
-                  type: "fading",
-                  pairIndex: s.pairIndex,
-                  nextPairIndex,
-                }))
-              : newRightSlots;
-
-          const finalLeftSlots =
-            side === "right"
-              ? updateSlotByPairIndex(newLeftSlots, otherPairIndex, (s) => ({
-                  type: "fading",
-                  pairIndex: s.pairIndex,
-                  nextPairIndex,
-                }))
-              : newLeftSlots;
 
           // Reshuffle provisional assignments (matchedCount incremented atomically)
           const newState: GameState = {
-            leftSlots: finalLeftSlots,
-            rightSlots: finalRightSlots,
+            leftSlots: newLeftSlots,
+            rightSlots: newRightSlots,
             pairPool: newPool,
             matchedCount: state.matchedCount + 1,
           };
@@ -377,8 +368,6 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
           return reshuffleProvisional(newState);
         } else {
           // Mismatch - mark both as fail
-          const leftPairIndex = side === "left" ? pairIndex : otherPairIndex;
-          const rightPairIndex = side === "right" ? pairIndex : otherPairIndex;
 
           const newLeftSlots = updateSlotByPairIndex(state.leftSlots, leftPairIndex, (s) => ({
             type: "fail",
@@ -414,7 +403,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
         }
       });
     },
-    []
+    [pairs]
   );
 
   // ──────────────────────────────────────────────────────────────────────────
