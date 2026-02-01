@@ -1,5 +1,4 @@
 import type React from "react";
-import { useEffect, useState } from "react";
 
 const PillStatusColors = {
   blanc: [
@@ -44,26 +43,19 @@ type PillSize = keyof typeof PillSizeMap;
 
 export const Pill = ({
   children,
-  hidden,
-  onClick = () => { },
+  className = "",
+  onClick = () => {},
   status = "blanc",
   size = "md",
 }: {
   children: React.ReactNode;
+  className?: string;
   status?: PillStatus;
   onClick?: React.Dispatch<void>;
   size?: PillSize;
-  hidden?: boolean;
 }) => {
   const [bg, border, , shadow, text] = PillStatusColors[status];
   const [textSize, px, py] = PillSizeMap[size];
-  const [hiding, setHiding] = useState("opacity-100");
-
-  useEffect(() => {
-    if (hidden) {
-      setTimeout(() => setHiding("duration-1400 ease-in opacity-0"), 100);
-    }
-  }, [hidden]);
 
   return (
     <button
@@ -72,19 +64,17 @@ export const Pill = ({
         bg,
         border,
         "border-2",
-        // hover,
         "inset-shadow-[0_-3px_0px]",
         shadow,
         text,
         textSize,
-        // "font-bold",
         px,
         py,
         "p-1",
         "rounded-lg",
         "cursor-pointer",
         "transition",
-        hiding,
+        className,
       ].join(" ")}
     >
       {children}
