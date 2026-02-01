@@ -138,7 +138,7 @@ const initializeGame = (pairCount: number, displayCount: number): GameState => {
     pairIndex,
   }));
 
-  return { leftSlots, rightSlots, pairPool: pool };
+  return { leftSlots, rightSlots, pairPool: pool, matchedCount: 0 };
 };
 
 // ============================================================================
@@ -148,10 +148,14 @@ const initializeGame = (pairCount: number, displayCount: number): GameState => {
 type UseGameProps = {
   pairs: WordPair[];
   onComplete?: () => void;
+  onMatch?: (matchedCount: number, totalPairs: number) => void;
 };
 
 type UseGameReturn = {
   displayCount: number;
+  matchedCount: number;
+  totalPairs: number;
+  progress: number;
   getSlotStatus: (side: ColumnSide, position: number) => PillStatus;
   getSlotWord: (side: ColumnSide, position: number) => string;
   isSlotFading: (side: ColumnSide, position: number) => boolean;
@@ -160,16 +164,51 @@ type UseGameReturn = {
   handleFadeComplete: (side: ColumnSide, position: number) => void;
 };
 
-export const useGame = ({ pairs, onComplete }: UseGameProps): UseGameReturn => {
+export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameReturn => {
   const displayCount = Math.min(DISPLAY_SLOTS, pairs.length);
+  const totalPairs = pairs.length;
 
-  // Single unified game state
+  // Single unified game state (includes matchedCount for atomic updates)
   const [gameState, setGameState] = useState<GameState>(() =>
     initializeGame(pairs.length, displayCount)
   );
 
+  // Derive matchedCount from game state
+  const matchedCount = gameState.matchedCount;
+
   // Fail timeout refs for cleanup
   const failTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
+
+  // Store onMatch callback in ref to avoid stale closure
+  const onMatchRef = useRef(onMatch);
+  onMatchRef.current = onMatch;
+
+  // Track pairs reference to detect when new batch is loaded
+  const pairsRef = useRef(pairs);
+
+  // Track previous matchedCount to detect new matches
+  const prevMatchedCountRef = useRef(0);
+
+  // Reset game state when pairs change (new batch)
+  useEffect(() => {
+    if (pairsRef.current !== pairs) {
+      pairsRef.current = pairs;
+      const newDisplayCount = Math.min(DISPLAY_SLOTS, pairs.length);
+      setGameState(initializeGame(pairs.length, newDisplayCount));
+      prevMatchedCountRef.current = 0;
+      // Clear any pending fail timeouts
+      failTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
+      failTimeoutsRef.current.clear();
+    }
+  }, [pairs]);
+
+  // Fire onMatch callback when matchedCount increases (no side effects in state updaters)
+  useEffect(() => {
+    if (matchedCount > prevMatchedCountRef.current) {
+      onMatchRef.current?.(matchedCount, totalPairs);
+      prevMatchedCountRef.current = matchedCount;
+    }
+  }, [matchedCount, totalPairs]);
 
   // Cleanup timeouts on unmount
   useEffect(() => {
@@ -251,6 +290,25 @@ export const useGame = ({ pairs, onComplete }: UseGameProps): UseGameReturn => {
             : { ...state, rightSlots: updateSlotAtPosition(state.rightSlots, position, newSlot) };
         }
 
+        // Check if same side already has a selection (switch selection)
+        const sameSlots = side === "left" ? state.leftSlots : state.rightSlots;
+        const sameSideSelectedIdx = sameSlots.findIndex((s) => s.type === "selected");
+
+        if (sameSideSelectedIdx !== -1) {
+          // Deselect the previous selection on same side, select the new one
+          const prevSlot = sameSlots[sameSideSelectedIdx];
+          const deselectedSlot: SlotState = { type: "active", pairIndex: prevSlot.pairIndex };
+          const newSlot: SlotState = { type: "selected", pairIndex };
+
+          const updatedSlots = sameSlots
+            .map((s, i) => (i === sameSideSelectedIdx ? deselectedSlot : s))
+            .map((s, i) => (i === position ? newSlot : s));
+
+          return side === "left"
+            ? { ...state, leftSlots: updatedSlots }
+            : { ...state, rightSlots: updatedSlots };
+        }
+
         // Check if other side has a selection
         const otherSlots = side === "left" ? state.rightSlots : state.leftSlots;
         const otherSelected = otherSlots.find((s) => s.type === "selected");
@@ -305,11 +363,12 @@ export const useGame = ({ pairs, onComplete }: UseGameProps): UseGameReturn => {
                 }))
               : newLeftSlots;
 
-          // Reshuffle provisional assignments
+          // Reshuffle provisional assignments (matchedCount incremented atomically)
           const newState: GameState = {
             leftSlots: finalLeftSlots,
             rightSlots: finalRightSlots,
             pairPool: newPool,
+            matchedCount: state.matchedCount + 1,
           };
 
           return reshuffleProvisional(newState);
@@ -400,8 +459,14 @@ export const useGame = ({ pairs, onComplete }: UseGameProps): UseGameReturn => {
     }
   }, [isGameComplete, onComplete]);
 
+  // Calculate progress as ratio of matched pairs to total
+  const progress = totalPairs > 0 ? matchedCount / totalPairs : 0;
+
   return {
     displayCount,
+    matchedCount,
+    totalPairs,
+    progress,
     getSlotStatus,
     getSlotWord,
     isSlotFading,

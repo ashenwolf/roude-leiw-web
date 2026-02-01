@@ -17,4 +17,5 @@ export type GameState = {
   leftSlots: SlotState[];
   rightSlots: SlotState[];
   pairPool: number[];
+  matchedCount: number;
 };

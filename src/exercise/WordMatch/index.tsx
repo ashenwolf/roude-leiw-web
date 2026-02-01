@@ -10,6 +10,7 @@ export type { WordPair } from "./types";
 type WordMatchProps = {
   pairs: WordPair[];
   onComplete?: () => void;
+  onMatch?: (matchedCount: number, totalPairs: number) => void;
 };
 
 const range = (from: number, to: number) =>
@@ -60,7 +61,7 @@ const WordColumn = ({
   </div>
 );
 
-export const WordMatch = ({ pairs, onComplete }: WordMatchProps) => {
+export const WordMatch = ({ pairs, onComplete, onMatch }: WordMatchProps) => {
   const {
     displayCount,
     getSlotStatus,
@@ -69,7 +70,7 @@ export const WordMatch = ({ pairs, onComplete }: WordMatchProps) => {
     isSlotEmpty,
     handleSelection,
     handleFadeComplete,
-  } = useGame({ pairs, onComplete });
+  } = useGame({ pairs, onComplete, onMatch });
 
   return (
     <div className="flex flex-col items-center gap-8">

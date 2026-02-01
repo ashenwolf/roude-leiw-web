@@ -1,0 +1,13 @@
+{
+  "levels": [
+    {
+      "id": "A1",
+      "lessons": [
+        { "id": "01_greetings", "file": "01_greetings.letz" },
+        { "id": "02_numbers", "file": "02_numbers.letz" },
+        { "id": "03_family", "file": "03_family.letz" },
+        { "id": "04_food", "file": "04_food.letz" }
+      ]
+    }
+  ]
+}

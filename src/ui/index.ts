@@ -8,3 +8,5 @@ export type UiColor = keyof typeof UiColorMap;
 export { Button } from "./Button";
 export { Pill } from "./Pill";
 export { AppWrapper } from "./AppWrapper";
+export { Popup, MilestonePopup, CelebrationPopup } from "./Popup";
+export { ProgressBar } from "./ProgressBar";
