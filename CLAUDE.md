@@ -24,8 +24,62 @@ Deployed to Cloudflare Pages as a fully static React app (no backend).
 
 - React 19 + TypeScript (strict) + Tailwind CSS 4
 - Vite 7 with Babel React Compiler (automatic memoization)
-- Chevrotain for parsing `.letz` lesson files
+- Chevrotain 11 for parsing `.letz` lesson files
 - Cloudflare Pages (deployment target)
+
+## Project Structure
+
+```
+src/
+├── main.tsx                          # App entry point (React root + providers)
+├── App.tsx                           # Root component, page routing
+├── App.css                           # Global app styles
+├── index.css                         # Tailwind imports & theme config
+│
+├── context/                          # Navigation state
+│   ├── navigation.ts                 # Types: AppPages, NavigationContext
+│   ├── NavigationContext.tsx         # Context provider
+│   └── useNavigation.ts              # Hook: useNavigation()
+│
+├── page/                             # Top-level page components
+│   ├── AppHome.tsx                   # Home/lesson selection page
+│   └── AppExercise.tsx              # Exercise/game page
+│
+├── exercise/                         # Core game logic
+│   ├── use-exercise-session.ts       # Main orchestrator hook
+│   ├── lesson-loader.ts              # Fetches manifest + .letz files
+│   ├── letz-parser.ts                # Facade: entriesToWordPairs(), combineAndShuffleEntries()
+│   └── WordMatch/                    # Matching game
+│       ├── index.tsx                 # Game UI (left/right columns)
+│       ├── use-game.ts               # Game state machine
+│       └── types.ts                  # WordPair, SlotState, GameState
+│
+├── lib/                              # Shared libraries
+│   └── letz-parser/                  # Chevrotain parser implementation
+│       ├── index.ts                  # Main exports
+│       ├── lexer.ts                  # Tokenizer
+│       ├── parser.ts                 # Grammar definition
+│       └── visitor.ts                # AST visitor → structured data
+│
+└── ui/                               # Reusable UI components
+    ├── index.ts                      # Barrel exports + color maps
+    ├── AppWrapper.tsx                # App shell (header, mobile frame)
+    ├── Button.tsx                    # Primary action button
+    ├── Pill.tsx                      # Status pill (blanc/selected/success/fail)
+    ├── FadingPill.tsx                # Pill with fade-out animation
+    ├── ProgressBar.tsx               # Segmented batch progress indicator
+    └── Popup.tsx                     # Modal (milestone & celebration variants)
+
+public/
+└── assets/lessons/
+    ├── manifest.json                 # Lesson index by CEFR level
+    └── A1/                           # Currently only A1 lessons exist
+        ├── 01_greetings.letz
+        ├── 02_numbers.letz
+        ├── 03_family.letz
+        ├── 04_food.letz
+        └── 05_basic_words.letz
+```
 
 ## Architecture
 
@@ -37,7 +91,7 @@ Context-based router (`src/context/`). Only two pages: `"home"` and `"exercise"`
 
 `src/exercise/use-exercise-session.ts` is the main orchestrator. It:
 1. Calls `lesson-loader.ts` to fetch the lesson manifest (`/assets/lessons/manifest.json`), then individual `.letz` files
-2. Parses `.letz` files via `src/lib/letz-parser.ts` (a facade over the Chevrotain parser in `src/lib/letz-parser/`)
+2. Parses `.letz` files via `src/exercise/letz-parser.ts` (a facade over the Chevrotain parser in `src/lib/letz-parser/`)
 3. Splits word pairs into 3 batches of ~20 pairs
 4. Tracks time only while the browser tab is focused
 
@@ -51,13 +105,21 @@ Context-based router (`src/context/`). Only two pages: `"home"` and `"exercise"`
 
 ### Persistence
 
-`src/persistence/PersistContext.tsx` wraps a localStorage adapter. It provides hooks for reading/writing `UserProgress`, `UserPreferences`, and `LearningStatistics`. Uses schema versioning (`CURRENT_SCHEMA_VERSION`) with a migration system in `src/persistence/migrations/`. Updates are optimistic with rollback on failure.
-
-Word mastery is calculated per-lesson from per-word stats (`correctCount`, `incorrectCount`, `timesShown`) via `src/persistence/utils/mastery.ts`. A lesson must be mastered before the next unlocks.
+Not yet implemented. `src/persistence/` does not exist. Progress, preferences, and statistics are not currently persisted between sessions.
 
 ### Lesson File Format (`.letz`)
 
-Custom DSL parsed by Chevrotain. Files live at `/assets/lessons/{level}/{filename}.letz`. Structure: metadata block (title, level, id) + word entries (`lu`/`en` pairs). The parser lives in `src/lib/letz-parser/` (lexer → parser → visitor → AST). The facade at `src/lib/letz-parser.ts` exposes `entriesToWordPairs()` and `combineAndShuffleEntries()`.
+Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{filename}.letz`. Structure: metadata block + word entries (`lu`/`en` pairs).
+
+```
+@lesson A1.01 "Basic Greetings"
+
+Moien = good morning
+Äddi = bye
+Merci = thanks
+```
+
+The parser lives in `src/lib/letz-parser/` (lexer → parser → visitor → AST). The facade at `src/exercise/letz-parser.ts` exposes `entriesToWordPairs()` and `combineAndShuffleEntries()`.
 
 ### Development
 
@@ -66,4 +128,4 @@ Custom DSL parsed by Chevrotain. Files live at `/assets/lessons/{level}/{filenam
 
 ### Self-improvement
 
-- Every time user makes a correction, the lessons learnt is added to the .claude/lessons.md, and check thsi file to to prevent repeating mistakes.
+- Every time user makes a correction, the lessons learnt is added to the `.claude/lessons.md`, and check this file to prevent repeating mistakes.
