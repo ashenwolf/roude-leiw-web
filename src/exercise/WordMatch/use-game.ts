@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { PillStatus } from "../../ui/Pill";
 
-import type { ColumnSide, GameState, SlotState, WordPair } from "./types";
+import type { ColumnSide, GameState, SlotState, WordPair, WordResultMap } from "./types";
 import { DISPLAY_SLOTS } from "./types";
 
 // ============================================================================
@@ -17,6 +17,31 @@ const shuffle = <T,>(array: T[]): T[] =>
 
 const range = (from: number, to: number) =>
   Array.from({ length: to - from }, (_, i) => i + from);
+
+// ============================================================================
+// Word Result Tracking
+// ============================================================================
+
+const wordKey = (pair: WordPair) => `${pair[0]}|${pair[1]}`;
+
+const markShown = (results: WordResultMap, pairs: WordPair[], pairIndices: number[]): WordResultMap =>
+  pairIndices.reduce((acc, idx) => {
+    const key = wordKey(pairs[idx]);
+    const existing = acc[key] ?? { shown: 0, correct: 0, incorrect: 0 };
+    return { ...acc, [key]: { ...existing, shown: existing.shown + 1 } };
+  }, results);
+
+const markCorrect = (results: WordResultMap, pairs: WordPair[], pairIndex: number): WordResultMap => {
+  const key = wordKey(pairs[pairIndex]);
+  const existing = results[key] ?? { shown: 0, correct: 0, incorrect: 0 };
+  return { ...results, [key]: { ...existing, correct: existing.correct + 1 } };
+};
+
+const markIncorrect = (results: WordResultMap, pairs: WordPair[], pairIndex: number): WordResultMap => {
+  const key = wordKey(pairs[pairIndex]);
+  const existing = results[key] ?? { shown: 0, correct: 0, incorrect: 0 };
+  return { ...results, [key]: { ...existing, incorrect: existing.incorrect + 1 } };
+};
 
 // ============================================================================
 // Derived Helpers
@@ -122,8 +147,8 @@ const reshuffleProvisional = (state: GameState): GameState => {
 // Game Initialization
 // ============================================================================
 
-const initializeGame = (pairCount: number, displayCount: number): GameState => {
-  const allIndices = shuffle(range(0, pairCount));
+const initializeGame = (pairs: WordPair[], displayCount: number): GameState => {
+  const allIndices = shuffle(range(0, pairs.length));
   const initialIndices = allIndices.slice(0, displayCount);
   const pool = allIndices.slice(displayCount);
 
@@ -140,7 +165,9 @@ const initializeGame = (pairCount: number, displayCount: number): GameState => {
     pairIndex,
   }));
 
-  return { leftSlots, rightSlots, pairPool: pool, matchedCount: 0 };
+  const wordResults = markShown({}, pairs, initialIndices);
+
+  return { leftSlots, rightSlots, pairPool: pool, matchedCount: 0, wordResults };
 };
 
 // ============================================================================
@@ -149,7 +176,7 @@ const initializeGame = (pairCount: number, displayCount: number): GameState => {
 
 type UseGameProps = {
   pairs: WordPair[];
-  onComplete?: () => void;
+  onComplete?: (wordResults: WordResultMap) => void;
   onMatch?: (matchedCount: number, totalPairs: number) => void;
 };
 
@@ -166,6 +193,7 @@ type UseGameReturn = {
   matchedCount: number;
   totalPairs: number;
   progress: number;
+  wordResults: WordResultMap;
   getSlotStatus: (side: ColumnSide, position: number) => PillStatus;
   getSlotWord: (side: ColumnSide, position: number) => string;
   isSlotFading: (side: ColumnSide, position: number) => boolean;
@@ -180,7 +208,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
 
   // Single unified game state (includes matchedCount for atomic updates)
   const [gameState, setGameState] = useState<GameState>(() =>
-    initializeGame(pairs.length, displayCount)
+    initializeGame(pairs, displayCount)
   );
 
   // Derive matchedCount from game state
@@ -204,7 +232,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
     if (pairsRef.current !== pairs) {
       pairsRef.current = pairs;
       const newDisplayCount = Math.min(DISPLAY_SLOTS, pairs.length);
-      setGameState(initializeGame(pairs.length, newDisplayCount));
+      setGameState(initializeGame(pairs, newDisplayCount));
       prevMatchedCountRef.current = 0;
       // Clear any pending fail timeouts
       failTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
@@ -357,18 +385,24 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
             nextPairIndex,
           }));
 
+          // Track correct match + mark new pair as shown
+          const resultsWithCorrect = markCorrect(state.wordResults, pairs, leftPairIndex);
+          const resultsWithShown = nextPairIndex !== null
+            ? markShown(resultsWithCorrect, pairs, [nextPairIndex])
+            : resultsWithCorrect;
+
           // Reshuffle provisional assignments (matchedCount incremented atomically)
           const newState: GameState = {
             leftSlots: newLeftSlots,
             rightSlots: newRightSlots,
             pairPool: newPool,
             matchedCount: state.matchedCount + 1,
+            wordResults: resultsWithShown,
           };
 
           return reshuffleProvisional(newState);
         } else {
           // Mismatch - mark both as fail
-
           const newLeftSlots = updateSlotByPairIndex(state.leftSlots, leftPairIndex, (s) => ({
             type: "fail",
             pairIndex: s.pairIndex,
@@ -378,6 +412,13 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
             type: "fail",
             pairIndex: s.pairIndex,
           }));
+
+          // Track incorrect for both involved pairs
+          const resultsWithFail = markIncorrect(
+            markIncorrect(state.wordResults, pairs, leftPairIndex),
+            pairs,
+            rightPairIndex,
+          );
 
           // Schedule timeout to clear fail state
           const timeoutKey = `${leftPairIndex}-${rightPairIndex}`;
@@ -399,7 +440,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
 
           failTimeoutsRef.current.set(timeoutKey, timeout);
 
-          return { ...state, leftSlots: newLeftSlots, rightSlots: newRightSlots };
+          return { ...state, leftSlots: newLeftSlots, rightSlots: newRightSlots, wordResults: resultsWithFail };
         }
       });
     },
@@ -442,9 +483,9 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
 
   useEffect(() => {
     if (isGameComplete) {
-      onComplete?.();
+      onComplete?.(gameState.wordResults);
     }
-  }, [isGameComplete, onComplete]);
+  }, [isGameComplete, onComplete, gameState.wordResults]);
 
   // Calculate progress as ratio of matched pairs to total
   const progress = totalPairs > 0 ? matchedCount / totalPairs : 0;
@@ -454,6 +495,7 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
     matchedCount,
     totalPairs,
     progress,
+    wordResults: gameState.wordResults,
     getSlotStatus,
     getSlotWord,
     isSlotFading,

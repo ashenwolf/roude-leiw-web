@@ -4,6 +4,7 @@ import { combineAndShuffleEntries, entriesToWordPairs } from "./letz-parser";
 import { loadLessonsForLevel } from "./lesson-loader";
 
 import type { WordEntry } from "./letz-parser";
+import type { WordResultMap } from "./WordMatch/types";
 
 // Configuration constants - can be adjusted as needed
 export const SESSION_CONFIG = {
@@ -18,6 +19,7 @@ type UseExerciseSessionProps = {
   userLevel?: string;
   batchSize?: number;
   batchCount?: number;
+  onBatchResults?: (wordResults: WordResultMap) => void;
 };
 
 type UseExerciseSessionReturn = {
@@ -28,7 +30,7 @@ type UseExerciseSessionReturn = {
   currentBatchPairs: [string, string][];
   batchProgress: number;
   startSession: () => void;
-  handleBatchComplete: () => void;
+  handleBatchComplete: (wordResults: WordResultMap) => void;
   handleMatchProgress: (matchedCount: number, totalPairs: number) => void;
   dismissMilestone: () => void;
   resetSession: () => void;
@@ -38,6 +40,7 @@ export const useExerciseSession = ({
   userLevel = SESSION_CONFIG.USER_LEVEL,
   batchSize = SESSION_CONFIG.BATCH_SIZE,
   batchCount = SESSION_CONFIG.BATCH_COUNT,
+  onBatchResults,
 }: UseExerciseSessionProps = {}): UseExerciseSessionReturn => {
   const [state, setState] = useState<SessionState>("loading");
   const [error, setError] = useState<string | null>(null);
@@ -105,15 +108,12 @@ export const useExerciseSession = ({
     }
   }, []);
 
-  const handleBatchComplete = useCallback(() => {
-    const isLastBatch = currentBatch >= totalBatches - 1;
+  const handleBatchComplete = useCallback((wordResults: WordResultMap) => {
+    onBatchResults?.(wordResults);
 
-    if (isLastBatch) {
-      setState("session_complete");
-    } else {
-      setState("batch_complete");
-    }
-  }, [currentBatch, totalBatches]);
+    const isLastBatch = currentBatch >= totalBatches - 1;
+    setState(isLastBatch ? "session_complete" : "batch_complete");
+  }, [currentBatch, totalBatches, onBatchResults]);
 
   const dismissMilestone = useCallback(() => {
     // Move to next batch

@@ -1,11 +1,12 @@
 import { useNavigation } from "../context/useNavigation";
 import { WordMatch } from "../exercise/WordMatch";
 import { useExerciseSession } from "../exercise/use-exercise-session";
+import { useProgressSync } from "../persistence/hooks/use-progress-sync";
 import { Button } from "../ui/Button";
 import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, CelebrationPopup } from "../ui/Popup";
 
-import type { WordPair } from "../exercise/WordMatch/types";
+import type { WordPair, WordResultMap } from "../exercise/WordMatch/types";
 
 type ExerciseState = ReturnType<typeof useExerciseSession>["state"];
 
@@ -60,7 +61,7 @@ type ExerciseActiveProps = {
   totalBatches: number;
   currentBatchPairs: WordPair[];
   batchProgress: number;
-  onBatchComplete: () => void;
+  onBatchComplete: (wordResults: WordResultMap) => void;
   onMatchProgress: (matchedCount: number, totalPairs: number) => void;
   onDismissMilestone: () => void;
   onSessionComplete: () => void;
@@ -123,6 +124,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo } = useNavigation();
+  const { syncProgress } = useProgressSync();
 
   const {
     state,
@@ -136,7 +138,9 @@ export const AppExercise = () => {
     handleMatchProgress,
     dismissMilestone,
     resetSession,
-  } = useExerciseSession();
+  } = useExerciseSession({
+    onBatchResults: (wordResults) => syncProgress({ wordResults, durationMs: 0 }),
+  });
 
   const goHome = () => navigateTo("home");
 

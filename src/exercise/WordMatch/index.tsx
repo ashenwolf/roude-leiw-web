@@ -2,14 +2,14 @@ import { FadingPill } from "../../ui/FadingPill";
 
 import { useGame } from "./use-game";
 
-import type { ColumnSide, WordPair } from "./types";
+import type { ColumnSide, WordPair, WordResultMap } from "./types";
 import type { PillStatus } from "../../ui/Pill";
 
-export type { WordPair } from "./types";
+export type { WordPair, WordResultMap } from "./types";
 
 type WordMatchProps = {
   pairs: WordPair[];
-  onComplete?: () => void;
+  onComplete?: (wordResults: WordResultMap) => void;
   onMatch?: (matchedCount: number, totalPairs: number) => void;
 };
 
