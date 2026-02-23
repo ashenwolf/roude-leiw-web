@@ -11,6 +11,6 @@ id = "fdd88b89c452452791cdbe3e88b29743"
 preview_id = "817b786d79f544d3b44f9b1480a8945e"
 
 [vars]
-APP_URL = "https://roude-leiw.pages.dev"
+APP_URL = "https://web.roudeleiw.app"
 # Secrets configured in Cloudflare dashboard:
 # GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
