@@ -43,15 +43,9 @@ export const entriesToWordPairs = (entries: WordEntry[]): [string, string][] => 
 /**
  * Combine entries from multiple lessons, shuffling the result
  */
-export const combineAndShuffleEntries = (lessons: Lesson[]): WordEntry[] => {
-  const allEntries = lessons.flatMap((lesson) => lesson.entries);
-
-  // Fisher-Yates shuffle
-  const shuffled = [...allEntries];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-
-  return shuffled;
-};
+export const combineAndShuffleEntries = (lessons: Lesson[]): WordEntry[] =>
+  lessons
+    .flatMap((lesson) => lesson.entries)
+    .map((entry) => ({ entry, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ entry }) => entry);

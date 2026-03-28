@@ -10,3 +10,7 @@ export { Pill } from "./Pill";
 export { AppWrapper } from "./AppWrapper";
 export { Popup, MilestonePopup, CelebrationPopup } from "./Popup";
 export { ProgressBar } from "./ProgressBar";
+export { LessonGrid } from "./LessonGrid";
+export { XPBar } from "./XPBar";
+export { StatsRow } from "./StatsRow";
+export { StreakBadge } from "./StreakBadge";

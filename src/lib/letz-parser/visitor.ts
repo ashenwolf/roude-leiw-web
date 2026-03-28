@@ -45,20 +45,18 @@ class LetzVisitor extends BaseCstVisitor {
   }
 
   lesson(ctx: LessonCst): VisitResult {
-    const result: VisitResult = { meta: null, entries: [] };
-
-    for (const stmt of ctx.statement ?? []) {
-      const { header, entry } = stmt.children;
-
-      if (header) {
-        result.meta = this.header(header[0]);
-      } else if (entry) {
-        const wordEntry = this.entry(entry[0]);
-        if (wordEntry) result.entries.push(wordEntry);
-      }
-    }
-
-    return result;
+    return (ctx.statement ?? []).reduce<VisitResult>(
+      (acc, stmt) => {
+        const { header, entry } = stmt.children;
+        if (header) return { ...acc, meta: this.header(header[0]) };
+        if (entry) {
+          const wordEntry = this.entry(entry[0]);
+          return wordEntry ? { ...acc, entries: [...acc.entries, wordEntry] } : acc;
+        }
+        return acc;
+      },
+      { meta: null, entries: [] },
+    );
   }
 
   header(ctx: HeaderCst): LessonMeta {

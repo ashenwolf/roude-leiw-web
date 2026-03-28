@@ -1,14 +1,16 @@
 import { useNavigation } from "../context/useNavigation";
 import { WordMatch } from "../exercise/WordMatch";
 import { useExerciseSession } from "../exercise/use-exercise-session";
-import { useProgressSync } from "../persistence/hooks/use-progress-sync";
+import { useProgress } from "../persistence/hooks/use-progress";
+import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
 import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, CelebrationPopup } from "../ui/Popup";
 
 import type { WordPair, WordResultMap } from "../exercise/WordMatch/types";
+import type { SessionStatus } from "../exercise/session-reducer";
 
-type ExerciseState = ReturnType<typeof useExerciseSession>["state"];
+// ── Sub-components ──────────────────────────────────────────────────────
 
 const ExerciseLoading = () => (
   <div className="flex flex-col items-center justify-center py-16">
@@ -56,7 +58,7 @@ const ExerciseReady = ({ totalBatches, onStart, onBack }: ExerciseReadyProps) =>
 );
 
 type ExerciseActiveProps = {
-  state: ExerciseState;
+  state: SessionStatus;
   currentBatch: number;
   totalBatches: number;
   currentBatchPairs: WordPair[];
@@ -122,52 +124,43 @@ const ExerciseActive = ({
   </div>
 );
 
-export const AppExercise = () => {
-  const { navigateTo } = useNavigation();
-  const { syncProgress } = useProgressSync();
+// ── Page Component ──────────────────────────────────────────────────────
 
-  const {
-    state,
-    error,
-    currentBatch,
-    totalBatches,
-    currentBatchPairs,
-    batchProgress,
-    startSession,
-    handleBatchComplete,
-    handleMatchProgress,
-    dismissMilestone,
-    resetSession,
-  } = useExerciseSession({
-    onBatchResults: (wordResults) => syncProgress({ wordResults, durationMs: 0 }),
+export const AppExercise = () => {
+  const { navigateTo, params } = useNavigation();
+  const { words, syncBatch } = useProgress();
+
+  const handleBatchSync = (wordResults: WordResultMap) => syncBatch(wordResults, 0);
+
+  const session = useExerciseSession({
+    userWords: words,
+    targetLessonId: params.lessonId,
+    onBatchResults: handleBatchSync,
   });
 
-  const goHome = () => navigateTo("home");
+  const goHome = () => {
+    refreshGuestProgress();
+    navigateTo("home");
+  };
 
-  if (state === "loading") {
-    return <ExerciseLoading />;
-  }
-
-  if (state === "error") {
-    return <ExerciseError error={error} onBack={goHome} />;
-  }
-
-  if (state === "ready") {
-    return <ExerciseReady totalBatches={totalBatches} onStart={startSession} onBack={goHome} />;
+  if (session.state === "loading") return <ExerciseLoading />;
+  if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
+  if (session.state === "ready") {
+    return <ExerciseReady totalBatches={session.totalBatches} onStart={session.startSession} onBack={goHome} />;
   }
 
   return (
     <ExerciseActive
-      state={state}
-      currentBatch={currentBatch}
-      totalBatches={totalBatches}
-      currentBatchPairs={currentBatchPairs}
-      batchProgress={batchProgress}
-      onBatchComplete={handleBatchComplete}
-      onMatchProgress={handleMatchProgress}
-      onDismissMilestone={dismissMilestone}
+      state={session.state}
+      currentBatch={session.currentBatch}
+      totalBatches={session.totalBatches}
+      currentBatchPairs={session.currentBatchPairs}
+      batchProgress={session.batchProgress}
+      onBatchComplete={session.handleBatchComplete}
+      onMatchProgress={session.handleMatchProgress}
+      onDismissMilestone={session.dismissMilestone}
       onSessionComplete={goHome}
-      onTryAgain={resetSession}
+      onTryAgain={session.resetSession}
       onBack={goHome}
     />
   );

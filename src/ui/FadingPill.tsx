@@ -22,18 +22,16 @@ export const FadingPill = ({
   const [isFading, setIsFading] = useState(false);
   const fadeCompleteCalledRef = useRef(false);
 
-  // Store callback in ref to avoid effect re-running on every render
+  // Sync ref via effect — avoids render-time ref write
   const onFadeCompleteRef = useRef(onFadeComplete);
-  onFadeCompleteRef.current = onFadeComplete;
+  useEffect(() => { onFadeCompleteRef.current = onFadeComplete; });
 
   useEffect(() => {
     if (hidden && !fadeCompleteCalledRef.current) {
-      // Start fade animation after a small delay
       const fadeTimer = setTimeout(() => {
         setIsFading(true);
       }, FADE_START_DELAY_MS);
 
-      // Call onFadeComplete after animation ends
       const completeTimer = setTimeout(() => {
         if (!fadeCompleteCalledRef.current) {
           fadeCompleteCalledRef.current = true;

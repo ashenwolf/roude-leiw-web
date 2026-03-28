@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "./Button";
 
@@ -36,11 +36,21 @@ export const Popup = ({
   const [isAnimating, setIsAnimating] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  // Handle mount/unmount and animation states
+  // Single-fire guarantee: dismiss only fires once per show cycle
+  const hasDismissedRef = useRef(false);
+
+  const handleDismiss = useCallback(() => {
+    if (hasDismissedRef.current) return;
+    hasDismissedRef.current = true;
+    onDismiss?.();
+  }, [onDismiss]);
+
+  // Mount/unmount animation: setState is intentional — we must mount DOM before triggering CSS transition
   useEffect(() => {
     if (visible) {
+      hasDismissedRef.current = false;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShouldRender(true);
-      // Small delay to ensure DOM is ready for animation
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsAnimating(true);
@@ -48,7 +58,6 @@ export const Popup = ({
       });
     } else {
       setIsAnimating(false);
-      // Wait for exit animation to complete before unmounting
       const timer = setTimeout(() => {
         setShouldRender(false);
       }, 300);
@@ -56,15 +65,13 @@ export const Popup = ({
     }
   }, [visible]);
 
-  // Auto-dismiss for milestone variant
+  // Auto-dismiss timer
   useEffect(() => {
     if (visible && autoDismissMs && autoDismissMs > 0) {
-      const timer = setTimeout(() => {
-        onDismiss?.();
-      }, autoDismissMs);
+      const timer = setTimeout(handleDismiss, autoDismissMs);
       return () => clearTimeout(timer);
     }
-  }, [visible, autoDismissMs, onDismiss]);
+  }, [visible, autoDismissMs, handleDismiss]);
 
   if (!shouldRender) return null;
 
@@ -77,7 +84,7 @@ export const Popup = ({
       {/* Backdrop */}
       <div
         className={`absolute inset-0 ${styles.backdrop} transition-opacity duration-300 ${backdropOpacity}`}
-        onClick={onDismiss}
+        onClick={handleDismiss}
       />
 
       {/* Slide-up container */}
@@ -89,7 +96,7 @@ export const Popup = ({
 
           {variant === "complete" && onDismiss && (
             <div className="w-full mt-4">
-              <Button onClick={onDismiss}>{actionLabel}</Button>
+              <Button onClick={handleDismiss}>{actionLabel}</Button>
             </div>
           )}
         </div>
