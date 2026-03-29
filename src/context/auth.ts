@@ -16,7 +16,7 @@ export type WordStats = {
 
 export type DailySession = {
   totalPairs: number;
-  durationMs: number;
+  durationSeconds: number;
   correctMatches: number;
   incorrectMatches: number;
 };

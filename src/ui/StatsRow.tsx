@@ -10,17 +10,24 @@ const StatItem = ({ label, value }: StatItemProps) => (
   </div>
 );
 
+const formatMinutes = (minutes: number): string =>
+  minutes < 1 ? "<1m" : `${Math.floor(minutes)}m`;
+
 type StatsRowProps = {
   masteredWords: number;
   totalWords: number;
   accuracy: number;
   streak: number;
+  todayMinutes?: number;
 };
 
-export const StatsRow = ({ masteredWords, totalWords, accuracy, streak }: StatsRowProps) => (
+export const StatsRow = ({ masteredWords, totalWords, accuracy, streak, todayMinutes }: StatsRowProps) => (
   <div className="flex justify-around py-3 px-2 bg-white/60 rounded-xl">
     <StatItem label="Learned" value={`${masteredWords}/${totalWords}`} />
     <StatItem label="Accuracy" value={`${Math.round(accuracy * 100)}%`} />
     <StatItem label="Streak" value={`${streak}d`} />
+    {todayMinutes !== undefined && (
+      <StatItem label="Today" value={formatMinutes(todayMinutes)} />
+    )}
   </div>
 );

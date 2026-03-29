@@ -54,25 +54,25 @@ describe("mergeDailySession", () => {
     const merged = mergeDailySession({}, "2025-01-10", 5000, [result("Moien|hi", 2, 1, 1)]);
     expect(merged["2025-01-10"]).toEqual({
       totalPairs: 2,
-      durationMs: 5000,
+      durationSeconds: 5000,
       correctMatches: 1,
       incorrectMatches: 1,
     });
   });
 
   it("accumulates into existing entry for same date", () => {
-    const existing = { "2025-01-10": { totalPairs: 3, durationMs: 2000, correctMatches: 2, incorrectMatches: 1 } };
+    const existing = { "2025-01-10": { totalPairs: 3, durationSeconds: 2000, correctMatches: 2, incorrectMatches: 1 } };
     const merged = mergeDailySession(existing, "2025-01-10", 3000, [result("Äddi|bye", 2, 2, 0)]);
     expect(merged["2025-01-10"]).toEqual({
       totalPairs: 5,
-      durationMs: 5000,
+      durationSeconds: 5000,
       correctMatches: 4,
       incorrectMatches: 1,
     });
   });
 
   it("preserves other dates when adding a new one", () => {
-    const existing = { "2025-01-09": { totalPairs: 1, durationMs: 1000, correctMatches: 1, incorrectMatches: 0 } };
+    const existing = { "2025-01-09": { totalPairs: 1, durationSeconds: 1000, correctMatches: 1, incorrectMatches: 0 } };
     const merged = mergeDailySession(existing, "2025-01-10", 2000, [result("Moien|hi", 1, 1, 0)]);
     expect(merged["2025-01-09"]).toEqual(existing["2025-01-09"]);
     expect(merged["2025-01-10"]).toBeDefined();
@@ -82,7 +82,7 @@ describe("mergeDailySession", () => {
     const merged = mergeDailySession({}, "2025-01-10", 1000, []);
     expect(merged["2025-01-10"]).toEqual({
       totalPairs: 0,
-      durationMs: 1000,
+      durationSeconds: 1000,
       correctMatches: 0,
       incorrectMatches: 0,
     });
@@ -96,7 +96,7 @@ describe("mergeDailySession", () => {
 describe("computeStreak", () => {
   const sessions = (dates: string[]) =>
     dates.reduce<Record<string, object>>(
-      (acc, d) => ({ ...acc, [d]: { totalPairs: 1, durationMs: 1000, correctMatches: 1, incorrectMatches: 0 } }),
+      (acc, d) => ({ ...acc, [d]: { totalPairs: 1, durationSeconds: 1000, correctMatches: 1, incorrectMatches: 0 } }),
       {},
     );
 

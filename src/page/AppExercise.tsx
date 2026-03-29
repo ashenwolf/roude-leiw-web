@@ -1,5 +1,6 @@
 import { useNavigation } from "../context/useNavigation";
 import { WordMatch } from "../exercise/WordMatch";
+import { useActivityTimer } from "../exercise/use-activity-timer";
 import { useExerciseSession } from "../exercise/use-exercise-session";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
@@ -130,8 +131,23 @@ const ExerciseActive = ({
 export const AppExercise = () => {
   const { navigateTo, params } = useNavigation();
   const { words, syncBatch } = useProgress();
+  const timer = useActivityTimer();
 
-  const handleBatchSync = (wordResults: WordResultMap) => syncBatch(wordResults, 0);
+  const handleBatchSync = (wordResults: WordResultMap) => {
+    const durationSeconds = timer.getElapsedSeconds();
+    timer.reset();
+    syncBatch(wordResults, durationSeconds);
+  };
+
+  const handleMatchProgress = (matchedCount: number, totalPairs: number) => {
+    timer.registerInteraction();
+    session.handleMatchProgress(matchedCount, totalPairs);
+  };
+
+  const handleTryAgain = () => {
+    timer.reset();
+    session.resetSession();
+  };
 
   const session = useExerciseSession({
     userWords: words,

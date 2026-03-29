@@ -34,9 +34,9 @@ const mergeDailySession = (
   existing: Record<string, DailySession>,
   date: string,
   results: WordResultMap,
-  durationMs: number,
+  durationSeconds: number,
 ): Record<string, DailySession> => {
-  const prev = existing[date] ?? { totalPairs: 0, durationMs: 0, correctMatches: 0, incorrectMatches: 0 };
+  const prev = existing[date] ?? { totalPairs: 0, durationSeconds: 0, correctMatches: 0, incorrectMatches: 0 };
   const batchStats = Object.values(results).reduce(
     (acc, r) => ({
       totalPairs: acc.totalPairs + r.shown,
@@ -50,7 +50,7 @@ const mergeDailySession = (
     ...existing,
     [date]: {
       totalPairs: prev.totalPairs + batchStats.totalPairs,
-      durationMs: prev.durationMs + durationMs,
+      durationSeconds: prev.durationSeconds + durationSeconds,
       correctMatches: prev.correctMatches + batchStats.correctMatches,
       incorrectMatches: prev.incorrectMatches + batchStats.incorrectMatches,
     },
@@ -107,12 +107,12 @@ const subscribe = (listener: () => void): (() => void) => {
 // ── Public API ──────────────────────────────────────────────────────────
 
 /** Fire-and-forget: writes to localStorage, does NOT trigger React re-render */
-const syncBatchToStorage = (wordResults: WordResultMap, durationMs: number): void => {
+const syncBatchToStorage = (wordResults: WordResultMap, durationSeconds: number): void => {
   const today = new Date().toISOString().slice(0, 10);
   const prev = readStorage();
   const updated: GuestData = {
     words: mergeWords(prev.words, wordResults),
-    dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationMs),
+    dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationSeconds),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   cache.set(localStorage.getItem(STORAGE_KEY), updated);
@@ -130,8 +130,8 @@ export const refreshGuestProgress = notifyListeners;
 export const useGuestProgress = () => {
   const data = useSyncExternalStore(subscribe, getSnapshot);
 
-  const syncBatch = useCallback((wordResults: WordResultMap, durationMs: number) => {
-    syncBatchToStorage(wordResults, durationMs);
+  const syncBatch = useCallback((wordResults: WordResultMap, durationSeconds: number) => {
+    syncBatchToStorage(wordResults, durationSeconds);
   }, []);
 
   const clear = useCallback(() => {

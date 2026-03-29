@@ -11,7 +11,7 @@ export type ProgressState = {
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
   streak: StreakInfo | null;
-  syncBatch: (wordResults: WordResultMap, durationMs: number) => void;
+  syncBatch: (wordResults: WordResultMap, durationSeconds: number) => void;
   isAuthenticated: boolean;
 };
 
@@ -33,18 +33,18 @@ export const useProgress = (): ProgressState => {
       Object.entries(guestData.words).map(([key, stats]) => [key, stats]),
     );
     const totalDuration = Object.values(guestData.dailySessions).reduce(
-      (sum, s) => sum + s.durationMs,
+      (sum, s) => sum + s.durationSeconds,
       0,
     );
-    syncProgress({ wordResults, durationMs: totalDuration }).then(() => guest.clear());
+    syncProgress({ wordResults, durationSeconds: totalDuration }).then(() => guest.clear());
   }, [auth.status, syncProgress, guest]);
 
   // React Compiler handles memoization — no manual useCallback needed
-  const syncBatch = (wordResults: WordResultMap, durationMs: number) => {
+  const syncBatch = (wordResults: WordResultMap, durationSeconds: number) => {
     if (auth.status === "authenticated") {
-      syncProgress({ wordResults, durationMs });
+      syncProgress({ wordResults, durationSeconds });
     } else {
-      guest.syncBatch(wordResults, durationMs);
+      guest.syncBatch(wordResults, durationSeconds);
     }
   };
 

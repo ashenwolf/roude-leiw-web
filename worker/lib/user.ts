@@ -47,10 +47,10 @@ export const mergeWordResults = (
 export const mergeDailySession = (
   existingSessions: UserData["dailySessions"],
   date: string,
-  durationMs: number,
+  durationSeconds: number,
   wordResults: WordResult[],
 ): UserData["dailySessions"] => {
-  const existing = existingSessions[date] ?? { totalPairs: 0, durationMs: 0, correctMatches: 0, incorrectMatches: 0 };
+  const existing = existingSessions[date] ?? { totalPairs: 0, durationSeconds: 0, correctMatches: 0, incorrectMatches: 0 };
   const totals = wordResults.reduce(
     (acc, r) => ({
       totalPairs: acc.totalPairs + r.shown,
@@ -64,7 +64,7 @@ export const mergeDailySession = (
     ...existingSessions,
     [date]: {
       totalPairs: existing.totalPairs + totals.totalPairs,
-      durationMs: existing.durationMs + durationMs,
+      durationSeconds: existing.durationSeconds + durationSeconds,
       correctMatches: existing.correctMatches + totals.correctMatches,
       incorrectMatches: existing.incorrectMatches + totals.incorrectMatches,
     } satisfies DailySession,

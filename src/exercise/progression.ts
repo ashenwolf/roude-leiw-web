@@ -8,6 +8,7 @@ export const MASTERY = {
   minAccuracy: 0.8,
   strugglingMaxAccuracy: 0.6,
   strugglingMinShown: 3,
+  unlockThreshold: 0.8,
 } as const;
 
 // --- Word Classification ---
@@ -56,8 +57,8 @@ export const computeUnlockedLessonIds = (
   lessons.reduce<string[]>(
     (unlocked, lesson, idx) => {
       if (idx === 0) return [lesson.meta.id];
-      const prevComplete = computeLessonProgress(lessons[idx - 1], userWords).isComplete;
-      return prevComplete ? [...unlocked, lesson.meta.id] : unlocked;
+      const prevProgress = computeLessonProgress(lessons[idx - 1], userWords);
+      return prevProgress.percentage >= MASTERY.unlockThreshold ? [...unlocked, lesson.meta.id] : unlocked;
     },
     [],
   );

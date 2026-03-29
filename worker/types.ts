@@ -26,7 +26,7 @@ export type WordStats = {
 
 export type DailySession = {
   totalPairs: number;
-  durationMs: number;
+  durationSeconds: number;
   correctMatches: number;
   incorrectMatches: number;
 };
@@ -60,6 +60,6 @@ export type WordResult = {
 
 export type ProgressSyncRequest = {
   wordResults: WordResult[];
-  durationMs: number;
+  durationSeconds: number;
   date: string; // "YYYY-MM-DD"
 };

@@ -13,7 +13,7 @@ export const handleProgressSync = async ({ request, env, userId }: RouteContext)
   const updatedUser: UserData = {
     ...userData,
     words: mergeWordResults(userData.words, body.wordResults),
-    dailySessions: mergeDailySession(userData.dailySessions, body.date, body.durationMs, body.wordResults),
+    dailySessions: mergeDailySession(userData.dailySessions, body.date, body.durationSeconds, body.wordResults),
   };
 
   await saveUser(env.KV, updatedUser);

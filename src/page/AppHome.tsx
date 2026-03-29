@@ -16,7 +16,7 @@ import type { LessonProgress } from "../exercise/progression";
 
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
-  const { words, streak } = useProgress();
+  const { words, streak, dailySessions } = useProgress();
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,6 +61,9 @@ export const AppHome = () => {
   const xp = useMemo(() => computeXP(words), [words]);
   const levelInfo = useMemo(() => computePlayerLevel(xp), [xp]);
 
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const todayMinutes = (dailySessions[todayKey]?.durationSeconds ?? 0) / 60;
+
   const handleSelectLesson = (lessonId: string) => {
     if (unlockedIds.includes(lessonId)) {
       navigateTo("exercise", { lessonId });
@@ -99,6 +102,7 @@ export const AppHome = () => {
         totalWords={lessons.reduce((sum, l) => sum + l.entries.length, 0)}
         accuracy={overallStats.overallAccuracy}
         streak={streak?.current ?? 0}
+        todayMinutes={todayMinutes}
       />
 
       {/* Lesson grid */}
