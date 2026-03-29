@@ -122,6 +122,7 @@ export const useExerciseSession = ({
   return {
     state: state.status,
     error: state.error,
+    lessons: state.lessons,
     currentBatch: state.currentBatch,
     totalBatches: state.batches.length || batchCount,
     currentBatchPairs: state.batches[state.currentBatch] ?? [],

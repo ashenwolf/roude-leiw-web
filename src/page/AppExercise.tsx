@@ -6,6 +6,7 @@ import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
 import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, CelebrationPopup } from "../ui/Popup";
+import { DebugPanel } from "../ui/DebugPanel";
 
 import type { WordPair, WordResultMap } from "../exercise/WordMatch/types";
 import type { SessionStatus } from "../exercise/session-reducer";
@@ -150,18 +151,26 @@ export const AppExercise = () => {
   }
 
   return (
-    <ExerciseActive
-      state={session.state}
-      currentBatch={session.currentBatch}
-      totalBatches={session.totalBatches}
-      currentBatchPairs={session.currentBatchPairs}
-      batchProgress={session.batchProgress}
-      onBatchComplete={session.handleBatchComplete}
-      onMatchProgress={session.handleMatchProgress}
-      onDismissMilestone={session.dismissMilestone}
-      onSessionComplete={goHome}
-      onTryAgain={session.resetSession}
-      onBack={goHome}
-    />
+    <>
+      <ExerciseActive
+        state={session.state}
+        currentBatch={session.currentBatch}
+        totalBatches={session.totalBatches}
+        currentBatchPairs={session.currentBatchPairs}
+        batchProgress={session.batchProgress}
+        onBatchComplete={session.handleBatchComplete}
+        onMatchProgress={handleMatchProgress}
+        onDismissMilestone={session.dismissMilestone}
+        onSessionComplete={goHome}
+        onTryAgain={handleTryAgain}
+        onBack={goHome}
+      />
+      <DebugPanel
+        lessons={session.lessons}
+        userWords={words}
+        currentBatchPairs={session.currentBatchPairs}
+        currentLessonId={session.currentLessonId}
+      />
+    </>
   );
 };
