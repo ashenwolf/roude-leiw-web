@@ -1,7 +1,7 @@
 import { multimethod, __ } from "../lib/multimethod";
 
 import type { Lesson } from "./letz-parser";
-import type { WordPair } from "./WordMatch/types";
+import type { ExerciseBatch } from "./types";
 
 // ============================================================================
 // State
@@ -13,7 +13,7 @@ export type SessionState = {
   status: SessionStatus;
   error: string | null;
   lessons: Lesson[];
-  batches: WordPair[][];
+  batches: ExerciseBatch[];
   currentBatch: number;
   batchProgress: number;
   currentLessonId: string;
@@ -34,13 +34,13 @@ export const INITIAL_SESSION_STATE: SessionState = {
 // ============================================================================
 
 export type SessionAction =
-  | { type: "LOADED"; lessons: Lesson[]; batches: WordPair[][]; currentLessonId: string }
+  | { type: "LOADED"; lessons: Lesson[]; batches: ExerciseBatch[]; currentLessonId: string }
   | { type: "LOAD_ERROR"; error: string }
   | { type: "START" }
   | { type: "MATCH_PROGRESS"; matchedCount: number; totalPairs: number }
   | { type: "BATCH_COMPLETE" }
   | { type: "DISMISS_MILESTONE" }
-  | { type: "RESET"; batches: WordPair[][]; currentLessonId: string };
+  | { type: "RESET"; batches: ExerciseBatch[]; currentLessonId: string };
 
 // Narrow action to a specific type — avoids verbose `as Extract<>` casts
 const narrow = <T extends SessionAction["type"]>(action: SessionAction) =>

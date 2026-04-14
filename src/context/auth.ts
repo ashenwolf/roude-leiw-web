@@ -15,10 +15,10 @@ export type WordStats = {
 };
 
 export type DailySession = {
-  totalPairs: number;
+  totalItems: number;
   durationSeconds: number;
-  correctMatches: number;
-  incorrectMatches: number;
+  correct: number;
+  incorrect: number;
 };
 
 export type StreakInfo = {

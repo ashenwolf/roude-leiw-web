@@ -1,14 +1,16 @@
 import { useEffect, useReducer, useRef } from "react";
 
 import { entriesToWordPairs } from "./letz-parser";
-import { fetchManifest, fetchLesson } from "./lesson-loader";
+import { loadAllLessons } from "./lesson-loader";
 import { computeUnlockedLessonIds, findCurrentLessonId } from "./progression";
 import { sessionReducer, INITIAL_SESSION_STATE } from "./session-reducer";
-import { selectWordsForBatch } from "./word-selector";
+import { lessonsToCandidates, selectItemsForBatch } from "./word-selector";
 
 import type { WordStats } from "../context/auth";
 import type { Lesson } from "./letz-parser";
-import type { WordResultMap, WordPair } from "./WordMatch/types";
+import type { ExerciseBatch, WordMatchBatch } from "./types";
+import type { ItemSelectionConfig } from "./word-selector";
+import type { WordResultMap } from "./WordMatch/types";
 
 // ============================================================================
 // Config
@@ -23,13 +25,19 @@ export const SESSION_CONFIG = {
 // Pure helpers
 // ============================================================================
 
-const loadAllLessons = async (): Promise<Lesson[]> => {
-  const manifest = await fetchManifest();
-  return Promise.all(
-    manifest.levels.flatMap((level) =>
-      level.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
-    ),
-  );
+const buildWordMatchBatch = (
+  lessons: Lesson[],
+  unlockedIds: ReadonlyArray<string>,
+  currentLessonId: string,
+  userWords: Record<string, WordStats>,
+  config: ItemSelectionConfig,
+): WordMatchBatch => {
+  const candidates = lessonsToCandidates(lessons, unlockedIds);
+  const selected = selectItemsForBatch(candidates, userWords, currentLessonId, new Set(), config);
+  return {
+    type: "word-match",
+    pairs: entriesToWordPairs(selected.map((s) => s.item)),
+  };
 };
 
 const buildBatches = (
@@ -38,7 +46,7 @@ const buildBatches = (
   targetLessonId: string | undefined,
   batchSize: number,
   batchCount: number,
-): WordPair[][] => {
+): ExerciseBatch[] => {
   if (lessons.length === 0) return [];
 
   const unlockedIds = computeUnlockedLessonIds(lessons, userWords);
@@ -46,12 +54,11 @@ const buildBatches = (
 
   return Array.from({ length: batchCount }).map((_, idx) => {
     const isLastBatch = idx === batchCount - 1;
-    const config = isLastBatch
+    const config: ItemSelectionConfig = isLastBatch
       ? { batchSize, bucketRatios: { new: 0.15, struggling: 0.25, reinforcing: 0.30, reviewing: 0.30 } }
       : { batchSize, bucketRatios: { new: 0.25, struggling: 0.25, reinforcing: 0.25, reviewing: 0.25 } };
 
-    const selected = selectWordsForBatch(lessons, unlockedIds, currentId, userWords, new Set(), config);
-    return entriesToWordPairs(selected.map((s) => s.entry));
+    return buildWordMatchBatch(lessons, unlockedIds, currentId, userWords, config);
   });
 };
 
@@ -123,9 +130,9 @@ export const useExerciseSession = ({
     state: state.status,
     error: state.error,
     lessons: state.lessons,
-    currentBatch: state.currentBatch,
+    currentBatchIndex: state.currentBatch,
     totalBatches: state.batches.length || batchCount,
-    currentBatchPairs: state.batches[state.currentBatch] ?? [],
+    currentBatch: state.batches[state.currentBatch],
     batchProgress: state.batchProgress,
     currentLessonId: state.currentLessonId,
     startSession,

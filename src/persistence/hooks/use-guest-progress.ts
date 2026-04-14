@@ -1,5 +1,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 
+import { mergeWordStats, mergeDailySession } from "../../lib/stats-merge";
+
 import type { WordStats, DailySession } from "../../context/auth";
 import type { WordResultMap } from "../../exercise/WordMatch/types";
 
@@ -11,51 +13,6 @@ type GuestData = {
 };
 
 const EMPTY: GuestData = { words: {}, dailySessions: {} };
-
-// ── Pure merge functions ────────────────────────────────────────────────
-
-const mergeWords = (
-  existing: Record<string, WordStats>,
-  results: WordResultMap,
-): Record<string, WordStats> =>
-  Object.entries(results).reduce(
-    (acc, [key, delta]) => ({
-      ...acc,
-      [key]: {
-        shown: (acc[key]?.shown ?? 0) + delta.shown,
-        correct: (acc[key]?.correct ?? 0) + delta.correct,
-        incorrect: (acc[key]?.incorrect ?? 0) + delta.incorrect,
-      },
-    }),
-    { ...existing },
-  );
-
-const mergeDailySession = (
-  existing: Record<string, DailySession>,
-  date: string,
-  results: WordResultMap,
-  durationSeconds: number,
-): Record<string, DailySession> => {
-  const prev = existing[date] ?? { totalPairs: 0, durationSeconds: 0, correctMatches: 0, incorrectMatches: 0 };
-  const batchStats = Object.values(results).reduce(
-    (acc, r) => ({
-      totalPairs: acc.totalPairs + r.shown,
-      correctMatches: acc.correctMatches + r.correct,
-      incorrectMatches: acc.incorrectMatches + r.incorrect,
-    }),
-    { totalPairs: 0, correctMatches: 0, incorrectMatches: 0 },
-  );
-
-  return {
-    ...existing,
-    [date]: {
-      totalPairs: prev.totalPairs + batchStats.totalPairs,
-      durationSeconds: prev.durationSeconds + durationSeconds,
-      correctMatches: prev.correctMatches + batchStats.correctMatches,
-      incorrectMatches: prev.incorrectMatches + batchStats.incorrectMatches,
-    },
-  };
-};
 
 // ── External store backed by localStorage ───────────────────────────────
 // Writes go directly to localStorage without triggering React re-renders.
@@ -111,7 +68,7 @@ const syncBatchToStorage = (wordResults: WordResultMap, durationSeconds: number)
   const today = new Date().toISOString().slice(0, 10);
   const prev = readStorage();
   const updated: GuestData = {
-    words: mergeWords(prev.words, wordResults),
+    words: mergeWordStats(prev.words, wordResults),
     dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationSeconds),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));

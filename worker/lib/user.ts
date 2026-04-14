@@ -50,23 +50,23 @@ export const mergeDailySession = (
   durationSeconds: number,
   wordResults: WordResult[],
 ): UserData["dailySessions"] => {
-  const existing = existingSessions[date] ?? { totalPairs: 0, durationSeconds: 0, correctMatches: 0, incorrectMatches: 0 };
+  const existing = existingSessions[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0 };
   const totals = wordResults.reduce(
     (acc, r) => ({
-      totalPairs: acc.totalPairs + r.shown,
-      correctMatches: acc.correctMatches + r.correct,
-      incorrectMatches: acc.incorrectMatches + r.incorrect,
+      totalItems: acc.totalItems + r.shown,
+      correct: acc.correct + r.correct,
+      incorrect: acc.incorrect + r.incorrect,
     }),
-    { totalPairs: 0, correctMatches: 0, incorrectMatches: 0 },
+    { totalItems: 0, correct: 0, incorrect: 0 },
   );
 
   return {
     ...existingSessions,
     [date]: {
-      totalPairs: existing.totalPairs + totals.totalPairs,
+      totalItems: existing.totalItems + totals.totalItems,
       durationSeconds: existing.durationSeconds + durationSeconds,
-      correctMatches: existing.correctMatches + totals.correctMatches,
-      incorrectMatches: existing.incorrectMatches + totals.incorrectMatches,
+      correct: existing.correct + totals.correct,
+      incorrect: existing.incorrect + totals.incorrect,
     } satisfies DailySession,
   };
 };

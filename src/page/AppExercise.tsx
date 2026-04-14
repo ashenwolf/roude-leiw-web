@@ -9,7 +9,8 @@ import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, CelebrationPopup } from "../ui/Popup";
 import { DebugPanel } from "../ui/DebugPanel";
 
-import type { WordPair, WordResultMap } from "../exercise/WordMatch/types";
+import type { ExerciseBatch } from "../exercise/types";
+import type { WordResultMap } from "../exercise/WordMatch/types";
 import type { SessionStatus } from "../exercise/session-reducer";
 
 // ── Sub-components ──────────────────────────────────────────────────────
@@ -61,9 +62,9 @@ const ExerciseReady = ({ totalBatches, onStart, onBack }: ExerciseReadyProps) =>
 
 type ExerciseActiveProps = {
   state: SessionStatus;
-  currentBatch: number;
+  currentBatchIndex: number;
   totalBatches: number;
-  currentBatchPairs: WordPair[];
+  currentBatch: ExerciseBatch | undefined;
   batchProgress: number;
   onBatchComplete: (wordResults: WordResultMap) => void;
   onMatchProgress: (matchedCount: number, totalPairs: number) => void;
@@ -75,9 +76,9 @@ type ExerciseActiveProps = {
 
 const ExerciseActive = ({
   state,
-  currentBatch,
+  currentBatchIndex,
   totalBatches,
-  currentBatchPairs,
+  currentBatch,
   batchProgress,
   onBatchComplete,
   onMatchProgress,
@@ -89,14 +90,14 @@ const ExerciseActive = ({
   <div className="flex flex-col gap-6">
     <ProgressBar
       batchProgress={batchProgress}
-      currentBatch={currentBatch}
+      currentBatch={currentBatchIndex}
       totalBatches={totalBatches}
     />
 
-    {currentBatchPairs.length > 0 && (
+    {currentBatch?.type === "word-match" && (
       <WordMatch
-        key={`batch-${currentBatch}`}
-        pairs={currentBatchPairs}
+        key={`batch-${currentBatchIndex}`}
+        pairs={currentBatch.pairs}
         onComplete={onBatchComplete}
         onMatch={onMatchProgress}
       />
@@ -114,7 +115,7 @@ const ExerciseActive = ({
     <MilestonePopup
       visible={state === "batch_complete"}
       onDismiss={onDismissMilestone}
-      batchNumber={currentBatch + 1}
+      batchNumber={currentBatchIndex + 1}
       totalBatches={totalBatches}
     />
 
@@ -170,9 +171,9 @@ export const AppExercise = () => {
     <>
       <ExerciseActive
         state={session.state}
-        currentBatch={session.currentBatch}
+        currentBatchIndex={session.currentBatchIndex}
         totalBatches={session.totalBatches}
-        currentBatchPairs={session.currentBatchPairs}
+        currentBatch={session.currentBatch}
         batchProgress={session.batchProgress}
         onBatchComplete={session.handleBatchComplete}
         onMatchProgress={handleMatchProgress}
@@ -184,7 +185,7 @@ export const AppExercise = () => {
       <DebugPanel
         lessons={session.lessons}
         userWords={words}
-        currentBatchPairs={session.currentBatchPairs}
+        currentBatchPairs={session.currentBatch?.type === "word-match" ? session.currentBatch.pairs : []}
         currentLessonId={session.currentLessonId}
       />
     </>

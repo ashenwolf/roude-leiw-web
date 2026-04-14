@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { useNavigation } from "../context/useNavigation";
-import { fetchManifest, fetchLesson } from "../exercise/lesson-loader";
+import { loadAllLessons } from "../exercise/lesson-loader";
 import { computeLessonProgress, computeUnlockedLessonIds, findCurrentLessonId, computeOverallStats } from "../exercise/progression";
 import { computeXP, computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
@@ -22,14 +22,7 @@ export const AppHome = () => {
 
   // Load all lessons on mount
   useEffect(() => {
-    fetchManifest()
-      .then((manifest) =>
-        Promise.all(
-          manifest.levels.flatMap((level) =>
-            level.lessons.map((l) => fetchLesson(level.id, l.file)),
-          ),
-        ),
-      )
+    loadAllLessons()
       .then((loaded) => {
         setLessons(loaded);
         setLoading(false);

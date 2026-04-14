@@ -53,38 +53,38 @@ describe("mergeDailySession", () => {
   it("creates new entry for a new date", () => {
     const merged = mergeDailySession({}, "2025-01-10", 5000, [result("Moien|hi", 2, 1, 1)]);
     expect(merged["2025-01-10"]).toEqual({
-      totalPairs: 2,
+      totalItems: 2,
       durationSeconds: 5000,
-      correctMatches: 1,
-      incorrectMatches: 1,
+      correct: 1,
+      incorrect: 1,
     });
   });
 
   it("accumulates into existing entry for same date", () => {
-    const existing = { "2025-01-10": { totalPairs: 3, durationSeconds: 2000, correctMatches: 2, incorrectMatches: 1 } };
+    const existing = { "2025-01-10": { totalItems: 3, durationSeconds: 2000, correct: 2, incorrect: 1 } };
     const merged = mergeDailySession(existing, "2025-01-10", 3000, [result("Äddi|bye", 2, 2, 0)]);
     expect(merged["2025-01-10"]).toEqual({
-      totalPairs: 5,
+      totalItems: 5,
       durationSeconds: 5000,
-      correctMatches: 4,
-      incorrectMatches: 1,
+      correct: 4,
+      incorrect: 1,
     });
   });
 
   it("preserves other dates when adding a new one", () => {
-    const existing = { "2025-01-09": { totalPairs: 1, durationSeconds: 1000, correctMatches: 1, incorrectMatches: 0 } };
+    const existing = { "2025-01-09": { totalItems: 1, durationSeconds: 1000, correct: 1, incorrect: 0 } };
     const merged = mergeDailySession(existing, "2025-01-10", 2000, [result("Moien|hi", 1, 1, 0)]);
     expect(merged["2025-01-09"]).toEqual(existing["2025-01-09"]);
     expect(merged["2025-01-10"]).toBeDefined();
   });
 
-  it("empty results creates session with zero pair counts", () => {
+  it("empty results creates session with zero item counts", () => {
     const merged = mergeDailySession({}, "2025-01-10", 1000, []);
     expect(merged["2025-01-10"]).toEqual({
-      totalPairs: 0,
+      totalItems: 0,
       durationSeconds: 1000,
-      correctMatches: 0,
-      incorrectMatches: 0,
+      correct: 0,
+      incorrect: 0,
     });
   });
 });
@@ -96,7 +96,7 @@ describe("mergeDailySession", () => {
 describe("computeStreak", () => {
   const sessions = (dates: string[]) =>
     dates.reduce<Record<string, object>>(
-      (acc, d) => ({ ...acc, [d]: { totalPairs: 1, durationSeconds: 1000, correctMatches: 1, incorrectMatches: 0 } }),
+      (acc, d) => ({ ...acc, [d]: { totalItems: 1, durationSeconds: 1000, correct: 1, incorrect: 0 } }),
       {},
     );
 

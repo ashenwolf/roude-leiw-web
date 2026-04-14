@@ -12,8 +12,8 @@ const baseReady: SessionState = {
   status: "ready",
   lessons: [],
   batches: [
-    [["Moien", "hi"], ["Äddi", "bye"]],
-    [["Merci", "thanks"]],
+    { type: "word-match", pairs: [["Moien", "hi"], ["Äddi", "bye"]] },
+    { type: "word-match", pairs: [["Merci", "thanks"]] },
   ],
   currentLessonId: "A1.01",
 };
@@ -28,7 +28,7 @@ describe("LOADED action", () => {
   const action: SessionAction = {
     type: "LOADED",
     lessons: [],
-    batches: [[["Moien", "hi"]]],
+    batches: [{ type: "word-match", pairs: [["Moien", "hi"]] }],
     currentLessonId: "A1.01",
   };
 
@@ -138,7 +138,7 @@ describe("DISMISS_MILESTONE action", () => {
 
 describe("RESET action", () => {
   it("resets to ready with new batches and lessonId", () => {
-    const newBatches: SessionState["batches"] = [[["grouss", "big"]]];
+    const newBatches: SessionState["batches"] = [{ type: "word-match", pairs: [["grouss", "big"]] }];
     const next = sessionReducer(baseActive, { type: "RESET", batches: newBatches, currentLessonId: "A1.02" });
     expect(next.status).toBe("ready");
     expect(next.batches).toBe(newBatches);

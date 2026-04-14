@@ -84,3 +84,29 @@ export const loadWordEntriesForLevel = async (userLevel: string): Promise<WordEn
   const lessons = await loadLessonsForLevel(userLevel);
   return lessons.flatMap((lesson) => lesson.entries);
 };
+
+// Module-level cache — all lessons, regardless of level.
+// Reset on error so the next call retries the fetch.
+let allLessonsCache: Promise<Lesson[]> | null = null;
+
+/**
+ * Load all lessons from the manifest (all levels).
+ * Result is cached for the lifetime of the page — subsequent calls return the same promise.
+ */
+export const loadAllLessons = (): Promise<Lesson[]> => {
+  if (!allLessonsCache) {
+    allLessonsCache = fetchManifest()
+      .then((manifest) =>
+        Promise.all(
+          manifest.levels.flatMap((level) =>
+            level.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
+          ),
+        ),
+      )
+      .catch((err) => {
+        allLessonsCache = null; // allow retry on next call
+        throw err;
+      });
+  }
+  return allLessonsCache;
+};

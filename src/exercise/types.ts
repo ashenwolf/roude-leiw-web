@@ -1,11 +1,16 @@
-import type { WordResultMap } from "./WordMatch/types";
+import type { WordPair } from "./WordMatch/types";
 
-export type WordPair = [string, string];
+// Exercise type registry — extend as new exercise types are added
+export const EXERCISE_TYPE = {
+  WordMatch: "word-match",
+} as const;
 
-export type ExerciseProps = {
+export type ExerciseType = typeof EXERCISE_TYPE[keyof typeof EXERCISE_TYPE];
+
+// Opaque exercise batch — each type carries its own data shape
+export type WordMatchBatch = {
+  type: "word-match";
   pairs: WordPair[];
-  onComplete: (results: WordResultMap) => void;
-  onProgress: (matchedCount: number, totalPairs: number) => void;
 };
 
-export type ExerciseType = "word-match";
+export type ExerciseBatch = WordMatchBatch; // | FillBlankBatch | ...
