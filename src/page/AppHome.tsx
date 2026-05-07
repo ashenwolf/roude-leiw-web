@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
 import { loadAllLessons } from "../exercise/lesson-loader";
@@ -16,6 +17,7 @@ import type { LessonProgress } from "../exercise/progression";
 
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
+  const posthog = usePostHog();
   const { words, streak, dailySessions } = useProgress();
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState(true);
@@ -59,11 +61,13 @@ export const AppHome = () => {
 
   const handleSelectLesson = (lessonId: string) => {
     if (unlockedIds.includes(lessonId)) {
+      posthog?.capture("lesson_selected", { lesson_id: lessonId });
       navigateTo("exercise", { lessonId });
     }
   };
 
   const handleStartLearning = () => {
+    posthog?.capture("lesson_started", { lesson_id: currentLessonId });
     navigateTo("exercise", { lessonId: currentLessonId });
   };
 

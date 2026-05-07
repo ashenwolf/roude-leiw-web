@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { usePostHog } from "@posthog/react";
 
 import type { PillStatus } from "../../ui/Pill";
 
@@ -47,6 +48,7 @@ const STATUS_MAP: Record<SlotState["type"], PillStatus> = {
 // ============================================================================
 
 export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameReturn => {
+  const posthog = usePostHog();
   const displayCount = Math.min(DISPLAY_SLOTS, pairs.length);
   const totalPairs = pairs.length;
 
@@ -95,6 +97,11 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
 
     // Schedule fail clearance timer (legitimate async side effect)
     if (failPair) {
+      posthog?.capture("word_match_failed", {
+        lu: pairs[failPair.leftPairIndex][0],
+        en: pairs[failPair.rightPairIndex][1],
+      });
+
       const timeoutKey = `${failPair.leftPairIndex}-${failPair.rightPairIndex}`;
       const existing = failTimeoutsRef.current.get(timeoutKey);
       if (existing) clearTimeout(existing);
@@ -108,7 +115,24 @@ export const useGame = ({ pairs, onComplete, onMatch }: UseGameProps): UseGameRe
 
     // Invoke callbacks synchronously — no effects, no cascades
     events.forEach((event) => {
-      if (event.type === "matched") onMatch?.(event.matchedCount, event.totalPairs);
+      if (event.type === "matched") {
+        const otherSlots = side === "left" ? gameState.rightSlots : gameState.leftSlots;
+        const otherSelected = otherSlots.find((s) => s.type === "selected");
+        const clickedSlots = side === "left" ? gameState.leftSlots : gameState.rightSlots;
+        const clickedPairIndex = clickedSlots[position]?.type !== "empty"
+          ? clickedSlots[position].pairIndex
+          : undefined;
+        const matchedPairIndex = side === "left" ? clickedPairIndex : otherSelected?.pairIndex;
+        if (matchedPairIndex !== undefined) {
+          posthog?.capture("word_matched", {
+            lu: pairs[matchedPairIndex][0],
+            en: pairs[matchedPairIndex][1],
+            matched_count: event.matchedCount,
+            total_pairs: event.totalPairs,
+          });
+        }
+        onMatch?.(event.matchedCount, event.totalPairs);
+      }
       if (event.type === "completed") onComplete?.(event.wordResults);
     });
   };

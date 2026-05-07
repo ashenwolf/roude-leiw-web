@@ -4,13 +4,22 @@ import "./index.css";
 import App from "./App.tsx";
 import { AppWrapper } from "./ui/AppWrapper.tsx";
 import { NavigationProvider } from "./context/NavigationContext.tsx";
+import posthog from "posthog-js";
+import { PostHogProvider } from "@posthog/react";
+
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: "2026-01-30",
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <NavigationProvider>
-      <AppWrapper>
-        <App />
-      </AppWrapper>
-    </NavigationProvider>
+    <PostHogProvider client={posthog}>
+      <NavigationProvider>
+        <AppWrapper>
+          <App />
+        </AppWrapper>
+      </NavigationProvider>
+    </PostHogProvider>
   </StrictMode>
 );

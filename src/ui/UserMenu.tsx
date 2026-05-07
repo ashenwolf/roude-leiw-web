@@ -1,14 +1,21 @@
+import { usePostHog } from "@posthog/react";
+
 import { useAuth } from "../context/useAuth.ts";
 
 export const UserMenu = () => {
   const { auth, login, logout } = useAuth();
+  const posthog = usePostHog();
 
   if (auth.status === "loading") return null;
 
   if (auth.status === "unauthenticated") {
+    const handleLogin = () => {
+      posthog?.capture("sign_in_clicked");
+      login();
+    };
     return (
       <button
-        onClick={login}
+        onClick={handleLogin}
         className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer"
       >
         Sign in
@@ -16,9 +23,14 @@ export const UserMenu = () => {
     );
   }
 
+  const handleLogout = () => {
+    posthog?.capture("sign_out_clicked");
+    logout();
+  };
+
   return (
     <button
-      onClick={logout}
+      onClick={handleLogout}
       className="flex items-center gap-2 cursor-pointer"
     >
       {auth.user.avatarUrl ? (

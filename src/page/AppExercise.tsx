@@ -1,3 +1,5 @@
+import { usePostHog } from "@posthog/react";
+
 import { useNavigation } from "../context/useNavigation";
 import { WordMatch } from "../exercise/WordMatch";
 import { useActivityTimer } from "../exercise/use-activity-timer";
@@ -133,10 +135,17 @@ export const AppExercise = () => {
   const { navigateTo, params } = useNavigation();
   const { words, syncBatch } = useProgress();
   const timer = useActivityTimer();
+  const posthog = usePostHog();
 
   const handleBatchSync = (wordResults: WordResultMap) => {
     const durationSeconds = timer.getElapsedSeconds();
     timer.reset();
+    posthog?.capture("batch_completed", {
+      batch_index: session.currentBatchIndex,
+      total_batches: session.totalBatches,
+      lesson_id: params.lessonId,
+      duration_seconds: durationSeconds,
+    });
     syncBatch(wordResults, durationSeconds);
   };
 
@@ -146,6 +155,7 @@ export const AppExercise = () => {
   };
 
   const handleTryAgain = () => {
+    posthog?.capture("session_restarted", { lesson_id: params.lessonId });
     timer.reset();
     session.resetSession();
   };
@@ -161,10 +171,31 @@ export const AppExercise = () => {
     navigateTo("home");
   };
 
+  const handleAbandon = () => {
+    posthog?.capture("exercise_abandoned", {
+      lesson_id: params.lessonId,
+      batch_index: session.currentBatchIndex,
+      total_batches: session.totalBatches,
+    });
+    goHome();
+  };
+
+  const handleSessionComplete = () => {
+    posthog?.capture("session_completed", { lesson_id: params.lessonId });
+    goHome();
+  };
+
   if (session.state === "loading") return <ExerciseLoading />;
   if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
   if (session.state === "ready") {
-    return <ExerciseReady totalBatches={session.totalBatches} onStart={session.startSession} onBack={goHome} />;
+    const handleStart = () => {
+      posthog?.capture("exercise_started", {
+        lesson_id: params.lessonId,
+        total_batches: session.totalBatches,
+      });
+      session.startSession();
+    };
+    return <ExerciseReady totalBatches={session.totalBatches} onStart={handleStart} onBack={goHome} />;
   }
 
   return (
@@ -178,9 +209,9 @@ export const AppExercise = () => {
         onBatchComplete={session.handleBatchComplete}
         onMatchProgress={handleMatchProgress}
         onDismissMilestone={session.dismissMilestone}
-        onSessionComplete={goHome}
+        onSessionComplete={handleSessionComplete}
         onTryAgain={handleTryAgain}
-        onBack={goHome}
+        onBack={handleAbandon}
       />
       <DebugPanel
         lessons={session.lessons}
