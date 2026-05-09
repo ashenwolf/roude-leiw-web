@@ -39,13 +39,3 @@ export const parseLetzContent = (content: string, fallbackId = "unknown"): Lesso
  * WordPair is [left, right] where left is Luxembourgish and right is English
  */
 export const entriesToWordPairs = (entries: WordEntry[]): [string, string][] => entries.map(({ lu, en }) => [lu, en]);
-
-/**
- * Combine entries from multiple lessons, shuffling the result
- */
-export const combineAndShuffleEntries = (lessons: Lesson[]): WordEntry[] =>
-  lessons
-    .flatMap((lesson) => lesson.entries)
-    .map((entry) => ({ entry, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ entry }) => entry);

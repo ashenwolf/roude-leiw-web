@@ -1,14 +1,10 @@
+import { shuffle } from "../../lib/shuffle";
+
 import type { ColumnSide, GameState, SlotState, WordPair, WordResultMap } from "./types";
 
 // ============================================================================
 // Utility Functions
 // ============================================================================
-
-const shuffle = <T,>(array: ReadonlyArray<T>): T[] =>
-  array
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
 
 const range = (from: number, to: number) =>
   Array.from({ length: to - from }, (_, i) => i + from);

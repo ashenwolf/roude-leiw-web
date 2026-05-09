@@ -1,3 +1,5 @@
+import { shuffle } from "../lib/shuffle";
+
 import type { WordStats } from "../context/auth";
 import type { Lesson, WordEntry } from "./letz-parser";
 import { classifyWord, wordKey, type WordMastery } from "./progression";
@@ -75,12 +77,6 @@ const bucketComparators: Record<WordBucket, (a: WithStats, b: WithStats) => numb
   reinforcing: (a, b) => (a.stats?.shown ?? 0) - (b.stats?.shown ?? 0),
   reviewing: (a, b) => (a.stats?.shown ?? 0) - (b.stats?.shown ?? 0),
 };
-
-const shuffle = <T>(arr: ReadonlyArray<T>): T[] =>
-  arr
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
 
 // --- Lesson adapter ---
 

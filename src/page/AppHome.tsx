@@ -3,7 +3,8 @@ import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
 import { loadAllLessons } from "../exercise/lesson-loader";
-import { computeLessonProgress, computeUnlockedLessonIds, findCurrentLessonId, computeOverallStats } from "../exercise/progression";
+import { projectHomeLessonsView } from "../exercise/lesson-rows";
+import { computeOverallStats } from "../exercise/progression";
 import { computeXP, computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
@@ -13,7 +14,6 @@ import { StreakBadge } from "../ui/StreakBadge";
 import { XPBar } from "../ui/XPBar";
 
 import type { Lesson } from "../exercise/letz-parser";
-import type { LessonProgress } from "../exercise/progression";
 
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
@@ -32,24 +32,9 @@ export const AppHome = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // Derived progression state
-  const unlockedIds = useMemo(
-    () => computeUnlockedLessonIds(lessons, words),
-    [lessons, words],
-  );
-
-  const currentLessonId = useMemo(
-    () => findCurrentLessonId(lessons, words),
-    [lessons, words],
-  );
-
-  const progressMap = useMemo(
-    () =>
-      Object.fromEntries(
-        lessons.map((lesson) => [lesson.meta.id, computeLessonProgress(lesson, words)]),
-      ) as Record<string, LessonProgress>,
-    [lessons, words],
-  );
+  // Single producer: everything AppHome needs about lessons + progress
+  const view = useMemo(() => projectHomeLessonsView(lessons, words), [lessons, words]);
+  const { progressMap, unlockedIds, currentLessonId, totalWords } = view;
 
   const overallStats = useMemo(() => computeOverallStats(words), [words]);
 
@@ -96,7 +81,7 @@ export const AppHome = () => {
       {/* Stats */}
       <StatsRow
         masteredWords={overallStats.masteredWords}
-        totalWords={lessons.reduce((sum, l) => sum + l.entries.length, 0)}
+        totalWords={totalWords}
         accuracy={overallStats.overallAccuracy}
         streak={streak?.current ?? 0}
         todayMinutes={todayMinutes}

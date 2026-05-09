@@ -1,15 +1,10 @@
 import { useEffect, useReducer, useRef } from "react";
 
-import { entriesToWordPairs } from "./letz-parser";
+import { planBatches } from "./batch-planner";
 import { loadAllLessons } from "./lesson-loader";
-import { computeUnlockedLessonIds, findCurrentLessonId } from "./progression";
 import { sessionReducer, INITIAL_SESSION_STATE } from "./session-reducer";
-import { lessonsToCandidates, selectItemsForBatch } from "./word-selector";
 
 import type { WordStats } from "../context/auth";
-import type { Lesson } from "./letz-parser";
-import type { ExerciseBatch, WordMatchBatch } from "./types";
-import type { ItemSelectionConfig } from "./word-selector";
 import type { WordResultMap } from "./WordMatch/types";
 
 // ============================================================================
@@ -22,48 +17,7 @@ export const SESSION_CONFIG = {
 } as const;
 
 // ============================================================================
-// Pure helpers
-// ============================================================================
-
-const buildWordMatchBatch = (
-  lessons: Lesson[],
-  unlockedIds: ReadonlyArray<string>,
-  currentLessonId: string,
-  userWords: Record<string, WordStats>,
-  config: ItemSelectionConfig,
-): WordMatchBatch => {
-  const candidates = lessonsToCandidates(lessons, unlockedIds);
-  const selected = selectItemsForBatch(candidates, userWords, currentLessonId, new Set(), config);
-  return {
-    type: "word-match",
-    pairs: entriesToWordPairs(selected.map((s) => s.item)),
-  };
-};
-
-const buildBatches = (
-  lessons: Lesson[],
-  userWords: Record<string, WordStats>,
-  targetLessonId: string | undefined,
-  batchSize: number,
-  batchCount: number,
-): ExerciseBatch[] => {
-  if (lessons.length === 0) return [];
-
-  const unlockedIds = computeUnlockedLessonIds(lessons, userWords);
-  const currentId = targetLessonId ?? findCurrentLessonId(lessons, userWords);
-
-  return Array.from({ length: batchCount }).map((_, idx) => {
-    const isLastBatch = idx === batchCount - 1;
-    const config: ItemSelectionConfig = isLastBatch
-      ? { batchSize, bucketRatios: { new: 0.15, struggling: 0.25, reinforcing: 0.30, reviewing: 0.30 } }
-      : { batchSize, bucketRatios: { new: 0.25, struggling: 0.25, reinforcing: 0.25, reviewing: 0.25 } };
-
-    return buildWordMatchBatch(lessons, unlockedIds, currentId, userWords, config);
-  });
-};
-
-// ============================================================================
-// Hook
+// Hook — pure wiring: load lessons → plan batches → drive reducer
 // ============================================================================
 
 type UseExerciseSessionProps = {
@@ -83,16 +37,15 @@ export const useExerciseSession = ({
 }: UseExerciseSessionProps) => {
   const [state, dispatch] = useReducer(sessionReducer, INITIAL_SESSION_STATE);
 
-  // Ref for userWords — needed in async effect callback where closure would be stale
+  // userWords may populate after auth resolves (after this effect fires).
+  // Read latest via ref at promise-resolution time so planBatches sees real progress.
   const userWordsRef = useRef(userWords);
   useEffect(() => { userWordsRef.current = userWords; });
 
-  // Single async effect: load lessons → dispatch LOADED
   useEffect(() => {
     loadAllLessons()
       .then((lessons) => {
-        const batches = buildBatches(lessons, userWordsRef.current, targetLessonId, batchSize, batchCount);
-        const currentLessonId = targetLessonId ?? findCurrentLessonId(lessons, userWordsRef.current);
+        const { batches, currentLessonId } = planBatches(lessons, userWordsRef.current, targetLessonId, { batchSize, batchCount });
         dispatch({ type: "LOADED", lessons, batches, currentLessonId });
       })
       .catch((err) => {
@@ -100,29 +53,21 @@ export const useExerciseSession = ({
       });
   }, [targetLessonId, batchSize, batchCount]);
 
-  // ── Callbacks — React Compiler handles memoization ─────────────────
+  const startSession = () => dispatch({ type: "START" });
 
-  const startSession = () => {
-    dispatch({ type: "START" });
-  };
-
-  const handleMatchProgress = (matchedCount: number, totalPairs: number) => {
+  const handleMatchProgress = (matchedCount: number, totalPairs: number) =>
     dispatch({ type: "MATCH_PROGRESS", matchedCount, totalPairs });
-  };
 
   const handleBatchComplete = (wordResults: WordResultMap) => {
-    // Side effect first (fire-and-forget), then state transition
+    // Side effect first (fire-and-forget), then state transition. Order is intentional.
     onBatchResults?.(wordResults);
     dispatch({ type: "BATCH_COMPLETE" });
   };
 
-  const dismissMilestone = () => {
-    dispatch({ type: "DISMISS_MILESTONE" });
-  };
+  const dismissMilestone = () => dispatch({ type: "DISMISS_MILESTONE" });
 
   const resetSession = () => {
-    const batches = buildBatches(state.lessons, userWords, targetLessonId, batchSize, batchCount);
-    const currentLessonId = targetLessonId ?? findCurrentLessonId(state.lessons, userWords);
+    const { batches, currentLessonId } = planBatches(state.lessons, userWords, targetLessonId, { batchSize, batchCount });
     dispatch({ type: "RESET", batches, currentLessonId });
   };
 
