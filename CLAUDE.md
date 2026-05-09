@@ -12,7 +12,7 @@ npm run preview      # Preview production build locally
 npm run deploy       # Build and deploy to Cloudflare Pages
 ```
 
-No test runner is configured.
+Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under `tests/` mirroring the source tree. See **Testing** in Architecture below for what's covered and the no-mocks rule.
 
 ## What This App Is
 
@@ -180,6 +180,59 @@ The pipeline is a **conceptual** model, not a syntax rule. Don't:
 
 If a change feels like it's making the code longer to satisfy the pattern rather than shorter to express the intent, the pattern is wrong for that change.
 
+### Screen Data Map
+
+What each screen receives and from which pipeline stage. Update this when adding a new screen or a new data dependency.
+
+```mermaid
+flowchart TD
+  subgraph sources["Shared inputs"]
+    words["words\nRecord&lt;key, WordStats&gt;"]
+    streak["streak\n{ current, longest }"]
+    daily["dailySessions\nRecord&lt;date, DailySession&gt;"]
+    lessons["Lesson[]"]
+    lessonId["params.lessonId\n(NavigationContext)"]
+  end
+
+  subgraph home["AppHome"]
+    direction TB
+    hv["HomeLessonsView\n· progressMap\n· unlockedIds\n· currentLessonId\n· totalWords"]
+    hstats["OverallStats\n· masteredWords\n· overallAccuracy"]
+    hxp["LevelInfo\n· xp · level · xpForNext"]
+    htoday["todayMinutes"]
+  end
+
+  subgraph exercise["AppExercise"]
+    direction TB
+    eplan["BatchPlan\n· batches · currentLessonId"]
+    estatus["SessionStatus\nloading → ready → active\n→ batch_complete\n→ session_complete"]
+    ebatch{{"ExerciseBatch  ❲discriminated union❳\ntype: 'word-match' | future types"}}
+    eprog["batchProgress (0–1)\ncurrentBatchIndex / totalBatches"]
+    wm["❮ word-match ❯  WordMatchBatch\n· pairs: WordPair[]\n→ GameState · slots · wordResults"]
+    fut["❮ future ❯  e.g. FillBlankBatch\n· …"]
+  end
+
+  words & lessons -->|"projectHomeLessonsView()"| hv
+  words -->|"computeOverallStats()"| hstats
+  words -->|"computeXP() + computePlayerLevel()"| hxp
+  daily --> htoday
+  streak --> home
+
+  words & lessons & lessonId -->|"planBatches()"| eplan
+  eplan --> estatus
+  eplan --> eprog
+  eplan --> ebatch
+  ebatch -->|"type === 'word-match'"| wm
+  ebatch -.->|"type === '…' ❲not yet❳"| fut
+```
+
+`Lesson[]` is loaded independently on both screens via `loadAllLessons()` (cached by the browser). `words`/`streak`/`dailySessions` come from `useProgress()`, which abstracts over KV (auth) and localStorage (guest).
+
+**Adding a new exercise type** — three touch points, nothing else:
+1. `src/exercise/types.ts` — add `FillBlankBatch` and extend `ExerciseBatch = WordMatchBatch | FillBlankBatch`
+2. `src/exercise/batch-planner.ts` — produce the new batch type where appropriate
+3. `src/page/AppExercise.tsx` — add a `currentBatch?.type === 'fill-blank' && <FillBlank … />` branch alongside the existing `word-match` check
+
 ### Authentication
 
 Google OAuth 2.0 via Cloudflare Worker. Flow:
@@ -315,6 +368,43 @@ Moien = good morning
 Äddi = bye
 Merci = thanks
 ```
+
+### Testing
+
+Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
+
+**What's covered (130 tests):**
+
+| Module                                      | Tests | Notes |
+|---------------------------------------------|-------|-------|
+| `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
+| `src/exercise/word-selector.ts`             | 15    | bucket classification, exclude keys, overflow priority, output shape |
+| `src/exercise/batch-planner.ts`             | 12    | empty input, unlock filter, currentLessonId precedence, batch shape, last-batch ratio shift |
+| `src/exercise/progression.ts`               | 22    | classifyWord, computeLessonProgress, computeUnlockedLessonIds, computeOverallStats |
+| `src/exercise/session-reducer.ts`           | 16    | every action × every state |
+| `src/lib/letz-parser.ts`                    | 9     | grammar, lesson directives, comments |
+| `worker/lib/user.ts`                        | 19    | mergeWordResults, mergeDailySession, computeStreak |
+| `worker/lib/session.ts`                     | 12    | session CRUD, cookie helpers |
+| `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 (failing on `main`) | jsdom environment issue — preexisting, unrelated |
+
+**No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.
+
+**What is intentionally NOT tested:**
+
+- **Hooks (`use-game.ts`, `useExerciseSession`, `useProgress`, `useGuestProgress`)** — wiring only. Their bug surface is dependency arrays, ref lifecycles, and effect ordering, which are caught by the build + manual smoke test more cheaply than by `@testing-library/react` setups.
+- **Worker handlers (`worker/handlers/*.ts`)** — thin routing over already-tested `worker/lib/*` transforms. Adding handler tests would require KV mocks for marginal coverage.
+- **UI components (`src/ui/*`, `src/page/*`, `<WordMatch>`)** — render functions. Visual correctness lives in browser smoke tests, not unit tests.
+
+**When adding a new producer or pure module, add tests in the same change.** If you can't write a test without mocking something, the code isn't on-pattern — fix the code, not the test.
+
+**Test fixture conventions:**
+
+- `s(shown, correct, incorrect)` for `WordStats` (see `progression.test.ts`)
+- `lesson(id, ...pairs)` for `Lesson` (see `progression.test.ts`, `batch-planner.test.ts`)
+- `slot.{active|selected|fail|fading|empty}(...)` for `SlotState` (see `game-logic.test.ts`)
+- `cand(lu, en, lessonId)` for `CandidateItem` (see `word-selector.test.ts`)
+
+Reuse these helpers; don't re-invent fixture shapes.
 
 ### Development
 
