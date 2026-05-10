@@ -23,14 +23,19 @@ export type WordEntry = {
   en: string;
 };
 
+export type SentenceEntry = {
+  luVariants: string[];
+  enVariants: string[];
+  distractorsEn?: string[];
+  distractorsLu?: string[];
+};
+
 export type Lesson = {
   meta: LessonMeta;
   entries: WordEntry[];
+  sentences: SentenceEntry[];
 };
 
-/**
- * Parse a single .letz file content into a Lesson object.
- */
 export const parseLetzContent = (content: string, fallbackId = "unknown"): Lesson =>
   parseLetz(content, fallbackId);
 

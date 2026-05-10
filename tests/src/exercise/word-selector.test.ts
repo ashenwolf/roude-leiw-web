@@ -18,6 +18,7 @@ import type { Lesson, WordEntry } from "../../../src/exercise/letz-parser.ts";
 const lesson = (id: string, ...pairs: [string, string][]): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: pairs.map(([lu, en]) => ({ lu, en })),
+  sentences: [],
 });
 
 const stats = (shown: number, correct: number, incorrect: number): WordStats =>

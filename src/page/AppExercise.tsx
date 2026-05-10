@@ -1,6 +1,7 @@
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
+import { SentenceBuilder } from "../exercise/SentenceBuilder";
 import { WordMatch } from "../exercise/WordMatch";
 import { useActivityTimer } from "../exercise/use-activity-timer";
 import { useExerciseSession } from "../exercise/use-exercise-session";
@@ -8,9 +9,11 @@ import { useProgress } from "../persistence/hooks/use-progress";
 import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
 import { ProgressBar } from "../ui/ProgressBar";
-import { MilestonePopup, CelebrationPopup } from "../ui/Popup";
+import { MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "../ui/Popup";
 import { DebugPanel } from "../ui/DebugPanel";
 
+import type { SessionMode } from "../exercise/batch-planner";
+import type { ProgressView } from "../exercise/session-progress";
 import type { ExerciseBatch } from "../exercise/types";
 import type { WordResultMap } from "../exercise/WordMatch/types";
 import type { SessionStatus } from "../exercise/session-reducer";
@@ -23,11 +26,7 @@ const ExerciseLoading = () => (
   </div>
 );
 
-type ExerciseErrorProps = {
-  error: string | null;
-  onBack: () => void;
-};
-
+type ExerciseErrorProps = { error: string | null; onBack: () => void };
 const ExerciseError = ({ error, onBack }: ExerciseErrorProps) => (
   <div className="flex flex-col items-center gap-4 py-8">
     <h2 className="text-xl font-bold text-red-600">Failed to load lessons</h2>
@@ -36,27 +35,23 @@ const ExerciseError = ({ error, onBack }: ExerciseErrorProps) => (
   </div>
 );
 
-type ExerciseReadyProps = {
-  totalBatches: number;
-  onStart: () => void;
-  onBack: () => void;
-};
-
-const ExerciseReady = ({ totalBatches, onStart, onBack }: ExerciseReadyProps) => (
+type ExerciseReadyProps = { totalSlots: number; onStart: () => void; onBack: () => void; mode: SessionMode };
+const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
-    <h2 className="text-2xl font-bold text-gray-800">Word Match Exercise</h2>
+    <h2 className="text-2xl font-bold text-gray-800">
+      {mode.kind === "madness" ? "Match Madness" : mode.kind === "mistakes" ? "Fix Your Mistakes" : "Word Match Exercise"}
+    </h2>
     <p className="text-gray-600 text-center">
-      Match Luxembourgish words with their English translations.
-      <br />
-      Complete {totalBatches} batches to finish the exercise.
+      {mode.kind === "madness"
+        ? "Test yourself across all words you've seen."
+        : mode.kind === "mistakes"
+        ? "Drill the words and phrases you got wrong."
+        : `Complete ${totalSlots} exercises to finish the session.`}
     </p>
     <div className="w-full max-w-xs">
-      <Button onClick={onStart}>Start Exercise</Button>
+      <Button onClick={onStart}>Start</Button>
     </div>
-    <button
-      onClick={onBack}
-      className="text-gray-500 hover:text-gray-700 transition-colors"
-    >
+    <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors">
       Back to Home
     </button>
   </div>
@@ -64,12 +59,12 @@ const ExerciseReady = ({ totalBatches, onStart, onBack }: ExerciseReadyProps) =>
 
 type ExerciseActiveProps = {
   state: SessionStatus;
-  currentBatchIndex: number;
-  totalBatches: number;
+  currentSlotIndex: number;
+  lastSlotOutcome: "success" | "mistake" | null;
+  progressView: ProgressView;
   currentBatch: ExerciseBatch | undefined;
-  batchProgress: number;
-  onBatchComplete: (wordResults: WordResultMap) => void;
-  onMatchProgress: (matchedCount: number, totalPairs: number) => void;
+  onSlotComplete: (wordResults: WordResultMap) => void;
+  onSlotProgress: (done: number, total: number) => void;
   onDismissMilestone: () => void;
   onSessionComplete: () => void;
   onTryAgain: () => void;
@@ -78,47 +73,53 @@ type ExerciseActiveProps = {
 
 const ExerciseActive = ({
   state,
-  currentBatchIndex,
-  totalBatches,
+  currentSlotIndex,
+  lastSlotOutcome,
+  progressView,
   currentBatch,
-  batchProgress,
-  onBatchComplete,
-  onMatchProgress,
+  onSlotComplete,
+  onSlotProgress,
   onDismissMilestone,
   onSessionComplete,
   onTryAgain,
   onBack,
 }: ExerciseActiveProps) => (
   <div className="flex flex-col gap-6">
-    <ProgressBar
-      batchProgress={batchProgress}
-      currentBatch={currentBatchIndex}
-      totalBatches={totalBatches}
-    />
+    <ProgressBar view={progressView} />
 
     {currentBatch?.type === "word-match" && (
       <WordMatch
-        key={`batch-${currentBatchIndex}`}
+        key={`slot-${currentSlotIndex}`}
         pairs={currentBatch.pairs}
-        onComplete={onBatchComplete}
-        onMatch={onMatchProgress}
+        onComplete={onSlotComplete}
+        onMatch={onSlotProgress}
+      />
+    )}
+
+    {currentBatch?.type === "sentence-builder" && (
+      <SentenceBuilder
+        key={`slot-${currentSlotIndex}`}
+        item={currentBatch.item}
+        onResult={onSlotComplete}
       />
     )}
 
     <div className="mt-4">
-      <button
-        onClick={onBack}
-        className="text-gray-500 hover:text-gray-700 transition-colors text-sm"
-      >
+      <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors text-sm">
         ← Back to Home
       </button>
     </div>
 
     <MilestonePopup
-      visible={state === "batch_complete"}
+      visible={state === "slot_complete"}
       onDismiss={onDismissMilestone}
-      batchNumber={currentBatchIndex + 1}
-      totalBatches={totalBatches}
+      outcome={lastSlotOutcome ?? "success"}
+    />
+
+    <SectionMilestonePopup
+      visible={state === "section_complete"}
+      onDismiss={onDismissMilestone}
+      section={Math.floor((currentSlotIndex + 1) / 5)}
     />
 
     <CelebrationPopup
@@ -132,26 +133,40 @@ const ExerciseActive = ({
 // ── Page Component ──────────────────────────────────────────────────────
 
 export const AppExercise = () => {
-  const { navigateTo, params } = useNavigation();
+  const { navigateTo, params, currentPage } = useNavigation();
   const { words, syncBatch } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
-  const handleBatchSync = (wordResults: WordResultMap) => {
+  const mode: SessionMode =
+    currentPage === "madness" ? { kind: "madness" }
+    : currentPage === "mistakes" ? { kind: "mistakes" }
+    : { kind: "lesson", lessonId: params.lessonId };
+
+  // session is defined first so handlers below can reference it without TDZ risk
+  const session = useExerciseSession({ userWords: words, mode });
+
+  const goHome = () => {
+    refreshGuestProgress();
+    navigateTo("home");
+  };
+
+  const handleSlotSync = (wordResults: WordResultMap) => {
     const durationSeconds = timer.getElapsedSeconds();
     timer.reset();
-    posthog?.capture("batch_completed", {
-      batch_index: session.currentBatchIndex,
-      total_batches: session.totalBatches,
+    posthog?.capture("slot_completed", {
+      slot_index: session.currentSlotIndex,
+      total_slots: session.totalSlots,
       lesson_id: params.lessonId,
       duration_seconds: durationSeconds,
     });
     syncBatch(wordResults, durationSeconds);
+    session.handleSlotComplete(wordResults); // determines outcome + re-queues if end of plan
   };
 
-  const handleMatchProgress = (matchedCount: number, totalPairs: number) => {
+  const handleSlotProgress = (done: number, total: number) => {
     timer.registerInteraction();
-    session.handleMatchProgress(matchedCount, totalPairs);
+    session.handleSlotProgress(done, total);
   };
 
   const handleTryAgain = () => {
@@ -160,22 +175,11 @@ export const AppExercise = () => {
     session.resetSession();
   };
 
-  const session = useExerciseSession({
-    userWords: words,
-    targetLessonId: params.lessonId,
-    onBatchResults: handleBatchSync,
-  });
-
-  const goHome = () => {
-    refreshGuestProgress();
-    navigateTo("home");
-  };
-
   const handleAbandon = () => {
     posthog?.capture("exercise_abandoned", {
       lesson_id: params.lessonId,
-      batch_index: session.currentBatchIndex,
-      total_batches: session.totalBatches,
+      slot_index: session.currentSlotIndex,
+      total_slots: session.totalSlots,
     });
     goHome();
   };
@@ -191,23 +195,31 @@ export const AppExercise = () => {
     const handleStart = () => {
       posthog?.capture("exercise_started", {
         lesson_id: params.lessonId,
-        total_batches: session.totalBatches,
+        mode: mode.kind,
+        total_slots: session.totalSlots,
       });
       session.startSession();
     };
-    return <ExerciseReady totalBatches={session.totalBatches} onStart={handleStart} onBack={goHome} />;
+    return (
+      <ExerciseReady
+        totalSlots={session.totalSlots}
+        onStart={handleStart}
+        onBack={goHome}
+        mode={mode}
+      />
+    );
   }
 
   return (
     <>
       <ExerciseActive
         state={session.state}
-        currentBatchIndex={session.currentBatchIndex}
-        totalBatches={session.totalBatches}
+        currentSlotIndex={session.currentSlotIndex}
+        lastSlotOutcome={session.lastSlotOutcome}
+        progressView={session.progressView}
         currentBatch={session.currentBatch}
-        batchProgress={session.batchProgress}
-        onBatchComplete={session.handleBatchComplete}
-        onMatchProgress={handleMatchProgress}
+        onSlotComplete={handleSlotSync}
+        onSlotProgress={handleSlotProgress}
         onDismissMilestone={session.dismissMilestone}
         onSessionComplete={handleSessionComplete}
         onTryAgain={handleTryAgain}

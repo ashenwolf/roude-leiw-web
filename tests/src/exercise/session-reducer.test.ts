@@ -2,23 +2,39 @@ import { describe, it, expect } from "vitest";
 
 import { sessionReducer, INITIAL_SESSION_STATE } from "../../../src/exercise/session-reducer.ts";
 import type { SessionState, SessionAction } from "../../../src/exercise/session-reducer.ts";
+import type { ExerciseBatch } from "../../../src/exercise/types.ts";
 
 // ============================================================================
 // Fixtures
 // ============================================================================
 
+const batch1: ExerciseBatch = { type: "word-match", pairs: [["Moien", "hi"], ["Äddi", "bye"]] };
+const batch2: ExerciseBatch = { type: "word-match", pairs: [["Merci", "thanks"]] };
+
+const makeQueue = (n: number): ExerciseBatch[] =>
+  Array.from({ length: n }, () => batch1);
+
+const slotComplete = (requeueBatch?: ExerciseBatch): SessionAction =>
+  ({ type: "SLOT_COMPLETE", outcome: "success", requeueBatch });
+
 const baseReady: SessionState = {
   ...INITIAL_SESSION_STATE,
   status: "ready",
   lessons: [],
-  batches: [
-    { type: "word-match", pairs: [["Moien", "hi"], ["Äddi", "bye"]] },
-    { type: "word-match", pairs: [["Merci", "thanks"]] },
-  ],
+  queue: [batch1, batch2],
+  plannedSlots: 15,
   currentLessonId: "A1.01",
 };
 
-const baseActive: SessionState = { ...baseReady, status: "active", currentBatch: 0 };
+const baseActive: SessionState = { ...baseReady, status: "active", currentSlot: 0 };
+
+const active15: SessionState = {
+  ...INITIAL_SESSION_STATE,
+  status: "active",
+  queue: makeQueue(15),
+  plannedSlots: 15,
+  currentLessonId: "A1.01",
+};
 
 // ============================================================================
 // LOADED
@@ -28,7 +44,8 @@ describe("LOADED action", () => {
   const action: SessionAction = {
     type: "LOADED",
     lessons: [],
-    batches: [{ type: "word-match", pairs: [["Moien", "hi"]] }],
+    queue: [{ type: "word-match", pairs: [["Moien", "hi"]] }],
+    plannedSlots: 1,
     currentLessonId: "A1.01",
   };
 
@@ -42,6 +59,7 @@ describe("LOADED action", () => {
     expect(next.status).toBe("ready");
     expect(next.error).toBeNull();
     expect(next.currentLessonId).toBe("A1.01");
+    expect(next.plannedSlots).toBe(1);
   });
 });
 
@@ -62,53 +80,115 @@ describe("LOAD_ERROR action", () => {
 // ============================================================================
 
 describe("START action", () => {
-  it("transitions to active, resets batch state", () => {
-    const state: SessionState = { ...baseReady, currentBatch: 1, batchProgress: 0.5 };
+  it("transitions to active, resets slot state", () => {
+    const state: SessionState = { ...baseReady, currentSlot: 1, slotProgress: 0.5 };
     const next = sessionReducer(state, { type: "START" });
     expect(next.status).toBe("active");
-    expect(next.currentBatch).toBe(0);
-    expect(next.batchProgress).toBe(0);
+    expect(next.currentSlot).toBe(0);
+    expect(next.slotProgress).toBe(0);
   });
 });
 
 // ============================================================================
-// MATCH_PROGRESS
+// SLOT_PROGRESS
 // ============================================================================
 
-describe("MATCH_PROGRESS action", () => {
+describe("SLOT_PROGRESS action", () => {
   it.each([
     ["1 of 2 matched → 0.5", 1, 2, 0.5],
     ["4 of 4 matched → 1.0", 4, 4, 1],
     ["0 of 0 → 0 (no divide-by-zero)", 0, 0, 0],
     ["0 of 3 → 0", 0, 3, 0],
-  ] as const)("%s", (_, matchedCount, totalPairs, expected) => {
-    const next = sessionReducer(baseActive, { type: "MATCH_PROGRESS", matchedCount, totalPairs });
-    expect(next.batchProgress).toBeCloseTo(expected);
+  ] as const)("%s", (_, done, total, expected) => {
+    const next = sessionReducer(baseActive, { type: "SLOT_PROGRESS", done, total });
+    expect(next.slotProgress).toBeCloseTo(expected);
   });
 
-  it("is ignored (falls to default) when status is not active", () => {
-    const next = sessionReducer(baseReady, { type: "MATCH_PROGRESS", matchedCount: 1, totalPairs: 2 });
+  it("is ignored when status is not active", () => {
+    const next = sessionReducer(baseReady, { type: "SLOT_PROGRESS", done: 1, total: 2 });
     expect(next).toBe(baseReady);
   });
 });
 
 // ============================================================================
-// BATCH_COMPLETE
+// SLOT_COMPLETE
 // ============================================================================
 
-describe("BATCH_COMPLETE action", () => {
-  it.each([
-    ["middle batch → batch_complete", 0, "batch_complete" as const],
-    ["last batch → session_complete", 1, "session_complete" as const],
-  ] as const)("%s", (_, currentBatch, expectedStatus) => {
-    // baseReady has 2 batches; index 0 is middle, index 1 is last
-    const state: SessionState = { ...baseActive, currentBatch };
-    const next = sessionReducer(state, { type: "BATCH_COMPLETE" });
-    expect(next.status).toBe(expectedStatus);
+describe("SLOT_COMPLETE action", () => {
+  it("middle slot (non-section-end) → slot_complete", () => {
+    const state: SessionState = { ...baseActive, currentSlot: 0 };
+    const next = sessionReducer(state, slotComplete());
+    expect(next.status).toBe("slot_complete");
+    expect(next.queue).toHaveLength(2);
+  });
+
+  it("records lastSlotOutcome", () => {
+    const state: SessionState = { ...baseActive, currentSlot: 0 };
+    const next = sessionReducer(state, { type: "SLOT_COMPLETE", outcome: "mistake", mistakeBatches: [] });
+    expect(next.lastSlotOutcome).toBe("mistake");
+  });
+
+  it("last slot → session_complete", () => {
+    const state: SessionState = { ...baseActive, currentSlot: 1 };
+    const next = sessionReducer(state, slotComplete());
+    expect(next.status).toBe("session_complete");
+  });
+
+  it("slot 4 of 15 (section 1 end) → section_complete", () => {
+    const next = sessionReducer({ ...active15, currentSlot: 4 }, slotComplete());
+    expect(next.status).toBe("section_complete");
+  });
+
+  it("slot 9 of 15 (section 2 end) → section_complete", () => {
+    const next = sessionReducer({ ...active15, currentSlot: 9 }, slotComplete());
+    expect(next.status).toBe("section_complete");
+  });
+
+  it("slot 14 of 15 (last) → session_complete not section_complete", () => {
+    const next = sessionReducer({ ...active15, currentSlot: 14 }, slotComplete());
+    expect(next.status).toBe("session_complete");
+  });
+
+  it("slot 2 of 15 (mid-section) → slot_complete", () => {
+    const next = sessionReducer({ ...active15, currentSlot: 2 }, slotComplete());
+    expect(next.status).toBe("slot_complete");
+  });
+
+  it("appends requeueBatch to queue (sentence mistake re-queued)", () => {
+    const requeue: ExerciseBatch = { type: "word-match", pairs: [["Moien", "hi"]] };
+    const state: SessionState = { ...baseActive, currentSlot: 0 };
+    const next = sessionReducer(state, { type: "SLOT_COMPLETE", outcome: "mistake", requeueBatch: requeue });
+    expect(next.queue).toHaveLength(3);
+    expect(next.queue[2]).toBe(requeue);
+    expect(next.status).toBe("slot_complete");
+  });
+
+  it("last slot + requeueBatch → slot_complete (not session_complete)", () => {
+    const requeue: ExerciseBatch = { type: "word-match", pairs: [["Moien", "hi"]] };
+    const state: SessionState = { ...baseActive, currentSlot: 1 };
+    const next = sessionReducer(state, { type: "SLOT_COMPLETE", outcome: "mistake", requeueBatch: requeue });
+    expect(next.queue).toHaveLength(3);
+    expect(next.status).toBe("slot_complete");
+  });
+
+  it("overflow slots never trigger section_complete", () => {
+    // 15 planned + 5 overflow = 20 total; slot 19 would be % 5 === 0 but it's overflow
+    const overflowQueue = makeQueue(20);
+    const state: SessionState = { ...active15, queue: overflowQueue, currentSlot: 19 };
+    const next = sessionReducer(state, slotComplete());
+    expect(next.status).toBe("session_complete"); // last slot, not section_complete
+  });
+
+  it("overflow slot mid-run gives slot_complete not section_complete", () => {
+    // slot 16 in a 15+5 queue: (16+1)=17, 17 <= 15 is false → slot_complete
+    const overflowQueue = makeQueue(20);
+    const state: SessionState = { ...active15, queue: overflowQueue, currentSlot: 16 };
+    const next = sessionReducer(state, slotComplete());
+    expect(next.status).toBe("slot_complete");
   });
 
   it("is ignored when status is not active", () => {
-    const next = sessionReducer(baseReady, { type: "BATCH_COMPLETE" });
+    const next = sessionReducer(baseReady, slotComplete());
     expect(next).toBe(baseReady);
   });
 });
@@ -118,15 +198,23 @@ describe("BATCH_COMPLETE action", () => {
 // ============================================================================
 
 describe("DISMISS_MILESTONE action", () => {
-  it("transitions batch_complete → active, increments batch, resets progress", () => {
-    const state: SessionState = { ...baseActive, status: "batch_complete", currentBatch: 0, batchProgress: 1 };
+  it("transitions slot_complete → active, increments slot, resets progress", () => {
+    const state: SessionState = { ...baseActive, status: "slot_complete", currentSlot: 0, slotProgress: 1 };
     const next = sessionReducer(state, { type: "DISMISS_MILESTONE" });
     expect(next.status).toBe("active");
-    expect(next.currentBatch).toBe(1);
-    expect(next.batchProgress).toBe(0);
+    expect(next.currentSlot).toBe(1);
+    expect(next.slotProgress).toBe(0);
   });
 
-  it("is ignored when status is not batch_complete", () => {
+  it("transitions section_complete → active, increments slot, resets progress", () => {
+    const state: SessionState = { ...active15, status: "section_complete", currentSlot: 4, slotProgress: 1 };
+    const next = sessionReducer(state, { type: "DISMISS_MILESTONE" });
+    expect(next.status).toBe("active");
+    expect(next.currentSlot).toBe(5);
+    expect(next.slotProgress).toBe(0);
+  });
+
+  it("is ignored when status is active", () => {
     const next = sessionReducer(baseActive, { type: "DISMISS_MILESTONE" });
     expect(next).toBe(baseActive);
   });
@@ -137,13 +225,44 @@ describe("DISMISS_MILESTONE action", () => {
 // ============================================================================
 
 describe("RESET action", () => {
-  it("resets to ready with new batches and lessonId", () => {
-    const newBatches: SessionState["batches"] = [{ type: "word-match", pairs: [["grouss", "big"]] }];
-    const next = sessionReducer(baseActive, { type: "RESET", batches: newBatches, currentLessonId: "A1.02" });
+  it("resets to ready with new queue and lessonId", () => {
+    const newQueue: ExerciseBatch[] = [{ type: "word-match", pairs: [["grouss", "big"]] }];
+    const next = sessionReducer(baseActive, {
+      type: "RESET",
+      queue: newQueue,
+      plannedSlots: 1,
+      currentLessonId: "A1.02",
+    });
     expect(next.status).toBe("ready");
-    expect(next.batches).toBe(newBatches);
+    expect(next.queue).toBe(newQueue);
+    expect(next.plannedSlots).toBe(1);
     expect(next.currentLessonId).toBe("A1.02");
-    expect(next.currentBatch).toBe(0);
-    expect(next.batchProgress).toBe(0);
+    expect(next.currentSlot).toBe(0);
+    expect(next.slotProgress).toBe(0);
+  });
+});
+
+// ============================================================================
+// End-of-plan mistake batches: session completes after re-queued slots done
+// ============================================================================
+
+describe("sentence mistake re-queue end-to-end", () => {
+  it("session completes after advancing through re-queued sentence mistake", () => {
+    const requeue: ExerciseBatch = { type: "word-match", pairs: [["Moien", "hi"]] };
+    let state: SessionState = { ...baseActive, currentSlot: 1 };
+
+    // Slot completes with a sentence mistake re-queued
+    state = sessionReducer(state, { type: "SLOT_COMPLETE", outcome: "mistake", requeueBatch: requeue });
+    expect(state.status).toBe("slot_complete");
+    expect(state.queue).toHaveLength(3);
+
+    // DISMISS_MILESTONE — advance to slot 2 (the mistake slot)
+    state = sessionReducer(state, { type: "DISMISS_MILESTONE" });
+    expect(state.status).toBe("active");
+    expect(state.currentSlot).toBe(2);
+
+    // Mistake slot completes — it's the last slot → session_complete
+    state = sessionReducer(state, slotComplete());
+    expect(state.status).toBe("session_complete");
   });
 });

@@ -3,17 +3,17 @@ import { describe, it, expect } from "vitest";
 import { parseLetz } from "../../../src/lib/letz-parser/index.ts";
 
 // ============================================================================
-// parseLetz
+// parseLetz — word entries
 // ============================================================================
 
 describe("parseLetz", () => {
-  it("parses header and entries correctly", () => {
+  it("parses header and @word entries correctly", () => {
     const content = `
 @lesson A1.01 "Basic Greetings"
 
-Moien = good morning
-Äddi = bye
-Merci = thanks
+@word Moien = good morning
+@word Äddi = bye
+@word Merci = thanks
     `.trim();
 
     const lesson = parseLetz(content, "A1.01");
@@ -24,6 +24,7 @@ Merci = thanks
       { lu: "Äddi", en: "bye" },
       { lu: "Merci", en: "thanks" },
     ]);
+    expect(lesson.sentences).toEqual([]);
   });
 
   it("ignores comment lines", () => {
@@ -31,9 +32,9 @@ Merci = thanks
 @lesson A1.02 "Numbers"
 
 # This is a comment
-eng = one
+@word eng = one
 # Another comment
-zwee = two
+@word zwee = two
     `.trim();
 
     const lesson = parseLetz(content);
@@ -45,7 +46,7 @@ zwee = two
   });
 
   it("uses fallbackId and default title when header is missing", () => {
-    const content = "Moien = hi\n";
+    const content = "@word Moien = hi\n";
     const lesson = parseLetz(content, "A1.99");
 
     expect(lesson.meta.id).toBe("A1.99");
@@ -58,7 +59,7 @@ zwee = two
     ["C1.10 → C1", "C1.10", "C1"],
     ["no-level fallback → A1", "xyz", "A1"],
   ] as const)("extractLevel: %s", (_, fallbackId, expectedLevel) => {
-    const content = "Moien = hi\n";
+    const content = "@word Moien = hi\n";
     const lesson = parseLetz(content, fallbackId);
     expect(lesson.meta.level).toBe(expectedLevel);
   });
@@ -67,10 +68,116 @@ zwee = two
     const content = '@lesson A1.01 "Empty Lesson"\n';
     const lesson = parseLetz(content);
     expect(lesson.entries).toHaveLength(0);
+    expect(lesson.sentences).toHaveLength(0);
   });
 
   it("throws on malformed content (missing = separator)", () => {
-    const content = "@lesson A1.01 \"Bad\"\nMoien hi\n";
+    const content = "@lesson A1.01 \"Bad\"\n@word Moien hi\n";
     expect(() => parseLetz(content, "A1.01")).toThrow(/A1\.01/);
+  });
+
+  // ============================================================================
+  // parseLetz — @sentence blocks
+  // ============================================================================
+
+  it("parses a @sentence block with single @lu and @en", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+@lu Gudde Moien!
+@en Good morning!
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences).toHaveLength(1);
+    expect(lesson.sentences[0].luVariants).toEqual(["Gudde Moien!"]);
+    expect(lesson.sentences[0].enVariants).toEqual(["Good morning!"]);
+    expect(lesson.sentences[0].distractorsEn).toBeUndefined();
+    expect(lesson.sentences[0].distractorsLu).toBeUndefined();
+  });
+
+  it("parses multiple @lu and @en variants", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+@lu Wéi heeschs du?
+@lu Wéi heesche Sie?
+@en What is your name?
+@en What's your name?
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences[0].luVariants).toEqual(["Wéi heeschs du?", "Wéi heesche Sie?"]);
+    expect(lesson.sentences[0].enVariants).toEqual(["What is your name?", "What's your name?"]);
+  });
+
+  it("parses @distractor-en and @distractor-lu lines", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+@lu Gudde Moien!
+@en Good morning!
+@distractor-en Good evening
+@distractor-en Good afternoon
+@distractor-lu Gudden Owend
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences[0].distractorsEn).toEqual(["Good evening", "Good afternoon"]);
+    expect(lesson.sentences[0].distractorsLu).toEqual(["Gudden Owend"]);
+  });
+
+  it("parses multiple @sentence blocks", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+@lu Moien!
+@en Hi!
+
+@sentence
+@lu Äddi!
+@en Bye!
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences).toHaveLength(2);
+    expect(lesson.sentences[0].luVariants[0]).toBe("Moien!");
+    expect(lesson.sentences[1].luVariants[0]).toBe("Äddi!");
+  });
+
+  it("excludes empty @sentence blocks (no @lu or @en)", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+
+@sentence
+@lu Moien!
+@en Hi!
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences).toHaveLength(1);
+  });
+
+  it("parses mixed @word and @sentence content correctly", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@word Moien = hi
+@word Äddi = bye
+
+@sentence
+@lu Gudde Moien!
+@en Good morning!
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.entries).toHaveLength(2);
+    expect(lesson.sentences).toHaveLength(1);
   });
 });

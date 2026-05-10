@@ -1,8 +1,8 @@
 import { shuffle } from "../lib/shuffle";
 
 import type { WordStats } from "../context/auth";
-import type { Lesson, WordEntry } from "./letz-parser";
-import { classifyWord, wordKey, type WordMastery } from "./progression";
+import type { Lesson, SentenceEntry, WordEntry } from "./letz-parser";
+import { classifyWord, phraseKey, wordKey, type WordMastery } from "./progression";
 
 // --- Types ---
 
@@ -80,7 +80,7 @@ const bucketComparators: Record<WordBucket, (a: WithStats, b: WithStats) => numb
 
 // --- Lesson adapter ---
 
-/** Convert unlocked lessons to generic candidates for the selector. */
+/** Convert unlocked lessons to generic word candidates for the selector. */
 export const lessonsToCandidates = (
   lessons: Lesson[],
   unlockedLessonIds: ReadonlyArray<string>,
@@ -93,6 +93,23 @@ export const lessonsToCandidates = (
         lessonId: lesson.meta.id,
         key: wordKey(entry.lu, entry.en),
       })),
+    );
+
+/** Convert unlocked lessons to sentence candidates for the selector. */
+export const lessonsSentencesToCandidates = (
+  lessons: Lesson[],
+  unlockedLessonIds: ReadonlyArray<string>,
+): CandidateItem<SentenceEntry>[] =>
+  lessons
+    .filter((l) => unlockedLessonIds.includes(l.meta.id))
+    .flatMap((lesson) =>
+      lesson.sentences
+        .filter((s) => s.enVariants.length > 0 && s.luVariants.length > 0)
+        .map((sentence) => ({
+          item: sentence,
+          lessonId: lesson.meta.id,
+          key: phraseKey("en-lu", sentence.enVariants[0]),
+        })),
     );
 
 // --- Main Selection ---

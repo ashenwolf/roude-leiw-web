@@ -2,23 +2,47 @@
 
 @lesson A1.04 "Food and Drinks"
 
-d'Waasser = water
-de Kaffi = coffee
-den Téi = tea
-d'Mëllech = milk
-d'Brout = bread
-de Kéis = cheese
-d'Fleesch = meat
-de Fësch = fish
-d'Uebst = fruit
-d'Geméis = vegetables
-den Äppel = apple
-d'Banann = banana
-d'Kartoffel = potato
-de Zalot = salad
-d'Zopp = soup
-de Räis = rice
-d'Nuddelen = noodles
-d'Botter = butter
-d'Ee = egg
-den Zocker = sugar
+@word d'Waasser = water
+@word de Kaffi = coffee
+@word den Téi = tea
+@word d'Mëllech = milk
+@word d'Brout = bread
+@word de Kéis = cheese
+@word d'Fleesch = meat
+@word de Fësch = fish
+@word d'Uebst = fruit
+@word d'Geméis = vegetables
+@word den Äppel = apple
+@word d'Banann = banana
+@word d'Kartoffel = potato
+@word de Zalot = salad
+@word d'Zopp = soup
+@word de Räis = rice
+@word d'Nuddelen = noodles
+@word d'Botter = butter
+@word d'Ee = egg
+@word den Zocker = sugar
+
+@sentence
+@lu Ech hätt gär e Kaffi, w.e.g.
+@en I would like a coffee, please.
+@distractor-en tea
+@distractor-en water
+@distractor-lu Téi
+@distractor-lu Waasser
+
+@sentence
+@lu D'Zopp ass gutt.
+@en The soup is good.
+@distractor-en bad
+@distractor-en bread
+@distractor-lu schlecht
+@distractor-lu Brout
+
+@sentence
+@lu Mir iessen Brout a Kéis.
+@en We eat bread and cheese.
+@distractor-en drink
+@distractor-en meat
+@distractor-lu drénken
+@distractor-lu Fleesch

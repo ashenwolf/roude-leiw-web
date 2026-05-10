@@ -2,105 +2,130 @@
 
 @lesson A1.05 "Basic Words"
 
-wunnen = to live
-schaffen = to work
-studéieren = to study
-wat? = what?
-wou? = where?
-den Hobby = the hobby
-d'Hobbyen = the hobbies
-de Sport = the sport
-Sport maachen = to do sports
-de Kino = the cinema
-d'Kinoen = the cinemas
-eppes gär maachen = to like doing something
-eppes net gär maachen = to dislike doing something
-kachen = to cook
-baken = to bake
-schwammen = to swim
-lafen = to run
-liesen = to read
-am Gaart schaffen = to work in the garden
-de Gaart = the garden
-d'Gäert = the gardens
-d'Aarbecht = the work
-d'Aarbechten = the works
-d'Aarbechtsplaz = the workplace, occupation
-de Kach = the cook 
-d'Kächin = the cook 
-den Infirmier = the nurse 
-d'Infirmière = the nurse
-de Sekretär = the secretary
-d'Sekretärin = the secretary 
-de Verkeefer = the salesman
-d'Verkeeferin = the saleswoman
-den Educateur = the childcare worker 
-d'Educatrice = the childcare worker 
-de Coiffeur = the hairdresser 
-d'Coiffeuse = the hairdresser 
-den Employé = the employee 
-d'Employée = the employee 
-de Student = the student 
-d'Studentin = the student 
-Wat schaffs du? = What's your job?
-Wat bass du vu Beruff? = What's your profession?
-Wou schaffs du? = Where do you work?
-Wat sinn deng Hobbyen? = What are your hobbies?
-den Aarbechtsuert = the place of work
-d'Geschäft = the shop
-d'Geschäfter = the shops
-fueren = to drive
-goen = to go
-maachen = to do
-maachen = to make
-Tëlee kucken = to watch TV
-d'Tëlee = the TV
-den Zuch = the train
-d'Zich = the trains
-de Vëlo = the bicycle
-d'Vëloen = the bicycles
-de Moto = the motorcycle
-d'Motoen = the motorcycles
-de Bus = the bus
-d'Bussen = the buses
-de Beruff = the profession
-d'Beruffer = the professions
-den Aperitif = the drink/aperitif
-d'Menüskaart = the menu
-d'Entrée = the starter
-d'Entréeën = the starters
-den Haaptplat = the main course
-d'Haaptplaten = the main courses
-d'Zopp = the soup
-d'Zoppen = the soups
-d'Zalot = the salad
-d'Zaloten = the salads
-de Bifdeck = the steak
-de Steak = the steak
-den Dagesmenü = the daily menu
-den Dessert = the dessert
-d'Desserten = the desserts
-d'Forschett = the fork
-d'Forschetten = the forks
-d'Messer = the knife
-d'Messeren = the knives
-de Läffel = the spoon
-d'Läffelen = the spoons
-kréien = to get
-huelen = to take
-ech hätt gär = I would like
-de Weess = the wheat
-de Räis = the rice
-d'Fritt = the french fry
-d'Fritten = the french fries
-de Comptoir = the counter, the bar
-d'Comptoiren = the counters, the bars
-mussen = must/have to
-kënnen = can
-wëllen = want
-sollen = should
-däerfen = allowed to
-fëmmen = to smoke
-gesond iessen = to eat healthy
-de Kuch = the cake
-d'Kuchen = the cakes
+@word wunnen = to live
+@word schaffen = to work
+@word studéieren = to study
+@word wat? = what?
+@word wou? = where?
+@word den Hobby = the hobby
+@word d'Hobbyen = the hobbies
+@word de Sport = the sport
+@word Sport maachen = to do sports
+@word de Kino = the cinema
+@word d'Kinoen = the cinemas
+@word eppes gär maachen = to like doing something
+@word eppes net gär maachen = to dislike doing something
+@word kachen = to cook
+@word baken = to bake
+@word schwammen = to swim
+@word lafen = to run
+@word liesen = to read
+@word am Gaart schaffen = to work in the garden
+@word de Gaart = the garden
+@word d'Gäert = the gardens
+@word d'Aarbecht = the work
+@word d'Aarbechten = the works
+@word d'Aarbechtsplaz = the workplace, occupation
+@word de Kach = the cook
+@word d'Kächin = the cook
+@word den Infirmier = the nurse
+@word d'Infirmière = the nurse
+@word de Sekretär = the secretary
+@word d'Sekretärin = the secretary
+@word de Verkeefer = the salesman
+@word d'Verkeeferin = the saleswoman
+@word den Educateur = the childcare worker
+@word d'Educatrice = the childcare worker
+@word de Coiffeur = the hairdresser
+@word d'Coiffeuse = the hairdresser
+@word den Employé = the employee
+@word d'Employée = the employee
+@word de Student = the student
+@word d'Studentin = the student
+@word Wat schaffs du? = What's your job?
+@word Wat bass du vu Beruff? = What's your profession?
+@word Wou schaffs du? = Where do you work?
+@word Wat sinn deng Hobbyen? = What are your hobbies?
+@word den Aarbechtsuert = the place of work
+@word d'Geschäft = the shop
+@word d'Geschäfter = the shops
+@word fueren = to drive
+@word goen = to go
+@word maachen = to do
+@word maachen = to make
+@word Tëlee kucken = to watch TV
+@word d'Tëlee = the TV
+@word den Zuch = the train
+@word d'Zich = the trains
+@word de Vëlo = the bicycle
+@word d'Vëloen = the bicycles
+@word de Moto = the motorcycle
+@word d'Motoen = the motorcycles
+@word de Bus = the bus
+@word d'Bussen = the buses
+@word de Beruff = the profession
+@word d'Beruffer = the professions
+@word den Aperitif = the drink/aperitif
+@word d'Menüskaart = the menu
+@word d'Entrée = the starter
+@word d'Entréeën = the starters
+@word den Haaptplat = the main course
+@word d'Haaptplaten = the main courses
+@word d'Zopp = the soup
+@word d'Zoppen = the soups
+@word d'Zalot = the salad
+@word d'Zaloten = the salads
+@word de Bifdeck = the steak
+@word de Steak = the steak
+@word den Dagesmenü = the daily menu
+@word den Dessert = the dessert
+@word d'Desserten = the desserts
+@word d'Forschett = the fork
+@word d'Forschetten = the forks
+@word d'Messer = the knife
+@word d'Messeren = the knives
+@word de Läffel = the spoon
+@word d'Läffelen = the spoons
+@word kréien = to get
+@word huelen = to take
+@word ech hätt gär = I would like
+@word de Weess = the wheat
+@word de Räis = the rice
+@word d'Fritt = the french fry
+@word d'Fritten = the french fries
+@word de Comptoir = the counter, the bar
+@word d'Comptoiren = the counters, the bars
+@word mussen = must/have to
+@word kënnen = can
+@word wëllen = want
+@word sollen = should
+@word däerfen = allowed to
+@word fëmmen = to smoke
+@word gesond iessen = to eat healthy
+@word de Kuch = the cake
+@word d'Kuchen = the cakes
+
+@sentence
+@lu Wat schaffs du?
+@en What is your job?
+@en What's your job?
+@distractor-en where
+@distractor-en how
+@distractor-lu wou
+@distractor-lu wéi
+
+@sentence
+@lu Mäi Hobby ass liesen.
+@en My hobby is reading.
+@distractor-en swimming
+@distractor-en your
+@distractor-lu schwammen
+@distractor-lu Däi
+
+@sentence
+@lu Ech fuere mam Bus op d'Aarbecht.
+@en I go to work by bus.
+@distractor-en train
+@distractor-en bike
+@distractor-lu Zuch
+@distractor-lu Vëlo

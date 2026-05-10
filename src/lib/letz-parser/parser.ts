@@ -1,15 +1,27 @@
 import { CstParser } from "chevrotain";
 
-import { allTokens, AtLesson, Comment, Equals, LessonId, NewLine, QuotedString, Text } from "./lexer";
+import {
+  allTokens,
+  AtDistractorEn, AtDistractorLu, AtEn, AtLesson, AtLu, AtSentence, AtWord,
+  Comment, Equals, LessonId, NewLine, QuotedString, Text,
+} from "./lexer";
 
 /**
  * LL(1) grammar for .letz lesson files.
  *
- * lesson     ::= statement* EOF
- * statement  ::= comment | header | entry | NewLine
- * comment    ::= Comment NewLine
- * header     ::= AtLesson LessonId QuotedString NewLine
- * entry      ::= Text Equals Text NewLine
+ * lesson          ::= statement* EOF
+ * statement       ::= comment | header | wordEntry | sentenceBlock | NewLine
+ * comment         ::= Comment NewLine?
+ * header          ::= AtLesson LessonId QuotedString NewLine?
+ * wordEntry       ::= AtWord Text Equals Text NewLine?
+ * sentenceBlock   ::= AtSentence NewLine? sentenceTag*
+ * sentenceTag     ::= luTag | enTag | distractorEnTag | distractorLuTag | NewLine
+ * luTag           ::= AtLu Text NewLine?
+ * enTag           ::= AtEn Text NewLine?
+ * distractorEnTag ::= AtDistractorEn Text NewLine?
+ * distractorLuTag ::= AtDistractorLu Text NewLine?
+ *
+ * First-token sets per alternative are all distinct — no lookahead needed.
  */
 export class LetzParser extends CstParser {
   constructor() {
@@ -25,8 +37,8 @@ export class LetzParser extends CstParser {
     this.OR([
       { ALT: () => this.SUBRULE(this.comment) },
       { ALT: () => this.SUBRULE(this.header) },
-      { ALT: () => this.SUBRULE(this.entry) },
-      // blank lines
+      { ALT: () => this.SUBRULE(this.wordEntry) },
+      { ALT: () => this.SUBRULE(this.sentenceBlock) },
       { ALT: () => this.CONSUME(NewLine) },
     ]);
   });
@@ -43,10 +55,51 @@ export class LetzParser extends CstParser {
     this.OPTION(() => this.CONSUME(NewLine));
   });
 
-  entry = this.RULE("entry", () => {
+  wordEntry = this.RULE("wordEntry", () => {
+    this.CONSUME(AtWord);
     this.CONSUME(Text);
     this.CONSUME(Equals);
     this.CONSUME2(Text);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  sentenceBlock = this.RULE("sentenceBlock", () => {
+    this.CONSUME(AtSentence);
+    this.OPTION(() => this.CONSUME(NewLine));
+    this.MANY(() => this.SUBRULE(this.sentenceTag));
+  });
+
+  sentenceTag = this.RULE("sentenceTag", () => {
+    this.OR([
+      { ALT: () => this.SUBRULE(this.luTag) },
+      { ALT: () => this.SUBRULE(this.enTag) },
+      { ALT: () => this.SUBRULE(this.distractorEnTag) },
+      { ALT: () => this.SUBRULE(this.distractorLuTag) },
+      { ALT: () => this.CONSUME(NewLine) },
+    ]);
+  });
+
+  luTag = this.RULE("luTag", () => {
+    this.CONSUME(AtLu);
+    this.CONSUME(Text);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  enTag = this.RULE("enTag", () => {
+    this.CONSUME(AtEn);
+    this.CONSUME(Text);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  distractorEnTag = this.RULE("distractorEnTag", () => {
+    this.CONSUME(AtDistractorEn);
+    this.CONSUME(Text);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  distractorLuTag = this.RULE("distractorLuTag", () => {
+    this.CONSUME(AtDistractorLu);
+    this.CONSUME(Text);
     this.OPTION(() => this.CONSUME(NewLine));
   });
 }

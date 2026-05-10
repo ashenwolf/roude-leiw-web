@@ -55,6 +55,11 @@ src/
 │   ├── letz-parser.ts                # Facade: entriesToWordPairs()
 │   ├── batch-planner.ts              # Producer: (lessons, userWords, target) → BatchPlan
 │   ├── lesson-rows.ts                # Producer: (lessons, userWords) → HomeLessonsView
+│   ├── SentenceBuilder/              # Sentence assembly game
+│   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
+│   │   ├── use-sentence-game.ts      # Game state machine + result tracking
+│   │   ├── types.ts                  # SentencePuzzle, TokenState, SentenceGameState
+│   │   └── sentence-logic.ts        # Pure logic: initSentenceGame, applyTokenTap, applySubmit, toWordResultMap
 │   └── WordMatch/                    # Matching game
 │       ├── index.tsx                 # Game UI (left/right columns)
 │       ├── use-game.ts               # Game state machine + word result tracking
@@ -131,25 +136,28 @@ This codebase is organized as a **producer/consumer pipeline**. Each stage is a 
 ```mermaid
 flowchart TD
   files[".letz files<br/>public/assets/lessons/"]
-  lessons["Lesson[]"]
+  lessons["Lesson[]<br/>{ meta, entries[], sentences[] }"]
   homeView["HomeLessonsView"]
-  batchPlan["BatchPlan<br/>{ batches, currentLessonId }"]
-  batch["ExerciseBatch<br/>{ type, pairs }"]
+  slotPlan["SlotPlan<br/>{ slots, currentLessonId }"]
+  batch["ExerciseBatch<br/>{ type, pairs | item }"]
   gameState["GameState + GameEvent[]"]
   results["WordResultMap"]
 
   appHome[["&lt;AppHome /&gt; render"]]
   wordMatch[["&lt;WordMatch /&gt; render"]]
+  sentenceBuilder[["&lt;SentenceBuilder /&gt; render"]]
   api[(POST /api/progress/sync<br/>→ KV)]
 
   files -->|"loadAllLessons()<br/>lesson-loader.ts"| lessons
   lessons -->|"projectHomeLessonsView()<br/>lesson-rows.ts"| homeView
   homeView --> appHome
-  lessons -->|"planBatches()<br/>batch-planner.ts<br/>(uses progression, word-selector, letz-parser)"| batchPlan
-  batchPlan -.->|"useExerciseSession<br/>(hook = wiring)"| batch
+  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, word-selector, letz-parser)"| slotPlan
+  slotPlan -.->|"useExerciseSession<br/>(hook = wiring)"| batch
   batch -->|"initializeGame / applySelection<br/>WordMatch/game-logic.ts"| gameState
-  gameState -.->|"useGame<br/>(hook = wiring + timeouts)"| results
+  batch -->|"initSentenceGame / applyTokenTap<br/>SentenceBuilder/sentence-logic.ts"| gameState
+  gameState -.->|"useGame / useSentenceGame<br/>(hook = wiring + timeouts)"| results
   gameState --> wordMatch
+  gameState --> sentenceBuilder
   results -->|"useProgressSync<br/>(buildPayload + fetch)"| api
 ```
 
@@ -204,12 +212,12 @@ flowchart TD
 
   subgraph exercise["AppExercise"]
     direction TB
-    eplan["BatchPlan\n· batches · currentLessonId"]
-    estatus["SessionStatus\nloading → ready → active\n→ batch_complete\n→ session_complete"]
-    ebatch{{"ExerciseBatch  ❲discriminated union❳\ntype: 'word-match' | future types"}}
-    eprog["batchProgress (0–1)\ncurrentBatchIndex / totalBatches"]
+    eplan["SlotPlan\n· slots · currentLessonId"]
+    estatus["SessionStatus\nloading → ready → active\n→ slot_complete | section_complete\n→ session_complete"]
+    ebatch{{"ExerciseBatch  ❲discriminated union❳\ntype: 'word-match' | 'sentence-builder'"}}
+    eprog["ProgressView\nsections[] (3 × 5 slots) + overflow\n(computeProgressView)"]
     wm["❮ word-match ❯  WordMatchBatch\n· pairs: WordPair[]\n→ GameState · slots · wordResults"]
-    fut["❮ future ❯  e.g. FillBlankBatch\n· …"]
+    sb["❮ sentence-builder ❯  SentenceBuilderBatch\n· item: SentenceBuilderItem\n→ SentenceGameState · result"]
   end
 
   words & lessons -->|"projectHomeLessonsView()"| hv
@@ -218,20 +226,22 @@ flowchart TD
   daily --> htoday
   streak --> home
 
-  words & lessons & lessonId -->|"planBatches()"| eplan
+  words & lessons & lessonId -->|"planSlots()\n(also: planMadnessSlots, planMistakesSlots)"| eplan
   eplan --> estatus
   eplan --> eprog
   eplan --> ebatch
   ebatch -->|"type === 'word-match'"| wm
-  ebatch -.->|"type === '…' ❲not yet❳"| fut
+  ebatch -->|"type === 'sentence-builder'"| sb
 ```
 
 `Lesson[]` is loaded independently on both screens via `loadAllLessons()` (cached by the browser). `words`/`streak`/`dailySessions` come from `useProgress()`, which abstracts over KV (auth) and localStorage (guest).
 
+**Session modes** — Home screen exposes three modes (lesson, madness, mistakes), each backed by a distinct planner function in `batch-planner.ts`: `planSlots()` (normal lesson), `planMadnessSlots()` (all levels mixed), `planMistakesSlots()` (words with errors).
+
 **Adding a new exercise type** — three touch points, nothing else:
-1. `src/exercise/types.ts` — add `FillBlankBatch` and extend `ExerciseBatch = WordMatchBatch | FillBlankBatch`
+1. `src/exercise/types.ts` — add e.g. `FillBlankBatch` and extend `ExerciseBatch = WordMatchBatch | SentenceBuilderBatch | FillBlankBatch`
 2. `src/exercise/batch-planner.ts` — produce the new batch type where appropriate
-3. `src/page/AppExercise.tsx` — add a `currentBatch?.type === 'fill-blank' && <FillBlank … />` branch alongside the existing `word-match` check
+3. `src/page/AppExercise.tsx` — add a `currentBatch?.type === 'fill-blank' && <FillBlank … />` branch alongside the existing checks
 
 ### Authentication
 
@@ -263,7 +273,8 @@ erDiagram
   USER {
     string id PK "user:{userId}"
     UserProfile profile
-    Map words "key '{lu}|{en}' → WordStats"
+    Map words "word key '{lu}|{en}' → WordStats"
+    Map words2 "phrase key 'phrase:en-lu:{firstEn}' or 'phrase:lu-en:{firstEn}' → WordStats"
     Map dailySessions "key 'YYYY-MM-DD' → DailySession"
   }
   EMAIL_INDEX {
@@ -285,6 +296,8 @@ erDiagram
   USER ||--o{ SESSION : "has"
 ```
 
+Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map.
+
 Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `SessionData`). KV CRUD lives in `worker/lib/user.ts` and `worker/lib/session.ts`.
 
 #### Core principles
@@ -293,7 +306,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
    - **Streaks** ← `computeStreak(dailySessions, today)` in `worker/lib/user.ts`. No `streak` field.
    - **Lesson completion** ← `computeLessonProgress(lesson, words)` in `src/exercise/progression.ts`. No `completedLessons` field.
    - **Lesson unlock** ← `computeUnlockedLessonIds(lessons, words)`. No `unlockedLessons` field.
-   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`.
+   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`. Mastered = `correct >= 3` (applies to both word and phrase keys).
    - If you're tempted to add a new "summary" field to KV, ask whether it's a function of existing data. It almost always is.
 
 2. **Send deltas, not snapshots.** The client posts a *batch* (`POST /api/progress/sync` body = what happened in this batch only). The server folds the delta into the cumulative `words` + `dailySessions`. Do not POST the full client snapshot.
@@ -334,18 +347,34 @@ Context-based router (`src/context/`). Only two pages: `"home"` and `"exercise"`
 
 ### Exercise Session Flow
 
-See **Data Pipeline** above for the full diagram. The orchestrator hook `src/exercise/use-exercise-session.ts` is intentionally thin: it loads lessons, calls `planBatches()` to produce a `BatchPlan`, and dispatches to the session reducer. All non-trivial logic lives in pure modules (`batch-planner.ts`, `progression.ts`, `word-selector.ts`).
+See **Data Pipeline** above for the full diagram. The orchestrator hook `src/exercise/use-exercise-session.ts` is intentionally thin: it loads lessons, calls `planSlots()` to produce a `SlotPlan`, and dispatches to the session reducer. All non-trivial logic lives in pure modules (`batch-planner.ts`, `progression.ts`, `word-selector.ts`).
 
-Key ratios: 3 batches × 20 pairs each. The last batch shifts toward review (struggling/reinforcing/reviewing weighted higher than new). Per-word stats (`shown/correct/incorrect`) accumulate in `GameState.wordResults` and sync after each batch via `useProgressSync`.
+Key ratios: 15 planned slots (3 sections × 5), dynamically expands on mistakes. The re-queue mechanic appends slots with mistakes to the back of the queue so they are retried before the session ends. Per-word stats (`shown/correct/incorrect`) accumulate per slot and sync after each slot group via `useProgressSync`.
 
-### Game State Machine
+### State Machines
 
-`src/exercise/WordMatch/use-game.ts` manages the matching game. Key concepts:
+The session and the per-slot games are modeled separately. Two are true state machines (discriminated unions with transition rules); one is an immutable accumulation record with a one-way lock. Don't conflate them.
+
+**SessionStatus** (`src/exercise/session-reducer.ts`) — drives the orchestrator hook.
+
+```
+loading → ready → active ⇄ slot_complete       (auto-dismissed; advances slot)
+                  active ⇄ section_complete    (user-dismissed milestone; every 5 slots within plannedSlots)
+                  active → session_complete    (queue exhausted)
+loading → error                                (load failure)
+```
+
+Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (see `session-reducer.ts:66`). Section boundaries are computed inline in the `SLOT_COMPLETE` handler from `plannedSlots / 3`; the matching UI projection lives in `session-progress.ts` (`computeProgressView`).
+
+**WordMatch SlotState** (`src/exercise/WordMatch/types.ts`, logic in `WordMatch/game-logic.ts`) — per-slot matching game.
+
 - 5 visible slots per side (left: Luxembourgish, right: English)
-- Slot states are a discriminated union: `active → selected → (match/fail) → fading → empty`
+- Discriminated union: `active → selected → (match | fail) → fading → empty`
 - Incorrect matches reset after 1 second
 - When a round completes, unmatched pairs reshuffle into remaining fading slots
-- `wordResults` tracked atomically in `GameState` — correct/incorrect/shown per word pair
+- Per-word `{shown, correct, incorrect}` accumulates in `GameState.wordResults`
+
+**SentenceGameState** (`src/exercise/SentenceBuilder/types.ts`, logic in `SentenceBuilder/sentence-logic.ts`) — **not** a state machine. It's an immutable accumulation record `{ assembled, checkResult, result }`. `checkResult` (`null → "correct" | "incorrect"`) acts as a one-way lock: once set, `applyTokenTap` / `applyAssembledTap` no-op. The single `result` (`WordResultEntry`) is folded into the session-level `WordResultMap` by `toWordResultMap`. If you need branching mid-puzzle behavior in the future, promote this to a real discriminated union — don't add ad-hoc flags.
 
 ### API Routes
 
@@ -364,28 +393,37 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 ```
 @lesson A1.01 "Basic Greetings"
 
-Moien = good morning
-Äddi = bye
-Merci = thanks
+@word Moien = good morning
+@word Äddi = bye
+@word Merci = thanks
+
+@sentence
+  @lu Ech sinn de Luca.
+  @en I am Luca.
+  @distractor-en He is Luca.
+  @distractor-lu Du bass de Luca.
 ```
+
+`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens.
 
 ### Testing
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (130 tests):**
+**What's covered (179 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
 | `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
+| `src/exercise/SentenceBuilder/sentence-logic.ts` | 18 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
 | `src/exercise/word-selector.ts`             | 15    | bucket classification, exclude keys, overflow priority, output shape |
-| `src/exercise/batch-planner.ts`             | 12    | empty input, unlock filter, currentLessonId precedence, batch shape, last-batch ratio shift |
-| `src/exercise/progression.ts`               | 22    | classifyWord, computeLessonProgress, computeUnlockedLessonIds, computeOverallStats |
-| `src/exercise/session-reducer.ts`           | 16    | every action × every state |
-| `src/lib/letz-parser.ts`                    | 9     | grammar, lesson directives, comments |
+| `src/exercise/batch-planner.ts`             | 27    | empty input, unlock filter, currentLessonId precedence, batch shape, last-batch ratio shift, slot re-queue, madness/mistakes planners |
+| `src/exercise/progression.ts`               | 29    | classifyWord, computeLessonProgress, computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
+| `src/exercise/session-reducer.ts`           | 19    | every action × every state |
+| `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
 | `worker/lib/user.ts`                        | 19    | mergeWordResults, mergeDailySession, computeStreak |
 | `worker/lib/session.ts`                     | 12    | session CRUD, cookie helpers |
-| `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 (failing on `main`) | jsdom environment issue — preexisting, unrelated |
+| `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
 
 **No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.
 

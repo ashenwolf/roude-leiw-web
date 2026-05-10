@@ -19,11 +19,14 @@ export const Comment = createToken({
   pattern: /#[^\r\n]*/,
 });
 
-// Directive keyword: @lesson
-export const AtLesson = createToken({
-  name: "AtLesson",
-  pattern: /@lesson/,
-});
+// Directive keywords — all @-prefixed; Text excludes @ so no conflicts
+export const AtLesson      = createToken({ name: "AtLesson",      pattern: /@lesson/ });
+export const AtSentence    = createToken({ name: "AtSentence",    pattern: /@sentence/ });
+export const AtDistractorEn = createToken({ name: "AtDistractorEn", pattern: /@distractor-en/ });
+export const AtDistractorLu = createToken({ name: "AtDistractorLu", pattern: /@distractor-lu/ });
+export const AtWord        = createToken({ name: "AtWord",        pattern: /@word/ });
+export const AtLu          = createToken({ name: "AtLu",          pattern: /@lu/ });
+export const AtEn          = createToken({ name: "AtEn",          pattern: /@en/ });
 
 // Lesson ID, e.g. A1.01
 export const LessonId = createToken({
@@ -37,25 +40,32 @@ export const QuotedString = createToken({
   pattern: /"[^"\r\n]+"/,
 });
 
-// Equals separator between LU and EN
+// Equals separator between LU and EN sides of a word pair
 export const Equals = createToken({
   name: "Equals",
   pattern: /=/,
 });
 
 // Free text: anything that isn't =, newline, #, or @
-// Used for both LU side and EN side of a word pair
 export const Text = createToken({
   name: "Text",
   pattern: /[^=\r\n#@]+/,
 });
 
-// Token order matters — more specific patterns must come first
+// Token order matters — longer @-prefixed patterns before shorter ones;
+// all @ keywords before Text (Text excludes @ so they never truly conflict,
+// but ordering ensures maximal-munch picks the right keyword first)
 export const allTokens = [
   WhiteSpace,
   NewLine,
   Comment,
   AtLesson,
+  AtSentence,
+  AtDistractorEn,   // before AtEn — longer pattern
+  AtDistractorLu,   // before AtLu — longer pattern
+  AtWord,
+  AtLu,
+  AtEn,
   LessonId,
   QuotedString,
   Equals,

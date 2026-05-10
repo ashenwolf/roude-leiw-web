@@ -7,6 +7,8 @@ import "./App.css";
 const PageMapper = {
   home: AppHome,
   exercise: AppExercise,
+  madness: AppExercise,
+  mistakes: AppExercise,
 };
 
 function App() {

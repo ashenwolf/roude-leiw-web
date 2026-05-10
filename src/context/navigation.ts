@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export type AppPages = "home" | "exercise";
+export type AppPages = "home" | "exercise" | "madness" | "mistakes";
 
 export type NavigationParams = Record<string, string>;
 

@@ -56,6 +56,16 @@ export const AppHome = () => {
     navigateTo("exercise", { lessonId: currentLessonId });
   };
 
+  const handleStartMadness = () => {
+    posthog?.capture("madness_started");
+    navigateTo("madness");
+  };
+
+  const handleStartMistakes = () => {
+    posthog?.capture("mistakes_started");
+    navigateTo("mistakes");
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
@@ -65,38 +75,53 @@ export const AppHome = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      {/* Header row: level + streak */}
-      <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-gray-500">Level A1</span>
-        <StreakBadge current={streak?.current ?? 0} />
+    <div className="flex flex-col min-h-full">
+      {/* Scrollable content */}
+      <div className="flex flex-col gap-5 pb-4">
+        {/* Header row: level + streak */}
+        <div className="flex justify-between items-center">
+          <span className="text-sm font-medium text-gray-500">Level A1</span>
+          <StreakBadge current={streak?.current ?? 0} />
+        </div>
+
+        {/* XP Progress */}
+        <XPBar levelInfo={levelInfo} />
+
+        {/* Start learning CTA */}
+        <Button onClick={handleStartLearning}>Start Learning</Button>
+
+        {/* Stats */}
+        <StatsRow
+          masteredWords={overallStats.masteredWords}
+          totalWords={totalWords}
+          accuracy={overallStats.overallAccuracy}
+          streak={streak?.current ?? 0}
+          todayMinutes={todayMinutes}
+        />
+
+        {/* Lesson grid */}
+        <div>
+          <h3 className="text-sm font-semibold text-gray-600 mb-2">Lessons</h3>
+          <LessonGrid
+            lessons={lessons}
+            progressMap={progressMap}
+            unlockedIds={unlockedIds}
+            currentLessonId={currentLessonId}
+            onSelectLesson={handleSelectLesson}
+          />
+        </div>
       </div>
 
-      {/* XP Progress */}
-      <XPBar levelInfo={levelInfo} />
-
-      {/* Start learning CTA */}
-      <Button onClick={handleStartLearning}>Start Learning</Button>
-
-      {/* Stats */}
-      <StatsRow
-        masteredWords={overallStats.masteredWords}
-        totalWords={totalWords}
-        accuracy={overallStats.overallAccuracy}
-        streak={streak?.current ?? 0}
-        todayMinutes={todayMinutes}
-      />
-
-      {/* Lesson grid */}
-      <div>
-        <h3 className="text-sm font-semibold text-gray-600 mb-2">Lessons</h3>
-        <LessonGrid
-          lessons={lessons}
-          progressMap={progressMap}
-          unlockedIds={unlockedIds}
-          currentLessonId={currentLessonId}
-          onSelectLesson={handleSelectLesson}
-        />
+      {/* Practice mode buttons — sticky at bottom */}
+      <div className="mt-auto sticky bottom-0 bg-white pt-3 pb-1 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
+        <div className="flex gap-2">
+          <Button color="madness" size="sm" onClick={handleStartMadness}>
+            ⚡ Madness
+          </Button>
+          <Button color="mistakes" size="sm" onClick={handleStartMistakes}>
+            🔁 Fix Mistakes
+          </Button>
+        </div>
       </div>
     </div>
   );

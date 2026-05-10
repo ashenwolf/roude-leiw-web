@@ -5,10 +5,13 @@ import {
   computeLessonProgress,
   computeUnlockedLessonIds,
   computeOverallStats,
+  phraseKey,
+  isPhraseKey,
+  isWordKey,
   MASTERY,
 } from "../../../src/exercise/progression.ts";
 import type { WordStats } from "../../../src/context/auth.ts";
-import type { Lesson } from "../../../src/exercise/letz-parser.ts";
+import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 
 // ============================================================================
 // Helpers
@@ -20,10 +23,16 @@ const s = (shown: number, correct: number, incorrect: number): WordStats =>
 const lesson = (id: string, ...pairs: [string, string][]): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: pairs.map(([lu, en]) => ({ lu, en })),
+  sentences: [],
+});
+
+const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
+  luVariants,
+  enVariants: [firstEn],
 });
 
 // ============================================================================
-// classifyWord
+// classifyWord — mastery is correct >= 3 (Duolingo-style)
 // ============================================================================
 
 describe("classifyWord", () => {
@@ -31,29 +40,49 @@ describe("classifyWord", () => {
     // unseen
     ["undefined → unseen", undefined, "unseen"],
     ["shown=0 → unseen", s(0, 0, 0), "unseen"],
-    // mastered: shown >= 5 AND accuracy >= 0.8
-    ["shown=5, 5/5 correct → mastered", s(5, 5, 0), "mastered"],
-    ["shown=5, 4/5 correct (0.8 exactly) → mastered", s(5, 4, 1), "mastered"],
-    ["shown=10, 8/10 correct → mastered", s(10, 8, 2), "mastered"],
-    // struggling: shown >= 3 AND accuracy < 0.6
+    // mastered: correct >= 3 regardless of incorrect count
+    ["correct=3, incorrect=0 → mastered", s(3, 3, 0), "mastered"],
+    ["correct=3, incorrect=20 → mastered (Duolingo-style)", s(23, 3, 20), "mastered"],
+    ["correct=5 → mastered", s(5, 5, 0), "mastered"],
+    // struggling: shown >= 3 AND accuracy < 0.6 AND not yet mastered
     ["shown=3, 1/3 correct (0.33) → struggling", s(3, 1, 2), "struggling"],
     ["shown=5, 2/5 correct (0.4) → struggling", s(5, 2, 3), "struggling"],
-    // boundary: accuracy = 0.6 exactly is NOT struggling (strict <)
-    ["shown=5, 3/5 correct (0.6) → learning", s(5, 3, 2), "learning"],
-    // learning: shown < 3 with bad accuracy — not enough shown to be struggling
-    ["shown=2, 0/2 correct → learning (not enough shown)", s(2, 0, 2), "learning"],
-    // learning: shown >= 5 but accuracy between 0.6 and 0.8
-    ["shown=5, 3/4 total attempts (0.75) → learning", s(5, 3, 1), "learning"],
+    // learning: shown > 0 but correct < 3 and not struggling
+    ["correct=2, incorrect=0 → learning", s(2, 2, 0), "learning"],
+    ["shown=2, 0/2 correct → learning (not enough shown for struggling)", s(2, 0, 2), "learning"],
   ] as const)("%s", (_, input, expected) => {
     expect(classifyWord(input)).toBe(expected);
   });
 
   it("MASTERY thresholds are applied correctly", () => {
-    // Verify the constants themselves match the test assumptions
-    expect(MASTERY.minShown).toBe(5);
-    expect(MASTERY.minAccuracy).toBe(0.8);
+    expect(MASTERY.correctToMaster).toBe(3);
     expect(MASTERY.strugglingMinShown).toBe(3);
     expect(MASTERY.strugglingMaxAccuracy).toBe(0.6);
+  });
+});
+
+// ============================================================================
+// phraseKey / isPhraseKey / isWordKey
+// ============================================================================
+
+describe("phraseKey helpers", () => {
+  it('phraseKey("en-lu", ...) produces correct key', () => {
+    expect(phraseKey("en-lu", "What is your name?")).toBe("phrase:en-lu:What is your name?");
+  });
+
+  it('phraseKey("lu-en", ...) produces correct key', () => {
+    expect(phraseKey("lu-en", "What is your name?")).toBe("phrase:lu-en:What is your name?");
+  });
+
+  it("isPhraseKey recognises phrase keys", () => {
+    expect(isPhraseKey("phrase:en-lu:Hello")).toBe(true);
+    expect(isPhraseKey("phrase:lu-en:Hello")).toBe(true);
+    expect(isPhraseKey("Moien|morning")).toBe(false);
+  });
+
+  it("isWordKey is the inverse of isPhraseKey", () => {
+    expect(isWordKey("Moien|morning")).toBe(true);
+    expect(isWordKey("phrase:en-lu:Hello")).toBe(false);
   });
 });
 
@@ -70,7 +99,8 @@ describe("computeLessonProgress", () => {
   });
 
   it("some words mastered → partial progress", () => {
-    const words = { "Moien|hi": s(5, 5, 0), "Äddi|bye": s(5, 4, 1) };
+    // correct=3 → mastered under new rule
+    const words = { "Moien|hi": s(3, 3, 0), "Äddi|bye": s(3, 3, 0) };
     const progress = computeLessonProgress(greetings, words);
     expect(progress.mastered).toBe(2);
     expect(progress.percentage).toBeCloseTo(2 / 3);
@@ -79,9 +109,9 @@ describe("computeLessonProgress", () => {
 
   it("all words mastered → 100% complete", () => {
     const words = {
-      "Moien|hi": s(5, 5, 0),
-      "Äddi|bye": s(5, 4, 1),
-      "Merci|thanks": s(5, 5, 0),
+      "Moien|hi": s(3, 3, 0),
+      "Äddi|bye": s(3, 3, 0),
+      "Merci|thanks": s(3, 3, 0),
     };
     const progress = computeLessonProgress(greetings, words);
     expect(progress).toEqual({ total: 3, mastered: 3, percentage: 1, isComplete: true });
@@ -92,6 +122,49 @@ describe("computeLessonProgress", () => {
     const progress = computeLessonProgress(emptyLesson, {});
     expect(progress.isComplete).toBe(false);
     expect(progress.percentage).toBe(0);
+  });
+
+  it("lesson with sentences — unmastered phrase counts toward total", () => {
+    const lessonWithSentence: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"], ["Äddi", "bye"]),
+      sentences: [sentence("Good morning!", "Gudde Moien!")],
+    };
+    // Both words mastered, phrase not yet seen
+    const words = { "Moien|hi": s(3, 3, 0), "Äddi|bye": s(3, 3, 0) };
+    const progress = computeLessonProgress(lessonWithSentence, words);
+    expect(progress.total).toBe(3);
+    expect(progress.mastered).toBe(2);
+    expect(progress.isComplete).toBe(false);
+  });
+
+  it("lesson with sentences — mastered phrase:en-lu counts toward completion", () => {
+    const lessonWithSentence: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"]),
+      sentences: [sentence("Good morning!", "Gudde Moien!")],
+    };
+    const words = {
+      "Moien|hi": s(3, 3, 0),
+      [phraseKey("en-lu", "Good morning!")]: s(3, 3, 0),
+    };
+    const progress = computeLessonProgress(lessonWithSentence, words);
+    expect(progress.total).toBe(2);
+    expect(progress.mastered).toBe(2);
+    expect(progress.isComplete).toBe(true);
+  });
+
+  it("lesson with sentences — mastered phrase:lu-en does NOT count for progression", () => {
+    const lessonWithSentence: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"]),
+      sentences: [sentence("Good morning!", "Gudde Moien!")],
+    };
+    // Only lu-en mastered, not en-lu
+    const words = {
+      "Moien|hi": s(3, 3, 0),
+      [phraseKey("lu-en", "Good morning!")]: s(3, 3, 0),
+    };
+    const progress = computeLessonProgress(lessonWithSentence, words);
+    expect(progress.mastered).toBe(1); // only the word
+    expect(progress.isComplete).toBe(false);
   });
 });
 
@@ -106,9 +179,9 @@ describe("computeUnlockedLessonIds", () => {
     lesson("A1.03", ["grouss", "big"], ["kleng", "small"]),
   ];
 
-  const masteredWords = (pairs: [string, string][]) =>
+  const mastered = (pairs: [string, string][]) =>
     pairs.reduce<Record<string, WordStats>>(
-      (acc, [lu, en]) => ({ ...acc, [`${lu}|${en}`]: s(5, 5, 0) }),
+      (acc, [lu, en]) => ({ ...acc, [`${lu}|${en}`]: s(3, 3, 0) }),
       {},
     );
 
@@ -119,7 +192,7 @@ describe("computeUnlockedLessonIds", () => {
   });
 
   it("unlocks next lesson when previous is complete", () => {
-    const words = masteredWords([["Moien", "hi"], ["Äddi", "bye"]]);
+    const words = mastered([["Moien", "hi"], ["Äddi", "bye"]]);
     const unlocked = computeUnlockedLessonIds(lessons, words);
     expect(unlocked).toContain("A1.01");
     expect(unlocked).toContain("A1.02");
@@ -127,7 +200,7 @@ describe("computeUnlockedLessonIds", () => {
   });
 
   it("unlocks all when all prior lessons are complete", () => {
-    const words = masteredWords([
+    const words = mastered([
       ["Moien", "hi"], ["Äddi", "bye"],
       ["eng", "one"], ["zwee", "two"],
     ]);
@@ -136,8 +209,7 @@ describe("computeUnlockedLessonIds", () => {
   });
 
   it("does not unlock lesson 3 if lesson 1 is done but lesson 2 is not", () => {
-    // Only lesson 1 complete — lesson 2 blocks lesson 3
-    const words = masteredWords([["Moien", "hi"], ["Äddi", "bye"]]);
+    const words = mastered([["Moien", "hi"], ["Äddi", "bye"]]);
     const unlocked = computeUnlockedLessonIds(lessons, words);
     expect(unlocked).not.toContain("A1.03");
   });
@@ -156,32 +228,46 @@ describe("computeOverallStats", () => {
       learningWords: 0,
       strugglingWords: 0,
       overallAccuracy: 0,
+      totalPhrases: 0,
+      masteredPhrases: 0,
     });
   });
 
   it("correctly counts words by classification", () => {
     const words = {
-      "a|a": s(5, 5, 0),   // mastered
-      "b|b": s(5, 4, 1),   // mastered (0.8 accuracy)
+      "a|a": s(3, 3, 0),   // mastered (correct=3)
+      "b|b": s(5, 3, 2),   // mastered (correct=3)
       "c|c": s(3, 1, 2),   // struggling
       "d|d": s(2, 1, 1),   // learning
-      "e|e": s(0, 0, 0),   // unseen → classifyWord returns "unseen", not counted in learning/struggling/mastered
+      "e|e": s(0, 0, 0),   // unseen
     };
     const stats = computeOverallStats(words);
     expect(stats.totalWords).toBe(5);
     expect(stats.masteredWords).toBe(2);
     expect(stats.strugglingWords).toBe(1);
     expect(stats.learningWords).toBe(1);
+    expect(stats.totalPhrases).toBe(0);
   });
 
-  it("computes overallAccuracy across all words", () => {
+  it("phrase keys are excluded from word counts", () => {
+    const words = {
+      "Moien|hi": s(3, 3, 0),
+      [phraseKey("en-lu", "Good morning!")]: s(3, 3, 0),
+      [phraseKey("lu-en", "Good morning!")]: s(1, 0, 1),
+    };
+    const stats = computeOverallStats(words);
+    expect(stats.totalWords).toBe(1);
+    expect(stats.totalPhrases).toBe(2);
+    expect(stats.masteredPhrases).toBe(1);
+  });
+
+  it("computes overallAccuracy across word entries only", () => {
     const words = {
       "a|a": s(5, 4, 1),  // 4 correct, 1 incorrect
       "b|b": s(5, 2, 3),  // 2 correct, 3 incorrect
+      [phraseKey("en-lu", "Hello!")]: s(3, 3, 0), // excluded from accuracy
     };
     const stats = computeOverallStats(words);
-    // totalCorrect=6, totalShown=6+4=15... wait: shown is separate from correct+incorrect
-    // overallAccuracy = totalCorrect / (totalCorrect + totalIncorrect) = 6/10 = 0.6
     expect(stats.overallAccuracy).toBeCloseTo(6 / 10);
   });
 });

@@ -30,8 +30,7 @@ const WordRow = ({ lu, en, stats }: WordRowProps) => {
   const mastery = classifyWord(stats);
   const attempts = (stats?.correct ?? 0) + (stats?.incorrect ?? 0);
   const acc = attempts > 0 ? pct(stats!.correct / attempts) : "—";
-  const needToMaster = MASTERY.minShown - (stats?.shown ?? 0);
-  const needAcc = pct(MASTERY.minAccuracy);
+  const needCorrect = MASTERY.correctToMaster - (stats?.correct ?? 0);
 
   const color =
     mastery === "mastered" ? "text-green-300"
@@ -41,9 +40,9 @@ const WordRow = ({ lu, en, stats }: WordRowProps) => {
 
   const hint =
     mastery === "mastered" ? "" :
-    mastery === "unseen" ? `needs ${MASTERY.minShown} shown + ${needAcc} acc` :
-    needToMaster > 0 ? `needs ${needToMaster} more shown + ${needAcc} acc` :
-    `needs ${needAcc} acc (currently ${acc})`;
+    mastery === "unseen" ? `needs ${MASTERY.correctToMaster} correct` :
+    needCorrect > 0 ? `needs ${needCorrect} more correct` :
+    "";
 
   return (
     <tr className={color}>
@@ -145,7 +144,7 @@ export const DebugPanel = ({ lessons, userWords, currentBatchPairs, currentLesso
           <section className="pt-3">
             <div className="text-yellow-400 font-bold mb-1">Mastery Rules</div>
             <div className="text-gray-300">
-              <span className="text-green-300">mastered</span> = shown ≥ {MASTERY.minShown} AND accuracy ≥ {pct(MASTERY.minAccuracy)}
+              <span className="text-green-300">mastered</span> = correct ≥ {MASTERY.correctToMaster}
             </div>
             <div className="text-gray-300">
               <span className="text-red-400">struggling</span> = shown ≥ {MASTERY.strugglingMinShown} AND accuracy &lt; {pct(MASTERY.strugglingMaxAccuracy)}

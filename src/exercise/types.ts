@@ -3,6 +3,7 @@ import type { WordPair } from "./WordMatch/types";
 // Exercise type registry — extend as new exercise types are added
 export const EXERCISE_TYPE = {
   WordMatch: "word-match",
+  SentenceBuilder: "sentence-builder",
 } as const;
 
 export type ExerciseType = typeof EXERCISE_TYPE[keyof typeof EXERCISE_TYPE];
@@ -13,4 +14,17 @@ export type WordMatchBatch = {
   pairs: WordPair[];
 };
 
-export type ExerciseBatch = WordMatchBatch; // | FillBlankBatch | ...
+export type SentenceBuilderItem = {
+  promptText: string;
+  acceptedAnswers: string[];
+  tokens: string[];
+  direction: "en-lu" | "lu-en";
+  phraseKey: string;
+};
+
+export type SentenceBuilderBatch = {
+  type: "sentence-builder";
+  item: SentenceBuilderItem;
+};
+
+export type ExerciseBatch = WordMatchBatch | SentenceBuilderBatch;

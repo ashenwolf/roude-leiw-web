@@ -110,3 +110,9 @@ export const loadAllLessons = (): Promise<Lesson[]> => {
   }
   return allLessonsCache;
 };
+
+// In dev mode, bust the cache whenever any module is hot-reloaded so stale
+// parsed lessons (e.g. pre-@sentence grammar) are never returned after a code change.
+if (import.meta.hot) {
+  import.meta.hot.accept(() => { allLessonsCache = null; });
+}

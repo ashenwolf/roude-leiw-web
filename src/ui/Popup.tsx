@@ -106,29 +106,47 @@ export const Popup = ({
 };
 
 // Convenience components for common use cases
+
+/** Brief auto-dismissing popup after each individual slot. */
 export const MilestonePopup = ({
   visible,
   onDismiss,
-  batchNumber,
-  totalBatches,
+  outcome = "success",
 }: {
   visible: boolean;
   onDismiss: () => void;
-  batchNumber: number;
-  totalBatches: number;
+  outcome?: "success" | "mistake";
 }) => (
-  <Popup
-    variant="milestone"
-    visible={visible}
-    onDismiss={onDismiss}
-    autoDismissMs={2000}
-  >
+  <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Continue">
+    {outcome === "success" ? (
+      <div className="text-center">
+        <div className="text-3xl mb-1">👍</div>
+        <p className="text-gray-700 font-semibold">Nice one!</p>
+      </div>
+    ) : (
+      <div className="text-center">
+        <div className="text-3xl mb-1">🙈</div>
+        <p className="text-rose-500 font-semibold">Not quite — keep going!</p>
+      </div>
+    )}
+  </Popup>
+);
+
+/** User-dismissed popup after completing a full section (5 slots). */
+export const SectionMilestonePopup = ({
+  visible,
+  onDismiss,
+  section,
+}: {
+  visible: boolean;
+  onDismiss: () => void;
+  section: number;
+}) => (
+  <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Keep going!">
     <div className="text-center">
-      <div className="text-4xl mb-2">🎯</div>
-      <h3 className="text-xl font-bold text-gray-800">
-        Set {batchNumber} of {totalBatches} Complete!
-      </h3>
-      <p className="text-gray-600 mt-1">Keep going!</p>
+      <div className="text-5xl mb-3">🎯</div>
+      <h3 className="text-2xl font-bold text-gray-800">Section {section} Complete!</h3>
+      <p className="text-gray-500 mt-1">{section < 3 ? `${3 - section} section${3 - section > 1 ? "s" : ""} to go` : "Last one done!"}</p>
     </div>
   </Popup>
 );

@@ -3,3 +3,12 @@
   --color-primary: var(--color-lime-300);
   --color-secondary: var(--color-blue-500);
 } */
+
+@layer base {
+  button:not(:disabled),
+  a,
+  [role="button"],
+  [role="link"] {
+    cursor: pointer;
+  }
+}

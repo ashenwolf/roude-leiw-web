@@ -34,7 +34,7 @@ const PillStatusColors = {
 export type PillStatus = keyof typeof PillStatusColors;
 
 const PillSizeMap = {
-  sm: ["text-sm", "", "h-14"],
+  sm: ["text-sm", "px-3", "h-9"],
   md: ["text-md", "", "h-18"],
   lg: ["text-lg", "", "h-22"],
 } as const;

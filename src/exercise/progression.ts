@@ -4,8 +4,7 @@ import type { WordStats } from "../context/auth";
 // --- Mastery Thresholds ---
 
 export const MASTERY = {
-  minShown: 5,
-  minAccuracy: 0.8,
+  correctToMaster: 3,
   strugglingMaxAccuracy: 0.6,
   strugglingMinShown: 3,
   unlockThreshold: 0.8,
@@ -20,12 +19,18 @@ const accuracy = (s: WordStats): number =>
 
 export const classifyWord = (stats: WordStats | undefined): WordMastery => {
   if (!stats || stats.shown === 0) return "unseen";
-  if (stats.shown >= MASTERY.minShown && accuracy(stats) >= MASTERY.minAccuracy) return "mastered";
+  if (stats.correct >= MASTERY.correctToMaster) return "mastered";
   if (stats.shown >= MASTERY.strugglingMinShown && accuracy(stats) < MASTERY.strugglingMaxAccuracy) return "struggling";
   return "learning";
 };
 
 export const wordKey = (lu: string, en: string): string => `${lu}|${en}`;
+
+export const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string): string =>
+  `phrase:${direction}:${firstEn}`;
+
+export const isPhraseKey = (key: string): boolean => key.startsWith("phrase:");
+export const isWordKey = (key: string): boolean => !isPhraseKey(key);
 
 // --- Lesson Progress ---
 
@@ -40,10 +45,19 @@ export const computeLessonProgress = (
   lesson: Lesson,
   userWords: Record<string, WordStats>,
 ): LessonProgress => {
-  const total = lesson.entries.length;
-  const mastered = lesson.entries.filter(
+  const wordTotal = lesson.entries.length;
+  const wordMastered = lesson.entries.filter(
     (e) => classifyWord(userWords[wordKey(e.lu, e.en)]) === "mastered",
   ).length;
+
+  // Only EN→LU direction gates lesson progression for sentences
+  const sentenceTotal = lesson.sentences.length;
+  const sentenceMastered = lesson.sentences.filter(
+    (s) => s.enVariants.length > 0 && classifyWord(userWords[phraseKey("en-lu", s.enVariants[0])]) === "mastered",
+  ).length;
+
+  const total = wordTotal + sentenceTotal;
+  const mastered = wordMastered + sentenceMastered;
   const percentage = total > 0 ? mastered / total : 0;
   return { total, mastered, percentage, isComplete: mastered === total && total > 0 };
 };
@@ -81,21 +95,27 @@ export type OverallStats = {
   learningWords: number;
   strugglingWords: number;
   overallAccuracy: number;
+  totalPhrases: number;
+  masteredPhrases: number;
 };
 
 export const computeOverallStats = (
   userWords: Record<string, WordStats>,
 ): OverallStats => {
-  const entries = Object.values(userWords);
-  const classified = entries.map((s) => classifyWord(s));
-  const totalShown = entries.reduce((sum, s) => sum + s.correct + s.incorrect, 0);
-  const totalCorrect = entries.reduce((sum, s) => sum + s.correct, 0);
+  const wordEntries = Object.entries(userWords).filter(([k]) => isWordKey(k)).map(([, v]) => v);
+  const phraseEntries = Object.entries(userWords).filter(([k]) => isPhraseKey(k)).map(([, v]) => v);
+
+  const wordClassified = wordEntries.map((s) => classifyWord(s));
+  const totalShown = wordEntries.reduce((sum, s) => sum + s.correct + s.incorrect, 0);
+  const totalCorrect = wordEntries.reduce((sum, s) => sum + s.correct, 0);
 
   return {
-    totalWords: entries.length,
-    masteredWords: classified.filter((c) => c === "mastered").length,
-    learningWords: classified.filter((c) => c === "learning").length,
-    strugglingWords: classified.filter((c) => c === "struggling").length,
+    totalWords: wordEntries.length,
+    masteredWords: wordClassified.filter((c) => c === "mastered").length,
+    learningWords: wordClassified.filter((c) => c === "learning").length,
+    strugglingWords: wordClassified.filter((c) => c === "struggling").length,
     overallAccuracy: totalShown > 0 ? totalCorrect / totalShown : 0,
+    totalPhrases: phraseEntries.length,
+    masteredPhrases: phraseEntries.filter((s) => classifyWord(s) === "mastered").length,
   };
 };

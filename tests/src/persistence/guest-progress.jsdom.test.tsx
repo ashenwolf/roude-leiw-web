@@ -12,9 +12,23 @@ import { useGuestProgress, refreshGuestProgress } from "../../../src/persistence
 
 const WORD_KEY = "Moien|hello";
 const WORD_RESULTS = { [WORD_KEY]: { shown: 5, correct: 4, incorrect: 1 } };
+const STORAGE_KEY = "roude-leiw-guest";
+
+// Node.js 22 adds an experimental globalThis.localStorage that lacks clear/removeItem.
+// Replace it with a compliant in-memory implementation for these tests.
+const store: Record<string, string> = {};
+const lsImpl: Storage = {
+  getItem: (key) => store[key] ?? null,
+  setItem: (key, value) => { store[key] = String(value); },
+  removeItem: (key) => { delete store[key]; },
+  clear: () => { Object.keys(store).forEach((k) => { delete store[k]; }); },
+  key: (index) => Object.keys(store)[index] ?? null,
+  get length() { return Object.keys(store).length; },
+};
+Object.defineProperty(globalThis, "localStorage", { get: () => lsImpl, configurable: true });
 
 describe("guest progress: home sees updated words after exercise", () => {
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => localStorage.removeItem(STORAGE_KEY));
 
   it("fresh hook mount reads words synced by a previous hook instance", () => {
     // --- AppExercise phase ---
