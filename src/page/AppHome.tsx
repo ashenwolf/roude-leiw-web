@@ -8,6 +8,8 @@ import { computeOverallStats } from "../exercise/progression";
 import { computeXP, computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
+import { RefreshIcon } from "../ui/icons/RefreshIcon";
+import { ShuffleIcon } from "../ui/icons/ShuffleIcon";
 import { LessonGrid } from "../ui/LessonGrid";
 import { StatsRow } from "../ui/StatsRow";
 import { StreakBadge } from "../ui/StreakBadge";
@@ -116,10 +118,14 @@ export const AppHome = () => {
       <div className="mt-auto sticky bottom-0 bg-white pt-3 pb-1 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
         <div className="flex gap-2">
           <Button color="madness" size="sm" onClick={handleStartMadness}>
-            ⚡ Madness
+            <span className="flex items-center justify-center gap-1.5">
+              <ShuffleIcon className="w-4 h-4" /> Madness
+            </span>
           </Button>
           <Button color="mistakes" size="sm" onClick={handleStartMistakes}>
-            🔁 Fix Mistakes
+            <span className="flex items-center justify-center gap-1.5">
+              <RefreshIcon className="w-4 h-4" /> Fix Mistakes
+            </span>
           </Button>
         </div>
       </div>

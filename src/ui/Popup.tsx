@@ -2,6 +2,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "./Button";
+import { AwardIcon, GiftBoxIcon, ThumbsDownIcon, ThumbsUpIcon } from "./icons";
 
 type PopupVariant = "milestone" | "complete";
 
@@ -120,12 +121,12 @@ export const MilestonePopup = ({
   <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Continue">
     {outcome === "success" ? (
       <div className="text-center">
-        <div className="text-3xl mb-1">👍</div>
+        <ThumbsUpIcon className="w-8 h-8 mx-auto mb-1 text-green-500" />
         <p className="text-gray-700 font-semibold">Nice one!</p>
       </div>
     ) : (
       <div className="text-center">
-        <div className="text-3xl mb-1">🙈</div>
+        <ThumbsDownIcon className="w-8 h-8 mx-auto mb-1 text-rose-400" />
         <p className="text-rose-500 font-semibold">Not quite — keep going!</p>
       </div>
     )}
@@ -144,7 +145,7 @@ export const SectionMilestonePopup = ({
 }) => (
   <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Keep going!">
     <div className="text-center">
-      <div className="text-5xl mb-3">🎯</div>
+      <AwardIcon className="w-12 h-12 mx-auto mb-3 text-amber-500" />
       <h3 className="text-2xl font-bold text-gray-800">Section {section} Complete!</h3>
       <p className="text-gray-500 mt-1">{section < 3 ? `${3 - section} section${3 - section > 1 ? "s" : ""} to go` : "Last one done!"}</p>
     </div>
@@ -162,7 +163,7 @@ export const CelebrationPopup = ({
 }) => (
   <Popup variant="complete" visible={visible} onDismiss={onDismiss}>
     <div className="text-center">
-      <div className="text-6xl mb-4">🎉</div>
+      <GiftBoxIcon className="w-16 h-16 mx-auto mb-4 text-green-500" />
       <h2 className="text-2xl font-bold text-green-600">Exercise Complete!</h2>
       <p className="text-gray-600 mt-2">Great job matching all the words!</p>
     </div>

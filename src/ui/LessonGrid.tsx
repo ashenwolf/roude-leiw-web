@@ -1,5 +1,7 @@
 import type { Lesson } from "../exercise/letz-parser";
 import type { LessonProgress } from "../exercise/progression";
+import { CheckCircleIcon } from "./icons/CheckCircleIcon";
+import { LockIcon } from "./icons/LockIcon";
 
 type LessonCardProps = {
   lesson: Lesson;
@@ -32,12 +34,12 @@ const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: Lesso
     >
       {/* Lock overlay */}
       {!isUnlocked && (
-        <span className="text-xl opacity-60">{"\uD83D\uDD12"}</span>
+        <LockIcon className="w-5 h-5 text-gray-400 opacity-60" />
       )}
 
       {/* Completion check */}
       {isComplete && (
-        <span className="absolute top-1 right-1.5 text-sm">{"\u2705"}</span>
+        <CheckCircleIcon className="absolute top-1 right-1 w-5 h-5 text-green-500" />
       )}
 
       {/* Lesson title */}
