@@ -34,7 +34,10 @@ export const AppHome = () => {
   }, []);
 
   // Single producer: everything AppHome needs about lessons + progress
-  const view = useMemo(() => projectHomeLessonsView(lessons, words), [lessons, words]);
+  const view = useMemo(
+    () => projectHomeLessonsView(lessons, words),
+    [lessons, words],
+  );
   const { progressMap, unlockedIds, currentLessonId, totalWords } = view;
 
   const overallStats = useMemo(() => computeOverallStats(words), [words]);

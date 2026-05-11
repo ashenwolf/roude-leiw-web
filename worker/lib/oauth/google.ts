@@ -53,9 +53,17 @@ export const exchangeCode = async (config: GoogleConfig, code: string): Promise<
   const profile = (await userResponse.json()) as {
     id: string;
     email: string;
+    verified_email?: boolean;
     name: string;
     picture?: string;
   };
+
+  // Reject unverified emails: account-takeover risk if we trust a Google account
+  // whose email was never proven (Workspace tenants where verification is off,
+  // or future Google changes). The email is our identity key — it must be verified.
+  if (profile.verified_email !== true) {
+    throw new Error("Google account email is not verified");
+  }
 
   return {
     provider: "google",

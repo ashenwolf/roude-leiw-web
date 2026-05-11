@@ -1,6 +1,12 @@
 import { describe, it, expect } from "vitest";
 
-import { mergeWordResults, mergeDailySession, computeStreak } from "../../../worker/lib/user.ts";
+import {
+  mergeWordResults,
+  mergeDailySession,
+  computeStreak,
+  MAX_WORD_KEYS,
+  MAX_DAILY_SESSIONS,
+} from "../../../worker/lib/user.ts";
 import type { WordResult } from "../../../worker/types.ts";
 
 // ============================================================================
@@ -39,6 +45,23 @@ describe("mergeWordResults", () => {
     const existing = { "Moien|hi": { shown: 1, correct: 1, incorrect: 0 } };
     const merged = mergeWordResults(existing, []);
     expect(merged).toEqual(existing);
+  });
+
+  it("drops new keys once existing map hits MAX_WORD_KEYS", () => {
+    const full = Object.fromEntries(
+      Array.from({ length: MAX_WORD_KEYS }, (_, i) => [`k${i}|v${i}`, { shown: 1, correct: 1, incorrect: 0 }]),
+    );
+    const merged = mergeWordResults(full, [result("brand|new", 1, 1, 0)]);
+    expect(merged["brand|new"]).toBeUndefined();
+    expect(Object.keys(merged)).toHaveLength(MAX_WORD_KEYS);
+  });
+
+  it("still accumulates existing keys at cap", () => {
+    const full = Object.fromEntries(
+      Array.from({ length: MAX_WORD_KEYS }, (_, i) => [`k${i}|v${i}`, { shown: 1, correct: 1, incorrect: 0 }]),
+    );
+    const merged = mergeWordResults(full, [result("k0|v0", 2, 1, 1)]);
+    expect(merged["k0|v0"]).toEqual({ shown: 3, correct: 2, incorrect: 1 });
   });
 });
 
@@ -86,6 +109,22 @@ describe("mergeDailySession", () => {
       correct: 0,
       incorrect: 0,
     });
+  });
+
+  it("drops oldest entries when exceeding MAX_DAILY_SESSIONS", () => {
+    const dayMs = 86_400_000;
+    const dateAt = (i: number) => new Date(i * dayMs).toISOString().slice(0, 10);
+    const full = Object.fromEntries(
+      Array.from({ length: MAX_DAILY_SESSIONS }, (_, i) => [
+        dateAt(i),
+        { totalItems: 1, durationSeconds: 1000, correct: 1, incorrect: 0 },
+      ]),
+    );
+    const newest = dateAt(MAX_DAILY_SESSIONS);
+    const merged = mergeDailySession(full, newest, 1000, []);
+    expect(Object.keys(merged)).toHaveLength(MAX_DAILY_SESSIONS);
+    expect(merged[newest]).toBeDefined();
+    expect(merged[dateAt(0)]).toBeUndefined();
   });
 });
 

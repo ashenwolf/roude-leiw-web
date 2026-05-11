@@ -22,8 +22,11 @@ export const AppWrapper = ({ children }: AppWrapperProps) => (
             className="text-2xl leading-none"
             style={{ fontFamily: "'Pacifico', cursive" }}
           >
-            <span style={{ color: "#EF3340" }}>Roude</span><br />
-            <span className="pl-4" style={{ color: "#00A1D6" }}>Leiw</span>
+            <span style={{ color: "#EF3340" }}>Roude</span>
+            <br />
+            <span className="pl-4" style={{ color: "#00A1D6" }}>
+              Leiw
+            </span>
           </h1>
           <div className="ml-auto">
             <UserMenu />

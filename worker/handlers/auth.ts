@@ -1,6 +1,16 @@
-import { createSession, deleteSession, sessionCookie, clearSessionCookie, parseSessionId } from "../lib/session.ts";
+import {
+  createSession,
+  deleteSession,
+  sessionCookie,
+  clearSessionCookie,
+  parseSessionId,
+  oauthStateCookie,
+  clearOauthStateCookie,
+  parseOauthState,
+} from "../lib/session.ts";
 import { getUser, saveUser, createNewUser, findUserIdByEmail, linkEmailToUser, computeStreak } from "../lib/user.ts";
 import { getAuthorizationUrl, exchangeCode } from "../lib/oauth/google.ts";
+import { log } from "../lib/log.ts";
 
 import type { RouteContext } from "../router.ts";
 import type { UserData } from "../types.ts";
@@ -15,7 +25,13 @@ export const handleGoogleAuth = async ({ env }: RouteContext) => {
   const state = `google:${crypto.randomUUID()}`;
   await env.KV.put(`csrf:${state}`, "google", { expirationTtl: 600 });
 
-  return Response.redirect(getAuthorizationUrl(googleConfig(env), state), 302);
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: getAuthorizationUrl(googleConfig(env), state),
+      "Set-Cookie": oauthStateCookie(state, env.APP_URL),
+    },
+  });
 };
 
 export const handleCallback = async ({ request, env }: RouteContext) => {
@@ -27,21 +43,46 @@ export const handleCallback = async ({ request, env }: RouteContext) => {
     return Response.redirect(`${env.APP_URL}?error=missing_params`, 302);
   }
 
+  // Two independent state checks must both pass:
+  //   1. KV-bound state (prevents replay across browsers / forged states)
+  //   2. Cookie-bound state (prevents login-CSRF — attacker can't set our cookie)
+  const cookieState = parseOauthState(request.headers.get("Cookie"));
+  if (!cookieState || cookieState !== state) {
+    log.warn("oauth_state_cookie_mismatch", {});
+    return Response.redirect(`${env.APP_URL}?error=invalid_state`, 302);
+  }
+
   const storedProvider = await env.KV.get(`csrf:${state}`);
   if (!storedProvider) {
     return Response.redirect(`${env.APP_URL}?error=invalid_state`, 302);
   }
   await env.KV.delete(`csrf:${state}`);
 
-  const userInfo = await exchangeCode(googleConfig(env), code);
+  const userInfo = await exchangeCode(googleConfig(env), code).catch((e) => {
+    log.warn("oauth_exchange_failed", { reason: e instanceof Error ? e.message : "unknown" });
+    return null;
+  });
+  if (!userInfo) {
+    return Response.redirect(`${env.APP_URL}?error=oauth_failed`, 302);
+  }
 
-  // Find or create user
+  // Resolve userId with best-effort race protection on the email→userId link.
+  // KV has no compare-and-swap, so we: (1) look up existing, (2) if none, claim
+  // the email by writing our candidate id, (3) re-read and accept whichever id
+  // the email row points to as the winner. Concurrent first-time logins thus
+  // converge on one userId; the loser's candidate uuid is silently discarded.
   const existingUserId = await findUserIdByEmail(env.KV, userInfo.email);
-  const userId = existingUserId ?? crypto.randomUUID();
-  const existingUser = existingUserId ? await getUser(env.KV, existingUserId) : null;
+  const resolvedUserId = await (async () => {
+    if (existingUserId) return existingUserId;
+    const candidateId = crypto.randomUUID();
+    await linkEmailToUser(env.KV, userInfo.email, candidateId);
+    const winnerId = await findUserIdByEmail(env.KV, userInfo.email);
+    return winnerId ?? candidateId;
+  })();
 
+  const existingUser = await getUser(env.KV, resolvedUserId);
   const userData: UserData = existingUser ?? createNewUser({
-    id: userId,
+    id: resolvedUserId,
     email: userInfo.email,
     name: userInfo.name,
     avatarUrl: userInfo.avatarUrl,
@@ -58,19 +99,13 @@ export const handleCallback = async ({ request, env }: RouteContext) => {
   };
 
   await saveUser(env.KV, updatedUser);
-  if (!existingUserId) {
-    await linkEmailToUser(env.KV, userInfo.email, userId);
-  }
 
-  const sessionId = await createSession(env.KV, userId);
+  const sessionId = await createSession(env.KV, resolvedUserId);
 
-  return new Response(null, {
-    status: 302,
-    headers: {
-      Location: env.APP_URL,
-      "Set-Cookie": sessionCookie(sessionId, env.APP_URL),
-    },
-  });
+  const headers = new Headers({ Location: env.APP_URL });
+  headers.append("Set-Cookie", sessionCookie(sessionId, env.APP_URL));
+  headers.append("Set-Cookie", clearOauthStateCookie(env.APP_URL));
+  return new Response(null, { status: 302, headers });
 };
 
 export const handleMe = async ({ env, userId }: RouteContext) => {

@@ -40,6 +40,8 @@ export type UserData = {
   profile: UserProfile;
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
+  /** Monotonic counter bumped on every save. Detects concurrent writes; older records may omit it. */
+  version?: number;
 };
 
 // --- Session ---
