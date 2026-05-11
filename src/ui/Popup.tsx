@@ -2,7 +2,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "./Button";
-import { AwardIcon, GiftBoxIcon, ThumbsDownIcon, ThumbsUpIcon } from "./icons";
+import { CelebrationIcon, ThumbsDownIcon, ThumbsUpIcon, TrophyIcon } from "./icons";
 
 type PopupVariant = "milestone" | "complete";
 
@@ -145,7 +145,7 @@ export const SectionMilestonePopup = ({
 }) => (
   <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Keep going!">
     <div className="text-center">
-      <AwardIcon className="w-12 h-12 mx-auto mb-3 text-amber-500" />
+      <TrophyIcon className="w-12 h-12 mx-auto mb-3 text-amber-500" />
       <h3 className="text-2xl font-bold text-gray-800">Section {section} Complete!</h3>
       <p className="text-gray-500 mt-1">{section < 3 ? `${3 - section} section${3 - section > 1 ? "s" : ""} to go` : "Last one done!"}</p>
     </div>
@@ -163,7 +163,7 @@ export const CelebrationPopup = ({
 }) => (
   <Popup variant="complete" visible={visible} onDismiss={onDismiss}>
     <div className="text-center">
-      <GiftBoxIcon className="w-16 h-16 mx-auto mb-4 text-green-500" />
+      <CelebrationIcon className="w-16 h-16 mx-auto mb-4 text-green-500" />
       <h2 className="text-2xl font-bold text-green-600">Exercise Complete!</h2>
       <p className="text-gray-600 mt-2">Great job matching all the words!</p>
     </div>

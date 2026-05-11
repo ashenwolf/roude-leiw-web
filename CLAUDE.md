@@ -449,6 +449,20 @@ Reuse these helpers; don't re-invent fixture shapes.
 - Try to analyze several ideas and provide options to human to pick from.
 - With every implementation check if it can be generalized and reused.
 
+### Icons
+
+Icons live in `src/ui/icons/`. They are hand-copied SVG paths from **Phosphor Icons** (duotone weight) — zero runtime dependency, zero bundle cost.
+
+**When adding a new icon:**
+1. Find the right icon at https://phosphoricons.com
+2. Install `@phosphor-icons/react` temporarily: `npm i @phosphor-icons/react`
+3. Copy the duotone paths from `node_modules/@phosphor-icons/react/dist/defs/<Name>.es.js`
+4. Create `src/ui/icons/<Name>Icon.tsx` following the pattern in any existing icon file (`IconBase` + two `<path>` elements: one with `opacity="0.2"`, one solid)
+5. Export from `src/ui/icons/index.ts`
+6. Uninstall: `npm uninstall @phosphor-icons/react`
+
+`IconBase` uses `viewBox="0 0 256 256"` (Phosphor's native grid). Size and color are controlled via `className` (`w-*`/`h-*` for size, `text-*` for color).
+
 ### Self-improvement
 
 - Every time user makes a correction, the lessons learnt is added to the `.claude/lessons.md`, and check this file to prevent repeating mistakes.

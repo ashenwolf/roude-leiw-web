@@ -1,5 +1,4 @@
-import { FireIcon } from "./icons/FireIcon";
-import { MoonIcon } from "./icons/MoonIcon";
+import { FireIcon, MoonIcon } from "./icons";
 
 type StreakBadgeProps = {
   current: number;

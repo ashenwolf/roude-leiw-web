@@ -1,7 +1,6 @@
 import type { Lesson } from "../exercise/letz-parser";
 import type { LessonProgress } from "../exercise/progression";
-import { CheckCircleIcon } from "./icons/CheckCircleIcon";
-import { LockIcon } from "./icons/LockIcon";
+import { CheckCircleIcon, LockIcon } from "./icons";
 
 type LessonCardProps = {
   lesson: Lesson;
