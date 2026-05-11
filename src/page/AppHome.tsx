@@ -114,11 +114,11 @@ export const AppHome = () => {
       </div>
 
       {/* Practice mode buttons — sticky at bottom */}
-      <div className="mt-auto sticky bottom-0 bg-white pt-3 pb-1 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
+      <div className="mt-auto sticky bottom-0 bg-white pt-2 pb-0 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
         <div className="flex gap-2">
           <Button color="madness" size="sm" onClick={handleStartMadness}>
             <span className="flex items-center justify-center gap-1.5">
-              <ShuffleIcon className="w-4 h-4" /> Madness
+              <ShuffleIcon className="w-4 h-4" /> Word Mix
             </span>
           </Button>
           <Button color="mistakes" size="sm" onClick={handleStartMistakes}>

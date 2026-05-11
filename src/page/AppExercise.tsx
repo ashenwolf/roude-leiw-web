@@ -39,7 +39,7 @@ type ExerciseReadyProps = { totalSlots: number; onStart: () => void; onBack: () 
 const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
     <h2 className="text-2xl font-bold text-gray-800">
-      {mode.kind === "madness" ? "Match Madness" : mode.kind === "mistakes" ? "Fix Your Mistakes" : "Word Match Exercise"}
+      {mode.kind === "madness" ? "Word Mix" : mode.kind === "mistakes" ? "Fix Your Mistakes" : "Word Match Exercise"}
     </h2>
     <p className="text-gray-600 text-center">
       {mode.kind === "madness"
