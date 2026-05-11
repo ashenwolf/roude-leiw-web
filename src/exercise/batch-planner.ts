@@ -238,6 +238,7 @@ export const planMadnessSlots = (
 // ============================================================================
 
 const MISTAKES_WORD_BATCH_SIZE = 5;
+const MAX_CONTEXT_SENTENCES_PER_LESSON = 2;
 
 export const planMistakesSlots = (
   lessons: Lesson[],
@@ -247,7 +248,7 @@ export const planMistakesSlots = (
 
   // Mistake words: entries with incorrect > 0, sorted most mistakes first
   const allEntries = lessons.flatMap((l) =>
-    l.entries.map((e) => ({ entry: e, key: `${e.lu}|${e.en}` })),
+    l.entries.map((e) => ({ entry: e, key: `${e.lu}|${e.en}`, lessonId: l.meta.id })),
   );
   const mistakeWords = allEntries
     .filter(({ key }) => (userWords[key]?.incorrect ?? 0) > 0)
@@ -288,12 +289,31 @@ export const planMistakesSlots = (
     buildSentenceSlot(s, "en-lu", []),
   );
 
-  // Interleave: alternate word-match and sentence slots
-  const queue: ExerciseBatch[] = [...wordBatches, ...phraseBatches].sort((a, b) => {
-    // Sentences between word batches: simple interleave by alternating
-    if (a.type === b.type) return 0;
-    return a.type === "word-match" ? -1 : 1;
-  });
+  // Context sentences: lessons that have word mistakes but no phrase mistakes yet —
+  // include a sample so sentence practice is always part of Fix Mistakes.
+  const mistakeLessonIds = new Set(
+    allEntries
+      .filter(({ key }) => (userWords[key]?.incorrect ?? 0) > 0)
+      .map(({ lessonId }) => lessonId),
+  );
+  const mistakePhraseKeys = new Set(mistakePhrases.map((s) => phraseKey("en-lu", s.enVariants[0])));
+  const contextBatches: SentenceBuilderBatch[] = lessons
+    .filter((l) => mistakeLessonIds.has(l.meta.id))
+    .flatMap((l) =>
+      l.sentences
+        .filter((s) => s.enVariants.length > 0 && !mistakePhraseKeys.has(phraseKey("en-lu", s.enVariants[0])))
+        .slice(0, MAX_CONTEXT_SENTENCES_PER_LESSON)
+        .map((s) => buildSentenceSlot(s, "en-lu", [])),
+    );
+
+  // Interleave word and sentence batches: [word, sentence, word, sentence, ...]
+  const allSentenceBatches = [...phraseBatches, ...contextBatches];
+  const queue: ExerciseBatch[] = Array.from(
+    { length: Math.max(wordBatches.length, allSentenceBatches.length) },
+    (_, i) => [wordBatches[i], allSentenceBatches[i]],
+  )
+    .flat()
+    .filter((b): b is ExerciseBatch => b !== undefined);
 
   const plannedSlots = queue.length;
   return { queue, plannedSlots, currentLessonId };

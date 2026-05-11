@@ -9,6 +9,8 @@ import {
   tokenizeSentence,
 } from "../../../src/exercise/batch-planner.ts";
 
+import { phraseKey } from "../../../src/exercise/progression.ts";
+
 import type { WordStats } from "../../../src/context/auth.ts";
 import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 import type { SentenceBuilderBatch, WordMatchBatch } from "../../../src/exercise/types.ts";
@@ -315,6 +317,103 @@ describe("planMistakesSlots", () => {
     const plan = planMistakesSlots(lessons, userWords);
     const wmBatch = plan.queue.find((s): s is WordMatchBatch => s.type === "word-match");
     expect(wmBatch!.pairs).toHaveLength(5);
+  });
+
+  it("includes sentence-builder batch for phrase with mistakes", () => {
+    const s = sentence("Good morning, how are you?", "Gudde Moien, wéi geet et?");
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences: [s],
+    }];
+    const pk = phraseKey("en-lu", s.enVariants[0]);
+    const userWords = { [pk]: stats(1, 0, 1) };
+    const plan = planMistakesSlots(lessons, userWords);
+    const sbBatch = plan.queue.find((b): b is SentenceBuilderBatch => b.type === "sentence-builder");
+    expect(sbBatch).toBeDefined();
+    expect(sbBatch!.item.phraseKey).toBe(pk);
+  });
+
+  it("excludes sentences with only correct results from mistakes", () => {
+    const s = sentence("Good morning, how are you?", "Gudde Moien, wéi geet et?");
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences: [s],
+    }];
+    const pk = phraseKey("en-lu", s.enVariants[0]);
+    const userWords = { [pk]: stats(3, 3, 0) };
+    const plan = planMistakesSlots(lessons, userWords);
+    const sbBatch = plan.queue.find((b): b is SentenceBuilderBatch => b.type === "sentence-builder");
+    expect(sbBatch).toBeUndefined();
+  });
+
+  it("interleaves word and sentence batches when both exist", () => {
+    const s = sentence("Good morning, how are you?", "Gudde Moien, wéi geet et?");
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences: [s],
+    }];
+    const pk = phraseKey("en-lu", s.enVariants[0]);
+    const userWords = {
+      "lu_0|en_0": stats(3, 1, 2),
+      [pk]: stats(1, 0, 1),
+    };
+    const plan = planMistakesSlots(lessons, userWords);
+    const types = plan.queue.map((b) => b.type);
+    expect(types).toContain("word-match");
+    expect(types).toContain("sentence-builder");
+  });
+
+  it("includes context sentences from mistake-word lessons even without phrase mistakes", () => {
+    const s1 = sentence("Good morning, how are you?", "Gudde Moien, wéi geet et?");
+    const s2 = sentence("I am fine, thank you.", "Mir geet et gutt, merci.");
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences: [s1, s2],
+    }];
+    // Only word mistakes, no phrase mistakes
+    const userWords = { "lu_0|en_0": stats(3, 1, 2) };
+    const plan = planMistakesSlots(lessons, userWords);
+    const sbBatches = plan.queue.filter((b): b is SentenceBuilderBatch => b.type === "sentence-builder");
+    expect(sbBatches.length).toBeGreaterThan(0);
+  });
+
+  it("caps context sentences at MAX_CONTEXT_SENTENCES_PER_LESSON per lesson", () => {
+    const sentences = Array.from({ length: 5 }, (_, i) =>
+      sentence(`sentence ${i}`, `frase ${i}`),
+    );
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences,
+    }];
+    const userWords = { "lu_0|en_0": stats(3, 1, 2) };
+    const plan = planMistakesSlots(lessons, userWords);
+    const sbBatches = plan.queue.filter((b): b is SentenceBuilderBatch => b.type === "sentence-builder");
+    expect(sbBatches).toHaveLength(2); // MAX_CONTEXT_SENTENCES_PER_LESSON
+  });
+
+  it("does not duplicate phrase mistakes as context sentences", () => {
+    const s = sentence("Good morning, how are you?", "Gudde Moien, wéi geet et?");
+    const lessons: Lesson[] = [{
+      meta: { id: "A1.01", title: "Greetings", level: "A1" },
+      entries: Array.from({ length: 5 }, (_, i) => ({ lu: `lu_${i}`, en: `en_${i}` })),
+      sentences: [s],
+    }];
+    const pk = phraseKey("en-lu", s.enVariants[0]);
+    // Both a word mistake and a phrase mistake on the same lesson
+    const userWords = {
+      "lu_0|en_0": stats(3, 1, 2),
+      [pk]: stats(1, 0, 1),
+    };
+    const plan = planMistakesSlots(lessons, userWords);
+    const sbBatches = plan.queue.filter((b): b is SentenceBuilderBatch => b.type === "sentence-builder");
+    // The phrase appears exactly once (as a phrase mistake, not also as a context sentence)
+    const matchingBatches = sbBatches.filter((b) => b.item.phraseKey === pk);
+    expect(matchingBatches).toHaveLength(1);
   });
 });
 
