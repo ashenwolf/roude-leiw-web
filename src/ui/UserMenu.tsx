@@ -1,6 +1,7 @@
 import { usePostHog } from "@posthog/react";
 
 import { useAuth } from "../context/useAuth.ts";
+import { Button } from "./Button.tsx";
 
 export const UserMenu = () => {
   const { auth, login, logout } = useAuth();
@@ -14,12 +15,9 @@ export const UserMenu = () => {
       login();
     };
     return (
-      <button
-        onClick={handleLogin}
-        className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer"
-      >
+      <Button size="sm" fullWidth={false} onClick={handleLogin}>
         Sign in
-      </button>
+      </Button>
     );
   }
 

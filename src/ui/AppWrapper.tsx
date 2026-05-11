@@ -14,11 +14,17 @@ export const AppWrapper = ({ children }: AppWrapperProps) => (
           style={{ paddingTop: "calc(env(safe-area-inset-top) + 1rem)" }}
         >
           <img
-            src="/image.png"
+            src="/roude-leiw-app.png"
             alt="Roude Leiw"
-            className="w-10 h-10 rounded-lg object-cover"
+            className="w-12 h-12 rounded-lg object-cover"
           />
-          <h1 className="text-2xl font-semibold text-gray-800">Roude Leiw</h1>
+          <h1
+            className="text-2xl leading-none"
+            style={{ fontFamily: "'Pacifico', cursive" }}
+          >
+            <span style={{ color: "#EF3340" }}>Roude</span><br />
+            <span className="pl-4" style={{ color: "#00A1D6" }}>Leiw</span>
+          </h1>
           <div className="ml-auto">
             <UserMenu />
           </div>
