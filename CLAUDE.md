@@ -16,7 +16,7 @@ Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under
 
 ## What This App Is
 
-**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2) in themed lessons. There's also a "madness" mode that mixes all levels.
+**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2) in themed lessons, build sentences from token tiles, and revisit content they've struggled with. There are three exercise Modes from the Home screen: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
 
 Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persistence.
 
@@ -27,6 +27,44 @@ Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persi
 - Chevrotain 11 for parsing `.letz` lesson files
 - Cloudflare Workers (backend API) + KV (persistence + sessions)
 - Google OAuth 2.0 for authentication
+
+## Glossary (binding vocabulary)
+
+This is the canonical vocabulary for the exercise/session system. Use these terms in code, comments, PR descriptions, and conversation. A migration is in progress that renames legacy terms in code (see the "Retired terms" list at the bottom and **Architecture Reference > Migration in progress** below).
+
+**Content tier** — static, read-only.
+
+| Term | Meaning |
+|---|---|
+| Manifest | Catalog index `{ levels: [{ id, lessons: [{ id, title, file }] }] }`. Title field is part of the target manifest. |
+| Lesson | One `.letz` file's parsed content. `{ id, title, words[], sentences[] }`. |
+| LessonMeta | Light catalog row used by Home (`{ id, title, level }`); no words/sentences. Loaded from manifest only. |
+| Word | A `{ lu, en }` pair. |
+| Sentence | A translatable phrase + accepted answers + distractors. |
+| Element | Umbrella for Word or Sentence (used uniformly by unlock %, error pool, stats). |
+
+**Progression tier** — persisted user state.
+
+| Term | Meaning |
+|---|---|
+| Stats | `{ shown, correct, incorrect }` per element key. |
+| Daily activity | `Record<YYYY-MM-DD, { durationSeconds }>`. |
+| Streak | Derived from daily activity. |
+| Cursor | Max unlocked lesson id; derived. |
+| Error pool | Derived set of struggling elements (see **Centralized error pool** below). |
+
+**Runtime tier** — ephemeral, one Session of work.
+
+| Term | Meaning |
+|---|---|
+| Mode | `lesson \| word-mix \| fix-errors`. Picked at Home. |
+| Session | One top-level run of a Mode. |
+| Block | A chunk of a Session. Lesson/fix-errors = 3 normal + ≤1 correction. Word-mix = 3. |
+| Slot | One unit of work inside a Block. Holds one Exercise. |
+| Exercise | The mechanic in a Slot. `word-match \| sentence-builder \| …` (plug-in seam). |
+| Step | Smallest user action inside an Exercise. WordMatch = one pair; SentenceBuilder = one submit. |
+
+**Retired terms — do not use in new code:** `batch` (use Slot or Exercise), `madness` (use word-mix), `mistakes mode` (use fix-errors), `game` when ambiguous (use Exercise for the mechanic or Session for the run).
 
 ## Project Structure
 
@@ -49,11 +87,11 @@ src/
 │   ├── AppHome.tsx                   # Home/lesson selection page
 │   └── AppExercise.tsx              # Exercise/game page (wires progress sync)
 │
-├── exercise/                         # Core game logic — producer pipeline
+├── exercise/                         # Core game logic — producer pipeline (see Glossary for terms)
 │   ├── use-exercise-session.ts       # Hook: thin wiring (load + dispatch only)
-│   ├── lesson-loader.ts              # Producer: fetches manifest + .letz files → Lesson[]
+│   ├── lesson-loader.ts              # Producer: manifest → LessonMeta[] (cheap); .letz files → Lesson (lazy, per Session)
 │   ├── letz-parser.ts                # Facade: entriesToWordPairs()
-│   ├── batch-planner.ts              # Producer: (lessons, userWords, target) → BatchPlan
+│   ├── batch-planner.ts              # Producer: (lessons, userWords, target) → BatchPlan. Migration target: replaced by src/exercise/modes/*.ts each returning ModeConfig.
 │   ├── lesson-rows.ts                # Producer: (lessons, userWords) → HomeLessonsView
 │   ├── SentenceBuilder/              # Sentence assembly game
 │   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
@@ -114,6 +152,110 @@ public/
 
 ## Architecture
 
+### Architecture Reference (binding model)
+
+This subsection is the load-bearing reference for the exercise/session system. The diagrams further down (Data Pipeline, Screen Data Map) describe the current state of the code; the rules here describe what the code is converging on. Both are accurate today within the scope they cover; if they disagree, this section wins and the diagrams will catch up.
+
+> **Migration in progress.** A multi-step refactor is converting the existing `batch-planner` + ad-hoc selectors into the layered model below. The full roadmap lives at `/Users/gulenoks/.claude/plans/sleepy-jumping-noodle.md`. Until it lands, some files referenced here (`src/exercise/modes/*`, `src/exercise/mode-config.ts`, `src/exercise/error-pool.ts`, `src/exercise/selection.ts`, `src/exercise/exercise-builders.ts`, `src/lib/streak.ts`) do not yet exist. The vocabulary, layering, and invariants apply now; the code locations apply after the matching migration step lands.
+
+#### Encapsulation layering
+
+```
+Layer 4: Mode planners              planLessonMode, planWordMixMode, planFixErrorsMode
+                                     ↓ produce
+Layer 3: SessionMachine              one reducer (Block/Slot transitions, popups)
+                                     ↓ consumes
+Layer 2: Exercises (plug-in)         WordMatchExercise, SentenceBuilderExercise, …
+                                     ↓ built from
+Layer 1: Selection primitives        bucketedPick(roll, buckets), pickPair, pickSentence,
+                                     buildWordMatchExercise, buildSentenceExercise
+                                     ↓ reading from
+Layer 0: Pure derivations            selectErrorPool, classifyElement, computeCursor,
+                                     unlockedSet, MIN_ANSWERS, thresholds
+```
+
+**Each layer imports only from layers below it.** The only place that knows which buckets feed which Exercise type is Layer 4 (the Mode planners). The SessionMachine (Layer 3) is Mode-agnostic — it walks a queue of pre-built Exercises and emits popup events at Block boundaries.
+
+#### Pipeline alignment invariants
+
+Four rules that must hold across this architecture (in addition to the Data Pipeline rules in the next subsection):
+
+1. **One-shot planning.** Mode planners run once at Session start, read a stats snapshot, and emit a complete `ModeConfig` with every Slot's Exercise pre-built. Mid-Session events update global Stats (sink) but do **not** re-enter the planner. Planners are stateless producers; the SessionMachine is a stupid consumer.
+2. **No callbacks across layer boundaries.** `ModeConfig.completionEffect` is a plain enum tag (`'unlock-check' | 'noop'`), not a function. The wiring hook (`use-exercise-session`) reads the tag and invokes the relevant pure derivation plus the relevant edge action (navigation, refresh). No layer hands a closure to a layer above it.
+3. **Named typed data is the only stage contract.** Anything crossing a layer boundary must be a plain typed value with an exported type. No shared mutable state, no implicit ordering.
+4. **Progress tick granularity is owned by Exercise, not Mode.** WordMatch emits a tick per Step (per pair); SentenceBuilder emits a tick per Slot (per submit); future Exercises declare their own. Total progress bar size for a Session = sum of each Slot's `exerciseTickCount`. Block boundaries on the bar are placed at the cumulative tick count where each Block ends.
+
+#### Mode specs
+
+All three Modes share the same SessionMachine; they differ only in what `ModeConfig` they emit.
+
+**Lesson** — `planLessonMode(lessons, stats, upperBoundId)`.
+- Shape: 3 Blocks × 5 Slots = 15 Slots base + optional correction Block.
+- Slot type roll: `[0, 0.2]` word-match, `[0.2, 1]` sentence-builder.
+- Upper bound is a single lesson id, compared **lexicographically**; pool = all lessons where `lesson.id <= upperBoundId`. "Start Learning" sets it to the cursor; picking a specific lesson sets it to that lesson (clamps the pool — picking A1.03 when A1.05 is unlocked draws only from A1.01–A1.03).
+- WordMatch Slot: 5 pairs, per-pair independent roll: `[0, 0.8]` current-lesson, `[0.8, 1]` previous-lessons. Re-roll on empty bucket.
+- SentenceBuilder Slot: lesson roll `[0, 0.75]` current / `[0.75, 1]` previous (re-roll on empty); random phrase within picked lesson; direction roll `[0, 0.66]` en→lu / `[0.66, 1]` lu→en.
+- Outcomes: WordMatch always success (failed pairs → stats only). SentenceBuilder fail → enqueue Slot into correction Block.
+- Correction Block: retry queued Slots; retry-fail re-enqueues at back; drain to empty.
+- Popups: block-success (after Blocks 1 & 2), session-success (after Block 3 if queue empty, or after correction drain). Every Session ends in success after drain.
+- `completionEffect: 'unlock-check'` — wiring hook runs `unlockedSet` after Stats sync.
+
+**Word Mix** — `planWordMixMode(lessons, stats)`.
+- Shape: 3 Blocks × 1 Slot per Block = 3 Slots total. Each Slot = a WordMatch Exercise with 20 pairs (20 Steps). No correction Block.
+- Pool: all words from lessons up to and including cursor.
+- Per-pair bucket roll (applied independently for each of the 60 pairs at plan time): `[0, 0.25]` error pool / `[0.25, 0.5]` current-lesson / `[0.5, 1]` previous-lessons. Re-roll on empty.
+- One-shot plan; mid-Session results do not re-bucket later pairs.
+- Popups: only on Slot/Block complete (3 total — Slot boundary = Block boundary).
+- `completionEffect: 'noop'`.
+- Progress bar: 60 ticks, milestones at 20/40/60.
+
+**Fix Errors** — `planFixErrorsMode(lessons, stats)`.
+- Home button disabled when error pool is empty.
+- Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
+- WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
+- SentenceBuilder Slot: 1 phrase from sentence-error pool.
+- Empty pool for rolled type → re-roll.
+- Outcomes & correction Block: identical to Lesson.
+- `completionEffect: 'noop'`.
+
+#### Unlock rule (Lesson Mode only)
+
+For each Element defined in the lesson's `.letz` file:
+- Element passes iff `shown >= MIN_ANSWERS` AND `correct/shown >= UNLOCK_ELEMENT_THRESHOLD` (0.8).
+
+The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (0.8).
+
+`MIN_ANSWERS` is a global gate (currently 5). Elements with `shown < MIN_ANSWERS` count as not-passing regardless of accuracy.
+
+Unlock is **sticky**: stats are monotonic in `correct` and `shown`, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
+
+#### Centralized error pool
+
+`selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+
+- Primary: elements with `shown >= MIN_ANSWERS` AND `correct/shown < ERROR_THRESHOLD` (0.9).
+- Fallback (when primary is empty): all elements with `incorrect > 0`, sorted ascending by `correct/shown` (worst first).
+
+Do not re-implement this rule inline; if you need a different definition, add a separate named function in the same module — don't fork.
+
+#### Post-Session refresh invariant
+
+**The auth and guest progress paths must produce byte-identical local state and must both refresh Home without a page reload after a Session completes.**
+
+- **Guest path:** `useGuestProgress` writes to localStorage; `AppExercise.goHome()` calls `refreshGuestProgress()` to notify subscribers; Home re-reads and re-renders.
+- **Auth path:** `useProgress.syncBatch` applies the same client-side `mergeWordStats`/`mergeDailySession` (`src/lib/stats-merge.ts`) to `AuthContext` state optimistically before POSTing to `/api/progress/sync`. `computeStreak` (shared between worker and client in `src/lib/streak.ts`) is re-run on the locally-merged daily activity. The POST stays fire-and-forget; the local merge is the byte-identical mirror of the server merge that runs in `worker/lib/user.ts`.
+
+If you change the merge logic on one side (worker or client), change it on the other side in the same commit. The byte-identity test in `tests/src/context/auth-stats-delta.test.ts` is the guarantee.
+
+#### Adding a new Exercise type
+
+Three touch points, nothing else:
+1. **Type:** extend the `Exercise` union in `src/exercise/types.ts` with the new variant (`{ type: 'fill-blank', … }`).
+2. **Logic + UI:** add `src/exercise/<NewType>/` containing the pure logic module and the React component, parameterized by the variant's data shape. Declare the Exercise's progress tick rate (per-Step or per-Slot) at the same time.
+3. **Router:** add a `currentExercise?.type === 'fill-blank' && <FillBlank … />` branch in `src/page/AppExercise.tsx`.
+
+The SessionMachine and Mode planners are untouched. If a Mode wants to schedule the new Exercise type in its Slots, the matching Mode planner adds a builder call (the only place that knows which Exercises feed which Modes).
+
 ### Data Pipeline (read this first)
 
 This codebase is organized as a **producer/consumer pipeline**. Each stage is a pure function that takes named, plain data and returns named, plain data. React, fetch, and KV writes only appear at the **edges**. Stages do not branch on edge cases the previous stage should have handled.
@@ -132,6 +274,8 @@ This codebase is organized as a **producer/consumer pipeline**. Each stage is a 
 > - **`journey`** — user-facing flows from the user's perspective.
 >
 > A sequence diagram squeezed into a flowchart loses the temporal ordering; a state machine drawn as a flowchart hides the cyclic transitions. Choose for clarity, not consistency.
+
+> ⚠️ **Migration note.** The diagram below reflects current code. The target architecture splits the single `batch-planner.ts` node into three `modes/*.ts` planners feeding a single `SessionMachine` (Mode-agnostic) consuming a `ModeConfig` contract; `lesson-loader` will return cheap `LessonMeta[]` to Home and full `Lesson` only to AppExercise. See **Architecture Reference > Encapsulation layering** above for the binding model. This diagram updates as each migration step lands.
 
 ```mermaid
 flowchart TD
@@ -236,12 +380,9 @@ flowchart TD
 
 `Lesson[]` is loaded independently on both screens via `loadAllLessons()` (cached by the browser). `words`/`streak`/`dailySessions` come from `useProgress()`, which abstracts over KV (auth) and localStorage (guest).
 
-**Session modes** — Home screen exposes three modes (lesson, madness, mistakes), each backed by a distinct planner function in `batch-planner.ts`: `planSlots()` (normal lesson), `planMadnessSlots()` (all levels mixed), `planMistakesSlots()` (words with errors).
+**Session modes** — Home screen exposes three Modes: **Lesson** (default), **Word Mix** (broader pair matching across unlocked words), and **Fix Errors** (drills the user's struggling Elements). Today these are backed by three distinct planners in `batch-planner.ts` (`planSlots`, `planMadnessSlots`, `planMistakesSlots`); the target architecture (see **Architecture Reference > Mode specs**) replaces them with three `modes/*.ts` planners that each return a `ModeConfig` consumed by a single Mode-agnostic SessionMachine.
 
-**Adding a new exercise type** — three touch points, nothing else:
-1. `src/exercise/types.ts` — add e.g. `FillBlankBatch` and extend `ExerciseBatch = WordMatchBatch | SentenceBuilderBatch | FillBlankBatch`
-2. `src/exercise/batch-planner.ts` — produce the new batch type where appropriate
-3. `src/page/AppExercise.tsx` — add a `currentBatch?.type === 'fill-blank' && <FillBlank … />` branch alongside the existing checks
+**Adding a new Exercise type** — see **Architecture Reference > Adding a new Exercise type** above for the binding 3-step recipe. (Today's `ExerciseBatch` union is renamed `Exercise` as part of the migration.)
 
 ### Authentication
 
@@ -347,9 +488,11 @@ Context-based router (`src/context/`). Only two pages: `"home"` and `"exercise"`
 
 ### Exercise Session Flow
 
-See **Data Pipeline** above for the full diagram. The orchestrator hook `src/exercise/use-exercise-session.ts` is intentionally thin: it loads lessons, calls `planSlots()` to produce a `SlotPlan`, and dispatches to the session reducer. All non-trivial logic lives in pure modules (`batch-planner.ts`, `progression.ts`, `word-selector.ts`).
+See **Architecture Reference > Mode specs** above for binding details on what each Mode produces. See **Data Pipeline** for the diagram of how the current code is wired.
 
-Key ratios: 15 planned slots (3 sections × 5), dynamically expands on mistakes. The re-queue mechanic appends slots with mistakes to the back of the queue so they are retried before the session ends. Per-word stats (`shown/correct/incorrect`) accumulate per slot and sync after each slot group via `useProgressSync`.
+A Session is one run of a Mode. The orchestrator hook `src/exercise/use-exercise-session.ts` is intentionally thin wiring: it loads lessons, calls the matching Mode planner to produce a queue of Slots (each holding a built Exercise), and dispatches to the SessionMachine reducer. All non-trivial logic lives in pure modules.
+
+The SessionMachine is Mode-agnostic. It walks the Slot queue, emits popup events at Block boundaries (defined per-Mode), and handles the correction Block drain (Lesson and Fix Errors). The re-queue mechanic appends failed SentenceBuilder Slots to the correction Block so they are retried before the Session ends; retry-fails re-enqueue at the back. Per-Element stats (`shown/correct/incorrect`) accumulate per Slot and sync after each Slot group via `useProgressSync` — and, for authenticated users, are also applied locally to `AuthContext` so Home refreshes without a reload (see **Post-Session refresh invariant** above).
 
 ### State Machines
 
@@ -359,12 +502,12 @@ The session and the per-slot games are modeled separately. Two are true state ma
 
 ```
 loading → ready → active ⇄ slot_complete       (auto-dismissed; advances slot)
-                  active ⇄ section_complete    (user-dismissed milestone; every 5 slots within plannedSlots)
-                  active → session_complete    (queue exhausted)
+                  active ⇄ section_complete    (user-dismissed milestone at Block boundaries from ModeConfig)
+                  active → session_complete    (queue exhausted; correction Block drained if applicable)
 loading → error                                (load failure)
 ```
 
-Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (see `session-reducer.ts:66`). Section boundaries are computed inline in the `SLOT_COMPLETE` handler from `plannedSlots / 3`; the matching UI projection lives in `session-progress.ts` (`computeProgressView`).
+Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (see `session-reducer.ts:66`). Today, section boundaries are computed inline in the `SLOT_COMPLETE` handler from `plannedSlots / 3`; the target architecture replaces this with cumulative tick-position boundaries supplied by `ModeConfig` (so Word Mix's three Block boundaries at 20/40/60 ticks and Lesson's variable-tick layout both fall out of the same mechanism). The matching UI projection lives in `session-progress.ts` (`computeProgressView`).
 
 **WordMatch SlotState** (`src/exercise/WordMatch/types.ts`, logic in `WordMatch/game-logic.ts`) — per-slot matching game.
 
