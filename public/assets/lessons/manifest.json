@@ -3,11 +3,16 @@
     {
       "id": "A1",
       "lessons": [
-        { "id": "01_greetings", "file": "01_greetings.letz" },
-        { "id": "02_numbers", "file": "02_numbers.letz" },
-        { "id": "03_family", "file": "03_family.letz" },
-        { "id": "04_food", "file": "04_food.letz" },
-        { "id": "05_basic_words", "file": "05_basic_words.letz" }
+        {
+          "id": "A1_01_greetings_and_introductions",
+          "file": "A1_01_greetings_and_introductions.letz",
+          "title": "Greetings & Introductions"
+        },
+        {
+          "id": "A1_02_introducing_yourself",
+          "file": "A1_02_introducing_yourself.letz",
+          "title": "Introducing Yourself"
+        }
       ]
     }
   ]
