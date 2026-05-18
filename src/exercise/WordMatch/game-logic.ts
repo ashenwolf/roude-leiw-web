@@ -113,7 +113,8 @@ const reshuffleProvisional = (state: GameState): GameState => {
 };
 
 const isValueMatch = (pairs: WordPair[], leftPairIndex: number, rightPairIndex: number): boolean =>
-  pairs[leftPairIndex][0] === pairs[rightPairIndex][0];
+  pairs[leftPairIndex][0] === pairs[rightPairIndex][0] ||
+  pairs[leftPairIndex][1] === pairs[rightPairIndex][1];
 
 // ============================================================================
 // Events — returned by pure functions, consumed by React binding

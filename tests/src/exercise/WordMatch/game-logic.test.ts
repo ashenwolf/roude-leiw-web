@@ -227,7 +227,7 @@ describe("applySelection — match", () => {
     }
   });
 
-  it("matching by LU value across different pair indices succeeds (duplicate translations)", () => {
+  it("matching by LU value across different pair indices succeeds (same Lu, different En)", () => {
     // Two pairs share the LU word "Moien" with different EN translations
     const DUP: WordPair[] = [["Moien", "hi"], ["Moien", "hello"]];
     const state = game(
@@ -239,6 +239,24 @@ describe("applySelection — match", () => {
     );
     const { state: next, events, failPair } = applySelection(state, DUP, "left", 0);
     // The LU words match → success, both fade
+    expect(next.leftSlots[0].type).toBe("fading");
+    expect(next.rightSlots[0].type).toBe("fading");
+    expect(events.some((e) => e.type === "matched")).toBe(true);
+    expect(failPair).toBeNull();
+  });
+
+  it("matching by EN value across different pair indices succeeds (same En, different Lu — synonym)", () => {
+    // Two pairs share the EN word "bye" with different LU words (Äddi / Awar)
+    const SYN: WordPair[] = [["Äddi", "bye"], ["Awar", "bye"]];
+    const state = game(
+      [slot.active(0)],          // showing "Äddi" (pairIndex 0)
+      [slot.selected(1)],        // showing "bye" from pairIndex 1 (Awar|bye)
+      [],
+      0,
+      { "Äddi|bye": { shown: 1, correct: 0, incorrect: 0 }, "Awar|bye": { shown: 1, correct: 0, incorrect: 0 } },
+    );
+    const { state: next, events, failPair } = applySelection(state, SYN, "left", 0);
+    // The EN words match → success, both fade
     expect(next.leftSlots[0].type).toBe("fading");
     expect(next.rightSlots[0].type).toBe("fading");
     expect(events.some((e) => e.type === "matched")).toBe(true);
