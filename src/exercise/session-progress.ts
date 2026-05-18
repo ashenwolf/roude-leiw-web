@@ -13,21 +13,30 @@ export type ProgressView = {
   overflow: ProgressSection | null; // null = no re-queued slots
 };
 
+/**
+ * Computes the progress bar state from the current slot position.
+ *
+ * @param completedSlots  - number of fully completed slots
+ * @param slotProgress    - fractional progress within the current slot (0–1)
+ * @param totalSlots      - total slots in the queue (including overflow)
+ * @param blockBoundaries - cumulative slot counts at each Block end (from ModeConfig)
+ */
 export const computeProgressView = (
   completedSlots: number,
   slotProgress: number,
   totalSlots: number,
-  plannedSlots: number,
-  sectionSize: number = 5,
+  blockBoundaries: ReadonlyArray<number>,
 ): ProgressView => {
-  const sectionCount = Math.ceil(plannedSlots / sectionSize);
+  const plannedSlots = blockBoundaries.length > 0
+    ? blockBoundaries[blockBoundaries.length - 1]
+    : 0;
 
-  const sections: ProgressSection[] = Array.from({ length: sectionCount }, (_, s) => {
-    const start = s * sectionSize;
-    const done = Math.max(0, Math.min(completedSlots - start, sectionSize));
-    const isCurrent = completedSlots >= start && completedSlots < start + sectionSize;
-    const inProgressContribution = isCurrent ? slotProgress : 0;
-    const fill = Math.min((done + inProgressContribution) / sectionSize, 1);
+  const sections: ProgressSection[] = blockBoundaries.map((boundary, i) => {
+    const start = i === 0 ? 0 : blockBoundaries[i - 1];
+    const size = boundary - start;
+    const done = Math.max(0, Math.min(completedSlots - start, size));
+    const isCurrent = completedSlots >= start && completedSlots < boundary;
+    const fill = Math.min((done + (isCurrent ? slotProgress : 0)) / size, 1);
     return { fill, isDone: fill >= 1 };
   });
 
@@ -36,8 +45,7 @@ export const computeProgressView = (
 
   const overflowDone = Math.max(0, completedSlots - plannedSlots);
   const isCurrentOverflow = completedSlots >= plannedSlots;
-  const overflowContrib = isCurrentOverflow ? slotProgress : 0;
-  const overflowFill = Math.min((overflowDone + overflowContrib) / overflowCount, 1);
+  const overflowFill = Math.min((overflowDone + (isCurrentOverflow ? slotProgress : 0)) / overflowCount, 1);
 
   return { sections, overflow: { fill: overflowFill, isDone: false } };
 };
