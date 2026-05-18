@@ -2,9 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { AuthContext } from "./auth.ts";
+import { computeStreak } from "../lib/streak.ts";
+import { mergeWordStats, mergeDailySession } from "../lib/stats-merge.ts";
 
 import type { ReactNode } from "react";
-import type { AuthState } from "./auth.ts";
+import type { AuthState, WordStats } from "./auth.ts";
 
 const fetchMe = async (): Promise<AuthState> => {
   const response = await fetch("/api/auth/me");
@@ -50,8 +52,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setAuth({ status: "unauthenticated" });
   }, [posthog]);
 
+  const applyStatsDelta = useCallback(
+    (wordResults: Record<string, WordStats>, durationSeconds: number, date: string) => {
+      setAuth((prev) => {
+        if (prev.status !== "authenticated") return prev;
+        const newWords = mergeWordStats(prev.words, wordResults);
+        const newDailySessions = mergeDailySession(prev.dailySessions, date, wordResults, durationSeconds);
+        const newStreak = computeStreak(newDailySessions, date);
+        return { ...prev, words: newWords, dailySessions: newDailySessions, streak: newStreak };
+      });
+    },
+    [],
+  );
+
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, applyStatsDelta }}>
       {children}
     </AuthContext.Provider>
   );

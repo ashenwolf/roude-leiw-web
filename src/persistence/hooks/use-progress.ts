@@ -16,7 +16,7 @@ export type ProgressState = {
 };
 
 export const useProgress = (): ProgressState => {
-  const { auth } = useAuth();
+  const { auth, applyStatsDelta } = useAuth();
   const guest = useGuestProgress();
   const { syncProgress } = useProgressSync();
   const migrationDone = useRef(false);
@@ -42,6 +42,10 @@ export const useProgress = (): ProgressState => {
   // React Compiler handles memoization — no manual useCallback needed
   const syncBatch = (wordResults: WordResultMap, durationSeconds: number) => {
     if (auth.status === "authenticated") {
+      const today = new Date().toISOString().slice(0, 10);
+      // Apply locally first so Home re-renders immediately without a page reload.
+      // The POST is fire-and-forget; the local merge is byte-identical to the server merge.
+      applyStatsDelta(wordResults, durationSeconds, today);
       syncProgress({ wordResults, durationSeconds });
     } else {
       guest.syncBatch(wordResults, durationSeconds);

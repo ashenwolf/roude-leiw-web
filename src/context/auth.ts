@@ -41,6 +41,17 @@ export type AuthContextType = {
   auth: AuthState;
   login: () => void;
   logout: () => void;
+  /**
+   * Optimistically apply a stats delta to the local auth state without waiting
+   * for the server round-trip. Must be called before (or alongside) the POST so
+   * Home re-renders immediately after a Session ends.
+   * See CLAUDE.md > Architecture Reference > Post-Session refresh invariant.
+   */
+  applyStatsDelta: (
+    wordResults: Record<string, WordStats>,
+    durationSeconds: number,
+    date: string,
+  ) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
