@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
-import { loadAllLessons } from "../exercise/lesson-loader";
+import { loadLessonMeta, loadLessonsUpToCursor } from "../exercise/lesson-loader";
 import { projectHomeLessonsView } from "../exercise/lesson-rows";
-import { computeOverallStats } from "../exercise/progression";
+import { computeOverallStats, computeLessonProgress } from "../exercise/progression";
+import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
 import { computeXP, computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
@@ -15,25 +16,48 @@ import { StreakBadge } from "../ui/StreakBadge";
 import { XPBar } from "../ui/XPBar";
 
 import type { Lesson } from "../exercise/letz-parser";
+import type { LessonMeta } from "../exercise/lesson-loader";
 
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
   const posthog = usePostHog();
   const { words, streak, dailySessions } = useProgress();
-  const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  // Load all lessons on mount
+  // Phase 1: manifest — renders lesson titles immediately (no .letz fetches).
+  const [lessonMetas, setLessonMetas] = useState<LessonMeta[]>([]);
+  const [metasLoading, setMetasLoading] = useState(true);
+
+  // Phase 2: full content for unlocked lessons only — populates progress + unlock.
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+
+  // Snapshot words at mount so the cascade predicate is stable (AppHome remounts
+  // on every navigation, so we always get the latest stats).
+  const wordsRef = useRef(words);
+
+  // Phase 1: load manifest
   useEffect(() => {
-    loadAllLessons()
-      .then((loaded) => {
-        setLessons(loaded);
-        setLoading(false);
+    loadLessonMeta()
+      .then((metas) => {
+        setLessonMetas(metas);
+        setMetasLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => setMetasLoading(false));
   }, []);
 
-  // Single producer: everything AppHome needs about lessons + progress
+  // Phase 2: cascade-load unlocked .letz files (runs once metas are ready).
+  // Stops after the first lesson whose progress is below the unlock threshold,
+  // so we only fetch lessons the user has actually unlocked.
+  useEffect(() => {
+    if (lessonMetas.length === 0) return;
+    const currentWords = wordsRef.current;
+    loadLessonsUpToCursor(
+      lessonMetas,
+      (lesson) => computeLessonProgress(lesson, currentWords).percentage >= UNLOCK_LESSON_THRESHOLD,
+    ).then(setLessons);
+  }, [lessonMetas]);
+
+  // Single producer: everything AppHome needs about lessons + progress.
+  // Uses loaded (unlocked) lessons only — locked lessons show as empty in progressMap.
   const view = useMemo(
     () => projectHomeLessonsView(lessons, words),
     [lessons, words],
@@ -60,17 +84,17 @@ export const AppHome = () => {
     navigateTo("exercise", { lessonId: currentLessonId });
   };
 
-  const handleStartMadness = () => {
-    posthog?.capture("madness_started");
-    navigateTo("madness");
+  const handleStartWordMix = () => {
+    posthog?.capture("word_mix_started");
+    navigateTo("word-mix");
   };
 
-  const handleStartMistakes = () => {
-    posthog?.capture("mistakes_started");
-    navigateTo("mistakes");
+  const handleStartFixErrors = () => {
+    posthog?.capture("fix_errors_started");
+    navigateTo("fix-errors");
   };
 
-  if (loading) {
+  if (metasLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
         <div className="animate-pulse text-gray-500 text-lg">Loading...</div>
@@ -103,11 +127,11 @@ export const AppHome = () => {
           todayMinutes={todayMinutes}
         />
 
-        {/* Lesson grid */}
+        {/* Lesson grid — titles from manifest (all lessons); progress from loaded subset */}
         <div>
           <h3 className="text-sm font-semibold text-gray-600 mb-2">Lessons</h3>
           <LessonGrid
-            lessons={lessons}
+            lessons={lessonMetas}
             progressMap={progressMap}
             unlockedIds={unlockedIds}
             currentLessonId={currentLessonId}
@@ -119,14 +143,14 @@ export const AppHome = () => {
       {/* Practice mode buttons — sticky at bottom */}
       <div className="mt-auto sticky bottom-0 bg-white pt-2 pb-0 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
         <div className="flex gap-2">
-          <Button color="madness" size="sm" onClick={handleStartMadness}>
+          <Button color="word-mix" size="sm" onClick={handleStartWordMix}>
             <span className="flex items-center justify-center gap-1.5">
               <ShuffleIcon className="w-4 h-4" /> Word Mix
             </span>
           </Button>
-          <Button color="mistakes" size="sm" onClick={handleStartMistakes}>
+          <Button color="fix-errors" size="sm" onClick={handleStartFixErrors}>
             <span className="flex items-center justify-center gap-1.5">
-              <RefreshIcon className="w-4 h-4" /> Fix Mistakes
+              <RefreshIcon className="w-4 h-4" /> Fix Errors
             </span>
           </Button>
         </div>

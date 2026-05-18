@@ -1,18 +1,18 @@
-import type { Lesson } from "../exercise/letz-parser";
+import type { LessonMeta } from "../exercise/lesson-loader";
 import type { LessonProgress } from "../exercise/progression";
 import { CheckCircleIcon, LockIcon } from "./icons";
 
 type LessonCardProps = {
-  lesson: Lesson;
-  progress: LessonProgress;
+  lesson: LessonMeta;
+  progress: LessonProgress | undefined;
   isUnlocked: boolean;
   isCurrent: boolean;
   onSelect: () => void;
 };
 
 const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: LessonCardProps) => {
-  const pct = Math.round(progress.percentage * 100);
-  const isComplete = progress.isComplete;
+  const pct = progress ? Math.round(progress.percentage * 100) : 0;
+  const isComplete = progress?.isComplete ?? false;
 
   return (
     <button
@@ -48,7 +48,7 @@ const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: Lesso
           isUnlocked ? "text-gray-700" : "text-gray-400",
         ].join(" ")}
       >
-        {lesson.meta.title}
+        {lesson.title}
       </span>
 
       {/* Progress indicator */}
@@ -70,7 +70,9 @@ const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: Lesso
 };
 
 type LessonGridProps = {
-  lessons: Lesson[];
+  /** All lessons from the manifest — used for titles and card layout. */
+  lessons: LessonMeta[];
+  /** Progress for loaded (unlocked) lessons only; absent for locked lessons. */
   progressMap: Record<string, LessonProgress>;
   unlockedIds: ReadonlyArray<string>;
   currentLessonId: string;
@@ -87,12 +89,12 @@ export const LessonGrid = ({
   <div className="grid grid-cols-3 gap-3">
     {lessons.map((lesson) => (
       <LessonCard
-        key={lesson.meta.id}
+        key={lesson.id}
         lesson={lesson}
-        progress={progressMap[lesson.meta.id] ?? { total: 0, mastered: 0, percentage: 0, isComplete: false }}
-        isUnlocked={unlockedIds.includes(lesson.meta.id)}
-        isCurrent={lesson.meta.id === currentLessonId}
-        onSelect={() => onSelectLesson(lesson.meta.id)}
+        progress={progressMap[lesson.id]}
+        isUnlocked={unlockedIds.includes(lesson.id)}
+        isCurrent={lesson.id === currentLessonId}
+        onSelect={() => onSelectLesson(lesson.id)}
       />
     ))}
   </div>

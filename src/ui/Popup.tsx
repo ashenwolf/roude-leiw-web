@@ -113,10 +113,13 @@ export const MilestonePopup = ({
   visible,
   onDismiss,
   outcome = "success",
+  correctAnswer,
 }: {
   visible: boolean;
   onDismiss: () => void;
   outcome?: "success" | "mistake";
+  /** Correct answer to display on a mistake — e.g. the accepted sentence translation. */
+  correctAnswer?: string;
 }) => (
   <Popup variant="complete" visible={visible} onDismiss={onDismiss} actionLabel="Continue">
     {outcome === "success" ? (
@@ -128,6 +131,12 @@ export const MilestonePopup = ({
       <div className="text-center">
         <ThumbsDownIcon className="w-8 h-8 mx-auto mb-1 text-rose-400" />
         <p className="text-rose-500 font-semibold">Not quite — keep going!</p>
+        {correctAnswer && (
+          <div className="mt-3 px-3 py-2 bg-rose-50 rounded-lg border border-rose-200">
+            <p className="text-xs text-rose-400 mb-1">Correct answer</p>
+            <p className="text-sm text-rose-700 font-medium">{correctAnswer}</p>
+          </div>
+        )}
       </div>
     )}
   </Popup>

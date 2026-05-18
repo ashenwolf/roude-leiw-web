@@ -33,13 +33,13 @@ export const SentenceBuilder = ({ item, onResult }: Props) => {
   const usedSet = new Set(state.assembled);
 
   return (
-    <div className="flex flex-col gap-5 p-2">
+    <div className="flex flex-col gap-6 p-2">
       <p className="text-center text-lg font-semibold text-gray-800 px-2">
         {item.promptText}
       </p>
 
-      {/* Assembled row — fixed height, chips stay visible after check for feedback */}
-      <div className="min-h-28 flex flex-wrap content-start gap-1.5 justify-center border-b-2 border-gray-200 pb-4">
+      {/* Assembled row — chips stay visible after check for feedback */}
+      <div className="min-h-36 flex flex-wrap content-start gap-2.5 justify-center border-b-2 border-gray-200 pb-8">
         {state.assembled.length === 0 ? (
           <span className="text-gray-400 text-sm w-full text-center mt-3 italic">
             Tap words below to build your answer
@@ -58,19 +58,27 @@ export const SentenceBuilder = ({ item, onResult }: Props) => {
         )}
       </div>
 
-      {/* Token pool — fixed positions, used tokens become invisible placeholders */}
-      <div className="flex flex-wrap gap-1.5 justify-center">
-        {item.tokens.map((token, idx) => (
-          <Pill
-            key={idx}
-            size="sm"
-            status="blanc"
-            className={usedSet.has(idx) ? "invisible pointer-events-none" : ""}
-            onClick={() => tapToken(idx)}
-          >
-            {token}
-          </Pill>
-        ))}
+      {/* Token pool — used tokens show as gray placeholders to keep layout stable */}
+      <div className="min-h-36 flex flex-wrap gap-2.5 justify-center content-start">
+        {item.tokens.map((token, idx) =>
+          usedSet.has(idx) ? (
+            <div
+              key={idx}
+              className="h-10 px-4 rounded-lg border-2 border-gray-200 bg-gray-100 flex items-center"
+            >
+              <span className="text-sm text-transparent select-none" aria-hidden="true">{token}</span>
+            </div>
+          ) : (
+            <Pill
+              key={idx}
+              size="sm"
+              status="blanc"
+              onClick={() => tapToken(idx)}
+            >
+              {token}
+            </Pill>
+          )
+        )}
       </div>
 
       <div className="w-full max-w-xs mx-auto">

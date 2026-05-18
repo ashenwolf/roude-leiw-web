@@ -12,9 +12,9 @@ import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "../ui/Popup";
 import { DebugPanel } from "../ui/DebugPanel";
 
-import type { SessionMode } from "../exercise/batch-planner";
+import type { SessionMode } from "../exercise/mode-config";
 import type { ProgressView } from "../exercise/session-progress";
-import type { ExerciseBatch } from "../exercise/types";
+import type { Exercise } from "../exercise/types";
 import type { WordResultMap } from "../exercise/WordMatch/types";
 import type { SessionStatus } from "../exercise/session-reducer";
 
@@ -39,12 +39,12 @@ type ExerciseReadyProps = { totalSlots: number; onStart: () => void; onBack: () 
 const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
     <h2 className="text-2xl font-bold text-gray-800">
-      {mode.kind === "madness" ? "Word Mix" : mode.kind === "mistakes" ? "Fix Your Mistakes" : "Word Match Exercise"}
+      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
     </h2>
     <p className="text-gray-600 text-center">
-      {mode.kind === "madness"
+      {mode.kind === "word-mix"
         ? "Test yourself across all words you've seen."
-        : mode.kind === "mistakes"
+        : mode.kind === "fix-errors"
         ? "Drill the words and phrases you got wrong."
         : `Complete ${totalSlots} exercises to finish the session.`}
     </p>
@@ -62,7 +62,7 @@ type ExerciseActiveProps = {
   currentSlotIndex: number;
   lastSlotOutcome: "success" | "mistake" | null;
   progressView: ProgressView;
-  currentBatch: ExerciseBatch | undefined;
+  currentBatch: Exercise | undefined;
   onSlotComplete: (wordResults: WordResultMap) => void;
   onSlotProgress: (done: number, total: number) => void;
   onDismissMilestone: () => void;
@@ -114,6 +114,11 @@ const ExerciseActive = ({
       visible={state === "slot_complete"}
       onDismiss={onDismissMilestone}
       outcome={lastSlotOutcome ?? "success"}
+      correctAnswer={
+        lastSlotOutcome === "mistake" && currentBatch?.type === "sentence-builder"
+          ? currentBatch.item.acceptedAnswers[0]
+          : undefined
+      }
     />
 
     <SectionMilestonePopup
@@ -139,8 +144,8 @@ export const AppExercise = () => {
   const posthog = usePostHog();
 
   const mode: SessionMode =
-    currentPage === "madness" ? { kind: "madness" }
-    : currentPage === "mistakes" ? { kind: "mistakes" }
+    currentPage === "word-mix" ? { kind: "word-mix" }
+    : currentPage === "fix-errors" ? { kind: "fix-errors" }
     : { kind: "lesson", lessonId: params.lessonId };
 
   // session is defined first so handlers below can reference it without TDZ risk
