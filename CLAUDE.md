@@ -91,8 +91,20 @@ src/
 │   ├── use-exercise-session.ts       # Hook: thin wiring (load + dispatch only)
 │   ├── lesson-loader.ts              # Producer: manifest → LessonMeta[] (cheap); .letz files → Lesson (lazy, per Session)
 │   ├── letz-parser.ts                # Facade: entriesToWordPairs()
-│   ├── batch-planner.ts              # Producer: (lessons, userWords, target) → BatchPlan. Migration target: replaced by src/exercise/modes/*.ts each returning ModeConfig.
+│   ├── constants.ts                  # All mode/slot/threshold constants — no magic numbers below this
+│   ├── mode-config.ts                # Layer 3 contract: SessionMode, ModeConfig, CompletionEffect types
+│   ├── session-reducer.ts            # SessionMachine reducer (Mode-agnostic)
+│   ├── session-progress.ts           # Pure producer: computeProgressView(blockBoundaries)
+│   ├── error-pool.ts                 # Layer 0: selectErrorPool(stats, lessons) → { words, phrases }
+│   ├── selection.ts                  # Layer 1: bucketedPick, pickPair, pickSentence primitives
+│   ├── exercise-builders.ts          # Layer 1: buildWordMatchExercise, buildSentenceExercise, tokenizeSentence
+│   ├── types.ts                      # Exercise discriminated union (word-match | sentence-builder)
+│   ├── progression.ts                # Pure derivations: classifyWord, computeLessonProgress, computeUnlockedLessonIds
 │   ├── lesson-rows.ts                # Producer: (lessons, userWords) → HomeLessonsView
+│   ├── modes/                        # Layer 4 — Mode planners (each returns ModeConfig)
+│   │   ├── lesson.ts                 # planLessonMode(lessons, upperBoundId) → ModeConfig
+│   │   ├── word-mix.ts               # planWordMixMode(lessons, stats) → ModeConfig
+│   │   └── fix-errors.ts             # planFixErrorsMode(lessons, stats) → ModeConfig
 │   ├── SentenceBuilder/              # Sentence assembly game
 │   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
 │   │   ├── use-sentence-game.ts      # Game state machine + result tracking
@@ -109,6 +121,8 @@ src/
 │
 ├── lib/                              # Shared libraries
 │   ├── shuffle.ts                    # Single Fisher–Yates shuffle for the whole app
+│   ├── streak.ts                     # Shared computeStreak — imported by both worker and client
+│   ├── stats-merge.ts                # Client-side mergeWordStats/mergeDailySession (mirrors worker merge)
 │   └── letz-parser/                  # Chevrotain parser implementation
 │       ├── index.ts                  # Main exports
 │       ├── lexer.ts                  # Tokenizer
@@ -275,7 +289,7 @@ This codebase is organized as a **producer/consumer pipeline**. Each stage is a 
 >
 > A sequence diagram squeezed into a flowchart loses the temporal ordering; a state machine drawn as a flowchart hides the cyclic transitions. Choose for clarity, not consistency.
 
-> ⚠️ **Migration note.** The diagram below reflects current code. The target architecture splits the single `batch-planner.ts` node into three `modes/*.ts` planners feeding a single `SessionMachine` (Mode-agnostic) consuming a `ModeConfig` contract; `lesson-loader` will return cheap `LessonMeta[]` to Home and full `Lesson` only to AppExercise. See **Architecture Reference > Encapsulation layering** above for the binding model. This diagram updates as each migration step lands.
+> ⚠️ **Diagram update needed.** The diagram below still references `batch-planner.ts` (deleted) and `planSlots` (replaced). The current architecture has `modes/*.ts` planners feeding a single `SessionMachine` via `ModeConfig`; `lesson-loader` returns `LessonMeta[]` to Home and `Lesson` (full) to Exercise. The binding model is in **Architecture Reference > Encapsulation layering** above. This diagram will be redrawn in a dedicated housekeeping pass.
 
 ```mermaid
 flowchart TD
@@ -484,7 +498,7 @@ Before adding a new field to `UserData` or a new KV key:
 
 ### Navigation
 
-Context-based router (`src/context/`). Only two pages: `"home"` and `"exercise"`. Navigate by calling `navigateTo()` from `useNavigation()`.
+Context-based router (`src/context/`). Pages: `"home"` | `"exercise"` | `"word-mix"` | `"fix-errors"`. Navigate by calling `navigateTo()` from `useNavigation()`. Word Mix and Fix Errors both render via `<AppExercise />` with a different `SessionMode`.
 
 ### Exercise Session Flow
 
@@ -648,19 +662,27 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (179 tests):**
+**What's covered (296 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
 | `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
-| `src/exercise/SentenceBuilder/sentence-logic.ts` | 18 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
+| `src/exercise/SentenceBuilder/sentence-logic.ts` | 24 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
 | `src/exercise/word-selector.ts`             | 15    | bucket classification, exclude keys, overflow priority, output shape |
-| `src/exercise/batch-planner.ts`             | 27    | empty input, unlock filter, currentLessonId precedence, batch shape, last-batch ratio shift, slot re-queue, madness/mistakes planners |
-| `src/exercise/progression.ts`               | 29    | classifyWord, computeLessonProgress, computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
-| `src/exercise/session-reducer.ts`           | 19    | every action × every state |
+| `src/exercise/progression.ts`               | 35    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
+| `src/exercise/session-reducer.ts`           | 27    | every action × every state, blockBoundaries-based section detection |
+| `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
+| `src/exercise/error-pool.ts`                | 14    | primary pool, fallback pool, independent words/phrases, deduplication |
+| `src/exercise/selection.ts`                 | 17    | bucketedPick boundaries, pickFromPool re-roll, pickPair, pickSentence |
+| `src/exercise/exercise-builders.ts`         | 20    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions |
+| `src/exercise/modes/lesson.ts`              | 11    | shape, upper-bound clamp, edge cases |
+| `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
+| `src/exercise/modes/fix-errors.ts`          | 9     | empty pool, word-only/phrase errors, fallback |
 | `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
-| `worker/lib/user.ts`                        | 19    | mergeWordResults, mergeDailySession, computeStreak |
-| `worker/lib/session.ts`                     | 12    | session CRUD, cookie helpers |
+| `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
+| `worker/lib/user.ts`                        | 22    | mergeWordResults, mergeDailySession, caps |
+| `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
+| `worker/lib/validators.ts`                  | 12    | payload validation bounds |
 | `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
 
 **No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.
@@ -675,10 +697,11 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 
 **Test fixture conventions:**
 
-- `s(shown, correct, incorrect)` for `WordStats` (see `progression.test.ts`)
-- `lesson(id, ...pairs)` for `Lesson` (see `progression.test.ts`, `batch-planner.test.ts`)
+- `s(shown, correct, incorrect)` for `WordStats` (see `progression.test.ts`, `error-pool.test.ts`)
+- `lesson(id, words, sentences?)` for `Lesson` (see `progression.test.ts`, `modes/lesson.test.ts`)
 - `slot.{active|selected|fail|fading|empty}(...)` for `SlotState` (see `game-logic.test.ts`)
 - `cand(lu, en, lessonId)` for `CandidateItem` (see `word-selector.test.ts`)
+- `fakeRng(...values)` for deterministic RNG in mode planner tests (see `selection.test.ts`)
 
 Reuse these helpers; don't re-invent fixture shapes.
 
