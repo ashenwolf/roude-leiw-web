@@ -1,21 +1,26 @@
 import { useEffect, useReducer, useRef } from "react";
 
-import { determineSlotOutcome, planSlots, planMadnessSlots, planMistakesSlots } from "./batch-planner";
+import { LESSON_TOTAL_SLOTS, LESSON_WORD_MATCH_PAIR_COUNT } from "./constants";
 import { loadAllLessons } from "./lesson-loader";
+import { planLessonMode } from "./modes/lesson";
+import { planWordMixMode } from "./modes/word-mix";
+import { planFixErrorsMode } from "./modes/fix-errors";
+import { findCurrentLessonId } from "./progression";
 import { computeProgressView } from "./session-progress";
 import { sessionReducer, INITIAL_SESSION_STATE } from "./session-reducer";
 
 import type { WordStats } from "../context/auth";
+import type { SessionMode } from "./mode-config";
 import type { WordResultMap } from "./WordMatch/types";
-import type { SessionMode } from "./batch-planner";
+import type { Exercise } from "./types";
 
 // ============================================================================
-// Config
+// Config (preserved for backward compatibility — now references constants)
 // ============================================================================
 
 export const SESSION_CONFIG = {
-  PLANNED_SLOTS: 15,
-  WORD_MATCH_SIZE: 5,
+  PLANNED_SLOTS: LESSON_TOTAL_SLOTS,
+  WORD_MATCH_SIZE: LESSON_WORD_MATCH_PAIR_COUNT,
 } as const;
 
 // ============================================================================
@@ -25,6 +30,16 @@ export const SESSION_CONFIG = {
 type UseExerciseSessionProps = {
   userWords: Record<string, WordStats>;
   mode?: SessionMode;
+};
+
+/** Word-match always succeeds; sentence-builder outcome depends on correctness. */
+const determineSlotOutcome = (
+  batch: Exercise,
+  results: WordResultMap,
+): "success" | "mistake" => {
+  if (batch.type === "word-match") return "success";
+  const r = results[batch.item.phraseKey];
+  return r && r.correct > 0 ? "success" : "mistake";
 };
 
 export const useExerciseSession = ({
@@ -37,16 +52,28 @@ export const useExerciseSession = ({
   useEffect(() => { userWordsRef.current = userWords; });
 
   useEffect(() => {
-
     loadAllLessons()
       .then((lessons) => {
-        const plan = mode.kind === "madness"
-          ? planMadnessSlots(lessons, userWordsRef.current)
-          : mode.kind === "mistakes"
-          ? planMistakesSlots(lessons, userWordsRef.current)
-          : planSlots(lessons, userWordsRef.current, (mode as { lessonId?: string }).lessonId);
+        const words = userWordsRef.current;
 
-        dispatch({ type: "LOADED", lessons, queue: plan.queue, plannedSlots: plan.plannedSlots, currentLessonId: plan.currentLessonId });
+        const config =
+          mode.kind === "word-mix"
+            ? planWordMixMode(lessons, words)
+            : mode.kind === "fix-errors"
+            ? planFixErrorsMode(lessons, words)
+            : planLessonMode(
+                lessons,
+                mode.lessonId ?? findCurrentLessonId(lessons, words),
+              );
+
+        dispatch({
+          type: "LOADED",
+          lessons: config.lessons,
+          queue: config.queue,
+          plannedSlots: config.plannedSlots,
+          blockBoundaries: config.blockBoundaries,
+          currentLessonId: config.currentLessonId,
+        });
       })
       .catch((err) => {
         dispatch({ type: "LOAD_ERROR", error: err instanceof Error ? err.message : "Failed to load lessons" });
@@ -77,18 +104,29 @@ export const useExerciseSession = ({
 
   const resetSession = () => {
     loadAllLessons().then((lessons) => {
-      const plan = mode.kind === "madness"
-        ? planMadnessSlots(lessons, userWords)
-        : mode.kind === "mistakes"
-        ? planMistakesSlots(lessons, userWords)
-        : planSlots(lessons, userWords, (mode as { lessonId?: string }).lessonId);
-      dispatch({ type: "RESET", queue: plan.queue, plannedSlots: plan.plannedSlots, currentLessonId: plan.currentLessonId });
+      const words = userWords;
+      const config =
+        mode.kind === "word-mix"
+          ? planWordMixMode(lessons, words)
+          : mode.kind === "fix-errors"
+          ? planFixErrorsMode(lessons, words)
+          : planLessonMode(
+              lessons,
+              mode.lessonId ?? findCurrentLessonId(lessons, words),
+            );
+      dispatch({
+        type: "RESET",
+        queue: config.queue,
+        plannedSlots: config.plannedSlots,
+        blockBoundaries: config.blockBoundaries,
+        currentLessonId: config.currentLessonId,
+      });
     });
   };
 
   const isSlotDone = state.status === "slot_complete" || state.status === "section_complete";
   const completedSlots = isSlotDone ? state.currentSlot + 1 : state.currentSlot;
-  const progressView = computeProgressView(completedSlots, state.slotProgress, state.queue.length, state.plannedSlots);
+  const progressView = computeProgressView(completedSlots, state.slotProgress, state.queue.length, state.blockBoundaries);
 
   return {
     state: state.status,
