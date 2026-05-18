@@ -2,8 +2,19 @@ import { parseLetzContent } from "./letz-parser";
 
 import type { Lesson, WordEntry } from "./letz-parser";
 
+/** Light catalog row — loaded from the manifest alone (no .letz fetch required). */
+export type LessonMeta = {
+  id: string;    // e.g., "01_greetings"
+  level: string; // e.g., "A1"
+  title: string; // e.g., "Basic Greetings"
+  file: string;  // e.g., "01_greetings.letz"
+};
+
 /**
- * Manifest structure that lists all available lessons
+ * Manifest structure that lists all available lessons.
+ * `title` is the user-facing lesson title from the `.letz` `@lesson` directive,
+ * duplicated into the manifest so Home can render lesson cards without fetching
+ * any `.letz` content (see CLAUDE.md > Architecture Reference > Migration note).
  */
 export type LessonManifest = {
   levels: {
@@ -11,6 +22,7 @@ export type LessonManifest = {
     lessons: {
       id: string; // e.g., "01_greetings"
       file: string; // e.g., "01_greetings.letz"
+      title: string; // e.g., "Basic Greetings"
     }[];
   }[];
 };
@@ -26,6 +38,47 @@ export const fetchManifest = async (): Promise<LessonManifest> => {
     throw new Error(`Failed to fetch manifest: ${response.statusText}`);
   }
   return response.json();
+};
+
+/**
+ * Load only the manifest — O(1) fetch, no .letz content.
+ * Returns a flat list of LessonMeta sorted in manifest order (lexicographic by level+id).
+ * Use this to render lesson card titles and the lesson grid without waiting for content.
+ */
+export const loadLessonMeta = (): Promise<LessonMeta[]> =>
+  fetchManifest().then((manifest) =>
+    manifest.levels.flatMap((level) =>
+      level.lessons.map((lesson) => ({
+        id: lesson.id,
+        level: level.id,
+        title: lesson.title,
+        file: lesson.file,
+      })),
+    ),
+  );
+
+/**
+ * Sequentially loads .letz files starting from the first lesson, stopping when
+ * `shouldContinue(justLoaded)` returns false (i.e., the next lesson would be locked).
+ * Caller provides the unlock predicate so this function stays free of progression logic.
+ *
+ * Example:
+ *   loadLessonsUpToCursor(metas, lesson =>
+ *     computeLessonProgress(lesson, userWords).percentage >= MASTERY.unlockThreshold
+ *   )
+ */
+export const loadLessonsUpToCursor = async (
+  metas: LessonMeta[],
+  shouldContinue: (justLoaded: Lesson) => boolean,
+): Promise<Lesson[]> => {
+  const loaded: Lesson[] = [];
+  for (const meta of metas) {
+    const lesson = await fetchLesson(meta.level, meta.file);
+    loaded.push(lesson);
+    const hasMore = loaded.length < metas.length;
+    if (!hasMore || !shouldContinue(lesson)) break;
+  }
+  return loaded;
 };
 
 /**
