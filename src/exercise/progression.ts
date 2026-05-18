@@ -1,13 +1,20 @@
+import {
+  MIN_ANSWERS,
+  UNLOCK_ELEMENT_THRESHOLD,
+  UNLOCK_LESSON_THRESHOLD,
+} from "./constants";
+
 import type { Lesson } from "./letz-parser";
 import type { WordStats } from "../context/auth";
 
-// --- Mastery Thresholds ---
+// --- Mastery Thresholds (UI classification — separate from unlock rule) ---
 
 export const MASTERY = {
   correctToMaster: 3,
   strugglingMaxAccuracy: 0.6,
   strugglingMinShown: 3,
-  unlockThreshold: 0.8,
+  /** @deprecated Use UNLOCK_LESSON_THRESHOLD from constants.ts for the unlock check. */
+  unlockThreshold: UNLOCK_LESSON_THRESHOLD,
 } as const;
 
 // --- Word Classification ---
@@ -36,30 +43,39 @@ export const isWordKey = (key: string): boolean => !isPhraseKey(key);
 
 export type LessonProgress = {
   total: number;
+  /** Elements that pass the unlock check (shown >= MIN_ANSWERS AND correct/shown >= 0.8). */
   mastered: number;
   percentage: number;
+  /** True when percentage >= UNLOCK_LESSON_THRESHOLD (80% of elements pass). */
   isComplete: boolean;
 };
+
+/** An element passes the unlock check iff it has been shown enough times with
+ *  sufficient accuracy. This is the single source of truth for lesson progression. */
+const isElementPassing = (stats: WordStats | undefined): boolean =>
+  stats !== undefined &&
+  stats.shown >= MIN_ANSWERS &&
+  stats.correct / stats.shown >= UNLOCK_ELEMENT_THRESHOLD;
 
 export const computeLessonProgress = (
   lesson: Lesson,
   userWords: Record<string, WordStats>,
 ): LessonProgress => {
   const wordTotal = lesson.entries.length;
-  const wordMastered = lesson.entries.filter(
-    (e) => classifyWord(userWords[wordKey(e.lu, e.en)]) === "mastered",
+  const wordPassing = lesson.entries.filter(
+    (e) => isElementPassing(userWords[wordKey(e.lu, e.en)]),
   ).length;
 
   // Only EN→LU direction gates lesson progression for sentences
   const sentenceTotal = lesson.sentences.length;
-  const sentenceMastered = lesson.sentences.filter(
-    (s) => s.enVariants.length > 0 && classifyWord(userWords[phraseKey("en-lu", s.enVariants[0])]) === "mastered",
+  const sentencePassing = lesson.sentences.filter(
+    (s) => s.enVariants.length > 0 && isElementPassing(userWords[phraseKey("en-lu", s.enVariants[0])]),
   ).length;
 
   const total = wordTotal + sentenceTotal;
-  const mastered = wordMastered + sentenceMastered;
+  const mastered = wordPassing + sentencePassing;
   const percentage = total > 0 ? mastered / total : 0;
-  return { total, mastered, percentage, isComplete: mastered === total && total > 0 };
+  return { total, mastered, percentage, isComplete: total > 0 && percentage >= UNLOCK_LESSON_THRESHOLD };
 };
 
 // --- Lesson Unlock ---
@@ -72,7 +88,7 @@ export const computeUnlockedLessonIds = (
     (unlocked, lesson, idx) => {
       if (idx === 0) return [lesson.meta.id];
       const prevProgress = computeLessonProgress(lessons[idx - 1], userWords);
-      return prevProgress.percentage >= MASTERY.unlockThreshold ? [...unlocked, lesson.meta.id] : unlocked;
+      return prevProgress.percentage >= UNLOCK_LESSON_THRESHOLD ? [...unlocked, lesson.meta.id] : unlocked;
     },
     [],
   );

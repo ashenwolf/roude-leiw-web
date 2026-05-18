@@ -10,6 +10,7 @@ import {
   isWordKey,
   MASTERY,
 } from "../../../src/exercise/progression.ts";
+import { MIN_ANSWERS, UNLOCK_ELEMENT_THRESHOLD, UNLOCK_LESSON_THRESHOLD } from "../../../src/exercise/constants.ts";
 import type { WordStats } from "../../../src/context/auth.ts";
 import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 
@@ -87,8 +88,16 @@ describe("phraseKey helpers", () => {
 });
 
 // ============================================================================
-// computeLessonProgress
+// computeLessonProgress  (new formula: shown >= MIN_ANSWERS AND rate >= 0.8)
 // ============================================================================
+
+// An element "passes" iff shown >= MIN_ANSWERS AND correct/shown >= UNLOCK_ELEMENT_THRESHOLD.
+// Helper: a passing stats entry.
+const passing = (extraShown = 0): WordStats =>
+  s(MIN_ANSWERS + extraShown, MIN_ANSWERS + extraShown, 0); // 100% accuracy, meets threshold
+
+// An entry with enough showings but just below threshold rate (4/5 = 0.8 — exactly at threshold)
+const borderline = (): WordStats => s(MIN_ANSWERS, Math.floor(MIN_ANSWERS * UNLOCK_ELEMENT_THRESHOLD), 1);
 
 describe("computeLessonProgress", () => {
   const greetings = lesson("A1.01", ["Moien", "hi"], ["Äddi", "bye"], ["Merci", "thanks"]);
@@ -98,20 +107,37 @@ describe("computeLessonProgress", () => {
     expect(progress).toEqual({ total: 3, mastered: 0, percentage: 0, isComplete: false });
   });
 
-  it("some words mastered → partial progress", () => {
-    // correct=3 → mastered under new rule
-    const words = { "Moien|hi": s(3, 3, 0), "Äddi|bye": s(3, 3, 0) };
+  it("element with shown < MIN_ANSWERS does not pass, even with 100% accuracy", () => {
+    const words = { "Moien|hi": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0) };
+    expect(computeLessonProgress(greetings, words).mastered).toBe(0);
+  });
+
+  it("element with shown >= MIN_ANSWERS AND rate >= threshold passes", () => {
+    const words = { "Moien|hi": passing() };
+    expect(computeLessonProgress(greetings, words).mastered).toBe(1);
+  });
+
+  it("element at exactly UNLOCK_ELEMENT_THRESHOLD rate passes", () => {
+    // 4/5 = 0.8 = UNLOCK_ELEMENT_THRESHOLD ✓
+    const words = { "Moien|hi": s(MIN_ANSWERS, Math.round(MIN_ANSWERS * UNLOCK_ELEMENT_THRESHOLD), 1) };
+    const progress = computeLessonProgress(greetings, words);
+    expect(progress.mastered).toBe(1);
+  });
+
+  it("some elements passing → partial progress, isComplete false for 3-element lesson", () => {
+    const words = { "Moien|hi": passing(), "Äddi|bye": passing() };
     const progress = computeLessonProgress(greetings, words);
     expect(progress.mastered).toBe(2);
     expect(progress.percentage).toBeCloseTo(2 / 3);
+    // 2/3 = 0.667 < UNLOCK_LESSON_THRESHOLD (0.8) → not complete
     expect(progress.isComplete).toBe(false);
   });
 
-  it("all words mastered → 100% complete", () => {
+  it("all elements passing → 100% complete (percentage >= UNLOCK_LESSON_THRESHOLD)", () => {
     const words = {
-      "Moien|hi": s(3, 3, 0),
-      "Äddi|bye": s(3, 3, 0),
-      "Merci|thanks": s(3, 3, 0),
+      "Moien|hi": passing(),
+      "Äddi|bye": passing(),
+      "Merci|thanks": passing(),
     };
     const progress = computeLessonProgress(greetings, words);
     expect(progress).toEqual({ total: 3, mastered: 3, percentage: 1, isComplete: true });
@@ -124,27 +150,38 @@ describe("computeLessonProgress", () => {
     expect(progress.percentage).toBe(0);
   });
 
-  it("lesson with sentences — unmastered phrase counts toward total", () => {
+  it("5-element lesson: 4/5 passing (80%) → isComplete true", () => {
+    const big = lesson("A1.02", ["a", "a"], ["b", "b"], ["c", "c"], ["d", "d"], ["e", "e"]);
+    const words = {
+      "a|a": passing(), "b|b": passing(), "c|c": passing(), "d|d": passing(),
+      // "e|e" unseen
+    };
+    const progress = computeLessonProgress(big, words);
+    expect(progress.mastered).toBe(4);
+    expect(progress.percentage).toBeCloseTo(4 / 5);
+    expect(progress.isComplete).toBe(true); // 0.8 >= 0.8 ✓
+  });
+
+  it("lesson with sentences — unpassed phrase counts toward total", () => {
     const lessonWithSentence: Lesson = {
       ...lesson("A1.01", ["Moien", "hi"], ["Äddi", "bye"]),
       sentences: [sentence("Good morning!", "Gudde Moien!")],
     };
-    // Both words mastered, phrase not yet seen
-    const words = { "Moien|hi": s(3, 3, 0), "Äddi|bye": s(3, 3, 0) };
+    const words = { "Moien|hi": passing(), "Äddi|bye": passing() };
     const progress = computeLessonProgress(lessonWithSentence, words);
     expect(progress.total).toBe(3);
     expect(progress.mastered).toBe(2);
     expect(progress.isComplete).toBe(false);
   });
 
-  it("lesson with sentences — mastered phrase:en-lu counts toward completion", () => {
+  it("lesson with sentences — passing phrase:en-lu counts toward completion", () => {
     const lessonWithSentence: Lesson = {
       ...lesson("A1.01", ["Moien", "hi"]),
       sentences: [sentence("Good morning!", "Gudde Moien!")],
     };
     const words = {
-      "Moien|hi": s(3, 3, 0),
-      [phraseKey("en-lu", "Good morning!")]: s(3, 3, 0),
+      "Moien|hi": passing(),
+      [phraseKey("en-lu", "Good morning!")]: passing(),
     };
     const progress = computeLessonProgress(lessonWithSentence, words);
     expect(progress.total).toBe(2);
@@ -152,15 +189,14 @@ describe("computeLessonProgress", () => {
     expect(progress.isComplete).toBe(true);
   });
 
-  it("lesson with sentences — mastered phrase:lu-en does NOT count for progression", () => {
+  it("lesson with sentences — passing phrase:lu-en does NOT count for progression", () => {
     const lessonWithSentence: Lesson = {
       ...lesson("A1.01", ["Moien", "hi"]),
       sentences: [sentence("Good morning!", "Gudde Moien!")],
     };
-    // Only lu-en mastered, not en-lu
     const words = {
-      "Moien|hi": s(3, 3, 0),
-      [phraseKey("lu-en", "Good morning!")]: s(3, 3, 0),
+      "Moien|hi": passing(),
+      [phraseKey("lu-en", "Good morning!")]: passing(), // wrong direction — excluded
     };
     const progress = computeLessonProgress(lessonWithSentence, words);
     expect(progress.mastered).toBe(1); // only the word
@@ -179,9 +215,10 @@ describe("computeUnlockedLessonIds", () => {
     lesson("A1.03", ["grouss", "big"], ["kleng", "small"]),
   ];
 
-  const mastered = (pairs: [string, string][]) =>
+  // "Fully passing" = every element meets shown >= MIN_ANSWERS AND rate >= threshold
+  const allPassing = (pairs: [string, string][]) =>
     pairs.reduce<Record<string, WordStats>>(
-      (acc, [lu, en]) => ({ ...acc, [`${lu}|${en}`]: s(3, 3, 0) }),
+      (acc, [lu, en]) => ({ ...acc, [`${lu}|${en}`]: passing() }),
       {},
     );
 
@@ -191,16 +228,17 @@ describe("computeUnlockedLessonIds", () => {
     expect(unlocked).not.toContain("A1.02");
   });
 
-  it("unlocks next lesson when previous is complete", () => {
-    const words = mastered([["Moien", "hi"], ["Äddi", "bye"]]);
+  it("unlocks next lesson when previous lesson passes the 80% threshold", () => {
+    // Both A1.01 words pass → A1.01 percentage = 2/2 = 1.0 >= 0.8 → A1.02 unlocked
+    const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
     const unlocked = computeUnlockedLessonIds(lessons, words);
     expect(unlocked).toContain("A1.01");
     expect(unlocked).toContain("A1.02");
     expect(unlocked).not.toContain("A1.03");
   });
 
-  it("unlocks all when all prior lessons are complete", () => {
-    const words = mastered([
+  it("unlocks all when all prior lessons pass", () => {
+    const words = allPassing([
       ["Moien", "hi"], ["Äddi", "bye"],
       ["eng", "one"], ["zwee", "two"],
     ]);
@@ -208,10 +246,35 @@ describe("computeUnlockedLessonIds", () => {
     expect(unlocked).toEqual(["A1.01", "A1.02", "A1.03"]);
   });
 
-  it("does not unlock lesson 3 if lesson 1 is done but lesson 2 is not", () => {
-    const words = mastered([["Moien", "hi"], ["Äddi", "bye"]]);
+  it("does not unlock lesson 3 if lesson 2 has not passed", () => {
+    const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
     const unlocked = computeUnlockedLessonIds(lessons, words);
     expect(unlocked).not.toContain("A1.03");
+  });
+
+  it("lesson with shown < MIN_ANSWERS elements does NOT unlock next", () => {
+    // Elements shown 3 times (< MIN_ANSWERS=5) — don't pass even with 100% accuracy
+    const underShown = {
+      "Moien|hi": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0),
+      "Äddi|bye": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0),
+    };
+    const unlocked = computeUnlockedLessonIds(lessons, underShown);
+    expect(unlocked).not.toContain("A1.02");
+  });
+
+  it("unlock is sticky — passing once is enough (stats are append-only)", () => {
+    // A lesson that passes the 80% threshold stays unlocked in the future
+    // because correct/shown only increases as user practices correctly.
+    const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
+    const u1 = computeUnlockedLessonIds(lessons, words);
+    expect(u1).toContain("A1.02");
+    // Simulating more practice (more shown, same accuracy) — still unlocked
+    const moreShown = {
+      "Moien|hi": s(MIN_ANSWERS + 5, MIN_ANSWERS + 5, 0),
+      "Äddi|bye": s(MIN_ANSWERS + 5, MIN_ANSWERS + 5, 0),
+    };
+    const u2 = computeUnlockedLessonIds(lessons, moreShown);
+    expect(u2).toContain("A1.02");
   });
 });
 

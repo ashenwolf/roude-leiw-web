@@ -1,4 +1,5 @@
 import { shuffle } from "../lib/shuffle";
+import { WORD_MIX_PAIRS_PER_SLOT } from "./constants";
 
 import type { WordStats } from "../context/auth";
 import type { Lesson, SentenceEntry, WordEntry } from "./letz-parser";
@@ -30,7 +31,7 @@ export type ItemSelectionConfig = {
 // --- Defaults ---
 
 const DEFAULT_CONFIG: ItemSelectionConfig = {
-  batchSize: 20,
+  batchSize: WORD_MIX_PAIRS_PER_SLOT,
   bucketRatios: {
     new: 0.25,
     struggling: 0.25,

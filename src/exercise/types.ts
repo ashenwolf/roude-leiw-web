@@ -27,4 +27,6 @@ export type SentenceBuilderBatch = {
   item: SentenceBuilderItem;
 };
 
-export type ExerciseBatch = WordMatchBatch | SentenceBuilderBatch;
+export type Exercise = WordMatchBatch | SentenceBuilderBatch;
+/** @deprecated Use Exercise */
+export type ExerciseBatch = Exercise;
