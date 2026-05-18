@@ -3,16 +3,8 @@
     {
       "id": "A1",
       "lessons": [
-        {
-          "id": "A1_01_greetings_and_introductions",
-          "file": "A1_01_greetings_and_introductions.letz",
-          "title": "Greetings & Introductions"
-        },
-        {
-          "id": "A1_02_introducing_yourself",
-          "file": "A1_02_introducing_yourself.letz",
-          "title": "Introducing Yourself"
-        }
+        { "id": "A1.01", "file": "A1_01_greetings_and_introductions.letz", "title": "Greetings & Introductions" },
+        { "id": "A1.02", "file": "A1_02_introducing_yourself.letz", "title": "Introducing Yourself" }
       ]
     }
   ]
