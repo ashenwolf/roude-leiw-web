@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. At the end of every development, check if there was anything worth writing to MEMORY.md (see details in "Memory — required reading and writing" section).
 
 ## Commands
 
@@ -724,26 +724,29 @@ Icons live in `src/ui/icons/`. They are hand-copied SVG paths from **Phosphor Ic
 
 `IconBase` uses `viewBox="0 0 256 256"` (Phosphor's native grid). Size and color are controlled via `className` (`w-*`/`h-*` for size, `text-*` for color).
 
-### Self-improvement
-
-- Every time the user makes a correction, add the lesson to `.claude/lessons.md` and check that file at the start of each session to avoid repeating mistakes.
 
 ### Memory — required reading and writing
 
-This project has a persistent memory store at:
+- Every time the user makes a correction, add the lesson to `.claude/memory/MEMORY.md` and check that file at the start of each session to avoid repeating mistakes.
 
-```
-/Users/gulenoks/.claude/projects/-Users-gulenoks-Personal-roude-leiw-web/memory/
-```
+This project's persistent memory store lives **in the repo** at `.claude/memory/` so it travels with the code, is reviewed in PRs, and is shared across every developer and machine.
 
-**Read `MEMORY.md` at the start of every session.** It is the index of all persisted knowledge about this project. Relevant memory files are linked from there and must be read before making architectural decisions or writing code.
+> Any home-dir auto-memory at `~/.claude/projects/-Users-gulenoks-Personal-roude-leiw-web/memory/` is **deprecated** — it is a thin redirect to this directory. Do not write there.
 
-**Maintain `MEMORY.md` throughout each session.** When you learn something that future sessions would benefit from, write it to a memory file and add a pointer to `MEMORY.md`. Things worth recording:
+**Read `.claude/memory/MEMORY.md` at the start of every session.** It is the index of all persisted project knowledge. Files linked from it must be read before making architectural decisions or writing code that touches the areas they describe.
 
-- **Lessons learned** — mistakes caught by the user, unexpected behavior, footguns in the stack
-- **Coding patterns the operator enforces** — style rules, naming conventions, anti-patterns to avoid (beyond what is in this file or `.claude/lessons.md`)
+**Maintain memory throughout each session.** When you learn something a future session would benefit from, write a new file in `.claude/memory/` and add a one-line pointer in `MEMORY.md`. Commit memory changes alongside the code change that motivated them — same PR, same commit when feasible.
+
+Worth recording:
 - **Design choices and their rationale** — why a particular structure was chosen over alternatives
 - **Conscious tradeoffs** — shortcuts taken, known limitations, deferred work with reasons
-- **Development log** — significant refactors, renames, deletions, or migrations that aren't obvious from git history
+- **"We considered X and decided no" notes** — prevents future re-litigation of settled decisions
+- **Non-obvious project context** — stakeholder constraints, deadlines, integration quirks
+- **Development log** — significant refactors, renames, deletions, migrations not obvious from git history
 
-Do not save things derivable from reading the current code or `git log`. Save what would otherwise be lost between sessions.
+Not worth recording (do not save):
+- Anything derivable from reading the current code or `git log`
+- Code-style rules — those belong in `.claude/memory/MEMORY.md`
+- Ephemeral task state — use plans (`.claude/plans/`, gitignored) or the TaskCreate tool
+
+**Keeping it up to date is part of "done."** If a change you make invalidates a citation, file path, or design claim in a memory file, update that file in the same commit. Stale memory is worse than missing memory — it asserts a wrong fact with confidence.
