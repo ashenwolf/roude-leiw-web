@@ -11,7 +11,8 @@
     "deploy": "npm run build && wrangler pages deploy dist",
     "deploy:workers": "npm run build && wrangler pages deploy dist",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-audio": "node --env-file-if-exists=.env scripts/generate-audio.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.15.3",
