@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npm run sync-audio:download",
     "build": "vitest run && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -12,7 +13,9 @@
     "deploy:workers": "npm run build && wrangler pages deploy dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "generate-audio": "node --env-file-if-exists=.env scripts/generate-audio.mjs"
+    "generate-audio": "node --env-file-if-exists=.env scripts/generate-audio.mjs",
+    "sync-audio:upload": "node scripts/sync-audio.mjs upload",
+    "sync-audio:download": "node scripts/sync-audio.mjs download"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.15.3",

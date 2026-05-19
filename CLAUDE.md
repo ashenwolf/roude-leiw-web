@@ -7,10 +7,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev          # Start Vite dev server (includes local worker + KV emulation)
 npm run build        # TypeScript compile + Vite build (tsc -b && vite build)
+                     # `prebuild` hook auto-syncs audio from R2 (see Audio below)
 npm run lint         # ESLint
 npm run preview      # Preview production build locally
 npm run deploy       # Build and deploy to Cloudflare Pages
+
+npm run generate-audio    -- <path-to-lesson.letz>   # ElevenLabs TTS for @lu phrases
+npm run sync-audio:upload -- [path]                  # push local mp3s to R2
+npm run sync-audio:download -- [path]                # pull mp3s from R2 (auto-runs in prebuild)
 ```
+
+Audio files are gitignored. R2 is the source of truth. See [`.claude/memory/audio-pipeline.md`](./.claude/memory/audio-pipeline.md) for the full design.
 
 Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under `tests/` mirroring the source tree. See **Testing** in Architecture below for what's covered and the no-mocks rule.
 

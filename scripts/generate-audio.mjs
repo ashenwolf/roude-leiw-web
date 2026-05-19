@@ -24,9 +24,11 @@
  * single hyphens). Existing files are skipped — re-running the script only
  * fetches phrases that don't already have audio.
  */
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import process from "node:process";
+
+import { extractLuPhrases, pathExists, slugify } from "./lib/letz-audio.mjs";
 
 const DEFAULT_VOICE_ID = "cgSgspJ2msm6clMCkdW9"; // "Jessica" — featured on ElevenLabs' Luxembourgish page
 const DEFAULT_MODEL_ID = "eleven_multilingual_v2";
@@ -38,64 +40,6 @@ const DEFAULT_MODEL_ID = "eleven_multilingual_v2";
 const REQUEST_INTERVAL_MS = 250;       // polite spacing between successful requests
 const MAX_RETRIES = 5;                 // for 429 / 5xx
 const RETRY_BASE_DELAY_MS = 1000;      // exponential backoff base
-
-// ---------------------------------------------------------------------------
-// Slugification
-// ---------------------------------------------------------------------------
-
-/**
- * Convert a Luxembourgish phrase into a filesystem-safe slug.
- * Result contains only lowercase ASCII letters, digits, and single hyphens.
- *
- *   "Wéi geet et?"          -> "wei-geet-et"
- *   "d'Schockela"           -> "d-schockela"
- *   "Ech sinn d'Christine." -> "ech-sinn-d-christine"
- *   "Gutt Nuecht"           -> "gutt-nuecht"
- */
-const slugify = (input) =>
-  input
-    .normalize("NFD")                  // split accented letters into base + combining mark
-    .replace(/[\u0300-\u036f]/g, "")   // drop combining marks (ä→a, é→e, ë→e, ü→u, ö→o, ...)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")       // anything else -> hyphen, collapsing runs
-    .replace(/^-+|-+$/g, "");          // trim leading/trailing hyphens
-
-// ---------------------------------------------------------------------------
-// .letz extraction
-// ---------------------------------------------------------------------------
-
-/**
- * Extract every Luxembourgish phrase that appears as `@lu` inside an
- * `@sentence` block. A sentence block begins at `@sentence` and ends at the
- * next top-level directive (`@lesson` or `@word`). Comments (`#…`) and blank
- * lines are ignored.
- *
- * Multiple `@lu` lines inside one block are treated as separate phrases —
- * each is a distinct sentence variant that deserves its own audio file.
- */
-const extractLuPhrases = (content) => {
-  const phrases = [];
-  let inSentence = false;
-
-  for (const rawLine of content.split(/\r?\n/)) {
-    const line = rawLine.trim();
-    if (line.length === 0 || line.startsWith("#")) continue;
-
-    if (line.startsWith("@sentence")) {
-      inSentence = true;
-      continue;
-    }
-    if (line.startsWith("@lesson") || line.startsWith("@word")) {
-      inSentence = false;
-      continue;
-    }
-    if (inSentence && line.startsWith("@lu ")) {
-      const phrase = line.slice(4).trim();
-      if (phrase.length > 0) phrases.push(phrase);
-    }
-  }
-  return phrases;
-};
 
 // ---------------------------------------------------------------------------
 // ElevenLabs client
@@ -149,19 +93,6 @@ const fetchAudio = async (text, { apiKey, voiceId, modelId }) => {
   }
 
   throw new Error(`ElevenLabs API failed after ${MAX_RETRIES} retries`);
-};
-
-// ---------------------------------------------------------------------------
-// Filesystem helpers
-// ---------------------------------------------------------------------------
-
-const fileExists = async (path) => {
-  try {
-    await stat(path);
-    return true;
-  } catch {
-    return false;
-  }
 };
 
 // ---------------------------------------------------------------------------
@@ -227,7 +158,7 @@ const main = async () => {
     const outputPath = join(audioDir, `${slug}.mp3`);
     const prefix = `[${i + 1}/${tasks.length}]`;
 
-    if (await fileExists(outputPath)) {
+    if (await pathExists(outputPath)) {
       console.log(`${prefix} • skip   ${slug}.mp3   (${phrase})`);
       skipped += 1;
       continue;
