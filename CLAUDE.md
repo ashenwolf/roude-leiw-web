@@ -726,4 +726,24 @@ Icons live in `src/ui/icons/`. They are hand-copied SVG paths from **Phosphor Ic
 
 ### Self-improvement
 
-- Every time user makes a correction, the lessons learnt is added to the `.claude/lessons.md`, and check this file to prevent repeating mistakes.
+- Every time the user makes a correction, add the lesson to `.claude/lessons.md` and check that file at the start of each session to avoid repeating mistakes.
+
+### Memory — required reading and writing
+
+This project has a persistent memory store at:
+
+```
+/Users/gulenoks/.claude/projects/-Users-gulenoks-Personal-roude-leiw-web/memory/
+```
+
+**Read `MEMORY.md` at the start of every session.** It is the index of all persisted knowledge about this project. Relevant memory files are linked from there and must be read before making architectural decisions or writing code.
+
+**Maintain `MEMORY.md` throughout each session.** When you learn something that future sessions would benefit from, write it to a memory file and add a pointer to `MEMORY.md`. Things worth recording:
+
+- **Lessons learned** — mistakes caught by the user, unexpected behavior, footguns in the stack
+- **Coding patterns the operator enforces** — style rules, naming conventions, anti-patterns to avoid (beyond what is in this file or `.claude/lessons.md`)
+- **Design choices and their rationale** — why a particular structure was chosen over alternatives
+- **Conscious tradeoffs** — shortcuts taken, known limitations, deferred work with reasons
+- **Development log** — significant refactors, renames, deletions, or migrations that aren't obvious from git history
+
+Do not save things derivable from reading the current code or `git log`. Save what would otherwise be lost between sessions.
