@@ -1,4 +1,5 @@
 import { AuthProvider } from "../context/AuthContext.tsx";
+import { ErrorBoundary } from "./ErrorBoundary.tsx";
 import { UserMenu } from "./UserMenu.tsx";
 
 type AppWrapperProps = {
@@ -33,7 +34,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => (
           </div>
         </header>
         <main className="relative flex-1 overflow-auto p-6 min-h-0">
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
         </main>
       </AuthProvider>
     </div>

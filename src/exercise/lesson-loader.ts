@@ -91,7 +91,7 @@ export const fetchLesson = async (level: string, filename: string): Promise<Less
     throw new Error(`Failed to fetch lesson ${url}: ${response.statusText}`);
   }
   const content = await response.text();
-  return parseLetzContent(content, `${level}/${filename}`);
+  return await parseLetzContent(content, `${level}/${filename}`);
 };
 
 /**
