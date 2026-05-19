@@ -1,255 +1,142 @@
-# A1.02/A1_02_introductions_and_basics.letz
-# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 2, Part A & Part B"
+# A1/A1.1/A1_02_introductions_and_basics.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 2, Part A"
+#   https://quizlet.com/_h2t0qn
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 2, Part B"
+#   https://quizlet.com/_h2t0yo
+# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Distractor tokens are sourced from other entries within these same Quizlet sets.
 
 @lesson A1.02 "Introductions & Basics"
 
-# === PART A: Introductions, Pronouns, Basic Nouns ===
+# ===== PART A =====
 
-# --- Question words ---
-@word Wat = What
-@word Wien = Who
-@word Wou = Where
-@word Wéi = How
-
-# --- Personal pronouns ---
+# --- Question words & pronouns (Quizlet 2A cards 10-23) ---
+@word Wat? = What?
+@word Wien? = Who?
+@word Wou? = Where?
+@word Wéi? = How?
 @word ech = I
-@word du = you
+@word du = you (informal & singular)
 @word hien = he
 @word hatt = she
-@word si = she
+@word si = she (respectful)
 @word et = it
 @word mir = we
-@word dir = you
-@word Dir = you
+@word dir = you (informal & plural)
+@word Dir = you (formal, singular or plural)
 @word si = they
 
-# --- Names & introductions ---
-@word de Numm = the name
-@word de Virnumm = the first name
-@word d'Virnimm = the first names
-@word den Nonumm = the last name
-@word d'Nonimm = the last names
-@word de Familljennumm = the surname
-@word den Här = the gentleman
-@word d'Madame = the lady
-@word enchantéiert = pleased to meet you
-
-# --- Useful words ---
+# --- Adverbs / short phrases (Quizlet 2A cards 29-30, 32-33, 35, 37, 45, 62) ---
 @word schonn = already
 @word esou vill = so much
+@word ech hoffen = I hope
 @word nëmmen = only
-@word dach = yes, of course
-@word liicht = easy
-@word riicht = straight
 @word vun haut un = from today
-
-# --- Nouns: things ---
-@word d'Saach = the thing
-@word d'Saachen = the things
-@word d'Zil = the objective
-@word d'Ziler = the objectives
-@word den Dag = the day
-@word d'Deeg = the days
-@word d'Been = the leg
-@word d'Fleesch = the meat
-@word de Reen = the rain
-@word d'Siicht = the view
-@word den Eemer = the bucket
-@word d'Eemeren = the buckets
-@word d'Biischt = the broom
-@word d'Biischten = the brooms
-@word d'Kiischt = the cherry
-@word d'Kiischten = the cherries
-@word de Weess = the wheat
-@word d'Rees = the journey
-@word d'Reesen = the journeys
-@word d'Leed = the suffering
-@word d'Freed = the joy
-@word d'Freeden = the joys
-@word den Duuscht = the thirst
-
-# --- Nouns: people ---
-@word de Jong = the boy
-@word d'Jongen = the boys
-@word d'Meedchen = the girl
-@word d'Meedercher = the girls
-@word de Riichter = the judge
-@word d'Riichteren = the judges
-
-# --- Nouns: objects ---
-@word de Fliger = the plane
-@word d'Fligeren = the planes
-@word de Kapp = the head
-@word d'Käpp = the heads
-@word d'Kap = the hat
-@word d'Kapen = the hats
-
-# --- Language & spelling ---
-@word de Sproch = the expression
-@word d'Spréch = the expressions
-@word d'Sprooch = the language
-@word d'Sproochen = the languages
-@word de Buschtaf = the letter
 @word lëtzebuergesch Buschtawen = Luxembourgish letters
-@word e grousse P = uppercase P
-@word e klenge p = lowercase p
+@word liicht = easy, light
+@word riicht = straight
 
-# === PART B: Verbs, More Nouns, Origins ===
-
-# --- Main verbs ---
-@word virstellen = to introduce
-@word widderhuelen = to repeat
-@word buschtawéieren = to spell
-@word bestellen = to order
-@word bezuelen = to pay
-@word gewannen = to win
-@word verléieren = to lose
-@word verstoen = to understand
-@word gesinn = to see
-@word bekloen = to complain
-@word entloossen = to fire
-@word kommen = to come
-@word schwätzen = to speak
-@word schreiwen = to write
-@word hoffen = to hope
-@word léieren = to learn
+# --- Verbs (Quizlet 2A cards 63) ---
 @word duschen = to shower
-@word richen = to smell
-@word heeschen = to be called
-@word sinn = to be
 
-# --- Separable verbs ---
-@word undoen = to put on
-@word matgoen = to come along
-@word mathuelen = to take along
-@word ofsoen = to cancel
-@word opfänken = to catch
-@word zoumaachen = to close
+# --- Nouns with multiple forms (Quizlet 2A cards 34, 38-44, 46-57, 59-60, 64-69) ---
+@word eng Saach, d'Saach (f), Saachen (pl) = thing, things
+@word en Zil, d'Zil (n), Ziler (pl) = objective, objectives
+@word en Dag, den Dag (m), Deeg (pl) = day, days
+@word e Been, d'Been (n), Been (pl) = leg, legs
+@word d'Fleesch (n, non-countable) = meat
+@word de Reen (m, non-countable) = rain
+@word eng Siicht, d'Siicht (f, non-countable) = view
+@word en Eemer, den Eemer (m), Eemeren (pl) = bucket, buckets
+@word eng Biischt, d'Biischt (f), Biischten (pl) = broom, brooms
+@word eng Kiischt, d'Kiischt (f), Kiischten (pl) = cherry, cherries
+@word de Weess (m, noun-countable) = wheat
+@word eng Rees, d'Rees (f), Reesen (pl) = journey, journeys
+@word d'Leed (n, non-countable) = suffering
+@word eng Freed, d'Freed (f), Freeden (pl) = joy, joys
+@word e Jong, de Jong (m), Jongen (pl) = boy, boys, son, sons
+@word e Meedchen, d'Meedchen (n), Meedercher (pl) = girl, girls, daughter, daughters
+@word e Riichter, de Riichter (m), Riichteren (pl) = judge, judges
+@word e Fliger, de Fliger (m), Fligeren (pl) = plane, planes
+@word e Kapp, de Kapp (m), Käpp (pl) = head, heads
+@word eng Kap, d'Kap (f), Kapen (pl) = hat, hats
+@word dach = yes, of course
+@word e Sproch, de Sproch (m), Spréch = expression, expressions
+@word eng Sprooch, d'Sprooch (f), Sproochen = language, languages
+@word en Duuscht, den Duuscht (m, non-countable) = thirst
+@word e Virnumm, de Virnumm (m), Virnimm = first name, first names
+@word en Nonumm, den Nonumm (m), Nonimm = last name, last names
+@word e Familljennumm, de Familljennumm (m), Familljennimm = surname, surnames
+@word e grousse P, P majuscule = uppercase P
+@word e klenge p, p minuscule = lowercase p
 
-# --- Spelling vocabulary ---
+# ===== PART B =====
+
+# --- Phrases / vocabulary (Quizlet 2B cards 4, 10) ---
 @word anert Wuert = different word
-@word d'Wuert = the word
-@word d'Wierder = the words
-@word d'Mutz = the hat
-@word d'Buch = the book
-@word d'Bicher = the books
-@word d'Reunioun = the meeting
-@word d'Reuniounen = the meetings
-@word de Ball = the ball
-@word d'Bäll = the balls
-@word d'Dier = the door
-@word d'Dieren = the doors
-@word d'Rechnung = the bill
-@word d'Rechnungen = the bills
-@word de Glas = the glass
-@word d'Glieser = the glasses
-@word den Auto = the car
-@word d'Autoen = the cars
-@word d'Gare = the train station
-@word de Zuch = the train
-@word d'Zich = the trains
-@word ze spéit = too late
-@word fort = gone
-@word enttäuscht = disappointed
+@word virstellen = to introduce
 
-# --- Animals & nature ---
-@word den Hond = the dog
-@word d'Hënn = the dogs
-@word de Bam = the tree
-@word d'Beem = the trees
-@word d'Fënster = the window
-@word d'Fënsteren = the windows
-@word de Gaart = the garden
-@word d'Gäert = the gardens
-@word d'Relioun = the religion
-@word d'Reliounen = the religions
+# --- Nouns with multiple forms (Quizlet 2B cards 30-46, 53-57) ---
+@word en Hond, den Hond (m), Hënn = dog, dogs
+@word e Buch, d'Buch (n), Bicher = book, books
+@word e Gaart, de Gaart (m), Gäert = garden, gardens
+@word eng Relioun, d'Relioun (f), Reliounen (pl) = religion, religions
+@word e Bam, de Bam (m), Beem (pl) = tree, trees
+@word eng Fënster, d'Fënster (f), Fënsteren (pl) = window, windows
+@word e Frënd, de Frënd (m), Frënn (pl) = friend (male), friends
+@word eng Frëndin, d'Frëndin (f), Frëndinnen (pl) = friend (female), friends (female)
+@word e Verkeefer, de Verkeefer (m), Verkeefer (pl) = salesman, salespeople
+@word eng Verkeeferin, d'Verkeeferin (f), Verkeeferinnen (pl) = saleswoman, saleswomen
+@word e Bäcker, de Bäcker (m), Bäckeren (pl) = baker (male), bakers
+@word eng Bäckesch, d'Bäckesch (f), Bäckeschen (pl) = baker (female), bakers (female)
+@word en Infirmier, den Infirmier (m), Infirmieren (pl) = nurse (male), nurses
+@word eng Infirmière, d'Infirmière (f), Infirmièren (pl) = nurse (female), nurses (female)
+@word e Papp, de Papp (m), Pappen (pl) = father, fathers
+@word eng Mamm, d'Mamm (f), Mammen (pl) = mother, mothers
+@word e Kand, d'Kand (n), Kanner (pl) = child, children
+@word e Mann, de Mann (m), Männer (pl) = man, men
+@word eng Fra, d'Fra (f), Fraen (pl) = woman, women
+@word eng Fläsch, d'Fläsch (f), Fläschen (pl) = bottle, bottles
+@word e Schlëssel, de Schlëssel (m), Schlësselen (pl) = key keys
+@word e Bic, de Bic (m), Bicker (pl) = pen, pens
 
-# --- Professions & people ---
-@word de Frënd = the friend
-@word d'Frënn = the friends
-@word d'Frëndin = the girlfriend
-@word d'Frëndinnen = the girlfriends
-@word de Verkeefer = the salesman
-@word d'Verkeefer = the salespeople
-@word d'Verkeeferin = the saleswoman
-@word d'Verkeeferinnen = the saleswomen
-@word de Bäcker = the baker
-@word d'Bäckeren = the bakers
-@word d'Bäckesch = the female baker
-@word d'Bäckeschen = the female bakers
-@word den Infirmier = the nurse
-@word d'Infirmieren = the nurses
-@word d'Infirmière = the female nurse
-@word d'Infirmièren = the female nurses
-
-# --- Family ---
-@word de Papp = the father
-@word d'Pappen = the fathers
-@word d'Mamm = the mother
-@word d'Mammen = the mothers
-@word d'Kand = the child
-@word d'Kanner = the children
-
-# --- People ---
-@word de Mann = the man
-@word d'Männer = the men
-@word d'Fra = the woman
-@word d'Fraen = the women
-
-# --- Objects ---
-@word d'Fläsch = the bottle
-@word d'Fläschen = the bottles
-@word de Schlëssel = the key
-@word d'Schlësselen = the keys
-@word de Bic = the pen
-@word d'Bicker = the pens
-
-# --- Languages, nationalities, places ---
-@word d'Nationalitéit = the nationality
-@word Englesch = English
-@word Schottin = Scottish woman
-@word Schottland = Scotland
-@word Schweden = Sweden
-@word Stockholm = Stockholm
-@word d'USA = the US
-
-# --- Sentences from Part A ---
+# --- Sentences (Part A: Quizlet cards 1-9, 24-28, 31, 36, 61) ---
 
 @sentence
 @lu Ech heeschen Anne.
 @en I am called Anne.
-@distractor-en come
-@distractor-en live
-@distractor-lu kommen
-@distractor-lu wunnen
+@distractor-en already
+@distractor-en only
+@distractor-lu schonn
+@distractor-lu nëmmen
 
 @sentence
 @lu Ech sinn d'Anne.
 @en I am Anne.
-@distractor-en called
-@distractor-en have
-@distractor-lu heeschen
-@distractor-lu hunn
+@distractor-en how
+@distractor-en where
+@distractor-lu Wéi
+@distractor-lu Wou
 
 @sentence
 @lu Mäin Numm ass Anne.
 @en My name is Anne.
-@distractor-en your
 @distractor-en first name
-@distractor-lu Däin
+@distractor-en surname
 @distractor-lu Virnumm
+@distractor-lu Familljennumm
 
 @sentence
 @lu Wéi heeschs du?
-@en What are you called?
-@distractor-en where
+@en What are you (informal) called?
 @distractor-en who
-@distractor-lu Wou
+@distractor-en where
 @distractor-lu Wien
+@distractor-lu Wou
 
 @sentence
 @lu Wéi heescht Dir?
-@en What are you called?
+@en What are you (formal) called?
 @distractor-en how
 @distractor-en what
 @distractor-lu Wéi
@@ -257,7 +144,7 @@
 
 @sentence
 @lu Wie bass du?
-@en Who are you?
+@en Who are you (informal)?
 @distractor-en where
 @distractor-en how
 @distractor-lu Wou
@@ -265,7 +152,7 @@
 
 @sentence
 @lu Wie sidd Dir?
-@en Who are you?
+@en Who are you (formal)?
 @distractor-en what
 @distractor-en where
 @distractor-lu Wat
@@ -273,89 +160,89 @@
 
 @sentence
 @lu Wéi ass däin Numm?
-@en What is your name?
-@distractor-en first name
+@en What is your (informal) name?
 @distractor-en surname
-@distractor-lu Virnumm
+@distractor-en last name
 @distractor-lu Familljennumm
+@distractor-lu Nonumm
 
 @sentence
 @lu Wéi ass Ären Numm?
-@en What is your name?
-@distractor-en his
-@distractor-en my
-@distractor-lu säin
-@distractor-lu mäin
+@en What is your (formal) name?
+@distractor-en first name
+@distractor-en how
+@distractor-lu Virnumm
+@distractor-lu Wéi
 
 @sentence
 @lu Ech stellen dir den Emile vir.
-@en I am introducing Emile to you.
-@distractor-en him
+@en I am introducing Emile to you (informal).
 @distractor-en already
-@distractor-lu hien
+@distractor-en how
 @distractor-lu schonn
+@distractor-lu Wéi
 
 @sentence
 @lu Dat ass d'Julie.
 @en That is Julie.
-@distractor-en called
 @distractor-en hope
-@distractor-lu heescht
+@distractor-en already
 @distractor-lu hoffen
-
-@sentence
-@lu Dat hei ass den Här Weymann.
-@en That is Mr Weymann.
-@distractor-en lady
-@distractor-en girl
-@distractor-lu Madame
-@distractor-lu Meedchen
+@distractor-lu schonn
 
 @sentence
 @lu Et freet mech dech kennen ze léieren.
-@en It is a pleasure to meet you.
-@distractor-en bye
-@distractor-en hello
-@distractor-lu Äddi
-@distractor-lu Bonjour
+@en It is a pleasure to meet you (informal).
+@distractor-en how
+@distractor-en where
+@distractor-lu Wéi
+@distractor-lu Wou
 
 @sentence
 @lu Et freet mech Iech kennen ze léieren.
-@en It is a pleasure to meet you.
-@distractor-en welcome
-@distractor-en hi
-@distractor-lu Wëllkomm
-@distractor-lu Moien
+@en It is a pleasure to meet you (formal).
+@distractor-en already
+@distractor-en only
+@distractor-lu schonn
+@distractor-lu nëmmen
 
 @sentence
 @lu Ech sinn enchantéiert.
-@en I am pleased to meet you.
-@distractor-en called
+@en I am pleased to meet (you).
 @distractor-en hope
-@distractor-lu heeschen
+@distractor-en how
 @distractor-lu hoffen
+@distractor-lu Wéi
 
 @sentence
 @lu D'Vanessa huet mir schonn esou vill vun dir erzielt.
-@en Vanessa told me so much about you already.
-@distractor-en us
-@distractor-en him
-@distractor-lu eis
-@distractor-lu hien
+@en Vanessa told me so much about you (informal) already.
+@distractor-en only
+@distractor-en how
+@distractor-lu nëmmen
+@distractor-lu Wéi
+
+@sentence
+@lu Dat hei ass den Här Weymann.
+@en That (here) is Mr Weymann.
+@distractor-en lady
+@distractor-en first name
+@distractor-lu Madame
+@distractor-lu Virnumm
 
 @sentence
 @lu Et richt net gutt.
 @en It doesn't smell good.
-@distractor-en bad
-@distractor-en sad
-@distractor-lu schlecht
-@distractor-lu traureg
+@distractor-en straight
+@distractor-en easy
+@distractor-lu riicht
+@distractor-lu liicht
 
-# --- Sentences from Part B ---
+# --- Sentences (Part B: Quizlet cards 1-3, 5-9, 11-29, 47-52, 58-59) ---
 
 @sentence
 @lu Wéi ass Ären Numm, wgl.?
-@en What is your name, please?
+@en What is your (formal) name, please?
 @distractor-en first name
 @distractor-en surname
 @distractor-lu Virnumm
@@ -364,18 +251,18 @@
 @sentence
 @lu Schreift sech dat an engem Wuert?
 @en Is that written in one word?
-@distractor-en two
-@distractor-en letter
-@distractor-lu zwee
-@distractor-lu Buschtaf
+@distractor-en different word
+@distractor-en how
+@distractor-lu anert Wuert
+@distractor-lu Wéi
 
 @sentence
 @lu Kënnt Dir dat buschtawéieren?
-@en Can you spell that?
-@distractor-en repeat
-@distractor-en write
-@distractor-lu widderhuelen
-@distractor-lu schreiwen
+@en Can you (formal) spell that?
+@distractor-en how
+@distractor-en where
+@distractor-lu Wéi
+@distractor-lu Wou
 
 @sentence
 @lu Wéi schreift een dat?
@@ -388,46 +275,46 @@
 @sentence
 @lu Ech widderhuelen.
 @en I repeat.
-@distractor-en speak
-@distractor-en understand
-@distractor-lu schwätzen
-@distractor-lu verstoen
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
 
 @sentence
 @lu Op wéi een Numm?
 @en To which name?
-@distractor-en how many
-@distractor-en when
-@distractor-lu wéi vill
-@distractor-lu wéini
+@distractor-en first name
+@distractor-en surname
+@distractor-lu Virnumm
+@distractor-lu Familljennumm
 
 @sentence
 @lu Dat schreift sech mat ck.
 @en That is spelled with ck.
-@distractor-en without
-@distractor-en word
-@distractor-lu ouni
-@distractor-lu Wuert
+@distractor-en different word
+@distractor-en how
+@distractor-lu anert Wuert
+@distractor-lu Wéi
 
 @sentence
 @lu Kënnt Dir dat nach eng Kéier widderhuelen, wgl.?
-@en Can you repeat that one more time, please?
-@distractor-en spell
-@distractor-en write
-@distractor-lu buschtawéieren
-@distractor-lu schreiwen
+@en Can you (formal) repeat that one more time, please?
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
 
 @sentence
 @lu Du dees d'Mutz un.
-@en You are putting the hat on.
+@en You (informal) are putting the hat on.
 @distractor-en book
-@distractor-en take off
+@distractor-en ball
 @distractor-lu Buch
-@distractor-lu aus
+@distractor-lu Ball
 
 @sentence
 @lu Hie geet mat.
-@en He is going with us.
+@en He is going with (us/me).
 @distractor-en she
 @distractor-en they
 @distractor-lu Hatt
@@ -435,7 +322,7 @@
 
 @sentence
 @lu Hatt hëlt d'Buch mat.
-@en She is taking the book with her.
+@en She is taking the book (with her).
 @distractor-en pen
 @distractor-en window
 @distractor-lu Bic
@@ -444,82 +331,82 @@
 @sentence
 @lu Mir soen d'Reunioun of.
 @en We are cancelling the meeting.
-@distractor-en order
-@distractor-en pay
-@distractor-lu bestellen
-@distractor-lu bezuelen
+@distractor-en bottle
+@distractor-en glass
+@distractor-lu Fläsch
+@distractor-lu Glas
 
 @sentence
 @lu Dir fänkt de Ball op.
-@en You are catching the ball.
+@en You (formal) are catching the ball.
 @distractor-en door
-@distractor-en bottle
+@distractor-en book
 @distractor-lu Dier
-@distractor-lu Fläsch
+@distractor-lu Buch
 
 @sentence
 @lu Si maachen d'Dier zou.
 @en They are closing the door.
 @distractor-en window
-@distractor-en open
+@distractor-en bill
 @distractor-lu Fënster
-@distractor-lu op
+@distractor-lu Rechnung
 
 @sentence
 @lu Ech bestellen e Glas Waasser.
 @en I'm ordering a glass of water.
-@distractor-en coffee
-@distractor-en pay
-@distractor-lu Kaffi
-@distractor-lu bezuelen
+@distractor-en bottle
+@distractor-en bill
+@distractor-lu Fläsch
+@distractor-lu Rechnung
 
 @sentence
 @lu Du bezils d'Rechnung.
-@en You are paying the bill.
-@distractor-en order
+@en You (informal) are paying the bill.
 @distractor-en glass
-@distractor-lu bestellen
+@distractor-en book
 @distractor-lu Glas
+@distractor-lu Buch
 
 @sentence
 @lu Hie gewënnt.
 @en He is winning.
-@distractor-en lose
 @distractor-en she
-@distractor-lu verléieren
+@distractor-en they
 @distractor-lu Hatt
+@distractor-lu Si
 
 @sentence
 @lu Hatt verléiert.
 @en She is losing.
 @distractor-en he
-@distractor-en win
+@distractor-en they
 @distractor-lu Hien
-@distractor-lu gewannen
+@distractor-lu Si
 
 @sentence
 @lu Mir verstinn alles.
 @en We understand everything.
-@distractor-en nothing
-@distractor-en see
-@distractor-lu näischt
-@distractor-lu gesinn
+@distractor-en pen
+@distractor-en book
+@distractor-lu Bic
+@distractor-lu Buch
 
 @sentence
 @lu Dir beklot iech vill.
-@en You complain a lot.
-@distractor-en little
-@distractor-en order
-@distractor-lu wéineg
-@distractor-lu bestellen
+@en You (informal, plural) complain a lot.
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
 
 @sentence
 @lu Si entloossen de Jean-Marc.
 @en They are firing Jean-Marc.
-@distractor-en hire
-@distractor-en welcome
-@distractor-lu astellen
-@distractor-lu Wëllkomm
+@distractor-en bill
+@distractor-en window
+@distractor-lu Rechnung
+@distractor-lu Fënster
 
 @sentence
 @lu Ech gesinn den Auto.
@@ -532,103 +419,103 @@
 @sentence
 @lu Ech sinn op der Gare.
 @en I'm at the train station.
-@distractor-en house
-@distractor-en city
-@distractor-lu Haus
-@distractor-lu Stad
+@distractor-en train
+@distractor-en how
+@distractor-lu Zuch
+@distractor-lu Wéi
 
 @sentence
 @lu Hien ass schonn am Zuch.
 @en He's already in the train.
-@distractor-en bus
-@distractor-en she
-@distractor-lu Bus
-@distractor-lu Hatt
+@distractor-en car
+@distractor-en plane
+@distractor-lu Auto
+@distractor-lu Fliger
 
 @sentence
 @lu Mir sinn ze spéit.
 @en We are too late.
-@distractor-en early
 @distractor-en gone
-@distractor-lu fréi
+@distractor-en disappointed
 @distractor-lu fort
+@distractor-lu enttäuscht
 
 @sentence
 @lu Dir sidd scho fort.
-@en You are already gone.
-@distractor-en here
+@en You're (informal, plural) already gone.
 @distractor-en too late
-@distractor-lu hei
+@distractor-en disappointed
 @distractor-lu ze spéit
+@distractor-lu enttäuscht
 
 @sentence
 @lu Si sinn enttäuscht.
 @en They are disappointed.
-@distractor-en happy
-@distractor-en sad
-@distractor-lu frou
-@distractor-lu traureg
+@distractor-en gone
+@distractor-en too late
+@distractor-lu fort
+@distractor-lu ze spéit
 
 @sentence
 @lu Ech kommen aus Schottland.
 @en I come from Scotland.
 @distractor-en Sweden
-@distractor-en live
+@distractor-en how
 @distractor-lu Schweden
-@distractor-lu wunnen
+@distractor-lu Wéi
 
 @sentence
 @lu Vu wou kënns du?
-@en Where do you come from?
+@en Where do you (informal) come from?
 @distractor-en how
-@distractor-en live
+@distractor-en who
 @distractor-lu Wéi
-@distractor-lu wunns
+@distractor-lu Wien
 
 @sentence
 @lu Wéi eng Nationalitéit hues du?
-@en What is your nationality?
+@en What is your (informal) nationality?
 @distractor-en language
-@distractor-en name
+@distractor-en first name
 @distractor-lu Sprooch
-@distractor-lu Numm
+@distractor-lu Virnumm
 
 @sentence
 @lu Wat fir Sprooche schwätz du?
-@en What languages do you speak?
-@distractor-en write
-@distractor-en understand
-@distractor-lu schreiwen
-@distractor-lu verstoen
+@en What languages do you (informal) speak?
+@distractor-en first name
+@distractor-en how
+@distractor-lu Virnumm
+@distractor-lu Wéi
 
 @sentence
 @lu Ech si Schottin.
 @en I'm Scottish.
 @distractor-en English
-@distractor-en Swedish
+@distractor-en how
 @distractor-lu Englesch
-@distractor-lu Schwedesch
+@distractor-lu Wéi
 
 @sentence
 @lu Ech schwätzen Englesch.
 @en I speak English.
-@distractor-en write
-@distractor-en understand
-@distractor-lu schreiwen
-@distractor-lu verstoen
+@distractor-en Scottish
+@distractor-en how
+@distractor-lu Schottin
+@distractor-lu Wéi
 
 @sentence
 @lu Ech kommen aus Schweden, vu Stockholm.
 @en I come from Sweden, from Stockholm.
 @distractor-en Scotland
-@distractor-en live
+@distractor-en US
 @distractor-lu Schottland
-@distractor-lu wunnen
+@distractor-lu USA
 
 @sentence
 @lu Mir kommen aus den USA.
 @en We come from the US.
-@distractor-en he
-@distractor-en they
-@distractor-lu Hien
-@distractor-lu Si
+@distractor-en Sweden
+@distractor-en Scotland
+@distractor-lu Schweden
+@distractor-lu Schottland

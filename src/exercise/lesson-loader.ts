@@ -4,28 +4,55 @@ import type { Lesson, WordEntry } from "./letz-parser";
 
 /** Light catalog row — loaded from the manifest alone (no .letz fetch required). */
 export type LessonMeta = {
-  id: string;    // e.g., "01_greetings"
-  level: string; // e.g., "A1"
-  title: string; // e.g., "Basic Greetings"
-  file: string;  // e.g., "01_greetings.letz"
+  id: string;           // e.g., "A1.01"
+  level: string;        // e.g., "A1"
+  sectionId: string;    // e.g., "A1.1"
+  sectionTitle: string; // e.g., "Basics"
+  title: string;        // e.g., "Greetings"
+  file: string;         // path relative to the level folder, e.g. "A1.1/A1_01_greetings.letz"
 };
 
 /**
  * Manifest structure that lists all available lessons.
+ *
  * `title` is the user-facing lesson title from the `.letz` `@lesson` directive,
  * duplicated into the manifest so Home can render lesson cards without fetching
  * any `.letz` content (see CLAUDE.md > Architecture Reference > Migration note).
+ *
+ * Sections group lessons within a level (e.g. "A1.1 — Basics"); Home renders one
+ * lesson grid per section. Lesson IDs remain flat within their level for
+ * lexicographic ordering by unlock logic.
  */
 export type LessonManifest = {
   levels: {
     id: string; // e.g., "A1", "A2"
-    lessons: {
-      id: string; // e.g., "01_greetings"
-      file: string; // e.g., "01_greetings.letz"
-      title: string; // e.g., "Basic Greetings"
+    sections: {
+      id: string;    // e.g., "A1.1"
+      title: string; // e.g., "Basics"
+      lessons: {
+        id: string;    // e.g., "A1.01"
+        file: string;  // path relative to the level folder
+        title: string; // e.g., "Greetings"
+      }[];
     }[];
   }[];
 };
+
+// All LessonMeta-producing flatteners go through this single helper so they
+// stay in sync if the manifest schema evolves again.
+const flattenManifest = (manifest: LessonManifest): LessonMeta[] =>
+  manifest.levels.flatMap((level) =>
+    level.sections.flatMap((section) =>
+      section.lessons.map((lesson) => ({
+        id: lesson.id,
+        level: level.id,
+        sectionId: section.id,
+        sectionTitle: section.title,
+        title: lesson.title,
+        file: lesson.file,
+      })),
+    ),
+  );
 
 const LESSONS_BASE_PATH = "/assets/lessons";
 
@@ -46,16 +73,7 @@ export const fetchManifest = async (): Promise<LessonManifest> => {
  * Use this to render lesson card titles and the lesson grid without waiting for content.
  */
 export const loadLessonMeta = (): Promise<LessonMeta[]> =>
-  fetchManifest().then((manifest) =>
-    manifest.levels.flatMap((level) =>
-      level.lessons.map((lesson) => ({
-        id: lesson.id,
-        level: level.id,
-        title: lesson.title,
-        file: lesson.file,
-      })),
-    ),
-  );
+  fetchManifest().then(flattenManifest);
 
 /**
  * Sequentially loads .letz files starting from the first lesson, stopping when
@@ -121,9 +139,11 @@ export const loadLessonsForLevel = async (userLevel: string): Promise<Lesson[]> 
   // Filter levels based on user's current level
   const relevantLevels = manifest.levels.filter((level) => shouldIncludeLevel(level.id, userLevel));
 
-  // Fetch all lessons in parallel
+  // Fetch all lessons in parallel (flatten levels → sections → lessons).
   const lessonPromises = relevantLevels.flatMap((level) =>
-    level.lessons.map((lesson) => fetchLesson(level.id, lesson.file))
+    level.sections.flatMap((section) =>
+      section.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
+    ),
   );
 
   const lessons = await Promise.all(lessonPromises);
@@ -152,7 +172,9 @@ export const loadAllLessons = (): Promise<Lesson[]> => {
       .then((manifest) =>
         Promise.all(
           manifest.levels.flatMap((level) =>
-            level.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
+            level.sections.flatMap((section) =>
+              section.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
+            ),
           ),
         ),
       )

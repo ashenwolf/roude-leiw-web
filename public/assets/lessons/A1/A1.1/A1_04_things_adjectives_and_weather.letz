@@ -1,50 +1,31 @@
-# A1.04/A1_04_things_adjectives_and_weather.letz
+# A1/A1.1/A1_04_things_adjectives_and_weather.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 4"
+#   https://quizlet.com/_h2swni
+# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Distractor tokens are sourced from other entries within this same Quizlet set.
 
 @lesson A1.04 "Things, Adjectives & Weather"
 
-# --- Household objects ---
-@word de Computer = the computer
-@word d'Computeren = the computers
-@word den Dësch = the table
-@word d'Dëscher = the tables
-@word d'Couche = the sofa
-@word d'Couchen = the sofas
-@word d'Luucht = the lamp
-@word d'Luuchten = the lamps
-@word d'Bett = the bed
-@word d'Better = the beds
-@word de Schaf = the wardrobe
-@word d'Schief = the wardrobes
+# --- Nouns with multiple forms (Quizlet cards 2-16) ---
+@word e Computer, de Computer (m), Computeren (pl) = computer, computers
+@word en Dësch, den Dësch (m), Dëscher (pl) = table, tables
+@word eng Couche, d'Couche (f), Couchen (pl) = sofa, sofas
+@word eng Luucht, d'Luucht (f), Luuchten (pl) = lamp, lamps
+@word e Bett, d'Bett (n), Better (pl) = bed, beds
+@word e Schaf, de Schaf (m), Schief (pl) = wardrobe, wardrobes, cupboard, cupboards
+@word eng Box, d'Box (f), Boxen (pl) = pants
+@word e Pullover, de Pullover (m), Pulloveren (pl) = jumper, jumpers
+@word en T-Shirt, den T-Shirt (m), T-Shirten (pl) = t-shirt, t-shirts
+@word eng Hand, d'Hand (f), Hänn (pl) = hand, hands
+@word e Buedzëmmer, d'Buedzëmmer (n), Buedzëmmeren (pl) = bathroom, bathrooms
+@word eng Schlofkummer, d'Schlofkummer (f), Schlofkummeren (pl) = bedroom, bedrooms
+@word eng Toilette, d'Toilette (f), Toiletten (pl) = toilet, toilets, washroom, washrooms
+@word eng Kichen, d'Kichen (f), Kichen (pl) = kitchen, kitchens
+@word eng Stuff, d'Stuff (f), Stuffen (pl) = living room, living rooms
 
-# --- Clothing ---
-@word d'Box = the pants
-@word d'Boxen = the pants plural
-@word de Pullover = the jumper
-@word d'Pulloveren = the jumpers
-@word den T-Shirt = the t-shirt
-@word d'T-Shirten = the t-shirts
-@word d'Hand = the hand
-@word d'Hänn = the hands
-
-# --- Rooms ---
-@word d'Buedzëmmer = the bathroom
-@word d'Buedzëmmeren = the bathrooms
-@word d'Schlofkummer = the bedroom
-@word d'Schlofkummeren = the bedrooms
-@word d'Toilette = the toilet
-@word d'Toiletten = the toilets
-@word d'Kichen = the kitchen
-@word d'Stuff = the living room
-@word d'Stuffen = the living rooms
-
-# --- Drinks & food ---
-@word de Glas Roude Wäin = the glass of red wine
-@word de Kaffi fir matzehuelen = a coffee to go
-@word alles = everything
-
-# --- Quantity words ---
-@word wéi vill = how much
+# --- Phrases / quantity words (Quizlet cards 24-31) ---
+@word e Kaffi fir matzehuelen = a coffee to go
+@word wéi vill = how much/how many
 @word e bëssen = a bit
 @word net vill = not much
 @word net ze vill = not too much
@@ -52,24 +33,20 @@
 @word manner = less
 @word genuch = enough
 
-# --- Adjectives ---
+# --- Adjectives (Quizlet cards 32-42) ---
 @word grouss = big
-@word kleng = small
 @word schéin = beautiful
 @word al = old
 @word nei = new
 @word hell = bright
-@word donkel = dark
 @word bëlleg = cheap
 @word waarm = warm
 @word kuerz = short
-@word richteg = right
+@word richteg = right (correct)
 @word liicht = light
 @word lues = slow
-@word frëndlech = friendly
-@word blond = blonde
 
-# --- Colors ---
+# --- Colors (Quizlet cards 43-53) ---
 @word wäiss = white
 @word giel = yellow
 @word gréng = green
@@ -82,38 +59,23 @@
 @word brong = brown
 @word schwaarz = black
 
-# --- Hair & body ---
-@word d'Hoer = the hair
-@word d'Nuecht = the night
-@word de Mann = the man
-
-# --- Weather verbs ---
-@word et schneit = it is snowing
-@word et donnert = there is thunder
-@word et blëtzt = there is lightning
-@word et reent = it is raining
-@word et stiermt = it is stormy
-@word sonneg = sunny
-@word bedeckt = cloudy
-@word niwweleg = foggy
-
-# --- Sentences ---
+# --- Sentences (Quizlet cards 1, 17-23, 54-69) ---
 
 @sentence
 @lu Wéi heescht dat op Lëtzebuergesch?
 @en What is that called in Luxembourgish?
-@distractor-en where
-@distractor-en who
-@distractor-lu Wou
-@distractor-lu Wien
+@distractor-en bedroom
+@distractor-en kitchen
+@distractor-lu Schlofkummer
+@distractor-lu Kichen
 
 @sentence
 @lu Wat ass dat?
 @en What is that?
-@distractor-en where
-@distractor-en how
-@distractor-lu Wou
-@distractor-lu Wéi
+@distractor-en bathroom
+@distractor-en living room
+@distractor-lu Buedzëmmer
+@distractor-lu Stuff
 
 @sentence
 @lu Dat ass d'Schlofkummer.
@@ -125,7 +87,7 @@
 
 @sentence
 @lu Wou ass d'Toilette?
-@en Where is the toilet?
+@en Where is the toilet/washroom?
 @distractor-en kitchen
 @distractor-en bedroom
 @distractor-lu Kichen
@@ -133,19 +95,19 @@
 
 @sentence
 @lu Wat hätt Dir gären?
-@en What would you like?
-@distractor-en have
-@distractor-en take
-@distractor-lu hunn
-@distractor-lu huelen
+@en What would you (formal) like?
+@distractor-en more
+@distractor-en less
+@distractor-lu méi
+@distractor-lu manner
 
 @sentence
 @lu Ech hätt gären e Glas Roude Wäin.
 @en I would like a glass of red wine.
-@distractor-en water
-@distractor-en coffee
-@distractor-lu Waasser
-@distractor-lu Kaffi
+@distractor-en a bit
+@distractor-en enough
+@distractor-lu e bëssen
+@distractor-lu genuch
 
 @sentence
 @lu Dat ass alles.
@@ -158,42 +120,42 @@
 @sentence
 @lu O waart!
 @en Oh wait!
-@distractor-en go
-@distractor-en come
-@distractor-lu géi
-@distractor-lu kommen
+@distractor-en big
+@distractor-en old
+@distractor-lu grouss
+@distractor-lu al
 
 @sentence
 @lu De Mann ass frëndlech.
 @en The man is friendly.
-@distractor-en woman
-@distractor-en small
-@distractor-lu Fra
-@distractor-lu kleng
+@distractor-en big
+@distractor-en old
+@distractor-lu grouss
+@distractor-lu al
 
 @sentence
 @lu Dat ass e frëndleche Mann.
 @en That is a friendly man.
-@distractor-en woman
-@distractor-en old
-@distractor-lu Fra
-@distractor-lu al
+@distractor-en beautiful
+@distractor-en new
+@distractor-lu schéin
+@distractor-lu nei
 
 @sentence
 @lu D'Nuecht gëtt donkel.
 @en The night is becoming dark.
 @distractor-en bright
-@distractor-en day
+@distractor-en short
 @distractor-lu hell
-@distractor-lu Dag
+@distractor-lu kuerz
 
 @sentence
 @lu Dat ass eng donkel Nuecht.
 @en That is a dark night.
 @distractor-en bright
-@distractor-en day
+@distractor-en warm
 @distractor-lu hell
-@distractor-lu Dag
+@distractor-lu waarm
 
 @sentence
 @lu D'Kand ass kleng.
@@ -206,58 +168,58 @@
 @sentence
 @lu Dat ass e klengt Kand.
 @en That is a small child.
-@distractor-en big
-@distractor-en man
-@distractor-lu grouss
-@distractor-lu Mann
+@distractor-en beautiful
+@distractor-en new
+@distractor-lu schéin
+@distractor-lu nei
 
 @sentence
 @lu Deng Hoer si blond.
 @en Your hair is blonde.
-@distractor-en my
 @distractor-en black
-@distractor-lu Meng
+@distractor-en brown
 @distractor-lu schwaarz
+@distractor-lu brong
 
 @sentence
 @lu Dat si blond Hoer.
 @en That is blonde hair.
-@distractor-en black
-@distractor-en my
-@distractor-lu schwaarz
-@distractor-lu meng
+@distractor-en yellow
+@distractor-en grey
+@distractor-lu giel
+@distractor-lu gro
 
 @sentence
 @lu De Mann ass ganz frëndlech.
 @en The man is very friendly.
-@distractor-en woman
-@distractor-en small
-@distractor-lu Fra
-@distractor-lu kleng
+@distractor-en cheap
+@distractor-en old
+@distractor-lu bëlleg
+@distractor-lu al
 
 @sentence
 @lu Et schneit.
 @en It is snowing.
-@distractor-en raining
 @distractor-en sunny
-@distractor-lu reent
+@distractor-en cloudy
 @distractor-lu sonneg
+@distractor-lu bedeckt
 
 @sentence
 @lu Et donnert an et blëtzt.
 @en There is thunder and lightning.
 @distractor-en sunny
-@distractor-en cold
+@distractor-en foggy
 @distractor-lu sonneg
-@distractor-lu kal
+@distractor-lu niwweleg
 
 @sentence
 @lu Et ass sonneg.
 @en It is sunny.
 @distractor-en cloudy
-@distractor-en rainy
+@distractor-en stormy
 @distractor-lu bedeckt
-@distractor-lu reent
+@distractor-lu stiermt
 
 @sentence
 @lu Et reent.
@@ -286,7 +248,7 @@
 @sentence
 @lu Et stiermt.
 @en It is stormy.
-@distractor-en raining
 @distractor-en snowing
-@distractor-lu reent
+@distractor-en raining
 @distractor-lu schneit
+@distractor-lu reent

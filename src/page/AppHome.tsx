@@ -72,6 +72,23 @@ export const AppHome = () => {
   const todayKey = new Date().toISOString().slice(0, 10);
   const todayMinutes = (dailySessions[todayKey]?.durationSeconds ?? 0) / 60;
 
+  // Group lesson metas by section, preserving manifest order. Sections within a
+  // level appear in manifest order; lessons within a section keep their order.
+  const sections = useMemo(() => {
+    const ordered: { sectionId: string; sectionTitle: string; lessons: LessonMeta[] }[] = [];
+    const indexById = new Map<string, number>();
+    for (const meta of lessonMetas) {
+      const idx = indexById.get(meta.sectionId);
+      if (idx === undefined) {
+        indexById.set(meta.sectionId, ordered.length);
+        ordered.push({ sectionId: meta.sectionId, sectionTitle: meta.sectionTitle, lessons: [meta] });
+      } else {
+        ordered[idx].lessons.push(meta);
+      }
+    }
+    return ordered;
+  }, [lessonMetas]);
+
   const handleSelectLesson = (lessonId: string) => {
     if (unlockedIds.includes(lessonId)) {
       posthog?.capture("lesson_selected", { lesson_id: lessonId });
@@ -128,15 +145,21 @@ export const AppHome = () => {
         />
 
         {/* Lesson grid — titles from manifest (all lessons); progress from loaded subset */}
-        <div>
-          <h3 className="text-sm font-semibold text-gray-600 mb-2">Lessons</h3>
-          <LessonGrid
-            lessons={lessonMetas}
-            progressMap={progressMap}
-            unlockedIds={unlockedIds}
-            currentLessonId={currentLessonId}
-            onSelectLesson={handleSelectLesson}
-          />
+        <div className="flex flex-col gap-4">
+          {sections.map((section) => (
+            <div key={section.sectionId}>
+              <h3 className="text-sm font-semibold text-gray-600 mb-2">
+                {section.sectionId} - {section.sectionTitle}
+              </h3>
+              <LessonGrid
+                lessons={section.lessons}
+                progressMap={progressMap}
+                unlockedIds={unlockedIds}
+                currentLessonId={currentLessonId}
+                onSelectLesson={handleSelectLesson}
+              />
+            </div>
+          ))}
         </div>
       </div>
 

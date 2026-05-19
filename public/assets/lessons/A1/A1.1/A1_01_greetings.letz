@@ -1,424 +1,380 @@
-# A1.01/A1_01_greetings.letz
+# A1/A1.1/A1_01_greetings.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 1"
+#   https://quizlet.com/_h2t0v7
+# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Distractor tokens are sourced from other entries within this same Quizlet set.
 
 @lesson A1.01 "Greetings"
 
-# --- Greetings ---
-@word Moien = Hi
+# --- Single-word / phrase entries (Quizlet cards 1-6, 13-22, 34-38, 55-57, 67) ---
 @word Gudde Moien = Good morning
-@word Gudde Mëtteg = Good afternoon
+@word Gudde Mëtteg/Gudde Mëtten = Good afternoon
 @word Gudden Owend = Good evening
-@word Gutt Nuecht = Good night
+@word Moien = Hi
 @word Bonjour = Hello
 @word Salut = Hi
-@word Wëllkomm = Welcome
-
-# --- Farewells ---
 @word Äddi = Bye
-@word Awar = Bye
+@word Awar/Awuer = Bye
 @word Ciao = Bye
 @word Bis geschwënn = See you soon
 @word Bis herno = See you later
-@word Bis dann = See you later
 @word Bis muer = See you tomorrow
+@word Bis dann = See you later
 @word Bis muer de Moien = See you tomorrow morning
-@word Bis de Mëtteg = See you at noon
+@word Bis de Mëtteg/Mëtten = See you at noon/in the afternoon
 @word Bis den Owend = See you in the evening
-
-# --- Politeness ---
 @word Merci = Thank you
-@word Pardon = Sorry
-@word Entschëllegt = Excuse me
-@word Wannechgelift = Please
-@word Jo = Yes
-@word Nee = No
 @word Ganz gutt = Very good
+@word Entschëllegt = Excuse me
+@word Pardon = Sorry
+@word Gutt Nuecht = Good night
+@word Jo = Yes
+@word Nee/neen = No
+@word Wannechgelift (wgl.) = Please, there you go
+@word Wëllkomm = Welcome
 
-# --- Feelings & states ---
-@word traureg = sad
-@word frou = happy
-@word hongereg = hungry
-@word kleng = small
-@word sauer = sour
-@word immens = really
-@word alles = everything
-@word vill = a lot
-@word net = not
-
-# --- Useful nouns ---
-@word de Bic = the pen
-@word de Kaffi = the coffee
-@word d'Waasser = the water
-@word d'Zäit = the time
-@word d'Stad = the city
-@word de Mupp = the dog
-@word d'Muppen = the dogs
-@word d'Plaz = the seat
-@word de Stéck = the piece
-@word d'Schockela = the chocolate
-@word den Zocker = the sugar
-@word d'Zitroun = the lemon
-@word d'Zitrounen = the lemons
-@word de Cappuccino = the cappuccino
-@word d'Euro = the euro
-@word dräi = three
-
-# --- Verbs ---
-@word sinn = to be
-@word hunn = to have
-@word ginn = to give
-@word wunnen = to live
-@word heeschen = to be called
-@word kommen = to come
-@word kënnen = can
-@word wëllen = to want
-@word drénken = to drink
-@word duzen = to address informally
-@word soen = to say
-@word hëllefen = to help
-
-# --- Sentences ---
+# --- Sentence entries (Quizlet cards 7-12, 23-33, 39-54, 58-66, 68) ---
 
 @sentence
 @lu Moien, wéi geet et?
 @en Hi, how are you?
-@distractor-en goodbye
 @distractor-en evening
+@distractor-en morning
 @distractor-lu Äddi
 @distractor-lu Owend
 
 @sentence
-@lu Wéi geet et dir?
-@en How are you?
-@distractor-en where
+@lu Kann ech hëllefen?
+@en Can I help?
 @distractor-en welcome
-@distractor-lu wou
-@distractor-lu Wëllkomm
-
-@sentence
-@lu Wéi geet et Iech?
-@en How are you?
-@distractor-en bye
-@distractor-en hi
-@distractor-lu Äddi
-@distractor-lu Moien
-
-@sentence
-@lu Mir geet et gutt.
-@en I'm fine.
-@distractor-en sad
-@distractor-en hungry
-@distractor-lu traureg
-@distractor-lu hongereg
-
-@sentence
-@lu A bei dir?
-@en And you?
-@distractor-en morning
-@distractor-en hi
-@distractor-lu Moien
+@distractor-en afternoon
+@distractor-lu Bonjour
 @distractor-lu Salut
 
 @sentence
 @lu Schwätz du Lëtzebuergesch?
-@en Do you speak Luxembourgish?
-@distractor-en drink
-@distractor-en have
-@distractor-lu drénken
-@distractor-lu hunn
+@en Do you (informal) speak Luxembourgish?
+@distractor-en sorry
+@distractor-en bye
+@distractor-lu Pardon
+@distractor-lu Ciao
 
 @sentence
 @lu Schwätzt Dir Lëtzebuergesch?
-@en Do you speak Luxembourgish?
-@distractor-en help
-@distractor-en come
-@distractor-lu hëllefen
-@distractor-lu kommen
+@en Do you (formal) speak Luxembourgish?
+@distractor-en hello
+@distractor-en thanks
+@distractor-lu Bonjour
+@distractor-lu Merci
 
 @sentence
 @lu Mir kënnen och du soen.
-@en We can also say you.
-@distractor-en they
-@distractor-en bye
-@distractor-lu si
-@distractor-lu Äddi
+@en We can also say you (informal).
+@distractor-en yes
+@distractor-en no
+@distractor-lu Jo
+@distractor-lu Nee
 
 @sentence
 @lu Mir kënnen eis och duzen.
 @en We can also address each other informally.
-@distractor-en formally
-@distractor-en help
-@distractor-lu Dir
-@distractor-lu hëllefen
-
-@sentence
-@lu Kann ech hëllefen?
-@en Can I help?
-@distractor-en drink
-@distractor-en go
-@distractor-lu drénken
-@distractor-lu goen
+@distractor-en evening
+@distractor-en welcome
+@distractor-lu Owend
+@distractor-lu Wëllkomm
 
 @sentence
 @lu Ech sinn d'Christine.
 @en I'm Christine.
-@distractor-en called
-@distractor-en have
-@distractor-lu heeschen
-@distractor-lu hunn
+@distractor-en bye
+@distractor-en good
+@distractor-lu Äddi
+@distractor-lu gutt
 
 @sentence
 @lu Ech sinn de Xavier.
 @en I'm Xavier.
 @distractor-en hi
-@distractor-en bye
+@distractor-en sorry
 @distractor-lu Moien
+@distractor-lu Pardon
+
+@sentence
+@lu Wéi geet et Iech?
+@en How are you (formal)?
+@distractor-en welcome
+@distractor-en bye
+@distractor-lu Wëllkomm
 @distractor-lu Äddi
 
 @sentence
-@lu Ech heeschen Anne.
-@en I'm called Anne.
-@distractor-en come
-@distractor-en live
-@distractor-lu kommen
-@distractor-lu wunnen
+@lu Mir geet et gutt.
+@en I'm fine.
+@distractor-en yes
+@distractor-en good
+@distractor-lu Jo
+@distractor-lu Salut
 
 @sentence
-@lu Ech heeschen Tom.
-@en I'm Tom.
-@distractor-en he
-@distractor-en where
-@distractor-lu hien
-@distractor-lu wou
+@lu Wéi geet et dir?
+@en How are you (informal)?
+@distractor-en evening
+@distractor-en morning
+@distractor-lu Owend
+@distractor-lu Moien
+
+@sentence
+@lu A bei dir?
+@en And you?
+@distractor-en thanks
+@distractor-en hello
+@distractor-lu Merci
+@distractor-lu Bonjour
 
 @sentence
 @lu Ech ginn dir e Bic.
-@en I give you a pen.
-@distractor-en water
-@distractor-en coffee
-@distractor-lu Waasser
-@distractor-lu Kaffi
+@en I give you (informal) a pen.
+@distractor-en welcome
+@distractor-en bye
+@distractor-lu Wëllkomm
+@distractor-lu Äddi
 
 @sentence
 @lu Ech ginn Iech e Bic.
-@en I give you a pen.
-@distractor-en bottle
-@distractor-en sugar
-@distractor-lu Fläsch
-@distractor-lu Zocker
+@en I give you (formal) a pen.
+@distractor-en hello
+@distractor-en yes
+@distractor-lu Bonjour
+@distractor-lu Jo
 
 @sentence
 @lu Du gëss mir e Bic.
 @en You give me a pen.
-@distractor-en us
-@distractor-en them
-@distractor-lu eis
-@distractor-lu hinnen
+@distractor-en bye
+@distractor-en good
+@distractor-lu Ciao
+@distractor-lu gutt
 
 @sentence
 @lu Du gëss eis e Bic.
 @en You give us a pen.
-@distractor-en me
-@distractor-en them
-@distractor-lu mir
-@distractor-lu hinnen
+@distractor-en thanks
+@distractor-en sorry
+@distractor-lu Merci
+@distractor-lu Pardon
 
 @sentence
 @lu Mir ginn hinnen e Bic.
 @en We give them a pen.
-@distractor-en me
-@distractor-en you
-@distractor-lu mir
-@distractor-lu dir
+@distractor-en hi
+@distractor-en welcome
+@distractor-lu Moien
+@distractor-lu Wëllkomm
 
 @sentence
 @lu Ech sinn net do.
 @en I'm not there.
-@distractor-en here
-@distractor-en happy
-@distractor-lu hei
-@distractor-lu frou
+@distractor-en hello
+@distractor-en bye
+@distractor-lu Bonjour
+@distractor-lu Äddi
 
 @sentence
 @lu Ech sinn traureg.
 @en I'm sad.
-@distractor-en happy
-@distractor-en hungry
-@distractor-lu frou
-@distractor-lu hongereg
+@distractor-en welcome
+@distractor-en thanks
+@distractor-lu Wëllkomm
+@distractor-lu Merci
 
 @sentence
 @lu Ech hunn Zäit.
 @en I have time.
-@distractor-en money
+@distractor-en yes
 @distractor-en no
-@distractor-lu Geld
-@distractor-lu keng
-
-@sentence
-@lu Ech hu keng Zäit.
-@en I don't have time.
-@distractor-en have
-@distractor-en lots
-@distractor-lu hunn
-@distractor-lu vill
+@distractor-lu Jo
+@distractor-lu Nee
 
 @sentence
 @lu Ech sinn hongereg.
 @en I'm hungry.
-@distractor-en sad
-@distractor-en small
-@distractor-lu traureg
-@distractor-lu kleng
+@distractor-en evening
+@distractor-en morning
+@distractor-lu Owend
+@distractor-lu Moien
 
 @sentence
 @lu Ech sinn immens frou.
 @en I'm really happy.
-@distractor-en sad
-@distractor-en hungry
-@distractor-lu traureg
-@distractor-lu hongereg
+@distractor-en bye
+@distractor-en hi
+@distractor-lu Äddi
+@distractor-lu Salut
 
 @sentence
 @lu Ech hunn alles.
 @en I have everything.
-@distractor-en lots
-@distractor-en time
-@distractor-lu vill
-@distractor-lu Zäit
+@distractor-en sorry
+@distractor-en good
+@distractor-lu Pardon
+@distractor-lu gutt
 
 @sentence
 @lu Ech si kleng.
 @en I'm small.
-@distractor-en happy
-@distractor-en sad
-@distractor-lu frou
-@distractor-lu traureg
+@distractor-en hello
+@distractor-en welcome
+@distractor-lu Bonjour
+@distractor-lu Wëllkomm
 
 @sentence
 @lu Zitroune si sauer.
 @en Lemons are sour.
-@distractor-en sweet
-@distractor-en bitter
-@distractor-lu séiss
-@distractor-lu batter
+@distractor-en thanks
+@distractor-en bye
+@distractor-lu Merci
+@distractor-lu Ciao
 
 @sentence
 @lu Ech hu Muppen.
 @en I have dogs.
-@distractor-en a lot
-@distractor-en time
-@distractor-lu vill
-@distractor-lu Zäit
+@distractor-en yes
+@distractor-en hi
+@distractor-lu Jo
+@distractor-lu Moien
 
 @sentence
 @lu Ech hu vill.
 @en I have lots.
-@distractor-en sad
-@distractor-en time
-@distractor-lu traureg
-@distractor-lu Zäit
+@distractor-en welcome
+@distractor-en evening
+@distractor-lu Wëllkomm
+@distractor-lu Owend
 
 @sentence
 @lu Ech sinn zu Bartreng.
 @en I'm in Bertrange.
-@distractor-en come
 @distractor-en bye
-@distractor-lu kommen
+@distractor-en hello
 @distractor-lu Äddi
+@distractor-lu Bonjour
 
 @sentence
 @lu Ech si beim Cactus.
 @en I'm at Cactus.
-@distractor-en city
-@distractor-en hungry
-@distractor-lu Stad
-@distractor-lu hongereg
+@distractor-en thanks
+@distractor-en good
+@distractor-lu Merci
+@distractor-lu gutt
 
 @sentence
 @lu Ech wunnen an der Stad.
 @en I live in the city.
-@distractor-en village
-@distractor-en come
-@distractor-lu Duerf
-@distractor-lu kommen
+@distractor-en welcome
+@distractor-en yes
+@distractor-lu Wëllkomm
+@distractor-lu Jo
 
 @sentence
-@lu Wëlls du e Kaffi drénken?
-@en Do you want to drink a coffee?
-@distractor-en water
-@distractor-en eat
-@distractor-lu Waasser
-@distractor-lu iessen
+@lu Ech hu keng Zäit.
+@en I don't have time.
+@distractor-en hi
+@distractor-en sorry
+@distractor-lu Moien
+@distractor-lu Pardon
+
+@sentence
+@lu Ech heeschen Anne.
+@en I'm called Anne.
+@distractor-en bye
+@distractor-en thanks
+@distractor-lu Äddi
+@distractor-lu Merci
+
+@sentence
+@lu Ech heeschen Tom.
+@en I'm Tom.
+@distractor-en evening
+@distractor-en welcome
+@distractor-lu Owend
+@distractor-lu Wëllkomm
+
+@sentence
+@lu Et ass gär geschitt.
+@en You're welcome.
+@distractor-en thanks
+@distractor-en sorry
+@distractor-lu Merci
+@distractor-lu Pardon
 
 @sentence
 @lu Wëllt Dir e Glas Waasser?
-@en Do you want a glass of water?
-@distractor-en sugar
-@distractor-en coffee
-@distractor-lu Zocker
-@distractor-lu Kaffi
+@en Do you (formal) want a glass of water?
+@distractor-en yes
+@distractor-en good
+@distractor-lu Jo
+@distractor-lu gutt
+
+@sentence
+@lu Wëlls du e Kaffi drénken?
+@en Do you (informal) want to drink a coffee?
+@distractor-en hello
+@distractor-en welcome
+@distractor-lu Bonjour
+@distractor-lu Wëllkomm
 
 @sentence
 @lu Wëlls du e Stéck Schockela?
-@en Do you want a piece of chocolate?
-@distractor-en pen
-@distractor-en water
-@distractor-lu Bic
-@distractor-lu Waasser
+@en Do you (informal) want a piece of chocolate?
+@distractor-en bye
+@distractor-en hi
+@distractor-lu Äddi
+@distractor-lu Moien
 
 @sentence
-@lu Wëllt Dir Zocker?
-@en Do you want any sugar?
-@distractor-en water
-@distractor-en coffee
-@distractor-lu Waasser
-@distractor-lu Kaffi
-
-@sentence
-@lu Kann ech e Cappuccino kréien, wgl.?
-@en Can I have a cappuccino, please?
-@distractor-en give
-@distractor-en water
-@distractor-lu ginn
-@distractor-lu Waasser
-
-@sentence
-@lu Soss nach eppes?
-@en Anything else?
+@lu Kann ech e Capuccino kréien, wgl.?
+@en Can I have a capuccino, please?
 @distractor-en thanks
 @distractor-en welcome
 @distractor-lu Merci
 @distractor-lu Wëllkomm
 
 @sentence
+@lu Wëllt Dir Zocker?
+@en Do you (formal) want any sugar?
+@distractor-en yes
+@distractor-en hi
+@distractor-lu Jo
+@distractor-lu Salut
+
+@sentence
+@lu Soss nach eppes?
+@en Anything else?
+@distractor-en bye
+@distractor-en evening
+@distractor-lu Ciao
+@distractor-lu Owend
+
+@sentence
 @lu Dat mécht dräi Euro.
 @en That's three euro.
-@distractor-en five
-@distractor-en two
-@distractor-lu fënnef
-@distractor-lu zwee
+@distractor-en thanks
+@distractor-en sorry
+@distractor-lu Merci
+@distractor-lu Pardon
 
 @sentence
 @lu Huelt Iech scho Plaz.
-@en You can already take a seat.
-@distractor-en bottle
-@distractor-en pen
-@distractor-lu Fläsch
-@distractor-lu Bic
-
-@sentence
-@lu Et ass gär geschitt.
-@en You're welcome.
-@distractor-en sorry
-@distractor-en hi
-@distractor-lu Pardon
-@distractor-lu Moien
+@en You (formal) can already take a seat.
+@distractor-en hello
+@distractor-en yes
+@distractor-lu Bonjour
+@distractor-lu Jo
 
 @sentence
 @lu Jo, gären.
 @en Yes, with pleasure.
 @distractor-en no
-@distractor-en sorry
+@distractor-en bye
 @distractor-lu Nee
-@distractor-lu Pardon
+@distractor-lu Äddi

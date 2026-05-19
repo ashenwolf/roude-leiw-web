@@ -1,9 +1,12 @@
-# A1.03/A1_03_numbers_and_personal_info.letz
+# A1/A1.1/A1_03_numbers_and_personal_info.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 3"
+#   https://quizlet.com/_h2t12h
+# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Distractor tokens are sourced from other entries within this same Quizlet set.
 
 @lesson A1.03 "Numbers & Personal Info"
 
-# --- Numbers 0-10 ---
+# --- Numbers (Quizlet cards 1-11) ---
 @word null = zero
 @word eent = one
 @word zwee = two
@@ -16,247 +19,211 @@
 @word néng = nine
 @word zéng = ten
 
-# --- Personal information ---
-@word d'Telefonsnummer = the telephone number
-@word d'Telefonsnummeren = the telephone numbers
-@word de Gebuertsdag = the birthday
-@word d'Gebuertsdeeg = the birthdays
-@word d'Adress = the address
-@word d'Adressen = the addresses
-@word de Joer = the year
-@word d'Joeren = the years
-
-# --- Family & relationships ---
-@word de Brudder = the brother
-@word d'Bridder = the brothers
-@word d'Schwëster = the sister
-@word d'Schwësteren = the sisters
-@word d'Kanner = the children
-@word de Frënd = the boyfriend
-@word d'Frëndin = the girlfriend
-@word de Mann = the husband
-@word d'Fra = the wife
-
-# --- Marital status ---
-@word bestuet = married
-@word gescheet = divorced
-@word getrennt = separated
-@word verloobt = engaged
-@word de Jonggesell = the bachelor
-@word d'Jonggesellin = the bachelorette
-@word de Wittmann = the widower
-@word d'Wittfra = the widow
-
-# --- Useful words ---
+# --- Phrase / vocabulary (Quizlet card 29) ---
 @word zesummen = together
-@word léif = lovely
-@word wéini = when
-@word gebuer = born
-@word um Kierchbierg = in the Kirchberg neighbourhood
-@word d'Belsch = Belgium
-@word Bréissel = Brussels
 
-# --- Question words ---
-@word Wéi vill = How many
+# --- Nouns with multiple forms (Quizlet cards 30-31) ---
+@word e Brudder, de Brudder (m), Bridder (pl) = brother, brothers
+@word eng Schwëster, d'Schwëster (f), Schwësteren (pl) = sister, sisters
 
-# --- Sentences ---
+# --- Sentences (Quizlet cards 12-28, 32-39) ---
 
 @sentence
 @lu Wéi ass deng Telefonsnummer?
-@en What is your telephone number?
-@distractor-en address
-@distractor-en birthday
-@distractor-lu Adress
-@distractor-lu Gebuertsdag
+@en What is your (informal) telephone number?
+@distractor-en together
+@distractor-en zero
+@distractor-lu zesummen
+@distractor-lu null
 
 @sentence
 @lu Wéi ass Är Telefonsnummer?
-@en What is your telephone number?
-@distractor-en my
-@distractor-en his
-@distractor-lu Meng
-@distractor-lu Säin
+@en What is your (formal) telephone number?
+@distractor-en one
+@distractor-en two
+@distractor-lu eent
+@distractor-lu zwee
 
 @sentence
-@lu Meng Telefonsnummer ass dräi.
-@en My phone number is three.
-@distractor-en two
-@distractor-en five
-@distractor-lu zwee
-@distractor-lu fënnef
+@lu Meng Telefonsnummer ass...
+@en My phone number is...
+@distractor-en three
+@distractor-en four
+@distractor-lu dräi
+@distractor-lu véier
 
 @sentence
 @lu Wou wunnt Dir?
-@en Where do you live?
-@distractor-en come
-@distractor-en how
-@distractor-lu kommen
-@distractor-lu Wéi
+@en Where do you (formal) live?
+@distractor-en five
+@distractor-en six
+@distractor-lu fënnef
+@distractor-lu sechs
 
 @sentence
 @lu Wou wunns du?
-@en Where do you live?
-@distractor-en work
-@distractor-en what
-@distractor-lu schaffs
-@distractor-lu Wat
+@en Where do you (informal) live?
+@distractor-en seven
+@distractor-en eight
+@distractor-lu siwen
+@distractor-lu aacht
 
 @sentence
 @lu Ech wunnen an der Belsch, zu Bréissel.
 @en I live in Belgium, in Brussels.
-@distractor-en France
-@distractor-en come
-@distractor-lu Frankräich
-@distractor-lu kommen
+@distractor-en nine
+@distractor-en ten
+@distractor-lu néng
+@distractor-lu zéng
 
 @sentence
 @lu Ech wunnen um Kierchbierg.
 @en I live in the Kirchberg neighbourhood.
-@distractor-en city
-@distractor-en country
-@distractor-lu Stad
-@distractor-lu Land
+@distractor-en together
+@distractor-en zero
+@distractor-lu zesummen
+@distractor-lu null
 
 @sentence
 @lu Wéi vill Joer hutt Dir?
-@en How old are you?
-@distractor-en where
-@distractor-en when
-@distractor-lu Wou
-@distractor-lu Wéini
+@en How many years do you (formal) have?
+@distractor-en one
+@distractor-en two
+@distractor-lu eent
+@distractor-lu zwee
 
 @sentence
 @lu Wéi vill Joer hues du?
-@en How old are you?
-@distractor-en have
-@distractor-en come
-@distractor-lu hunn
-@distractor-lu kommen
+@en How many years do you (informal) have?
+@distractor-en three
+@distractor-en four
+@distractor-lu dräi
+@distractor-lu véier
 
 @sentence
 @lu Wéini ass Äre Gebuertsdag?
-@en When is your birthday?
-@distractor-en address
-@distractor-en number
-@distractor-lu Adress
-@distractor-lu Nummer
+@en When is your (formal) birthday?
+@distractor-en five
+@distractor-en six
+@distractor-lu fënnef
+@distractor-lu sechs
 
 @sentence
 @lu Wéini ass däi Gebuertsdag?
-@en When is your birthday?
-@distractor-en where
-@distractor-en how
-@distractor-lu Wou
-@distractor-lu Wéi
+@en When is your (informal) birthday?
+@distractor-en seven
+@distractor-en eight
+@distractor-lu siwen
+@distractor-lu aacht
 
 @sentence
 @lu Wéini sidd Dir gebuer?
-@en When were you born?
-@distractor-en married
-@distractor-en divorced
-@distractor-lu bestuet
-@distractor-lu gescheet
+@en When are (were) you (formal) born?
+@distractor-en nine
+@distractor-en ten
+@distractor-lu néng
+@distractor-lu zéng
 
 @sentence
 @lu Wéini bass du gebuer?
-@en When were you born?
-@distractor-en where
-@distractor-en how
-@distractor-lu Wou
-@distractor-lu Wéi
+@en When are (were) you (informal) born?
+@distractor-en together
+@distractor-en zero
+@distractor-lu zesummen
+@distractor-lu null
 
 @sentence
 @lu Mir si bestuet.
 @en We are married.
-@distractor-en divorced
-@distractor-en separated
-@distractor-lu gescheet
-@distractor-lu getrennt
+@distractor-en sister, sisters
+@distractor-en brother, brothers
+@distractor-lu Schwëster
+@distractor-lu Brudder
 
 @sentence
 @lu Ech si gescheet.
 @en I'm divorced.
-@distractor-en married
-@distractor-en engaged
-@distractor-lu bestuet
-@distractor-lu verloobt
+@distractor-en together
+@distractor-en one
+@distractor-lu zesummen
+@distractor-lu eent
 
 @sentence
 @lu Mir hunn eis getrennt.
 @en We separated.
-@distractor-en married
-@distractor-en together
-@distractor-lu bestuet
-@distractor-lu zesummen
+@distractor-en two
+@distractor-en three
+@distractor-lu zwee
+@distractor-lu dräi
 
 @sentence
 @lu Ech fannen dech léif.
 @en I like you.
-@distractor-en him
-@distractor-en us
-@distractor-lu hien
-@distractor-lu eis
+@distractor-en four
+@distractor-en five
+@distractor-lu véier
+@distractor-lu fënnef
 
 @sentence
 @lu Ech hu Kanner.
 @en I have children.
-@distractor-en sister
-@distractor-en brother
+@distractor-en sister, sisters
+@distractor-en brother, brothers
 @distractor-lu Schwëster
 @distractor-lu Brudder
 
 @sentence
 @lu Ech hu keng Kanner.
 @en I don't have children.
-@distractor-en have
-@distractor-en a lot
-@distractor-lu hunn
-@distractor-lu vill
+@distractor-en six
+@distractor-en seven
+@distractor-lu sechs
+@distractor-lu siwen
 
 @sentence
 @lu Ech hunn e Frënd.
-@en I have a boyfriend.
-@distractor-en girlfriend
-@distractor-en sister
-@distractor-lu Frëndin
-@distractor-lu Schwëster
+@en I have a friend (boyfriend).
+@distractor-en eight
+@distractor-en nine
+@distractor-lu aacht
+@distractor-lu néng
 
 @sentence
 @lu Ech hu kee Frënd.
-@en I don't have a boyfriend.
-@distractor-en have
-@distractor-en husband
-@distractor-lu hunn
-@distractor-lu Mann
+@en I don't have a friend (boyfriend).
+@distractor-en ten
+@distractor-en together
+@distractor-lu zéng
+@distractor-lu zesummen
 
 @sentence
 @lu Ech hunn eng Frëndin.
 @en I have a girlfriend.
-@distractor-en boyfriend
-@distractor-en wife
-@distractor-lu Frënd
-@distractor-lu Fra
+@distractor-en zero
+@distractor-en one
+@distractor-lu null
+@distractor-lu eent
 
 @sentence
 @lu Ech hu keng Frëndin.
 @en I don't have a girlfriend.
-@distractor-en a
-@distractor-en have
-@distractor-lu eng
-@distractor-lu hunn
+@distractor-en two
+@distractor-en three
+@distractor-lu zwee
+@distractor-lu dräi
 
 @sentence
 @lu Ech gi bei mäi Mann.
 @en I'm going to my husband.
-@distractor-en wife
-@distractor-en your
-@distractor-lu Fra
-@distractor-lu däi
+@distractor-en four
+@distractor-en five
+@distractor-lu véier
+@distractor-lu fënnef
 
 @sentence
 @lu Ech ginn net bei mäi Mann.
 @en I'm not going to my husband.
-@distractor-en go
-@distractor-en wife
-@distractor-lu ginn
-@distractor-lu Fra
+@distractor-en six
+@distractor-en seven
+@distractor-lu sechs
+@distractor-lu siwen

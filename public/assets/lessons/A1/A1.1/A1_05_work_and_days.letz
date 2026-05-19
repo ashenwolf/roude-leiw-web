@@ -1,57 +1,12 @@
-# A1.05/A1_05_work_and_days.letz
+# A1/A1.1/A1_05_work_and_days.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 5"
+#   https://quizlet.com/_h2swfv
+# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Distractor tokens are sourced from other entries within this same Quizlet set.
 
 @lesson A1.05 "Work & Days"
 
-# --- Work-related verbs ---
-@word schaffen = to work
-@word schreiwen = to write
-@word verteideg = to defend
-@word liesen = to read
-@word verkafen = to sell
-@word këmmeren = to look after
-@word geréieren = to manage
-@word versuergen = to provide
-@word schwätzen = to talk
-@word maachen = to do
-@word ausschaffen = to devise
-@word hëllefen = to help
-@word entwerfen = to design
-
-# --- Workplace nouns ---
-@word den Artikel = the article
-@word d'Artikelen = the articles
-@word d'Leit = the people
-@word d'Recherche = the study
-@word d'Recherchen = the studies
-@word de Service = the service
-@word d'Servicer = the services
-@word d'Bankenindustrie = the banking industry
-@word d'Personal = the personnel
-@word de Fong = the fund
-@word d'Fongen = the funds
-@word den Enkel = the grandchild
-@word d'Enkelen = the grandchildren
-@word den Telefon = the telephone
-@word d'Presentatioun = the presentation
-@word d'Presentatiounen = the presentations
-@word d'Strategie = the strategy
-@word de Plang = the plan
-@word d'Pläng = the plans
-@word de Computer = the computer
-@word de Coiffer = the hairdresser
-@word d'Post = the post office
-@word de Staat = the government
-@word d'Bank = the bank
-@word d'Banken = the banks
-@word de Projet = the project
-@word de Direkter = the director
-@word de Ministère = the ministry
-@word de Bus = the bus
-@word de Gaart = the garden
-@word d'Bicher = the books
-
-# --- Days of the week ---
+# --- Days of the week (Quizlet cards 31-37) ---
 @word Méindeg = Monday
 @word Dënschdeg = Tuesday
 @word Mëttwoch = Wednesday
@@ -60,10 +15,10 @@
 @word Samschdeg = Saturday
 @word Sonndeg = Sunday
 
-# --- Daily routine ---
+# --- Daily routine verbs (Quizlet cards 38-48) ---
 @word opstoen = to get up
 @word Zänn wäschen = to brush teeth
-@word Sport maachen = to do sports
+@word Sport maachen = to do sports/to work out
 @word an d'Dusch goen = to go for a shower
 @word d'Hoer kämmen = to brush hair
 @word Kaffi drénken = to have breakfast
@@ -73,123 +28,123 @@
 @word zu Nuecht iessen = to have dinner
 @word schlofe goen = to go to sleep
 
-# --- Sentences ---
+# --- Sentences (Quizlet cards 1-30) ---
 
 @sentence
 @lu Ech schreiwen Artikelen.
 @en I write articles.
-@distractor-en read
-@distractor-en books
-@distractor-lu liesen
-@distractor-lu Bicher
+@distractor-en Monday
+@distractor-en Tuesday
+@distractor-lu Méindeg
+@distractor-lu Dënschdeg
 
 @sentence
 @lu Ech verteidege Leit.
 @en I defend people.
-@distractor-en help
-@distractor-en sell
-@distractor-lu hëllefen
-@distractor-lu verkafen
+@distractor-en Wednesday
+@distractor-en Thursday
+@distractor-lu Mëttwoch
+@distractor-lu Donneschdeg
 
 @sentence
 @lu Hatt liest vill Recherchen.
 @en She reads a lot of studies.
-@distractor-en few
-@distractor-en books
-@distractor-lu wéineg
-@distractor-lu Bicher
+@distractor-en Friday
+@distractor-en Saturday
+@distractor-lu Freideg
+@distractor-lu Samschdeg
 
 @sentence
 @lu Hie verkeeft Servicer un d'Bankenindustrie.
 @en He sells services to the banking industry.
-@distractor-en buy
-@distractor-en post office
-@distractor-lu kafen
-@distractor-lu Post
+@distractor-en Sunday
+@distractor-en Monday
+@distractor-lu Sonndeg
+@distractor-lu Méindeg
 
 @sentence
 @lu Du këmmers dech ëm d'Personal.
 @en You look after the personnel.
-@distractor-en grandchildren
-@distractor-en director
-@distractor-lu Enkelen
-@distractor-lu Direkter
+@distractor-en to get up
+@distractor-en to brush teeth
+@distractor-lu opstoen
+@distractor-lu Zänn wäschen
 
 @sentence
 @lu Si geréiert Fongen.
 @en She manages funds.
-@distractor-en he
-@distractor-en projects
-@distractor-lu Hien
-@distractor-lu Projeten
+@distractor-en to brush hair
+@distractor-en to go shopping
+@distractor-lu d'Hoer kämmen
+@distractor-lu akafe goen
 
 @sentence
 @lu Dir versuergt Är Enkelen.
-@en You look after your grandchildren.
-@distractor-en my
-@distractor-en parents
-@distractor-lu Meng
-@distractor-lu Elteren
+@en You (plural or formal) look after your grand-children.
+@distractor-en to have lunch
+@distractor-en to have dinner
+@distractor-lu zu Mëtteg iessen
+@distractor-lu zu Nuecht iessen
 
 @sentence
 @lu Ech schwätze vill um Telefon.
 @en I talk a lot on the phone.
-@distractor-en write
-@distractor-en computer
-@distractor-lu schreiwen
-@distractor-lu Computer
+@distractor-en to go to work
+@distractor-en to go to sleep
+@distractor-lu schaffe goen
+@distractor-lu schlofe goen
 
 @sentence
 @lu Ech maache vill Presentatiounen.
 @en I do a lot of presentations.
-@distractor-en few
-@distractor-en plans
-@distractor-lu wéineg
-@distractor-lu Pläng
+@distractor-en Tuesday
+@distractor-en Wednesday
+@distractor-lu Dënschdeg
+@distractor-lu Mëttwoch
 
 @sentence
 @lu Hie schafft eng nei Strategie aus.
 @en He devises a new strategy.
-@distractor-en old
-@distractor-en plan
-@distractor-lu al
-@distractor-lu Plang
+@distractor-en Thursday
+@distractor-en Friday
+@distractor-lu Donneschdeg
+@distractor-lu Freideg
 
 @sentence
 @lu Du hëllefs de Leit.
 @en You help people.
-@distractor-en director
-@distractor-en sell
-@distractor-lu Direkter
-@distractor-lu verkafen
+@distractor-en Saturday
+@distractor-en Sunday
+@distractor-lu Samschdeg
+@distractor-lu Sonndeg
 
 @sentence
 @lu Du schreifs Bicher.
 @en You write books.
-@distractor-en read
-@distractor-en articles
-@distractor-lu liesen
-@distractor-lu Artikelen
+@distractor-en Monday
+@distractor-en Tuesday
+@distractor-lu Méindeg
+@distractor-lu Dënschdeg
 
 @sentence
 @lu Dir entwerft Pläng.
-@en You design plans.
-@distractor-en strategy
-@distractor-en write
-@distractor-lu Strategie
-@distractor-lu schreiwen
+@en You (plural or formal) design plans.
+@distractor-en to get up
+@distractor-en to brush teeth
+@distractor-lu opstoen
+@distractor-lu Zänn wäschen
 
 @sentence
 @lu Hatt schafft vill um Computer.
-@en She works a lot on the computer.
-@distractor-en phone
-@distractor-en few
-@distractor-lu Telefon
-@distractor-lu wéineg
+@en She works on the computer a lot.
+@distractor-en to go for a shower
+@distractor-en to do sports
+@distractor-lu an d'Dusch goen
+@distractor-lu Sport maachen
 
 @sentence
 @lu Wou schaffs du?
-@en Where do you work?
+@en Where do you (informal) work?
 @distractor-en how
 @distractor-en when
 @distractor-lu Wéi
@@ -197,107 +152,107 @@
 
 @sentence
 @lu Wou schafft Dir?
-@en Where do you work?
-@distractor-en live
-@distractor-en come
-@distractor-lu wunns
-@distractor-lu kommen
+@en Where do you (formal) work?
+@distractor-en Monday
+@distractor-en Friday
+@distractor-lu Méindeg
+@distractor-lu Freideg
 
 @sentence
 @lu Hie schafft beim Coiffer.
 @en He works at the hairdresser's.
-@distractor-en bank
-@distractor-en post office
-@distractor-lu Bank
-@distractor-lu Post
+@distractor-en to brush hair
+@distractor-en to go shopping
+@distractor-lu d'Hoer kämmen
+@distractor-lu akafe goen
 
 @sentence
 @lu Si schafft op der Post.
 @en She works at the post office.
-@distractor-en bank
-@distractor-en bus
-@distractor-lu Bank
-@distractor-lu Bus
+@distractor-en Tuesday
+@distractor-en Wednesday
+@distractor-lu Dënschdeg
+@distractor-lu Mëttwoch
 
 @sentence
 @lu Hatt schafft fir de Staat.
 @en She works for the government.
-@distractor-en bank
-@distractor-en director
-@distractor-lu Bank
-@distractor-lu Direkter
+@distractor-en Thursday
+@distractor-en Saturday
+@distractor-lu Donneschdeg
+@distractor-lu Samschdeg
 
 @sentence
 @lu Ech schaffen op enger Bank.
 @en I work at a bank.
-@distractor-en post office
-@distractor-en project
-@distractor-lu Post
-@distractor-lu Projet
+@distractor-en Sunday
+@distractor-en Monday
+@distractor-lu Sonndeg
+@distractor-lu Méindeg
 
 @sentence
 @lu Ech schaffe bei enger Bank.
 @en I work at a bank.
-@distractor-en hairdresser
-@distractor-en garden
-@distractor-lu Coiffer
-@distractor-lu Gaart
+@distractor-en Tuesday
+@distractor-en Wednesday
+@distractor-lu Dënschdeg
+@distractor-lu Mëttwoch
 
 @sentence
 @lu Ech schaffen un engem Projet.
 @en I work on a project.
-@distractor-en plan
-@distractor-en strategy
-@distractor-lu Plang
-@distractor-lu Strategie
+@distractor-en Thursday
+@distractor-en Friday
+@distractor-lu Donneschdeg
+@distractor-lu Freideg
 
 @sentence
 @lu Ech schaffe mat enger Bank.
 @en I work with a bank.
-@distractor-en for
-@distractor-en at
-@distractor-lu fir
-@distractor-lu op
+@distractor-en Saturday
+@distractor-en Sunday
+@distractor-lu Samschdeg
+@distractor-lu Sonndeg
 
 @sentence
 @lu Ech schaffe fir eng Bank.
 @en I work for a bank.
-@distractor-en with
-@distractor-en at
-@distractor-lu mat
-@distractor-lu op
+@distractor-en to have lunch
+@distractor-en to have dinner
+@distractor-lu zu Mëtteg iessen
+@distractor-lu zu Nuecht iessen
 
 @sentence
 @lu Ech schaffen am Gaart.
 @en I work in the garden.
-@distractor-en bank
-@distractor-en post office
-@distractor-lu Bank
-@distractor-lu Post
+@distractor-en to go to work
+@distractor-en to go to sleep
+@distractor-lu schaffe goen
+@distractor-lu schlofe goen
 
 @sentence
 @lu Hatt schafft mam Direkter.
-@en She works with the director.
-@distractor-en hairdresser
-@distractor-en personnel
-@distractor-lu Coiffer
-@distractor-lu Personal
+@en She works with the (male) director.
+@distractor-en Monday
+@distractor-en Tuesday
+@distractor-lu Méindeg
+@distractor-lu Dënschdeg
 
 @sentence
 @lu Si schafft um Ministère.
 @en She works at the Ministry.
-@distractor-en bank
-@distractor-en post office
-@distractor-lu Bank
-@distractor-lu Post
+@distractor-en Wednesday
+@distractor-en Thursday
+@distractor-lu Mëttwoch
+@distractor-lu Donneschdeg
 
 @sentence
 @lu Mir schaffen um Projet.
 @en We work on the project.
-@distractor-en plan
-@distractor-en bank
-@distractor-lu Plang
-@distractor-lu Bank
+@distractor-en Friday
+@distractor-en Saturday
+@distractor-lu Freideg
+@distractor-lu Samschdeg
 
 @sentence
 @lu Wéi gees du schaffen?
@@ -309,8 +264,8 @@
 
 @sentence
 @lu Ech gi mam Bus schaffen.
-@en I go to work by bus.
-@distractor-en train
-@distractor-en bike
-@distractor-lu Zuch
-@distractor-lu Vëlo
+@en I go to work by (with the) bus.
+@distractor-en Sunday
+@distractor-en Monday
+@distractor-lu Sonndeg
+@distractor-lu Méindeg

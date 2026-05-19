@@ -2,16 +2,22 @@
   "levels": [
     {
       "id": "A1",
-      "lessons": [
-        { "id": "A1.01", "file": "A1.1/A1_01_greetings.letz", "title": "Greetings" },
-        { "id": "A1.02", "file": "A1.1/A1_02_introductions_and_basics.letz", "title": "Introductions & Basics" },
-        { "id": "A1.03", "file": "A1.1/A1_03_numbers_and_personal_info.letz", "title": "Numbers & Personal Info" },
-        { "id": "A1.04", "file": "A1.1/A1_04_things_adjectives_and_weather.letz", "title": "Things, Adjectives & Weather" },
-        { "id": "A1.05", "file": "A1.1/A1_05_work_and_days.letz", "title": "Work & Days" },
-        { "id": "A1.06", "file": "A1.1/A1_06_hobbies_and_time.letz", "title": "Hobbies & Time" },
-        { "id": "A1.07", "file": "A1.1/A1_07_food_and_shopping.letz", "title": "Food & Shopping" },
-        { "id": "A1.08", "file": "A1.1/A1_08_places_and_directions.letz", "title": "Places & Directions" },
-        { "id": "A1.09", "file": "A1.1/A1_09_verbs_review.letz", "title": "Verbs Review" }
+      "sections": [
+        {
+          "id": "A1.1",
+          "title": "Basics",
+          "lessons": [
+            { "id": "A1.01", "file": "A1.1/A1_01_greetings.letz", "title": "Greetings" },
+            { "id": "A1.02", "file": "A1.1/A1_02_introductions_and_basics.letz", "title": "Introductions & Basics" },
+            { "id": "A1.03", "file": "A1.1/A1_03_numbers_and_personal_info.letz", "title": "Numbers & Personal Info" },
+            { "id": "A1.04", "file": "A1.1/A1_04_things_adjectives_and_weather.letz", "title": "Things, Adjectives & Weather" },
+            { "id": "A1.05", "file": "A1.1/A1_05_work_and_days.letz", "title": "Work & Days" },
+            { "id": "A1.06", "file": "A1.1/A1_06_hobbies_and_time.letz", "title": "Hobbies & Time" },
+            { "id": "A1.07", "file": "A1.1/A1_07_food_and_shopping.letz", "title": "Food & Shopping" },
+            { "id": "A1.08", "file": "A1.1/A1_08_places_and_directions.letz", "title": "Places & Directions" },
+            { "id": "A1.09", "file": "A1.1/A1_09_verbs_review.letz", "title": "Verbs Review" }
+          ]
+        }
       ]
     }
   ]
