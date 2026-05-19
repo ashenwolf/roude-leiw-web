@@ -1,0 +1,412 @@
+# A1.06/A1_06_hobbies_and_time.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 6"
+
+@lesson A1.06 "Hobbies & Time"
+
+# --- Hobby verbs / activities ---
+@word kucken = to watch
+@word liesen = to read
+@word schwammen = to swim
+@word schwamme goen = to go swimming
+@word an de Kino goen = to go to the cinema
+@word Tëlee kucken = to watch TV
+@word danze goen = to go dancing
+@word spadséiere goen = to go for a walk
+@word Sport maachen = to do sports
+@word um Internet surfen = to surf the web
+@word Lëtzebuergesch léieren = to learn Luxembourgish
+@word lafe goen = to go for a run
+@word spillen = to play
+@word Musek lauschteren = to listen to music
+@word Bicher liesen = to read books
+@word fléien = to fly
+
+# --- Hobby nouns ---
+@word de Sport = the sport
+@word de Kino = the cinema
+@word d'Tëlee = the TV
+@word d'Musek = the music
+@word de Piano = the piano
+@word de Squash = the squash
+@word d'Hobbyen = the hobbies
+@word de Kanner = the children
+@word den Aarbechtskolleeg = the work colleague
+
+# --- Frequency ---
+@word gär = with pleasure
+@word ganz gär = very much
+@word net gär = not happily
+@word guer net gär = really not
+@word dacks = often
+@word net dacks = not often
+@word heiansdo = sometimes
+@word eemol = once
+@word zweemol = twice
+@word ni = never
+@word am Mount = a month
+@word an der Woch = a week
+@word wéi oft = how often
+
+# --- Time / o'clock ---
+@word d'Auer = the hour
+@word eng Auer = one o'clock
+@word zwou Auer = two o'clock
+@word dräi Auer = three o'clock
+@word Véierel vir = quarter to
+@word Véierel op = quarter past
+@word hallwer = half past
+@word moies = in the morning
+@word vun = from
+@word bis = until
+
+# --- Modal verbs ---
+@word kënnen = can
+@word mussen = must
+@word sollen = should
+@word wëllen = to want
+@word däerfen = to be allowed to
+@word retten = to save
+@word manipuléieren = to manipulate
+@word dreemen = to dream
+@word fëmmen = to smoke
+
+# --- Adjectives & states ---
+@word aventuriéis = adventurous
+@word frëndlech = friendly
+@word normal = normal
+@word léiwer = preferably
+@word genau = exactly
+
+# --- Meeting & planning ---
+@word de Rendez-vous = the appointment
+@word d'Reunioun = the meeting
+@word doheem = at home
+@word de Restaurant = the restaurant
+
+# --- Useful verbs ---
+@word kommen = to come
+@word sichen = to look for
+@word sich kommen = to come pick up
+@word treffen = to meet
+
+# --- Sentences ---
+
+@sentence
+@lu Ech kucke gär Sport.
+@en I like to watch sports.
+@distractor-en TV
+@distractor-en music
+@distractor-lu Tëlee
+@distractor-lu Musek
+
+@sentence
+@lu Ech kucken net gär Sport.
+@en I don't like to watch sports.
+@distractor-en TV
+@distractor-en piano
+@distractor-lu Tëlee
+@distractor-lu Piano
+
+@sentence
+@lu Ech gi ganz gär spadséieren.
+@en I like to go for a walk very much.
+@distractor-en run
+@distractor-en swim
+@distractor-lu lafen
+@distractor-lu schwammen
+
+@sentence
+@lu Ech gi guer net gär schwammen.
+@en I really don't like to go swimming.
+@distractor-en walk
+@distractor-en run
+@distractor-lu spadséieren
+@distractor-lu lafen
+
+@sentence
+@lu Spillt hatt gär Piano?
+@en Does she like to play the piano?
+@distractor-en he
+@distractor-en read
+@distractor-lu hien
+@distractor-lu liesen
+
+@sentence
+@lu Ech maachen net dacks Sport.
+@en I don't often do sports.
+@distractor-en sometimes
+@distractor-en never
+@distractor-lu heiansdo
+@distractor-lu ni
+
+@sentence
+@lu Ech spillen heiansdo Squash.
+@en I sometimes play squash.
+@distractor-en often
+@distractor-en piano
+@distractor-lu dacks
+@distractor-lu Piano
+
+@sentence
+@lu Ech spillen eemol am Mount mat mengem Aarbechtskolleeg.
+@en I play once a month with my work colleague.
+@distractor-en twice
+@distractor-en week
+@distractor-lu zweemol
+@distractor-lu Woch
+
+@sentence
+@lu Ech maache mech ni waarm virum Squash.
+@en I never warm up before squash.
+@distractor-en always
+@distractor-en after
+@distractor-lu ëmmer
+@distractor-lu no
+
+@sentence
+@lu Ech maachen zweemol an der Woch Stretching.
+@en I do stretching twice a week.
+@distractor-en once
+@distractor-en month
+@distractor-lu eemol
+@distractor-lu Mount
+
+@sentence
+@lu Wat sinn deng Hobbyen?
+@en What are your hobbies?
+@distractor-en where
+@distractor-en sports
+@distractor-lu Wou
+@distractor-lu Sport
+
+@sentence
+@lu Wéi oft méchs du dat?
+@en How often do you do that?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Et ass eng Auer.
+@en It's one o'clock.
+@distractor-en two
+@distractor-en three
+@distractor-lu zwou
+@distractor-lu dräi
+
+@sentence
+@lu Et ass zwou Auer.
+@en It's two o'clock.
+@distractor-en three
+@distractor-en one
+@distractor-lu dräi
+@distractor-lu eng
+
+@sentence
+@lu Et ass dräi Auer.
+@en It's three o'clock.
+@distractor-en two
+@distractor-en five
+@distractor-lu zwou
+@distractor-lu fënnef
+
+@sentence
+@lu Et ass Véierel vir fënnef.
+@en It's quarter to five.
+@distractor-en past
+@distractor-en half
+@distractor-lu op
+@distractor-lu hallwer
+
+@sentence
+@lu Et ass Véierel op fënnef.
+@en It's quarter past five.
+@distractor-en to
+@distractor-en half
+@distractor-lu vir
+@distractor-lu hallwer
+
+@sentence
+@lu Et ass hallwer sechs.
+@en It is half past five.
+@distractor-en quarter
+@distractor-en seven
+@distractor-lu Véierel
+@distractor-lu siwen
+
+@sentence
+@lu Ech maachen um aacht Auer moies Sport.
+@en I do sports at eight o'clock in the morning.
+@distractor-en evening
+@distractor-en seven
+@distractor-lu owes
+@distractor-lu siwen
+
+@sentence
+@lu Ech maache vun aacht bis néng Auer Sport.
+@en I do sports from eight to nine o'clock.
+@distractor-en until
+@distractor-en seven
+@distractor-lu bis
+@distractor-lu siwen
+
+@sentence
+@lu Ech maache bis néng Auer Sport.
+@en I do sports until nine o'clock.
+@distractor-en from
+@distractor-en eight
+@distractor-lu vun
+@distractor-lu aacht
+
+@sentence
+@lu Hatt ka fléien.
+@en She can fly.
+@distractor-en he
+@distractor-en swim
+@distractor-lu Hien
+@distractor-lu schwammen
+
+@sentence
+@lu Hatt kann d'Zäit manipuléieren.
+@en She can manipulate time.
+@distractor-en save
+@distractor-en dream
+@distractor-lu retten
+@distractor-lu dreemen
+
+@sentence
+@lu Hatt muss d'Kand retten.
+@en She has to save the child.
+@distractor-en man
+@distractor-en help
+@distractor-lu Mann
+@distractor-lu hëllefen
+
+@sentence
+@lu Hatt soll aventuriéis sinn.
+@en She should be adventurous.
+@distractor-en friendly
+@distractor-en normal
+@distractor-lu frëndlech
+@distractor-lu normal
+
+@sentence
+@lu Hatt soll frëndlech sinn.
+@en She should be friendly.
+@distractor-en adventurous
+@distractor-en normal
+@distractor-lu aventuriéis
+@distractor-lu normal
+
+@sentence
+@lu Hatt wëll normal sinn.
+@en She wants to be normal.
+@distractor-en adventurous
+@distractor-en friendly
+@distractor-lu aventuriéis
+@distractor-lu frëndlech
+
+@sentence
+@lu Hatt däerf net fëmmen.
+@en She is not allowed to smoke.
+@distractor-en dream
+@distractor-en fly
+@distractor-lu dreemen
+@distractor-lu fléien
+
+@sentence
+@lu Hatt däerf dreemen.
+@en She is allowed to dream.
+@distractor-en smoke
+@distractor-en fly
+@distractor-lu fëmmen
+@distractor-lu fléien
+
+@sentence
+@lu Kann ech e Rendez-vous fir en Donneschdeg kréien?
+@en Can I have an appointment for Thursday?
+@distractor-en Friday
+@distractor-en Sunday
+@distractor-lu Freideg
+@distractor-lu Sonndeg
+
+@sentence
+@lu Léiwer moies.
+@en Preferably in the morning.
+@distractor-en evening
+@distractor-en afternoon
+@distractor-lu owes
+@distractor-lu nomëttes
+
+@sentence
+@lu Kanns du mat an eng Reunioun kommen?
+@en Can you come with me to a meeting?
+@distractor-en go
+@distractor-en restaurant
+@distractor-lu goen
+@distractor-lu Restaurant
+
+@sentence
+@lu Kanns du d'Reunioun ouni mech maachen?
+@en Can you do the meeting without me?
+@distractor-en with
+@distractor-en him
+@distractor-lu mat
+@distractor-lu hien
+
+@sentence
+@lu Hues du Zäit dëse Sonndeg?
+@en Do you have time this Sunday?
+@distractor-en Saturday
+@distractor-en have
+@distractor-lu Samschdeg
+@distractor-lu hunn
+
+@sentence
+@lu E Méindeg kënne mir eppes maachen.
+@en On Monday we can do something.
+@distractor-en Tuesday
+@distractor-en nothing
+@distractor-lu Dënschdeg
+@distractor-lu näischt
+
+@sentence
+@lu Wéi ass siwen Auer fir dech?
+@en How is seven o'clock for you?
+@distractor-en eight
+@distractor-en him
+@distractor-lu aacht
+@distractor-lu hien
+
+@sentence
+@lu Genau!
+@en Exactly!
+@distractor-en yes
+@distractor-en no
+@distractor-lu Jo
+@distractor-lu Nee
+
+@sentence
+@lu Ech sinn um siwen Auer nach doheem.
+@en At seven o'clock I'm still at home.
+@distractor-en eight
+@distractor-en cinema
+@distractor-lu aacht
+@distractor-lu Kino
+
+@sentence
+@lu Soll ech dech siche kommen?
+@en Should I come pick you up?
+@distractor-en him
+@distractor-en go
+@distractor-lu hien
+@distractor-lu goen
+
+@sentence
+@lu Mir treffen eis virum Restaurant.
+@en We will meet in front of the restaurant.
+@distractor-en behind
+@distractor-en cinema
+@distractor-lu hannert
+@distractor-lu Kino

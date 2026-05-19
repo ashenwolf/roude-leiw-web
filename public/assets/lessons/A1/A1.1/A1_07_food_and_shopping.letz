@@ -1,0 +1,469 @@
+# A1.07/A1_07_food_and_shopping.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 7"
+
+@lesson A1.07 "Food & Shopping"
+
+# --- Food categories ---
+@word d'Iessen = the food
+@word d'Gedrénks = the drinks
+
+# --- Vegetables ---
+@word d'Wuerzel = the carrot
+@word d'Wuerzelen = the carrots
+@word d'Zalot = the salad
+@word d'Zaloten = the salads
+@word d'Gromper = the potato
+@word d'Gromperen = the potatoes
+@word d'Tomat = the tomato
+@word d'Tomaten = the tomatoes
+@word d'Courgette = the zucchini
+@word d'Courgetten = the zucchinis
+@word d'Ënn = the onion
+@word d'Ënnen = the onions
+
+# --- Fruit ---
+@word den Apel = the apple
+@word d'Äppel = the apples
+@word d'Banann = the banana
+@word d'Banannen = the bananas
+
+# --- Bakery ---
+@word d'Bréitchen = the roll
+@word d'Bréidercher = the rolls
+@word de Kuch = the cake
+@word d'Kuchen = the cakes
+@word d'Taart = the pie
+@word d'Taarten = the pies
+@word de Croissant = the croissant
+@word d'Croissanten = the croissants
+@word d'Brout = the bread
+
+# --- Meat & fish ---
+@word d'Wurscht = the sausage
+@word d'Wurschten = the sausages
+@word d'Zoossiss = the dried sausage
+@word d'Rëndfleesch = the beef
+@word de Gehacktes = the ground beef
+@word de Fësch = the fish
+@word de Kéis = the cheese
+
+# --- Drinks ---
+@word d'Taass = the cup
+@word d'Taassen = the cups
+@word de Kaffi = the coffee
+@word den Téi = the tea
+@word d'Fläsch = the bottle
+@word d'Fläschen = the bottles
+@word de Schampes = the champagne
+@word den Orangëjus = the orange juice
+@word de Béier = the beer
+@word d'Béieren = the beers
+@word de Glas = the glass
+@word d'Glieser = the glasses
+
+# --- Other nouns ---
+@word d'Rezept = the recipe
+@word d'Rezepter = the recipes
+@word d'Déier = the animal
+@word d'Déieren = the animals
+@word den Handy = the mobile phone
+@word d'Handyen = the mobile phones
+@word de Cours = the class
+@word d'Coursen = the classes
+@word d'Boot = the boat
+@word d'Booter = the boats
+@word d'Blummen = the flowers
+@word d'Enveloppe = the envelope
+@word d'Tut = the grocery bag
+@word d'Tuten = the grocery bags
+@word d'Béchs = the can
+@word d'Béchsen = the cans
+@word d'Dëppchen = the container
+@word d'Dëppercher = the containers
+@word de Pak = the pack
+@word d'Tüb = the tube
+@word den Eeër = the egg
+@word d'Dosen Eeër = a dozen eggs
+@word de Jughurt = the yogurt
+@word d'Kola = the cola
+@word d'Zännseef = the toothpaste
+
+# --- Stores ---
+@word d'Epicerie = the grocery store
+@word d'Bäckerei = the bakery
+@word d'Pâtisserie = the pastry shop
+@word d'Metzlerei = the butcher shop
+@word de Supermarché = the supermarket
+@word de Blummebuttek = the flower store
+@word d'Post = the post office
+@word de Maart = the market
+
+# --- Restaurant ---
+@word d'Menüskaart = the menu
+@word d'Rechnung = the bill
+@word den Dësch = the table
+@word de Kannerplat = the children's menu
+@word de Klengen = the little one
+@word d'Persoun = the person
+@word d'Persounen = the people
+@word de Bus = the bus
+@word de Fliger = the plane
+@word de Kaddo = the present
+
+# --- Verbs ---
+@word kafen = to buy
+@word kéine = to buy
+@word kaschten = to cost
+@word verstoen = to understand
+@word widderhuelen = to repeat
+@word reservéieren = to book
+@word huelen = to take
+@word kréien = to get
+@word bréngen = to bring
+@word goen = to go
+@word kommen = to come
+
+# --- Useful words ---
+@word allergesch = allergic
+@word op Gluten = to gluten
+@word presséiert = pressed for time
+@word prett = ready
+@word direkt = directly
+@word natierlech = of course
+@word wéini = when
+@word w.e.g. = please
+
+# --- Polite phrases ---
+@word Et ass näischt = It's nothing
+@word Villmools Merci = Thank you very much
+@word Merci gläichfalls = Thank you, the same to you
+
+# --- Sentences ---
+
+@sentence
+@lu Kann ech e Stéck Taart kréien, w.e.g.?
+@en Can I get a piece of pie, please?
+@distractor-en cake
+@distractor-en bread
+@distractor-lu Kuch
+@distractor-lu Brout
+
+@sentence
+@lu Wéi vill Bréidercher hätt Dir gär?
+@en How many rolls would you like?
+@distractor-en few
+@distractor-en cakes
+@distractor-lu wéineg
+@distractor-lu Kuchen
+
+@sentence
+@lu Wéi vill kaschten zéng Tranchen Zoossiss?
+@en How much are ten slices of dried sausage?
+@distractor-en cheese
+@distractor-en bread
+@distractor-lu Kéis
+@distractor-lu Brout
+
+@sentence
+@lu Hutt Dir Rëndfleesch?
+@en Do you have beef?
+@distractor-en chicken
+@distractor-en fish
+@distractor-lu Hong
+@distractor-lu Fësch
+
+@sentence
+@lu Ech hätt gär eng Taass Kaffi, w.e.g.
+@en I would like a cup of coffee, please.
+@distractor-en tea
+@distractor-en water
+@distractor-lu Téi
+@distractor-lu Waasser
+
+@sentence
+@lu Hätt Dir gär eng Taass Téi?
+@en Would you like a cup of tea?
+@distractor-en coffee
+@distractor-en glass
+@distractor-lu Kaffi
+@distractor-lu Glas
+
+@sentence
+@lu Eng Fläsch Schampes, w.e.g.!
+@en A bottle of champagne, please!
+@distractor-en beer
+@distractor-en glass
+@distractor-lu Béier
+@distractor-lu Glas
+
+@sentence
+@lu Ech kafen en Orangëjus an der Epicerie.
+@en I'm buying an orange juice at the grocery store.
+@distractor-en supermarket
+@distractor-en bakery
+@distractor-lu Supermarché
+@distractor-lu Bäckerei
+
+@sentence
+@lu Du keefs e Brout an der Bäckerei.
+@en You are buying a loaf of bread at the baker's.
+@distractor-en cake
+@distractor-en grocery store
+@distractor-lu Kuch
+@distractor-lu Epicerie
+
+@sentence
+@lu Ech kafen e Croissant an der Pâtisserie.
+@en I'm buying a croissant at the pastry shop.
+@distractor-en bakery
+@distractor-en pie
+@distractor-lu Bäckerei
+@distractor-lu Taart
+
+@sentence
+@lu Hie keeft Gehacktes an der Metzlerei.
+@en He is buying ground beef at the butcher shop.
+@distractor-en supermarket
+@distractor-en sausage
+@distractor-lu Supermarché
+@distractor-lu Wurscht
+
+@sentence
+@lu Hatt keeft Béier am Supermarché.
+@en She is buying beer at the supermarket.
+@distractor-en wine
+@distractor-en bakery
+@distractor-lu Wäin
+@distractor-lu Bäckerei
+
+@sentence
+@lu Si kafe Blummen am Blummebuttek.
+@en They are buying flowers at the flower store.
+@distractor-en post office
+@distractor-en he
+@distractor-lu Post
+@distractor-lu Hien
+
+@sentence
+@lu Du keefs eng Enveloppe op der Post.
+@en You're buying an envelope at the post office.
+@distractor-en bank
+@distractor-en bread
+@distractor-lu Bank
+@distractor-lu Brout
+
+@sentence
+@lu Ech kafe Kéis um Maart.
+@en I'm buying cheese at the market.
+@distractor-en supermarket
+@distractor-en sausage
+@distractor-lu Supermarché
+@distractor-lu Wurscht
+
+@sentence
+@lu Wéi vill kascht dat?
+@en How much does that cost?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Dat kascht dräi Euro an drësseg Cent.
+@en That's three euro and thirty cents.
+@distractor-en five
+@distractor-en two
+@distractor-lu fënnef
+@distractor-lu zwee
+
+@sentence
+@lu Pardon, ech hunn dat net verstanen.
+@en Sorry, I didn't understand that.
+@distractor-en hear
+@distractor-en repeat
+@distractor-lu héieren
+@distractor-lu widderhuelen
+
+@sentence
+@lu Nach eng Kéier, wgl.!
+@en Again, please!
+@distractor-en thanks
+@distractor-en sorry
+@distractor-lu Merci
+@distractor-lu Pardon
+
+@sentence
+@lu Kënnt Dir dat widderhuelen, wgl.?
+@en Can you repeat that, please?
+@distractor-en spell
+@distractor-en speak
+@distractor-lu buschtawéieren
+@distractor-lu schwätzen
+
+@sentence
+@lu Villmools Merci.
+@en Thank you very much.
+@distractor-en sorry
+@distractor-en welcome
+@distractor-lu Pardon
+@distractor-lu Wëllkomm
+
+@sentence
+@lu Merci gläichfalls.
+@en Thank you, the same to you.
+@distractor-en welcome
+@distractor-en bye
+@distractor-lu Wëllkomm
+@distractor-lu Äddi
+
+@sentence
+@lu Et ass gär geschitt.
+@en You're welcome.
+@distractor-en sorry
+@distractor-en hi
+@distractor-lu Pardon
+@distractor-lu Moien
+
+@sentence
+@lu Et ass näischt.
+@en It's nothing.
+@distractor-en everything
+@distractor-en sorry
+@distractor-lu alles
+@distractor-lu Pardon
+
+@sentence
+@lu Merci an nach e schéinen Dag.
+@en Thank you and have a nice day.
+@distractor-en evening
+@distractor-en bad
+@distractor-lu Owend
+@distractor-lu schlecht
+
+@sentence
+@lu Kann ech en Dësch op Schmit reservéieren?
+@en Can I book a table for Schmit?
+@distractor-en bill
+@distractor-en buy
+@distractor-lu Rechnung
+@distractor-lu kafen
+
+@sentence
+@lu Ech si prett.
+@en I'm ready.
+@distractor-en pressed for time
+@distractor-en hungry
+@distractor-lu presséiert
+@distractor-lu hongereg
+
+@sentence
+@lu Ech ginn d'Menüskaart sichen.
+@en I'm going to get the menu.
+@distractor-en bill
+@distractor-en bring
+@distractor-lu Rechnung
+@distractor-lu bréngen
+
+@sentence
+@lu Ech kommen direkt erëm.
+@en I'm coming right back.
+@distractor-en go
+@distractor-en later
+@distractor-lu goen
+@distractor-lu spéider
+
+@sentence
+@lu Ech si presséiert.
+@en I'm pressed for time.
+@distractor-en ready
+@distractor-en hungry
+@distractor-lu prett
+@distractor-lu hongereg
+
+@sentence
+@lu Hei ass d'Rechnung.
+@en Here is the bill.
+@distractor-en menu
+@distractor-en there
+@distractor-lu Menüskaart
+@distractor-lu do
+
+@sentence
+@lu Ech sinn allergesch op Gluten.
+@en I'm allergic to gluten.
+@distractor-en milk
+@distractor-en cheese
+@distractor-lu Mëllech
+@distractor-lu Kéis
+
+@sentence
+@lu Kann ech dir eppes bréngen?
+@en Can I bring something to you?
+@distractor-en him
+@distractor-en take
+@distractor-lu hien
+@distractor-lu huelen
+
+@sentence
+@lu Ech huelen de Kannerplat fir dee Klengen.
+@en I'm taking the children's menu for the little one.
+@distractor-en menu
+@distractor-en cake
+@distractor-lu Menüskaart
+@distractor-lu Kuch
+
+@sentence
+@lu Mir huelen de Bus.
+@en We're taking the bus.
+@distractor-en train
+@distractor-en plane
+@distractor-lu Zuch
+@distractor-lu Fliger
+
+@sentence
+@lu Si huelen de Fliger.
+@en They're taking the plane.
+@distractor-en bus
+@distractor-en boat
+@distractor-lu Bus
+@distractor-lu Boot
+
+@sentence
+@lu Hie kritt e Kaddo.
+@en He is getting a present.
+@distractor-en bill
+@distractor-en book
+@distractor-lu Rechnung
+@distractor-lu Buch
+
+@sentence
+@lu Fir wéi vill Persoune wëllt dir reservéieren?
+@en How many people do you want to book for?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Et ass fir véier Persounen.
+@en It is for four people.
+@distractor-en two
+@distractor-en five
+@distractor-lu zwee
+@distractor-lu fënnef
+
+@sentence
+@lu Et ass Zäit ze goen.
+@en It's time to go.
+@distractor-en come
+@distractor-en take
+@distractor-lu kommen
+@distractor-lu huelen
+
+@sentence
+@lu Wat gelift?
+@en I beg your pardon?
+@distractor-en hello
+@distractor-en bye
+@distractor-lu Moien
+@distractor-lu Äddi

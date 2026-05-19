@@ -1,0 +1,316 @@
+# A1.05/A1_05_work_and_days.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 5"
+
+@lesson A1.05 "Work & Days"
+
+# --- Work-related verbs ---
+@word schaffen = to work
+@word schreiwen = to write
+@word verteideg = to defend
+@word liesen = to read
+@word verkafen = to sell
+@word këmmeren = to look after
+@word geréieren = to manage
+@word versuergen = to provide
+@word schwätzen = to talk
+@word maachen = to do
+@word ausschaffen = to devise
+@word hëllefen = to help
+@word entwerfen = to design
+
+# --- Workplace nouns ---
+@word den Artikel = the article
+@word d'Artikelen = the articles
+@word d'Leit = the people
+@word d'Recherche = the study
+@word d'Recherchen = the studies
+@word de Service = the service
+@word d'Servicer = the services
+@word d'Bankenindustrie = the banking industry
+@word d'Personal = the personnel
+@word de Fong = the fund
+@word d'Fongen = the funds
+@word den Enkel = the grandchild
+@word d'Enkelen = the grandchildren
+@word den Telefon = the telephone
+@word d'Presentatioun = the presentation
+@word d'Presentatiounen = the presentations
+@word d'Strategie = the strategy
+@word de Plang = the plan
+@word d'Pläng = the plans
+@word de Computer = the computer
+@word de Coiffer = the hairdresser
+@word d'Post = the post office
+@word de Staat = the government
+@word d'Bank = the bank
+@word d'Banken = the banks
+@word de Projet = the project
+@word de Direkter = the director
+@word de Ministère = the ministry
+@word de Bus = the bus
+@word de Gaart = the garden
+@word d'Bicher = the books
+
+# --- Days of the week ---
+@word Méindeg = Monday
+@word Dënschdeg = Tuesday
+@word Mëttwoch = Wednesday
+@word Donneschdeg = Thursday
+@word Freideg = Friday
+@word Samschdeg = Saturday
+@word Sonndeg = Sunday
+
+# --- Daily routine ---
+@word opstoen = to get up
+@word Zänn wäschen = to brush teeth
+@word Sport maachen = to do sports
+@word an d'Dusch goen = to go for a shower
+@word d'Hoer kämmen = to brush hair
+@word Kaffi drénken = to have breakfast
+@word schaffe goen = to go to work
+@word akafe goen = to go shopping
+@word zu Mëtteg iessen = to have lunch
+@word zu Nuecht iessen = to have dinner
+@word schlofe goen = to go to sleep
+
+# --- Sentences ---
+
+@sentence
+@lu Ech schreiwen Artikelen.
+@en I write articles.
+@distractor-en read
+@distractor-en books
+@distractor-lu liesen
+@distractor-lu Bicher
+
+@sentence
+@lu Ech verteidege Leit.
+@en I defend people.
+@distractor-en help
+@distractor-en sell
+@distractor-lu hëllefen
+@distractor-lu verkafen
+
+@sentence
+@lu Hatt liest vill Recherchen.
+@en She reads a lot of studies.
+@distractor-en few
+@distractor-en books
+@distractor-lu wéineg
+@distractor-lu Bicher
+
+@sentence
+@lu Hie verkeeft Servicer un d'Bankenindustrie.
+@en He sells services to the banking industry.
+@distractor-en buy
+@distractor-en post office
+@distractor-lu kafen
+@distractor-lu Post
+
+@sentence
+@lu Du këmmers dech ëm d'Personal.
+@en You look after the personnel.
+@distractor-en grandchildren
+@distractor-en director
+@distractor-lu Enkelen
+@distractor-lu Direkter
+
+@sentence
+@lu Si geréiert Fongen.
+@en She manages funds.
+@distractor-en he
+@distractor-en projects
+@distractor-lu Hien
+@distractor-lu Projeten
+
+@sentence
+@lu Dir versuergt Är Enkelen.
+@en You look after your grandchildren.
+@distractor-en my
+@distractor-en parents
+@distractor-lu Meng
+@distractor-lu Elteren
+
+@sentence
+@lu Ech schwätze vill um Telefon.
+@en I talk a lot on the phone.
+@distractor-en write
+@distractor-en computer
+@distractor-lu schreiwen
+@distractor-lu Computer
+
+@sentence
+@lu Ech maache vill Presentatiounen.
+@en I do a lot of presentations.
+@distractor-en few
+@distractor-en plans
+@distractor-lu wéineg
+@distractor-lu Pläng
+
+@sentence
+@lu Hie schafft eng nei Strategie aus.
+@en He devises a new strategy.
+@distractor-en old
+@distractor-en plan
+@distractor-lu al
+@distractor-lu Plang
+
+@sentence
+@lu Du hëllefs de Leit.
+@en You help people.
+@distractor-en director
+@distractor-en sell
+@distractor-lu Direkter
+@distractor-lu verkafen
+
+@sentence
+@lu Du schreifs Bicher.
+@en You write books.
+@distractor-en read
+@distractor-en articles
+@distractor-lu liesen
+@distractor-lu Artikelen
+
+@sentence
+@lu Dir entwerft Pläng.
+@en You design plans.
+@distractor-en strategy
+@distractor-en write
+@distractor-lu Strategie
+@distractor-lu schreiwen
+
+@sentence
+@lu Hatt schafft vill um Computer.
+@en She works a lot on the computer.
+@distractor-en phone
+@distractor-en few
+@distractor-lu Telefon
+@distractor-lu wéineg
+
+@sentence
+@lu Wou schaffs du?
+@en Where do you work?
+@distractor-en how
+@distractor-en when
+@distractor-lu Wéi
+@distractor-lu Wéini
+
+@sentence
+@lu Wou schafft Dir?
+@en Where do you work?
+@distractor-en live
+@distractor-en come
+@distractor-lu wunns
+@distractor-lu kommen
+
+@sentence
+@lu Hie schafft beim Coiffer.
+@en He works at the hairdresser's.
+@distractor-en bank
+@distractor-en post office
+@distractor-lu Bank
+@distractor-lu Post
+
+@sentence
+@lu Si schafft op der Post.
+@en She works at the post office.
+@distractor-en bank
+@distractor-en bus
+@distractor-lu Bank
+@distractor-lu Bus
+
+@sentence
+@lu Hatt schafft fir de Staat.
+@en She works for the government.
+@distractor-en bank
+@distractor-en director
+@distractor-lu Bank
+@distractor-lu Direkter
+
+@sentence
+@lu Ech schaffen op enger Bank.
+@en I work at a bank.
+@distractor-en post office
+@distractor-en project
+@distractor-lu Post
+@distractor-lu Projet
+
+@sentence
+@lu Ech schaffe bei enger Bank.
+@en I work at a bank.
+@distractor-en hairdresser
+@distractor-en garden
+@distractor-lu Coiffer
+@distractor-lu Gaart
+
+@sentence
+@lu Ech schaffen un engem Projet.
+@en I work on a project.
+@distractor-en plan
+@distractor-en strategy
+@distractor-lu Plang
+@distractor-lu Strategie
+
+@sentence
+@lu Ech schaffe mat enger Bank.
+@en I work with a bank.
+@distractor-en for
+@distractor-en at
+@distractor-lu fir
+@distractor-lu op
+
+@sentence
+@lu Ech schaffe fir eng Bank.
+@en I work for a bank.
+@distractor-en with
+@distractor-en at
+@distractor-lu mat
+@distractor-lu op
+
+@sentence
+@lu Ech schaffen am Gaart.
+@en I work in the garden.
+@distractor-en bank
+@distractor-en post office
+@distractor-lu Bank
+@distractor-lu Post
+
+@sentence
+@lu Hatt schafft mam Direkter.
+@en She works with the director.
+@distractor-en hairdresser
+@distractor-en personnel
+@distractor-lu Coiffer
+@distractor-lu Personal
+
+@sentence
+@lu Si schafft um Ministère.
+@en She works at the Ministry.
+@distractor-en bank
+@distractor-en post office
+@distractor-lu Bank
+@distractor-lu Post
+
+@sentence
+@lu Mir schaffen um Projet.
+@en We work on the project.
+@distractor-en plan
+@distractor-en bank
+@distractor-lu Plang
+@distractor-lu Bank
+
+@sentence
+@lu Wéi gees du schaffen?
+@en How do you get to work?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Ech gi mam Bus schaffen.
+@en I go to work by bus.
+@distractor-en train
+@distractor-en bike
+@distractor-lu Zuch
+@distractor-lu Vëlo

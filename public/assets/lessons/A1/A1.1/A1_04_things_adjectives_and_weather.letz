@@ -1,0 +1,292 @@
+# A1.04/A1_04_things_adjectives_and_weather.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 4"
+
+@lesson A1.04 "Things, Adjectives & Weather"
+
+# --- Household objects ---
+@word de Computer = the computer
+@word d'Computeren = the computers
+@word den Dësch = the table
+@word d'Dëscher = the tables
+@word d'Couche = the sofa
+@word d'Couchen = the sofas
+@word d'Luucht = the lamp
+@word d'Luuchten = the lamps
+@word d'Bett = the bed
+@word d'Better = the beds
+@word de Schaf = the wardrobe
+@word d'Schief = the wardrobes
+
+# --- Clothing ---
+@word d'Box = the pants
+@word d'Boxen = the pants plural
+@word de Pullover = the jumper
+@word d'Pulloveren = the jumpers
+@word den T-Shirt = the t-shirt
+@word d'T-Shirten = the t-shirts
+@word d'Hand = the hand
+@word d'Hänn = the hands
+
+# --- Rooms ---
+@word d'Buedzëmmer = the bathroom
+@word d'Buedzëmmeren = the bathrooms
+@word d'Schlofkummer = the bedroom
+@word d'Schlofkummeren = the bedrooms
+@word d'Toilette = the toilet
+@word d'Toiletten = the toilets
+@word d'Kichen = the kitchen
+@word d'Stuff = the living room
+@word d'Stuffen = the living rooms
+
+# --- Drinks & food ---
+@word de Glas Roude Wäin = the glass of red wine
+@word de Kaffi fir matzehuelen = a coffee to go
+@word alles = everything
+
+# --- Quantity words ---
+@word wéi vill = how much
+@word e bëssen = a bit
+@word net vill = not much
+@word net ze vill = not too much
+@word méi = more
+@word manner = less
+@word genuch = enough
+
+# --- Adjectives ---
+@word grouss = big
+@word kleng = small
+@word schéin = beautiful
+@word al = old
+@word nei = new
+@word hell = bright
+@word donkel = dark
+@word bëlleg = cheap
+@word waarm = warm
+@word kuerz = short
+@word richteg = right
+@word liicht = light
+@word lues = slow
+@word frëndlech = friendly
+@word blond = blonde
+
+# --- Colors ---
+@word wäiss = white
+@word giel = yellow
+@word gréng = green
+@word blo = blue
+@word rout = red
+@word orange = orange
+@word rosa = pink
+@word mof = purple
+@word gro = grey
+@word brong = brown
+@word schwaarz = black
+
+# --- Hair & body ---
+@word d'Hoer = the hair
+@word d'Nuecht = the night
+@word de Mann = the man
+
+# --- Weather verbs ---
+@word et schneit = it is snowing
+@word et donnert = there is thunder
+@word et blëtzt = there is lightning
+@word et reent = it is raining
+@word et stiermt = it is stormy
+@word sonneg = sunny
+@word bedeckt = cloudy
+@word niwweleg = foggy
+
+# --- Sentences ---
+
+@sentence
+@lu Wéi heescht dat op Lëtzebuergesch?
+@en What is that called in Luxembourgish?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Wat ass dat?
+@en What is that?
+@distractor-en where
+@distractor-en how
+@distractor-lu Wou
+@distractor-lu Wéi
+
+@sentence
+@lu Dat ass d'Schlofkummer.
+@en That is the bedroom.
+@distractor-en kitchen
+@distractor-en bathroom
+@distractor-lu Kichen
+@distractor-lu Buedzëmmer
+
+@sentence
+@lu Wou ass d'Toilette?
+@en Where is the toilet?
+@distractor-en kitchen
+@distractor-en bedroom
+@distractor-lu Kichen
+@distractor-lu Schlofkummer
+
+@sentence
+@lu Wat hätt Dir gären?
+@en What would you like?
+@distractor-en have
+@distractor-en take
+@distractor-lu hunn
+@distractor-lu huelen
+
+@sentence
+@lu Ech hätt gären e Glas Roude Wäin.
+@en I would like a glass of red wine.
+@distractor-en water
+@distractor-en coffee
+@distractor-lu Waasser
+@distractor-lu Kaffi
+
+@sentence
+@lu Dat ass alles.
+@en That is all.
+@distractor-en more
+@distractor-en less
+@distractor-lu méi
+@distractor-lu manner
+
+@sentence
+@lu O waart!
+@en Oh wait!
+@distractor-en go
+@distractor-en come
+@distractor-lu géi
+@distractor-lu kommen
+
+@sentence
+@lu De Mann ass frëndlech.
+@en The man is friendly.
+@distractor-en woman
+@distractor-en small
+@distractor-lu Fra
+@distractor-lu kleng
+
+@sentence
+@lu Dat ass e frëndleche Mann.
+@en That is a friendly man.
+@distractor-en woman
+@distractor-en old
+@distractor-lu Fra
+@distractor-lu al
+
+@sentence
+@lu D'Nuecht gëtt donkel.
+@en The night is becoming dark.
+@distractor-en bright
+@distractor-en day
+@distractor-lu hell
+@distractor-lu Dag
+
+@sentence
+@lu Dat ass eng donkel Nuecht.
+@en That is a dark night.
+@distractor-en bright
+@distractor-en day
+@distractor-lu hell
+@distractor-lu Dag
+
+@sentence
+@lu D'Kand ass kleng.
+@en The child is small.
+@distractor-en big
+@distractor-en old
+@distractor-lu grouss
+@distractor-lu al
+
+@sentence
+@lu Dat ass e klengt Kand.
+@en That is a small child.
+@distractor-en big
+@distractor-en man
+@distractor-lu grouss
+@distractor-lu Mann
+
+@sentence
+@lu Deng Hoer si blond.
+@en Your hair is blonde.
+@distractor-en my
+@distractor-en black
+@distractor-lu Meng
+@distractor-lu schwaarz
+
+@sentence
+@lu Dat si blond Hoer.
+@en That is blonde hair.
+@distractor-en black
+@distractor-en my
+@distractor-lu schwaarz
+@distractor-lu meng
+
+@sentence
+@lu De Mann ass ganz frëndlech.
+@en The man is very friendly.
+@distractor-en woman
+@distractor-en small
+@distractor-lu Fra
+@distractor-lu kleng
+
+@sentence
+@lu Et schneit.
+@en It is snowing.
+@distractor-en raining
+@distractor-en sunny
+@distractor-lu reent
+@distractor-lu sonneg
+
+@sentence
+@lu Et donnert an et blëtzt.
+@en There is thunder and lightning.
+@distractor-en sunny
+@distractor-en cold
+@distractor-lu sonneg
+@distractor-lu kal
+
+@sentence
+@lu Et ass sonneg.
+@en It is sunny.
+@distractor-en cloudy
+@distractor-en rainy
+@distractor-lu bedeckt
+@distractor-lu reent
+
+@sentence
+@lu Et reent.
+@en It is raining.
+@distractor-en snowing
+@distractor-en sunny
+@distractor-lu schneit
+@distractor-lu sonneg
+
+@sentence
+@lu Et ass bedeckt.
+@en It is cloudy.
+@distractor-en sunny
+@distractor-en foggy
+@distractor-lu sonneg
+@distractor-lu niwweleg
+
+@sentence
+@lu Et ass niwweleg.
+@en It is foggy.
+@distractor-en sunny
+@distractor-en cloudy
+@distractor-lu sonneg
+@distractor-lu bedeckt
+
+@sentence
+@lu Et stiermt.
+@en It is stormy.
+@distractor-en raining
+@distractor-en snowing
+@distractor-lu reent
+@distractor-lu schneit

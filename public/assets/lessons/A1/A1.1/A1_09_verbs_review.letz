@@ -1,0 +1,181 @@
+# A1.09/A1_09_verbs_review.letz
+# Source: Quizlet "A1 Basics Beginner Luxembourgish Verbs"
+
+@lesson A1.09 "Verbs Review"
+
+# --- Action verbs ---
+@word schwätzen = to speak
+@word ginn = to give
+@word hunn = to have
+@word sinn = to be
+@word wunnen = to live
+@word heeschen = to be called
+@word bréngen = to bring
+@word spillen = to play
+@word schaffen = to work
+@word kommen = to come
+@word maachen = to make
+@word goen = to go
+@word fueren = to drive
+@word huelen = to take
+
+# --- Modal verbs ---
+@word mussen = must
+@word kënnen = can
+@word wëllen = to want
+@word sollen = should
+@word däerfen = to be allowed to
+
+# --- Sentences (review using verbs from previous lessons) ---
+
+@sentence
+@lu Ech schwätzen Lëtzebuergesch.
+@en I speak Luxembourgish.
+@distractor-en write
+@distractor-en understand
+@distractor-lu schreiwen
+@distractor-lu verstoen
+
+@sentence
+@lu Du gëss mir e Bic.
+@en You give me a pen.
+@distractor-en take
+@distractor-en him
+@distractor-lu hëls
+@distractor-lu hien
+
+@sentence
+@lu Mir hunn Zäit.
+@en We have time.
+@distractor-en money
+@distractor-en have
+@distractor-lu Geld
+@distractor-lu hu
+
+@sentence
+@lu Ech sinn frou.
+@en I am happy.
+@distractor-en sad
+@distractor-en hungry
+@distractor-lu traureg
+@distractor-lu hongereg
+
+@sentence
+@lu Si wunnen zu Lëtzebuerg.
+@en They live in Luxembourg.
+@distractor-en come
+@distractor-en city
+@distractor-lu kommen
+@distractor-lu Stad
+
+@sentence
+@lu Ech heeschen Anne.
+@en I'm called Anne.
+@distractor-en he
+@distractor-en my
+@distractor-lu hien
+@distractor-lu mäin
+
+@sentence
+@lu Hie bréngt d'Buch.
+@en He brings the book.
+@distractor-en pen
+@distractor-en take
+@distractor-lu Bic
+@distractor-lu huelen
+
+@sentence
+@lu Mir spillen Piano.
+@en We play piano.
+@distractor-en guitar
+@distractor-en sport
+@distractor-lu Gitar
+@distractor-lu Sport
+
+@sentence
+@lu Du schaffs vill.
+@en You work a lot.
+@distractor-en little
+@distractor-en have
+@distractor-lu wéineg
+@distractor-lu hunn
+
+@sentence
+@lu Ech kommen aus Lëtzebuerg.
+@en I come from Luxembourg.
+@distractor-en go
+@distractor-en city
+@distractor-lu goen
+@distractor-lu Stad
+
+@sentence
+@lu Wat méchs du?
+@en What are you doing?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Ech ginn an d'Stad.
+@en I'm going to the city.
+@distractor-en come
+@distractor-en building
+@distractor-lu kommen
+@distractor-lu Gebai
+
+@sentence
+@lu Mir fueren mam Auto.
+@en We drive by car.
+@distractor-en bus
+@distractor-en train
+@distractor-lu Bus
+@distractor-lu Zuch
+
+@sentence
+@lu Ech huelen de Bus.
+@en I'm taking the bus.
+@distractor-en train
+@distractor-en bring
+@distractor-lu Zuch
+@distractor-lu bréngen
+
+@sentence
+@lu Ech muss schaffen.
+@en I have to work.
+@distractor-en can
+@distractor-en want
+@distractor-lu kann
+@distractor-lu wëll
+
+@sentence
+@lu Hatt kann fléien.
+@en She can fly.
+@distractor-en swim
+@distractor-en run
+@distractor-lu schwammen
+@distractor-lu lafen
+
+@sentence
+@lu Ech wëll Kaffi.
+@en I want coffee.
+@distractor-en water
+@distractor-en tea
+@distractor-lu Waasser
+@distractor-lu Téi
+
+@sentence
+@lu Du solls schlofe goen.
+@en You should go to sleep.
+@distractor-en eat
+@distractor-en work
+@distractor-lu iesse
+@distractor-lu schaffen
+
+@sentence
+@lu Mir däerfe spillen.
+@en We are allowed to play.
+@distractor-en write
+@distractor-en sleep
+@distractor-lu schreiwen
+@distractor-lu schlofen
