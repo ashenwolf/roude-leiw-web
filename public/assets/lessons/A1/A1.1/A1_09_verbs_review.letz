@@ -1,29 +1,32 @@
 # A1/A1.1/A1_09_verbs_review.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Verbs"
 #   https://quizlet.com/_h2sudr
-# All @word content is taken verbatim from the Quizlet flashcards.
-# This set is a verb-only review; the source has no example sentences.
+# Comma- and slash-separated EN translations split into multiple atomic pairs.
 
 @lesson A1.09 "Verbs Review"
 
-# --- Action verbs (Quizlet cards 1-13, 19) ---
-@word schwätzen = to talk, to speak
+# --- Action verbs ---
+@word schwätzen = to talk
+@word schwätzen = to speak
 @word ginn = to give
 @word hunn = to have
 @word sinn = to be
-@word wunnen = to live, to reside
+@word wunnen = to live
+@word wunnen = to reside
 @word heeschen = to be called
 @word bréngen = to bring
 @word spillen = to play
 @word schaffen = to work
 @word kommen = to come
-@word maachen = to make/to do
+@word maachen = to make
+@word maachen = to do
 @word goen = to go
 @word fueren = to drive
 @word huelen = to take
 
-# --- Modal verbs (Quizlet cards 14-18) ---
-@word mussen = must/have to
+# --- Modal verbs ---
+@word mussen = must
+@word mussen = have to
 @word kënnen = can
 @word wëllen = to want
 @word sollen = should

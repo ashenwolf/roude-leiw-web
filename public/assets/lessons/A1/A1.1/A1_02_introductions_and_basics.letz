@@ -3,7 +3,8 @@
 #   https://quizlet.com/_h2t0qn
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 2, Part B"
 #   https://quizlet.com/_h2t0yo
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# Slash variants and bracket alternatives are split into atomic pairs;
+# (m)/(f)/(n)/(pl)/non-countable markers stripped; (formal)/(informal) qualifiers stripped.
 # Distractor tokens are sourced from other entries within these same Quizlet sets.
 
 @lesson A1.02 "Introductions & Basics"
@@ -16,14 +17,14 @@
 @word Wou? = Where?
 @word Wéi? = How?
 @word ech = I
-@word du = you (informal & singular)
+@word du = you
 @word hien = he
 @word hatt = she
-@word si = she (respectful)
+@word si = she
 @word et = it
 @word mir = we
-@word dir = you (informal & plural)
-@word Dir = you (formal, singular or plural)
+@word dir = you
+@word Dir = you
 @word si = they
 
 # --- Adverbs / short phrases (Quizlet 2A cards 29-30, 32-33, 35, 37, 45, 62) ---
@@ -33,42 +34,128 @@
 @word nëmmen = only
 @word vun haut un = from today
 @word lëtzebuergesch Buschtawen = Luxembourgish letters
-@word liicht = easy, light
+@word liicht = easy
+@word liicht = light
 @word riicht = straight
 
-# --- Verbs (Quizlet 2A cards 63) ---
+# --- Verbs (Quizlet 2A card 63) ---
 @word duschen = to shower
 
-# --- Nouns with multiple forms (Quizlet 2A cards 34, 38-44, 46-57, 59-60, 64-69) ---
-@word eng Saach, d'Saach (f), Saachen (pl) = thing, things
-@word en Zil, d'Zil (n), Ziler (pl) = objective, objectives
-@word en Dag, den Dag (m), Deeg (pl) = day, days
-@word e Been, d'Been (n), Been (pl) = leg, legs
-@word d'Fleesch (n, non-countable) = meat
-@word de Reen (m, non-countable) = rain
-@word eng Siicht, d'Siicht (f, non-countable) = view
-@word en Eemer, den Eemer (m), Eemeren (pl) = bucket, buckets
-@word eng Biischt, d'Biischt (f), Biischten (pl) = broom, brooms
-@word eng Kiischt, d'Kiischt (f), Kiischten (pl) = cherry, cherries
-@word de Weess (m, noun-countable) = wheat
-@word eng Rees, d'Rees (f), Reesen (pl) = journey, journeys
-@word d'Leed (n, non-countable) = suffering
-@word eng Freed, d'Freed (f), Freeden (pl) = joy, joys
-@word e Jong, de Jong (m), Jongen (pl) = boy, boys, son, sons
-@word e Meedchen, d'Meedchen (n), Meedercher (pl) = girl, girls, daughter, daughters
-@word e Riichter, de Riichter (m), Riichteren (pl) = judge, judges
-@word e Fliger, de Fliger (m), Fligeren (pl) = plane, planes
-@word e Kapp, de Kapp (m), Käpp (pl) = head, heads
-@word eng Kap, d'Kap (f), Kapen (pl) = hat, hats
-@word dach = yes, of course
-@word e Sproch, de Sproch (m), Spréch = expression, expressions
-@word eng Sprooch, d'Sprooch (f), Sproochen = language, languages
-@word en Duuscht, den Duuscht (m, non-countable) = thirst
-@word e Virnumm, de Virnumm (m), Virnimm = first name, first names
-@word en Nonumm, den Nonumm (m), Nonimm = last name, last names
-@word e Familljennumm, de Familljennumm (m), Familljennimm = surname, surnames
-@word e grousse P, P majuscule = uppercase P
-@word e klenge p, p minuscule = lowercase p
+# --- Nouns: things (Quizlet 2A cards 34, 38-44, 46-51, 64) ---
+@word eng Saach = thing
+@word d'Saach = thing
+@word Saachen = things
+
+@word en Zil = objective
+@word d'Zil = objective
+@word Ziler = objectives
+
+@word en Dag = day
+@word den Dag = day
+@word Deeg = days
+
+@word e Been = leg
+@word d'Been = leg
+@word Been = legs
+
+@word d'Fleesch = meat
+
+@word de Reen = rain
+
+@word eng Siicht = view
+@word d'Siicht = view
+
+@word en Eemer = bucket
+@word den Eemer = bucket
+@word Eemeren = buckets
+
+@word eng Biischt = broom
+@word d'Biischt = broom
+@word Biischten = brooms
+
+@word eng Kiischt = cherry
+@word d'Kiischt = cherry
+@word Kiischten = cherries
+
+@word de Weess = wheat
+
+@word eng Rees = journey
+@word d'Rees = journey
+@word Reesen = journeys
+
+@word d'Leed = suffering
+
+@word eng Freed = joy
+@word d'Freed = joy
+@word Freeden = joys
+
+@word en Duuscht = thirst
+@word den Duuscht = thirst
+
+# --- Nouns: people (Quizlet 2A cards 52-54) ---
+@word e Jong = boy
+@word e Jong = son
+@word de Jong = boy
+@word de Jong = son
+@word Jongen = boys
+@word Jongen = sons
+
+@word e Meedchen = girl
+@word e Meedchen = daughter
+@word d'Meedchen = girl
+@word d'Meedchen = daughter
+@word Meedercher = girls
+@word Meedercher = daughters
+
+@word e Riichter = judge
+@word de Riichter = judge
+@word Riichteren = judges
+
+# --- Nouns: objects (Quizlet 2A cards 55-57) ---
+@word e Fliger = plane
+@word de Fliger = plane
+@word Fligeren = planes
+
+@word e Kapp = head
+@word de Kapp = head
+@word Käpp = heads
+
+@word eng Kap = hat
+@word d'Kap = hat
+@word Kapen = hats
+
+# --- "dach" (Quizlet 2A card 58) ---
+@word dach = yes
+@word dach = of course
+
+# --- Language & spelling (Quizlet 2A cards 59-60, 65-69) ---
+@word e Sproch = expression
+@word de Sproch = expression
+@word Spréch = expressions
+
+@word eng Sprooch = language
+@word d'Sprooch = language
+@word Sproochen = languages
+
+@word e Virnumm = first name
+@word de Virnumm = first name
+@word Virnimm = first names
+
+@word en Nonumm = last name
+@word den Nonumm = last name
+@word Nonimm = last names
+
+@word e Familljennumm = surname
+@word de Familljennumm = surname
+@word Familljennimm = surnames
+
+@word e grousse P = uppercase P
+@word P majuscule = uppercase P
+
+@word e klenge p = lowercase p
+@word p minuscule = lowercase p
+
+@word enchantéiert = pleased to meet you
 
 # ===== PART B =====
 
@@ -76,31 +163,109 @@
 @word anert Wuert = different word
 @word virstellen = to introduce
 
-# --- Nouns with multiple forms (Quizlet 2B cards 30-46, 53-57) ---
-@word en Hond, den Hond (m), Hënn = dog, dogs
-@word e Buch, d'Buch (n), Bicher = book, books
-@word e Gaart, de Gaart (m), Gäert = garden, gardens
-@word eng Relioun, d'Relioun (f), Reliounen (pl) = religion, religions
-@word e Bam, de Bam (m), Beem (pl) = tree, trees
-@word eng Fënster, d'Fënster (f), Fënsteren (pl) = window, windows
-@word e Frënd, de Frënd (m), Frënn (pl) = friend (male), friends
-@word eng Frëndin, d'Frëndin (f), Frëndinnen (pl) = friend (female), friends (female)
-@word e Verkeefer, de Verkeefer (m), Verkeefer (pl) = salesman, salespeople
-@word eng Verkeeferin, d'Verkeeferin (f), Verkeeferinnen (pl) = saleswoman, saleswomen
-@word e Bäcker, de Bäcker (m), Bäckeren (pl) = baker (male), bakers
-@word eng Bäckesch, d'Bäckesch (f), Bäckeschen (pl) = baker (female), bakers (female)
-@word en Infirmier, den Infirmier (m), Infirmieren (pl) = nurse (male), nurses
-@word eng Infirmière, d'Infirmière (f), Infirmièren (pl) = nurse (female), nurses (female)
-@word e Papp, de Papp (m), Pappen (pl) = father, fathers
-@word eng Mamm, d'Mamm (f), Mammen (pl) = mother, mothers
-@word e Kand, d'Kand (n), Kanner (pl) = child, children
-@word e Mann, de Mann (m), Männer (pl) = man, men
-@word eng Fra, d'Fra (f), Fraen (pl) = woman, women
-@word eng Fläsch, d'Fläsch (f), Fläschen (pl) = bottle, bottles
-@word e Schlëssel, de Schlëssel (m), Schlësselen (pl) = key keys
-@word e Bic, de Bic (m), Bicker (pl) = pen, pens
+# --- Animals & nature (Quizlet 2B cards 30-35) ---
+@word en Hond = dog
+@word den Hond = dog
+@word Hënn = dogs
 
-# --- Sentences (Part A: Quizlet cards 1-9, 24-28, 31, 36, 61) ---
+@word e Buch = book
+@word d'Buch = book
+@word Bicher = books
+
+@word e Gaart = garden
+@word de Gaart = garden
+@word Gäert = gardens
+
+@word eng Relioun = religion
+@word d'Relioun = religion
+@word Reliounen = religions
+
+@word e Bam = tree
+@word de Bam = tree
+@word Beem = trees
+
+@word eng Fënster = window
+@word d'Fënster = window
+@word Fënsteren = windows
+
+# --- Friends & professions (Quizlet 2B cards 36-43) ---
+@word e Frënd = friend
+@word de Frënd = friend
+@word Frënn = friends
+
+@word eng Frëndin = friend
+@word d'Frëndin = friend
+@word Frëndinnen = friends
+
+@word e Verkeefer = salesman
+@word de Verkeefer = salesman
+@word Verkeefer = salespeople
+
+@word eng Verkeeferin = saleswoman
+@word d'Verkeeferin = saleswoman
+@word Verkeeferinnen = saleswomen
+
+@word e Bäcker = baker
+@word de Bäcker = baker
+@word Bäckeren = bakers
+
+@word eng Bäckesch = baker
+@word d'Bäckesch = baker
+@word Bäckeschen = bakers
+
+@word en Infirmier = nurse
+@word den Infirmier = nurse
+@word Infirmieren = nurses
+
+@word eng Infirmière = nurse
+@word d'Infirmière = nurse
+@word Infirmièren = nurses
+
+# --- Family (Quizlet 2B cards 44-46) ---
+@word e Papp = father
+@word de Papp = father
+@word Pappen = fathers
+
+@word eng Mamm = mother
+@word d'Mamm = mother
+@word Mammen = mothers
+
+@word e Kand = child
+@word d'Kand = child
+@word Kanner = children
+
+# --- People (Quizlet 2B cards 53-54) ---
+@word e Mann = man
+@word de Mann = man
+@word Männer = men
+
+@word eng Fra = woman
+@word d'Fra = woman
+@word Fraen = women
+
+# --- Objects (Quizlet 2B cards 55-57) ---
+@word eng Fläsch = bottle
+@word d'Fläsch = bottle
+@word Fläschen = bottles
+
+@word e Schlëssel = key
+@word de Schlëssel = key
+@word Schlësselen = keys
+
+@word e Bic = pen
+@word de Bic = pen
+@word Bicker = pens
+
+# --- Languages, nationalities, places (referenced in sentences) ---
+@word d'Nationalitéit = the nationality
+@word Englesch = English
+@word Schottin = Scottish woman
+@word Schottland = Scotland
+@word Schweden = Sweden
+@word Stockholm = Stockholm
+@word d'USA = the US
+
+# --- Sentences from Part A ---
 
 @sentence
 @lu Ech heeschen Anne.
@@ -128,7 +293,7 @@
 
 @sentence
 @lu Wéi heeschs du?
-@en What are you (informal) called?
+@en What are you called?
 @distractor-en who
 @distractor-en where
 @distractor-lu Wien
@@ -136,7 +301,7 @@
 
 @sentence
 @lu Wéi heescht Dir?
-@en What are you (formal) called?
+@en What are you called?
 @distractor-en how
 @distractor-en what
 @distractor-lu Wéi
@@ -144,7 +309,7 @@
 
 @sentence
 @lu Wie bass du?
-@en Who are you (informal)?
+@en Who are you?
 @distractor-en where
 @distractor-en how
 @distractor-lu Wou
@@ -152,7 +317,7 @@
 
 @sentence
 @lu Wie sidd Dir?
-@en Who are you (formal)?
+@en Who are you?
 @distractor-en what
 @distractor-en where
 @distractor-lu Wat
@@ -160,7 +325,7 @@
 
 @sentence
 @lu Wéi ass däin Numm?
-@en What is your (informal) name?
+@en What is your name?
 @distractor-en surname
 @distractor-en last name
 @distractor-lu Familljennumm
@@ -168,7 +333,7 @@
 
 @sentence
 @lu Wéi ass Ären Numm?
-@en What is your (formal) name?
+@en What is your name?
 @distractor-en first name
 @distractor-en how
 @distractor-lu Virnumm
@@ -176,7 +341,7 @@
 
 @sentence
 @lu Ech stellen dir den Emile vir.
-@en I am introducing Emile to you (informal).
+@en I am introducing Emile to you.
 @distractor-en already
 @distractor-en how
 @distractor-lu schonn
@@ -192,7 +357,7 @@
 
 @sentence
 @lu Et freet mech dech kennen ze léieren.
-@en It is a pleasure to meet you (informal).
+@en It is a pleasure to meet you.
 @distractor-en how
 @distractor-en where
 @distractor-lu Wéi
@@ -200,7 +365,7 @@
 
 @sentence
 @lu Et freet mech Iech kennen ze léieren.
-@en It is a pleasure to meet you (formal).
+@en It is a pleasure to meet you.
 @distractor-en already
 @distractor-en only
 @distractor-lu schonn
@@ -208,7 +373,8 @@
 
 @sentence
 @lu Ech sinn enchantéiert.
-@en I am pleased to meet (you).
+@en I am pleased to meet.
+@en I am pleased to meet you.
 @distractor-en hope
 @distractor-en how
 @distractor-lu hoffen
@@ -216,7 +382,7 @@
 
 @sentence
 @lu D'Vanessa huet mir schonn esou vill vun dir erzielt.
-@en Vanessa told me so much about you (informal) already.
+@en Vanessa told me so much about you already.
 @distractor-en only
 @distractor-en how
 @distractor-lu nëmmen
@@ -224,7 +390,8 @@
 
 @sentence
 @lu Dat hei ass den Här Weymann.
-@en That (here) is Mr Weymann.
+@en That is Mr Weymann.
+@en That here is Mr Weymann.
 @distractor-en lady
 @distractor-en first name
 @distractor-lu Madame
@@ -238,11 +405,11 @@
 @distractor-lu riicht
 @distractor-lu liicht
 
-# --- Sentences (Part B: Quizlet cards 1-3, 5-9, 11-29, 47-52, 58-59) ---
+# --- Sentences from Part B ---
 
 @sentence
 @lu Wéi ass Ären Numm, wgl.?
-@en What is your (formal) name, please?
+@en What is your name, please?
 @distractor-en first name
 @distractor-en surname
 @distractor-lu Virnumm
@@ -258,7 +425,7 @@
 
 @sentence
 @lu Kënnt Dir dat buschtawéieren?
-@en Can you (formal) spell that?
+@en Can you spell that?
 @distractor-en how
 @distractor-en where
 @distractor-lu Wéi
@@ -298,7 +465,7 @@
 
 @sentence
 @lu Kënnt Dir dat nach eng Kéier widderhuelen, wgl.?
-@en Can you (formal) repeat that one more time, please?
+@en Can you repeat that one more time, please?
 @distractor-en already
 @distractor-en how
 @distractor-lu schonn
@@ -306,15 +473,16 @@
 
 @sentence
 @lu Du dees d'Mutz un.
-@en You (informal) are putting the hat on.
+@en You are putting the hat on.
 @distractor-en book
-@distractor-en ball
+@distractor-en pen
 @distractor-lu Buch
-@distractor-lu Ball
+@distractor-lu Bic
 
 @sentence
 @lu Hie geet mat.
-@en He is going with (us/me).
+@en He is going with us.
+@en He is going with me.
 @distractor-en she
 @distractor-en they
 @distractor-lu Hatt
@@ -322,7 +490,8 @@
 
 @sentence
 @lu Hatt hëlt d'Buch mat.
-@en She is taking the book (with her).
+@en She is taking the book.
+@en She is taking the book with her.
 @distractor-en pen
 @distractor-en window
 @distractor-lu Bic
@@ -332,13 +501,13 @@
 @lu Mir soen d'Reunioun of.
 @en We are cancelling the meeting.
 @distractor-en bottle
-@distractor-en glass
+@distractor-en book
 @distractor-lu Fläsch
-@distractor-lu Glas
+@distractor-lu Buch
 
 @sentence
 @lu Dir fänkt de Ball op.
-@en You (formal) are catching the ball.
+@en You are catching the ball.
 @distractor-en door
 @distractor-en book
 @distractor-lu Dier
@@ -362,7 +531,7 @@
 
 @sentence
 @lu Du bezils d'Rechnung.
-@en You (informal) are paying the bill.
+@en You are paying the bill.
 @distractor-en glass
 @distractor-en book
 @distractor-lu Glas
@@ -394,7 +563,7 @@
 
 @sentence
 @lu Dir beklot iech vill.
-@en You (informal, plural) complain a lot.
+@en You complain a lot.
 @distractor-en already
 @distractor-en how
 @distractor-lu schonn
@@ -442,7 +611,7 @@
 
 @sentence
 @lu Dir sidd scho fort.
-@en You're (informal, plural) already gone.
+@en You are already gone.
 @distractor-en too late
 @distractor-en disappointed
 @distractor-lu ze spéit
@@ -466,7 +635,7 @@
 
 @sentence
 @lu Vu wou kënns du?
-@en Where do you (informal) come from?
+@en Where do you come from?
 @distractor-en how
 @distractor-en who
 @distractor-lu Wéi
@@ -474,7 +643,7 @@
 
 @sentence
 @lu Wéi eng Nationalitéit hues du?
-@en What is your (informal) nationality?
+@en What is your nationality?
 @distractor-en language
 @distractor-en first name
 @distractor-lu Sprooch
@@ -482,7 +651,7 @@
 
 @sentence
 @lu Wat fir Sprooche schwätz du?
-@en What languages do you (informal) speak?
+@en What languages do you speak?
 @distractor-en first name
 @distractor-en how
 @distractor-lu Virnumm
@@ -515,7 +684,7 @@
 @sentence
 @lu Mir kommen aus den USA.
 @en We come from the US.
-@distractor-en Sweden
-@distractor-en Scotland
-@distractor-lu Schweden
-@distractor-lu Schottland
+@distractor-en he
+@distractor-en they
+@distractor-lu Hien
+@distractor-lu Si

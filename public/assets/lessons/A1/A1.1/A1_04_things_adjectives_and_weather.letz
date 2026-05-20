@@ -1,31 +1,85 @@
 # A1/A1.1/A1_04_things_adjectives_and_weather.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 4"
 #   https://quizlet.com/_h2swni
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Slash variants and bracket alternatives split into atomic pairs;
+# gender markers (m)/(f)/(n)/(pl) stripped; multi-meaning EN like "wardrobe, wardrobes,
+# cupboard, cupboards" expanded so each LU form pairs with each compatible EN.
 
 @lesson A1.04 "Things, Adjectives & Weather"
 
-# --- Nouns with multiple forms (Quizlet cards 2-16) ---
-@word e Computer, de Computer (m), Computeren (pl) = computer, computers
-@word en Dësch, den Dësch (m), Dëscher (pl) = table, tables
-@word eng Couche, d'Couche (f), Couchen (pl) = sofa, sofas
-@word eng Luucht, d'Luucht (f), Luuchten (pl) = lamp, lamps
-@word e Bett, d'Bett (n), Better (pl) = bed, beds
-@word e Schaf, de Schaf (m), Schief (pl) = wardrobe, wardrobes, cupboard, cupboards
-@word eng Box, d'Box (f), Boxen (pl) = pants
-@word e Pullover, de Pullover (m), Pulloveren (pl) = jumper, jumpers
-@word en T-Shirt, den T-Shirt (m), T-Shirten (pl) = t-shirt, t-shirts
-@word eng Hand, d'Hand (f), Hänn (pl) = hand, hands
-@word e Buedzëmmer, d'Buedzëmmer (n), Buedzëmmeren (pl) = bathroom, bathrooms
-@word eng Schlofkummer, d'Schlofkummer (f), Schlofkummeren (pl) = bedroom, bedrooms
-@word eng Toilette, d'Toilette (f), Toiletten (pl) = toilet, toilets, washroom, washrooms
-@word eng Kichen, d'Kichen (f), Kichen (pl) = kitchen, kitchens
-@word eng Stuff, d'Stuff (f), Stuffen (pl) = living room, living rooms
+# --- Household objects (Quizlet cards 2-7) ---
+@word e Computer = computer
+@word de Computer = computer
+@word Computeren = computers
+
+@word en Dësch = table
+@word den Dësch = table
+@word Dëscher = tables
+
+@word eng Couche = sofa
+@word d'Couche = sofa
+@word Couchen = sofas
+
+@word eng Luucht = lamp
+@word d'Luucht = lamp
+@word Luuchten = lamps
+
+@word e Bett = bed
+@word d'Bett = bed
+@word Better = beds
+
+@word e Schaf = wardrobe
+@word e Schaf = cupboard
+@word de Schaf = wardrobe
+@word de Schaf = cupboard
+@word Schief = wardrobes
+@word Schief = cupboards
+
+# --- Clothing (Quizlet cards 8-11) ---
+@word eng Box = pants
+@word d'Box = pants
+@word Boxen = pants
+
+@word e Pullover = jumper
+@word de Pullover = jumper
+@word Pulloveren = jumpers
+
+@word en T-Shirt = t-shirt
+@word den T-Shirt = t-shirt
+@word T-Shirten = t-shirts
+
+@word eng Hand = hand
+@word d'Hand = hand
+@word Hänn = hands
+
+# --- Rooms (Quizlet cards 12-16) ---
+@word e Buedzëmmer = bathroom
+@word d'Buedzëmmer = bathroom
+@word Buedzëmmeren = bathrooms
+
+@word eng Schlofkummer = bedroom
+@word d'Schlofkummer = bedroom
+@word Schlofkummeren = bedrooms
+
+@word eng Toilette = toilet
+@word eng Toilette = washroom
+@word d'Toilette = toilet
+@word d'Toilette = washroom
+@word Toiletten = toilets
+@word Toiletten = washrooms
+
+@word eng Kichen = kitchen
+@word d'Kichen = kitchen
+@word Kichen = kitchens
+
+@word eng Stuff = living room
+@word d'Stuff = living room
+@word Stuffen = living rooms
 
 # --- Phrases / quantity words (Quizlet cards 24-31) ---
 @word e Kaffi fir matzehuelen = a coffee to go
-@word wéi vill = how much/how many
+@word wéi vill = how much
+@word wéi vill = how many
 @word e bëssen = a bit
 @word net vill = not much
 @word net ze vill = not too much
@@ -42,7 +96,8 @@
 @word bëlleg = cheap
 @word waarm = warm
 @word kuerz = short
-@word richteg = right (correct)
+@word richteg = right
+@word richteg = correct
 @word liicht = light
 @word lues = slow
 
@@ -87,7 +142,8 @@
 
 @sentence
 @lu Wou ass d'Toilette?
-@en Where is the toilet/washroom?
+@en Where is the toilet?
+@en Where is the washroom?
 @distractor-en kitchen
 @distractor-en bedroom
 @distractor-lu Kichen
@@ -95,7 +151,7 @@
 
 @sentence
 @lu Wat hätt Dir gären?
-@en What would you (formal) like?
+@en What would you like?
 @distractor-en more
 @distractor-en less
 @distractor-lu méi

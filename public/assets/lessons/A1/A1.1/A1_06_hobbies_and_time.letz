@@ -1,8 +1,7 @@
 # A1/A1.1/A1_06_hobbies_and_time.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 6"
 #   https://quizlet.com/_h2swbj
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Bracket alternatives like "(with me)" split into multiple @en variants.
 
 @lesson A1.06 "Hobbies & Time"
 
@@ -275,7 +274,8 @@
 
 @sentence
 @lu Kanns du mat an eng Reunioun kommen?
-@en Can you come (with me) to a meeting?
+@en Can you come to a meeting?
+@en Can you come with me to a meeting?
 @distractor-en to read books
 @distractor-en to listen to music
 @distractor-lu Bicher liesen

@@ -1,8 +1,9 @@
 # A1/A1.1/A1_05_work_and_days.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 5"
 #   https://quizlet.com/_h2swfv
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Slash variants and bracket alternatives split into atomic pairs;
+# (formal)/(informal)/(male) qualifiers stripped;
+# (with the) and "to do sports/to work out" alternatives split across multiple variants.
 
 @lesson A1.05 "Work & Days"
 
@@ -18,7 +19,8 @@
 # --- Daily routine verbs (Quizlet cards 38-48) ---
 @word opstoen = to get up
 @word Zänn wäschen = to brush teeth
-@word Sport maachen = to do sports/to work out
+@word Sport maachen = to do sports
+@word Sport maachen = to work out
 @word an d'Dusch goen = to go for a shower
 @word d'Hoer kämmen = to brush hair
 @word Kaffi drénken = to have breakfast
@@ -80,7 +82,7 @@
 
 @sentence
 @lu Dir versuergt Är Enkelen.
-@en You (plural or formal) look after your grand-children.
+@en You look after your grand-children.
 @distractor-en to have lunch
 @distractor-en to have dinner
 @distractor-lu zu Mëtteg iessen
@@ -128,7 +130,7 @@
 
 @sentence
 @lu Dir entwerft Pläng.
-@en You (plural or formal) design plans.
+@en You design plans.
 @distractor-en to get up
 @distractor-en to brush teeth
 @distractor-lu opstoen
@@ -144,7 +146,7 @@
 
 @sentence
 @lu Wou schaffs du?
-@en Where do you (informal) work?
+@en Where do you work?
 @distractor-en how
 @distractor-en when
 @distractor-lu Wéi
@@ -152,7 +154,7 @@
 
 @sentence
 @lu Wou schafft Dir?
-@en Where do you (formal) work?
+@en Where do you work?
 @distractor-en Monday
 @distractor-en Friday
 @distractor-lu Méindeg
@@ -232,7 +234,7 @@
 
 @sentence
 @lu Hatt schafft mam Direkter.
-@en She works with the (male) director.
+@en She works with the director.
 @distractor-en Monday
 @distractor-en Tuesday
 @distractor-lu Méindeg
@@ -264,7 +266,8 @@
 
 @sentence
 @lu Ech gi mam Bus schaffen.
-@en I go to work by (with the) bus.
+@en I go to work by bus.
+@en I go to work with the bus.
 @distractor-en Sunday
 @distractor-en Monday
 @distractor-lu Sonndeg

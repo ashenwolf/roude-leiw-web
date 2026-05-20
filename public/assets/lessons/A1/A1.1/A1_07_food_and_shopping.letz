@@ -1,42 +1,118 @@
 # A1/A1.1/A1_07_food_and_shopping.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 7"
 #   https://quizlet.com/_h2sw80
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Comma-separated noun forms split; gender markers stripped; (formal)/(informal)/(plural)
+# qualifiers stripped; "rolls/sandwiches" slash split into multiple @en variants.
 
 @lesson A1.07 "Food & Shopping"
 
 # --- Food & drink nouns (Quizlet cards 1-13) ---
-@word en Iessen, d'Iessen (n), Iessen (pl) = food, meal, meals
+@word en Iessen = food
+@word en Iessen = meal
+@word d'Iessen = food
+@word d'Iessen = meal
+@word Iessen = meals
+
 @word Gedrénks = drinks
-@word eng Wuerzel, d'Wuerzel (f), Wuerzelen (pl) = carrot, carrots
-@word eng Zalot, d'Zalot (f), Zaloten (pl) = salad, salads
-@word eng Gromper, d'Gromper (f), Gromperen (pl) = potato, potatoes
-@word eng Tomat, d'Tomat (f), Tomaten (pl) = tomato, tomatoes
-@word eng Courgette, d'Courgette (f), Courgetten = zucchini, zucchinis
-@word eng Ënn, d'Ënn (f), Ënnen (pl) = onion, onions
-@word en Apel, den Apel (m), Äppel (pl) = apple, apples
-@word eng Banann, d'Banann (f), Banannen (pl) = banana, bananas
-@word e Bréitchen, d'Bréitchen (n), Bréidercher (pl) = roll, rolls
-@word e Kuch, de Kuch (m), Kuchen (pl) = cake, cakes
-@word eng Taart, d'Taart (f), Taarten (pl) = pie, pies
+
+@word eng Wuerzel = carrot
+@word d'Wuerzel = carrot
+@word Wuerzelen = carrots
+
+@word eng Zalot = salad
+@word d'Zalot = salad
+@word Zaloten = salads
+
+@word eng Gromper = potato
+@word d'Gromper = potato
+@word Gromperen = potatoes
+
+@word eng Tomat = tomato
+@word d'Tomat = tomato
+@word Tomaten = tomatoes
+
+@word eng Courgette = zucchini
+@word d'Courgette = zucchini
+@word Courgetten = zucchinis
+
+@word eng Ënn = onion
+@word d'Ënn = onion
+@word Ënnen = onions
+
+@word en Apel = apple
+@word den Apel = apple
+@word Äppel = apples
+
+@word eng Banann = banana
+@word d'Banann = banana
+@word Banannen = bananas
+
+@word e Bréitchen = roll
+@word d'Bréitchen = roll
+@word Bréidercher = rolls
+
+@word e Kuch = cake
+@word de Kuch = cake
+@word Kuchen = cakes
+
+@word eng Taart = pie
+@word d'Taart = pie
+@word Taarten = pies
 
 # --- More nouns (Quizlet cards 21-30) ---
-@word e Croissant, de Croissant (m), Croissanten (pl) = croissant, croissants
-@word e Rezept, d'Rezept (n), Rezepter (pl) = recipe, recipes
-@word eng Wurscht, d'Wurscht (f), Wurschten (pl) = sausage, sausages
-@word en Déier, d'Déier (n), Déieren (pl) = animal, animals
-@word en Handy, den Handy (m), Handyen (pl) = mobile phone, mobile phones
-@word e Cours, de Cours (m), Coursen (pl) = class, classes
-@word e Boot, d'Boot (n), Booter (pl) = boat, boats
-@word e Fësch, de Fësch (m), Fësch (pl) = fish
-@word e Béier, de Béier (m), Béier (pl) = beer, beers
-@word e Glas, d'Glas (n), Glieser (pl) = glass, glasses (to drink out of)
+@word e Croissant = croissant
+@word de Croissant = croissant
+@word Croissanten = croissants
+
+@word e Rezept = recipe
+@word d'Rezept = recipe
+@word Rezepter = recipes
+
+@word eng Wurscht = sausage
+@word d'Wurscht = sausage
+@word Wurschten = sausages
+
+@word en Déier = animal
+@word d'Déier = animal
+@word Déieren = animals
+
+@word en Handy = mobile phone
+@word den Handy = mobile phone
+@word Handyen = mobile phones
+
+@word e Cours = class
+@word de Cours = class
+@word Coursen = classes
+
+@word e Boot = boat
+@word d'Boot = boat
+@word Booter = boats
+
+@word e Fësch = fish
+@word de Fësch = fish
+@word Fësch = fish
+
+@word e Béier = beer
+@word de Béier = beer
+@word Béier = beers
+
+@word e Glas = glass
+@word d'Glas = glass
+@word Glieser = glasses
 
 # --- Containers & quantities (Quizlet cards 39-46) ---
-@word eng Tut, d'Tut (f), Tuten (pl) = grocery bag, grocery bags
-@word eng Béchs, d'Béchs (f), Béchsen (pl) = can, cans
-@word en Dëppchen, d'Dëppchen (n), Dëppercher (pl) = container, containers
+@word eng Tut = grocery bag
+@word d'Tut = grocery bag
+@word Tuten = grocery bags
+
+@word eng Béchs = can
+@word d'Béchs = can
+@word Béchsen = cans
+
+@word en Dëppchen = container
+@word d'Dëppchen = container
+@word Dëppercher = containers
+
 @word en Dëppche Jughurt = a container of yogurt
 @word eng Béchs Kola = a can of cola
 @word eng Dosen Eeër = a dozen eggs
@@ -52,31 +128,32 @@
 @sentence
 @lu Kann ech e Stéck Taart kréien, w.e.g.?
 @en Can I get a piece of pie, please?
-@distractor-en cake, cakes
-@distractor-en roll, rolls
+@distractor-en cake
+@distractor-en roll
 @distractor-lu Kuch
 @distractor-lu Bréitchen
 
 @sentence
 @lu Wéi vill Bréidercher hätt Dir gär?
-@en How many rolls/sandwiches would you (formal) like?
-@distractor-en pie, pies
-@distractor-en cake, cakes
+@en How many rolls would you like?
+@en How many sandwiches would you like?
+@distractor-en pie
+@distractor-en cake
 @distractor-lu Taart
 @distractor-lu Kuch
 
 @sentence
 @lu Wéi vill kaschten zéng Tranchen Zoossiss?
 @en How much are ten slices of dried sausage?
-@distractor-en sausage, sausages
+@distractor-en sausage
 @distractor-en fish
 @distractor-lu Wurscht
 @distractor-lu Fësch
 
 @sentence
 @lu Hutt Dir Rëndfleesch?
-@en Do you (formal) have beef?
-@distractor-en sausage, sausages
+@en Do you have beef?
+@distractor-en sausage
 @distractor-en fish
 @distractor-lu Wurscht
 @distractor-lu Fësch
@@ -84,15 +161,15 @@
 @sentence
 @lu Ech hätt gär eng Taass Kaffi, w.e.g.
 @en I would like a cup of coffee, please.
-@distractor-en beer, beers
-@distractor-en glass, glasses (to drink out of)
+@distractor-en beer
+@distractor-en glass
 @distractor-lu Béier
 @distractor-lu Glas
 
 @sentence
 @lu Hätt Dir gär eng Taass Téi?
-@en Would you (formal) like a cup of tea?
-@distractor-en beer, beers
+@en Would you like a cup of tea?
+@distractor-en beer
 @distractor-en drinks
 @distractor-lu Béier
 @distractor-lu Gedrénks
@@ -100,8 +177,8 @@
 @sentence
 @lu Eng Fläsch Schampes, w.e.g.!
 @en A bottle of champagne, please!
-@distractor-en beer, beers
-@distractor-en glass, glasses (to drink out of)
+@distractor-en beer
+@distractor-en glass
 @distractor-lu Béier
 @distractor-lu Glas
 
@@ -116,23 +193,23 @@
 @sentence
 @lu Du keefs e Brout an der Bäckerei.
 @en You are buying a loaf of bread at the baker's.
-@distractor-en cake, cakes
-@distractor-en roll, rolls
+@distractor-en cake
+@distractor-en roll
 @distractor-lu Kuch
 @distractor-lu Bréitchen
 
 @sentence
 @lu Ech kafen e Croissant an der Pâtisserie.
 @en I'm buying a croissant at the pastry shop.
-@distractor-en pie, pies
-@distractor-en recipe, recipes
+@distractor-en pie
+@distractor-en recipe
 @distractor-lu Taart
 @distractor-lu Rezept
 
 @sentence
 @lu Hie keeft Gehacktes an der Metzlerei.
 @en He is buying ground beef at the butcher shop.
-@distractor-en sausage, sausages
+@distractor-en sausage
 @distractor-en fish
 @distractor-lu Wurscht
 @distractor-lu Fësch
@@ -140,7 +217,7 @@
 @sentence
 @lu Hatt keeft Béier am Supermarché.
 @en She is buying beer at the supermarket.
-@distractor-en glass, glasses (to drink out of)
+@distractor-en glass
 @distractor-en drinks
 @distractor-lu Glas
 @distractor-lu Gedrénks
@@ -156,16 +233,16 @@
 @sentence
 @lu Du keefs eng Enveloppe op der Post.
 @en You're buying an envelope at the post office.
-@distractor-en grocery bag, grocery bags
-@distractor-en can, cans
+@distractor-en grocery bag
+@distractor-en can
 @distractor-lu Tut
 @distractor-lu Béchs
 
 @sentence
 @lu Ech kafe Kéis um Maart.
 @en I'm buying cheese at the market.
-@distractor-en pie, pies
-@distractor-en cake, cakes
+@distractor-en pie
+@distractor-en cake
 @distractor-lu Taart
 @distractor-lu Kuch
 
@@ -203,7 +280,7 @@
 
 @sentence
 @lu Kënnt Dir dat widderhuelen, wgl.?
-@en Can you (formal) repeat that, please?
+@en Can you repeat that, please?
 @distractor-en when
 @distractor-en of course
 @distractor-lu wéini
@@ -235,7 +312,8 @@
 
 @sentence
 @lu Et ass näischt.
-@en It's nothing./You're welcome.
+@en It's nothing.
+@en You're welcome.
 @distractor-en when
 @distractor-en of course
 @distractor-lu wéini
@@ -244,10 +322,10 @@
 @sentence
 @lu Merci an nach e schéinen Dag.
 @en Thank you and have a nice day.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en evening
+@distractor-en bad
+@distractor-lu Owend
+@distractor-lu schlecht
 
 @sentence
 @lu Kann ech en Dësch op Schmit reservéieren?
@@ -268,86 +346,86 @@
 @sentence
 @lu Ech ginn d'Menüskaart sichen.
 @en I'm going to get the menu.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en bill
+@distractor-en bring
+@distractor-lu Rechnung
+@distractor-lu bréngen
 
 @sentence
 @lu Ech kommen direkt erëm.
 @en I'm coming right back.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en go
+@distractor-en later
+@distractor-lu goen
+@distractor-lu spéider
 
 @sentence
 @lu Ech si presséiert.
 @en I'm pressed for time.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en ready
+@distractor-en hungry
+@distractor-lu prett
+@distractor-lu hongereg
 
 @sentence
 @lu Hei ass d'Rechnung.
 @en Here is the bill.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en menu
+@distractor-en there
+@distractor-lu Menüskaart
+@distractor-lu do
 
 @sentence
 @lu Ech sinn allergesch op Gluten.
 @en I'm allergic to gluten.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en milk
+@distractor-en cheese
+@distractor-lu Mëllech
+@distractor-lu Kéis
 
 @sentence
 @lu Kann ech dir eppes bréngen?
-@en Can I bring something to you (informal)?
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@en Can I bring something to you?
+@distractor-en him
+@distractor-en take
+@distractor-lu hien
+@distractor-lu huelen
 
 @sentence
 @lu Ech huelen de Kannerplat fir dee Klengen.
 @en I'm taking the children's menu for the little one.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en menu
+@distractor-en cake
+@distractor-lu Menüskaart
+@distractor-lu Kuch
 
 @sentence
 @lu Mir huelen de Bus.
 @en We're taking the bus.
-@distractor-en boat, boats
-@distractor-en class, classes
+@distractor-en boat
+@distractor-en class
 @distractor-lu Boot
 @distractor-lu Cours
 
 @sentence
 @lu Si huelen de Fliger.
 @en They're taking the plane.
-@distractor-en boat, boats
-@distractor-en mobile phone, mobile phones
+@distractor-en boat
+@distractor-en mobile phone
 @distractor-lu Boot
 @distractor-lu Handy
 
 @sentence
 @lu Hie kritt e Kaddo.
 @en He is getting a present.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
+@distractor-en bill
+@distractor-en book
+@distractor-lu Rechnung
+@distractor-lu Buch
 
 @sentence
 @lu Fir wéi vill Persoune wëllt dir reservéieren?
-@en How many people do you (plural) want to book for?
+@en How many people do you want to book for?
 @distractor-en when
 @distractor-en how
 @distractor-lu wéini

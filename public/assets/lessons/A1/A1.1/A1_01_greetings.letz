@@ -1,39 +1,54 @@
 # A1/A1.1/A1_01_greetings.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 1"
 #   https://quizlet.com/_h2t0v7
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
+# All @word and @sentence content is taken from the Quizlet flashcards.
+# Slash variants and bracket alternatives are split into atomic pairs;
+# (formal)/(informal) qualifiers are stripped (LU form already encodes formality).
 # Distractor tokens are sourced from other entries within this same Quizlet set.
 
 @lesson A1.01 "Greetings"
 
-# --- Single-word / phrase entries (Quizlet cards 1-6, 13-22, 34-38, 55-57, 67) ---
+# --- Greetings (Quizlet cards 1-6, 67) ---
 @word Gudde Moien = Good morning
-@word Gudde Mëtteg/Gudde Mëtten = Good afternoon
+@word Gudde Mëtteg = Good afternoon
+@word Gudde Mëtten = Good afternoon
 @word Gudden Owend = Good evening
 @word Moien = Hi
 @word Bonjour = Hello
 @word Salut = Hi
+@word Wëllkomm = Welcome
+
+# --- Farewells (Quizlet cards 13-22, 38) ---
 @word Äddi = Bye
-@word Awar/Awuer = Bye
+@word Awar = Bye
+@word Awuer = Bye
 @word Ciao = Bye
 @word Bis geschwënn = See you soon
 @word Bis herno = See you later
 @word Bis muer = See you tomorrow
 @word Bis dann = See you later
 @word Bis muer de Moien = See you tomorrow morning
-@word Bis de Mëtteg/Mëtten = See you at noon/in the afternoon
+@word Bis de Mëtteg = See you at noon
+@word Bis de Mëtteg = See you in the afternoon
+@word Bis de Mëtten = See you at noon
+@word Bis de Mëtten = See you in the afternoon
 @word Bis den Owend = See you in the evening
+@word Gutt Nuecht = Good night
+
+# --- Politeness (Quizlet cards 34-37, 55-57) ---
 @word Merci = Thank you
 @word Ganz gutt = Very good
 @word Entschëllegt = Excuse me
 @word Pardon = Sorry
-@word Gutt Nuecht = Good night
+@word Wannechgelift = Please
+@word Wannechgelift = there you go
+@word wgl. = Please
+@word wgl. = there you go
 @word Jo = Yes
-@word Nee/neen = No
-@word Wannechgelift (wgl.) = Please, there you go
-@word Wëllkomm = Welcome
+@word Nee = No
+@word neen = No
 
-# --- Sentence entries (Quizlet cards 7-12, 23-33, 39-54, 58-66, 68) ---
+# --- Sentences (Quizlet cards 7-12, 23-33, 39-54, 58-66, 68) ---
 
 @sentence
 @lu Moien, wéi geet et?
@@ -53,7 +68,7 @@
 
 @sentence
 @lu Schwätz du Lëtzebuergesch?
-@en Do you (informal) speak Luxembourgish?
+@en Do you speak Luxembourgish?
 @distractor-en sorry
 @distractor-en bye
 @distractor-lu Pardon
@@ -61,7 +76,7 @@
 
 @sentence
 @lu Schwätzt Dir Lëtzebuergesch?
-@en Do you (formal) speak Luxembourgish?
+@en Do you speak Luxembourgish?
 @distractor-en hello
 @distractor-en thanks
 @distractor-lu Bonjour
@@ -69,7 +84,7 @@
 
 @sentence
 @lu Mir kënnen och du soen.
-@en We can also say you (informal).
+@en We can also say you.
 @distractor-en yes
 @distractor-en no
 @distractor-lu Jo
@@ -101,7 +116,7 @@
 
 @sentence
 @lu Wéi geet et Iech?
-@en How are you (formal)?
+@en How are you?
 @distractor-en welcome
 @distractor-en bye
 @distractor-lu Wëllkomm
@@ -117,7 +132,7 @@
 
 @sentence
 @lu Wéi geet et dir?
-@en How are you (informal)?
+@en How are you?
 @distractor-en evening
 @distractor-en morning
 @distractor-lu Owend
@@ -133,7 +148,7 @@
 
 @sentence
 @lu Ech ginn dir e Bic.
-@en I give you (informal) a pen.
+@en I give you a pen.
 @distractor-en welcome
 @distractor-en bye
 @distractor-lu Wëllkomm
@@ -141,7 +156,7 @@
 
 @sentence
 @lu Ech ginn Iech e Bic.
-@en I give you (formal) a pen.
+@en I give you a pen.
 @distractor-en hello
 @distractor-en yes
 @distractor-lu Bonjour
@@ -309,7 +324,7 @@
 
 @sentence
 @lu Wëllt Dir e Glas Waasser?
-@en Do you (formal) want a glass of water?
+@en Do you want a glass of water?
 @distractor-en yes
 @distractor-en good
 @distractor-lu Jo
@@ -317,7 +332,7 @@
 
 @sentence
 @lu Wëlls du e Kaffi drénken?
-@en Do you (informal) want to drink a coffee?
+@en Do you want to drink a coffee?
 @distractor-en hello
 @distractor-en welcome
 @distractor-lu Bonjour
@@ -325,7 +340,7 @@
 
 @sentence
 @lu Wëlls du e Stéck Schockela?
-@en Do you (informal) want a piece of chocolate?
+@en Do you want a piece of chocolate?
 @distractor-en bye
 @distractor-en hi
 @distractor-lu Äddi
@@ -341,7 +356,7 @@
 
 @sentence
 @lu Wëllt Dir Zocker?
-@en Do you (formal) want any sugar?
+@en Do you want any sugar?
 @distractor-en yes
 @distractor-en hi
 @distractor-lu Jo
@@ -365,7 +380,7 @@
 
 @sentence
 @lu Huelt Iech scho Plaz.
-@en You (formal) can already take a seat.
+@en You can already take a seat.
 @distractor-en hello
 @distractor-en yes
 @distractor-lu Bonjour

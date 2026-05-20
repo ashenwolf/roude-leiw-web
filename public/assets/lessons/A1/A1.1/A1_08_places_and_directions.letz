@@ -1,24 +1,60 @@
 # A1/A1.1/A1_08_places_and_directions.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 8"
 #   https://quizlet.com/_h2svv7
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Comma-separated noun forms split; gender markers stripped;
+# (no) and (ewech) optional words produce extra @lu variants;
+# (to) optional EN endings produce extra @en variants.
 
 @lesson A1.08 "Places & Directions"
 
 # --- Place nouns (Quizlet cards 1-12) ---
-@word en Haus, d'Haus (n), Haiser (pl) = house, houses
-@word e Gebai, d'Gebai (n), Gebaier (pl) = building, buildings
-@word e Buttek, de Buttek (m), Butteker (pl) = shop, shops
-@word eng Gemeng, d'Gemeng (f), Gemengen (pl) = commune, communes
-@word en Theater, den Theater (m), Theateren (pl) = theatre, theatres
-@word eng Kierch, d'Kierch (f), Kierchen (pl) = church, churches
-@word eng Schoul, d'Schoul (f), Schoulen (pl) = school, schools
-@word eng Bréck, d'Bréck (f), Brécken (pl) = bridge, bridges
-@word e Kino, de Kino (m), Kinoen (pl) = cinema, cinemas
-@word eng Klinick, d'Klinick (f), Klinicken (pl) = hospital, hospitals
-@word eng Apdikt, d'Apdikt (f), Apdikten (pl) = pharmacy, pharmacies
-@word e Café, de Café (m), Caféen (pl) = café, cafés
+@word en Haus = house
+@word d'Haus = house
+@word Haiser = houses
+
+@word e Gebai = building
+@word d'Gebai = building
+@word Gebaier = buildings
+
+@word e Buttek = shop
+@word de Buttek = shop
+@word Butteker = shops
+
+@word eng Gemeng = commune
+@word d'Gemeng = commune
+@word Gemengen = communes
+
+@word en Theater = theatre
+@word den Theater = theatre
+@word Theateren = theatres
+
+@word eng Kierch = church
+@word d'Kierch = church
+@word Kierchen = churches
+
+@word eng Schoul = school
+@word d'Schoul = school
+@word Schoulen = schools
+
+@word eng Bréck = bridge
+@word d'Bréck = bridge
+@word Brécken = bridges
+
+@word e Kino = cinema
+@word de Kino = cinema
+@word Kinoen = cinemas
+
+@word eng Klinick = hospital
+@word d'Klinick = hospital
+@word Klinicken = hospitals
+
+@word eng Apdikt = pharmacy
+@word d'Apdikt = pharmacy
+@word Apdikten = pharmacies
+
+@word e Café = café
+@word de Café = café
+@word Caféen = cafés
 
 # --- Directional phrases (Quizlet cards 35-40) ---
 @word laanscht de Kleederrayon = past the clothing aisle
@@ -33,130 +69,132 @@
 @sentence
 @lu De Restaurant ass niewent der Kierch.
 @en The restaurant is next to the church.
-@distractor-en school, schools
-@distractor-en bridge, bridges
+@distractor-en school
+@distractor-en bridge
 @distractor-lu Schoul
 @distractor-lu Bréck
 
 @sentence
 @lu D'Emma ass an der Schoul.
 @en Emma is in school.
-@distractor-en church, churches
-@distractor-en cinema, cinemas
+@distractor-en church
+@distractor-en home
 @distractor-lu Kierch
-@distractor-lu Kino
+@distractor-lu doheem
 
 @sentence
 @lu De Rick steet tëschent zwee Beem.
 @en Rick is standing between two trees,
-@distractor-en hospital, hospitals
-@distractor-en pharmacy, pharmacies
+@distractor-en hospital
+@distractor-en pharmacy
 @distractor-lu Klinick
 @distractor-lu Apdikt
 
 @sentence
-@lu De Park ass (no) bei der Bank.
+@lu De Park ass no bei der Bank.
+@lu De Park ass bei der Bank.
 @en The park is close to the bank.
-@distractor-en café, cafés
-@distractor-en shop, shops
+@distractor-en café
+@distractor-en shop
 @distractor-lu Café
 @distractor-lu Buttek
 
 @sentence
-@lu D'Post ass wäit (ewech) vun der Bank.
+@lu D'Post ass wäit ewech vun der Bank.
+@lu D'Post ass wäit vun der Bank.
 @en The post office is far away from the bank.
-@distractor-en building, buildings
-@distractor-en commune, communes
+@distractor-en building
+@distractor-en commune
 @distractor-lu Gebai
 @distractor-lu Gemeng
 
 @sentence
 @lu De Café ass vis-à-vis vun der Apdikt.
 @en The café is opposite the pharmacy.
-@distractor-en theatre, theatres
-@distractor-en church, churches
+@distractor-en theatre
+@distractor-en church
 @distractor-lu Theater
 @distractor-lu Kierch
 
 @sentence
 @lu De Vic steet hannert der Bréck.
 @en Vic is standing behind the bridge.
-@distractor-en school, schools
-@distractor-en cinema, cinemas
+@distractor-en school
+@distractor-en cinema
 @distractor-lu Schoul
 @distractor-lu Kino
 
 @sentence
 @lu D'Martine steet virun der Gemeng.
 @en Martine is standing in front of the commune.
-@distractor-en bridge, bridges
-@distractor-en hospital, hospitals
+@distractor-en bridge
+@distractor-en hospital
 @distractor-lu Bréck
 @distractor-lu Klinick
 
 @sentence
 @lu Ech sinn op der Post.
 @en I'm at the post office.
-@distractor-en theatre, theatres
-@distractor-en church, churches
+@distractor-en theatre
+@distractor-en church
 @distractor-lu Theater
 @distractor-lu Kierch
 
 @sentence
 @lu Ech sinn an de Wolleken.
 @en My head is in the clouds.
-@distractor-en building, buildings
-@distractor-en house, houses
+@distractor-en city
+@distractor-en building
+@distractor-lu Stad
 @distractor-lu Gebai
-@distractor-lu Haus
 
 @sentence
 @lu Ech ginn an den Theater.
 @en I'm going to the theatre.
-@distractor-en cinema, cinemas
-@distractor-en church, churches
+@distractor-en cinema
+@distractor-en church
 @distractor-lu Kino
 @distractor-lu Kierch
 
 @sentence
 @lu Ech sinn am Theater.
 @en I'm at the theatre.
-@distractor-en cinema, cinemas
-@distractor-en café, cafés
+@distractor-en cinema
+@distractor-en café
 @distractor-lu Kino
 @distractor-lu Café
 
 @sentence
 @lu Ech ginn an d'Stad.
 @en I'm going to the city.
-@distractor-en building, buildings
-@distractor-en shop, shops
+@distractor-en building
+@distractor-en come
 @distractor-lu Gebai
-@distractor-lu Buttek
+@distractor-lu kommen
 
 @sentence
 @lu Ech sinn an der Stad.
 @en I'm in the city.
-@distractor-en building, buildings
-@distractor-en commune, communes
+@distractor-en building
+@distractor-en church
 @distractor-lu Gebai
-@distractor-lu Gemeng
+@distractor-lu Kierch
 
 @sentence
 @lu Ech ginn an d'Gebai.
 @en I'm going into the building.
-@distractor-en house, houses
-@distractor-en shop, shops
-@distractor-lu Haus
-@distractor-lu Buttek
+@distractor-en city
+@distractor-en out of
+@distractor-lu Stad
+@distractor-lu aus
 
 @sentence
 @lu Ech sinn am Gebai.
 @en I'm in the building.
-@distractor-en house, houses
-@distractor-en theatre, theatres
-@distractor-lu Haus
-@distractor-lu Theater
+@distractor-en outside
+@distractor-en city
+@distractor-lu dobaussen
+@distractor-lu Stad
 
 @sentence
 @lu Wou bass du?
@@ -168,40 +206,42 @@
 
 @sentence
 @lu Wuer fiers du?
-@en Where are you driving (to)?
+@en Where are you driving?
+@en Where are you driving to?
+@distractor-en come
 @distractor-en how
-@distractor-en where
+@distractor-lu kommen
 @distractor-lu Wéi
-@distractor-lu Wou
 
 @sentence
 @lu Wuer gees du?
-@en Where are you going (to)?
-@distractor-en how
+@en Where are you going?
+@en Where are you going to?
+@distractor-en come
 @distractor-en when
-@distractor-lu Wéi
+@distractor-lu kommen
 @distractor-lu Wéini
 
 @sentence
 @lu Géi lénks!
 @en Go left!
-@distractor-en on the right hand side
-@distractor-en in the direction of Mamer
-@distractor-lu op der rietser Säit
-@distractor-lu Richtung Mamer
+@distractor-en right
+@distractor-en straight
+@distractor-lu riets
+@distractor-lu riichtaus
 
 @sentence
 @lu Géi riets!
 @en Go right!
-@distractor-en on the left hand side
-@distractor-en past the clothing aisle
-@distractor-lu op der lénker Säit
-@distractor-lu laanscht de Kleederrayon
+@distractor-en left
+@distractor-en straight
+@distractor-lu lénks
+@distractor-lu riichtaus
 
 @sentence
 @lu Géi riichtaus!
 @en Go straight ahead!
-@distractor-en the ground floor
-@distractor-en the first floor
-@distractor-lu de Rez-de-chaussée
-@distractor-lu den éischte Stack
+@distractor-en left
+@distractor-en right
+@distractor-lu lénks
+@distractor-lu riets

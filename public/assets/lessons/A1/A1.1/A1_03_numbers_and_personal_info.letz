@@ -1,8 +1,9 @@
 # A1/A1.1/A1_03_numbers_and_personal_info.letz
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 3"
 #   https://quizlet.com/_h2t12h
-# All @word and @sentence content is taken verbatim from the Quizlet flashcards.
-# Distractor tokens are sourced from other entries within this same Quizlet set.
+# Slash variants and bracket alternatives split into atomic pairs;
+# (m)/(f)/(pl) markers stripped; (formal)/(informal) qualifiers stripped;
+# (were) and (boyfriend) bracket alternatives produce extra @en variants.
 
 @lesson A1.03 "Numbers & Personal Info"
 
@@ -22,15 +23,20 @@
 # --- Phrase / vocabulary (Quizlet card 29) ---
 @word zesummen = together
 
-# --- Nouns with multiple forms (Quizlet cards 30-31) ---
-@word e Brudder, de Brudder (m), Bridder (pl) = brother, brothers
-@word eng Schwëster, d'Schwëster (f), Schwësteren (pl) = sister, sisters
+# --- Family nouns (Quizlet cards 30-31) ---
+@word e Brudder = brother
+@word de Brudder = brother
+@word Bridder = brothers
+
+@word eng Schwëster = sister
+@word d'Schwëster = sister
+@word Schwësteren = sisters
 
 # --- Sentences (Quizlet cards 12-28, 32-39) ---
 
 @sentence
 @lu Wéi ass deng Telefonsnummer?
-@en What is your (informal) telephone number?
+@en What is your telephone number?
 @distractor-en together
 @distractor-en zero
 @distractor-lu zesummen
@@ -38,7 +44,7 @@
 
 @sentence
 @lu Wéi ass Är Telefonsnummer?
-@en What is your (formal) telephone number?
+@en What is your telephone number?
 @distractor-en one
 @distractor-en two
 @distractor-lu eent
@@ -54,7 +60,7 @@
 
 @sentence
 @lu Wou wunnt Dir?
-@en Where do you (formal) live?
+@en Where do you live?
 @distractor-en five
 @distractor-en six
 @distractor-lu fënnef
@@ -62,7 +68,7 @@
 
 @sentence
 @lu Wou wunns du?
-@en Where do you (informal) live?
+@en Where do you live?
 @distractor-en seven
 @distractor-en eight
 @distractor-lu siwen
@@ -86,7 +92,7 @@
 
 @sentence
 @lu Wéi vill Joer hutt Dir?
-@en How many years do you (formal) have?
+@en How many years do you have?
 @distractor-en one
 @distractor-en two
 @distractor-lu eent
@@ -94,7 +100,7 @@
 
 @sentence
 @lu Wéi vill Joer hues du?
-@en How many years do you (informal) have?
+@en How many years do you have?
 @distractor-en three
 @distractor-en four
 @distractor-lu dräi
@@ -102,7 +108,7 @@
 
 @sentence
 @lu Wéini ass Äre Gebuertsdag?
-@en When is your (formal) birthday?
+@en When is your birthday?
 @distractor-en five
 @distractor-en six
 @distractor-lu fënnef
@@ -110,7 +116,7 @@
 
 @sentence
 @lu Wéini ass däi Gebuertsdag?
-@en When is your (informal) birthday?
+@en When is your birthday?
 @distractor-en seven
 @distractor-en eight
 @distractor-lu siwen
@@ -118,7 +124,8 @@
 
 @sentence
 @lu Wéini sidd Dir gebuer?
-@en When are (were) you (formal) born?
+@en When are you born?
+@en When were you born?
 @distractor-en nine
 @distractor-en ten
 @distractor-lu néng
@@ -126,7 +133,8 @@
 
 @sentence
 @lu Wéini bass du gebuer?
-@en When are (were) you (informal) born?
+@en When are you born?
+@en When were you born?
 @distractor-en together
 @distractor-en zero
 @distractor-lu zesummen
@@ -135,8 +143,8 @@
 @sentence
 @lu Mir si bestuet.
 @en We are married.
-@distractor-en sister, sisters
-@distractor-en brother, brothers
+@distractor-en sister
+@distractor-en brother
 @distractor-lu Schwëster
 @distractor-lu Brudder
 
@@ -167,8 +175,8 @@
 @sentence
 @lu Ech hu Kanner.
 @en I have children.
-@distractor-en sister, sisters
-@distractor-en brother, brothers
+@distractor-en sister
+@distractor-en brother
 @distractor-lu Schwëster
 @distractor-lu Brudder
 
@@ -182,7 +190,8 @@
 
 @sentence
 @lu Ech hunn e Frënd.
-@en I have a friend (boyfriend).
+@en I have a friend.
+@en I have a boyfriend.
 @distractor-en eight
 @distractor-en nine
 @distractor-lu aacht
@@ -190,7 +199,8 @@
 
 @sentence
 @lu Ech hu kee Frënd.
-@en I don't have a friend (boyfriend).
+@en I don't have a friend.
+@en I don't have a boyfriend.
 @distractor-en ten
 @distractor-en together
 @distractor-lu zéng
