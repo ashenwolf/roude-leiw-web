@@ -241,17 +241,16 @@ export const applySelection = (
     return { state: nextState, events, failPair: null };
   }
 
-  // Mismatch
+  // Mismatch. We mark exactly ONE pair as incorrect (the one the user just
+  // clicked) — marking both halves of the wrong pairing would double-count a
+  // single mistake and bias displayed accuracy downward.
   const newLeftSlots = updateSlotByPairIndex(state.leftSlots, leftPairIndex, (s) => ({
     type: "fail", pairIndex: s.pairIndex,
   }));
   const newRightSlots = updateSlotByPairIndex(state.rightSlots, rightPairIndex, (s) => ({
     type: "fail", pairIndex: s.pairIndex,
   }));
-  const wordResults = markIncorrect(
-    markIncorrect(state.wordResults, pairs, leftPairIndex),
-    pairs, rightPairIndex,
-  );
+  const wordResults = markIncorrect(state.wordResults, pairs, pairIndex);
 
   return {
     state: { ...state, leftSlots: newLeftSlots, rightSlots: newRightSlots, wordResults },

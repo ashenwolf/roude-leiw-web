@@ -1,4 +1,10 @@
-import { getUser, saveUser, mergeWordResults, mergeDailySession } from "../lib/user.ts";
+import {
+  getUser,
+  saveUser,
+  mergeWordResults,
+  mergeDailySession,
+  mergeUnlockedLessons,
+} from "../lib/user.ts";
 import { validateProgressSync } from "../lib/validators.ts";
 import { log } from "../lib/log.ts";
 
@@ -15,7 +21,7 @@ export const handleProgressSync = async ({ request, env, userId }: RouteContext)
     log.warn("progress_sync_rejected", { userId, reason: validation.reason });
     return new Response("Bad Request", { status: 400 });
   }
-  const { wordResults, date, durationSeconds } = validation.value;
+  const { wordResults, date, durationSeconds, newlyUnlockedLessons } = validation.value;
 
   const userData = await getUser(env.KV, userId);
   if (!userData) return new Response("User not found", { status: 404 });
@@ -25,6 +31,7 @@ export const handleProgressSync = async ({ request, env, userId }: RouteContext)
     ...userData,
     words: mergeWordResults(userData.words, wordResults),
     dailySessions: mergeDailySession(userData.dailySessions, date, durationSeconds, wordResults),
+    unlockedLessons: mergeUnlockedLessons(userData.unlockedLessons, newlyUnlockedLessons ?? []),
     version: baseVersion + 1,
   };
 

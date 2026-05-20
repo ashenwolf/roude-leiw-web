@@ -10,9 +10,14 @@ const STORAGE_KEY = "roude-leiw-guest";
 type GuestData = {
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
+  unlockedLessons?: string[];
 };
 
-const EMPTY: GuestData = { words: {}, dailySessions: {} };
+const EMPTY: GuestData = { words: {}, dailySessions: {}, unlockedLessons: [] };
+
+/** Normalize older blobs that predate the unlockedLessons field. */
+const normalize = (data: GuestData): GuestData =>
+  data.unlockedLessons === undefined ? { ...data, unlockedLessons: [] } : data;
 
 // ── External store backed by localStorage ───────────────────────────────
 // Writes go directly to localStorage without triggering React re-renders.
@@ -25,7 +30,7 @@ const notifyListeners = () => listeners.forEach((fn) => fn());
 const readStorage = (): GuestData => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as GuestData) : EMPTY;
+    return raw ? normalize(JSON.parse(raw) as GuestData) : EMPTY;
   } catch {
     return EMPTY;
   }
@@ -39,7 +44,7 @@ const cache = (() => {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw !== state.raw) {
         state.raw = raw;
-        state.data = raw ? (JSON.parse(raw) as GuestData) : EMPTY;
+        state.data = raw ? normalize(JSON.parse(raw) as GuestData) : EMPTY;
       }
       return state.data;
     },
@@ -64,12 +69,20 @@ const subscribe = (listener: () => void): (() => void) => {
 // ── Public API ──────────────────────────────────────────────────────────
 
 /** Fire-and-forget: writes to localStorage, does NOT trigger React re-render */
-const syncBatchToStorage = (wordResults: WordResultMap, durationSeconds: number): void => {
+const syncBatchToStorage = (
+  wordResults: WordResultMap,
+  durationSeconds: number,
+  newlyUnlockedLessons: string[] = [],
+): void => {
   const today = new Date().toISOString().slice(0, 10);
   const prev = readStorage();
   const updated: GuestData = {
     words: mergeWordStats(prev.words, wordResults),
     dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationSeconds),
+    unlockedLessons:
+      newlyUnlockedLessons.length === 0
+        ? prev.unlockedLessons ?? []
+        : [...new Set([...(prev.unlockedLessons ?? []), ...newlyUnlockedLessons])],
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   cache.set(localStorage.getItem(STORAGE_KEY), updated);
@@ -87,15 +100,24 @@ export const refreshGuestProgress = notifyListeners;
 export const useGuestProgress = () => {
   const data = useSyncExternalStore(subscribe, getSnapshot);
 
-  const syncBatch = useCallback((wordResults: WordResultMap, durationSeconds: number) => {
-    syncBatchToStorage(wordResults, durationSeconds);
-  }, []);
+  const syncBatch = useCallback(
+    (wordResults: WordResultMap, durationSeconds: number, newlyUnlockedLessons: string[] = []) => {
+      syncBatchToStorage(wordResults, durationSeconds, newlyUnlockedLessons);
+    },
+    [],
+  );
 
   const clear = useCallback(() => {
     clearStorage();
   }, []);
 
-  return { words: data.words, dailySessions: data.dailySessions, syncBatch, clear };
+  return {
+    words: data.words,
+    dailySessions: data.dailySessions,
+    unlockedLessons: data.unlockedLessons ?? [],
+    syncBatch,
+    clear,
+  };
 };
 
 export const readGuestData = readStorage;

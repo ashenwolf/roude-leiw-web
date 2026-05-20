@@ -40,6 +40,11 @@ export type UserData = {
   profile: UserProfile;
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
+  /**
+   * Lesson ids the user has ever unlocked. Sticky — only ever grows. Older
+   * records may omit it; treat absence as "compute from stats only".
+   */
+  unlockedLessons?: string[];
   /** Monotonic counter bumped on every save. Detects concurrent writes; older records may omit it. */
   version?: number;
 };
@@ -64,4 +69,10 @@ export type ProgressSyncRequest = {
   wordResults: WordResult[];
   durationSeconds: number;
   date: string; // "YYYY-MM-DD"
+  /**
+   * Lesson ids the client now considers unlocked. Server unions this with the
+   * previously stored set — never removes. Optional to keep older clients
+   * working without bumps.
+   */
+  newlyUnlockedLessons?: string[];
 };

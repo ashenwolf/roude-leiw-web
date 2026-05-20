@@ -35,6 +35,7 @@ export type AuthState =
       words: Record<string, WordStats>;
       dailySessions: Record<string, DailySession>;
       streak: StreakInfo;
+      unlockedLessons: string[];
     };
 
 export type AuthContextType = {
@@ -51,6 +52,7 @@ export type AuthContextType = {
     wordResults: Record<string, WordStats>,
     durationSeconds: number,
     date: string,
+    newlyUnlockedLessons?: string[],
   ) => void;
 };
 

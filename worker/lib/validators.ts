@@ -11,9 +11,13 @@ const MAX_WORD_RESULTS = 200;
 const MAX_PART_LEN = 64;
 const MAX_COUNT = 100;
 const MAX_DURATION = 3600;
+const MAX_UNLOCKED_LESSONS = 500;
+const MAX_LESSON_ID_LEN = 64;
 const DATE_RX = /^\d{4}-\d{2}-\d{2}$/;
 const WORD_KEY_RX = /^[^|]{1,64}\|[^|]{1,64}$/;
 const PHRASE_KEY_RX = /^phrase:(?:en-lu|lu-en):[^|]{1,64}$/;
+// Lesson ids are alphanumeric with a few separators (e.g. "A1.01" or "01_greetings").
+const LESSON_ID_RX = /^[A-Za-z0-9._-]{1,64}$/;
 
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v);
@@ -45,6 +49,15 @@ const isDateInWindow = (date: string, today: string) => {
   return delta >= -2 * DAY_MS && delta <= 1 * DAY_MS;
 };
 
+const validateLessonIds = (raw: unknown): ValidationResult<string[]> => {
+  if (raw === undefined) return ok([]);
+  if (!Array.isArray(raw)) return err("newlyUnlockedLessons: not an array");
+  if (raw.length > MAX_UNLOCKED_LESSONS) return err(`newlyUnlockedLessons: length > ${MAX_UNLOCKED_LESSONS}`);
+  const bad = raw.find((v) => typeof v !== "string" || !LESSON_ID_RX.test(v) || v.length > MAX_LESSON_ID_LEN);
+  if (bad !== undefined) return err("newlyUnlockedLessons: invalid lesson id");
+  return ok(raw as string[]);
+};
+
 /**
  * Validates a /api/progress/sync request body against the documented contract.
  * Pure — pass `today` (UTC YYYY-MM-DD) so tests can pin the clock.
@@ -68,8 +81,15 @@ export const validateProgressSync = (
     },
     ok([]),
   );
+  if (!validated.ok) return validated;
 
-  return validated.ok
-    ? ok({ date: body.date, durationSeconds: body.durationSeconds, wordResults: validated.value })
-    : validated;
+  const unlocks = validateLessonIds(body.newlyUnlockedLessons);
+  if (!unlocks.ok) return unlocks;
+
+  return ok({
+    date: body.date,
+    durationSeconds: body.durationSeconds,
+    wordResults: validated.value,
+    newlyUnlockedLessons: unlocks.value,
+  });
 };

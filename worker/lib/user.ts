@@ -30,12 +30,29 @@ export const linkEmailToUser = async (kv: KVNamespace, email: string, userId: st
  */
 export const MAX_WORD_KEYS = 10_000;
 export const MAX_DAILY_SESSIONS = 365 * 5;
+/** Defensive cap on the persisted unlock set — well above any plausible catalog. */
+export const MAX_UNLOCKED_LESSONS = 500;
 
 export const createNewUser = (profile: UserData["profile"]): UserData => ({
   profile,
   words: {},
   dailySessions: {},
+  unlockedLessons: [],
 });
+
+/**
+ * Union the previously stored unlocked-lesson set with newly reported ids.
+ * Sticky: never removes. Capped so a misbehaving client can't unbound-grow
+ * the blob.
+ */
+export const mergeUnlockedLessons = (
+  existing: UserData["unlockedLessons"],
+  newlyUnlocked: ReadonlyArray<string>,
+): string[] => {
+  if (newlyUnlocked.length === 0) return existing ?? [];
+  const merged = [...new Set([...(existing ?? []), ...newlyUnlocked])];
+  return merged.length <= MAX_UNLOCKED_LESSONS ? merged : merged.slice(0, MAX_UNLOCKED_LESSONS);
+};
 
 /**
  * Merge batch word results into user's cumulative word stats.

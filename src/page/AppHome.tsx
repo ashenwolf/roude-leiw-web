@@ -4,7 +4,7 @@ import { usePostHog } from "@posthog/react";
 import { useNavigation } from "../context/useNavigation";
 import { loadLessonMeta, loadLessonsUpToCursor } from "../exercise/lesson-loader";
 import { projectHomeLessonsView } from "../exercise/lesson-rows";
-import { computeOverallStats, computeLessonProgress } from "../exercise/progression";
+import { computeOverallStats, computeLessonProgress, collectLessonKeys } from "../exercise/progression";
 import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
 import { computeXP, computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
@@ -21,7 +21,7 @@ import type { LessonMeta } from "../exercise/lesson-loader";
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
   const posthog = usePostHog();
-  const { words, streak, dailySessions } = useProgress();
+  const { words, streak, dailySessions, unlockedLessons } = useProgress();
 
   // Phase 1: manifest — renders lesson titles immediately (no .letz fetches).
   const [lessonMetas, setLessonMetas] = useState<LessonMeta[]>([]);
@@ -44,29 +44,39 @@ export const AppHome = () => {
       .catch(() => setMetasLoading(false));
   }, []);
 
+  // Snapshot the persisted unlocked set alongside words so the cascade keeps
+  // fetching lessons that were once unlocked even if their predecessor has
+  // since drifted below the 80% threshold (sticky unlock).
+  const persistedUnlockedRef = useRef(unlockedLessons);
+
   // Phase 2: cascade-load unlocked .letz files (runs once metas are ready).
-  // Stops after the first lesson whose progress is below the unlock threshold,
-  // so we only fetch lessons the user has actually unlocked.
+  // Stops after the first lesson that is neither currently passing nor in the
+  // persisted-unlocked set, so we only fetch lessons the user has access to.
   useEffect(() => {
     if (lessonMetas.length === 0) return;
     const currentWords = wordsRef.current;
+    const persisted = new Set(persistedUnlockedRef.current);
     loadLessonsUpToCursor(
       lessonMetas,
-      (lesson) => computeLessonProgress(lesson, currentWords).percentage >= UNLOCK_LESSON_THRESHOLD,
+      (lesson) =>
+        persisted.has(lesson.meta.id) ||
+        computeLessonProgress(lesson, currentWords).percentage >= UNLOCK_LESSON_THRESHOLD,
     ).then(setLessons);
   }, [lessonMetas]);
 
   // Single producer: everything AppHome needs about lessons + progress.
   // Uses loaded (unlocked) lessons only — locked lessons show as empty in progressMap.
   const view = useMemo(
-    () => projectHomeLessonsView(lessons, words),
-    [lessons, words],
+    () => projectHomeLessonsView(lessons, words, unlockedLessons),
+    [lessons, words, unlockedLessons],
   );
   const { progressMap, unlockedIds, currentLessonId, totalWords } = view;
 
-  const overallStats = useMemo(() => computeOverallStats(words), [words]);
+  const validKeys = useMemo(() => collectLessonKeys(lessons), [lessons]);
 
-  const xp = useMemo(() => computeXP(words), [words]);
+  const overallStats = useMemo(() => computeOverallStats(words, validKeys), [words, validKeys]);
+
+  const xp = useMemo(() => computeXP(words, validKeys), [words, validKeys]);
   const levelInfo = useMemo(() => computePlayerLevel(xp), [xp]);
 
   const todayKey = new Date().toISOString().slice(0, 10);
@@ -140,7 +150,6 @@ export const AppHome = () => {
           masteredWords={overallStats.masteredWords}
           totalWords={totalWords}
           accuracy={overallStats.overallAccuracy}
-          streak={streak?.current ?? 0}
           todayMinutes={todayMinutes}
         />
 

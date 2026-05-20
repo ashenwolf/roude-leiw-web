@@ -20,6 +20,7 @@ const fetchMe = async (): Promise<AuthState> => {
         words: data.words,
         dailySessions: data.dailySessions,
         streak: data.streak,
+        unlockedLessons: Array.isArray(data.unlockedLessons) ? data.unlockedLessons : [],
       }
     : { status: "unauthenticated" };
 };
@@ -53,13 +54,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [posthog]);
 
   const applyStatsDelta = useCallback(
-    (wordResults: Record<string, WordStats>, durationSeconds: number, date: string) => {
+    (
+      wordResults: Record<string, WordStats>,
+      durationSeconds: number,
+      date: string,
+      newlyUnlockedLessons: string[] = [],
+    ) => {
       setAuth((prev) => {
         if (prev.status !== "authenticated") return prev;
         const newWords = mergeWordStats(prev.words, wordResults);
         const newDailySessions = mergeDailySession(prev.dailySessions, date, wordResults, durationSeconds);
         const newStreak = computeStreak(newDailySessions, date);
-        return { ...prev, words: newWords, dailySessions: newDailySessions, streak: newStreak };
+        const unlockedLessons = newlyUnlockedLessons.length === 0
+          ? prev.unlockedLessons
+          : [...new Set([...prev.unlockedLessons, ...newlyUnlockedLessons])];
+        return {
+          ...prev,
+          words: newWords,
+          dailySessions: newDailySessions,
+          streak: newStreak,
+          unlockedLessons,
+        };
       });
     },
     [],

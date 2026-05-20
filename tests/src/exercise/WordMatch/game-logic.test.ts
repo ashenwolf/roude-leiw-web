@@ -269,7 +269,7 @@ describe("applySelection — match", () => {
 // ============================================================================
 
 describe("applySelection — mismatch", () => {
-  it("non-matching pair indices → both become 'fail', both pairs marked incorrect", () => {
+  it("non-matching pair indices → both become 'fail', clicked pair marked incorrect once", () => {
     const state = game(
       [slot.active(0), slot.active(1)],
       [slot.selected(2), slot.active(3)], // pairIndex 2 vs 0 — different LU words
@@ -288,9 +288,10 @@ describe("applySelection — mismatch", () => {
     expect(events).toEqual([]);
     expect(failPair).toEqual({ leftPairIndex: 0, rightPairIndex: 2 });
 
-    // Both pairs marked incorrect
+    // Only the pair the user just clicked is marked incorrect — marking both
+    // would double-count a single mistake and skew displayed accuracy.
     expect(next.wordResults["Moien|hi"].incorrect).toBe(1);
-    expect(next.wordResults["Merci|thanks"].incorrect).toBe(1);
+    expect(next.wordResults["Merci|thanks"].incorrect).toBe(0);
     // Shown counts NOT incremented on a fail (slots remain visible)
     expect(next.wordResults["Moien|hi"].shown).toBe(1);
     expect(next.wordResults["Merci|thanks"].shown).toBe(1);

@@ -262,19 +262,28 @@ describe("computeUnlockedLessonIds", () => {
     expect(unlocked).not.toContain("A1.02");
   });
 
-  it("unlock is sticky — passing once is enough (stats are append-only)", () => {
-    // A lesson that passes the 80% threshold stays unlocked in the future
-    // because correct/shown only increases as user practices correctly.
-    const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
-    const u1 = computeUnlockedLessonIds(lessons, words);
-    expect(u1).toContain("A1.02");
-    // Simulating more practice (more shown, same accuracy) — still unlocked
-    const moreShown = {
-      "Moien|hi": s(MIN_ANSWERS + 5, MIN_ANSWERS + 5, 0),
-      "Äddi|bye": s(MIN_ANSWERS + 5, MIN_ANSWERS + 5, 0),
+  it("persistedUnlocked keeps a lesson available even if its predecessor's accuracy drops below threshold", () => {
+    // The user passed A1.01 once (so A1.02 was persisted as unlocked), then
+    // accumulated wrong answers — `correct/shown` for A1.01's words drops
+    // below 80%, but A1.02 must stay accessible.
+    const draggedDown = {
+      "Moien|hi": s(MIN_ANSWERS * 2, MIN_ANSWERS, MIN_ANSWERS),  // 50% — fails check
+      "Äddi|bye": s(MIN_ANSWERS * 2, MIN_ANSWERS, MIN_ANSWERS),
     };
-    const u2 = computeUnlockedLessonIds(lessons, moreShown);
-    expect(u2).toContain("A1.02");
+    const withoutPersisted = computeUnlockedLessonIds(lessons, draggedDown);
+    expect(withoutPersisted).not.toContain("A1.02");
+    const withPersisted = computeUnlockedLessonIds(lessons, draggedDown, ["A1.02"]);
+    expect(withPersisted).toContain("A1.02");
+  });
+
+  it("persistedUnlocked unions with currently-passing, never narrows it", () => {
+    const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
+    // Persisted set contains a lesson the stats also currently support.
+    const unlocked = computeUnlockedLessonIds(lessons, words, ["A1.02"]);
+    expect(unlocked).toContain("A1.01");
+    expect(unlocked).toContain("A1.02");
+    // No duplicate ids in the result.
+    expect(new Set(unlocked).size).toBe(unlocked.length);
   });
 });
 

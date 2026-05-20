@@ -11,9 +11,19 @@ const XP_PER_MASTERY: Record<string, number> = {
   mastered: 100,
 };
 
-export const computeXP = (words: Record<string, WordStats>): number =>
-  Object.values(words).reduce(
-    (xp, stats) => xp + (XP_PER_MASTERY[classifyWord(stats)] ?? 0),
+/**
+ * Sum of per-element XP. When `validKeys` is provided, keys outside the set
+ * (stats for elements no longer in any lesson) do not earn XP.
+ */
+export const computeXP = (
+  words: Record<string, WordStats>,
+  validKeys?: ReadonlySet<string>,
+): number =>
+  Object.entries(words).reduce(
+    (xp, [key, stats]) =>
+      validKeys && !validKeys.has(key)
+        ? xp
+        : xp + (XP_PER_MASTERY[classifyWord(stats)] ?? 0),
     0,
   );
 

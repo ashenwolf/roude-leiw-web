@@ -26,6 +26,7 @@ const EMPTY_VIEW: HomeLessonsView = {
 export const projectHomeLessonsView = (
   lessons: Lesson[],
   userWords: Record<string, WordStats>,
+  persistedUnlocked: ReadonlyArray<string> = [],
 ): HomeLessonsView => {
   if (lessons.length === 0) return EMPTY_VIEW;
 
@@ -33,8 +34,8 @@ export const projectHomeLessonsView = (
     progressMap: Object.fromEntries(
       lessons.map((lesson) => [lesson.meta.id, computeLessonProgress(lesson, userWords)]),
     ),
-    unlockedIds: computeUnlockedLessonIds(lessons, userWords),
-    currentLessonId: findCurrentLessonId(lessons, userWords),
+    unlockedIds: computeUnlockedLessonIds(lessons, userWords, persistedUnlocked),
+    currentLessonId: findCurrentLessonId(lessons, userWords, persistedUnlocked),
     totalWords: lessons.reduce((sum, l) => sum + l.entries.length, 0),
   };
 };

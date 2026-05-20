@@ -7,6 +7,7 @@ import type { WordResultMap } from "../../exercise/WordMatch/types.ts";
 type SyncPayload = {
   wordResults: WordResultMap;
   durationSeconds: number;
+  newlyUnlockedLessons?: string[];
 };
 
 const toApiFormat = (wordResults: WordResultMap) =>
@@ -16,7 +17,7 @@ export const useProgressSync = () => {
   const { auth } = useAuth();
 
   const syncProgress = useCallback(
-    async ({ wordResults, durationSeconds }: SyncPayload) => {
+    async ({ wordResults, durationSeconds, newlyUnlockedLessons }: SyncPayload) => {
       if (auth.status !== "authenticated") return;
 
       const today = new Date().toISOString().slice(0, 10);
@@ -28,6 +29,7 @@ export const useProgressSync = () => {
           wordResults: toApiFormat(wordResults),
           durationSeconds,
           date: today,
+          newlyUnlockedLessons: newlyUnlockedLessons ?? [],
         }),
       });
     },

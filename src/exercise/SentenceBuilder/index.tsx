@@ -12,10 +12,24 @@ import type { WordResultMap } from "../WordMatch/types";
 type Props = {
   item: SentenceBuilderItem;
   onResult: (results: WordResultMap) => void;
+  onInteraction?: () => void;
 };
 
-export const SentenceBuilder = ({ item, onResult }: Props) => {
+export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const { state, tapToken, tapAssembled, submit } = useSentenceGame(item);
+
+  const handleTapToken = (idx: number) => {
+    onInteraction?.();
+    tapToken(idx);
+  };
+  const handleTapAssembled = (pos: number) => {
+    onInteraction?.();
+    tapAssembled(pos);
+  };
+  const handleSubmit = () => {
+    onInteraction?.();
+    submit();
+  };
 
   // Call onResult as soon as the answer is checked — always advance to next slot
   useEffect(() => {
@@ -50,7 +64,7 @@ export const SentenceBuilder = ({ item, onResult }: Props) => {
               key={assembledPos}
               size="sm"
               status={assembledStatus}
-              onClick={canTapAssembled ? () => tapAssembled(assembledPos) : undefined}
+              onClick={canTapAssembled ? () => handleTapAssembled(assembledPos) : undefined}
             >
               {item.tokens[tokenIdx]}
             </Pill>
@@ -73,7 +87,7 @@ export const SentenceBuilder = ({ item, onResult }: Props) => {
               key={idx}
               size="sm"
               status="blanc"
-              onClick={() => tapToken(idx)}
+              onClick={() => handleTapToken(idx)}
             >
               {token}
             </Pill>
@@ -83,7 +97,7 @@ export const SentenceBuilder = ({ item, onResult }: Props) => {
 
       <div className="w-full max-w-xs mx-auto">
         <Button
-          onClick={submit}
+          onClick={handleSubmit}
           disabled={state.assembled.length === 0 || state.checkResult !== null}
         >
           Check

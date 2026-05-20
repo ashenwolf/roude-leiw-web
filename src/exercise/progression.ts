@@ -39,6 +39,27 @@ export const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string): string
 export const isPhraseKey = (key: string): boolean => key.startsWith("phrase:");
 export const isWordKey = (key: string): boolean => !isPhraseKey(key);
 
+/**
+ * All stat-keys defined by the given lessons (both word and phrase forms).
+ * Use as the `validKeys` argument to overall-stat producers so that elements
+ * deleted from `.letz` files don't keep contributing orphan data.
+ *
+ * Both phrase directions (`phrase:en-lu:...` and `phrase:lu-en:...`) are
+ * included even though only the en-lu direction gates lesson unlock — both
+ * directions are still real elements the user can encounter and earn XP on.
+ */
+export const collectLessonKeys = (lessons: Lesson[]): Set<string> =>
+  new Set(
+    lessons.flatMap((lesson) => [
+      ...lesson.entries.map((e) => wordKey(e.lu, e.en)),
+      ...lesson.sentences.flatMap((s) =>
+        s.enVariants.length > 0
+          ? [phraseKey("en-lu", s.enVariants[0]), phraseKey("lu-en", s.enVariants[0])]
+          : [],
+      ),
+    ]),
+  );
+
 // --- Lesson Progress ---
 
 export type LessonProgress = {
@@ -80,27 +101,52 @@ export const computeLessonProgress = (
 
 // --- Lesson Unlock ---
 
+/**
+ * Lessons the user can access right now.
+ *
+ * The set is the union of:
+ *   - the first lesson (always unlocked);
+ *   - every lesson whose previous lesson currently passes the unlock threshold;
+ *   - every lesson in `persistedUnlocked` (sticky — once unlocked, always
+ *     unlocked, even if the predecessor's `correct/shown` later drifts below
+ *     threshold).
+ *
+ * The persisted set is the load-bearing part of stickiness: stats are
+ * append-only but the ratio `correct/shown` is not monotonic, so without a
+ * separate store the unlock set could shrink between renders.
+ */
 export const computeUnlockedLessonIds = (
   lessons: Lesson[],
   userWords: Record<string, WordStats>,
-): ReadonlyArray<string> =>
-  lessons.reduce<string[]>(
+  persistedUnlocked: ReadonlyArray<string> = [],
+): ReadonlyArray<string> => {
+  const persisted = new Set(persistedUnlocked);
+  return lessons.reduce<string[]>(
     (unlocked, lesson, idx) => {
       if (idx === 0) return [lesson.meta.id];
+      if (persisted.has(lesson.meta.id)) return [...unlocked, lesson.meta.id];
       const prevProgress = computeLessonProgress(lessons[idx - 1], userWords);
-      return prevProgress.percentage >= UNLOCK_LESSON_THRESHOLD ? [...unlocked, lesson.meta.id] : unlocked;
+      return prevProgress.percentage >= UNLOCK_LESSON_THRESHOLD
+        ? [...unlocked, lesson.meta.id]
+        : unlocked;
     },
     [],
   );
+};
 
+/**
+ * The lesson the user should resume on "Start Learning". With sticky unlock,
+ * the highest-unlocked lesson is the user's frontier — they may be working
+ * on it, or have just passed it. Falling back to first/last lesson handles
+ * the empty-state and all-done cases.
+ */
 export const findCurrentLessonId = (
   lessons: Lesson[],
   userWords: Record<string, WordStats>,
+  persistedUnlocked: ReadonlyArray<string> = [],
 ): string => {
-  const firstIncomplete = lessons.find(
-    (lesson) => !computeLessonProgress(lesson, userWords).isComplete,
-  );
-  return firstIncomplete?.meta.id ?? lessons[lessons.length - 1]?.meta.id ?? "";
+  const unlocked = computeUnlockedLessonIds(lessons, userWords, persistedUnlocked);
+  return unlocked[unlocked.length - 1] ?? lessons[0]?.meta.id ?? "";
 };
 
 // --- Overall Stats ---
@@ -115,11 +161,21 @@ export type OverallStats = {
   masteredPhrases: number;
 };
 
+/**
+ * Aggregate user-facing counters. When `validKeys` is provided, keys outside
+ * the set (e.g. stats left over from words removed from `.letz` files) are
+ * dropped so the UI doesn't display "mastered 12/10" with orphan data inflating
+ * the numerator.
+ */
 export const computeOverallStats = (
   userWords: Record<string, WordStats>,
+  validKeys?: ReadonlySet<string>,
 ): OverallStats => {
-  const wordEntries = Object.entries(userWords).filter(([k]) => isWordKey(k)).map(([, v]) => v);
-  const phraseEntries = Object.entries(userWords).filter(([k]) => isPhraseKey(k)).map(([, v]) => v);
+  const entries = validKeys
+    ? Object.entries(userWords).filter(([k]) => validKeys.has(k))
+    : Object.entries(userWords);
+  const wordEntries = entries.filter(([k]) => isWordKey(k)).map(([, v]) => v);
+  const phraseEntries = entries.filter(([k]) => isPhraseKey(k)).map(([, v]) => v);
 
   const wordClassified = wordEntries.map((s) => classifyWord(s));
   const totalShown = wordEntries.reduce((sum, s) => sum + s.correct + s.incorrect, 0);

@@ -121,6 +121,7 @@ export const handleMe = async ({ env, userId }: RouteContext) => {
     words: userData.words,
     dailySessions: userData.dailySessions,
     streak: computeStreak(userData.dailySessions, today),
+    unlockedLessons: userData.unlockedLessons ?? [],
   });
 };
 

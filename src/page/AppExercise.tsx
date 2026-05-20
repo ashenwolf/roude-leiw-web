@@ -1,10 +1,13 @@
+import { useEffect } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
 import { SentenceBuilder } from "../exercise/SentenceBuilder";
 import { WordMatch } from "../exercise/WordMatch";
+import { computeUnlockedLessonIds } from "../exercise/progression";
 import { useActivityTimer } from "../exercise/use-activity-timer";
 import { useExerciseSession } from "../exercise/use-exercise-session";
+import { mergeWordStats } from "../lib/stats-merge";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
@@ -65,6 +68,7 @@ type ExerciseActiveProps = {
   currentBatch: Exercise | undefined;
   onSlotComplete: (wordResults: WordResultMap) => void;
   onSlotProgress: (done: number, total: number) => void;
+  onInteraction: () => void;
   onDismissMilestone: () => void;
   onSessionComplete: () => void;
   onTryAgain: () => void;
@@ -79,6 +83,7 @@ const ExerciseActive = ({
   currentBatch,
   onSlotComplete,
   onSlotProgress,
+  onInteraction,
   onDismissMilestone,
   onSessionComplete,
   onTryAgain,
@@ -101,6 +106,7 @@ const ExerciseActive = ({
         key={`slot-${currentSlotIndex}`}
         item={currentBatch.item}
         onResult={onSlotComplete}
+        onInteraction={onInteraction}
       />
     )}
 
@@ -139,7 +145,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo, params, currentPage } = useNavigation();
-  const { words, syncBatch } = useProgress();
+  const { words, unlockedLessons, syncBatch } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
@@ -150,6 +156,12 @@ export const AppExercise = () => {
 
   // session is defined first so handlers below can reference it without TDZ risk
   const session = useExerciseSession({ userWords: words, mode });
+
+  // Anchor the activity timer when a new slot becomes visible so the user's
+  // think-time before the first interaction is measured against this moment.
+  useEffect(() => {
+    if (session.state === "active") timer.start();
+  }, [session.state, session.currentSlotIndex, timer]);
 
   const goHome = () => {
     refreshGuestProgress();
@@ -165,7 +177,17 @@ export const AppExercise = () => {
       lesson_id: params.lessonId,
       duration_seconds: durationSeconds,
     });
-    syncBatch(wordResults, durationSeconds);
+    // Compute any lessons that became unlocked because of this slot's results.
+    // The diff is what persistence stores; the union there is what later renders
+    // read back as "sticky" unlocked set.
+    const merged = mergeWordStats(words, wordResults);
+    const persistedSet = new Set(unlockedLessons);
+    const newlyUnlockedLessons = computeUnlockedLessonIds(
+      session.lessons,
+      merged,
+      unlockedLessons,
+    ).filter((id) => !persistedSet.has(id));
+    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
     session.handleSlotComplete(wordResults); // determines outcome + re-queues if end of plan
   };
 
@@ -225,6 +247,7 @@ export const AppExercise = () => {
         currentBatch={session.currentBatch}
         onSlotComplete={handleSlotSync}
         onSlotProgress={handleSlotProgress}
+        onInteraction={timer.registerInteraction}
         onDismissMilestone={session.dismissMilestone}
         onSessionComplete={handleSessionComplete}
         onTryAgain={handleTryAgain}
