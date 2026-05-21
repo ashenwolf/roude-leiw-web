@@ -6,7 +6,7 @@ import { loadLessonMeta, loadLessonsUpToCursor } from "../exercise/lesson-loader
 import { projectHomeLessonsView } from "../exercise/lesson-rows";
 import { computeOverallStats, computeLessonProgress, collectLessonKeys } from "../exercise/progression";
 import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
-import { computeXP, computePlayerLevel } from "../exercise/xp";
+import { computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
 import { RefreshIcon, ShuffleIcon } from "../ui/icons";
@@ -21,7 +21,7 @@ import type { LessonMeta } from "../exercise/lesson-loader";
 export const AppHome = () => {
   const { navigateTo } = useNavigation();
   const posthog = usePostHog();
-  const { words, streak, dailySessions, unlockedLessons } = useProgress();
+  const { words, streak, dailySessions, unlockedLessons, totalXP, todayXP } = useProgress();
 
   // Phase 1: manifest — renders lesson titles immediately (no .letz fetches).
   const [lessonMetas, setLessonMetas] = useState<LessonMeta[]>([]);
@@ -76,8 +76,7 @@ export const AppHome = () => {
 
   const overallStats = useMemo(() => computeOverallStats(words, validKeys), [words, validKeys]);
 
-  const xp = useMemo(() => computeXP(words, validKeys), [words, validKeys]);
-  const levelInfo = useMemo(() => computePlayerLevel(xp), [xp]);
+  const levelInfo = useMemo(() => computePlayerLevel(totalXP), [totalXP]);
 
   const todayKey = new Date().toISOString().slice(0, 10);
   const todayMinutes = (dailySessions[todayKey]?.durationSeconds ?? 0) / 60;
@@ -151,6 +150,7 @@ export const AppHome = () => {
           totalElements={totalElements}
           accuracy={overallStats.overallAccuracy}
           todayMinutes={todayMinutes}
+          todayXP={todayXP}
         />
 
         {/* Lesson grid — titles from manifest (all lessons); progress from loaded subset */}

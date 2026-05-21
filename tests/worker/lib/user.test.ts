@@ -76,26 +76,20 @@ describe("mergeDailySession", () => {
   it("creates new entry for a new date", () => {
     const merged = mergeDailySession({}, "2025-01-10", 5000, [result("Moien|hi", 2, 1, 1)]);
     expect(merged["2025-01-10"]).toEqual({
-      totalItems: 2,
-      durationSeconds: 5000,
-      correct: 1,
-      incorrect: 1,
+      totalItems: 2, durationSeconds: 5000, correct: 1, incorrect: 1, xp: 0,
     });
   });
 
   it("accumulates into existing entry for same date", () => {
-    const existing = { "2025-01-10": { totalItems: 3, durationSeconds: 2000, correct: 2, incorrect: 1 } };
+    const existing = { "2025-01-10": { totalItems: 3, durationSeconds: 2000, correct: 2, incorrect: 1, xp: 0 } };
     const merged = mergeDailySession(existing, "2025-01-10", 3000, [result("Äddi|bye", 2, 2, 0)]);
     expect(merged["2025-01-10"]).toEqual({
-      totalItems: 5,
-      durationSeconds: 5000,
-      correct: 4,
-      incorrect: 1,
+      totalItems: 5, durationSeconds: 5000, correct: 4, incorrect: 1, xp: 0,
     });
   });
 
   it("preserves other dates when adding a new one", () => {
-    const existing = { "2025-01-09": { totalItems: 1, durationSeconds: 1000, correct: 1, incorrect: 0 } };
+    const existing = { "2025-01-09": { totalItems: 1, durationSeconds: 1000, correct: 1, incorrect: 0, xp: 0 } };
     const merged = mergeDailySession(existing, "2025-01-10", 2000, [result("Moien|hi", 1, 1, 0)]);
     expect(merged["2025-01-09"]).toEqual(existing["2025-01-09"]);
     expect(merged["2025-01-10"]).toBeDefined();
@@ -104,11 +98,15 @@ describe("mergeDailySession", () => {
   it("empty results creates session with zero item counts", () => {
     const merged = mergeDailySession({}, "2025-01-10", 1000, []);
     expect(merged["2025-01-10"]).toEqual({
-      totalItems: 0,
-      durationSeconds: 1000,
-      correct: 0,
-      incorrect: 0,
+      totalItems: 0, durationSeconds: 1000, correct: 0, incorrect: 0, xp: 0,
     });
+  });
+
+  it("accumulates xpEarned into daily xp across multiple syncs", () => {
+    const m1 = mergeDailySession({}, "2025-01-10", 0, [], 100);
+    expect(m1["2025-01-10"].xp).toBe(100);
+    const m2 = mergeDailySession(m1, "2025-01-10", 0, [], 90);
+    expect(m2["2025-01-10"].xp).toBe(190);
   });
 
   it("drops oldest entries when exceeding MAX_DAILY_SESSIONS", () => {

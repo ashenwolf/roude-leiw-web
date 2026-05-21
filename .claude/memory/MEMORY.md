@@ -9,6 +9,7 @@ This is the **canonical** location. The home-dir auto-memory at `~/.claude/proje
 - [React 19 features evaluation](react-19-features-evaluation.md) — why Suspense/`use()`/`useOptimistic`/`useTransition`/etc. are intentionally NOT adopted; only Error Boundary + route lazy-load were taken
 - [Bundle code-splitting](bundle-code-splitting.md) — Chevrotain dynamic-imported via `parseLetzContent`; AppExercise via `React.lazy`; initial paint is 40 KB gzipped
 - [Audio pipeline](audio-pipeline.md) — ElevenLabs TTS for sentence audio; gitignored locally, R2 as source of truth, Pages CI rehydrates via `prebuild` hook
+- [Stats and XP redesign](stats-and-xp-redesign.md) — two mastery systems (live vs monotonic), sticky unlock, event-based XP, timer fixes, double-incorrect fix, orphan filtering (May 2026)
 
 ## Maintenance rules
 

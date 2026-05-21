@@ -8,6 +8,7 @@ type SyncPayload = {
   wordResults: WordResultMap;
   durationSeconds: number;
   newlyUnlockedLessons?: string[];
+  xpEarned?: number;
 };
 
 const toApiFormat = (wordResults: WordResultMap) =>
@@ -17,7 +18,7 @@ export const useProgressSync = () => {
   const { auth } = useAuth();
 
   const syncProgress = useCallback(
-    async ({ wordResults, durationSeconds, newlyUnlockedLessons }: SyncPayload) => {
+    async ({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned }: SyncPayload) => {
       if (auth.status !== "authenticated") return;
 
       const today = new Date().toISOString().slice(0, 10);
@@ -29,6 +30,7 @@ export const useProgressSync = () => {
           wordResults: toApiFormat(wordResults),
           durationSeconds,
           date: today,
+          xpEarned: xpEarned ?? 0,
           newlyUnlockedLessons: newlyUnlockedLessons ?? [],
         }),
       });

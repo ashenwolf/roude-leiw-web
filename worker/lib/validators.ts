@@ -11,6 +11,7 @@ const MAX_WORD_RESULTS = 200;
 const MAX_PART_LEN = 64;
 const MAX_COUNT = 100;
 const MAX_DURATION = 3600;
+const MAX_XP_PER_SYNC = 500;
 const MAX_UNLOCKED_LESSONS = 500;
 const MAX_LESSON_ID_LEN = 64;
 const DATE_RX = /^\d{4}-\d{2}-\d{2}$/;
@@ -86,10 +87,14 @@ export const validateProgressSync = (
   const unlocks = validateLessonIds(body.newlyUnlockedLessons);
   if (!unlocks.ok) return unlocks;
 
+  const xpEarned = body.xpEarned === undefined ? 0 : body.xpEarned;
+  if (!isBoundedInt(xpEarned, MAX_XP_PER_SYNC)) return err(`xpEarned: not an int in [0,${MAX_XP_PER_SYNC}]`);
+
   return ok({
     date: body.date,
     durationSeconds: body.durationSeconds,
     wordResults: validated.value,
+    xpEarned,
     newlyUnlockedLessons: unlocks.value,
   });
 };

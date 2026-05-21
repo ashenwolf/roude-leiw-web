@@ -21,6 +21,7 @@ const fetchMe = async (): Promise<AuthState> => {
         dailySessions: data.dailySessions,
         streak: data.streak,
         unlockedLessons: Array.isArray(data.unlockedLessons) ? data.unlockedLessons : [],
+        totalXP: typeof data.totalXP === "number" ? data.totalXP : 0,
       }
     : { status: "unauthenticated" };
 };
@@ -68,20 +69,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const unlockedLessons = newlyUnlockedLessons.length === 0
           ? prev.unlockedLessons
           : [...new Set([...prev.unlockedLessons, ...newlyUnlockedLessons])];
-        return {
-          ...prev,
-          words: newWords,
-          dailySessions: newDailySessions,
-          streak: newStreak,
-          unlockedLessons,
+        return { ...prev, words: newWords, dailySessions: newDailySessions, streak: newStreak, unlockedLessons };
+      });
+    },
+    [],
+  );
+
+  const applyXPDelta = useCallback(
+    (xpEarned: number, date: string) => {
+      setAuth((prev) => {
+        if (prev.status !== "authenticated") return prev;
+        const prevDay = prev.dailySessions[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 0 };
+        const newDailySessions = {
+          ...prev.dailySessions,
+          [date]: { ...prevDay, xp: (prevDay.xp ?? 0) + xpEarned },
         };
+        return { ...prev, totalXP: prev.totalXP + xpEarned, dailySessions: newDailySessions };
       });
     },
     [],
   );
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, applyStatsDelta }}>
+    <AuthContext.Provider value={{ auth, login, logout, applyStatsDelta, applyXPDelta }}>
       {children}
     </AuthContext.Provider>
   );

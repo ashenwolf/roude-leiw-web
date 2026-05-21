@@ -29,6 +29,8 @@ export type DailySession = {
   durationSeconds: number;
   correct: number;
   incorrect: number;
+  /** XP earned this calendar day. Older records may omit — treat absence as 0. */
+  xp?: number;
 };
 
 export type StreakInfo = {
@@ -40,6 +42,12 @@ export type UserData = {
   profile: UserProfile;
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
+  /**
+   * Cumulative XP across all sessions. Stored separately from dailySessions so
+   * it survives the MAX_DAILY_SESSIONS pruning window (5 years). Older records
+   * may omit it; treat absence as 0.
+   */
+  totalXP?: number;
   /**
    * Lesson ids the user has ever unlocked. Sticky — only ever grows. Older
    * records may omit it; treat absence as "compute from stats only".
@@ -69,6 +77,11 @@ export type ProgressSyncRequest = {
   wordResults: WordResult[];
   durationSeconds: number;
   date: string; // "YYYY-MM-DD"
+  /**
+   * XP earned this sync. For slot syncs this is 0 (omit); for a session-complete
+   * sync this is the session's XP award. Optional so older clients still work.
+   */
+  xpEarned?: number;
   /**
    * Lesson ids the client now considers unlocked. Server unions this with the
    * previously stored set — never removes. Optional to keep older clients

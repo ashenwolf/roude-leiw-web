@@ -19,6 +19,8 @@ export type DailySession = {
   durationSeconds: number;
   correct: number;
   incorrect: number;
+  /** XP earned this calendar day. Older records may omit — treat absence as 0. */
+  xp?: number;
 };
 
 export type StreakInfo = {
@@ -36,6 +38,8 @@ export type AuthState =
       dailySessions: Record<string, DailySession>;
       streak: StreakInfo;
       unlockedLessons: string[];
+      /** Cumulative XP. Stored separately from daily sessions so it survives session pruning. */
+      totalXP: number;
     };
 
 export type AuthContextType = {
@@ -54,6 +58,9 @@ export type AuthContextType = {
     date: string,
     newlyUnlockedLessons?: string[],
   ) => void;
+  /** Optimistically credit XP for a completed session. Called separately from
+   *  applyStatsDelta because XP is awarded once at session-end, not per-slot. */
+  applyXPDelta: (xpEarned: number, date: string) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -12,21 +12,25 @@ export type ProgressState = {
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
   streak: StreakInfo | null;
-  /**
-   * Lesson ids the user has ever unlocked. Sticky — see Architecture Reference
-   * > Unlock rule in CLAUDE.md.
-   */
   unlockedLessons: string[];
+  /** Cumulative XP. For auth users this is the server-stored value (immune to
+   *  session pruning). For guests it is derived from dailySessions.xp sums. */
+  totalXP: number;
+  /** XP earned today (for the "today" stat display). */
+  todayXP: number;
   syncBatch: (
     wordResults: WordResultMap,
     durationSeconds: number,
     newlyUnlockedLessons?: string[],
   ) => void;
+  /** Award XP for a completed session. Called once on session-complete, separately
+   *  from syncBatch which fires per-slot. */
+  awardXP: (xpEarned: number) => void;
   isAuthenticated: boolean;
 };
 
 export const useProgress = (): ProgressState => {
-  const { auth, applyStatsDelta } = useAuth();
+  const { auth, applyStatsDelta, applyXPDelta } = useAuth();
   const guest = useGuestProgress();
   const { syncProgress } = useProgressSync();
   const migrationDone = useRef(false);
@@ -61,12 +65,22 @@ export const useProgress = (): ProgressState => {
   ) => {
     if (auth.status === "authenticated") {
       const today = new Date().toISOString().slice(0, 10);
-      // Apply locally first so Home re-renders immediately without a page reload.
-      // The POST is fire-and-forget; the local merge is byte-identical to the server merge.
       applyStatsDelta(wordResults, durationSeconds, today, newlyUnlockedLessons);
       syncProgress({ wordResults, durationSeconds, newlyUnlockedLessons });
     } else {
       guest.syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+    }
+  };
+
+  const awardXP = (xpEarned: number) => {
+    if (auth.status === "authenticated") {
+      const today = new Date().toISOString().slice(0, 10);
+      applyXPDelta(xpEarned, today);
+      syncProgress({ wordResults: {}, durationSeconds: 0, xpEarned });
+    } else {
+      guest.awardXP(xpEarned);
+      // Notify React so Home re-renders with updated todayXP
+      import("./use-guest-progress").then(({ refreshGuestProgress }) => refreshGuestProgress());
     }
   };
 
@@ -75,13 +89,18 @@ export const useProgress = (): ProgressState => {
     [guest.dailySessions],
   );
 
+  const today = new Date().toISOString().slice(0, 10);
+
   if (auth.status === "authenticated") {
     return {
       words: auth.words,
       dailySessions: auth.dailySessions,
       streak: auth.streak,
       unlockedLessons: auth.unlockedLessons,
+      totalXP: auth.totalXP,
+      todayXP: auth.dailySessions[today]?.xp ?? 0,
       syncBatch,
+      awardXP,
       isAuthenticated: true,
     };
   }
@@ -91,7 +110,10 @@ export const useProgress = (): ProgressState => {
     dailySessions: guest.dailySessions,
     streak: guestStreak,
     unlockedLessons: guest.unlockedLessons,
+    totalXP: guest.totalXP,
+    todayXP: guest.dailySessions[today]?.xp ?? 0,
     syncBatch,
+    awardXP,
     isAuthenticated: false,
   };
 };

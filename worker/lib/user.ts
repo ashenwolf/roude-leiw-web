@@ -37,6 +37,7 @@ export const createNewUser = (profile: UserData["profile"]): UserData => ({
   profile,
   words: {},
   dailySessions: {},
+  totalXP: 0,
   unlockedLessons: [],
 });
 
@@ -90,8 +91,9 @@ export const mergeDailySession = (
   date: string,
   durationSeconds: number,
   wordResults: WordResult[],
+  xpEarned: number = 0,
 ): UserData["dailySessions"] => {
-  const existing = existingSessions[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0 };
+  const existing = existingSessions[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 0 };
   const totals = wordResults.reduce(
     (acc, r) => ({
       totalItems: acc.totalItems + r.shown,
@@ -108,6 +110,7 @@ export const mergeDailySession = (
       durationSeconds: existing.durationSeconds + durationSeconds,
       correct: existing.correct + totals.correct,
       incorrect: existing.incorrect + totals.incorrect,
+      xp: (existing.xp ?? 0) + xpEarned,
     } satisfies DailySession,
   };
 

@@ -18,14 +18,24 @@ type StatsRowProps = {
   totalElements: number;
   accuracy: number;
   todayMinutes?: number;
+  todayXP?: number;
 };
 
-export const StatsRow = ({ masteredElements, totalElements, accuracy, todayMinutes }: StatsRowProps) => (
+export const StatsRow = ({
+  masteredElements,
+  totalElements,
+  accuracy,
+  todayMinutes,
+  todayXP,
+}: StatsRowProps) => (
   <div className="flex justify-around py-3 px-2 bg-white/60 rounded-xl">
     <StatItem label="Learned" value={`${masteredElements}/${totalElements}`} />
     <StatItem label="Accuracy" value={`${Math.round(accuracy * 100)}%`} />
     {todayMinutes !== undefined && (
       <StatItem label="Today" value={formatMinutes(todayMinutes)} />
+    )}
+    {todayXP !== undefined && todayXP > 0 && (
+      <StatItem label="XP Today" value={`+${todayXP}`} />
     )}
   </div>
 );

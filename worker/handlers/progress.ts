@@ -21,7 +21,7 @@ export const handleProgressSync = async ({ request, env, userId }: RouteContext)
     log.warn("progress_sync_rejected", { userId, reason: validation.reason });
     return new Response("Bad Request", { status: 400 });
   }
-  const { wordResults, date, durationSeconds, newlyUnlockedLessons } = validation.value;
+  const { wordResults, date, durationSeconds, xpEarned, newlyUnlockedLessons } = validation.value;
 
   const userData = await getUser(env.KV, userId);
   if (!userData) return new Response("User not found", { status: 404 });
@@ -30,7 +30,8 @@ export const handleProgressSync = async ({ request, env, userId }: RouteContext)
   const updatedUser: UserData = {
     ...userData,
     words: mergeWordResults(userData.words, wordResults),
-    dailySessions: mergeDailySession(userData.dailySessions, date, durationSeconds, wordResults),
+    dailySessions: mergeDailySession(userData.dailySessions, date, durationSeconds, wordResults, xpEarned ?? 0),
+    totalXP: (userData.totalXP ?? 0) + (xpEarned ?? 0),
     unlockedLessons: mergeUnlockedLessons(userData.unlockedLessons, newlyUnlockedLessons ?? []),
     version: baseVersion + 1,
   };

@@ -1,36 +1,29 @@
-import type { WordStats } from "../context/auth";
-import { classifyWord, isElementMastered } from "./progression";
+// ── Session XP awards ──────────────────────────────────────────────────────
+//
+// XP is awarded once per completed session (all blocks done), not per-slot and
+// not derived from mastery state. This means XP can only ever increase.
+//
+// Scale assumptions:
+//   A1-B2 = 4 CEFR levels × 12 modules = 48 modules
+//   ~8 sessions per module to reach unlock threshold
+//   = ~384 sessions to complete A1-B2
+//   = ~38,400 XP at 100 XP/session → reaching level 12-13
 
-// XP for elements that have NOT yet crossed the monotonic mastery gate.
-// "mastered" is intentionally absent — isElementMastered handles that path first.
-const XP_PRE_MASTERY: Record<string, number> = {
-  unseen: 0,
-  learning: 10,
-  struggling: 5,
-};
+export const SESSION_XP = {
+  lesson: 100,
+  "fix-errors": 90,
+  "word-mix": 80,
+} as const satisfies Record<string, number>;
 
-/**
- * Sum of per-element XP. When `validKeys` is provided, keys outside the set
- * (stats for elements no longer in any lesson) do not earn XP.
- *
- * The 100-XP mastery tier uses `isElementMastered` (monotonic) so the player's
- * total XP — and therefore their level — can never decrease as they practise.
- * Non-mastered elements use the live `classifyWord` result.
- */
-export const computeXP = (
-  words: Record<string, WordStats>,
-  validKeys?: ReadonlySet<string>,
-): number =>
-  Object.entries(words).reduce(
-    (xp, [key, stats]) => {
-      if (validKeys && !validKeys.has(key)) return xp;
-      if (isElementMastered(stats)) return xp + 100;
-      return xp + (XP_PRE_MASTERY[classifyWord(stats)] ?? 0);
-    },
-    0,
-  );
-
-// --- Player Levels ---
+// ── Level table ────────────────────────────────────────────────────────────
+//
+// 20 levels aligned to CEFR milestones at 100 XP/session, 8 sessions/module:
+//   A1 complete ≈ level 6  (96 sessions = 9,600 XP)
+//   A2 complete ≈ level 9  (192 sessions = 19,200 XP)
+//   B1 complete ≈ level 11 (288 sessions = 28,800 XP)
+//   B2 complete ≈ level 13 (384 sessions = 38,400 XP)
+//   C1 complete ≈ level 15 (480 sessions = 48,000 XP)
+//   C2 complete ≈ level 17 (576 sessions = 57,600 XP)
 
 export type PlayerLevel = {
   level: number;
@@ -39,14 +32,26 @@ export type PlayerLevel = {
 };
 
 const XP_LEVELS: ReadonlyArray<PlayerLevel> = [
-  { level: 1, title: "Beginner", xpRequired: 0 },
-  { level: 2, title: "Explorer", xpRequired: 200 },
-  { level: 3, title: "Learner", xpRequired: 500 },
-  { level: 4, title: "Practitioner", xpRequired: 1000 },
-  { level: 5, title: "Scholar", xpRequired: 2000 },
-  { level: 6, title: "Adept", xpRequired: 4000 },
-  { level: 7, title: "Expert", xpRequired: 7000 },
-  { level: 8, title: "Master", xpRequired: 12000 },
+  { level: 1,  title: "Beginner",     xpRequired: 0 },
+  { level: 2,  title: "Explorer",     xpRequired: 600 },
+  { level: 3,  title: "Learner",      xpRequired: 1_500 },
+  { level: 4,  title: "Practitioner", xpRequired: 3_000 },
+  { level: 5,  title: "Student",      xpRequired: 5_000 },
+  { level: 6,  title: "Scholar",      xpRequired: 8_000 },   // ≈ A1 complete
+  { level: 7,  title: "Adept",        xpRequired: 11_500 },
+  { level: 8,  title: "Skilled",      xpRequired: 15_500 },
+  { level: 9,  title: "Advanced",     xpRequired: 20_000 },  // ≈ A2 complete
+  { level: 10, title: "Expert",       xpRequired: 25_000 },
+  { level: 11, title: "Professional", xpRequired: 31_000 },  // ≈ B1 complete
+  { level: 12, title: "Specialist",   xpRequired: 37_500 },
+  { level: 13, title: "Master",       xpRequired: 44_500 },  // ≈ B2 complete
+  { level: 14, title: "Grand Master", xpRequired: 52_000 },
+  { level: 15, title: "Champion",     xpRequired: 60_500 },  // ≈ C1 complete
+  { level: 16, title: "Elite",        xpRequired: 70_000 },
+  { level: 17, title: "Legend",       xpRequired: 80_500 },  // ≈ C2 complete
+  { level: 18, title: "Virtuoso",     xpRequired: 92_000 },
+  { level: 19, title: "Grandmaster",  xpRequired: 104_500 },
+  { level: 20, title: "Supreme",      xpRequired: 118_000 },
 ] as const;
 
 export type PlayerLevelInfo = {

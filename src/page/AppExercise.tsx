@@ -5,6 +5,7 @@ import { useNavigation } from "../context/useNavigation";
 import { SentenceBuilder } from "../exercise/SentenceBuilder";
 import { WordMatch } from "../exercise/WordMatch";
 import { computeUnlockedLessonIds } from "../exercise/progression";
+import { SESSION_XP } from "../exercise/xp";
 import { useActivityTimer } from "../exercise/use-activity-timer";
 import { useExerciseSession } from "../exercise/use-exercise-session";
 import { mergeWordStats } from "../lib/stats-merge";
@@ -145,7 +146,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo, params, currentPage } = useNavigation();
-  const { words, unlockedLessons, syncBatch } = useProgress();
+  const { words, unlockedLessons, syncBatch, awardXP } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
@@ -213,6 +214,7 @@ export const AppExercise = () => {
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
+    awardXP(SESSION_XP[mode.kind]);
     goHome();
   };
 

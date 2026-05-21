@@ -88,6 +88,22 @@ const syncBatchToStorage = (
   cache.set(localStorage.getItem(STORAGE_KEY), updated);
 };
 
+/** Award session XP — updates the daily xp counter for today. */
+const awardXPToStorage = (xpEarned: number): void => {
+  const today = new Date().toISOString().slice(0, 10);
+  const prev = readStorage();
+  const prevDay = prev.dailySessions[today] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 0 };
+  const updated: GuestData = {
+    ...prev,
+    dailySessions: {
+      ...prev.dailySessions,
+      [today]: { ...prevDay, xp: (prevDay.xp ?? 0) + xpEarned },
+    },
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  cache.set(localStorage.getItem(STORAGE_KEY), updated);
+};
+
 const clearStorage = (): void => {
   localStorage.removeItem(STORAGE_KEY);
   cache.clear();
@@ -107,15 +123,27 @@ export const useGuestProgress = () => {
     [],
   );
 
+  const awardXP = useCallback((xpEarned: number) => {
+    awardXPToStorage(xpEarned);
+  }, []);
+
   const clear = useCallback(() => {
     clearStorage();
   }, []);
+
+  // totalXP derived from daily sessions (guests have no server-side totalXP field).
+  const totalXP = Object.values(data.dailySessions).reduce(
+    (sum, s) => sum + (s.xp ?? 0),
+    0,
+  );
 
   return {
     words: data.words,
     dailySessions: data.dailySessions,
     unlockedLessons: data.unlockedLessons ?? [],
+    totalXP,
     syncBatch,
+    awardXP,
     clear,
   };
 };

@@ -29,8 +29,9 @@ export const mergeDailySession = (
   date: string,
   stats: Record<string, WordStats>,
   durationSeconds: number,
+  xpEarned: number = 0,
 ): Record<string, DailySession> => {
-  const prev = existing[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0 };
+  const prev = existing[date] ?? { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 0 };
   const batchTotals = Object.values(stats).reduce(
     (acc, r) => ({
       totalItems: acc.totalItems + r.shown,
@@ -47,6 +48,7 @@ export const mergeDailySession = (
       durationSeconds: prev.durationSeconds + durationSeconds,
       correct: prev.correct + batchTotals.correct,
       incorrect: prev.incorrect + batchTotals.incorrect,
+      xp: (prev.xp ?? 0) + xpEarned,
     },
   };
 };
