@@ -50,13 +50,25 @@ Slugs are deterministic from the phrase. If two different phrases collapse to th
 
 Both officially support Luxembourgish (it's in their listed 70+ languages).
 
-## CI integration: prebuild hook, not deploy hook
+## CI integration: currently disabled
 
-Sync runs via `prebuild` in `package.json` so `npm run build` triggers it automatically. This is required because:
+**As of 2026-05-21, audio is no longer wired into the build pipeline.** The `prebuild` hook (`npm run sync-audio:download`) was removed because audio is not consumed by the app yet, and the build was wasting ~30 s and emitting R2 403 noise on machines without `CLOUDFLARE_API_TOKEN`.
+
+Scripts remain available for manual invocation:
+
+- `npm run generate-audio -- <letz-file>` — synthesize via ElevenLabs
+- `npm run sync-audio:upload -- <letz-file>` — push to R2
+- `npm run sync-audio:download` — pull all from R2
+
+When the app actually starts using the mp3s, restore the build hook (or replace it with a Worker route serving R2 directly). Original design rationale below — kept for when we re-enable.
+
+### Original design (pre-2026-05-21): prebuild hook, not deploy hook
+
+Sync ran via `prebuild` in `package.json` so `npm run build` triggered it automatically. Required because:
 
 - **Cloudflare Pages git integration runs `npm run build`, not `npm run deploy`.** Hooking into `deploy` would only help local CLI deploys, not push deploys.
 - `prebuild` is a standard npm lifecycle hook — no extra config.
-- Local `npm run dev` is unaffected (no `predev`), so the dev server starts instantly without touching R2.
+- Local `npm run dev` was unaffected (no `predev`), so the dev server started instantly without touching R2.
 
 ## CI auth: API token, not `wrangler login`
 
@@ -80,6 +92,8 @@ Scripts (`scripts/generate-audio.mjs`, `scripts/sync-audio.mjs`, `scripts/lib/le
 R2 supports the S3 protocol and `@aws-sdk/client-s3` would be faster (no per-call wrangler boot ~0.5s). Rejected because it requires generating R2 access keys (extra dashboard step, extra secret to manage) and adds a heavyweight dep. `npx wrangler r2 object put/get` reuses the same auth as the rest of the project (`wrangler login` locally, `CLOUDFLARE_API_TOKEN` in CI). Concurrency=4 in `parallelMap` amortizes the boot cost: 43 files sync in ~10 s instead of ~40 s.
 
 ## How to apply
+
+> **2026-05-21 note:** the build hook is currently disabled (see "CI integration" above). Steps 1-3 still work for local generation and R2 backup. Step "CI: ..." does not happen automatically right now — the deployed site has no audio until the prebuild hook (or equivalent) is restored.
 
 When adding a new lesson with audio:
 
