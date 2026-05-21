@@ -14,15 +14,15 @@ const formatMinutes = (minutes: number): string =>
   minutes < 1 ? "<1m" : `${Math.floor(minutes)}m`;
 
 type StatsRowProps = {
-  masteredWords: number;
-  totalWords: number;
+  masteredElements: number;
+  totalElements: number;
   accuracy: number;
   todayMinutes?: number;
 };
 
-export const StatsRow = ({ masteredWords, totalWords, accuracy, todayMinutes }: StatsRowProps) => (
+export const StatsRow = ({ masteredElements, totalElements, accuracy, todayMinutes }: StatsRowProps) => (
   <div className="flex justify-around py-3 px-2 bg-white/60 rounded-xl">
-    <StatItem label="Learned" value={`${masteredWords}/${totalWords}`} />
+    <StatItem label="Learned" value={`${masteredElements}/${totalElements}`} />
     <StatItem label="Accuracy" value={`${Math.round(accuracy * 100)}%`} />
     {todayMinutes !== undefined && (
       <StatItem label="Today" value={formatMinutes(todayMinutes)} />

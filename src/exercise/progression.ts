@@ -1,5 +1,6 @@
 import {
   MIN_ANSWERS,
+  MASTERY_CORRECT_COUNT,
   UNLOCK_ELEMENT_THRESHOLD,
   UNLOCK_LESSON_THRESHOLD,
 } from "./constants";
@@ -7,29 +8,64 @@ import {
 import type { Lesson } from "./letz-parser";
 import type { WordStats } from "../context/auth";
 
-// --- Mastery Thresholds (UI classification — separate from unlock rule) ---
+// --- Mastery Thresholds ---
 
+/**
+ * Reference constants for the two classification systems.
+ * Import individual constants from `constants.ts` for logic; use MASTERY only
+ * when you need all thresholds together (e.g. display, tests).
+ */
 export const MASTERY = {
-  correctToMaster: 3,
-  strugglingMaxAccuracy: 0.6,
-  strugglingMinShown: 3,
-  /** @deprecated Use UNLOCK_LESSON_THRESHOLD from constants.ts for the unlock check. */
-  unlockThreshold: UNLOCK_LESSON_THRESHOLD,
+  /** Minimum correct count for the monotonic gate (lesson progress, XP). */
+  correctToMaster: MASTERY_CORRECT_COUNT,       // 4
+  /** Accuracy boundary used by the live classifyWord and error pool. */
+  accuracyThreshold: UNLOCK_ELEMENT_THRESHOLD,  // 0.8
+  /** Minimum showings before an element can be mastered or struggling. */
+  minShown: MIN_ANSWERS,                        // 5
 } as const;
 
 // --- Word Classification ---
 
 export type WordMastery = "unseen" | "learning" | "struggling" | "mastered";
 
+/** Live accuracy: correct / (correct + incorrect). Returns 0 when never attempted. */
 const accuracy = (s: WordStats): number =>
   s.correct + s.incorrect > 0 ? s.correct / (s.correct + s.incorrect) : 0;
 
+/**
+ * Live classification — can change as `correct` and `incorrect` accumulate.
+ *
+ * Rules:
+ *   unseen    — never shown (shown = 0)
+ *   learning  — shown < MIN_ANSWERS (not enough data to classify)
+ *   mastered  — shown >= MIN_ANSWERS AND accuracy >= 0.8
+ *   struggling— shown >= MIN_ANSWERS AND accuracy < 0.8
+ *
+ * Use this for error-pool selection and UI mastery labels.
+ * Do NOT use this for lesson progress or XP — use `isElementMastered` instead.
+ */
 export const classifyWord = (stats: WordStats | undefined): WordMastery => {
   if (!stats || stats.shown === 0) return "unseen";
-  if (stats.correct >= MASTERY.correctToMaster) return "mastered";
-  if (stats.shown >= MASTERY.strugglingMinShown && accuracy(stats) < MASTERY.strugglingMaxAccuracy) return "struggling";
-  return "learning";
+  if (stats.shown < MASTERY.minShown) return "learning";
+  return accuracy(stats) >= MASTERY.accuracyThreshold ? "mastered" : "struggling";
 };
+
+/**
+ * Monotonic mastery gate — once `true`, never reverts.
+ *
+ * An element is mastered when it has been shown enough times (`shown >= MIN_ANSWERS`)
+ * AND answered correctly enough times in total (`correct >= MASTERY_CORRECT_COUNT`).
+ * Both counters only ever grow, so this predicate can only flip from false → true.
+ *
+ * Use this for lesson progress, XP, and the "Learned X/Y" display stat.
+ * A word can simultaneously pass this gate AND be `struggling` in `classifyWord`
+ * (meaning: it was mastered historically but accuracy has since dropped and the
+ * user should practise it again via the error pool).
+ */
+export const isElementMastered = (stats: WordStats | undefined): boolean =>
+  stats !== undefined &&
+  stats.shown >= MASTERY.minShown &&
+  stats.correct >= MASTERY.correctToMaster;
 
 export const wordKey = (lu: string, en: string): string => `${lu}|${en}`;
 
@@ -71,12 +107,9 @@ export type LessonProgress = {
   isComplete: boolean;
 };
 
-/** An element passes the unlock check iff it has been shown enough times with
- *  sufficient accuracy. This is the single source of truth for lesson progression. */
-const isElementPassing = (stats: WordStats | undefined): boolean =>
-  stats !== undefined &&
-  stats.shown >= MIN_ANSWERS &&
-  stats.correct / stats.shown >= UNLOCK_ELEMENT_THRESHOLD;
+/** Lesson-progress gate — delegates to the monotonic isElementMastered so
+ *  lesson completion percentages never decrease as the user keeps practising. */
+const isElementPassing = isElementMastered;
 
 export const computeLessonProgress = (
   lesson: Lesson,
@@ -156,9 +189,13 @@ export type OverallStats = {
   masteredWords: number;
   learningWords: number;
   strugglingWords: number;
+  /** Mastered words + mastered sentences (en-lu direction only, so each sentence counts once). */
+  masteredElements: number;
+  /** Accuracy across all valid elements (words + both phrase directions). */
   overallAccuracy: number;
-  totalPhrases: number;
-  masteredPhrases: number;
+  /** How many distinct sentences (en-lu keys) are tracked in userWords. */
+  totalSentences: number;
+  masteredSentences: number;
 };
 
 /**
@@ -174,20 +211,33 @@ export const computeOverallStats = (
   const entries = validKeys
     ? Object.entries(userWords).filter(([k]) => validKeys.has(k))
     : Object.entries(userWords);
-  const wordEntries = entries.filter(([k]) => isWordKey(k)).map(([, v]) => v);
-  const phraseEntries = entries.filter(([k]) => isPhraseKey(k)).map(([, v]) => v);
 
-  const wordClassified = wordEntries.map((s) => classifyWord(s));
-  const totalShown = wordEntries.reduce((sum, s) => sum + s.correct + s.incorrect, 0);
-  const totalCorrect = wordEntries.reduce((sum, s) => sum + s.correct, 0);
+  // Words and phrases kept as [key, stats] pairs so we can filter by direction.
+  const wordPairs = entries.filter(([k]) => isWordKey(k));
+  const phrasePairs = entries.filter(([k]) => isPhraseKey(k));
+  // en-lu is the canonical direction: one key per sentence, aligns with unlock gate.
+  const enLuPairs = phrasePairs.filter(([k]) => k.startsWith("phrase:en-lu:"));
+
+  const wordStats = wordPairs.map(([, v]) => v);
+  const allStats = entries.map(([, v]) => v);  // words + both phrase directions
+
+  const wordClassified = wordStats.map(classifyWord);
+  // Accuracy uses all valid elements for a more complete signal.
+  const totalShown = allStats.reduce((sum, s) => sum + s.correct + s.incorrect, 0);
+  const totalCorrect = allStats.reduce((sum, s) => sum + s.correct, 0);
+
+  const masteredWords = wordStats.filter(isElementMastered).length;
+  const masteredSentences = enLuPairs.filter(([, s]) => isElementMastered(s)).length;
 
   return {
-    totalWords: wordEntries.length,
-    masteredWords: wordClassified.filter((c) => c === "mastered").length,
+    totalWords: wordPairs.length,
+    masteredWords,
     learningWords: wordClassified.filter((c) => c === "learning").length,
     strugglingWords: wordClassified.filter((c) => c === "struggling").length,
+    // Combined — used for "Learned X/Y". Each sentence counted once via en-lu key.
+    masteredElements: masteredWords + masteredSentences,
     overallAccuracy: totalShown > 0 ? totalCorrect / totalShown : 0,
-    totalPhrases: phraseEntries.length,
-    masteredPhrases: phraseEntries.filter((s) => classifyWord(s) === "mastered").length,
+    totalSentences: enLuPairs.length,
+    masteredSentences,
   };
 };

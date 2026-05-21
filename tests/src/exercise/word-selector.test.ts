@@ -88,16 +88,17 @@ describe("selectItemsForBatch — bucket classification", () => {
     expect(selected.every((s) => s.bucket === "new")).toBe(true);
   });
 
-  it("low-accuracy words (shown ≥ 3, accuracy < 0.6) go to 'struggling'", () => {
+  it("low-accuracy words (shown >= MIN_ANSWERS, accuracy < 0.8) go to 'struggling'", () => {
     const candidates = [cand("a", "1", "L1")];
-    const userWords = { "a|1": stats(5, 1, 4) }; // 0.2 accuracy
+    const userWords = { "a|1": stats(5, 1, 4) }; // accuracy=1/5=20% < 80%
     const selected = selectItemsForBatch(candidates, userWords, "L1", new Set(), evenRatios);
     expect(selected[0].bucket).toBe("struggling");
   });
 
-  it("learning words (shown but not mastered/struggling) go to 'reinforcing'", () => {
+  it("learning words (shown < MIN_ANSWERS) go to 'reinforcing'", () => {
     const candidates = [cand("a", "1", "L1")];
-    const userWords = { "a|1": stats(5, 3, 1) }; // 0.75 accuracy → learning
+    // shown=3 < MIN_ANSWERS(5) → classifyWord='learning' → bucket='reinforcing'
+    const userWords = { "a|1": stats(3, 2, 0) };
     const selected = selectItemsForBatch(candidates, userWords, "L1", new Set(), evenRatios);
     expect(selected[0].bucket).toBe("reinforcing");
   });

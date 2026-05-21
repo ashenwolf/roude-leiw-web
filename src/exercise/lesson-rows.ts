@@ -13,7 +13,12 @@ export type HomeLessonsView = {
   progressMap: Record<string, LessonProgress>;
   unlockedIds: ReadonlyArray<string>;
   currentLessonId: string;
+  /** Vocabulary words across loaded lessons. */
   totalWords: number;
+  /** Sentences across loaded lessons (one per @sentence block, direction-agnostic). */
+  totalSentences: number;
+  /** totalWords + totalSentences — the denominator for the "Learned X/Y" stat. */
+  totalElements: number;
 };
 
 const EMPTY_VIEW: HomeLessonsView = {
@@ -21,6 +26,8 @@ const EMPTY_VIEW: HomeLessonsView = {
   unlockedIds: [],
   currentLessonId: "",
   totalWords: 0,
+  totalSentences: 0,
+  totalElements: 0,
 };
 
 export const projectHomeLessonsView = (
@@ -37,5 +44,7 @@ export const projectHomeLessonsView = (
     unlockedIds: computeUnlockedLessonIds(lessons, userWords, persistedUnlocked),
     currentLessonId: findCurrentLessonId(lessons, userWords, persistedUnlocked),
     totalWords: lessons.reduce((sum, l) => sum + l.entries.length, 0),
+    totalSentences: lessons.reduce((sum, l) => sum + l.sentences.length, 0),
+    totalElements: lessons.reduce((sum, l) => sum + l.entries.length + l.sentences.length, 0),
   };
 };

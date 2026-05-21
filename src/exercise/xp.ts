@@ -1,29 +1,32 @@
 import type { WordStats } from "../context/auth";
-import { classifyWord } from "./progression";
+import { classifyWord, isElementMastered } from "./progression";
 
-// --- XP Computation ---
-// Flat XP per word based on mastery state (not raw counts) to keep totals sane
-
-const XP_PER_MASTERY: Record<string, number> = {
+// XP for elements that have NOT yet crossed the monotonic mastery gate.
+// "mastered" is intentionally absent — isElementMastered handles that path first.
+const XP_PRE_MASTERY: Record<string, number> = {
   unseen: 0,
   learning: 10,
   struggling: 5,
-  mastered: 100,
 };
 
 /**
  * Sum of per-element XP. When `validKeys` is provided, keys outside the set
  * (stats for elements no longer in any lesson) do not earn XP.
+ *
+ * The 100-XP mastery tier uses `isElementMastered` (monotonic) so the player's
+ * total XP — and therefore their level — can never decrease as they practise.
+ * Non-mastered elements use the live `classifyWord` result.
  */
 export const computeXP = (
   words: Record<string, WordStats>,
   validKeys?: ReadonlySet<string>,
 ): number =>
   Object.entries(words).reduce(
-    (xp, [key, stats]) =>
-      validKeys && !validKeys.has(key)
-        ? xp
-        : xp + (XP_PER_MASTERY[classifyWord(stats)] ?? 0),
+    (xp, [key, stats]) => {
+      if (validKeys && !validKeys.has(key)) return xp;
+      if (isElementMastered(stats)) return xp + 100;
+      return xp + (XP_PRE_MASTERY[classifyWord(stats)] ?? 0);
+    },
     0,
   );
 

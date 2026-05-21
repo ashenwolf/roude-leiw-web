@@ -70,7 +70,7 @@ export const AppHome = () => {
     () => projectHomeLessonsView(lessons, words, unlockedLessons),
     [lessons, words, unlockedLessons],
   );
-  const { progressMap, unlockedIds, currentLessonId, totalWords } = view;
+  const { progressMap, unlockedIds, currentLessonId, totalElements } = view;
 
   const validKeys = useMemo(() => collectLessonKeys(lessons), [lessons]);
 
@@ -147,8 +147,8 @@ export const AppHome = () => {
 
         {/* Stats */}
         <StatsRow
-          masteredWords={overallStats.masteredWords}
-          totalWords={totalWords}
+          masteredElements={overallStats.masteredElements}
+          totalElements={totalElements}
           accuracy={overallStats.overallAccuracy}
           todayMinutes={todayMinutes}
         />

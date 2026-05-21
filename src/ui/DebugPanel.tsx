@@ -147,7 +147,7 @@ export const DebugPanel = ({ lessons, userWords, currentBatchPairs, currentLesso
               <span className="text-green-300">mastered</span> = correct ≥ {MASTERY.correctToMaster}
             </div>
             <div className="text-gray-300">
-              <span className="text-red-400">struggling</span> = shown ≥ {MASTERY.strugglingMinShown} AND accuracy &lt; {pct(MASTERY.strugglingMaxAccuracy)}
+              <span className="text-red-400">struggling</span> = shown ≥ {MASTERY.minShown} AND accuracy &lt; {pct(MASTERY.accuracyThreshold)}
             </div>
             <div className="text-gray-300">
               <span className="text-blue-300">learning</span> = seen but not yet mastered or struggling

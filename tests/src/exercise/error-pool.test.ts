@@ -40,12 +40,13 @@ const wordKey = (lu: string, en: string) => `${lu}|${en}`;
 const phraseKey = (firstEn: string) => `phrase:en-lu:${firstEn}`;
 
 // ============================================================================
-// Primary pool — shown >= MIN_ANSWERS AND correct/shown < ERROR_THRESHOLD
+// Primary pool — shown >= MIN_ANSWERS AND accuracy < ERROR_THRESHOLD (0.8)
+// accuracy = correct / (correct + incorrect)
 // ============================================================================
 
 describe("selectErrorPool — primary pool", () => {
   it("returns words meeting primary criteria", () => {
-    // shown = MIN_ANSWERS, correct = 0 → rate 0 < 0.9 ✓
+    // shown = MIN_ANSWERS, correct = 0, incorrect = MIN_ANSWERS → accuracy 0% < 80% ✓
     const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
     const lessons = [lesson("L1", ["Moien", "hi"])];
 
@@ -67,8 +68,8 @@ describe("selectErrorPool — primary pool", () => {
     expect(pool.words).toHaveLength(1);
   });
 
-  it("excludes words with no errors and high accuracy", () => {
-    // correct/shown = 1.0 ≥ 0.9 AND incorrect = 0 → neither primary nor fallback
+  it("excludes words with perfect accuracy (100%)", () => {
+    // accuracy = 1.0 ≥ 0.8 AND incorrect = 0 → neither primary nor fallback
     const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, MIN_ANSWERS, 0) };
     const lessons = [lesson("L1", ["Moien", "hi"])];
 
@@ -77,21 +78,21 @@ describe("selectErrorPool — primary pool", () => {
     expect(pool.words).toHaveLength(0);
   });
 
-  it("boundary: rate exactly at ERROR_THRESHOLD (0.9) is excluded from primary", () => {
-    // Use shown=10, correct=9 to hit 0.9 exactly with integers
-    const stats = { [wordKey("Moien", "hi")]: s(10, 9, 1) };
+  it("boundary: accuracy exactly at ERROR_THRESHOLD (0.8) is excluded from primary", () => {
+    // correct=4, incorrect=1 → accuracy=4/5=0.8 = threshold → NOT < threshold → not primary
+    // incorrect=1 → primary empty → fallback kicks in
+    const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 4, 1) };
     const lessons = [lesson("L1", ["Moien", "hi"])];
 
     const pool = selectErrorPool(stats, lessons);
 
-    // 9/10 = 0.9 = ERROR_THRESHOLD → NOT < threshold → not primary
-    // But incorrect = 1 → primary is empty → fallback kicks in
+    // Not primary (0.8 is not < 0.8), but fallback fires because incorrect > 0
     expect(pool.words).toHaveLength(1);
   });
 
-  it("boundary: rate just below ERROR_THRESHOLD enters primary", () => {
-    // shown=10, correct=8 → rate=0.8 < 0.9 AND shown>=MIN_ANSWERS → primary
-    const stats = { [wordKey("Moien", "hi")]: s(10, 8, 2) };
+  it("boundary: accuracy just below ERROR_THRESHOLD enters primary", () => {
+    // correct=3, incorrect=2 → accuracy=3/5=0.6 < 0.8 AND shown>=MIN_ANSWERS → primary
+    const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 3, 2) };
     const lessons = [lesson("L1", ["Moien", "hi"])];
 
     const pool = selectErrorPool(stats, lessons);
@@ -99,11 +100,9 @@ describe("selectErrorPool — primary pool", () => {
     expect(pool.words).toHaveLength(1);
   });
 
-  it("includes words just below ERROR_THRESHOLD", () => {
-    // correct = MIN_ANSWERS - 1 → rate = (n-1)/n < 0.9 for n=5 → 0.8 < 0.9 ✓
-    const shown = MIN_ANSWERS;
-    const correct = MIN_ANSWERS - 1;
-    const stats = { [wordKey("Moien", "hi")]: s(shown, correct, shown - correct) };
+  it("includes historically-mastered words that have since accumulated wrong answers", () => {
+    // correct=4 ≥ MASTERY_CORRECT_COUNT → isElementMastered=true, but accuracy=4/104≈4% → primary
+    const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 4, 100) };
     const lessons = [lesson("L1", ["Moien", "hi"])];
 
     const pool = selectErrorPool(stats, lessons);
@@ -173,11 +172,11 @@ describe("selectErrorPool — fallback pool", () => {
     expect(pool.phrases).toHaveLength(0);
   });
 
-  it("fallback sorts ascending by success rate (worst first)", () => {
+  it("fallback sorts ascending by accuracy (worst first)", () => {
     const stats = {
-      [wordKey("A", "a")]: s(2, 2, 0), // rate 1.0 — no errors, excluded from fallback
-      [wordKey("B", "b")]: s(3, 1, 2), // rate 0.33 — worst
-      [wordKey("C", "c")]: s(4, 3, 1), // rate 0.75 — middle
+      [wordKey("A", "a")]: s(2, 2, 0), // no errors → excluded from fallback
+      [wordKey("B", "b")]: s(3, 1, 2), // accuracy=1/3≈33% — worst
+      [wordKey("C", "c")]: s(4, 3, 1), // accuracy=3/4=75% — middle
     };
     const lessons = [lesson("L1", ["A", "a"], ["B", "b"], ["C", "c"])];
 

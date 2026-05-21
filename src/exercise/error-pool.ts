@@ -9,13 +9,14 @@ export type ErrorPool = {
   phrases: SentenceEntry[];
 };
 
-const successRate = (stats: WordStats): number =>
-  stats.shown > 0 ? stats.correct / stats.shown : 0;
+/** Same formula as classifyWord — correct / (correct + incorrect). */
+const accuracy = (stats: WordStats): number =>
+  stats.correct + stats.incorrect > 0 ? stats.correct / (stats.correct + stats.incorrect) : 0;
 
 const isPrimary = (stats: WordStats | undefined): boolean =>
   stats !== undefined &&
   stats.shown >= MIN_ANSWERS &&
-  successRate(stats) < ERROR_THRESHOLD;
+  accuracy(stats) < ERROR_THRESHOLD;
 
 const isFallback = (stats: WordStats | undefined): boolean =>
   (stats?.incorrect ?? 0) > 0;
@@ -58,7 +59,7 @@ const selectWordPool = (
 
   return [...byKey.entries()]
     .filter(([key]) => isFallback(userStats[key]))
-    .sort(([a], [b]) => successRate(userStats[a]!) - successRate(userStats[b]!))
+    .sort(([a], [b]) => accuracy(userStats[a]!) - accuracy(userStats[b]!))
     .map(([, entry]) => entry);
 };
 
@@ -83,6 +84,6 @@ const selectPhrasePool = (
 
   return [...byKey.entries()]
     .filter(([key]) => isFallback(userStats[key]))
-    .sort(([a], [b]) => successRate(userStats[a]!) - successRate(userStats[b]!))
+    .sort(([a], [b]) => accuracy(userStats[a]!) - accuracy(userStats[b]!))
     .map(([, sentence]) => sentence);
 };

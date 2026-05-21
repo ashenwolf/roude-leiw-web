@@ -10,11 +10,28 @@ export const MIN_ANSWERS = 5;
 
 // --- Thresholds --------------------------------------------------------------
 
-/** An Element is in the "error pool" if its success rate drops below this. */
-export const ERROR_THRESHOLD = 0.9;
+/**
+ * Accuracy boundary (correct / (correct + incorrect)) below which an element
+ * is considered "struggling" and enters the error pool for Fix Errors / Word Mix.
+ * Also the boundary above which `classifyWord` returns "mastered" (live view).
+ */
+export const ERROR_THRESHOLD = 0.8;
 
 /** An Element passes the lesson's unlock check if `correct/shown >= this`. */
 export const UNLOCK_ELEMENT_THRESHOLD = 0.8;
+
+/**
+ * Minimum number of correct answers for the **monotonic** mastery gate used by
+ * lesson progress, XP, and the "Learned X/Y" stat. Derived from the unlock
+ * threshold × min answers so the two rules stay consistent as constants change.
+ *
+ * At MIN_ANSWERS = 5 and UNLOCK_ELEMENT_THRESHOLD = 0.8 → MASTERY_CORRECT_COUNT = 4.
+ *
+ * Unlike `classifyWord` (which uses live accuracy and can fluctuate),
+ * `isElementMastered` only becomes `true` and never reverts, because `correct`
+ * is a monotonically increasing counter.
+ */
+export const MASTERY_CORRECT_COUNT = Math.ceil(UNLOCK_ELEMENT_THRESHOLD * MIN_ANSWERS);
 
 /** A lesson unlocks the next lesson if `passingElements / totalElements >= this`. */
 export const UNLOCK_LESSON_THRESHOLD = 0.8;
