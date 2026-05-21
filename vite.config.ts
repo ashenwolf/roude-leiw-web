@@ -31,11 +31,23 @@ export default defineConfig({
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
-            urlPattern: /^\/assets\/lessons\//,
-            handler: "CacheFirst",
+            // Manifest is the lessons index — must be fresh so new/renamed
+            // lessons appear without waiting for the cache to expire.
+            urlPattern: /^\/assets\/lessons\/manifest\.json$/,
+            handler: "NetworkFirst",
             options: {
-              cacheName: "lessons-cache",
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 7 },
+              cacheName: "lessons-manifest-v2",
+              networkTimeoutSeconds: 3,
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
+            // .letz files: serve from cache for instant load, refresh in background.
+            urlPattern: /^\/assets\/lessons\/.+\.letz$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "lessons-content-v2",
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 7 },
             },
           },
           {
