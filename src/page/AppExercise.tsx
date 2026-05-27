@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
@@ -158,6 +158,11 @@ export const AppExercise = () => {
   // session is defined first so handlers below can reference it without TDZ risk
   const session = useExerciseSession({ userWords: words, mode });
 
+  // Accumulate word results and duration across all slots. Flushed once on
+  // session complete or abandon so local state and the remote POST update together.
+  const pendingResults = useRef<WordResultMap>({});
+  const pendingDuration = useRef<number>(0);
+
   // Anchor the activity timer when a new slot becomes visible so the user's
   // think-time before the first interaction is measured against this moment.
   useEffect(() => {
@@ -169,6 +174,24 @@ export const AppExercise = () => {
     navigateTo("home");
   };
 
+  // Merge accumulated results into local + remote state, then clear the buffer.
+  const flushProgress = (extraUnlockCheck: boolean) => {
+    const wordResults = pendingResults.current;
+    const durationSeconds = pendingDuration.current;
+    pendingResults.current = {};
+    pendingDuration.current = 0;
+
+    const newlyUnlockedLessons = extraUnlockCheck
+      ? computeUnlockedLessonIds(
+          session.lessons,
+          mergeWordStats(words, wordResults),
+          unlockedLessons,
+        ).filter((id) => !new Set(unlockedLessons).has(id))
+      : [];
+
+    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+  };
+
   const handleSlotSync = (wordResults: WordResultMap) => {
     const durationSeconds = timer.getElapsedSeconds();
     timer.reset();
@@ -178,17 +201,8 @@ export const AppExercise = () => {
       lesson_id: params.lessonId,
       duration_seconds: durationSeconds,
     });
-    // Compute any lessons that became unlocked because of this slot's results.
-    // The diff is what persistence stores; the union there is what later renders
-    // read back as "sticky" unlocked set.
-    const merged = mergeWordStats(words, wordResults);
-    const persistedSet = new Set(unlockedLessons);
-    const newlyUnlockedLessons = computeUnlockedLessonIds(
-      session.lessons,
-      merged,
-      unlockedLessons,
-    ).filter((id) => !persistedSet.has(id));
-    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+    pendingResults.current = mergeWordStats(pendingResults.current, wordResults);
+    pendingDuration.current += durationSeconds;
     session.handleSlotComplete(wordResults); // determines outcome + re-queues if end of plan
   };
 
@@ -199,6 +213,7 @@ export const AppExercise = () => {
 
   const handleTryAgain = () => {
     posthog?.capture("session_restarted", { lesson_id: params.lessonId });
+    flushProgress(mode.kind === "lesson");
     timer.reset();
     session.resetSession();
   };
@@ -209,11 +224,13 @@ export const AppExercise = () => {
       slot_index: session.currentSlotIndex,
       total_slots: session.totalSlots,
     });
+    flushProgress(mode.kind === "lesson");
     goHome();
   };
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
+    flushProgress(mode.kind === "lesson");
     awardXP(SESSION_XP[mode.kind]);
     goHome();
   };

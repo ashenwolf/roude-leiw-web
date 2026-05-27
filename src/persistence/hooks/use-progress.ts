@@ -52,7 +52,7 @@ export const useProgress = (): ProgressState => {
     );
     syncProgress({
       wordResults,
-      durationSeconds: totalDuration,
+      durationSeconds: Math.round(totalDuration),
       newlyUnlockedLessons: guestData.unlockedLessons ?? [],
     }).then(() => guest.clear());
   }, [auth.status, syncProgress, guest]);

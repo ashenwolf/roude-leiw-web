@@ -30,7 +30,7 @@ export const useProgressSync = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           wordResults: toApiFormat(wordResults),
-          durationSeconds,
+          durationSeconds: Math.round(durationSeconds),
           date: today,
           xpEarned: xpEarned ?? 0,
           newlyUnlockedLessons: newlyUnlockedLessons ?? [],
