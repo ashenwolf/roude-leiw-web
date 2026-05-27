@@ -1,9 +1,15 @@
 import { describe, it, expect } from "vitest";
 
 import { planLessonMode } from "../../../../src/exercise/modes/lesson.ts";
-import { LESSON_SLOTS_PER_BLOCK, LESSON_TOTAL_SLOTS } from "../../../../src/exercise/constants.ts";
+import {
+  LESSON_SLOTS_PER_BLOCK,
+  LESSON_TOTAL_SLOTS,
+  MIN_ANSWERS,
+} from "../../../../src/exercise/constants.ts";
+import { phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
 
 import type { Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
+import type { WordStats } from "../../../../src/context/auth.ts";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -25,6 +31,13 @@ const wordMatchRng = () => 0.1;
 // RNG that always rolls above word-match threshold → always picks sentence-builder
 const sentenceRng = () => 0.5;
 
+// Always rolls into the under-exposed bucket (0.0 < 0.3) and picks index 0.
+// Used to force selection of the under-exposed sub-pool inside word-match slots.
+const underExposedRng = () => 0.0;
+
+const stats = (shown: number, correct = 0, incorrect = 0): WordStats =>
+  ({ shown, correct, incorrect });
+
 // ─── Basic shape ──────────────────────────────────────────────────────────────
 
 describe("planLessonMode — shape", () => {
@@ -34,12 +47,12 @@ describe("planLessonMode — shape", () => {
   ];
 
   it("returns LESSON_TOTAL_SLOTS planned slots", () => {
-    const config = planLessonMode(lessons, "A1_02", wordMatchRng);
+    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
     expect(config.plannedSlots).toBe(LESSON_TOTAL_SLOTS);
   });
 
   it("queue length matches planned slots when enough words available", () => {
-    const config = planLessonMode(lessons, "A1_02", wordMatchRng);
+    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
     expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
   });
 
@@ -66,7 +79,7 @@ describe("planLessonMode — shape", () => {
   });
 
   it("produces word-match slots when rng always picks word-match bucket", () => {
-    const config = planLessonMode(lessons, "A1_02", wordMatchRng);
+    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
 });
@@ -80,7 +93,7 @@ describe("planLessonMode — upper-bound clamp", () => {
 
   it("clamps pool to lessons <= upperBoundId (lexicographic)", () => {
     // upperBound = A1_01 → only A1_01 is in pool → currentLessonId = A1_01
-    const config = planLessonMode([l01, l02, l03], "A1_01", wordMatchRng);
+    const config = planLessonMode([l01, l02, l03], "A1_01", {}, wordMatchRng);
     expect(config.currentLessonId).toBe("A1_01");
   });
 
@@ -108,8 +121,72 @@ describe("planLessonMode — edge cases", () => {
   it("handles lesson with only words (no sentences) — falls back to word-match", () => {
     const noSentences = lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]);
     // Force sentence-builder roll — should fall back to word-match since no sentences
-    const config = planLessonMode([noSentences], "A1_01", sentenceRng);
+    const config = planLessonMode([noSentences], "A1_01", {}, sentenceRng);
     expect(config.queue.length).toBeGreaterThan(0);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
+  });
+
+  it("planner is callable with no stats (defaults to empty record)", () => {
+    const l = lesson("A1_01", [["Moien", "hi"]]);
+    // No third arg → all entries treated as under-exposed, but planner still runs.
+    const config = planLessonMode([l], "A1_01");
+    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+  });
+});
+
+// ─── Under-exposed bucket ─────────────────────────────────────────────────────
+
+describe("planLessonMode — under-exposed bucket", () => {
+  it("biases word-match draws toward current-lesson entries with shown < MIN_ANSWERS", () => {
+    const l = lesson("A1_01", [
+      ["Moien", "hi"],
+      ["Äddi", "bye"],
+      ["Merci", "thanks"],
+    ]);
+    // "Moien" is under-exposed; the others have already cleared MIN_ANSWERS.
+    const userWords: Record<string, WordStats> = {
+      [wordKey("Äddi", "bye")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+      [wordKey("Merci", "thanks")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+    };
+    const config = planLessonMode([l], "A1_01", userWords, underExposedRng);
+
+    const pickedLu = config.queue
+      .flatMap((b) => (b.type === "word-match" ? b.pairs : []))
+      .map(([lu]) => lu);
+
+    expect(pickedLu.length).toBeGreaterThan(0);
+    // Every pick is the under-exposed entry — bucket forced it.
+    expect(pickedLu.every((lu) => lu === "Moien")).toBe(true);
+  });
+
+  it("re-rolls into another bucket when nothing is under-exposed", () => {
+    const l = lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]);
+    // All entries have cleared MIN_ANSWERS → under-exposed pool is empty.
+    const userWords: Record<string, WordStats> = {
+      [wordKey("Moien", "hi")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+      [wordKey("Äddi", "bye")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+    };
+    // RNG always rolls into the under-exposed bucket (0.0). Re-roll fallback
+    // must keep producing word-match slots from the current-lesson pool.
+    const config = planLessonMode([l], "A1_01", userWords, underExposedRng);
+    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
+  });
+
+  it("includes current-lesson sentences in the under-exposed pool when any sentence has shown < MIN_ANSWERS", () => {
+    const onlySentence = sentence("Good morning", "Gudde Moien");
+    const l = lesson("A1_01", [["Moien", "hi"]], [onlySentence]);
+    // Sentence has not been shown enough yet → eligible for under-exposed bucket.
+    // Slot type 0.5 → sentence-builder; bucket roll 0.0 → under-exposed; lesson 0;
+    // sentence 0; direction 0.5 → en-lu.
+    let i = 0;
+    const seq = [0.5, 0.0, 0.0, 0.0, 0.5];
+    const seqRng = () => seq[i++ % seq.length];
+    const config = planLessonMode([l], "A1_01", {}, seqRng);
+    const firstSlot = config.queue[0];
+    expect(firstSlot.type).toBe("sentence-builder");
+    if (firstSlot.type === "sentence-builder") {
+      expect(firstSlot.item.phraseKey).toBe(phraseKey("en-lu", "Good morning"));
+    }
   });
 });

@@ -64,6 +64,7 @@ export const useExerciseSession = ({
             : planLessonMode(
                 lessons,
                 mode.lessonId ?? findCurrentLessonId(lessons, words),
+                words,
               );
 
         dispatch({
@@ -113,6 +114,7 @@ export const useExerciseSession = ({
           : planLessonMode(
               lessons,
               mode.lessonId ?? findCurrentLessonId(lessons, words),
+              words,
             );
       dispatch({
         type: "RESET",

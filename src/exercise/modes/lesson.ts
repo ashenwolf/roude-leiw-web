@@ -9,11 +9,14 @@ import {
   LESSON_TOTAL_SLOTS,
   LESSON_WORD_MATCH_BUCKETS,
   LESSON_WORD_MATCH_PAIR_COUNT,
+  MIN_ANSWERS,
   SLOT_TYPE_DISTRIBUTION,
 } from "../constants";
 import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
+import { phraseKey, wordKey } from "../progression";
 import { bucketedPick, pickPair, pickSentence } from "../selection";
 
+import type { WordStats } from "../../context/auth";
 import type { Lesson, WordEntry } from "../letz-parser";
 import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
@@ -34,6 +37,7 @@ const BLOCK_BOUNDARIES = [
 export const planLessonMode = (
   lessons: Lesson[],
   upperBoundId: string,
+  userWords: Record<string, WordStats> = {},
   rng: () => number = Math.random,
 ): ModeConfig => {
   const pool = lessons.filter((l) => l.meta.id <= upperBoundId);
@@ -52,12 +56,26 @@ export const planLessonMode = (
   const currentLesson = pool[pool.length - 1];
   const previousLessons = pool.slice(0, -1);
 
+  const isWordUnderExposed = (e: WordEntry) =>
+    (userWords[wordKey(e.lu, e.en)]?.shown ?? 0) < MIN_ANSWERS;
+
+  // Phrase stats are keyed by "en-lu" direction regardless of presentation
+  // direction (see buildSentenceExercise), so the unlock counter is shared.
+  const hasUnderExposedSentence = (l: Lesson) =>
+    l.sentences.some(
+      (s) =>
+        s.enVariants[0] !== undefined &&
+        (userWords[phraseKey("en-lu", s.enVariants[0])]?.shown ?? 0) < MIN_ANSWERS,
+    );
+
   const wordPools = {
+    "under-exposed": currentLesson.entries.filter(isWordUnderExposed),
     current: currentLesson.entries,
     previous: previousLessons.flatMap((l) => l.entries),
   };
 
   const sentencePools = {
+    "under-exposed": hasUnderExposedSentence(currentLesson) ? [currentLesson] : [],
     current: [currentLesson],
     previous: previousLessons,
   };
@@ -86,9 +104,12 @@ export const planLessonMode = (
 
 // ─── Internal ─────────────────────────────────────────────────────────────────
 
+type WordBucketName = (typeof LESSON_WORD_MATCH_BUCKETS)[number]["name"];
+type SentenceBucketName = (typeof LESSON_SENTENCE_LESSON_BUCKETS)[number]["name"];
+
 const buildSlot = (
-  wordPools: Record<"current" | "previous", ReadonlyArray<WordEntry>>,
-  sentencePools: Record<"current" | "previous", ReadonlyArray<Lesson>>,
+  wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
+  sentencePools: Record<SentenceBucketName, ReadonlyArray<Lesson>>,
   lessonVocab: string[],
   rng: () => number,
 ): Exercise | null => {

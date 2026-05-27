@@ -73,17 +73,35 @@ export const SLOT_TYPE_DISTRIBUTION = [
   { name: "sentence-builder", upTo: 1.0 },
 ] as const satisfies ReadonlyArray<Bucket<"word-match" | "sentence-builder">>;
 
-/** Lesson WordMatch per-pair source. */
+/**
+ * Lesson WordMatch per-pair source.
+ *
+ * The `under-exposed` bucket biases toward current-lesson entries with
+ * `shown < MIN_ANSWERS` so no element gets stranded below the unlock gate
+ * by unlucky random rolls. When the bucket is empty (all current-lesson
+ * entries already shown ≥ MIN_ANSWERS), `pickFromPool` re-rolls into the
+ * remaining buckets.
+ */
 export const LESSON_WORD_MATCH_BUCKETS = [
+  { name: "under-exposed", upTo: 0.3 },
+  { name: "current", upTo: 0.85 },
+  { name: "previous", upTo: 1.0 },
+] as const satisfies ReadonlyArray<Bucket<"under-exposed" | "current" | "previous">>;
+
+/**
+ * Lesson SentenceBuilder per-Slot lesson source.
+ *
+ * `under-exposed` includes the current lesson only when it contains at
+ * least one sentence with `shown < MIN_ANSWERS`. Inside the lesson the
+ * sentence pick is uniform, so the bias is "lesson with an under-exposed
+ * sentence is preferred"; at 30% weight this converges fast enough that
+ * stragglers reach the unlock gate without dominating the Session.
+ */
+export const LESSON_SENTENCE_LESSON_BUCKETS = [
+  { name: "under-exposed", upTo: 0.3 },
   { name: "current", upTo: 0.8 },
   { name: "previous", upTo: 1.0 },
-] as const satisfies ReadonlyArray<Bucket<"current" | "previous">>;
-
-/** Lesson SentenceBuilder per-Slot lesson source. */
-export const LESSON_SENTENCE_LESSON_BUCKETS = [
-  { name: "current", upTo: 0.75 },
-  { name: "previous", upTo: 1.0 },
-] as const satisfies ReadonlyArray<Bucket<"current" | "previous">>;
+] as const satisfies ReadonlyArray<Bucket<"under-exposed" | "current" | "previous">>;
 
 /** Lesson SentenceBuilder per-Slot direction. */
 export const LESSON_SENTENCE_DIRECTION_BUCKETS = [
