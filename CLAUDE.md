@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev          # Start Vite dev server (includes local worker + KV emulation)
-npm run build        # TypeScript compile + Vite build (tsc -b && vite build)
-                     # `prebuild` hook auto-syncs audio from R2 (see Audio below)
+npm run build        # vitest run && eslint . && tsc -b && vite build
+                     # Tests, lint, and typecheck must all pass before bundling.
 npm run lint         # ESLint
 npm run preview      # Preview production build locally
 npm run deploy       # Build and deploy to Cloudflare Pages
