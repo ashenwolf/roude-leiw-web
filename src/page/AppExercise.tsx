@@ -146,7 +146,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo, params, currentPage } = useNavigation();
-  const { words, unlockedLessons, syncBatch, awardXP } = useProgress();
+  const { words, unlockedLessons, syncBatch } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
@@ -175,7 +175,7 @@ export const AppExercise = () => {
   };
 
   // Merge accumulated results into local + remote state, then clear the buffer.
-  const flushProgress = (extraUnlockCheck: boolean) => {
+  const flushProgress = (extraUnlockCheck: boolean, xpEarned = 0) => {
     const wordResults = pendingResults.current;
     const durationSeconds = pendingDuration.current;
     pendingResults.current = {};
@@ -189,7 +189,7 @@ export const AppExercise = () => {
         ).filter((id) => !new Set(unlockedLessons).has(id))
       : [];
 
-    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
   };
 
   const handleSlotSync = (wordResults: WordResultMap) => {
@@ -230,8 +230,7 @@ export const AppExercise = () => {
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
-    flushProgress(mode.kind === "lesson");
-    awardXP(SESSION_XP[mode.kind]);
+    flushProgress(mode.kind === "lesson", SESSION_XP[mode.kind]);
     goHome();
   };
 

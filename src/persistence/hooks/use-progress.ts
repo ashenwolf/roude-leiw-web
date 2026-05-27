@@ -22,10 +22,8 @@ export type ProgressState = {
     wordResults: WordResultMap,
     durationSeconds: number,
     newlyUnlockedLessons?: string[],
+    xpEarned?: number,
   ) => void;
-  /** Award XP for a completed session. Called once on session-complete, separately
-   *  from syncBatch which fires per-slot. */
-  awardXP: (xpEarned: number) => void;
   isAuthenticated: boolean;
 };
 
@@ -62,25 +60,15 @@ export const useProgress = (): ProgressState => {
     wordResults: WordResultMap,
     durationSeconds: number,
     newlyUnlockedLessons: string[] = [],
+    xpEarned = 0,
   ) => {
     if (auth.status === "authenticated") {
       const today = new Date().toISOString().slice(0, 10);
       applyStatsDelta(wordResults, durationSeconds, today, newlyUnlockedLessons);
-      syncProgress({ wordResults, durationSeconds, newlyUnlockedLessons });
+      if (xpEarned > 0) applyXPDelta(xpEarned, today);
+      syncProgress({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned });
     } else {
-      guest.syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
-    }
-  };
-
-  const awardXP = (xpEarned: number) => {
-    if (auth.status === "authenticated") {
-      const today = new Date().toISOString().slice(0, 10);
-      applyXPDelta(xpEarned, today);
-      syncProgress({ wordResults: {}, durationSeconds: 0, xpEarned });
-    } else {
-      guest.awardXP(xpEarned);
-      // Notify React so Home re-renders with updated todayXP
-      import("./use-guest-progress").then(({ refreshGuestProgress }) => refreshGuestProgress());
+      guest.syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
     }
   };
 
@@ -100,7 +88,6 @@ export const useProgress = (): ProgressState => {
       totalXP: auth.totalXP,
       todayXP: auth.dailySessions[today]?.xp ?? 0,
       syncBatch,
-      awardXP,
       isAuthenticated: true,
     };
   }
@@ -113,7 +100,6 @@ export const useProgress = (): ProgressState => {
     totalXP: guest.totalXP,
     todayXP: guest.dailySessions[today]?.xp ?? 0,
     syncBatch,
-    awardXP,
     isAuthenticated: false,
   };
 };
