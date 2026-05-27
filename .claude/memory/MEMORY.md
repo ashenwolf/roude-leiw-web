@@ -11,6 +11,7 @@ This is the **canonical** location. The home-dir auto-memory at `~/.claude/proje
 - [Audio pipeline](audio-pipeline.md) — ElevenLabs TTS for sentence audio; gitignored locally, R2 as source of truth. **Build hook disabled 2026-05-21** until app actually consumes audio.
 - [PWA caching](pwa-caching.md) — service-worker runtime cache rules for `/assets/lessons/`; why we don't blanket-`CacheFirst` an index file, how to invalidate on deploy
 - [Stats and XP redesign](stats-and-xp-redesign.md) — two mastery systems (live vs monotonic), sticky unlock, event-based XP, timer fixes, double-incorrect fix, orphan filtering (May 2026)
+- [Progress sync on focus](progress-sync-on-focus.md) — visibility/focus/online listener refetches `/api/auth/me` for cross-device sync; 10s throttle; POST failures logged to PostHog (no retry queue yet, deliberate)
 
 ## Maintenance rules
 

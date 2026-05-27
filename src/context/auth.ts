@@ -61,6 +61,9 @@ export type AuthContextType = {
   /** Optimistically credit XP for a completed session. Called separately from
    *  applyStatsDelta because XP is awarded once at session-end, not per-slot. */
   applyXPDelta: (xpEarned: number, date: string) => void;
+  /** Re-fetch the authoritative server state. Called by focus/visibility/online
+   *  listeners to recover from cross-device drift or lost POSTs. Throttled. */
+  refresh: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

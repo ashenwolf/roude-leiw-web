@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { usePostHog } from "@posthog/react";
 
 import { useAuth } from "../../context/useAuth.ts";
 
@@ -16,6 +17,7 @@ const toApiFormat = (wordResults: WordResultMap) =>
 
 export const useProgressSync = () => {
   const { auth } = useAuth();
+  const posthog = usePostHog();
 
   const syncProgress = useCallback(
     async ({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned }: SyncPayload) => {
@@ -23,7 +25,7 @@ export const useProgressSync = () => {
 
       const today = new Date().toISOString().slice(0, 10);
 
-      await fetch("/api/progress/sync", {
+      const response = await fetch("/api/progress/sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,9 +35,22 @@ export const useProgressSync = () => {
           xpEarned: xpEarned ?? 0,
           newlyUnlockedLessons: newlyUnlockedLessons ?? [],
         }),
+      }).catch((error: unknown) => {
+        posthog?.capture("progress_sync_failed", {
+          reason: "network",
+          message: error instanceof Error ? error.message : String(error),
+        });
+        return null;
       });
+
+      if (response && !response.ok) {
+        posthog?.capture("progress_sync_failed", {
+          reason: "http",
+          status: response.status,
+        });
+      }
     },
-    [auth.status],
+    [auth.status, posthog],
   );
 
   return { syncProgress };

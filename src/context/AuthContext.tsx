@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { AuthContext } from "./auth.ts";
@@ -26,13 +26,43 @@ const fetchMe = async (): Promise<AuthState> => {
     : { status: "unauthenticated" };
 };
 
+const REFRESH_THROTTLE_MS = 10_000;
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthState>({ status: "loading" });
   const posthog = usePostHog();
+  const lastRefreshAtRef = useRef(0);
+  const authStatusRef = useRef(auth.status);
 
   useEffect(() => {
-    fetchMe().then(setAuth);
+    authStatusRef.current = auth.status;
+  }, [auth.status]);
+
+  const refresh = useCallback(() => {
+    lastRefreshAtRef.current = Date.now();
+    return fetchMe().then(setAuth);
   }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  useEffect(() => {
+    const handler = () => {
+      if (document.hidden) return;
+      if (authStatusRef.current !== "authenticated") return;
+      if (Date.now() - lastRefreshAtRef.current < REFRESH_THROTTLE_MS) return;
+      refresh();
+    };
+    document.addEventListener("visibilitychange", handler);
+    window.addEventListener("focus", handler);
+    window.addEventListener("online", handler);
+    return () => {
+      document.removeEventListener("visibilitychange", handler);
+      window.removeEventListener("focus", handler);
+      window.removeEventListener("online", handler);
+    };
+  }, [refresh]);
 
   // Sync identity with PostHog whenever auth state resolves
   useEffect(() => {
@@ -91,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, applyStatsDelta, applyXPDelta }}>
+    <AuthContext.Provider value={{ auth, login, logout, applyStatsDelta, applyXPDelta, refresh }}>
       {children}
     </AuthContext.Provider>
   );
