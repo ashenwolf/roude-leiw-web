@@ -11,7 +11,7 @@ import {
   isWordKey,
   MASTERY,
 } from "../../../src/exercise/progression.ts";
-import { MIN_ANSWERS, MASTERY_CORRECT_COUNT, UNLOCK_ELEMENT_THRESHOLD, UNLOCK_LESSON_THRESHOLD } from "../../../src/exercise/constants.ts";
+import { MIN_ANSWERS, MASTERY_CORRECT_COUNT, UNLOCK_ELEMENT_THRESHOLD } from "../../../src/exercise/constants.ts";
 import type { WordStats } from "../../../src/context/auth.ts";
 import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 

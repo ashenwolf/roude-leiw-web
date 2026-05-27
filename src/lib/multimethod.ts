@@ -7,16 +7,17 @@ class IgnoreField {}
  */
 export const __ = new IgnoreField();
 
-type DispatchFunction<T extends readonly unknown[]> = (...obj: T) => any;
-type Method<T extends readonly unknown[]> = (...params: T) => any;
-type DispatchClause<T extends readonly unknown[]> = any | Method<T>;
-interface MultiMethodProps<T extends readonly unknown[]> {
-  methods: DispatchClause<T>[];
+type DispatchValue = readonly unknown[];
+type DispatchFunction<T extends readonly unknown[]> = (...obj: T) => DispatchValue;
+type Method<T extends readonly unknown[], R> = (...params: T) => R;
+type DispatchClause<T extends readonly unknown[], R> = [DispatchValue, Method<T, R>];
+interface MultiMethodProps<T extends readonly unknown[], R> {
+  methods: DispatchClause<T, R>[];
   dispatchFunction: DispatchFunction<T>;
-  defaultMethod: DispatchFunction<T>;
+  defaultMethod: Method<T, R>;
 }
 
-const raiseNoDispatchFound = <T extends readonly unknown[]>(...obj: T): any => {
+const raiseNoDispatchFound = <T extends readonly unknown[]>(...obj: T): never => {
   throw new Error(
     `No method found matching these parameters: ${JSON.stringify(obj)}`,
   );
@@ -45,19 +46,19 @@ const raiseNoDispatchFound = <T extends readonly unknown[]>(...obj: T): any => {
  *
  */
 
-export function multimethod<T extends readonly unknown[]>(
+export function multimethod<T extends readonly unknown[], R = unknown>(
   dispatchFunction: DispatchFunction<T>,
 ) {
-  const data: MultiMethodProps<T> = {
+  const data: MultiMethodProps<T, R> = {
     methods: [],
     dispatchFunction: dispatchFunction,
-    defaultMethod: raiseNoDispatchFound,
+    defaultMethod: raiseNoDispatchFound as Method<T, R>,
   };
 
   /**
    * Helper function to zip two arrays together
    */
-  const zip = <A, B>(a: A[], b: B[]): [A, B][] =>
+  const zip = <A, B>(a: readonly A[], b: readonly B[]): [A, B][] =>
     Array.from({ length: Math.min(a.length, b.length) }, (_, i) => [a[i], b[i]]);
 
   const multiMethod = (...objs: T) => {
@@ -77,7 +78,7 @@ export function multimethod<T extends readonly unknown[]>(
    * @param selector to be matched against.
    * @param method actual implementation of the multimethod call for given selector.
    */
-  multiMethod.method = (selector: any[], method: Method<T>) => {
+  multiMethod.method = (selector: DispatchValue, method: Method<T, R>) => {
     data.methods.push([selector, method]);
     return multiMethod;
   };
@@ -89,7 +90,7 @@ export function multimethod<T extends readonly unknown[]>(
    *
    * @param method actual implementation of default multimethod call
    */
-  multiMethod.default = (method: Method<T>) => {
+  multiMethod.default = (method: Method<T, R>) => {
     data.defaultMethod = method;
     return multiMethod;
   };

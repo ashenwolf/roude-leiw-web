@@ -65,8 +65,8 @@ const narrow = <T extends SessionAction["type"]>(action: SessionAction) =>
 // Reducer
 // ============================================================================
 
-export const sessionReducer = multimethod(
-  (state: SessionState, action: SessionAction) => [action.type, state.status],
+export const sessionReducer = multimethod<[SessionState, SessionAction], SessionState>(
+  (state, action) => [action.type, state.status],
 )
   .method(["LOADED", __], (state: SessionState, action: SessionAction) => {
     const { lessons, queue, plannedSlots, blockBoundaries, currentLessonId } = narrow<"LOADED">(action);

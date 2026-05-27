@@ -11,7 +11,7 @@ import { describe, it, expect } from "vitest";
 import { mergeWordStats, mergeDailySession } from "../../../src/lib/stats-merge.ts";
 import { computeStreak } from "../../../src/lib/streak.ts";
 
-import type { WordStats, DailySession, StreakInfo } from "../../../src/context/auth.ts";
+import type { WordStats, DailySession } from "../../../src/context/auth.ts";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 

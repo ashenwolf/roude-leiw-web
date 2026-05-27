@@ -5,7 +5,6 @@ import {
   WORD_MIX_TOTAL_SLOTS,
   WORD_MIX_PAIRS_PER_SLOT,
   MIN_ANSWERS,
-  ERROR_THRESHOLD,
 } from "../../../../src/exercise/constants.ts";
 import { wordKey } from "../../../../src/exercise/progression.ts";
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { selectErrorPool } from "../../../src/exercise/error-pool.ts";
-import { MIN_ANSWERS, ERROR_THRESHOLD } from "../../../src/exercise/constants.ts";
+import { MIN_ANSWERS } from "../../../src/exercise/constants.ts";
 
 import type { WordStats } from "../../../src/context/auth.ts";
 import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
