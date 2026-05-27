@@ -12,6 +12,7 @@ This is the **canonical** location. The home-dir auto-memory at `~/.claude/proje
 - [PWA caching](pwa-caching.md) — service-worker runtime cache rules for `/assets/lessons/`; why we don't blanket-`CacheFirst` an index file, how to invalidate on deploy
 - [Stats and XP redesign](stats-and-xp-redesign.md) — two mastery systems (live vs monotonic), sticky unlock, event-based XP, timer fixes, double-incorrect fix, orphan filtering (May 2026)
 - [Progress sync on focus](progress-sync-on-focus.md) — visibility/focus/online listener refetches `/api/auth/me` for cross-device sync; 10s throttle; POST failures logged to PostHog (no retry queue yet, deliberate)
+- [Under-exposed bucket](under-exposed-bucket.md) — Lesson Mode adds 30% bucket for current-lesson Elements with `shown < MIN_ANSWERS` so RNG can't strand stragglers below the unlock gate; binary cliff chosen over weighted 1/(1+shown) for consistency with the gate
 
 ## Maintenance rules
 
