@@ -1,3 +1,9 @@
+/sw.js
+  Cache-Control: no-store
+
+/workbox-*.js
+  Cache-Control: no-store
+
 /*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
