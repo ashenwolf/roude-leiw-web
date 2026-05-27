@@ -92,3 +92,15 @@ WordMatch mismatch used to call `markIncorrect` for both pairs involved. Changed
 - `xpEarned?: integer [0, 500]`
 - `newlyUnlockedLessons?: string[]` (≤ 500, lesson-id format)
 Both are optional for backward compatibility with older clients.
+
+## Legacy `DailySession` shape normalized at read
+
+Pre-April 2026 records used `{ totalPairs, durationMs, correctMatches, incorrectMatches }` (no `xp`). The current shape is `{ totalItems, durationSeconds, correct, incorrect, xp? }`. Older user blobs still in KV have one or both of those legacy rows mixed in.
+
+Decision: normalize at the **read boundary** (`getUser` in `worker/lib/user.ts`) via `normalizeDailySession`/`normalizeDailySessions`. Pure + idempotent — new-shape records pass through unchanged. Considered alternatives:
+- **Defensive reads at merge sites** — keeps the bug latent for any *new* code that sums fields across all dates.
+- **One-shot KV migration script** — operational burden; the normalizer still needs to exist defensively for any blob that didn't run through it.
+
+`mergeDailySession` previously produced `NaN` if a sync targeted a date already stored in the legacy shape (e.g. `existing.totalItems = undefined` → `undefined + n = NaN`). The validator's `[today-2, today+1]` window kept this latent, but a future "lifetime stats" sum would have hit it.
+
+The next `saveUser` write naturally persists the clean shape, so the legacy normalizer becomes removable once all live KV blobs have rolled over.

@@ -687,7 +687,7 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `src/exercise/modes/fix-errors.ts`          | 9     | empty pool, word-only/phrase errors, fallback |
 | `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
 | `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
-| `worker/lib/user.ts`                        | 22    | mergeWordResults, mergeDailySession, caps |
+| `worker/lib/user.ts`                        | 36    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
 | `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
 | `worker/lib/validators.ts`                  | 12    | payload validation bounds |
 | `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
