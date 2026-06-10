@@ -189,4 +189,82 @@ describe("planLessonMode — under-exposed bucket", () => {
       expect(firstSlot.item.phraseKey).toBe(phraseKey("en-lu", "Good morning"));
     }
   });
+
+  it("under-exposed sentence bucket targets only under-exposed sentences, not the whole lesson", () => {
+    // 3 sentences: only s1 is under-exposed (shown=0); s2 and s3 have cleared MIN_ANSWERS.
+    const s1 = sentence("Hello", "Moien");
+    const s2 = sentence("Goodbye", "Äddi");
+    const s3 = sentence("Thanks", "Merci");
+    const l = lesson("A1_01", [["Foo", "bar"]], [s1, s2, s3]);
+    const userWords: Record<string, WordStats> = {
+      [phraseKey("en-lu", "Goodbye")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+      [phraseKey("en-lu", "Thanks")]: stats(MIN_ANSWERS, MIN_ANSWERS),
+    };
+    // Force under-exposed bucket (roll 0.0) for all sentence picks.
+    // With old code the whole lesson was in the pool, so s2/s3 could appear.
+    // With new code only s1 (shown < MIN_ANSWERS) is in the under-exposed pool.
+    let i = 0;
+    const seq = [0.5, 0.0, 0.0, 0.0, 0.5]; // sentence-builder; under-exposed; idx 0; sent 0; en-lu
+    const seqRng = () => seq[i++ % seq.length];
+    const config = planLessonMode([l], "A1_01", userWords, seqRng);
+    const firstSlot = config.queue[0];
+    expect(firstSlot.type).toBe("sentence-builder");
+    if (firstSlot.type === "sentence-builder") {
+      // Must be s1 — the only under-exposed sentence
+      expect(firstSlot.item.phraseKey).toBe(phraseKey("en-lu", "Hello"));
+    }
+  });
+});
+
+// ─── Deduplication ────────────────────────────────────────────────────────────
+
+describe("planLessonMode — deduplication", () => {
+  it("word-match slots do not contain duplicate pairs", () => {
+    // 10 words — enough that with-replacement draws could otherwise repeat.
+    const words: [string, string][] = Array.from(
+      { length: 10 },
+      (_, i) => [`lu${i}`, `en${i}`],
+    );
+    const l = lesson("A1_01", words);
+    const config = planLessonMode([l], "A1_01", {}, wordMatchRng);
+    for (const slot of config.queue) {
+      if (slot.type !== "word-match") continue;
+      const keys = slot.pairs.map(([lu, en]) => `${lu}|${en}`);
+      expect(new Set(keys).size).toBe(keys.length);
+    }
+  });
+
+  it("sentence phraseKeys do not repeat across slots when pool is large enough", () => {
+    // 20 sentences — more than the 15 slots in a session.
+    const sentences = Array.from({ length: 20 }, (_, i) =>
+      sentence(`en${i}`, `lu${i}`),
+    );
+    const l = lesson("A1_01", [["Foo", "bar"]], sentences);
+    // Each 5-call group: [slot-type=sentence-builder, bucket=current, lesson-idx=0,
+    //                     sentence-idx=i/20, direction=en-lu]
+    // sentence-idx i/20 ensures each of the 15 slots selects a distinct sentence
+    // (sentences 0..14) so the deduplication check always finds a fresh key.
+    const seq = Array.from({ length: LESSON_TOTAL_SLOTS }, (_, i) =>
+      [0.5, 0.5, 0.0, i / 20, 0.5],
+    ).flat();
+    let idx = 0;
+    const seqRng = () => seq[idx++ % seq.length];
+    const config = planLessonMode([l], "A1_01", {}, seqRng);
+    const keys = config.queue
+      .filter((s) => s.type === "sentence-builder")
+      .map((s) => (s.type === "sentence-builder" ? s.item.phraseKey : ""));
+    expect(keys.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it("allows sentence repeats when pool is smaller than available sentence slots", () => {
+    // 2 sentences but sentence-builder always rolls → exhausts unique pool quickly.
+    const s1 = sentence("Hello", "Moien");
+    const s2 = sentence("Bye", "Äddi");
+    const l = lesson("A1_01", [["Foo", "bar"]], [s1, s2]);
+    const config = planLessonMode([l], "A1_01", {}, sentenceRng);
+    // Should still produce LESSON_TOTAL_SLOTS slots (not silently drop them).
+    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.every((s) => s.type === "sentence-builder")).toBe(true);
+  });
 });

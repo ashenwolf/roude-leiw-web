@@ -61,12 +61,14 @@ export const planLessonMode = (
 
   // Phrase stats are keyed by "en-lu" direction regardless of presentation
   // direction (see buildSentenceExercise), so the unlock counter is shared.
-  const hasUnderExposedSentence = (l: Lesson) =>
-    l.sentences.some(
-      (s) =>
-        s.enVariants[0] !== undefined &&
-        (userWords[phraseKey("en-lu", s.enVariants[0])]?.shown ?? 0) < MIN_ANSWERS,
-    );
+  // The under-exposed pool is a synthetic lesson containing ONLY the under-exposed
+  // sentences — not the whole lesson. Prevents the bucket from spending 70%+ of its
+  // weight on already-shown sentences when only a few stragglers remain.
+  const underExposedSentences = currentLesson.sentences.filter(
+    (s) =>
+      s.enVariants[0] !== undefined &&
+      (userWords[phraseKey("en-lu", s.enVariants[0])]?.shown ?? 0) < MIN_ANSWERS,
+  );
 
   const wordPools = {
     "under-exposed": currentLesson.entries.filter(isWordUnderExposed),
@@ -75,7 +77,9 @@ export const planLessonMode = (
   };
 
   const sentencePools = {
-    "under-exposed": hasUnderExposedSentence(currentLesson) ? [currentLesson] : [],
+    "under-exposed": underExposedSentences.length > 0
+      ? [{ ...currentLesson, sentences: underExposedSentences }]
+      : [],
     current: [currentLesson],
     previous: previousLessons,
   };
@@ -85,11 +89,13 @@ export const planLessonMode = (
     currentLesson.entries.flatMap((e) => tokenizeSentence(e.lu, "lu")),
   )];
 
-  const queue: Exercise[] = [];
-  for (let i = 0; i < LESSON_TOTAL_SLOTS; i++) {
-    const slot = buildSlot(wordPools, sentencePools, lessonVocab, rng);
-    if (slot) queue.push(slot);
-  }
+  // Shared set tracking sentence keys already used in this session plan.
+  // buildSlot mutates it so no sentence is repeated until the pool is exhausted.
+  const usedSentenceKeys = new Set<string>();
+  const queue = Array.from(
+    { length: LESSON_TOTAL_SLOTS },
+    () => buildSlot(wordPools, sentencePools, lessonVocab, rng, usedSentenceKeys),
+  ).filter((slot): slot is Exercise => slot !== null);
 
   return {
     lessons,
@@ -107,11 +113,35 @@ export const planLessonMode = (
 type WordBucketName = (typeof LESSON_WORD_MATCH_BUCKETS)[number]["name"];
 type SentenceBucketName = (typeof LESSON_SENTENCE_LESSON_BUCKETS)[number]["name"];
 
+// Picks up to `count` unique word pairs (deduplicated by wordKey).
+// Generates count*4 candidates via with-replacement draws, then keeps the first
+// `count` distinct ones. Returns fewer than `count` only when the pool itself
+// has fewer unique words.
+const pickUniquePairs = (
+  pools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
+  count: number,
+  rng: () => number,
+): WordEntry[] => {
+  const seen = new Set<string>();
+  return Array.from({ length: count * 4 }, () =>
+    pickPair(pools, LESSON_WORD_MATCH_BUCKETS, rng),
+  )
+    .filter((p): p is WordEntry => p !== undefined)
+    .reduce<WordEntry[]>((acc, entry) => {
+      if (acc.length >= count) return acc;
+      const k = wordKey(entry.lu, entry.en);
+      if (seen.has(k)) return acc;
+      seen.add(k);
+      return [...acc, entry];
+    }, []);
+};
+
 const buildSlot = (
   wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
   sentencePools: Record<SentenceBucketName, ReadonlyArray<Lesson>>,
   lessonVocab: string[],
   rng: () => number,
+  usedSentenceKeys: Set<string>,
 ): Exercise | null => {
   for (let attempt = 0; attempt < 10; attempt++) {
     const slotType = bucketedPick(rng(), SLOT_TYPE_DISTRIBUTION);
@@ -119,22 +149,28 @@ const buildSlot = (
     if (slotType === "sentence-builder") {
       const picked = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
       if (!picked) continue; // no sentences in pool → re-roll
+      const key = phraseKey("en-lu", picked.sentence.enVariants[0] ?? "");
+      if (usedSentenceKeys.has(key)) continue; // already used this session → try again
+      usedSentenceKeys.add(key);
       const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
       return buildSentenceExercise(picked.sentence, direction, lessonVocab);
     }
 
-    // word-match: LESSON_WORD_MATCH_PAIR_COUNT independent draws
-    const pairs = Array.from({ length: LESSON_WORD_MATCH_PAIR_COUNT }, () =>
-      pickPair(wordPools, LESSON_WORD_MATCH_BUCKETS, rng),
-    ).filter((p): p is WordEntry => p !== undefined);
-
+    // word-match: pick LESSON_WORD_MATCH_PAIR_COUNT unique pairs
+    const pairs = pickUniquePairs(wordPools, LESSON_WORD_MATCH_PAIR_COUNT, rng);
     if (pairs.length > 0) return buildWordMatchExercise(pairs);
   }
 
-  // Exhausted retries (e.g. rng always hits sentence-builder but no sentences exist).
-  // Fall back to word-match unconditionally so the slot is never silently skipped.
-  const fallbackPairs = Array.from({ length: LESSON_WORD_MATCH_PAIR_COUNT }, () =>
-    pickPair(wordPools, LESSON_WORD_MATCH_BUCKETS, rng),
-  ).filter((p): p is WordEntry => p !== undefined);
+  // Retries exhausted — most likely sentence-builder kept rolling but all session
+  // sentences are already used. Accept a sentence repeat rather than skip the slot.
+  const fallback = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
+  if (fallback) {
+    const key = phraseKey("en-lu", fallback.sentence.enVariants[0] ?? "");
+    usedSentenceKeys.add(key);
+    const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
+    return buildSentenceExercise(fallback.sentence, direction, lessonVocab);
+  }
+  // No sentences at all in pool → fall back to word-match
+  const fallbackPairs = pickUniquePairs(wordPools, LESSON_WORD_MATCH_PAIR_COUNT, rng);
   return fallbackPairs.length > 0 ? buildWordMatchExercise(fallbackPairs) : null;
 };

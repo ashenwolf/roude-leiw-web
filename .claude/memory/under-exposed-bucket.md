@@ -16,11 +16,28 @@ We considered shaping inside the bucket with an inverse-shown weight so an Eleme
 
 If real usage shows stragglers persisting past expectation, promote to weighted then — same constants module, same bucket name, just a different selection primitive. Don't pre-optimize.
 
-## Sentence-level imprecision (deliberate)
+## Sentence-level precision (changed 2026-06-03)
 
-For sentences, the under-exposed bucket includes the *current lesson* if any of its sentences has `shown < MIN_ANSWERS`. Inside the lesson, sentence pick is uniform — so an already-shown sentence may still get drawn while a sibling is the actual laggard.
+The `under-exposed` sentence pool is now a **synthetic lesson containing only the under-exposed sentences**, not the full current lesson. Built in `lesson.ts` as:
 
-Alternative: change `pickSentence` to take a sentence-level filter. **Rejected for symmetry.** `pickPair` and `pickSentence` both work at the (bucket → pool → uniform index) layer; specializing one breaks Layer-1 uniformity. Combined with the 30% weight, the laggard converges fast enough that the imprecision doesn't matter in practice.
+```ts
+const underExposedSentences = currentLesson.sentences.filter(
+  (s) => (userWords[phraseKey("en-lu", s.enVariants[0])]?.shown ?? 0) < MIN_ANSWERS,
+);
+sentencePools["under-exposed"] = underExposedSentences.length > 0
+  ? [{ ...currentLesson, sentences: underExposedSentences }]
+  : [];
+```
+
+**Why changed:** With a large lesson (e.g. A1.01 has 42 sentences), once most sentences have cleared `MIN_ANSWERS`, hitting the 30% under-exposed bucket would still pick a random sentence from the whole lesson — 70%+ chance of landing on an already-shown one. The bucket weight was right; the selection inside it wasn't. Synthetic lesson trick fixes this without changing `pickSentence` or breaking Layer-1 uniformity.
+
+The previously-rejected alternative of changing `pickSentence` to take a sentence-level filter is still rejected for the same reason (breaks Layer-1 uniformity). The synthetic lesson achieves the same precision while keeping `pickSentence` generic.
+
+## Session-level sentence deduplication (added 2026-06-03)
+
+`planLessonMode` now passes a shared `usedSentenceKeys: Set<string>` into every `buildSlot` call. When a sentence slot is built, its `phrase:en-lu:…` key is added to the set; future slots skip already-used keys (up to 10 retries), then fall back to allowing repeats only when the pool is exhausted. Guarantees variety across the ~12 sentence slots in a typical 15-slot session as long as the lesson has ≥ 12 unique sentences (A1.01 has 42).
+
+Word-match slots use `pickUniquePairs` — picks `count*4` candidates via with-replacement draws then deduplicates by `wordKey`, so the same pair can't appear twice in one 5-card slot.
 
 ## Touch points if rules change
 
