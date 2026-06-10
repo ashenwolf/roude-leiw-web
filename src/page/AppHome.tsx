@@ -4,6 +4,7 @@ import { usePostHog } from "@posthog/react";
 import { useNavigation } from "../context/useNavigation";
 import { loadLessonMeta, loadLessonsUpToCursor } from "../exercise/lesson-loader";
 import { projectHomeLessonsView } from "../exercise/lesson-rows";
+import { selectErrorPool } from "../exercise/error-pool";
 import { computeOverallStats, computeLessonProgress, collectLessonKeys } from "../exercise/progression";
 import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
 import { computePlayerLevel } from "../exercise/xp";
@@ -77,6 +78,12 @@ export const AppHome = () => {
   const overallStats = useMemo(() => computeOverallStats(words, validKeys), [words, validKeys]);
 
   const levelInfo = useMemo(() => computePlayerLevel(totalXP), [totalXP]);
+
+  // Single source of truth for "struggling content" (see CLAUDE.md, Centralized
+  // error pool). While phase-2 lessons are still loading, `lessons` is empty and
+  // both pools come back empty → button stays disabled (safe default).
+  const errorPool = useMemo(() => selectErrorPool(words, lessons), [words, lessons]);
+  const fixErrorsDisabled = errorPool.words.length === 0 && errorPool.phrases.length === 0;
 
   const todayKey = new Date().toISOString().slice(0, 10);
   const todayMinutes = (dailySessions[todayKey]?.durationSeconds ?? 0) / 60;
@@ -180,7 +187,7 @@ export const AppHome = () => {
               <ShuffleIcon className="w-4 h-4" /> Word Mix
             </span>
           </Button>
-          <Button color="fix-errors" size="sm" onClick={handleStartFixErrors}>
+          <Button color="fix-errors" size="sm" onClick={handleStartFixErrors} disabled={fixErrorsDisabled}>
             <span className="flex items-center justify-center gap-1.5">
               <RefreshIcon className="w-4 h-4" /> Fix Errors
             </span>

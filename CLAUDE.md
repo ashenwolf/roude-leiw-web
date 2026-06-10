@@ -123,8 +123,9 @@ src/
 │       └── types.ts                  # WordPair, SlotState, GameState, WordResultMap
 │
 ├── persistence/                      # Backend sync
+│   ├── migration.ts                  # Pure: buildMigrationChunks — splits guest totals into validator-bound sync payloads
 │   └── hooks/
-│       └── use-progress-sync.ts      # Syncs word results to /api/progress/sync
+│       └── use-progress-sync.ts      # Syncs word results to /api/progress/sync (returns success boolean)
 │
 ├── lib/                              # Shared libraries
 │   ├── shuffle.ts                    # Single Fisher–Yates shuffle for the whole app
@@ -458,7 +459,7 @@ erDiagram
   USER ||--o{ SESSION : "has"
 ```
 
-Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map.
+Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map. `phraseKey()` truncates `firstEn` to 64 chars to match the server validator's per-part cap (`PHRASE_KEY_RX`); sentences sharing the same first 64 chars collide onto one key by design.
 
 Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `SessionData`). KV CRUD lives in `worker/lib/user.ts` and `worker/lib/session.ts`.
 
@@ -481,7 +482,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 6. **Sessions and CSRF use TTLs, not deletion sweeps.** Cloudflare KV `expirationTtl` handles cleanup. Don't write background jobs to expire stale rows.
 
-7. **Guest store mirrors the auth schema.** `GuestData = { words, dailySessions }` is structurally a subset of `UserData` (no profile). This makes the guest→auth migration in `use-progress.ts` a straight POST of accumulated deltas, then `localStorage.removeItem`.
+7. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
 
 #### Client read/write pattern
 
@@ -669,7 +670,7 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (296 tests):**
+**What's covered (367 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
@@ -690,6 +691,7 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `worker/lib/user.ts`                        | 36    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
 | `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
 | `worker/lib/validators.ts`                  | 12    | payload validation bounds |
+| `src/persistence/migration.ts`              | 23    | buildMigrationChunks: per-chunk validator bounds, counter splitting, duration/XP spread, exact total reconstruction |
 | `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
 
 **No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.

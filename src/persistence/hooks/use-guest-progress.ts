@@ -7,7 +7,7 @@ import type { WordResultMap } from "../../exercise/WordMatch/types";
 
 const STORAGE_KEY = "roude-leiw-guest";
 
-type GuestData = {
+export type GuestData = {
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
   unlockedLessons?: string[];

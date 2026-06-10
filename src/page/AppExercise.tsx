@@ -61,6 +61,26 @@ const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps
   </div>
 );
 
+// Defensive guard for an empty session queue (e.g. Fix Errors with an empty
+// error pool): without it, Start would transition to `active` with no exercise
+// to render — a dead end.
+type ExerciseEmptyProps = { mode: SessionMode; onBack: () => void };
+const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
+  <div className="flex flex-col items-center gap-6 py-8">
+    <h2 className="text-2xl font-bold text-gray-800">
+      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
+    </h2>
+    <p className="text-gray-600 text-center">
+      {mode.kind === "fix-errors"
+        ? "No mistakes to fix right now — nice work!"
+        : "Nothing to practice here yet."}
+    </p>
+    <div className="w-full max-w-xs">
+      <Button onClick={onBack}>Back to Home</Button>
+    </div>
+  </div>
+);
+
 type ExerciseActiveProps = {
   state: SessionStatus;
   currentSlotIndex: number;
@@ -237,6 +257,7 @@ export const AppExercise = () => {
   if (session.state === "loading") return <ExerciseLoading />;
   if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
   if (session.state === "ready") {
+    if (session.totalSlots === 0) return <ExerciseEmpty mode={mode} onBack={goHome} />;
     const handleStart = () => {
       posthog?.capture("exercise_started", {
         lesson_id: params.lessonId,

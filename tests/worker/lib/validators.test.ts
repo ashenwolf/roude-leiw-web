@@ -74,6 +74,19 @@ describe("validateProgressSync", () => {
     expect(bad("x".repeat(65) + "|y").ok).toBe(false);
   });
 
+  it("accepts keys at the per-part length boundary, rejects one past it", () => {
+    const check = (key: string) =>
+      validateProgressSync({ ...valid(), wordResults: [{ key, shown: 1, correct: 1, incorrect: 0 }] }, TODAY).ok;
+    // word key: each part may be up to 64 chars (129 chars total incl. the pipe)
+    expect(check("l".repeat(64) + "|" + "e".repeat(64))).toBe(true);
+    expect(check("l".repeat(65) + "|" + "e".repeat(64))).toBe(false);
+    expect(check("l".repeat(64) + "|" + "e".repeat(65))).toBe(false);
+    // phrase key: tail may be up to 64 chars (77 chars total)
+    expect(check("phrase:en-lu:" + "x".repeat(64))).toBe(true);
+    expect(check("phrase:lu-en:" + "x".repeat(64))).toBe(true);
+    expect(check("phrase:lu-en:" + "x".repeat(65))).toBe(false);
+  });
+
   it("accepts phrase keys in both directions", () => {
     expect(
       validateProgressSync(

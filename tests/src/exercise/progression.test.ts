@@ -111,6 +111,19 @@ describe("phraseKey helpers", () => {
     expect(phraseKey("lu-en", "What is your name?")).toBe("phrase:lu-en:What is your name?");
   });
 
+  it("truncates firstEn to 64 chars (lockstep with PHRASE_KEY_RX in worker/lib/validators.ts)", () => {
+    const long = "a".repeat(70);
+    expect(phraseKey("en-lu", long)).toBe("phrase:en-lu:" + "a".repeat(64));
+    // exactly 64 chars is a no-op
+    const exact = "b".repeat(64);
+    expect(phraseKey("lu-en", exact)).toBe("phrase:lu-en:" + exact);
+  });
+
+  it("collides sentences sharing the same first 64 chars (accepted tradeoff)", () => {
+    const prefix = "c".repeat(64);
+    expect(phraseKey("en-lu", prefix + " one")).toBe(phraseKey("en-lu", prefix + " two"));
+  });
+
   it("isPhraseKey recognises phrase keys", () => {
     expect(isPhraseKey("phrase:en-lu:Hello")).toBe(true);
     expect(isPhraseKey("phrase:lu-en:Hello")).toBe(true);

@@ -69,8 +69,18 @@ export const isElementMastered = (stats: WordStats | undefined): boolean =>
 
 export const wordKey = (lu: string, en: string): string => `${lu}|${en}`;
 
+/**
+ * Single source of truth for phrase stat-keys.
+ *
+ * `firstEn` is truncated to 64 chars to stay in lockstep with `PHRASE_KEY_RX`
+ * in `worker/lib/validators.ts` (max part length 64) — a longer component would
+ * make the server reject the entire sync batch containing it. The slice is a
+ * no-op for sentences ≤64 chars, so existing keys are unchanged. Two sentences
+ * sharing the same first 64 chars of their first EN variant collide onto one
+ * key — an accepted tradeoff (their stats merge).
+ */
 export const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string): string =>
-  `phrase:${direction}:${firstEn}`;
+  `phrase:${direction}:${firstEn.slice(0, 64)}`;
 
 export const isPhraseKey = (key: string): boolean => key.startsWith("phrase:");
 export const isWordKey = (key: string): boolean => !isPhraseKey(key);

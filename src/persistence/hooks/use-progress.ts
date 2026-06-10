@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { useAuth } from "../../context/useAuth";
 import { computeStreak } from "../../lib/streak";
+import { buildMigrationChunks } from "../migration";
 import { useGuestProgress, readGuestData } from "./use-guest-progress";
 import { useProgressSync } from "./use-progress-sync";
 
@@ -33,26 +34,33 @@ export const useProgress = (): ProgressState => {
   const { syncProgress } = useProgressSync();
   const migrationDone = useRef(false);
 
-  // Guest-to-auth migration: one-time on login
+  // Guest-to-auth migration: one-time on login. Lifetime guest totals routinely
+  // exceed the server's per-request bounds (worker/lib/validators.ts), so the
+  // pure producer splits them into chunks that each pass validation. Per-day
+  // history/streak cannot be migrated — the validator's date window only allows
+  // [today-2, today+1] — so all guest progress lands on today's date.
   useEffect(() => {
     if (auth.status !== "authenticated" || migrationDone.current) return;
     migrationDone.current = true;
 
-    const guestData = readGuestData();
-    if (Object.keys(guestData.words).length === 0) return;
+    const chunks = buildMigrationChunks(readGuestData());
+    if (chunks.length === 0) return; // literally nothing to migrate
 
-    const wordResults: WordResultMap = Object.fromEntries(
-      Object.entries(guestData.words).map(([key, stats]) => [key, stats]),
-    );
-    const totalDuration = Object.values(guestData.dailySessions).reduce(
-      (sum, s) => sum + s.durationSeconds,
-      0,
-    );
-    syncProgress({
-      wordResults,
-      durationSeconds: Math.round(totalDuration),
-      newlyUnlockedLessons: guestData.unlockedLessons ?? [],
-    }).then(() => guest.clear());
+    // POST sequentially, stopping at the first failure. Guest data is cleared
+    // ONLY when every chunk was accepted. On failure we keep localStorage and
+    // leave migrationDone set for this tab session (no re-post of partial data);
+    // the next full page load retries the migration from scratch. Tradeoff:
+    // chunks that succeeded before the failure are re-sent on that retry and
+    // double-count, because the server merge is additive with no idempotency
+    // key. We accept that honestly rather than invent client-side dedup state.
+    chunks
+      .reduce<Promise<boolean>>(
+        (prev, chunk) => prev.then((okSoFar) => (okSoFar ? syncProgress(chunk) : false)),
+        Promise.resolve(true),
+      )
+      .then((allOk) => {
+        if (allOk) guest.clear();
+      });
   }, [auth.status, syncProgress, guest]);
 
   // React Compiler handles memoization — no manual useCallback needed
