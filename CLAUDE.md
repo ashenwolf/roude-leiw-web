@@ -317,7 +317,7 @@ flowchart TD
   files -->|"loadAllLessons()<br/>lesson-loader.ts"| lessons
   lessons -->|"projectHomeLessonsView()<br/>lesson-rows.ts"| homeView
   homeView --> appHome
-  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, word-selector, letz-parser)"| slotPlan
+  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, letz-parser)"| slotPlan
   slotPlan -.->|"useExerciseSession<br/>(hook = wiring)"| batch
   batch -->|"initializeGame / applySelection<br/>WordMatch/game-logic.ts"| gameState
   batch -->|"initSentenceGame / applyTokenTap<br/>SentenceBuilder/sentence-logic.ts"| gameState
@@ -670,13 +670,12 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (367 tests):**
+**What's covered (352 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
 | `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
 | `src/exercise/SentenceBuilder/sentence-logic.ts` | 24 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
-| `src/exercise/word-selector.ts`             | 15    | bucket classification, exclude keys, overflow priority, output shape |
 | `src/exercise/progression.ts`               | 35    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
 | `src/exercise/session-reducer.ts`           | 27    | every action × every state, blockBoundaries-based section detection |
 | `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
@@ -709,7 +708,6 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 - `s(shown, correct, incorrect)` for `WordStats` (see `progression.test.ts`, `error-pool.test.ts`)
 - `lesson(id, words, sentences?)` for `Lesson` (see `progression.test.ts`, `modes/lesson.test.ts`)
 - `slot.{active|selected|fail|fading|empty}(...)` for `SlotState` (see `game-logic.test.ts`)
-- `cand(lu, en, lessonId)` for `CandidateItem` (see `word-selector.test.ts`)
 - `fakeRng(...values)` for deterministic RNG in mode planner tests (see `selection.test.ts`)
 
 Reuse these helpers; don't re-invent fixture shapes.
