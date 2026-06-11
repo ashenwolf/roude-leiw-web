@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
@@ -31,10 +31,6 @@ export const AppHome = () => {
   // Phase 2: full content for unlocked lessons only — populates progress + unlock.
   const [lessons, setLessons] = useState<Lesson[]>([]);
 
-  // Snapshot words at mount so the cascade predicate is stable (AppHome remounts
-  // on every navigation, so we always get the latest stats).
-  const wordsRef = useRef(words);
-
   // Phase 1: load manifest
   useEffect(() => {
     loadLessonMeta()
@@ -45,25 +41,28 @@ export const AppHome = () => {
       .catch(() => setMetasLoading(false));
   }, []);
 
-  // Snapshot the persisted unlocked set alongside words so the cascade keeps
-  // fetching lessons that were once unlocked even if their predecessor has
-  // since drifted below the 80% threshold (sticky unlock).
-  const persistedUnlockedRef = useRef(unlockedLessons);
-
-  // Phase 2: cascade-load unlocked .letz files (runs once metas are ready).
-  // Stops after the first lesson that is neither currently passing nor in the
-  // persisted-unlocked set, so we only fetch lessons the user has access to.
+  // Phase 2: cascade-load unlocked .letz files. Re-runs whenever stats arrive or
+  // change — on a hard reload `/api/auth/me` resolves AFTER mount, so `words` and
+  // `unlockedLessons` start empty and only populate later; freezing them at mount
+  // would stop the cascade at the first lesson and leave completed lessons'
+  // successors locked-and-unloaded. The cascade stops after the first lesson that
+  // is neither currently passing nor in the persisted-unlocked set (sticky
+  // unlock), so we only fetch lessons the user has access to. The AbortController
+  // drops a stale resolution if `words` changes again mid-fetch.
   useEffect(() => {
     if (lessonMetas.length === 0) return;
-    const currentWords = wordsRef.current;
-    const persisted = new Set(persistedUnlockedRef.current);
+    const controller = new AbortController();
+    const persisted = new Set(unlockedLessons);
     loadLessonsUpToCursor(
       lessonMetas,
       (lesson) =>
         persisted.has(lesson.meta.id) ||
-        computeLessonProgress(lesson, currentWords).percentage >= UNLOCK_LESSON_THRESHOLD,
-    ).then(setLessons);
-  }, [lessonMetas]);
+        computeLessonProgress(lesson, words).percentage >= UNLOCK_LESSON_THRESHOLD,
+    ).then((loaded) => {
+      if (!controller.signal.aborted) setLessons(loaded);
+    });
+    return () => controller.abort();
+  }, [lessonMetas, words, unlockedLessons]);
 
   // Single producer: everything AppHome needs about lessons + progress.
   // Uses loaded (unlocked) lessons only — locked lessons show as empty in progressMap.
