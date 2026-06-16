@@ -32,6 +32,12 @@
 @word d'Schwëster = sister
 @word Schwësteren = sisters
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Telefonsnummer = telephone number
+@word d'Joer = year
+@word de Gebuertsdag = birthday
+@word fannen = to find
+
 # --- Sentences (Quizlet cards 12-28, 32-39) ---
 
 @sentence

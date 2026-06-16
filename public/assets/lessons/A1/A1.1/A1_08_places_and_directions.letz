@@ -64,6 +64,18 @@
 @word op der rietser Säit = on the right hand side
 @word op der lénker Säit = on the left hand side
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word de Park = park
+@word d'Stad = city
+@word d'Wollek = cloud
+@word lénks = left
+@word riets = right
+@word riichtaus = straight ahead
+@word wäit = far
+@word hannert = behind
+@word niewent = next to
+@word tëschent = between
+
 # --- Sentences (Quizlet cards 13-34) ---
 
 @sentence

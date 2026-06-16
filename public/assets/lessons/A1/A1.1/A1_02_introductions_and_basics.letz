@@ -264,6 +264,22 @@
 @word Stockholm = Stockholm
 @word d'USA = the US
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word den Numm = name
+@word den Auto = car
+@word den Zuch = train
+@word d'Gare = train station
+@word d'Dier = door
+@word de Ball = ball
+@word d'Rechnung = bill
+@word d'Reunioun = meeting
+@word kommen = to come
+@word léieren = to learn
+@word schreiwen = to write
+@word gesinn = to see
+@word verstoen = to understand
+@word bestellen = to order
+
 # --- Sentences from Part A ---
 
 @sentence

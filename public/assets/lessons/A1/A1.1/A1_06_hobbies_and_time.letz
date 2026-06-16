@@ -22,6 +22,20 @@
 # --- Single-word entry (Quizlet card 49) ---
 @word Genau! = Exactly!
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Auer = hour
+@word de Mount = month
+@word d'Woch = week
+@word de Restaurant = restaurant
+@word dacks = often
+@word heiansdo = sometimes
+@word léiwer = rather
+@word moies = in the morning
+@word treffen = to meet
+@word sichen = to look for
+@word fléien = to fly
+@word retten = to rescue
+
 # --- Sentences (Quizlet cards 1-2, 15-48, 50-52) ---
 
 @sentence

@@ -41,6 +41,28 @@
 @word Jo = Yes
 @word Nee = No
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Zäit = time
+@word d'Glas = glass
+@word d'Waasser = water
+@word de Kaffi = coffee
+@word den Zocker = sugar
+@word d'Stéck = piece
+@word d'Zitroun = lemon
+@word kleng = small
+@word traureg = sad
+@word frou = happy
+@word hongereg = hungry
+@word sauer = sour
+@word alles = everything
+@word eppes = something
+@word vill = a lot
+@word gär = gladly
+@word drénken = to drink
+@word hëllefen = to help
+@word kréien = to get
+@word soen = to say
+
 # --- Sentences (Quizlet cards 7-12, 23-33, 39-54, 58-66, 68) ---
 
 @sentence

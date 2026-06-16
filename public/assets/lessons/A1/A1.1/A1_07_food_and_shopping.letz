@@ -123,6 +123,27 @@
 @word wéini = when
 @word natierlech = of course
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Brout = bread
+@word de Kéis = cheese
+@word den Téi = tea
+@word d'Taass = cup
+@word d'Persoun = person
+@word d'Blumm = flower
+@word de Kaddo = present
+@word d'Enveloppe = envelope
+@word d'Tranche = slice
+@word de Maart = market
+@word d'Bäckerei = bakery
+@word d'Metzlerei = butcher's shop
+@word d'Epicerie = grocer's
+@word de Supermarché = supermarket
+@word d'Pâtisserie = cake shop
+@word näischt = nothing
+@word kafen = to buy
+@word liesen = to read
+@word reservéieren = to reserve
+
 # --- Sentences (Quizlet cards 14-20, 31-38, 47-61, 64-74) ---
 
 @sentence

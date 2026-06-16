@@ -30,6 +30,21 @@
 @word zu Nuecht iessen = to have dinner
 @word schlofe goen = to go to sleep
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Bank = bank
+@word d'Post = post office
+@word d'Leit = people
+@word de Projet = project
+@word de Bus = bus
+@word den Telefon = telephone
+@word de Staat = state
+@word de Plang = plan
+@word de Direkter = director
+@word d'Strategie = strategy
+@word de Ministère = ministry
+@word de Coiffer = hairdresser
+@word den Enkel = grandchild
+
 # --- Sentences (Quizlet cards 1-30) ---
 
 @sentence

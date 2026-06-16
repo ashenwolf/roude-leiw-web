@@ -114,6 +114,18 @@
 @word brong = brown
 @word schwaarz = black
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Hoer = hair
+@word de Wäin = wine
+@word donkel = dark
+@word frëndlech = friendly
+@word blond = blond
+@word sonneg = sunny
+@word bedeckt = cloudy
+@word niwweleg = foggy
+@word reenen = to rain
+@word schneien = to snow
+
 # --- Sentences (Quizlet cards 1, 17-23, 54-69) ---
 
 @sentence
