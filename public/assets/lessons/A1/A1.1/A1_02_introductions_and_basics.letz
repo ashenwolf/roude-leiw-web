@@ -33,7 +33,7 @@
 @word ech hoffen = I hope
 @word nëmmen = only
 @word vun haut un = from today
-@word lëtzebuergesch Buschtawen = Luxembourgish letters
+@word Buschtawen = letters
 @word liicht = easy
 @word liicht = light
 @word riicht = straight
@@ -125,7 +125,6 @@
 @word Kapen = hats
 
 # --- "dach" (Quizlet 2A card 58) ---
-@word dach = yes
 @word dach = of course
 
 # --- Language & spelling (Quizlet 2A cards 59-60, 65-69) ---
@@ -381,14 +380,6 @@
 @distractor-lu Wéi
 
 @sentence
-@lu D'Vanessa huet mir schonn esou vill vun dir erzielt.
-@en Vanessa told me so much about you already.
-@distractor-en only
-@distractor-en how
-@distractor-lu nëmmen
-@distractor-lu Wéi
-
-@sentence
 @lu Dat hei ass den Här Weymann.
 @en That is Mr Weymann.
 @en That here is Mr Weymann.
@@ -456,14 +447,6 @@
 @distractor-lu Familljennumm
 
 @sentence
-@lu Dat schreift sech mat ck.
-@en That is spelled with ck.
-@distractor-en different word
-@distractor-en how
-@distractor-lu anert Wuert
-@distractor-lu Wéi
-
-@sentence
 @lu Kënnt Dir dat nach eng Kéier widderhuelen, wgl.?
 @en Can you repeat that one more time, please?
 @distractor-en already
@@ -480,8 +463,7 @@
 @distractor-lu Bic
 
 @sentence
-@lu Hie geet mat.
-@en He is going with us.
+@lu Hie geet mat mir.
 @en He is going with me.
 @distractor-en she
 @distractor-en they
@@ -490,7 +472,6 @@
 
 @sentence
 @lu Hatt hëlt d'Buch mat.
-@en She is taking the book.
 @en She is taking the book with her.
 @distractor-en pen
 @distractor-en window
