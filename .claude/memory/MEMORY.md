@@ -15,6 +15,7 @@ This is the **canonical** location. The home-dir auto-memory at `~/.claude/proje
 - [Under-exposed bucket](under-exposed-bucket.md) — Lesson Mode adds 30% bucket for current-lesson Elements with `shown < MIN_ANSWERS` so RNG can't strand stragglers below the unlock gate; binary cliff chosen over weighted 1/(1+shown) for consistency with the gate
 - [Guest migration chunking](guest-migration-chunking.md) — guest→auth migration split into validator-bound chunks, clear-on-success; rejected server-side daily-history migration and client dedup state (June 2026); also phraseKey 64-char truncation + empty-pool dead-end guards
 - [Home cascade & async words](home-cascade-async-words.md) — AppHome lesson cascade must depend on live words/unlockedLessons, not mount-time refs; auth resolves after mount so freezing them left next-lesson locked after a hard reload (June 2026 regression fix)
+- [LOD MCP server](lod-mcp.md) — `tools/lod-mcp/` wraps the official lod.lu dictionary API as MCP tools (`lod_lookup`, `lod_suggest`) for authoritative LU translations + gender when authoring `.letz` content; zero-dep stdio server registered in `.mcp.json`
 
 ## Maintenance rules
 

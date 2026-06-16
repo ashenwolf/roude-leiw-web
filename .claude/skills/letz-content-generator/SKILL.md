@@ -32,6 +32,25 @@ Two kinds of PDF input, often provided together for the same lesson:
 
 When multiple PDFs are provided, they all belong to the same lesson. Merge content from all sources into one `.letz` file, deduplicating entries that appear in both.
 
+## Verifying content with the LOD dictionary (MCP)
+
+This repo ships an MCP server (`tools/lod-mcp/`, registered in `.mcp.json`) that wraps the official **Lëtzebuerger Online Dictionnaire** ([lod.lu](https://lod.lu)). **Use it to verify every `@word` against the authoritative dictionary** rather than trusting the PDF or guessing — it is the source of truth for translations, part of speech, and grammatical gender.
+
+> The tools are loaded only when Claude Code starts. If `lod_lookup` is not available, the session predates `.mcp.json` — ask the user to restart Claude Code, then proceed. (You can still author content without it, but flag entries you couldn't verify.)
+
+**Tools:**
+- `lod_lookup { word, locale?=en, maxEntries?=3 }` → matching entries with `lemma`, `partOfSpeech`, `gender` (`m`/`f`/`n`), `ipa`, and `meanings[]` (each with `translations`, `clarifiers`, `examples`).
+- `lod_suggest { word, locale? }` → spellchecker suggestions (find the correct lemma before `lod_lookup`).
+
+**When to call it:**
+1. **Gender → article.** Look up each noun's lemma; map `gender` to the definite article — `m`→`de(n)`, `f`→`d'`, `n`→`d'`/`den`. Don't infer the article from the PDF; confirm it (see step 4).
+2. **Translation sanity.** Cross-check your English gloss against the entry's `translations`. If they diverge, prefer the LOD gloss or flag the conflict in the summary (see step 5).
+3. **Typo / lemma recovery.** When a source word looks misspelled or inflected, run `lod_suggest`, then `lod_lookup` the suggested lemma (see Edge cases).
+
+**Caveats:**
+- **Inflected forms, typos, and proper names return `found: 0`** (not an error). A zero result means "not a dictionary lemma" — recover the lemma with `lod_suggest`, don't invent a translation.
+- **Polysemy / homographs:** a word can have multiple senses or entries (`Bank` = bank *and* bench/`Bänk`; `Kéis` = cheese *and* nonsense; `Post` masc/fem). Pick the sense that fits the lesson context — first result isn't always right. Raise `maxEntries` to see alternatives.
+
 ## Step-by-step workflow
 
 ### 1. Read all provided PDFs
@@ -91,6 +110,8 @@ Output:
 
 Use the **definite article form** (de/d'/den/eng→d') for the primary entry. The indefinite form (e/en/eng) is implicit.
 
+When unsure of a noun's gender (and therefore its article), confirm with `lod_lookup` — the `gender` field (`m`/`f`/`n`) is authoritative: `m`→`de`/`den`, `f`→`d'`, `n`→`d'`/`den`. Prefer this over guessing from the source.
+
 #### Drop formal/informal annotations
 Source: `Schwätz du Lëtzebuergesch?: Do you (informal) speak Luxembourgish?`
 If this routes to a sentence, the English side should just say: `Do you speak Luxembourgish?`
@@ -109,6 +130,8 @@ Straightforward mapping:
 @word grouss = big, tall
 @word spéit = late
 ```
+
+Before finalizing a batch of `@word` entries, verify them against `lod_lookup` (see "Verifying content with the LOD dictionary" above). For each lemma, confirm the English gloss matches one of the entry's `translations`; if your gloss and LOD's disagree, prefer LOD's or flag the conflict in the output summary.
 
 ### 5. Process SENTENCE entries
 
@@ -186,9 +209,9 @@ After presenting, briefly summarize what was generated: how many `@word` entries
 
 ## Edge cases and pitfalls
 
-**Suspected typos** — Luxembourgish spelling can be inconsistent across sources (e.g., `Kaf` vs the standard `Kaffi`, or `Lëtzebuesch` vs `Lëtzebuergesch`). When you spot a word that looks like a misspelling or non-standard form, include it using the source spelling but add a warning at the end of the output summary. Format: `⚠️ Possible typo: "Kaf" in source — standard spelling is "Kaffi". Used source form.` Let the user decide whether to correct it.
+**Suspected typos** — Luxembourgish spelling can be inconsistent across sources (e.g., `Kaf` vs the standard `Kaffi`, or `Lëtzebuesch` vs `Lëtzebuergesch`). When you spot a word that looks like a misspelling or non-standard form, **confirm with the LOD dictionary**: a `lod_lookup` returning `found: 0` means it isn't a dictionary lemma — run `lod_suggest` to get the standard spelling, then `lod_lookup` that lemma to verify. Include the entry using the source spelling but add a warning at the end of the output summary. Format: `⚠️ Possible typo: "Kaf" in source — LOD suggests "Kaffi". Used source form.` Let the user decide whether to correct it.
 
-**Infinitive extraction** — When a sentence in the source uses a conjugated verb (e.g., `Du bezils d'Rechnung`), it is fine to extract the infinitive form (`bezuelen = to pay`) as a separate `@word` entry even if the infinitive never appears explicitly in the PDF. This is expected and useful — learners need the dictionary form.
+**Infinitive extraction** — When a sentence in the source uses a conjugated verb (e.g., `Du bezils d'Rechnung`), it is fine to extract the infinitive form (`bezuelen = to pay`) as a separate `@word` entry even if the infinitive never appears explicitly in the PDF. This is expected and useful — learners need the dictionary form. Verify the infinitive you derived with `lod_lookup` (the conjugated form will return `found: 0`; the infinitive lemma should resolve) — this catches a wrong stem before it ships.
 
 **Pronunciation notes** — Slides sometimes include pronunciation hints like `"Lëtzeboiesch"` or `"riit"`. These are teaching aids, not vocabulary. Skip them.
 
