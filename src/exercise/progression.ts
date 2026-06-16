@@ -16,11 +16,11 @@ import type { WordStats } from "../context/auth";
  * when you need all thresholds together (e.g. display, tests).
  */
 export const MASTERY = {
-  /** Minimum correct count for the monotonic gate (lesson progress, XP). */
-  correctToMaster: MASTERY_CORRECT_COUNT,       // 4
+  /** Correct count for the monotonic pass gate (lesson progress, unlock, XP). */
+  correctToMaster: MASTERY_CORRECT_COUNT,       // 3
   /** Accuracy boundary used by the live classifyWord and error pool. */
   accuracyThreshold: UNLOCK_ELEMENT_THRESHOLD,  // 0.8
-  /** Minimum showings before an element can be mastered or struggling. */
+  /** Minimum showings before an element can be mastered or struggling (live view only). */
   minShown: MIN_ANSWERS,                        // 5
 } as const;
 
@@ -53,9 +53,11 @@ export const classifyWord = (stats: WordStats | undefined): WordMastery => {
 /**
  * Monotonic mastery gate — once `true`, never reverts.
  *
- * An element is mastered when it has been shown enough times (`shown >= MIN_ANSWERS`)
- * AND answered correctly enough times in total (`correct >= MASTERY_CORRECT_COUNT`).
- * Both counters only ever grow, so this predicate can only flip from false → true.
+ * An element is mastered when it has been answered correctly enough times in
+ * total (`correct >= MASTERY_CORRECT_COUNT`). There is no minimum-shown gate and
+ * no accuracy ratio — three correct answers passes the element regardless of how
+ * many times it was missed. `correct` only ever grows, so this predicate can
+ * only flip from false → true.
  *
  * Use this for lesson progress, XP, and the "Learned X/Y" display stat.
  * A word can simultaneously pass this gate AND be `struggling` in `classifyWord`
@@ -63,36 +65,67 @@ export const classifyWord = (stats: WordStats | undefined): WordMastery => {
  * user should practise it again via the error pool).
  */
 export const isElementMastered = (stats: WordStats | undefined): boolean =>
-  stats !== undefined &&
-  stats.shown >= MASTERY.minShown &&
-  stats.correct >= MASTERY.correctToMaster;
+  stats !== undefined && stats.correct >= MASTERY.correctToMaster;
 
 export const wordKey = (lu: string, en: string): string => `${lu}|${en}`;
+
+export type Direction = "en-lu" | "lu-en";
 
 /**
  * Single source of truth for phrase stat-keys.
  *
+ * Keys are **per presentation direction** so the error pool can repeat the exact
+ * direction a user failed (en→lu assembly vs lu→en assembly are tracked apart).
+ * The first EN variant is the stable identity for a sentence in both directions;
+ * `combinedPhraseStats` / `phraseIdentity` recombine the two keys when a phrase
+ * must be treated as ONE element (lesson progress, unlock, "Learned X/Y").
+ *
  * `firstEn` is truncated to 64 chars to stay in lockstep with `PHRASE_KEY_RX`
  * in `worker/lib/validators.ts` (max part length 64) — a longer component would
  * make the server reject the entire sync batch containing it. The slice is a
- * no-op for sentences ≤64 chars, so existing keys are unchanged. Two sentences
- * sharing the same first 64 chars of their first EN variant collide onto one
- * key — an accepted tradeoff (their stats merge).
+ * no-op for sentences ≤64 chars. Two sentences sharing the same first 64 chars
+ * of their first EN variant collide onto one key — an accepted tradeoff (their
+ * stats merge).
  */
-export const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string): string =>
+export const phraseKey = (direction: Direction, firstEn: string): string =>
   `phrase:${direction}:${firstEn.slice(0, 64)}`;
 
 export const isPhraseKey = (key: string): boolean => key.startsWith("phrase:");
 export const isWordKey = (key: string): boolean => !isPhraseKey(key);
+
+const EMPTY_STATS: WordStats = { shown: 0, correct: 0, incorrect: 0 };
+
+const addStats = (a: WordStats, b: WordStats): WordStats => ({
+  shown: a.shown + b.shown,
+  correct: a.correct + b.correct,
+  incorrect: a.incorrect + b.incorrect,
+});
+
+/**
+ * A phrase is one logical element: its stats are the sum of both presentation
+ * directions. Answers in either direction accumulate toward the same pass gate,
+ * so practising en→lu and lu→en both count toward mastering the one phrase.
+ */
+export const combinedPhraseStats = (
+  userWords: Record<string, WordStats>,
+  firstEn: string,
+): WordStats =>
+  addStats(
+    userWords[phraseKey("en-lu", firstEn)] ?? EMPTY_STATS,
+    userWords[phraseKey("lu-en", firstEn)] ?? EMPTY_STATS,
+  );
+
+/** The direction-agnostic identity of a phrase key (its first EN variant). */
+export const phraseIdentity = (key: string): string =>
+  key.replace(/^phrase:(?:en-lu|lu-en):/, "");
 
 /**
  * All stat-keys defined by the given lessons (both word and phrase forms).
  * Use as the `validKeys` argument to overall-stat producers so that elements
  * deleted from `.letz` files don't keep contributing orphan data.
  *
- * Both phrase directions (`phrase:en-lu:...` and `phrase:lu-en:...`) are
- * included even though only the en-lu direction gates lesson unlock — both
- * directions are still real elements the user can encounter and earn XP on.
+ * Each sentence contributes both directional phrase keys; they are recombined
+ * into one Element by `combinedPhraseStats` wherever progress is counted.
  */
 export const collectLessonKeys = (lessons: Lesson[]): Set<string> =>
   new Set(
@@ -110,7 +143,7 @@ export const collectLessonKeys = (lessons: Lesson[]): Set<string> =>
 
 export type LessonProgress = {
   total: number;
-  /** Elements that pass the unlock check (shown >= MIN_ANSWERS AND correct/shown >= 0.8). */
+  /** Elements that pass the unlock check (correct >= MASTERY_CORRECT_COUNT). */
   mastered: number;
   percentage: number;
   /** True when percentage >= UNLOCK_LESSON_THRESHOLD (80% of elements pass). */
@@ -130,10 +163,10 @@ export const computeLessonProgress = (
     (e) => isElementPassing(userWords[wordKey(e.lu, e.en)]),
   ).length;
 
-  // Only EN→LU direction gates lesson progression for sentences
+  // Each sentence is one element; both directions are summed before the gate.
   const sentenceTotal = lesson.sentences.length;
   const sentencePassing = lesson.sentences.filter(
-    (s) => s.enVariants.length > 0 && isElementPassing(userWords[phraseKey("en-lu", s.enVariants[0])]),
+    (s) => s.enVariants.length > 0 && isElementPassing(combinedPhraseStats(userWords, s.enVariants[0])),
   ).length;
 
   const total = wordTotal + sentenceTotal;
@@ -199,11 +232,11 @@ export type OverallStats = {
   masteredWords: number;
   learningWords: number;
   strugglingWords: number;
-  /** Mastered words + mastered sentences (en-lu direction only, so each sentence counts once). */
+  /** Mastered words + mastered sentences (each sentence = both directions summed). */
   masteredElements: number;
   /** Accuracy across all valid elements (words + both phrase directions). */
   overallAccuracy: number;
-  /** How many distinct sentences (en-lu keys) are tracked in userWords. */
+  /** How many distinct sentences are tracked (directions collapsed to one). */
   totalSentences: number;
   masteredSentences: number;
 };
@@ -222,11 +255,19 @@ export const computeOverallStats = (
     ? Object.entries(userWords).filter(([k]) => validKeys.has(k))
     : Object.entries(userWords);
 
-  // Words and phrases kept as [key, stats] pairs so we can filter by direction.
   const wordPairs = entries.filter(([k]) => isWordKey(k));
   const phrasePairs = entries.filter(([k]) => isPhraseKey(k));
-  // en-lu is the canonical direction: one key per sentence, aligns with unlock gate.
-  const enLuPairs = phrasePairs.filter(([k]) => k.startsWith("phrase:en-lu:"));
+
+  // Both directional keys of a phrase collapse into one logical sentence whose
+  // stats are the sum of the two directions.
+  const sentenceStats = [
+    ...phrasePairs
+      .reduce<Map<string, WordStats>>((m, [k, v]) => {
+        const id = phraseIdentity(k);
+        return m.set(id, addStats(m.get(id) ?? EMPTY_STATS, v));
+      }, new Map())
+      .values(),
+  ];
 
   const wordStats = wordPairs.map(([, v]) => v);
   const allStats = entries.map(([, v]) => v);  // words + both phrase directions
@@ -237,17 +278,17 @@ export const computeOverallStats = (
   const totalCorrect = allStats.reduce((sum, s) => sum + s.correct, 0);
 
   const masteredWords = wordStats.filter(isElementMastered).length;
-  const masteredSentences = enLuPairs.filter(([, s]) => isElementMastered(s)).length;
+  const masteredSentences = sentenceStats.filter(isElementMastered).length;
 
   return {
     totalWords: wordPairs.length,
     masteredWords,
     learningWords: wordClassified.filter((c) => c === "learning").length,
     strugglingWords: wordClassified.filter((c) => c === "struggling").length,
-    // Combined — used for "Learned X/Y". Each sentence counted once via en-lu key.
+    // Combined — used for "Learned X/Y". Each sentence counted once.
     masteredElements: masteredWords + masteredSentences,
     overallAccuracy: totalShown > 0 ? totalCorrect / totalShown : 0,
-    totalSentences: enLuPairs.length,
+    totalSentences: sentenceStats.length,
     masteredSentences,
   };
 };

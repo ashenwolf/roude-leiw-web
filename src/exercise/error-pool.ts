@@ -2,11 +2,18 @@ import { MIN_ANSWERS, ERROR_THRESHOLD } from "./constants";
 import { wordKey, phraseKey } from "./progression";
 
 import type { WordStats } from "../context/auth";
+import type { Direction } from "./progression";
 import type { Lesson, WordEntry, SentenceEntry } from "./letz-parser";
+
+/** A struggling phrase plus the exact direction the user failed it in. */
+export type PhraseError = {
+  sentence: SentenceEntry;
+  direction: Direction;
+};
 
 export type ErrorPool = {
   words: WordEntry[];
-  phrases: SentenceEntry[];
+  phrases: PhraseError[];
 };
 
 /** Same formula as classifyWord — correct / (correct + incorrect). */
@@ -63,27 +70,33 @@ const selectWordPool = (
     .map(([, entry]) => entry);
 };
 
-// De-duplicates by phrase key (en-lu direction only gates unlock/errors).
+// Each candidate is a (sentence, direction) pair keyed by its directional stat
+// key, so a phrase failed in en→lu and the same phrase failed in lu→en are
+// distinct error entries and Fix Errors repeats the exact failed direction.
+const DIRECTIONS: ReadonlyArray<Direction> = ["en-lu", "lu-en"];
+
 const selectPhrasePool = (
   userStats: Record<string, WordStats>,
   lessons: Lesson[],
-): SentenceEntry[] => {
-  const byKey = new Map<string, SentenceEntry>();
+): PhraseError[] => {
+  const byKey = new Map<string, PhraseError>();
   for (const lesson of lessons) {
     for (const sentence of lesson.sentences) {
       if (sentence.enVariants.length === 0) continue;
-      byKey.set(phraseKey("en-lu", sentence.enVariants[0]), sentence);
+      for (const direction of DIRECTIONS) {
+        byKey.set(phraseKey(direction, sentence.enVariants[0]), { sentence, direction });
+      }
     }
   }
 
   const primary = [...byKey.entries()]
     .filter(([key]) => isPrimary(userStats[key]))
-    .map(([, sentence]) => sentence);
+    .map(([, phrase]) => phrase);
 
   if (primary.length > 0) return primary;
 
   return [...byKey.entries()]
     .filter(([key]) => isFallback(userStats[key]))
     .sort(([a], [b]) => accuracy(userStats[a]!) - accuracy(userStats[b]!))
-    .map(([, sentence]) => sentence);
+    .map(([, phrase]) => phrase);
 };

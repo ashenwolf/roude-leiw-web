@@ -16,6 +16,7 @@ This is the **canonical** location. The home-dir auto-memory at `~/.claude/proje
 - [Guest migration chunking](guest-migration-chunking.md) — guest→auth migration split into validator-bound chunks, clear-on-success; rejected server-side daily-history migration and client dedup state (June 2026); also phraseKey 64-char truncation + empty-pool dead-end guards
 - [Home cascade & async words](home-cascade-async-words.md) — AppHome lesson cascade must depend on live words/unlockedLessons, not mount-time refs; auth resolves after mount so freezing them left next-lesson locked after a hard reload (June 2026 regression fix)
 - [LOD MCP server](lod-mcp.md) — `tools/lod-mcp/` wraps the official lod.lu dictionary API as MCP tools (`lod_lookup`, `lod_suggest`) for authoritative LU translations + gender when authoring `.letz` content; zero-dep stdio server registered in `.mcp.json`
+- [Passed gate & phrase directions](passed-gate-and-phrase-directions.md) — pass gate simplified to `correct>=3`; phrases stored per-direction but mastery sums both; error pool keeps direction to repeat the exact failed one (June 2026)
 
 ## Maintenance rules
 

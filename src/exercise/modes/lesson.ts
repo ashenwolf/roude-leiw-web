@@ -13,7 +13,7 @@ import {
   SLOT_TYPE_DISTRIBUTION,
 } from "../constants";
 import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
-import { phraseKey, wordKey } from "../progression";
+import { combinedPhraseStats, wordKey } from "../progression";
 import { bucketedPick, pickPair, pickSentence } from "../selection";
 
 import type { WordStats } from "../../context/auth";
@@ -59,15 +59,15 @@ export const planLessonMode = (
   const isWordUnderExposed = (e: WordEntry) =>
     (userWords[wordKey(e.lu, e.en)]?.shown ?? 0) < MIN_ANSWERS;
 
-  // Phrase stats are keyed by "en-lu" direction regardless of presentation
-  // direction (see buildSentenceExercise), so the unlock counter is shared.
-  // The under-exposed pool is a synthetic lesson containing ONLY the under-exposed
-  // sentences — not the whole lesson. Prevents the bucket from spending 70%+ of its
-  // weight on already-shown sentences when only a few stragglers remain.
+  // Under-exposure is measured on the phrase's combined shown count (both
+  // directions summed — a sentence is one element). The under-exposed pool is a
+  // synthetic lesson containing ONLY the under-exposed sentences — not the whole
+  // lesson. Prevents the bucket from spending 70%+ of its weight on already-shown
+  // sentences when only a few stragglers remain.
   const underExposedSentences = currentLesson.sentences.filter(
     (s) =>
       s.enVariants[0] !== undefined &&
-      (userWords[phraseKey("en-lu", s.enVariants[0])]?.shown ?? 0) < MIN_ANSWERS,
+      combinedPhraseStats(userWords, s.enVariants[0]).shown < MIN_ANSWERS,
   );
 
   const wordPools = {
@@ -149,7 +149,7 @@ const buildSlot = (
     if (slotType === "sentence-builder") {
       const picked = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
       if (!picked) continue; // no sentences in pool → re-roll
-      const key = phraseKey("en-lu", picked.sentence.enVariants[0] ?? "");
+      const key = picked.sentence.enVariants[0] ?? ""; // sentence identity (direction-agnostic)
       if (usedSentenceKeys.has(key)) continue; // already used this session → try again
       usedSentenceKeys.add(key);
       const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
@@ -165,8 +165,7 @@ const buildSlot = (
   // sentences are already used. Accept a sentence repeat rather than skip the slot.
   const fallback = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
   if (fallback) {
-    const key = phraseKey("en-lu", fallback.sentence.enVariants[0] ?? "");
-    usedSentenceKeys.add(key);
+    usedSentenceKeys.add(fallback.sentence.enVariants[0] ?? "");
     const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
     return buildSentenceExercise(fallback.sentence, direction, lessonVocab);
   }

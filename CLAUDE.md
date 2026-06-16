@@ -235,7 +235,7 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Home button disabled when error pool is empty.
 - Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
 - WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
-- SentenceBuilder Slot: 1 phrase from sentence-error pool.
+- SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
 - Empty pool for rolled type → re-roll.
 - Outcomes & correction Block: identical to Lesson.
 - `completionEffect: 'noop'`.
@@ -243,17 +243,20 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 #### Unlock rule (Lesson Mode only)
 
 For each Element defined in the lesson's `.letz` file:
-- Element passes iff `shown >= MIN_ANSWERS` AND `correct/shown >= UNLOCK_ELEMENT_THRESHOLD` (0.8).
+- Element passes iff `correct >= MASTERY_CORRECT_COUNT` (3). There is **no** accuracy ratio and **no** minimum-shown gate — three correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
+- For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct >= 3` (`combinedPhraseStats`). Both directions count toward the one phrase Element.
 
 The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (0.8).
 
-`MIN_ANSWERS` is a global gate (currently 5). Elements with `shown < MIN_ANSWERS` count as not-passing regardless of accuracy.
+Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 
-Unlock is **sticky**: stats are monotonic in `correct` and `shown`, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
+> `MIN_ANSWERS` (5) still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [stats-and-xp-redesign](.claude/memory/stats-and-xp-redesign.md)).
 
 #### Centralized error pool
 
 `selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+
+`phrases` is `PhraseError[]` — each entry is `{ sentence, direction }` keyed by its **directional** stat key, so a phrase failed in `en-lu` and the same phrase failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
 
 - Primary: elements with `shown >= MIN_ANSWERS` AND `correct/shown < ERROR_THRESHOLD` (0.9).
 - Fallback (when primary is empty): all elements with `incorrect > 0`, sorted ascending by `correct/shown` (worst first).

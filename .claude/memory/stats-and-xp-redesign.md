@@ -15,17 +15,17 @@ Comprehensive stats-system overhaul. Key decisions and their rationale below.
 
 | | `classifyWord` | `isElementMastered` |
 |---|---|---|
-| Formula | `correct / (correct + incorrect) >= 0.8` | `correct >= 4 AND shown >= 5` |
+| Formula | `correct / (correct + incorrect) >= 0.8` AND `shown >= 5` | `correct >= 3` |
 | Monotonic? | No — can fluctuate | Yes — can only become `true` |
 | Used for | Error pool selection, UI labels | Lesson progress, XP, "Learned X/Y" |
 
 A word can simultaneously be `isElementMastered=true` (lesson progress doesn't regress) and `classifyWord=struggling` (it's in the error pool for drill). That's intentional.
 
-`MASTERY_CORRECT_COUNT = ceil(0.8 × MIN_ANSWERS) = 4`. Derived so both thresholds stay consistent if MIN_ANSWERS changes.
+**Updated 2026-06-16:** the pass gate was simplified from `correct >= 4 AND shown >= 5` to **just `correct >= 3`** — no accuracy ratio, no min-shown. `MASTERY_CORRECT_COUNT = 3` is now a plain constant (no longer derived from `0.8 × MIN_ANSWERS`). `MIN_ANSWERS` (5) still gates `classifyWord` and the error pool, just not the pass gate. See [[passed-gate-and-phrase-directions]].
 
 ## Why `isElementMastered` and not stored `masteredKeys`
 
-Storing a `masteredKeys: string[]` set was considered (like `unlockedLessons`). Rejected because the monotonic condition `correct >= 4 AND shown >= 5` is already naturally non-reversible given that `correct` and `shown` only grow. No extra storage needed.
+Storing a `masteredKeys: string[]` set was considered (like `unlockedLessons`). Rejected because the condition `correct >= 3` is already naturally non-reversible given that `correct` only grows. No extra storage needed.
 
 ## Lesson progress is now guaranteed monotonic
 
@@ -62,11 +62,11 @@ Level table: 20 levels. A1-B2 completion (~384 sessions at avg 97 XP) reaches le
 
 `StatsRow` "Learned X/Y":
 - Y = `totalElements` from `HomeLessonsView` (words + sentences per loaded lesson)
-- X = `masteredElements` from `computeOverallStats` (mastered words + mastered en-lu phrases)
+- X = `masteredElements` from `computeOverallStats` (mastered words + mastered phrases)
 
 Accuracy includes all valid elements (both phrase directions).
 
-`masteredPhrases` counts only `phrase:en-lu:*` keys — one per sentence — to avoid double-counting when both directions are practiced.
+**Updated 2026-06-16:** a phrase is one Element whose stats are the **sum of both directions** (`combinedPhraseStats`). `computeOverallStats` groups the two directional keys by `phraseIdentity` and counts each sentence once; a sentence is mastered when its combined `correct >= 3`. (Previously only `phrase:en-lu:*` keys counted, which under-counted because `lu-en` practice was never tracked at all — see [[passed-gate-and-phrase-directions]].)
 
 ## Guest users now get a streak
 

@@ -13,7 +13,8 @@ import { findCurrentLessonId } from "../progression";
 import { bucketedPick, pickPair } from "../selection";
 
 import type { WordStats } from "../../context/auth";
-import type { Lesson, SentenceEntry, WordEntry } from "../letz-parser";
+import type { PhraseError } from "../error-pool";
+import type { Lesson, WordEntry } from "../letz-parser";
 import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
 
@@ -78,7 +79,7 @@ export const planFixErrorsMode = (
 
 const buildSlot = (
   wordPools: Record<"errors", ReadonlyArray<WordEntry>>,
-  phrasePool: ReadonlyArray<SentenceEntry>,
+  phrasePool: ReadonlyArray<PhraseError>,
   rng: () => number,
 ): Exercise | null => {
   const hasWords = wordPools.errors.length > 0;
@@ -88,8 +89,8 @@ const buildSlot = (
     const slotType = bucketedPick(rng(), SLOT_TYPE_DISTRIBUTION);
 
     if (slotType === "sentence-builder" && hasPhrases) {
-      const sentence = phrasePool[Math.floor(rng() * phrasePool.length)];
-      return buildSentenceExercise(sentence, "en-lu", []);
+      const { sentence, direction } = phrasePool[Math.floor(rng() * phrasePool.length)];
+      return buildSentenceExercise(sentence, direction, []);
     }
 
     if (slotType === "word-match" && hasWords) {
@@ -111,8 +112,8 @@ const buildSlot = (
     return pairs.length > 0 ? buildWordMatchExercise(pairs) : null;
   }
   if (hasPhrases) {
-    const sentence = phrasePool[Math.floor(rng() * phrasePool.length)];
-    return buildSentenceExercise(sentence, "en-lu", []);
+    const { sentence, direction } = phrasePool[Math.floor(rng() * phrasePool.length)];
+    return buildSentenceExercise(sentence, direction, []);
   }
   return null;
 };

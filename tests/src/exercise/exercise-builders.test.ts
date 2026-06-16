@@ -118,10 +118,12 @@ describe("buildSentenceExercise — en→lu direction", () => {
     expect(ex.item.tokens).toContain("Äddi");
   });
 
-  it("sets phraseKey using the en-lu direction and first EN variant", () => {
+  it("records the phraseKey under the actual presented direction", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien"]);
-    const ex = buildSentenceExercise(entry, "en-lu", []);
-    expect(ex.item.phraseKey).toBe("phrase:en-lu:Good morning");
+    // Each presentation direction is tracked separately so the error pool can
+    // repeat the exact direction the user failed.
+    expect(buildSentenceExercise(entry, "en-lu", []).item.phraseKey).toBe("phrase:en-lu:Good morning");
+    expect(buildSentenceExercise(entry, "lu-en", []).item.phraseKey).toBe("phrase:lu-en:Good morning");
   });
 
   it("sets direction field", () => {

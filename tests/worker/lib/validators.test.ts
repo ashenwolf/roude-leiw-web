@@ -69,7 +69,7 @@ describe("validateProgressSync", () => {
     expect(bad("no-pipe").ok).toBe(false);
     expect(bad("a||b").ok).toBe(false);
     expect(bad("a|b|c").ok).toBe(false);
-    expect(bad("phrase:xx:foo").ok).toBe(false);
+    expect(bad("phrase:xx:foo").ok).toBe(false);          // unknown direction
     expect(bad("phrase:en-lu:" + "x".repeat(65)).ok).toBe(false);
     expect(bad("x".repeat(65) + "|y").ok).toBe(false);
   });

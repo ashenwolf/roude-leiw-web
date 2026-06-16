@@ -16,8 +16,9 @@ const MAX_LESSON_ID_LEN = 64;
 const DATE_RX = /^\d{4}-\d{2}-\d{2}$/;
 // Key length bounds live in the regexes themselves: each part is capped at 64 chars,
 // so a word key is at most 129 chars total ({lu ≤64}|{en ≤64}) and a phrase key is at
-// most 77 chars total ("phrase:en-lu:" + {firstEn ≤64}). The client's `phraseKey`
-// producer (src/exercise/progression.ts) truncates firstEn to 64 chars to match.
+// most 77 chars total ("phrase:en-lu:" + {firstEn ≤64}). Phrase keys are per direction
+// (en-lu | lu-en) so the error pool can repeat the exact failed direction; the client's
+// `phraseKey` producer (src/exercise/progression.ts) truncates firstEn to 64 chars to match.
 const WORD_KEY_RX = /^[^|]{1,64}\|[^|]{1,64}$/;
 const PHRASE_KEY_RX = /^phrase:(?:en-lu|lu-en):[^|]{1,64}$/;
 // Lesson ids are alphanumeric with a few separators (e.g. "A1.01" or "01_greetings").

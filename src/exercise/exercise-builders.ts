@@ -94,7 +94,9 @@ export const buildSentenceExercise = (
     acceptedAnswers,
     tokens: shuffle([...uniqueTargetTokens, ...distractors]),
     direction,
-    phraseKey: phraseKey("en-lu", entry.enVariants[0]),
+    // Record under the actual presented direction so the error pool can later
+    // repeat the exact direction the user struggled with.
+    phraseKey: phraseKey(direction, entry.enVariants[0]),
   };
 
   return { type: "sentence-builder", item };

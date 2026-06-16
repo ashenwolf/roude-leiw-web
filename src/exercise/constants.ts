@@ -21,17 +21,17 @@ export const ERROR_THRESHOLD = 0.8;
 export const UNLOCK_ELEMENT_THRESHOLD = 0.8;
 
 /**
- * Minimum number of correct answers for the **monotonic** mastery gate used by
- * lesson progress, XP, and the "Learned X/Y" stat. Derived from the unlock
- * threshold × min answers so the two rules stay consistent as constants change.
- *
- * At MIN_ANSWERS = 5 and UNLOCK_ELEMENT_THRESHOLD = 0.8 → MASTERY_CORRECT_COUNT = 4.
+ * Number of correct answers an Element needs to "pass" — the **monotonic**
+ * mastery gate used by lesson progress, lesson unlock, XP, and the "Learned X/Y"
+ * stat. The rule is intentionally simple: pass iff `correct >= this`. There is no
+ * accuracy ratio and no minimum-shown gate — three correct answers is enough,
+ * regardless of how many times the Element was missed.
  *
  * Unlike `classifyWord` (which uses live accuracy and can fluctuate),
  * `isElementMastered` only becomes `true` and never reverts, because `correct`
  * is a monotonically increasing counter.
  */
-export const MASTERY_CORRECT_COUNT = Math.ceil(UNLOCK_ELEMENT_THRESHOLD * MIN_ANSWERS);
+export const MASTERY_CORRECT_COUNT = 3;
 
 /** A lesson unlocks the next lesson if `passingElements / totalElements >= this`. */
 export const UNLOCK_LESSON_THRESHOLD = 0.8;
