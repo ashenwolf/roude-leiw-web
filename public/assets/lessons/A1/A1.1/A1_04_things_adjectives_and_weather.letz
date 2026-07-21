@@ -140,8 +140,10 @@
 @en Where is the washroom?
 @distractor-en kitchen
 @distractor-en bedroom
+@distractor-en when
 @distractor-lu Kichen
 @distractor-lu Schlofkummer
+@distractor-lu Wéini
 
 @sentence
 @lu Wat hätt Dir gären?

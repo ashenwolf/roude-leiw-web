@@ -70,8 +70,10 @@
 @en Hi, how are you?
 @distractor-en evening
 @distractor-en morning
+@distractor-en where
 @distractor-lu Äddi
 @distractor-lu Owend
+@distractor-lu Wou
 
 @sentence
 @lu Kann ech hëllefen?
@@ -123,9 +125,11 @@
 @distractor-en welcome
 @distractor-en bye
 @distractor-en evening
+@distractor-en where
 @distractor-lu Wëllkomm
 @distractor-lu Äddi
 @distractor-lu Owend
+@distractor-lu Wou
 
 @sentence
 @lu Mir geet et gutt.

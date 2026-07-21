@@ -71,8 +71,10 @@
 @en The restaurant is next to the church.
 @distractor-en school
 @distractor-en bridge
+@distractor-en behind
 @distractor-lu Schoul
 @distractor-lu Bréck
+@distractor-lu hannert
 
 @sentence
 @lu D'Emma ass an der Schoul.
@@ -87,8 +89,10 @@
 @en Rick is standing between two trees.
 @distractor-en hospital
 @distractor-en pharmacy
+@distractor-en behind
 @distractor-lu Klinick
 @distractor-lu Apdikt
+@distractor-lu hannert
 
 @sentence
 @lu De Park ass no bei der Bank.
@@ -121,16 +125,20 @@
 @en Vic is standing behind the bridge.
 @distractor-en school
 @distractor-en cinema
+@distractor-en in front of
 @distractor-lu Schoul
 @distractor-lu Kino
+@distractor-lu virun
 
 @sentence
 @lu D'Martine steet virun der Gemeng.
 @en Martine is standing in front of the commune.
 @distractor-en bridge
 @distractor-en hospital
+@distractor-en behind
 @distractor-lu Bréck
 @distractor-lu Klinick
+@distractor-lu hannert
 
 @sentence
 @lu Ech sinn op der Post.

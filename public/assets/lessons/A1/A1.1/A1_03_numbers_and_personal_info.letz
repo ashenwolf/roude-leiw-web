@@ -64,9 +64,11 @@
 @distractor-en five
 @distractor-en six
 @distractor-en seven
+@distractor-en when
 @distractor-lu fënnef
 @distractor-lu sechs
 @distractor-lu siwen
+@distractor-lu Wéini
 
 @sentence
 @lu Ech wunnen an der Belsch, zu Bréissel.
@@ -102,9 +104,11 @@
 @distractor-en five
 @distractor-en six
 @distractor-en seven
+@distractor-en where
 @distractor-lu fënnef
 @distractor-lu sechs
 @distractor-lu siwen
+@distractor-lu Wou
 
 @sentence
 @lu Wéini sidd Dir gebuer?
@@ -113,9 +117,11 @@
 @distractor-en nine
 @distractor-en ten
 @distractor-en together
+@distractor-en where
 @distractor-lu néng
 @distractor-lu zéng
 @distractor-lu zesummen
+@distractor-lu Wou
 
 @sentence
 @lu Mir si bestuet.
