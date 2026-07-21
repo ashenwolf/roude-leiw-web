@@ -247,8 +247,8 @@
 @sentence
 @lu Mäin Numm ass Anne.
 @en My name is Anne.
-@distractor-en first name
 @distractor-en surname
+@distractor-en age
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
 
@@ -279,8 +279,8 @@
 @lu Wéi ass Ären Numm?
 @en What is your name?
 @distractor-en surname
-@distractor-en last name
-@distractor-en first name
+@distractor-en address
+@distractor-en age
 @distractor-lu Familljennumm
 @distractor-lu Nonumm
 @distractor-lu Virnumm
@@ -343,17 +343,17 @@
 @sentence
 @lu Wéi ass Ären Numm, wgl.?
 @en What is your name, please?
-@distractor-en first name
 @distractor-en surname
+@distractor-en address
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
 
 @sentence
 @lu Schreift sech dat an engem Wuert?
 @en Is that written in one word?
-@distractor-en different word
+@distractor-en letter
 @distractor-en how
-@distractor-lu anert Wuert
+@distractor-lu Buschtawen
 @distractor-lu Wéi
 
 @sentence
@@ -383,8 +383,8 @@
 @sentence
 @lu Op wéi een Numm?
 @en To which name?
-@distractor-en first name
 @distractor-en surname
+@distractor-en address
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
 
@@ -511,7 +511,7 @@
 @sentence
 @lu Ech sinn op der Gare.
 @en I'm at the train station.
-@distractor-en train
+@distractor-en ticket
 @distractor-en how
 @distractor-lu Zuch
 @distractor-lu Wéi

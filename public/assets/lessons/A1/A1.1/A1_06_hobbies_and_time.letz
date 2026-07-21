@@ -40,40 +40,40 @@
 @sentence
 @lu Ech kucke gär Sport.
 @en I like to watch sports.
-@distractor-en to read books
-@distractor-en to watch TV
+@distractor-en books
+@distractor-en music
 @distractor-lu Bicher liesen
 @distractor-lu Tëlee kucken
 
 @sentence
 @lu Ech kucken net gär Sport.
 @en I don't like to watch sports.
-@distractor-en to go swimming
-@distractor-en to go for a walk
+@distractor-en swimming
+@distractor-en dancing
 @distractor-lu schwamme goen
 @distractor-lu spadséiere goen
 
 @sentence
 @lu Ech gi ganz gär spadséieren.
 @en I like to go for a walk very much.
-@distractor-en to go for a run
-@distractor-en to go dancing
+@distractor-en running
+@distractor-en dancing
 @distractor-lu lafe goen
 @distractor-lu danze goen
 
 @sentence
 @lu Ech gi guer net gär schwammen.
 @en I really don't like to go swimming.
-@distractor-en to go to the cinema
-@distractor-en to listen to music
+@distractor-en cinema
+@distractor-en music
 @distractor-lu an de Kino goen
 @distractor-lu Musek lauschteren
 
 @sentence
 @lu Spillt hatt gär Piano?
 @en Does she like to play the piano?
-@distractor-en to surf the web
-@distractor-en to do sports
+@distractor-en sports
+@distractor-en reading
 @distractor-lu um Internet surfen
 @distractor-lu Sport maachen
 
@@ -97,8 +97,8 @@
 @sentence
 @lu Ech spillen eemol am Mount mat mengem Aarbechtskolleeg.
 @en I play once a month with my work colleague.
-@distractor-en to go swimming
-@distractor-en to go for a run
+@distractor-en tennis
+@distractor-en swimming
 @distractor-lu schwamme goen
 @distractor-lu lafe goen
 
@@ -171,15 +171,15 @@
 @lu Et ass Véierel op fënnef.
 @en It's quarter past five.
 @distractor-en to
-@distractor-en half past
+@distractor-en hour
 @distractor-lu vir
 @distractor-lu hallwer
 
 @sentence
 @lu Et ass hallwer sechs.
 @en It is half past five.
-@distractor-en quarter to
-@distractor-en quarter past
+@distractor-en quarter
+@distractor-en hour
 @distractor-lu Véierel vir
 @distractor-lu Véierel op
 
@@ -187,26 +187,26 @@
 @lu Ech maachen um aacht Auer moies Sport.
 @lu Um aacht Auer moies maachen ech Sport.
 @en I do sports at eight o'clock in the morning.
-@distractor-en to do sports
-@distractor-en to watch TV
-@distractor-lu Sport maachen
+@distractor-en evening
+@distractor-en noon
+@distractor-lu danze goen
 @distractor-lu Tëlee kucken
 
 @sentence
 @lu Ech maache vun aacht bis néng Auer Sport.
 @en I do sports from eight to nine o'clock.
 @distractor-en until
-@distractor-en from
-@distractor-lu bis
-@distractor-lu vun
+@distractor-en past
+@distractor-lu moies
+@distractor-lu hallwer
 
 @sentence
 @lu Ech maache bis néng Auer Sport.
 @en I do sports until nine o'clock.
 @distractor-en from
-@distractor-en to do sports
+@distractor-en evening
 @distractor-lu vun
-@distractor-lu Sport maachen
+@distractor-lu moies
 
 @sentence
 @lu Hatt ka fléien.
@@ -227,8 +227,8 @@
 @sentence
 @lu Hatt muss d'Kand retten.
 @en She has to save the child.
-@distractor-en to go dancing
-@distractor-en to go for a walk
+@distractor-en dancing
+@distractor-en swimming
 @distractor-lu danze goen
 @distractor-lu spadséiere goen
 
@@ -251,24 +251,24 @@
 @sentence
 @lu Hatt wëll normal sinn.
 @en She wants to be normal.
-@distractor-en to read books
-@distractor-en to watch TV
+@distractor-en books
+@distractor-en music
 @distractor-lu Bicher liesen
 @distractor-lu Tëlee kucken
 
 @sentence
 @lu Hatt däerf net fëmmen.
 @en She is not allowed to smoke.
-@distractor-en to go swimming
-@distractor-en to go for a run
+@distractor-en swimming
+@distractor-en running
 @distractor-lu schwamme goen
 @distractor-lu lafe goen
 
 @sentence
 @lu Hatt däerf dreemen.
 @en She is allowed to dream.
-@distractor-en to go dancing
-@distractor-en to go to the cinema
+@distractor-en dancing
+@distractor-en cinema
 @distractor-lu danze goen
 @distractor-lu an de Kino goen
 
@@ -292,16 +292,16 @@
 @lu Kanns du mat an eng Reunioun kommen?
 @en Can you come to a meeting?
 @en Can you come with me to a meeting?
-@distractor-en to read books
-@distractor-en to listen to music
+@distractor-en books
+@distractor-en music
 @distractor-lu Bicher liesen
 @distractor-lu Musek lauschteren
 
 @sentence
 @lu Kanns du d'Reunioun ouni mech maachen?
 @en Can you do the meeting without me?
-@distractor-en to surf the web
-@distractor-en to learn Luxembourgish
+@distractor-en reading
+@distractor-en internet
 @distractor-lu um Internet surfen
 @distractor-lu Lëtzebuergesch léieren
 

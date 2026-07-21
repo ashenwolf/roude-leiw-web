@@ -139,8 +139,8 @@
 @sentence
 @lu Wéi vill kaschten zéng Tranchen Zoossiss?
 @en How much are ten slices of dried sausage?
-@distractor-en sausage
 @distractor-en fish
+@distractor-en cheese
 @distractor-lu Wurscht
 @distractor-lu Fësch
 
@@ -380,7 +380,7 @@
 @sentence
 @lu Ech huelen de Kannerplat fir dee Klengen.
 @en I'm taking the children's menu for the little one.
-@distractor-en menu
+@distractor-en bill
 @distractor-en cake
 @distractor-lu Menüskaart
 @distractor-lu Kuch
@@ -413,9 +413,9 @@
 @lu Fir wéi vill Persoune wëllt dir reservéieren?
 @en How many people do you want to book for?
 @distractor-en when
-@distractor-en how
+@distractor-en where
 @distractor-lu wéini
-@distractor-lu Wéi
+@distractor-lu Wou
 
 @sentence
 @lu Et ass fir véier Persounen.
