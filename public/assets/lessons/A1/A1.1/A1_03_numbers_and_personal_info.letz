@@ -24,11 +24,9 @@
 @word zesummen = together
 
 # --- Family nouns (Quizlet cards 30-31) ---
-@word e Brudder = brother
 @word de Brudder = brother
 @word Bridder = brothers
 
-@word eng Schwëster = sister
 @word d'Schwëster = sister
 @word Schwësteren = sisters
 

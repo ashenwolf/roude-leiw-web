@@ -44,8 +44,8 @@ describe("bucketedPick", () => {
   });
 
   it("maps lesson word-match buckets correctly", () => {
-    expect(bucketedPick(0.0, LESSON_WORD_MATCH_BUCKETS)).toBe("under-exposed");
-    expect(bucketedPick(0.29, LESSON_WORD_MATCH_BUCKETS)).toBe("under-exposed");
+    expect(bucketedPick(0.0, LESSON_WORD_MATCH_BUCKETS)).toBe("not-yet-mastered");
+    expect(bucketedPick(0.29, LESSON_WORD_MATCH_BUCKETS)).toBe("not-yet-mastered");
     expect(bucketedPick(0.3, LESSON_WORD_MATCH_BUCKETS)).toBe("current");
     expect(bucketedPick(0.84, LESSON_WORD_MATCH_BUCKETS)).toBe("current");
     expect(bucketedPick(0.85, LESSON_WORD_MATCH_BUCKETS)).toBe("previous");
@@ -72,7 +72,7 @@ describe("bucketedPick", () => {
 describe("pickFromPool", () => {
   const current = [word("A", "a"), word("B", "b")];
   const previous = [word("C", "c")];
-  const pools = { "under-exposed": [], current, previous };
+  const pools = { "not-yet-mastered": [], current, previous };
 
   it("picks from the bucket that the roll selects", () => {
     // roll=0.5 → 'current' bucket; index roll=0.0 → candidates[0]
@@ -85,7 +85,7 @@ describe("pickFromPool", () => {
     // First roll → 'previous' bucket (empty here), second roll → 'current' bucket
     const rng = fakeRng(0.9, 0.5, 0.0);
     const result = pickFromPool(
-      { "under-exposed": [], current, previous: [] },
+      { "not-yet-mastered": [], current, previous: [] },
       LESSON_WORD_MATCH_BUCKETS,
       rng,
     );
@@ -95,7 +95,7 @@ describe("pickFromPool", () => {
 
   it("returns undefined when all pools are empty", () => {
     const result = pickFromPool(
-      { "under-exposed": [], current: [], previous: [] },
+      { "not-yet-mastered": [], current: [], previous: [] },
       LESSON_WORD_MATCH_BUCKETS,
     );
     expect(result).toBeUndefined();
@@ -137,7 +137,7 @@ describe("pickPair", () => {
     // roll 0.5 → current bucket, pick index 0
     const rng = fakeRng(0.5, 0.0);
     const result = pickPair(
-      { "under-exposed": [], current, previous },
+      { "not-yet-mastered": [], current, previous },
       LESSON_WORD_MATCH_BUCKETS,
       rng,
     );
@@ -149,7 +149,7 @@ describe("pickPair", () => {
     // First roll → current (empty) → re-roll → previous
     const rng = fakeRng(0.5, 0.9, 0.0);
     const result = pickPair(
-      { "under-exposed": [], current: [], previous },
+      { "not-yet-mastered": [], current: [], previous },
       LESSON_WORD_MATCH_BUCKETS,
       rng,
     );
@@ -159,7 +159,7 @@ describe("pickPair", () => {
   it("returns undefined when all pools empty", () => {
     expect(
       pickPair(
-        { "under-exposed": [], current: [], previous: [] },
+        { "not-yet-mastered": [], current: [], previous: [] },
         LESSON_WORD_MATCH_BUCKETS,
       ),
     ).toBeUndefined();
@@ -177,7 +177,7 @@ describe("pickSentence", () => {
     // roll 0.5 → current bucket; lesson index 0; sentence index 0
     const rng = fakeRng(0.5, 0.0, 0.0);
     const result = pickSentence(
-      { "under-exposed": [], current: [currentLesson], previous: [previousLesson] },
+      { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
       LESSON_SENTENCE_LESSON_BUCKETS,
       rng,
     );
@@ -189,7 +189,7 @@ describe("pickSentence", () => {
     // roll → previous bucket; lesson index 0; sentence index 0
     const rng = fakeRng(0.9, 0.0, 0.0);
     const result = pickSentence(
-      { "under-exposed": [], current: [currentLesson], previous: [previousLesson] },
+      { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
       LESSON_SENTENCE_LESSON_BUCKETS,
       rng,
     );
@@ -201,7 +201,7 @@ describe("pickSentence", () => {
     // First → current (empty) → continue; second → previous → lesson 0; sentence 0
     const rng = fakeRng(0.5, 0.9, 0.0, 0.0);
     const result = pickSentence(
-      { "under-exposed": [], current: [], previous: [previousLesson] },
+      { "not-yet-mastered": [], current: [], previous: [previousLesson] },
       LESSON_SENTENCE_LESSON_BUCKETS,
       rng,
     );
@@ -211,7 +211,7 @@ describe("pickSentence", () => {
   it("returns undefined when all lesson pools are empty", () => {
     expect(
       pickSentence(
-        { "under-exposed": [], current: [], previous: [] },
+        { "not-yet-mastered": [], current: [], previous: [] },
         LESSON_SENTENCE_LESSON_BUCKETS,
       ),
     ).toBeUndefined();
@@ -222,7 +222,7 @@ describe("pickSentence", () => {
     // roll 0.5 → current bucket; lesson index 0 → emptyLesson (no sentences)
     const rng = fakeRng(0.5, 0.0);
     const result = pickSentence(
-      { "under-exposed": [], current: [emptyLesson], previous: [] },
+      { "not-yet-mastered": [], current: [emptyLesson], previous: [] },
       LESSON_SENTENCE_LESSON_BUCKETS,
       rng,
     );

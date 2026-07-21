@@ -8,51 +8,39 @@
 @lesson A1.08 "Places & Directions"
 
 # --- Place nouns (Quizlet cards 1-12) ---
-@word en Haus = house
 @word d'Haus = house
 @word Haiser = houses
 
-@word e Gebai = building
 @word d'Gebai = building
 @word Gebaier = buildings
 
-@word e Buttek = shop
 @word de Buttek = shop
 @word Butteker = shops
 
-@word eng Gemeng = commune
 @word d'Gemeng = commune
 @word Gemengen = communes
 
-@word en Theater = theatre
 @word den Theater = theatre
 @word Theateren = theatres
 
-@word eng Kierch = church
 @word d'Kierch = church
 @word Kierchen = churches
 
-@word eng Schoul = school
 @word d'Schoul = school
 @word Schoulen = schools
 
-@word eng Bréck = bridge
 @word d'Bréck = bridge
 @word Brécken = bridges
 
-@word e Kino = cinema
 @word de Kino = cinema
 @word Kinoen = cinemas
 
-@word eng Klinick = hospital
 @word d'Klinick = hospital
 @word Klinicken = hospitals
 
-@word eng Apdikt = pharmacy
 @word d'Apdikt = pharmacy
 @word Apdikten = pharmacies
 
-@word e Café = café
 @word de Café = café
 @word Caféen = cafés
 

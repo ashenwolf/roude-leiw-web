@@ -9,8 +9,9 @@ import {
   LESSON_TOTAL_SLOTS,
   LESSON_WORD_MATCH_BUCKETS,
   LESSON_WORD_MATCH_PAIR_COUNT,
-  MIN_ANSWERS,
-  SLOT_TYPE_DISTRIBUTION,
+  LESSON_WORD_MATCH_SHARE_MAX,
+  LESSON_WORD_MATCH_SHARE_MIN,
+  MASTERY_CORRECT_COUNT,
 } from "../constants";
 import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
 import { combinedPhraseStats, wordKey } from "../progression";
@@ -20,6 +21,34 @@ import type { WordStats } from "../../context/auth";
 import type { Lesson, WordEntry } from "../letz-parser";
 import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
+import type { Bucket } from "../selection";
+
+type SlotType = "word-match" | "sentence-builder";
+
+/**
+ * Adaptive slot-type distribution for Lesson Mode.
+ *
+ * The word-match share scales with how word-heavy the current lesson's remaining
+ * backlog is, clamped to [MIN, MAX]. When there is no backlog at all (everything
+ * mastered) the share falls back to MIN — the historical fixed split. Returns a
+ * bucket table in the same shape as SLOT_TYPE_DISTRIBUTION so it drops straight
+ * into `bucketedPick`.
+ */
+export const lessonSlotTypeDistribution = (
+  unmasteredWords: number,
+  unmasteredSentences: number,
+): ReadonlyArray<Bucket<SlotType>> => {
+  const backlog = unmasteredWords + unmasteredSentences;
+  const raw = backlog > 0 ? unmasteredWords / backlog : LESSON_WORD_MATCH_SHARE_MIN;
+  const share = Math.min(
+    LESSON_WORD_MATCH_SHARE_MAX,
+    Math.max(LESSON_WORD_MATCH_SHARE_MIN, raw),
+  );
+  return [
+    { name: "word-match", upTo: share },
+    { name: "sentence-builder", upTo: 1.0 },
+  ];
+};
 
 const BLOCK_BOUNDARIES = [
   LESSON_SLOTS_PER_BLOCK,
@@ -56,29 +85,46 @@ export const planLessonMode = (
   const currentLesson = pool[pool.length - 1];
   const previousLessons = pool.slice(0, -1);
 
-  const isWordUnderExposed = (e: WordEntry) =>
-    (userWords[wordKey(e.lu, e.en)]?.shown ?? 0) < MIN_ANSWERS;
+  // "Not yet mastered" is measured against the unlock gate itself
+  // (`correct < MASTERY_CORRECT_COUNT`), NOT `shown`. This is the load-bearing
+  // fix for stragglers: a word shown 10× but only correct twice is unmastered,
+  // caps the lesson below the 80% gate, and — under the old `shown < MIN_ANSWERS`
+  // rule — had dropped out of every priority bucket. Keying off `correct` keeps
+  // such stragglers in the bias pool until they actually pass the gate.
+  const isWordNotYetMastered = (e: WordEntry) =>
+    (userWords[wordKey(e.lu, e.en)]?.correct ?? 0) < MASTERY_CORRECT_COUNT;
 
-  // Under-exposure is measured on the phrase's combined shown count (both
-  // directions summed — a sentence is one element). The under-exposed pool is a
-  // synthetic lesson containing ONLY the under-exposed sentences — not the whole
-  // lesson. Prevents the bucket from spending 70%+ of its weight on already-shown
-  // sentences when only a few stragglers remain.
-  const underExposedSentences = currentLesson.sentences.filter(
+  // The not-yet-mastered pool is a synthetic lesson containing ONLY the
+  // unmastered sentences — not the whole lesson. Prevents the bucket from
+  // spending its weight on already-mastered sentences when only a few
+  // stragglers remain. Combined `correct` (both directions summed — a sentence
+  // is one element) is compared against the same gate.
+  const notYetMasteredSentences = currentLesson.sentences.filter(
     (s) =>
       s.enVariants[0] !== undefined &&
-      combinedPhraseStats(userWords, s.enVariants[0]).shown < MIN_ANSWERS,
+      combinedPhraseStats(userWords, s.enVariants[0]).correct < MASTERY_CORRECT_COUNT,
+  );
+
+  const unmasteredWords = currentLesson.entries.filter(isWordNotYetMastered);
+
+  // Adaptive slot-type split: the more word-heavy the current lesson's backlog,
+  // the more word-match slots this session schedules (clamped to [MIN, MAX]).
+  // Counts are the current-lesson unmastered elements only — previous-lesson
+  // review is incidental, not what the unlock gate is waiting on.
+  const slotTypeDistribution = lessonSlotTypeDistribution(
+    unmasteredWords.length,
+    notYetMasteredSentences.length,
   );
 
   const wordPools = {
-    "under-exposed": currentLesson.entries.filter(isWordUnderExposed),
+    "not-yet-mastered": unmasteredWords,
     current: currentLesson.entries,
     previous: previousLessons.flatMap((l) => l.entries),
   };
 
   const sentencePools = {
-    "under-exposed": underExposedSentences.length > 0
-      ? [{ ...currentLesson, sentences: underExposedSentences }]
+    "not-yet-mastered": notYetMasteredSentences.length > 0
+      ? [{ ...currentLesson, sentences: notYetMasteredSentences }]
       : [],
     current: [currentLesson],
     previous: previousLessons,
@@ -94,7 +140,7 @@ export const planLessonMode = (
   const usedSentenceKeys = new Set<string>();
   const queue = Array.from(
     { length: LESSON_TOTAL_SLOTS },
-    () => buildSlot(wordPools, sentencePools, lessonVocab, rng, usedSentenceKeys),
+    () => buildSlot(wordPools, sentencePools, slotTypeDistribution, lessonVocab, rng, usedSentenceKeys),
   ).filter((slot): slot is Exercise => slot !== null);
 
   return {
@@ -139,12 +185,13 @@ const pickUniquePairs = (
 const buildSlot = (
   wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
   sentencePools: Record<SentenceBucketName, ReadonlyArray<Lesson>>,
+  slotTypeDistribution: ReadonlyArray<Bucket<SlotType>>,
   lessonVocab: string[],
   rng: () => number,
   usedSentenceKeys: Set<string>,
 ): Exercise | null => {
   for (let attempt = 0; attempt < 10; attempt++) {
-    const slotType = bucketedPick(rng(), SLOT_TYPE_DISTRIBUTION);
+    const slotType = bucketedPick(rng(), slotTypeDistribution);
 
     if (slotType === "sentence-builder") {
       const picked = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);

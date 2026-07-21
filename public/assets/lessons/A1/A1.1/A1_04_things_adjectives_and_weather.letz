@@ -8,71 +8,54 @@
 @lesson A1.04 "Things, Adjectives & Weather"
 
 # --- Household objects (Quizlet cards 2-7) ---
-@word e Computer = computer
 @word de Computer = computer
 @word Computeren = computers
 
-@word en Dësch = table
 @word den Dësch = table
 @word Dëscher = tables
 
-@word eng Couche = sofa
 @word d'Couche = sofa
 @word Couchen = sofas
 
-@word eng Luucht = lamp
 @word d'Luucht = lamp
 @word Luuchten = lamps
 
-@word e Bett = bed
 @word d'Bett = bed
 @word Better = beds
 
-@word e Schaf = wardrobe
-@word e Schaf = cupboard
 @word de Schaf = wardrobe
 @word de Schaf = cupboard
 @word Schief = wardrobes
 @word Schief = cupboards
 
 # --- Clothing (Quizlet cards 8-11) ---
-@word eng Box = pants
 @word d'Box = pants
 @word Boxen = pants
 
-@word e Pullover = jumper
 @word de Pullover = jumper
 @word Pulloveren = jumpers
 
-@word en T-Shirt = t-shirt
 @word den T-Shirt = t-shirt
 @word T-Shirten = t-shirts
 
-@word eng Hand = hand
 @word d'Hand = hand
 @word Hänn = hands
 
 # --- Rooms (Quizlet cards 12-16) ---
-@word e Buedzëmmer = bathroom
 @word d'Buedzëmmer = bathroom
 @word Buedzëmmeren = bathrooms
 
-@word eng Schlofkummer = bedroom
 @word d'Schlofkummer = bedroom
 @word Schlofkummeren = bedrooms
 
-@word eng Toilette = toilet
-@word eng Toilette = washroom
 @word d'Toilette = toilet
 @word d'Toilette = washroom
 @word Toiletten = toilets
 @word Toiletten = washrooms
 
-@word eng Kichen = kitchen
 @word d'Kichen = kitchen
 @word Kichen = kitchens
 
-@word eng Stuff = living room
 @word d'Stuff = living room
 @word Stuffen = living rooms
 

@@ -7,109 +7,83 @@
 @lesson A1.07 "Food & Shopping"
 
 # --- Food & drink nouns (Quizlet cards 1-13) ---
-@word en Iessen = food
-@word en Iessen = meal
 @word d'Iessen = food
 @word d'Iessen = meal
 @word Iessen = meals
 
 @word Gedrénks = drinks
 
-@word eng Wuerzel = carrot
 @word d'Wuerzel = carrot
 @word Wuerzelen = carrots
 
-@word eng Zalot = salad
 @word d'Zalot = salad
 @word Zaloten = salads
 
-@word eng Gromper = potato
 @word d'Gromper = potato
 @word Gromperen = potatoes
 
-@word eng Tomat = tomato
 @word d'Tomat = tomato
 @word Tomaten = tomatoes
 
-@word eng Courgette = zucchini
 @word d'Courgette = zucchini
 @word Courgetten = zucchinis
 
-@word eng Ënn = onion
 @word d'Ënn = onion
 @word Ënnen = onions
 
-@word en Apel = apple
 @word den Apel = apple
 @word Äppel = apples
 
-@word eng Banann = banana
 @word d'Banann = banana
 @word Banannen = bananas
 
-@word e Bréitchen = roll
 @word d'Bréitchen = roll
 @word Bréidercher = rolls
 
-@word e Kuch = cake
 @word de Kuch = cake
 @word Kuchen = cakes
 
-@word eng Taart = pie
 @word d'Taart = pie
 @word Taarten = pies
 
 # --- More nouns (Quizlet cards 21-30) ---
-@word e Croissant = croissant
 @word de Croissant = croissant
 @word Croissanten = croissants
 
-@word e Rezept = recipe
 @word d'Rezept = recipe
 @word Rezepter = recipes
 
-@word eng Wurscht = sausage
 @word d'Wurscht = sausage
 @word Wurschten = sausages
 
-@word en Déier = animal
 @word d'Déier = animal
 @word Déieren = animals
 
-@word en Handy = mobile phone
 @word den Handy = mobile phone
 @word Handyen = mobile phones
 
-@word e Cours = class
 @word de Cours = class
 @word Coursen = classes
 
-@word e Boot = boat
 @word d'Boot = boat
 @word Booter = boats
 
-@word e Fësch = fish
 @word de Fësch = fish
 @word Fësch = fish
 
-@word e Béier = beer
 @word de Béier = beer
 @word Béier = beers
 
-@word e Glas = glass
 @word d'Glas = glass
 @word Glieser = glasses
 
 # --- Containers & quantities (Quizlet cards 39-46) ---
-@word eng Tut = grocery bag
 @word d'Tut = grocery bag
 @word Tuten = grocery bags
 
-@word eng Béchs = can
 @word d'Béchs = can
 @word Béchsen = cans
 
-@word en Dëppchen = container
 @word d'Dëppchen = container
 @word Dëppercher = containers
 
