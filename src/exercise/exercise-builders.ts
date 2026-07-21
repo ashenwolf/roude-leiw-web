@@ -7,6 +7,7 @@
 import { shuffle } from "../lib/shuffle";
 import { phraseKey } from "./progression";
 import { entriesToWordPairs } from "./letz-parser";
+import { normalizeAnswer } from "./SentenceBuilder/sentence-logic";
 
 import type { SentenceEntry, WordEntry } from "./letz-parser";
 import type { WordMatchBatch, SentenceBuilderBatch, SentenceBuilderItem } from "./types";
@@ -67,10 +68,9 @@ export const buildSentenceExercise = (
   const promptText = isEnToLu ? entry.enVariants[0] : entry.luVariants[0];
   const acceptedAnswers = isEnToLu ? entry.luVariants : entry.enVariants;
 
-  const rawDistractors = isEnToLu ? (entry.distractorsLu ?? []) : (entry.distractorsEn ?? []);
-  const authoredDistractors = rawDistractors.flatMap((d) => tokenizeSentence(d, targetLang));
-
-  // For each token, provide max(count in any single variant) chips.
+  // For each token, provide max(count in any single variant) chips. Shared tokens
+  // across variants collapse to one chip; diverging tokens (e.g. formal "Ären" vs
+  // informal "däin") both appear, so any single variant is fully buildable.
   const variantTokenLists = acceptedAnswers.map((a) => tokenizeSentence(a, targetLang));
   const maxCounts = variantTokenLists.reduce<Map<string, number>>((acc, tokens) => {
     const counts = tokens.reduce<Map<string, number>>(
@@ -84,10 +84,22 @@ export const buildSentenceExercise = (
     Array.from({ length: n }, () => t),
   );
 
+  // A distractor tile must be a wrong answer, never a word that is also part of a
+  // correct variant — otherwise it is either a free correct chip or (for a
+  // multi-word phrase distractor) leaks shared function words. Drop any distractor
+  // token that collides with an accepted-answer token, comparing under the same
+  // normalization the answer checker uses (see normalizeAnswer). Variety between
+  // variants comes from the accepted answers, not from distractors.
+  const acceptedTokenSet = new Set(uniqueTargetTokens.map((t) => normalizeAnswer(t)));
+  const rawDistractors = isEnToLu ? (entry.distractorsLu ?? []) : (entry.distractorsEn ?? []);
+  const authoredDistractors = rawDistractors
+    .flatMap((d) => tokenizeSentence(d, targetLang))
+    .filter((t) => !acceptedTokenSet.has(normalizeAnswer(t)));
+
   const distractors =
     authoredDistractors.length > 0
       ? authoredDistractors
-      : lessonVocab.filter((w) => !uniqueTargetTokens.includes(w)).slice(0, 3);
+      : lessonVocab.filter((w) => !acceptedTokenSet.has(normalizeAnswer(w))).slice(0, 3);
 
   const item: SentenceBuilderItem = {
     promptText,

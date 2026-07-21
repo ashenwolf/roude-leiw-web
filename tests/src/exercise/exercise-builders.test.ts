@@ -118,6 +118,34 @@ describe("buildSentenceExercise — en→lu direction", () => {
     expect(ex.item.tokens).toContain("Äddi");
   });
 
+  it("drops authored distractor tokens that collide with an accepted-answer token", () => {
+    // "name" is part of the answer, so the "first name"/"surname" distractors
+    // must not contribute a "name" tile. Only the genuinely-wrong tokens survive.
+    const entry = sentence(
+      ["What is your name?"],
+      ["Wéi ass Ären Numm?"],
+      [],
+      ["Virnumm", "Numm"], // "Numm" collides with the answer
+    );
+    const ex = buildSentenceExercise(entry, "en-lu", []);
+    const nummChips = ex.item.tokens.filter((t) => t === "Numm");
+    // exactly one "Numm" — from the answer, none from the distractor
+    expect(nummChips).toHaveLength(1);
+    expect(ex.item.tokens).toContain("Virnumm");
+  });
+
+  it("falls back to lessonVocab when every authored distractor collides", () => {
+    const entry = sentence(
+      ["I do sports from eight to nine."],
+      ["Ech maache vun aacht bis néng."],
+      [],
+      ["vun", "bis"], // both are in the answer → filtered out entirely
+    );
+    const ex = buildSentenceExercise(entry, "en-lu", ["Owend", "Merci"]);
+    // authored list emptied → lessonVocab distractors used
+    expect(ex.item.tokens).toContain("Owend");
+  });
+
   it("records the phraseKey under the actual presented direction", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien"]);
     // Each presentation direction is tracked separately so the error pool can
