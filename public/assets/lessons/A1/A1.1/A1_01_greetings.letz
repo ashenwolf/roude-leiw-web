@@ -83,19 +83,14 @@
 
 @sentence
 @lu Schwätz du Lëtzebuergesch?
+@lu Schwätzt Dir Lëtzebuergesch?
 @en Do you speak Luxembourgish?
 @distractor-en sorry
 @distractor-en bye
+@distractor-en hello
 @distractor-lu Pardon
 @distractor-lu Ciao
-
-@sentence
-@lu Schwätzt Dir Lëtzebuergesch?
-@en Do you speak Luxembourgish?
-@distractor-en hello
-@distractor-en thanks
 @distractor-lu Bonjour
-@distractor-lu Merci
 
 @sentence
 @lu Mir kënnen och du soen.
@@ -123,11 +118,14 @@
 
 @sentence
 @lu Wéi geet et Iech?
+@lu Wéi geet et dir?
 @en How are you?
 @distractor-en welcome
 @distractor-en bye
+@distractor-en evening
 @distractor-lu Wëllkomm
 @distractor-lu Äddi
+@distractor-lu Owend
 
 @sentence
 @lu Mir geet et gutt.
@@ -136,14 +134,6 @@
 @distractor-en good
 @distractor-lu Jo
 @distractor-lu Salut
-
-@sentence
-@lu Wéi geet et dir?
-@en How are you?
-@distractor-en evening
-@distractor-en morning
-@distractor-lu Owend
-@distractor-lu Moien
 
 @sentence
 @lu A bei dir?
@@ -155,19 +145,14 @@
 
 @sentence
 @lu Ech ginn dir e Bic.
+@lu Ech ginn Iech e Bic.
 @en I give you a pen.
 @distractor-en welcome
 @distractor-en bye
+@distractor-en hello
 @distractor-lu Wëllkomm
 @distractor-lu Äddi
-
-@sentence
-@lu Ech ginn Iech e Bic.
-@en I give you a pen.
-@distractor-en hello
-@distractor-en yes
 @distractor-lu Bonjour
-@distractor-lu Jo
 
 @sentence
 @lu Du gëss mir e Bic.

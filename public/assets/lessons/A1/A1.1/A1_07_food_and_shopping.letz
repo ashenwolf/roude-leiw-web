@@ -74,7 +74,6 @@
 @word de Béier = beer
 @word Béier = beers
 
-@word d'Glas = glass
 @word Glieser = glasses
 
 # --- Containers & quantities (Quizlet cards 39-46) ---
@@ -292,14 +291,6 @@
 @sentence
 @lu Merci gläichfalls.
 @en Thank you, the same to you.
-@distractor-en when
-@distractor-en of course
-@distractor-lu wéini
-@distractor-lu natierlech
-
-@sentence
-@lu Et ass gär geschitt.
-@en You're welcome.
 @distractor-en when
 @distractor-en of course
 @distractor-lu wéini

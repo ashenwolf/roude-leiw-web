@@ -237,14 +237,6 @@
 # --- Sentences from Part A ---
 
 @sentence
-@lu Ech heeschen Anne.
-@en I am called Anne.
-@distractor-en already
-@distractor-en only
-@distractor-lu schonn
-@distractor-lu nëmmen
-
-@sentence
 @lu Ech sinn d'Anne.
 @en I am Anne.
 @distractor-en how
@@ -262,51 +254,36 @@
 
 @sentence
 @lu Wéi heeschs du?
+@lu Wéi heescht Dir?
 @en What are you called?
 @distractor-en who
 @distractor-en where
+@distractor-en how
 @distractor-lu Wien
 @distractor-lu Wou
-
-@sentence
-@lu Wéi heescht Dir?
-@en What are you called?
-@distractor-en how
-@distractor-en what
-@distractor-lu Wéi
 @distractor-lu Wat
 
 @sentence
 @lu Wie bass du?
+@lu Wie sidd Dir?
 @en Who are you?
 @distractor-en where
 @distractor-en how
+@distractor-en what
 @distractor-lu Wou
 @distractor-lu Wéi
-
-@sentence
-@lu Wie sidd Dir?
-@en Who are you?
-@distractor-en what
-@distractor-en where
 @distractor-lu Wat
-@distractor-lu Wou
 
 @sentence
 @lu Wéi ass däin Numm?
+@lu Wéi ass Ären Numm?
 @en What is your name?
 @distractor-en surname
 @distractor-en last name
+@distractor-en first name
 @distractor-lu Familljennumm
 @distractor-lu Nonumm
-
-@sentence
-@lu Wéi ass Ären Numm?
-@en What is your name?
-@distractor-en first name
-@distractor-en how
 @distractor-lu Virnumm
-@distractor-lu Wéi
 
 @sentence
 @lu Ech stellen dir den Emile vir.
@@ -326,19 +303,14 @@
 
 @sentence
 @lu Et freet mech dech kennen ze léieren.
+@lu Et freet mech Iech kennen ze léieren.
 @en It is a pleasure to meet you.
 @distractor-en how
 @distractor-en where
+@distractor-en already
 @distractor-lu Wéi
 @distractor-lu Wou
-
-@sentence
-@lu Et freet mech Iech kennen ze léieren.
-@en It is a pleasure to meet you.
-@distractor-en already
-@distractor-en only
 @distractor-lu schonn
-@distractor-lu nëmmen
 
 @sentence
 @lu Ech sinn enchantéiert.

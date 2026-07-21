@@ -161,19 +161,14 @@
 
 @sentence
 @lu Wou schaffs du?
+@lu Wou schafft Dir?
 @en Where do you work?
 @distractor-en how
 @distractor-en when
+@distractor-en Monday
 @distractor-lu Wéi
 @distractor-lu Wéini
-
-@sentence
-@lu Wou schafft Dir?
-@en Where do you work?
-@distractor-en Monday
-@distractor-en Friday
 @distractor-lu Méindeg
-@distractor-lu Freideg
 
 @sentence
 @lu Hie schafft beim Coiffer.
@@ -201,19 +196,14 @@
 
 @sentence
 @lu Ech schaffen op enger Bank.
+@lu Ech schaffe bei enger Bank.
 @en I work at a bank.
 @distractor-en Sunday
 @distractor-en Monday
+@distractor-en Tuesday
 @distractor-lu Sonndeg
 @distractor-lu Méindeg
-
-@sentence
-@lu Ech schaffe bei enger Bank.
-@en I work at a bank.
-@distractor-en Tuesday
-@distractor-en Wednesday
 @distractor-lu Dënschdeg
-@distractor-lu Mëttwoch
 
 @sentence
 @lu Ech schaffen un engem Projet.
