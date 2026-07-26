@@ -20,6 +20,8 @@ export type SentenceBuilderItem = {
   tokens: string[];
   direction: "en-lu" | "lu-en";
   phraseKey: string;
+  /** Examiner-style question rendered above the prompt (exam-track Q&A slots). */
+  question?: string;
 };
 
 export type SentenceBuilderBatch = {

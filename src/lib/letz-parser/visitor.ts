@@ -44,6 +44,7 @@ type SentenceTagCst = {
   children: {
     luTag?: [TagCst];
     enTag?: [TagCst];
+    questionTag?: [TagCst];
     distractorEnTag?: [TagCst];
     distractorLuTag?: [TagCst];
   };
@@ -108,9 +109,10 @@ class LetzVisitor extends BaseCstVisitor {
 
     const result = tags.reduce<SentenceEntry>(
       (acc, tag) => {
-        const { luTag, enTag, distractorEnTag, distractorLuTag } = tag.children;
+        const { luTag, enTag, questionTag, distractorEnTag, distractorLuTag } = tag.children;
         if (luTag)          return { ...acc, luVariants: [...acc.luVariants, this.tagText(luTag[0])] };
         if (enTag)          return { ...acc, enVariants: [...acc.enVariants, this.tagText(enTag[0])] };
+        if (questionTag)    return { ...acc, question: this.tagText(questionTag[0]) };
         if (distractorEnTag) return { ...acc, distractorsEn: [...(acc.distractorsEn ?? []), this.tagText(distractorEnTag[0])] };
         if (distractorLuTag) return { ...acc, distractorsLu: [...(acc.distractorsLu ?? []), this.tagText(distractorLuTag[0])] };
         return acc;

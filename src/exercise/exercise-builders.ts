@@ -109,6 +109,9 @@ export const buildSentenceExercise = (
     // Record under the actual presented direction so the error pool can later
     // repeat the exact direction the user struggled with.
     phraseKey: phraseKey(direction, entry.enVariants[0]),
+    // Only meaningful when assembling the LU answer to a LU question; a lu→en
+    // slot shows the LU sentence itself, so the question would be redundant.
+    ...(entry.question !== undefined && isEnToLu ? { question: entry.question } : {}),
   };
 
   return { type: "sentence-builder", item };

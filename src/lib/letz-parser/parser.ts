@@ -2,7 +2,7 @@ import { CstParser } from "chevrotain";
 
 import {
   allTokens,
-  AtDistractorEn, AtDistractorLu, AtEn, AtLesson, AtLu, AtSentence, AtWord,
+  AtDistractorEn, AtDistractorLu, AtEn, AtLesson, AtLu, AtQuestion, AtSentence, AtWord,
   Comment, Equals, LessonId, NewLine, QuotedString, Text,
 } from "./lexer";
 
@@ -15,9 +15,10 @@ import {
  * header          ::= AtLesson LessonId QuotedString NewLine?
  * wordEntry       ::= AtWord Text Equals Text NewLine?
  * sentenceBlock   ::= AtSentence NewLine? sentenceTag*
- * sentenceTag     ::= luTag | enTag | distractorEnTag | distractorLuTag | NewLine
+ * sentenceTag     ::= luTag | enTag | questionTag | distractorEnTag | distractorLuTag | NewLine
  * luTag           ::= AtLu Text NewLine?
  * enTag           ::= AtEn Text NewLine?
+ * questionTag     ::= AtQuestion Text NewLine?
  * distractorEnTag ::= AtDistractorEn Text NewLine?
  * distractorLuTag ::= AtDistractorLu Text NewLine?
  *
@@ -73,6 +74,7 @@ export class LetzParser extends CstParser {
     this.OR([
       { ALT: () => this.SUBRULE(this.luTag) },
       { ALT: () => this.SUBRULE(this.enTag) },
+      { ALT: () => this.SUBRULE(this.questionTag) },
       { ALT: () => this.SUBRULE(this.distractorEnTag) },
       { ALT: () => this.SUBRULE(this.distractorLuTag) },
       { ALT: () => this.CONSUME(NewLine) },
@@ -87,6 +89,12 @@ export class LetzParser extends CstParser {
 
   enTag = this.RULE("enTag", () => {
     this.CONSUME(AtEn);
+    this.CONSUME(Text);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  questionTag = this.RULE("questionTag", () => {
+    this.CONSUME(AtQuestion);
     this.CONSUME(Text);
     this.OPTION(() => this.CONSUME(NewLine));
   });

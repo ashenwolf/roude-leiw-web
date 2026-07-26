@@ -78,6 +78,24 @@ describe("buildSentenceExercise — en→lu direction", () => {
     expect(ex.item.promptText).toBe("Good morning");
   });
 
+  it("passes question through when assembling the LU answer", () => {
+    const entry = { ...sentence(["We are going to France."], ["Mir fueren a Frankräich."]), question: "Wou fuert Dir?" };
+    const ex = buildSentenceExercise(entry, "en-lu", []);
+    expect(ex.item.question).toBe("Wou fuert Dir?");
+  });
+
+  it("drops question in lu→en direction (LU sentence is already shown)", () => {
+    const entry = { ...sentence(["We are going to France."], ["Mir fueren a Frankräich."]), question: "Wou fuert Dir?" };
+    const ex = buildSentenceExercise(entry, "lu-en", []);
+    expect(ex.item.question).toBeUndefined();
+  });
+
+  it("leaves question undefined when the entry has none", () => {
+    const entry = sentence(["Good morning"], ["Gudde Moien"]);
+    const ex = buildSentenceExercise(entry, "en-lu", []);
+    expect(ex.item.question).toBeUndefined();
+  });
+
   it("sets acceptedAnswers to LU variants", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien", "Moien"]);
     const ex = buildSentenceExercise(entry, "en-lu", []);

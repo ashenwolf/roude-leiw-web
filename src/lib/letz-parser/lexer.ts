@@ -24,6 +24,7 @@ export const AtLesson      = createToken({ name: "AtLesson",      pattern: /@les
 export const AtSentence    = createToken({ name: "AtSentence",    pattern: /@sentence/ });
 export const AtDistractorEn = createToken({ name: "AtDistractorEn", pattern: /@distractor-en/ });
 export const AtDistractorLu = createToken({ name: "AtDistractorLu", pattern: /@distractor-lu/ });
+export const AtQuestion    = createToken({ name: "AtQuestion",    pattern: /@question/ });
 export const AtWord        = createToken({ name: "AtWord",        pattern: /@word/ });
 export const AtLu          = createToken({ name: "AtLu",          pattern: /@lu/ });
 export const AtEn          = createToken({ name: "AtEn",          pattern: /@en/ });
@@ -63,6 +64,7 @@ export const allTokens = [
   AtSentence,
   AtDistractorEn,   // before AtEn — longer pattern
   AtDistractorLu,   // before AtLu — longer pattern
+  AtQuestion,
   AtWord,
   AtLu,
   AtEn,
