@@ -51,6 +51,24 @@ export default defineConfig({
             },
           },
           {
+            // Exam-track index — same freshness rationale as the lessons manifest.
+            urlPattern: /^\/assets\/exam\/manifest\.json$/,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "exam-manifest-v1",
+              networkTimeoutSeconds: 3,
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
+            urlPattern: /^\/assets\/exam\/.+\.letz$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "exam-content-v1",
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 7 },
+            },
+          },
+          {
             urlPattern: /^\/api\//,
             handler: "NetworkOnly",
           },
