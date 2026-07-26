@@ -59,6 +59,15 @@ export const LESSON_TOTAL_SLOTS = BLOCK_COUNT * LESSON_SLOTS_PER_BLOCK;
 /** Word Mix total Slots (always exactly BLOCK_COUNT × WORD_MIX_SLOTS_PER_BLOCK). */
 export const WORD_MIX_TOTAL_SLOTS = BLOCK_COUNT * WORD_MIX_SLOTS_PER_BLOCK;
 
+/**
+ * Exam Mode: pairs per WordMatch Slot. The planner chunks the sub-lesson's
+ * (shuffled) vocabulary into slots of this size; a trailing chunk smaller than
+ * EXAM_WORD_MATCH_MIN_CHUNK merges into the previous slot rather than forming
+ * a degenerate 1–2 pair slot.
+ */
+export const EXAM_WORD_MATCH_PAIR_COUNT = 5;
+export const EXAM_WORD_MATCH_MIN_CHUNK = 3;
+
 // --- Probability tables ------------------------------------------------------
 //
 // Each table is an ordered list of buckets. A roll in [0, 1) is matched against

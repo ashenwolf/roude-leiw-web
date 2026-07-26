@@ -10,7 +10,7 @@ import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
 import { computePlayerLevel } from "../exercise/xp";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
-import { RefreshIcon, ShuffleIcon } from "../ui/icons";
+import { GraduationCapIcon, RefreshIcon, ShuffleIcon } from "../ui/icons";
 import { LessonGrid } from "../ui/LessonGrid";
 import { StatsRow } from "../ui/StatsRow";
 import { StreakBadge } from "../ui/StreakBadge";
@@ -126,6 +126,11 @@ export const AppHome = () => {
     navigateTo("fix-errors");
   };
 
+  const handleOpenExam = () => {
+    posthog?.capture("exam_opened");
+    navigateTo("exam");
+  };
+
   if (metasLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
@@ -149,6 +154,13 @@ export const AppHome = () => {
 
         {/* Start learning CTA */}
         <Button onClick={handleStartLearning}>Start Learning</Button>
+
+        {/* Exam track — a destination (theme page), not a practice mode */}
+        <Button color="exam" size="sm" onClick={handleOpenExam}>
+          <span className="flex items-center justify-center gap-1.5">
+            <GraduationCapIcon className="w-4 h-4" /> Sproochentest Prep
+          </span>
+        </Button>
 
         {/* Stats */}
         <StatsRow
