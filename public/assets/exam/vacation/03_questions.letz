@@ -1,0 +1,61 @@
+# Exam track — Theme: Vacation & Travel — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+
+@lesson V1.03 "Talking About Vacation"
+
+@sentence
+@question Wou fuert Dir dëst Joer an d'Vakanz?
+@lu Dëst Joer fuere mir a Frankräich.
+@en This year we are going to France.
+@distractor-lu gëschter
+@distractor-lu waren
+
+@sentence
+@question Wéi reest Dir am léifsten?
+@lu Ech reesen am léifste mam Zuch.
+@en I like traveling by train the most.
+@distractor-lu Fliger
+@distractor-lu ni
+
+@sentence
+@question Wat war Är schéinste Vakanz?
+@lu Meng schéinste Vakanz war an Italien.
+@en My most beautiful vacation was in Italy.
+@distractor-lu wäert
+@distractor-lu sinn
+
+@sentence
+@question Wat maacht Dir gär an der Vakanz?
+@lu Ech gi gär op d'Plage schwammen.
+@en I like to go swimming at the beach.
+@distractor-lu schaffen
+@distractor-lu ni
+
+@sentence
+@question Mat wiem fuert Dir an d'Vakanz?
+@lu Ech fuere mat menger Famill an d'Vakanz.
+@en I go on vacation with my family.
+@distractor-lu eleng
+@distractor-lu ouni
+
+@sentence
+@question Wéi laang bleift Dir do?
+@lu Mir bleiwen zwou Wochen do.
+@en We are staying there for two weeks.
+@distractor-lu Deeg
+@distractor-lu eng
+
+@sentence
+@question Wat huelt Dir mat an d'Vakanz?
+@lu Ech huele meng Valise a mäi Pass mat.
+@en I take my suitcase and my passport with me.
+@distractor-lu deng
+@distractor-lu ouni
+
+@sentence
+@question Wéi ass d'Wieder op der Plage?
+@lu D'Wieder ass waarm an d'Sonn schéngt.
+@en The weather is warm and the sun is shining.
+@distractor-lu kal
+@distractor-lu reent
