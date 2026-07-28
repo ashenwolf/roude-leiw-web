@@ -140,3 +140,32 @@ describe("planFixErrorsMode — phrase errors", () => {
     }
   });
 });
+
+// ─── Global scope (course + exam content in one pool) ─────────────────────────
+
+describe("planFixErrorsMode — global scope", () => {
+  it("drills exam-track elements passed alongside course lessons", () => {
+    const examSent: SentenceEntry = {
+      ...sentence("We are going to France.", "Mir fueren a Frankräich."),
+      question: "Wou fuert Dir?",
+    };
+    const lessons = [
+      lesson("A1_01", [["Moien", "hi"]]),
+      lesson("V1.03", [], [examSent]), // exam sub-lesson content, same Lesson shape
+    ];
+    const stats = {
+      [phraseKey("en-lu", "We are going to France.")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+    };
+    const sentenceRng = () => 0.5; // always sentence-builder
+    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const sentenceSlots = config.queue.filter((b) => b.type === "sentence-builder");
+    expect(sentenceSlots.length).toBeGreaterThan(0);
+    for (const slot of sentenceSlots) {
+      if (slot.type === "sentence-builder") {
+        // The failed exam Q&A phrase is rebuilt WITH its examiner question.
+        expect(slot.item.question).toBe("Wou fuert Dir?");
+        expect(slot.item.direction).toBe("en-lu");
+      }
+    }
+  });
+});

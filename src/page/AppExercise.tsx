@@ -187,7 +187,7 @@ export const AppExercise = () => {
     : { kind: "lesson", lessonId: params.lessonId };
 
   // session is defined first so handlers below can reference it without TDZ risk
-  const session = useExerciseSession({ userWords: words, mode });
+  const session = useExerciseSession({ userWords: words, unlockedLessons, mode });
 
   // Accumulate word results and duration across all slots. Flushed once on
   // session complete or abandon so local state and the remote POST update together.

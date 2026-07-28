@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef } from "react";
 
 import { loadExamMeta, fetchSubLesson } from "../exam/exam-catalog";
 import { LESSON_TOTAL_SLOTS, LESSON_WORD_MATCH_PAIR_COUNT } from "./constants";
+import { loadErrorScopeLessons } from "./error-scope";
 import { loadAllLessons } from "./lesson-loader";
 import { planExamMode } from "./modes/exam";
 import { planLessonMode } from "./modes/lesson";
@@ -31,6 +32,8 @@ export const SESSION_CONFIG = {
 
 type UseExerciseSessionProps = {
   userWords: Record<string, WordStats>;
+  /** Persisted unlock/play-gate set — scopes Fix Errors' exam-content loading. */
+  unlockedLessons?: ReadonlyArray<string>;
   mode?: SessionMode;
 };
 
@@ -48,6 +51,7 @@ const determineSlotOutcome = (
 const loadModeConfig = async (
   mode: SessionMode,
   words: Record<string, WordStats>,
+  unlockedLessons: ReadonlyArray<string>,
 ): Promise<ModeConfig> => {
   if (mode.kind === "exam") {
     const metas = await loadExamMeta();
@@ -55,20 +59,27 @@ const loadModeConfig = async (
     if (!meta) throw new Error(`Unknown exam sub-lesson: ${mode.subLessonId}`);
     return planExamMode(await fetchSubLesson(meta));
   }
+  // Fix Errors is GLOBAL: its pool spans course lessons AND exam sub-lessons.
+  if (mode.kind === "fix-errors") {
+    return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words);
+  }
   const lessons = await loadAllLessons();
-  return mode.kind === "word-mix" ? planWordMixMode(lessons, words)
-    : mode.kind === "fix-errors" ? planFixErrorsMode(lessons, words)
+  return mode.kind === "word-mix"
+    ? planWordMixMode(lessons, words)
     : planLessonMode(lessons, mode.lessonId ?? findCurrentLessonId(lessons, words), words);
 };
 
 export const useExerciseSession = ({
   userWords,
+  unlockedLessons = [],
   mode = { kind: "lesson" },
 }: UseExerciseSessionProps) => {
   const [state, dispatch] = useReducer(sessionReducer, INITIAL_SESSION_STATE);
 
   const userWordsRef = useRef(userWords);
   useEffect(() => { userWordsRef.current = userWords; });
+  const unlockedLessonsRef = useRef(unlockedLessons);
+  useEffect(() => { unlockedLessonsRef.current = unlockedLessons; });
 
   // Mode identity for the load effect — a Session replans only when the target
   // changes, not when stats do (one-shot planning invariant).
@@ -76,7 +87,7 @@ export const useExerciseSession = ({
   const modeSubLessonId = mode.kind === "exam" ? mode.subLessonId : undefined;
 
   useEffect(() => {
-    loadModeConfig(mode, userWordsRef.current)
+    loadModeConfig(mode, userWordsRef.current, unlockedLessonsRef.current)
       .then((config) => {
         dispatch({
           type: "LOADED",
@@ -115,7 +126,7 @@ export const useExerciseSession = ({
   const dismissMilestone = () => dispatch({ type: "DISMISS_MILESTONE" });
 
   const resetSession = () => {
-    loadModeConfig(mode, userWords).then((config) => {
+    loadModeConfig(mode, userWords, unlockedLessons).then((config) => {
       dispatch({
         type: "RESET",
         queue: config.queue,

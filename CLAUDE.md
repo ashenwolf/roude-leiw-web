@@ -25,7 +25,7 @@ Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under
 
 **Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2), build sentences from token tiles, and revisit content they've struggled with. There are three exercise Modes from the Home screen: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
 
-A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially by playing, not by mastery. Exam content is a parallel catalog — it never enters Word Mix, Fix Errors, or Home's stats.
+A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially by playing, not by mastery. Exam content is a parallel catalog — it never enters Word Mix or Home's stats. **Fix Errors is the one global Mode**: its error pool spans both tracks (course lessons + played/unlocked exam SubLessons).
 
 Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persistence.
 
@@ -243,7 +243,8 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Progress bar: 60 ticks, milestones at 20/40/60.
 
 **Fix Errors** — `planFixErrorsMode(lessons, stats)`.
-- Home button disabled when error pool is empty.
+- **Global scope**: `lessons` = all course lessons + exam SubLessons in error scope (played or unlocked — see `loadErrorScopeLessons` in `src/exercise/error-scope.ts`). The planner itself is track-agnostic; the call sites decide the scope. A failed exam Q&A phrase is rebuilt with its `question` in the failed direction.
+- Home button disabled when error pool is empty (same global scope via `loadExamErrorLessons`).
 - Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
 - WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
 - SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
@@ -274,6 +275,8 @@ Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the thresh
 #### Centralized error pool
 
 `selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+
+The function is scope-agnostic: the `lessons` argument defines the scope. Fix Errors passes the **global** scope (course + exam, via `src/exercise/error-scope.ts`); Word Mix passes course-lessons-up-to-cursor only.
 
 `phrases` is `PhraseError[]` — each entry is `{ sentence, direction }` keyed by its **directional** stat key, so a phrase failed in `en-lu` and the same phrase failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
 
@@ -713,7 +716,7 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `src/exercise/exercise-builders.ts`         | 20    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions |
 | `src/exercise/modes/lesson.ts`              | 11    | shape, upper-bound clamp, edge cases |
 | `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
-| `src/exercise/modes/fix-errors.ts`          | 9     | empty pool, word-only/phrase errors, fallback |
+| `src/exercise/modes/fix-errors.ts`          | 11    | empty pool, word-only/phrase errors, fallback, global scope (exam Q&A rebuild) |
 | `src/exercise/modes/exam.ts`                | 13    | chunking + merge edges, @question direction forcing, determinism, boundaries |
 | `src/exam/exam-catalog.ts`                  | 3     | flattenExamManifest ordering + theme propagation |
 | `src/exam/exam-progression.ts`              | 11    | play-gate chain, theme independence, mastery-does-not-unlock, load selection |

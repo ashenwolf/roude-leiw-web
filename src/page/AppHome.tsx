@@ -5,6 +5,7 @@ import { useNavigation } from "../context/useNavigation";
 import { loadLessonMeta, loadLessonsUpToCursor } from "../exercise/lesson-loader";
 import { projectHomeLessonsView } from "../exercise/lesson-rows";
 import { selectErrorPool } from "../exercise/error-pool";
+import { loadExamErrorLessons } from "../exercise/error-scope";
 import { computeOverallStats, computeLessonProgress, collectLessonKeys } from "../exercise/progression";
 import { UNLOCK_LESSON_THRESHOLD } from "../exercise/constants";
 import { computePlayerLevel } from "../exercise/xp";
@@ -30,6 +31,10 @@ export const AppHome = () => {
 
   // Phase 2: full content for unlocked lessons only — populates progress + unlock.
   const [lessons, setLessons] = useState<Lesson[]>([]);
+
+  // Exam sub-lessons in error-pool scope (Fix Errors is global across tracks).
+  // Only affects the error pool below — course stats/progress never read these.
+  const [examErrorLessons, setExamErrorLessons] = useState<Lesson[]>([]);
 
   // Phase 1: load manifest
   useEffect(() => {
@@ -64,6 +69,14 @@ export const AppHome = () => {
     return () => controller.abort();
   }, [lessonMetas, words, unlockedLessons]);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    loadExamErrorLessons(unlockedLessons).then((loaded) => {
+      if (!controller.signal.aborted) setExamErrorLessons(loaded);
+    });
+    return () => controller.abort();
+  }, [unlockedLessons]);
+
   // Single producer: everything AppHome needs about lessons + progress.
   // Uses loaded (unlocked) lessons only — locked lessons show as empty in progressMap.
   const view = useMemo(
@@ -79,9 +92,13 @@ export const AppHome = () => {
   const levelInfo = useMemo(() => computePlayerLevel(totalXP), [totalXP]);
 
   // Single source of truth for "struggling content" (see CLAUDE.md, Centralized
-  // error pool). While phase-2 lessons are still loading, `lessons` is empty and
+  // error pool). GLOBAL scope: course lessons + in-scope exam sub-lessons.
+  // While phase-2 lessons are still loading, `lessons` is empty and
   // both pools come back empty → button stays disabled (safe default).
-  const errorPool = useMemo(() => selectErrorPool(words, lessons), [words, lessons]);
+  const errorPool = useMemo(
+    () => selectErrorPool(words, [...lessons, ...examErrorLessons]),
+    [words, lessons, examErrorLessons],
+  );
   const fixErrorsDisabled = errorPool.words.length === 0 && errorPool.phrases.length === 0;
 
   const todayKey = new Date().toISOString().slice(0, 10);

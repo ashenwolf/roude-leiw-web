@@ -41,13 +41,17 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
   words chunked into 5-pair WordMatch slots (trailing <3 merges), one
   SentenceBuilder slot per sentence, slot list shuffled. No stats input, no
   buckets. `@question` sentences are forced en→lu.
-- **Exam content intentionally does NOT feed course Fix Errors / Word Mix /
-  Home stats.** `selectErrorPool` and `collectLessonKeys` take a lessons
-  argument and are only ever passed course lessons; exam-exclusive keys are
-  orphan-filtered out of Home stats automatically. Words shared between both
-  tracks DO cross-pollinate (same stat key) — accepted and desirable. An
-  exam-scoped Fix Errors (reusing `selectErrorPool(stats, examLessons)`) is
-  the planned P1 follow-up, not a mix-in to the course button.
+- **Fix Errors is GLOBAL; Word Mix and Home stats stay course-scoped.**
+  (User decision 2026-07-28, superseding the earlier exam-scoped-Fix-Errors
+  plan.) `selectErrorPool` is scope-agnostic — the lessons argument defines
+  the scope. Fix Errors call sites (session planner + Home button) pass the
+  global scope via `src/exercise/error-scope.ts` (`loadErrorScopeLessons` =
+  all course lessons + exam sub-lessons that are played or unlocked; locked
+  sub-lessons can't carry stats). Failed exam Q&A phrases are rebuilt with
+  their `question` in the failed direction. Word Mix still passes
+  course-up-to-cursor only, and `collectLessonKeys` keeps Home's
+  "Learned X/Y" course-scoped. Words shared between tracks cross-pollinate
+  via the shared stat key — accepted and desirable.
 
 ## Implementation notes
 
@@ -69,6 +73,6 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
   authored from standard textbook vocabulary but NOT dictionary-verified.
   Re-run `lod_lookup` on the LU sides locally before treating the content as
   final.
-- Exam-scoped Fix Errors on the theme page; theme-completion/readiness stat;
-  audio playback on prompts; speaking-prompt Exercise type (self-graded);
-  more themes (work, free time, housing, health, past/future, Luxembourg).
+- Theme-completion/readiness stat; audio playback on prompts;
+  speaking-prompt Exercise type (self-graded); more themes (work, free time,
+  housing, health, past/future, Luxembourg).
