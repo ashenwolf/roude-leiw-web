@@ -8,51 +8,39 @@
 @lesson A1.08 "Places & Directions"
 
 # --- Place nouns (Quizlet cards 1-12) ---
-@word en Haus = house
 @word d'Haus = house
 @word Haiser = houses
 
-@word e Gebai = building
 @word d'Gebai = building
 @word Gebaier = buildings
 
-@word e Buttek = shop
 @word de Buttek = shop
 @word Butteker = shops
 
-@word eng Gemeng = commune
 @word d'Gemeng = commune
 @word Gemengen = communes
 
-@word en Theater = theatre
 @word den Theater = theatre
 @word Theateren = theatres
 
-@word eng Kierch = church
 @word d'Kierch = church
 @word Kierchen = churches
 
-@word eng Schoul = school
 @word d'Schoul = school
 @word Schoulen = schools
 
-@word eng Bréck = bridge
 @word d'Bréck = bridge
 @word Brécken = bridges
 
-@word e Kino = cinema
 @word de Kino = cinema
 @word Kinoen = cinemas
 
-@word eng Klinick = hospital
 @word d'Klinick = hospital
 @word Klinicken = hospitals
 
-@word eng Apdikt = pharmacy
 @word d'Apdikt = pharmacy
 @word Apdikten = pharmacies
 
-@word e Café = café
 @word de Café = café
 @word Caféen = cafés
 
@@ -64,6 +52,18 @@
 @word op der rietser Säit = on the right hand side
 @word op der lénker Säit = on the left hand side
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word de Park = park
+@word d'Stad = city
+@word d'Wollek = cloud
+@word lénks = left
+@word riets = right
+@word riichtaus = straight ahead
+@word wäit = far
+@word hannert = behind
+@word niewent = next to
+@word tëschent = between
+
 # --- Sentences (Quizlet cards 13-34) ---
 
 @sentence
@@ -71,8 +71,10 @@
 @en The restaurant is next to the church.
 @distractor-en school
 @distractor-en bridge
+@distractor-en behind
 @distractor-lu Schoul
 @distractor-lu Bréck
+@distractor-lu hannert
 
 @sentence
 @lu D'Emma ass an der Schoul.
@@ -84,11 +86,13 @@
 
 @sentence
 @lu De Rick steet tëschent zwee Beem.
-@en Rick is standing between two trees,
+@en Rick is standing between two trees.
 @distractor-en hospital
 @distractor-en pharmacy
+@distractor-en behind
 @distractor-lu Klinick
 @distractor-lu Apdikt
+@distractor-lu hannert
 
 @sentence
 @lu De Park ass no bei der Bank.
@@ -121,16 +125,20 @@
 @en Vic is standing behind the bridge.
 @distractor-en school
 @distractor-en cinema
+@distractor-en in front of
 @distractor-lu Schoul
 @distractor-lu Kino
+@distractor-lu virun
 
 @sentence
 @lu D'Martine steet virun der Gemeng.
 @en Martine is standing in front of the commune.
 @distractor-en bridge
 @distractor-en hospital
+@distractor-en behind
 @distractor-lu Bréck
 @distractor-lu Klinick
+@distractor-lu hannert
 
 @sentence
 @lu Ech sinn op der Post.

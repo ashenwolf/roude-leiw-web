@@ -24,31 +24,30 @@
 @word zesummen = together
 
 # --- Family nouns (Quizlet cards 30-31) ---
-@word e Brudder = brother
 @word de Brudder = brother
 @word Bridder = brothers
 
-@word eng Schwëster = sister
 @word d'Schwëster = sister
 @word Schwësteren = sisters
+
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Telefonsnummer = telephone number
+@word d'Joer = year
+@word de Gebuertsdag = birthday
+@word fannen = to find
 
 # --- Sentences (Quizlet cards 12-28, 32-39) ---
 
 @sentence
 @lu Wéi ass deng Telefonsnummer?
+@lu Wéi ass Är Telefonsnummer?
 @en What is your telephone number?
 @distractor-en together
 @distractor-en zero
+@distractor-en one
 @distractor-lu zesummen
 @distractor-lu null
-
-@sentence
-@lu Wéi ass Är Telefonsnummer?
-@en What is your telephone number?
-@distractor-en one
-@distractor-en two
 @distractor-lu eent
-@distractor-lu zwee
 
 @sentence
 @lu Meng Telefonsnummer ass...
@@ -60,19 +59,16 @@
 
 @sentence
 @lu Wou wunnt Dir?
+@lu Wou wunns du?
 @en Where do you live?
 @distractor-en five
 @distractor-en six
+@distractor-en seven
+@distractor-en when
 @distractor-lu fënnef
 @distractor-lu sechs
-
-@sentence
-@lu Wou wunns du?
-@en Where do you live?
-@distractor-en seven
-@distractor-en eight
 @distractor-lu siwen
-@distractor-lu aacht
+@distractor-lu Wéini
 
 @sentence
 @lu Ech wunnen an der Belsch, zu Bréissel.
@@ -92,53 +88,40 @@
 
 @sentence
 @lu Wéi vill Joer hutt Dir?
+@lu Wéi vill Joer hues du?
 @en How many years do you have?
 @distractor-en one
 @distractor-en two
+@distractor-en three
 @distractor-lu eent
 @distractor-lu zwee
-
-@sentence
-@lu Wéi vill Joer hues du?
-@en How many years do you have?
-@distractor-en three
-@distractor-en four
 @distractor-lu dräi
-@distractor-lu véier
 
 @sentence
 @lu Wéini ass Äre Gebuertsdag?
+@lu Wéini ass däi Gebuertsdag?
 @en When is your birthday?
 @distractor-en five
 @distractor-en six
+@distractor-en seven
+@distractor-en where
 @distractor-lu fënnef
 @distractor-lu sechs
-
-@sentence
-@lu Wéini ass däi Gebuertsdag?
-@en When is your birthday?
-@distractor-en seven
-@distractor-en eight
 @distractor-lu siwen
-@distractor-lu aacht
+@distractor-lu Wou
 
 @sentence
 @lu Wéini sidd Dir gebuer?
-@en When are you born?
+@lu Wéini bass du gebuer?
 @en When were you born?
 @distractor-en nine
 @distractor-en ten
+@distractor-en together
+@distractor-en where
 @distractor-lu néng
 @distractor-lu zéng
-
-@sentence
-@lu Wéini bass du gebuer?
-@en When are you born?
-@en When were you born?
-@distractor-en together
-@distractor-en zero
 @distractor-lu zesummen
-@distractor-lu null
+@distractor-lu Wou
 
 @sentence
 @lu Mir si bestuet.
@@ -199,8 +182,8 @@
 
 @sentence
 @lu Ech hu kee Frënd.
-@en I don't have a friend.
-@en I don't have a boyfriend.
+@en I do not have a friend.
+@en I do not have a boyfriend.
 @distractor-en ten
 @distractor-en together
 @distractor-lu zéng
@@ -216,7 +199,7 @@
 
 @sentence
 @lu Ech hu keng Frëndin.
-@en I don't have a girlfriend.
+@en I do not have a girlfriend.
 @distractor-en two
 @distractor-en three
 @distractor-lu zwee

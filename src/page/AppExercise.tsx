@@ -61,6 +61,26 @@ const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps
   </div>
 );
 
+// Defensive guard for an empty session queue (e.g. Fix Errors with an empty
+// error pool): without it, Start would transition to `active` with no exercise
+// to render — a dead end.
+type ExerciseEmptyProps = { mode: SessionMode; onBack: () => void };
+const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
+  <div className="flex flex-col items-center gap-6 py-8">
+    <h2 className="text-2xl font-bold text-gray-800">
+      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
+    </h2>
+    <p className="text-gray-600 text-center">
+      {mode.kind === "fix-errors"
+        ? "No mistakes to fix right now — nice work!"
+        : "Nothing to practice here yet."}
+    </p>
+    <div className="w-full max-w-xs">
+      <Button onClick={onBack}>Back to Home</Button>
+    </div>
+  </div>
+);
+
 type ExerciseActiveProps = {
   state: SessionStatus;
   currentSlotIndex: number;
@@ -146,7 +166,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo, params, currentPage } = useNavigation();
-  const { words, unlockedLessons, syncBatch, awardXP } = useProgress();
+  const { words, unlockedLessons, syncBatch } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
@@ -175,7 +195,7 @@ export const AppExercise = () => {
   };
 
   // Merge accumulated results into local + remote state, then clear the buffer.
-  const flushProgress = (extraUnlockCheck: boolean) => {
+  const flushProgress = (extraUnlockCheck: boolean, xpEarned = 0) => {
     const wordResults = pendingResults.current;
     const durationSeconds = pendingDuration.current;
     pendingResults.current = {};
@@ -189,7 +209,7 @@ export const AppExercise = () => {
         ).filter((id) => !new Set(unlockedLessons).has(id))
       : [];
 
-    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
   };
 
   const handleSlotSync = (wordResults: WordResultMap) => {
@@ -230,14 +250,14 @@ export const AppExercise = () => {
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
-    flushProgress(mode.kind === "lesson");
-    awardXP(SESSION_XP[mode.kind]);
+    flushProgress(mode.kind === "lesson", SESSION_XP[mode.kind]);
     goHome();
   };
 
   if (session.state === "loading") return <ExerciseLoading />;
   if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
   if (session.state === "ready") {
+    if (session.totalSlots === 0) return <ExerciseEmpty mode={mode} onBack={goHome} />;
     const handleStart = () => {
       posthog?.capture("exercise_started", {
         lesson_id: params.lessonId,

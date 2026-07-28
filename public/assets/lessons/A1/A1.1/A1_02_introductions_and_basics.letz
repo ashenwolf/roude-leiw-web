@@ -33,7 +33,7 @@
 @word ech hoffen = I hope
 @word nëmmen = only
 @word vun haut un = from today
-@word lëtzebuergesch Buschtawen = Luxembourgish letters
+@word Buschtawen = letters
 @word liicht = easy
 @word liicht = light
 @word riicht = straight
@@ -42,19 +42,15 @@
 @word duschen = to shower
 
 # --- Nouns: things (Quizlet 2A cards 34, 38-44, 46-51, 64) ---
-@word eng Saach = thing
 @word d'Saach = thing
 @word Saachen = things
 
-@word en Zil = objective
 @word d'Zil = objective
 @word Ziler = objectives
 
-@word en Dag = day
 @word den Dag = day
 @word Deeg = days
 
-@word e Been = leg
 @word d'Been = leg
 @word Been = legs
 
@@ -62,90 +58,69 @@
 
 @word de Reen = rain
 
-@word eng Siicht = view
 @word d'Siicht = view
 
-@word en Eemer = bucket
 @word den Eemer = bucket
 @word Eemeren = buckets
 
-@word eng Biischt = broom
 @word d'Biischt = broom
 @word Biischten = brooms
 
-@word eng Kiischt = cherry
 @word d'Kiischt = cherry
 @word Kiischten = cherries
 
 @word de Weess = wheat
 
-@word eng Rees = journey
 @word d'Rees = journey
 @word Reesen = journeys
 
 @word d'Leed = suffering
 
-@word eng Freed = joy
 @word d'Freed = joy
 @word Freeden = joys
 
-@word en Duuscht = thirst
 @word den Duuscht = thirst
 
 # --- Nouns: people (Quizlet 2A cards 52-54) ---
-@word e Jong = boy
-@word e Jong = son
 @word de Jong = boy
 @word de Jong = son
 @word Jongen = boys
 @word Jongen = sons
 
-@word e Meedchen = girl
-@word e Meedchen = daughter
 @word d'Meedchen = girl
 @word d'Meedchen = daughter
 @word Meedercher = girls
 @word Meedercher = daughters
 
-@word e Riichter = judge
 @word de Riichter = judge
 @word Riichteren = judges
 
 # --- Nouns: objects (Quizlet 2A cards 55-57) ---
-@word e Fliger = plane
 @word de Fliger = plane
 @word Fligeren = planes
 
-@word e Kapp = head
 @word de Kapp = head
 @word Käpp = heads
 
-@word eng Kap = hat
 @word d'Kap = hat
 @word Kapen = hats
 
 # --- "dach" (Quizlet 2A card 58) ---
-@word dach = yes
 @word dach = of course
 
 # --- Language & spelling (Quizlet 2A cards 59-60, 65-69) ---
-@word e Sproch = expression
 @word de Sproch = expression
 @word Spréch = expressions
 
-@word eng Sprooch = language
 @word d'Sprooch = language
 @word Sproochen = languages
 
-@word e Virnumm = first name
 @word de Virnumm = first name
 @word Virnimm = first names
 
-@word en Nonumm = last name
 @word den Nonumm = last name
 @word Nonimm = last names
 
-@word e Familljennumm = surname
 @word de Familljennumm = surname
 @word Familljennimm = surnames
 
@@ -164,95 +139,73 @@
 @word virstellen = to introduce
 
 # --- Animals & nature (Quizlet 2B cards 30-35) ---
-@word en Hond = dog
 @word den Hond = dog
 @word Hënn = dogs
 
-@word e Buch = book
 @word d'Buch = book
 @word Bicher = books
 
-@word e Gaart = garden
 @word de Gaart = garden
 @word Gäert = gardens
 
-@word eng Relioun = religion
 @word d'Relioun = religion
 @word Reliounen = religions
 
-@word e Bam = tree
 @word de Bam = tree
 @word Beem = trees
 
-@word eng Fënster = window
 @word d'Fënster = window
 @word Fënsteren = windows
 
 # --- Friends & professions (Quizlet 2B cards 36-43) ---
-@word e Frënd = friend
 @word de Frënd = friend
 @word Frënn = friends
 
-@word eng Frëndin = friend
 @word d'Frëndin = friend
 @word Frëndinnen = friends
 
-@word e Verkeefer = salesman
 @word de Verkeefer = salesman
 @word Verkeefer = salespeople
 
-@word eng Verkeeferin = saleswoman
 @word d'Verkeeferin = saleswoman
 @word Verkeeferinnen = saleswomen
 
-@word e Bäcker = baker
 @word de Bäcker = baker
 @word Bäckeren = bakers
 
-@word eng Bäckesch = baker
 @word d'Bäckesch = baker
 @word Bäckeschen = bakers
 
-@word en Infirmier = nurse
 @word den Infirmier = nurse
 @word Infirmieren = nurses
 
-@word eng Infirmière = nurse
 @word d'Infirmière = nurse
 @word Infirmièren = nurses
 
 # --- Family (Quizlet 2B cards 44-46) ---
-@word e Papp = father
 @word de Papp = father
 @word Pappen = fathers
 
-@word eng Mamm = mother
 @word d'Mamm = mother
 @word Mammen = mothers
 
-@word e Kand = child
 @word d'Kand = child
 @word Kanner = children
 
 # --- People (Quizlet 2B cards 53-54) ---
-@word e Mann = man
 @word de Mann = man
 @word Männer = men
 
-@word eng Fra = woman
 @word d'Fra = woman
 @word Fraen = women
 
 # --- Objects (Quizlet 2B cards 55-57) ---
-@word eng Fläsch = bottle
 @word d'Fläsch = bottle
 @word Fläschen = bottles
 
-@word e Schlëssel = key
 @word de Schlëssel = key
 @word Schlësselen = keys
 
-@word e Bic = pen
 @word de Bic = pen
 @word Bicker = pens
 
@@ -265,15 +218,23 @@
 @word Stockholm = Stockholm
 @word d'USA = the US
 
-# --- Sentences from Part A ---
+# --- Vocabulary from sentences (coverage backfill) ---
+@word den Numm = name
+@word den Auto = car
+@word den Zuch = train
+@word d'Gare = train station
+@word d'Dier = door
+@word de Ball = ball
+@word d'Rechnung = bill
+@word d'Reunioun = meeting
+@word kommen = to come
+@word léieren = to learn
+@word schreiwen = to write
+@word gesinn = to see
+@word verstoen = to understand
+@word bestellen = to order
 
-@sentence
-@lu Ech heeschen Anne.
-@en I am called Anne.
-@distractor-en already
-@distractor-en only
-@distractor-lu schonn
-@distractor-lu nëmmen
+# --- Sentences from Part A ---
 
 @sentence
 @lu Ech sinn d'Anne.
@@ -286,58 +247,43 @@
 @sentence
 @lu Mäin Numm ass Anne.
 @en My name is Anne.
-@distractor-en first name
 @distractor-en surname
+@distractor-en age
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
 
 @sentence
 @lu Wéi heeschs du?
+@lu Wéi heescht Dir?
 @en What are you called?
 @distractor-en who
 @distractor-en where
+@distractor-en how
 @distractor-lu Wien
 @distractor-lu Wou
-
-@sentence
-@lu Wéi heescht Dir?
-@en What are you called?
-@distractor-en how
-@distractor-en what
-@distractor-lu Wéi
 @distractor-lu Wat
 
 @sentence
 @lu Wie bass du?
+@lu Wie sidd Dir?
 @en Who are you?
 @distractor-en where
 @distractor-en how
+@distractor-en what
 @distractor-lu Wou
 @distractor-lu Wéi
-
-@sentence
-@lu Wie sidd Dir?
-@en Who are you?
-@distractor-en what
-@distractor-en where
 @distractor-lu Wat
-@distractor-lu Wou
 
 @sentence
 @lu Wéi ass däin Numm?
-@en What is your name?
-@distractor-en surname
-@distractor-en last name
-@distractor-lu Familljennumm
-@distractor-lu Nonumm
-
-@sentence
 @lu Wéi ass Ären Numm?
 @en What is your name?
-@distractor-en first name
-@distractor-en how
+@distractor-en surname
+@distractor-en address
+@distractor-en age
+@distractor-lu Familljennumm
+@distractor-lu Nonumm
 @distractor-lu Virnumm
-@distractor-lu Wéi
 
 @sentence
 @lu Ech stellen dir den Emile vir.
@@ -357,19 +303,14 @@
 
 @sentence
 @lu Et freet mech dech kennen ze léieren.
+@lu Et freet mech Iech kennen ze léieren.
 @en It is a pleasure to meet you.
 @distractor-en how
 @distractor-en where
+@distractor-en already
 @distractor-lu Wéi
 @distractor-lu Wou
-
-@sentence
-@lu Et freet mech Iech kennen ze léieren.
-@en It is a pleasure to meet you.
-@distractor-en already
-@distractor-en only
 @distractor-lu schonn
-@distractor-lu nëmmen
 
 @sentence
 @lu Ech sinn enchantéiert.
@@ -378,14 +319,6 @@
 @distractor-en hope
 @distractor-en how
 @distractor-lu hoffen
-@distractor-lu Wéi
-
-@sentence
-@lu D'Vanessa huet mir schonn esou vill vun dir erzielt.
-@en Vanessa told me so much about you already.
-@distractor-en only
-@distractor-en how
-@distractor-lu nëmmen
 @distractor-lu Wéi
 
 @sentence
@@ -410,17 +343,17 @@
 @sentence
 @lu Wéi ass Ären Numm, wgl.?
 @en What is your name, please?
-@distractor-en first name
 @distractor-en surname
+@distractor-en address
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
 
 @sentence
 @lu Schreift sech dat an engem Wuert?
 @en Is that written in one word?
-@distractor-en different word
+@distractor-en letter
 @distractor-en how
-@distractor-lu anert Wuert
+@distractor-lu Buschtawen
 @distractor-lu Wéi
 
 @sentence
@@ -450,18 +383,10 @@
 @sentence
 @lu Op wéi een Numm?
 @en To which name?
-@distractor-en first name
 @distractor-en surname
+@distractor-en address
 @distractor-lu Virnumm
 @distractor-lu Familljennumm
-
-@sentence
-@lu Dat schreift sech mat ck.
-@en That is spelled with ck.
-@distractor-en different word
-@distractor-en how
-@distractor-lu anert Wuert
-@distractor-lu Wéi
 
 @sentence
 @lu Kënnt Dir dat nach eng Kéier widderhuelen, wgl.?
@@ -480,8 +405,7 @@
 @distractor-lu Bic
 
 @sentence
-@lu Hie geet mat.
-@en He is going with us.
+@lu Hie geet mat mir.
 @en He is going with me.
 @distractor-en she
 @distractor-en they
@@ -490,7 +414,6 @@
 
 @sentence
 @lu Hatt hëlt d'Buch mat.
-@en She is taking the book.
 @en She is taking the book with her.
 @distractor-en pen
 @distractor-en window
@@ -588,7 +511,7 @@
 @sentence
 @lu Ech sinn op der Gare.
 @en I'm at the train station.
-@distractor-en train
+@distractor-en ticket
 @distractor-en how
 @distractor-lu Zuch
 @distractor-lu Wéi

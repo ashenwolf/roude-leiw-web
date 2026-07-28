@@ -8,13 +8,17 @@ const ok = <T>(value: T): ValidationOk<T> => ({ ok: true, value });
 const err = (reason: string): ValidationErr => ({ ok: false, reason });
 
 const MAX_WORD_RESULTS = 200;
-const MAX_PART_LEN = 64;
 const MAX_COUNT = 100;
 const MAX_DURATION = 3600;
 const MAX_XP_PER_SYNC = 500;
 const MAX_UNLOCKED_LESSONS = 500;
 const MAX_LESSON_ID_LEN = 64;
 const DATE_RX = /^\d{4}-\d{2}-\d{2}$/;
+// Key length bounds live in the regexes themselves: each part is capped at 64 chars,
+// so a word key is at most 129 chars total ({lu ≤64}|{en ≤64}) and a phrase key is at
+// most 77 chars total ("phrase:en-lu:" + {firstEn ≤64}). Phrase keys are per direction
+// (en-lu | lu-en) so the error pool can repeat the exact failed direction; the client's
+// `phraseKey` producer (src/exercise/progression.ts) truncates firstEn to 64 chars to match.
 const WORD_KEY_RX = /^[^|]{1,64}\|[^|]{1,64}$/;
 const PHRASE_KEY_RX = /^phrase:(?:en-lu|lu-en):[^|]{1,64}$/;
 // Lesson ids are alphanumeric with a few separators (e.g. "A1.01" or "01_greetings").
@@ -27,8 +31,7 @@ const isBoundedInt = (v: unknown, max: number): v is number =>
   typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= max;
 
 const isValidKey = (v: unknown): v is string =>
-  typeof v === "string" && (WORD_KEY_RX.test(v) || PHRASE_KEY_RX.test(v)) &&
-  v.length <= "phrase:en-lu:".length + MAX_PART_LEN;
+  typeof v === "string" && (WORD_KEY_RX.test(v) || PHRASE_KEY_RX.test(v));
 
 const validateWordResult = (raw: unknown, index: number): ValidationResult<WordResult> => {
   if (!isPlainObject(raw)) return err(`wordResults[${index}]: not an object`);

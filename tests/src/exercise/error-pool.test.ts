@@ -37,7 +37,7 @@ const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
 });
 
 const wordKey = (lu: string, en: string) => `${lu}|${en}`;
-const phraseKey = (firstEn: string) => `phrase:en-lu:${firstEn}`;
+const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string) => `phrase:${direction}:${firstEn}`;
 
 // ============================================================================
 // Primary pool — shown >= MIN_ANSWERS AND accuracy < ERROR_THRESHOLD (0.8)
@@ -122,8 +122,8 @@ describe("selectErrorPool — primary pool", () => {
     expect(pool.words).toHaveLength(1);
   });
 
-  it("returns phrases meeting primary criteria", () => {
-    const key = phraseKey("Good morning");
+  it("returns phrases meeting primary criteria, tagged with the failed direction", () => {
+    const key = phraseKey("lu-en", "Good morning");
     const stats = { [key]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
     const lessons = [
       lessonWithSentences("L1", [], [sentence("Good morning", "Gudde Moien")]),
@@ -132,7 +132,24 @@ describe("selectErrorPool — primary pool", () => {
     const pool = selectErrorPool(stats, lessons);
 
     expect(pool.phrases).toHaveLength(1);
-    expect(pool.phrases[0].enVariants[0]).toBe("Good morning");
+    expect(pool.phrases[0].sentence.enVariants[0]).toBe("Good morning");
+    expect(pool.phrases[0].direction).toBe("lu-en");
+  });
+
+  it("tracks each direction of the same phrase as a separate error entry", () => {
+    const firstEn = "Good morning";
+    const stats = {
+      [phraseKey("en-lu", firstEn)]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+      [phraseKey("lu-en", firstEn)]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+    };
+    const lessons = [
+      lessonWithSentences("L1", [], [sentence(firstEn, "Gudde Moien")]),
+    ];
+
+    const pool = selectErrorPool(stats, lessons);
+
+    expect(pool.phrases).toHaveLength(2);
+    expect(new Set(pool.phrases.map((p) => p.direction))).toEqual(new Set(["en-lu", "lu-en"]));
   });
 
   it("excludes sentences with no enVariants", () => {
@@ -204,7 +221,7 @@ describe("selectErrorPool — independence of words and phrases", () => {
     // Word: primary (shown >= MIN_ANSWERS, low rate)
     const wKey = wordKey("Moien", "hi");
     // Phrase: fallback (shown < MIN_ANSWERS but incorrect > 0)
-    const pKey = phraseKey("Good morning");
+    const pKey = phraseKey("en-lu", "Good morning");
 
     const stats = {
       [wKey]: s(MIN_ANSWERS, 0, MIN_ANSWERS),

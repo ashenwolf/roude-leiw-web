@@ -1,6 +1,6 @@
 import { parseLetzContent } from "./letz-parser";
 
-import type { Lesson, WordEntry } from "./letz-parser";
+import type { Lesson } from "./letz-parser";
 
 /** Light catalog row — loaded from the manifest alone (no .letz fetch required). */
 export type LessonMeta = {
@@ -110,52 +110,6 @@ export const fetchLesson = async (level: string, filename: string): Promise<Less
   }
   const content = await response.text();
   return await parseLetzContent(content, `${level}/${filename}`);
-};
-
-/**
- * Level ordering for comparison
- */
-const LEVEL_ORDER = ["A1", "A2", "B1", "B2", "C1", "C2"];
-
-const getLevelIndex = (level: string): number => {
-  const index = LEVEL_ORDER.indexOf(level.toUpperCase());
-  return index >= 0 ? index : 0;
-};
-
-/**
- * Check if a level should be included based on user's current level
- * Returns true if levelToCheck is <= userLevel
- */
-const shouldIncludeLevel = (levelToCheck: string, userLevel: string): boolean => {
-  return getLevelIndex(levelToCheck) <= getLevelIndex(userLevel);
-};
-
-/**
- * Load all lessons up to and including the specified user level
- */
-export const loadLessonsForLevel = async (userLevel: string): Promise<Lesson[]> => {
-  const manifest = await fetchManifest();
-
-  // Filter levels based on user's current level
-  const relevantLevels = manifest.levels.filter((level) => shouldIncludeLevel(level.id, userLevel));
-
-  // Fetch all lessons in parallel (flatten levels → sections → lessons).
-  const lessonPromises = relevantLevels.flatMap((level) =>
-    level.sections.flatMap((section) =>
-      section.lessons.map((lesson) => fetchLesson(level.id, lesson.file)),
-    ),
-  );
-
-  const lessons = await Promise.all(lessonPromises);
-  return lessons;
-};
-
-/**
- * Load lessons and extract all word entries
- */
-export const loadWordEntriesForLevel = async (userLevel: string): Promise<WordEntry[]> => {
-  const lessons = await loadLessonsForLevel(userLevel);
-  return lessons.flatMap((lesson) => lesson.entries);
 };
 
 // Module-level cache — all lessons, regardless of level.

@@ -34,7 +34,7 @@ const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
 });
 
 // ============================================================================
-// classifyWord — mastery is correct >= 3 (Duolingo-style)
+// classifyWord — live accuracy-based classification (shown >= 5 AND accuracy)
 // ============================================================================
 
 describe("classifyWord — live accuracy-based classification", () => {
@@ -60,35 +60,34 @@ describe("classifyWord — live accuracy-based classification", () => {
   });
 
   it("MASTERY constants match expected values", () => {
-    expect(MASTERY.correctToMaster).toBe(MASTERY_CORRECT_COUNT);  // 4
+    expect(MASTERY.correctToMaster).toBe(MASTERY_CORRECT_COUNT);  // 3
     expect(MASTERY.accuracyThreshold).toBe(UNLOCK_ELEMENT_THRESHOLD);  // 0.8
     expect(MASTERY.minShown).toBe(MIN_ANSWERS);  // 5
   });
 });
 
-describe("isElementMastered — monotonic gate", () => {
-  it("false when shown < MIN_ANSWERS, even with high correct count", () => {
-    expect(isElementMastered(s(4, 4, 0))).toBe(false);
+describe("isElementMastered — monotonic gate (correct >= 3, no shown gate)", () => {
+  it("false when correct < MASTERY_CORRECT_COUNT", () => {
+    expect(isElementMastered(s(5, 2, 3))).toBe(false);
+    expect(isElementMastered(s(2, 2, 0))).toBe(false);
   });
 
-  it("false when correct < MASTERY_CORRECT_COUNT, even with enough shown", () => {
-    expect(isElementMastered(s(5, 3, 2))).toBe(false);
-  });
-
-  it("true when shown >= MIN_ANSWERS AND correct >= MASTERY_CORRECT_COUNT", () => {
+  it("true as soon as correct >= MASTERY_CORRECT_COUNT, regardless of shown", () => {
+    // shown=3, correct=3, no incorrect — passes even though shown < MIN_ANSWERS.
+    expect(isElementMastered(s(3, 3, 0))).toBe(true);
     expect(isElementMastered(s(5, 4, 1))).toBe(true);
     expect(isElementMastered(s(5, 5, 0))).toBe(true);
   });
 
   it("remains true even after many wrong answers (monotonic)", () => {
-    // correct=4 achieved mastery; subsequent wrong answers grow incorrect but not shown.
-    // correct is still 4 — gate stays open.
-    expect(isElementMastered(s(5, 4, 100))).toBe(true);
+    // correct=3 achieved mastery; subsequent wrong answers grow incorrect.
+    // correct is still >= 3 — gate stays open.
+    expect(isElementMastered(s(50, 3, 47))).toBe(true);
   });
 
   it("classifyWord may say 'struggling' while isElementMastered is true", () => {
-    // Accuracy = 4/(4+100) ≈ 3.8% → struggling live; but correct=4 → mastered historically.
-    const stats = s(5, 4, 100);
+    // Accuracy = 3/(3+100) ≈ 2.9% → struggling live; but correct=3 → mastered historically.
+    const stats = s(5, 3, 100);
     expect(classifyWord(stats)).toBe("struggling");
     expect(isElementMastered(stats)).toBe(true);
   });
@@ -103,12 +102,22 @@ describe("isElementMastered — monotonic gate", () => {
 // ============================================================================
 
 describe("phraseKey helpers", () => {
-  it('phraseKey("en-lu", ...) produces correct key', () => {
+  it("produces a per-direction key from the first EN variant", () => {
     expect(phraseKey("en-lu", "What is your name?")).toBe("phrase:en-lu:What is your name?");
+    expect(phraseKey("lu-en", "What is your name?")).toBe("phrase:lu-en:What is your name?");
   });
 
-  it('phraseKey("lu-en", ...) produces correct key', () => {
-    expect(phraseKey("lu-en", "What is your name?")).toBe("phrase:lu-en:What is your name?");
+  it("truncates firstEn to 64 chars (lockstep with PHRASE_KEY_RX in worker/lib/validators.ts)", () => {
+    const long = "a".repeat(70);
+    expect(phraseKey("en-lu", long)).toBe("phrase:en-lu:" + "a".repeat(64));
+    // exactly 64 chars is a no-op
+    const exact = "b".repeat(64);
+    expect(phraseKey("lu-en", exact)).toBe("phrase:lu-en:" + exact);
+  });
+
+  it("collides sentences sharing the same first 64 chars (accepted tradeoff)", () => {
+    const prefix = "c".repeat(64);
+    expect(phraseKey("en-lu", prefix + " one")).toBe(phraseKey("en-lu", prefix + " two"));
   });
 
   it("isPhraseKey recognises phrase keys", () => {
@@ -124,16 +133,16 @@ describe("phraseKey helpers", () => {
 });
 
 // ============================================================================
-// computeLessonProgress  (monotonic gate: shown >= MIN_ANSWERS AND correct >= MASTERY_CORRECT_COUNT)
+// computeLessonProgress  (monotonic gate: correct >= MASTERY_CORRECT_COUNT)
 // ============================================================================
 
-// An element "passes" iff isElementMastered: shown >= MIN_ANSWERS AND correct >= MASTERY_CORRECT_COUNT.
-// Helper: a clearly passing stats entry (100% accuracy, correct = MIN_ANSWERS ≥ MASTERY_CORRECT_COUNT).
+// An element "passes" iff isElementMastered: correct >= MASTERY_CORRECT_COUNT.
+// Helper: a clearly passing stats entry (100% accuracy, correct well above the gate).
 const passing = (extraShown = 0): WordStats =>
   s(MIN_ANSWERS + extraShown, MIN_ANSWERS + extraShown, 0);
 
-// Minimum correct needed to pass — correct = MASTERY_CORRECT_COUNT, shown = MIN_ANSWERS.
-const barelyPassing = (): WordStats => s(MIN_ANSWERS, MASTERY_CORRECT_COUNT, MIN_ANSWERS - MASTERY_CORRECT_COUNT);
+// Minimum correct needed to pass — correct = MASTERY_CORRECT_COUNT.
+const barelyPassing = (): WordStats => s(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT, 0);
 
 describe("computeLessonProgress", () => {
   const greetings = lesson("A1.01", ["Moien", "hi"], ["Äddi", "bye"], ["Merci", "thanks"]);
@@ -143,26 +152,26 @@ describe("computeLessonProgress", () => {
     expect(progress).toEqual({ total: 3, mastered: 0, percentage: 0, isComplete: false });
   });
 
-  it("element with shown < MIN_ANSWERS does not pass, even with 100% accuracy", () => {
-    const words = { "Moien|hi": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0) };
+  it("element with correct < MASTERY_CORRECT_COUNT does not pass, even at 100% accuracy", () => {
+    const words = { "Moien|hi": s(2, 2, 0) };
     expect(computeLessonProgress(greetings, words).mastered).toBe(0);
   });
 
-  it("element with shown >= MIN_ANSWERS AND rate >= threshold passes", () => {
-    const words = { "Moien|hi": passing() };
+  it("element with correct >= MASTERY_CORRECT_COUNT passes regardless of shown count", () => {
+    // shown=3, correct=3 — passes even though shown < MIN_ANSWERS
+    const words = { "Moien|hi": s(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT, 0) };
     expect(computeLessonProgress(greetings, words).mastered).toBe(1);
   });
 
-  it("element at exactly MASTERY_CORRECT_COUNT correct passes (ignores extra incorrect)", () => {
-    // correct=4, shown=5, incorrect=1 → isElementMastered=true regardless of accuracy
+  it("element at exactly MASTERY_CORRECT_COUNT correct passes", () => {
     const words = { "Moien|hi": barelyPassing() };
     const progress = computeLessonProgress(greetings, words);
     expect(progress.mastered).toBe(1);
   });
 
   it("element with correct >= MASTERY_CORRECT_COUNT but many wrong answers still passes (monotonic)", () => {
-    // correct=4, shown=5, incorrect=100 → live accuracy ≈4% but isElementMastered=true
-    const words = { "Moien|hi": s(5, 4, 100) };
+    // correct=3, incorrect=100 → live accuracy ≈3% but isElementMastered=true
+    const words = { "Moien|hi": s(50, 3, 100) };
     expect(computeLessonProgress(greetings, words).mastered).toBe(1);
   });
 
@@ -216,7 +225,7 @@ describe("computeLessonProgress", () => {
     expect(progress.isComplete).toBe(false);
   });
 
-  it("lesson with sentences — passing phrase:en-lu counts toward completion", () => {
+  it("lesson with sentences — passing a phrase counts toward completion", () => {
     const lessonWithSentence: Lesson = {
       ...lesson("A1.01", ["Moien", "hi"]),
       sentences: [sentence("Good morning!", "Gudde Moien!")],
@@ -231,14 +240,30 @@ describe("computeLessonProgress", () => {
     expect(progress.isComplete).toBe(true);
   });
 
-  it("lesson with sentences — passing phrase:lu-en does NOT count for progression", () => {
+  it("lesson with sentences — both directions sum toward the one phrase gate", () => {
+    // Neither direction alone reaches MASTERY_CORRECT_COUNT (3), but combined they do.
     const lessonWithSentence: Lesson = {
       ...lesson("A1.01", ["Moien", "hi"]),
       sentences: [sentence("Good morning!", "Gudde Moien!")],
     };
     const words = {
       "Moien|hi": passing(),
-      [phraseKey("lu-en", "Good morning!")]: passing(), // wrong direction — excluded
+      [phraseKey("en-lu", "Good morning!")]: s(2, 2, 0), // 2 correct
+      [phraseKey("lu-en", "Good morning!")]: s(1, 1, 0), // + 1 correct = 3 combined
+    };
+    const progress = computeLessonProgress(lessonWithSentence, words);
+    expect(progress.mastered).toBe(2);
+    expect(progress.isComplete).toBe(true);
+  });
+
+  it("lesson with sentences — one direction short of the gate does not pass", () => {
+    const lessonWithSentence: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"]),
+      sentences: [sentence("Good morning!", "Gudde Moien!")],
+    };
+    const words = {
+      "Moien|hi": passing(),
+      [phraseKey("en-lu", "Good morning!")]: s(2, 2, 0), // only 2 combined correct
     };
     const progress = computeLessonProgress(lessonWithSentence, words);
     expect(progress.mastered).toBe(1); // only the word
@@ -294,24 +319,24 @@ describe("computeUnlockedLessonIds", () => {
     expect(unlocked).not.toContain("A1.03");
   });
 
-  it("lesson with shown < MIN_ANSWERS elements does NOT unlock next", () => {
-    // Elements shown 3 times (< MIN_ANSWERS=5) — don't pass even with 100% accuracy
-    const underShown = {
-      "Moien|hi": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0),
-      "Äddi|bye": s(MIN_ANSWERS - 1, MIN_ANSWERS - 1, 0),
+  it("lesson with correct < MASTERY_CORRECT_COUNT elements does NOT unlock next", () => {
+    // Elements answered correctly only twice (< MASTERY_CORRECT_COUNT=3) — don't pass.
+    const underCorrect = {
+      "Moien|hi": s(10, 2, 8),
+      "Äddi|bye": s(10, 2, 8),
     };
-    const unlocked = computeUnlockedLessonIds(lessons, underShown);
+    const unlocked = computeUnlockedLessonIds(lessons, underCorrect);
     expect(unlocked).not.toContain("A1.02");
   });
 
   it("persistedUnlocked keeps a lesson available even if its predecessor drops below monotonic gate", () => {
-    // The user passed A1.01 once (so A1.02 was persisted as unlocked), then
-    // accumulated wrong answers — `correct` stays below MASTERY_CORRECT_COUNT (4)
-    // and A1.02 must stay accessible via persistedUnlocked.
+    // The user passed A1.01 once (so A1.02 was persisted as unlocked), then their
+    // stats stayed below MASTERY_CORRECT_COUNT (3) — A1.02 must stay accessible
+    // via persistedUnlocked.
     const draggedDown = {
-      // correct=3 < MASTERY_CORRECT_COUNT=4 → isElementMastered=false
-      "Moien|hi": s(10, 3, 7),
-      "Äddi|bye": s(10, 3, 7),
+      // correct=2 < MASTERY_CORRECT_COUNT=3 → isElementMastered=false
+      "Moien|hi": s(10, 2, 8),
+      "Äddi|bye": s(10, 2, 8),
     };
     const withoutPersisted = computeUnlockedLessonIds(lessons, draggedDown);
     expect(withoutPersisted).not.toContain("A1.02");
@@ -351,11 +376,11 @@ describe("computeOverallStats", () => {
 
   it("correctly counts words by classification", () => {
     const words = {
-      "a|a": s(5, 5, 0),   // mastered: correct=5>=4; live=mastered (100%)
-      "b|b": s(5, 4, 1),   // mastered: correct=4>=4; live=mastered (80%)
-      "c|c": s(5, 4, 20),  // mastered (monotonic): correct=4>=4; live=struggling
-      "d|d": s(5, 2, 3),   // NOT mastered: correct=2<4; live=struggling
-      "e|e": s(3, 2, 1),   // NOT mastered: shown=3<5; live=learning
+      "a|a": s(5, 5, 0),   // mastered: correct=5>=3; live=mastered (100%)
+      "b|b": s(5, 4, 1),   // mastered: correct=4>=3; live=mastered (80%)
+      "c|c": s(5, 4, 20),  // mastered (monotonic): correct=4>=3; live=struggling
+      "d|d": s(5, 2, 3),   // NOT mastered: correct=2<3; live=struggling
+      "e|e": s(3, 2, 1),   // NOT mastered: correct=2<3; live=learning (shown<5)
       "f|f": s(0, 0, 0),   // unseen
     };
     const stats = computeOverallStats(words);
@@ -367,24 +392,24 @@ describe("computeOverallStats", () => {
     expect(stats.masteredElements).toBe(3);       // masteredWords + masteredSentences
   });
 
-  it("phrase keys are excluded from word counts; en-lu direction counted as sentences", () => {
+  it("phrase keys are excluded from word counts; both directions collapse to one sentence", () => {
     const words = {
-      "Moien|hi": s(3, 3, 0),
-      [phraseKey("en-lu", "Good morning!")]: s(5, 4, 1),  // isElementMastered=true
-      [phraseKey("lu-en", "Good morning!")]: s(1, 0, 1),  // isElementMastered=false
+      "Moien|hi": s(2, 2, 0),                          // correct=2<3 → not a mastered word
+      [phraseKey("en-lu", "Good morning!")]: s(3, 2, 1), // 2 correct
+      [phraseKey("lu-en", "Good morning!")]: s(2, 2, 0), // + 2 correct = 4 combined → mastered
     };
     const stats = computeOverallStats(words);
     expect(stats.totalWords).toBe(1);
-    expect(stats.totalSentences).toBe(1);         // one en-lu key = one sentence
+    expect(stats.totalSentences).toBe(1);         // two directional keys = one sentence
     expect(stats.masteredSentences).toBe(1);
     expect(stats.masteredElements).toBe(0 + 1);  // 0 mastered words + 1 mastered sentence
   });
 
   it("overallAccuracy includes both words and phrases", () => {
     const words = {
-      "a|a": s(5, 4, 1),                           // 4 correct, 1 incorrect
-      "b|b": s(5, 2, 3),                           // 2 correct, 3 incorrect
-      [phraseKey("en-lu", "Hello!")]: s(3, 3, 0),  // 3 correct, 0 incorrect — now included
+      "a|a": s(5, 4, 1),                              // 4 correct, 1 incorrect
+      "b|b": s(5, 2, 3),                              // 2 correct, 3 incorrect
+      [phraseKey("en-lu", "Hello!")]: s(3, 3, 0),     // 3 correct, 0 incorrect
     };
     const stats = computeOverallStats(words);
     // denominator = (correct+incorrect) per entry = 5 + 5 + 3 = 13
@@ -392,11 +417,11 @@ describe("computeOverallStats", () => {
     expect(stats.overallAccuracy).toBeCloseTo(9 / 13);
   });
 
-  it("masteredElements = mastered words + mastered en-lu sentences (lu-en not double-counted)", () => {
+  it("masteredElements = mastered words + mastered sentences (directions summed, counted once)", () => {
     const words = {
       "word|one": s(5, 4, 0),                       // mastered word
-      [phraseKey("en-lu", "Hi!")]: s(5, 4, 1),      // mastered en-lu sentence
-      [phraseKey("lu-en", "Hi!")]: s(5, 4, 1),      // same sentence, lu-en — NOT counted again
+      [phraseKey("en-lu", "Hi!")]: s(5, 4, 1),      // mastered sentence on its own
+      [phraseKey("lu-en", "Hi!")]: s(5, 4, 1),      // same sentence — NOT counted again
     };
     const stats = computeOverallStats(words);
     expect(stats.masteredWords).toBe(1);

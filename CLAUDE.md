@@ -123,8 +123,9 @@ src/
 │       └── types.ts                  # WordPair, SlotState, GameState, WordResultMap
 │
 ├── persistence/                      # Backend sync
+│   ├── migration.ts                  # Pure: buildMigrationChunks — splits guest totals into validator-bound sync payloads
 │   └── hooks/
-│       └── use-progress-sync.ts      # Syncs word results to /api/progress/sync
+│       └── use-progress-sync.ts      # Syncs word results to /api/progress/sync (returns success boolean)
 │
 ├── lib/                              # Shared libraries
 │   ├── shuffle.ts                    # Single Fisher–Yates shuffle for the whole app
@@ -234,7 +235,7 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Home button disabled when error pool is empty.
 - Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
 - WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
-- SentenceBuilder Slot: 1 phrase from sentence-error pool.
+- SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
 - Empty pool for rolled type → re-roll.
 - Outcomes & correction Block: identical to Lesson.
 - `completionEffect: 'noop'`.
@@ -242,17 +243,20 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 #### Unlock rule (Lesson Mode only)
 
 For each Element defined in the lesson's `.letz` file:
-- Element passes iff `shown >= MIN_ANSWERS` AND `correct/shown >= UNLOCK_ELEMENT_THRESHOLD` (0.8).
+- Element passes iff `correct >= MASTERY_CORRECT_COUNT` (3). There is **no** accuracy ratio and **no** minimum-shown gate — three correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
+- For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct >= 3` (`combinedPhraseStats`). Both directions count toward the one phrase Element.
 
 The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (0.8).
 
-`MIN_ANSWERS` is a global gate (currently 5). Elements with `shown < MIN_ANSWERS` count as not-passing regardless of accuracy.
+Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 
-Unlock is **sticky**: stats are monotonic in `correct` and `shown`, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
+> `MIN_ANSWERS` (5) still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [stats-and-xp-redesign](.claude/memory/stats-and-xp-redesign.md)).
 
 #### Centralized error pool
 
 `selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+
+`phrases` is `PhraseError[]` — each entry is `{ sentence, direction }` keyed by its **directional** stat key, so a phrase failed in `en-lu` and the same phrase failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
 
 - Primary: elements with `shown >= MIN_ANSWERS` AND `correct/shown < ERROR_THRESHOLD` (0.9).
 - Fallback (when primary is empty): all elements with `incorrect > 0`, sorted ascending by `correct/shown` (worst first).
@@ -316,7 +320,7 @@ flowchart TD
   files -->|"loadAllLessons()<br/>lesson-loader.ts"| lessons
   lessons -->|"projectHomeLessonsView()<br/>lesson-rows.ts"| homeView
   homeView --> appHome
-  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, word-selector, letz-parser)"| slotPlan
+  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, letz-parser)"| slotPlan
   slotPlan -.->|"useExerciseSession<br/>(hook = wiring)"| batch
   batch -->|"initializeGame / applySelection<br/>WordMatch/game-logic.ts"| gameState
   batch -->|"initSentenceGame / applyTokenTap<br/>SentenceBuilder/sentence-logic.ts"| gameState
@@ -458,7 +462,7 @@ erDiagram
   USER ||--o{ SESSION : "has"
 ```
 
-Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map.
+Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map. `phraseKey()` truncates `firstEn` to 64 chars to match the server validator's per-part cap (`PHRASE_KEY_RX`); sentences sharing the same first 64 chars collide onto one key by design.
 
 Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `SessionData`). KV CRUD lives in `worker/lib/user.ts` and `worker/lib/session.ts`.
 
@@ -481,7 +485,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 6. **Sessions and CSRF use TTLs, not deletion sweeps.** Cloudflare KV `expirationTtl` handles cleanup. Don't write background jobs to expire stale rows.
 
-7. **Guest store mirrors the auth schema.** `GuestData = { words, dailySessions }` is structurally a subset of `UserData` (no profile). This makes the guest→auth migration in `use-progress.ts` a straight POST of accumulated deltas, then `localStorage.removeItem`.
+7. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
 
 #### Client read/write pattern
 
@@ -669,13 +673,12 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (296 tests):**
+**What's covered (352 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
 | `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
 | `src/exercise/SentenceBuilder/sentence-logic.ts` | 24 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
-| `src/exercise/word-selector.ts`             | 15    | bucket classification, exclude keys, overflow priority, output shape |
 | `src/exercise/progression.ts`               | 35    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
 | `src/exercise/session-reducer.ts`           | 27    | every action × every state, blockBoundaries-based section detection |
 | `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
@@ -687,9 +690,10 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `src/exercise/modes/fix-errors.ts`          | 9     | empty pool, word-only/phrase errors, fallback |
 | `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
 | `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
-| `worker/lib/user.ts`                        | 22    | mergeWordResults, mergeDailySession, caps |
+| `worker/lib/user.ts`                        | 36    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
 | `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
 | `worker/lib/validators.ts`                  | 12    | payload validation bounds |
+| `src/persistence/migration.ts`              | 23    | buildMigrationChunks: per-chunk validator bounds, counter splitting, duration/XP spread, exact total reconstruction |
 | `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
 
 **No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.
@@ -707,7 +711,6 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 - `s(shown, correct, incorrect)` for `WordStats` (see `progression.test.ts`, `error-pool.test.ts`)
 - `lesson(id, words, sentences?)` for `Lesson` (see `progression.test.ts`, `modes/lesson.test.ts`)
 - `slot.{active|selected|fail|fading|empty}(...)` for `SlotState` (see `game-logic.test.ts`)
-- `cand(lu, en, lessonId)` for `CandidateItem` (see `word-selector.test.ts`)
 - `fakeRng(...values)` for deterministic RNG in mode planner tests (see `selection.test.ts`)
 
 Reuse these helpers; don't re-invent fixture shapes.
