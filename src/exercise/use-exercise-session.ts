@@ -1,7 +1,10 @@
 import { useEffect, useReducer, useRef } from "react";
 
-import { LESSON_TOTAL_SLOTS, LESSON_WORD_MATCH_PAIR_COUNT } from "./constants";
+import { loadExamMeta, fetchSubLesson } from "../exam/exam-catalog";
+import { LESSON } from "./constants";
+import { loadErrorScopeLessons } from "./error-scope";
 import { loadAllLessons } from "./lesson-loader";
+import { planExamMode } from "./modes/exam";
 import { planLessonMode } from "./modes/lesson";
 import { planWordMixMode } from "./modes/word-mix";
 import { planFixErrorsMode } from "./modes/fix-errors";
@@ -10,7 +13,7 @@ import { computeProgressView } from "./session-progress";
 import { sessionReducer, INITIAL_SESSION_STATE } from "./session-reducer";
 
 import type { WordStats } from "../context/auth";
-import type { SessionMode } from "./mode-config";
+import type { ModeConfig, SessionMode } from "./mode-config";
 import type { WordResultMap } from "./WordMatch/types";
 import type { Exercise } from "./types";
 
@@ -19,8 +22,8 @@ import type { Exercise } from "./types";
 // ============================================================================
 
 export const SESSION_CONFIG = {
-  PLANNED_SLOTS: LESSON_TOTAL_SLOTS,
-  WORD_MATCH_SIZE: LESSON_WORD_MATCH_PAIR_COUNT,
+  PLANNED_SLOTS: LESSON.totalSlots,
+  WORD_MATCH_SIZE: LESSON.wordMatchPairs,
 } as const;
 
 // ============================================================================
@@ -29,6 +32,8 @@ export const SESSION_CONFIG = {
 
 type UseExerciseSessionProps = {
   userWords: Record<string, WordStats>;
+  /** Persisted unlock/play-gate set — scopes Fix Errors' exam-content loading. */
+  unlockedLessons?: ReadonlyArray<string>;
   mode?: SessionMode;
 };
 
@@ -42,31 +47,51 @@ const determineSlotOutcome = (
   return r && r.correct > 0 ? "success" : "mistake";
 };
 
+/** Load the content the Mode needs, then plan its complete ModeConfig. */
+const loadModeConfig = async (
+  mode: SessionMode,
+  words: Record<string, WordStats>,
+  unlockedLessons: ReadonlyArray<string>,
+): Promise<ModeConfig> => {
+  switch (mode.kind) {
+    case "exam": {
+      const metas = await loadExamMeta();
+      const meta = metas.find((m) => m.id === mode.subLessonId);
+      if (!meta) throw new Error(`Unknown exam sub-lesson: ${mode.subLessonId}`);
+      return planExamMode(await fetchSubLesson(meta));
+    }
+    case "fix-errors":
+      // Global scope: the pool spans course lessons AND exam sub-lessons.
+      return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words);
+    case "word-mix":
+      return planWordMixMode(await loadAllLessons(), words);
+    case "lesson": {
+      const lessons = await loadAllLessons();
+      return planLessonMode(lessons, mode.lessonId ?? findCurrentLessonId(lessons, words), words);
+    }
+  }
+};
+
 export const useExerciseSession = ({
   userWords,
+  unlockedLessons = [],
   mode = { kind: "lesson" },
 }: UseExerciseSessionProps) => {
   const [state, dispatch] = useReducer(sessionReducer, INITIAL_SESSION_STATE);
 
   const userWordsRef = useRef(userWords);
   useEffect(() => { userWordsRef.current = userWords; });
+  const unlockedLessonsRef = useRef(unlockedLessons);
+  useEffect(() => { unlockedLessonsRef.current = unlockedLessons; });
+
+  // Mode identity for the load effect — a Session replans only when the target
+  // changes, not when stats do (one-shot planning invariant).
+  const modeLessonId = mode.kind === "lesson" ? mode.lessonId : undefined;
+  const modeSubLessonId = mode.kind === "exam" ? mode.subLessonId : undefined;
 
   useEffect(() => {
-    loadAllLessons()
-      .then((lessons) => {
-        const words = userWordsRef.current;
-
-        const config =
-          mode.kind === "word-mix"
-            ? planWordMixMode(lessons, words)
-            : mode.kind === "fix-errors"
-            ? planFixErrorsMode(lessons, words)
-            : planLessonMode(
-                lessons,
-                mode.lessonId ?? findCurrentLessonId(lessons, words),
-                words,
-              );
-
+    loadModeConfig(mode, userWordsRef.current, unlockedLessonsRef.current)
+      .then((config) => {
         dispatch({
           type: "LOADED",
           lessons: config.lessons,
@@ -80,7 +105,7 @@ export const useExerciseSession = ({
         dispatch({ type: "LOAD_ERROR", error: err instanceof Error ? err.message : "Failed to load lessons" });
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode.kind, (mode as { lessonId?: string }).lessonId]);
+  }, [mode.kind, modeLessonId, modeSubLessonId]);
 
   const startSession = () => dispatch({ type: "START" });
 
@@ -104,18 +129,7 @@ export const useExerciseSession = ({
   const dismissMilestone = () => dispatch({ type: "DISMISS_MILESTONE" });
 
   const resetSession = () => {
-    loadAllLessons().then((lessons) => {
-      const words = userWords;
-      const config =
-        mode.kind === "word-mix"
-          ? planWordMixMode(lessons, words)
-          : mode.kind === "fix-errors"
-          ? planFixErrorsMode(lessons, words)
-          : planLessonMode(
-              lessons,
-              mode.lessonId ?? findCurrentLessonId(lessons, words),
-              words,
-            );
+    loadModeConfig(mode, userWords, unlockedLessons).then((config) => {
       dispatch({
         type: "RESET",
         queue: config.queue,
@@ -129,6 +143,9 @@ export const useExerciseSession = ({
   const isSlotDone = state.status === "slot_complete" || state.status === "section_complete";
   const completedSlots = isSlotDone ? state.currentSlot + 1 : state.currentSlot;
   const progressView = computeProgressView(completedSlots, state.slotProgress, state.queue.length, state.blockBoundaries);
+  // Block boundaries vary per Mode — count crossed boundaries instead of
+  // assuming a fixed slots-per-block (Word Mix: 1/block, Exam: variable).
+  const completedSections = state.blockBoundaries.filter((b) => b <= completedSlots).length;
 
   return {
     state: state.status,
@@ -138,6 +155,7 @@ export const useExerciseSession = ({
     totalSlots: state.queue.length,
     lastSlotOutcome: state.lastSlotOutcome,
     progressView,
+    completedSections,
     currentBatch: state.queue[state.currentSlot],
     currentLessonId: state.currentLessonId,
     startSession,

@@ -2,17 +2,7 @@
 // Reads lessons + stats, emits a complete ModeConfig with every Slot pre-built.
 // See CLAUDE.md > Architecture Reference > Mode specs > Lesson.
 
-import {
-  LESSON_SENTENCE_DIRECTION_BUCKETS,
-  LESSON_SENTENCE_LESSON_BUCKETS,
-  LESSON_SLOTS_PER_BLOCK,
-  LESSON_TOTAL_SLOTS,
-  LESSON_WORD_MATCH_BUCKETS,
-  LESSON_WORD_MATCH_PAIR_COUNT,
-  LESSON_WORD_MATCH_SHARE_MAX,
-  LESSON_WORD_MATCH_SHARE_MIN,
-  MASTERY_CORRECT_COUNT,
-} from "../constants";
+import { LESSON, MASTERY_CORRECT_COUNT } from "../constants";
 import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
 import { combinedPhraseStats, wordKey } from "../progression";
 import { bucketedPick, pickPair, pickSentence } from "../selection";
@@ -31,7 +21,7 @@ type SlotType = "word-match" | "sentence-builder";
  * The word-match share scales with how word-heavy the current lesson's remaining
  * backlog is, clamped to [MIN, MAX]. When there is no backlog at all (everything
  * mastered) the share falls back to MIN — the historical fixed split. Returns a
- * bucket table in the same shape as SLOT_TYPE_DISTRIBUTION so it drops straight
+ * bucket table in the same shape as FIX_ERRORS.buckets.slotType so it drops straight
  * into `bucketedPick`.
  */
 export const lessonSlotTypeDistribution = (
@@ -39,10 +29,10 @@ export const lessonSlotTypeDistribution = (
   unmasteredSentences: number,
 ): ReadonlyArray<Bucket<SlotType>> => {
   const backlog = unmasteredWords + unmasteredSentences;
-  const raw = backlog > 0 ? unmasteredWords / backlog : LESSON_WORD_MATCH_SHARE_MIN;
+  const raw = backlog > 0 ? unmasteredWords / backlog : LESSON.wordMatchShare.min;
   const share = Math.min(
-    LESSON_WORD_MATCH_SHARE_MAX,
-    Math.max(LESSON_WORD_MATCH_SHARE_MIN, raw),
+    LESSON.wordMatchShare.max,
+    Math.max(LESSON.wordMatchShare.min, raw),
   );
   return [
     { name: "word-match", upTo: share },
@@ -51,9 +41,9 @@ export const lessonSlotTypeDistribution = (
 };
 
 const BLOCK_BOUNDARIES = [
-  LESSON_SLOTS_PER_BLOCK,
-  2 * LESSON_SLOTS_PER_BLOCK,
-  3 * LESSON_SLOTS_PER_BLOCK,
+  LESSON.slotsPerBlock,
+  2 * LESSON.slotsPerBlock,
+  3 * LESSON.slotsPerBlock,
 ] as const;
 
 /**
@@ -74,7 +64,7 @@ export const planLessonMode = (
     return {
       lessons,
       queue: [],
-      plannedSlots: LESSON_TOTAL_SLOTS,
+      plannedSlots: LESSON.totalSlots,
       currentLessonId: "",
       blockBoundaries: BLOCK_BOUNDARIES,
       hasCorrectionBlock: true,
@@ -139,14 +129,14 @@ export const planLessonMode = (
   // buildSlot mutates it so no sentence is repeated until the pool is exhausted.
   const usedSentenceKeys = new Set<string>();
   const queue = Array.from(
-    { length: LESSON_TOTAL_SLOTS },
+    { length: LESSON.totalSlots },
     () => buildSlot(wordPools, sentencePools, slotTypeDistribution, lessonVocab, rng, usedSentenceKeys),
   ).filter((slot): slot is Exercise => slot !== null);
 
   return {
     lessons,
     queue,
-    plannedSlots: LESSON_TOTAL_SLOTS,
+    plannedSlots: LESSON.totalSlots,
     currentLessonId: currentLesson.meta.id,
     blockBoundaries: BLOCK_BOUNDARIES,
     hasCorrectionBlock: true,
@@ -156,8 +146,8 @@ export const planLessonMode = (
 
 // ─── Internal ─────────────────────────────────────────────────────────────────
 
-type WordBucketName = (typeof LESSON_WORD_MATCH_BUCKETS)[number]["name"];
-type SentenceBucketName = (typeof LESSON_SENTENCE_LESSON_BUCKETS)[number]["name"];
+type WordBucketName = (typeof LESSON.buckets.wordMatch)[number]["name"];
+type SentenceBucketName = (typeof LESSON.buckets.sentenceLesson)[number]["name"];
 
 // Picks up to `count` unique word pairs (deduplicated by wordKey).
 // Generates count*4 candidates via with-replacement draws, then keeps the first
@@ -170,7 +160,7 @@ const pickUniquePairs = (
 ): WordEntry[] => {
   const seen = new Set<string>();
   return Array.from({ length: count * 4 }, () =>
-    pickPair(pools, LESSON_WORD_MATCH_BUCKETS, rng),
+    pickPair(pools, LESSON.buckets.wordMatch, rng),
   )
     .filter((p): p is WordEntry => p !== undefined)
     .reduce<WordEntry[]>((acc, entry) => {
@@ -194,29 +184,29 @@ const buildSlot = (
     const slotType = bucketedPick(rng(), slotTypeDistribution);
 
     if (slotType === "sentence-builder") {
-      const picked = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
+      const picked = pickSentence(sentencePools, LESSON.buckets.sentenceLesson, rng);
       if (!picked) continue; // no sentences in pool → re-roll
       const key = picked.sentence.enVariants[0] ?? ""; // sentence identity (direction-agnostic)
       if (usedSentenceKeys.has(key)) continue; // already used this session → try again
       usedSentenceKeys.add(key);
-      const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
+      const direction = bucketedPick(rng(), LESSON.buckets.direction);
       return buildSentenceExercise(picked.sentence, direction, lessonVocab);
     }
 
-    // word-match: pick LESSON_WORD_MATCH_PAIR_COUNT unique pairs
-    const pairs = pickUniquePairs(wordPools, LESSON_WORD_MATCH_PAIR_COUNT, rng);
+    // word-match: pick LESSON.wordMatchPairs unique pairs
+    const pairs = pickUniquePairs(wordPools, LESSON.wordMatchPairs, rng);
     if (pairs.length > 0) return buildWordMatchExercise(pairs);
   }
 
   // Retries exhausted — most likely sentence-builder kept rolling but all session
   // sentences are already used. Accept a sentence repeat rather than skip the slot.
-  const fallback = pickSentence(sentencePools, LESSON_SENTENCE_LESSON_BUCKETS, rng);
+  const fallback = pickSentence(sentencePools, LESSON.buckets.sentenceLesson, rng);
   if (fallback) {
     usedSentenceKeys.add(fallback.sentence.enVariants[0] ?? "");
-    const direction = bucketedPick(rng(), LESSON_SENTENCE_DIRECTION_BUCKETS);
+    const direction = bucketedPick(rng(), LESSON.buckets.direction);
     return buildSentenceExercise(fallback.sentence, direction, lessonVocab);
   }
   // No sentences at all in pool → fall back to word-match
-  const fallbackPairs = pickUniquePairs(wordPools, LESSON_WORD_MATCH_PAIR_COUNT, rng);
+  const fallbackPairs = pickUniquePairs(wordPools, LESSON.wordMatchPairs, rng);
   return fallbackPairs.length > 0 ? buildWordMatchExercise(fallbackPairs) : null;
 };

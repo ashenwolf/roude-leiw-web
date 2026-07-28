@@ -23,7 +23,9 @@ Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under
 
 ## What This App Is
 
-**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2) in themed lessons, build sentences from token tiles, and revisit content they've struggled with. There are three exercise Modes from the Home screen: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
+**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2), build sentences from token tiles, and revisit content they've struggled with. There are three exercise Modes from the Home screen: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
+
+A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially by playing, not by mastery. Exam content is a parallel catalog — it never enters Word Mix or Home's stats. **Fix Errors is the one global Mode**: its error pool spans both tracks (course lessons + played/unlocked exam SubLessons).
 
 Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persistence.
 
@@ -47,8 +49,10 @@ This is the canonical vocabulary for the exercise/session system. Use these term
 | Lesson | One `.letz` file's parsed content. `{ id, title, words[], sentences[] }`. |
 | LessonMeta | Light catalog row used by Home (`{ id, title, level }`); no words/sentences. Loaded from manifest only. |
 | Word | A `{ lu, en }` pair. |
-| Sentence | A translatable phrase + accepted answers + distractors. |
+| Sentence | A translatable phrase + accepted answers + distractors; may carry a `question` (examiner prompt, exam track). |
 | Element | Umbrella for Word or Sentence (used uniformly by unlock %, error pool, stats). |
+| Theme | Exam-track topic (e.g. Vacation) from `public/assets/exam/manifest.json`. No level; manifest order is display order. |
+| SubLesson | One step of a Theme's path. Content-wise a `Lesson` (one `.letz` file); identity is the **manifest** id (e.g. `vacation.01`), the in-file `@lesson` id is only a label. |
 
 **Progression tier** — persisted user state.
 
@@ -64,7 +68,7 @@ This is the canonical vocabulary for the exercise/session system. Use these term
 
 | Term | Meaning |
 |---|---|
-| Mode | `lesson \| word-mix \| fix-errors`. Picked at Home. |
+| Mode | `lesson \| word-mix \| fix-errors \| exam`. Picked at Home (exam: via the theme page). |
 | Session | One top-level run of a Mode. |
 | Block | A chunk of a Session. Lesson/fix-errors = 3 normal + ≤1 correction. Word-mix = 3. |
 | Slot | One unit of work inside a Block. Holds one Exercise. |
@@ -92,7 +96,12 @@ src/
 │
 ├── page/                             # Top-level page components
 │   ├── AppHome.tsx                   # Home/lesson selection page
+│   ├── AppExam.tsx                   # Exam-track theme page (Sproochentest Prep)
 │   └── AppExercise.tsx              # Exercise/game page (wires progress sync)
+│
+├── exam/                             # Exam track — parallel to the course catalog
+│   ├── exam-catalog.ts               # ExamManifest/SubLessonMeta types + loaders (theme-first, no level)
+│   └── exam-progression.ts           # Pure: computeExamView (play-gate unlock), selectSubLessonsToLoad
 │
 ├── exercise/                         # Core game logic — producer pipeline (see Glossary for terms)
 │   ├── use-exercise-session.ts       # Hook: thin wiring (load + dispatch only)
@@ -111,7 +120,8 @@ src/
 │   ├── modes/                        # Layer 4 — Mode planners (each returns ModeConfig)
 │   │   ├── lesson.ts                 # planLessonMode(lessons, upperBoundId) → ModeConfig
 │   │   ├── word-mix.ts               # planWordMixMode(lessons, stats) → ModeConfig
-│   │   └── fix-errors.ts             # planFixErrorsMode(lessons, stats) → ModeConfig
+│   │   ├── fix-errors.ts             # planFixErrorsMode(lessons, stats) → ModeConfig
+│   │   └── exam.ts                   # planExamMode(subLesson) → ModeConfig (chunk + shuffle, no stats)
 │   ├── SentenceBuilder/              # Sentence assembly game
 │   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
 │   │   ├── use-sentence-game.ts      # Game state machine + result tracking
@@ -145,6 +155,7 @@ src/
     ├── Pill.tsx                      # Status pill (blanc/selected/success/fail)
     ├── FadingPill.tsx                # Pill with fade-out animation
     ├── ProgressBar.tsx               # Segmented batch progress indicator
+    ├── SubLessonPath.tsx             # Exam theme path (vertical node list, play/lock states)
     └── Popup.tsx                     # Modal (milestone & celebration variants)
 
 worker/
@@ -162,14 +173,14 @@ worker/
         └── google.ts                 # Google OAuth (auth URL + code exchange)
 
 public/
-└── assets/lessons/
-    ├── manifest.json                 # Lesson index by CEFR level
-    └── A1/                           # Currently only A1 lessons exist
-        ├── 01_greetings.letz
-        ├── 02_numbers.letz
-        ├── 03_family.letz
-        ├── 04_food.letz
-        └── 05_basic_words.letz
+└── assets/
+    ├── lessons/
+    │   ├── manifest.json             # Course index by CEFR level → sections → lessons
+    │   └── A1/A1.1/*.letz            # Course content (9 A1 lessons)
+    └── exam/
+        ├── manifest.json             # Exam index: themes → subLessons (no level dimension)
+        ├── vacation/*.letz           # 01_vocabulary, 02_phrases, 03_questions
+        └── family/*.letz             # same three-step pattern per theme
 ```
 
 ## Architecture
@@ -190,7 +201,8 @@ Layer 3: SessionMachine              one reducer (Block/Slot transitions, popups
 Layer 2: Exercises (plug-in)         WordMatchExercise, SentenceBuilderExercise, …
                                      ↓ built from
 Layer 1: Selection primitives        bucketedPick(roll, buckets), pickPair, pickSentence,
-                                     buildWordMatchExercise, buildSentenceExercise
+                                     buildWordMatchExercise, buildSentenceExercise,
+                                     chunkIntoWordMatchExercises, resolveSentenceDirection
                                      ↓ reading from
 Layer 0: Pure derivations            selectErrorPool, classifyElement, computeCursor,
                                      unlockedSet, MIN_ANSWERS, thresholds
@@ -232,13 +244,22 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Progress bar: 60 ticks, milestones at 20/40/60.
 
 **Fix Errors** — `planFixErrorsMode(lessons, stats)`.
-- Home button disabled when error pool is empty.
+- **Global scope**: `lessons` = all course lessons + exam SubLessons in error scope (played or unlocked — see `loadErrorScopeLessons` in `src/exercise/error-scope.ts`). The planner itself is track-agnostic; the call sites decide the scope. A failed exam Q&A phrase is rebuilt with its `question` in the failed direction.
+- Home button disabled when error pool is empty (same global scope via `loadExamErrorLessons`).
 - Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
 - WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
 - SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
 - Empty pool for rolled type → re-roll.
 - Outcomes & correction Block: identical to Lesson.
 - `completionEffect: 'noop'`.
+
+**Exam** — `planExamMode(subLesson)`.
+- Input: ONE SubLesson's `Lesson` (loaded via `src/exam/exam-catalog.ts`, never `loadAllLessons`). No stats input — the plan is content-deterministic ("we only shuffle it").
+- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — 5 pairs per Slot, trailing chunk < `minChunk` (3) merges into the previous Slot. Sentences: one SentenceBuilder Slot each. Combined Slot list shuffled.
+- Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically.
+- Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
+- Outcomes: same as Lesson. `completionEffect: 'noop'`.
+- Play-gate (edge, in `AppExercise.flushProgress`): a **completed** exam Session pushes its SubLesson's manifest id through `newlyUnlockedLessons`; abandoning marks nothing. `computeExamView` (`src/exam/exam-progression.ts`) unlocks the next SubLesson in the Theme when the previous id is in the persisted set. Mastery (`computeLessonProgress`) is the visible progress ring but gates nothing on this track.
 
 #### Unlock rule (Lesson Mode only)
 
@@ -255,6 +276,8 @@ Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the thresh
 #### Centralized error pool
 
 `selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+
+The function is scope-agnostic: the `lessons` argument defines the scope. Fix Errors passes the **global** scope (course + exam, via `src/exercise/error-scope.ts`); Word Mix passes course-lessons-up-to-cursor only.
 
 `phrases` is `PhraseError[]` — each entry is `{ sentence, direction }` keyed by its **directional** stat key, so a phrase failed in `en-lu` and the same phrase failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
 
@@ -485,7 +508,9 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 6. **Sessions and CSRF use TTLs, not deletion sweeps.** Cloudflare KV `expirationTtl` handles cleanup. Don't write background jobs to expire stale rows.
 
-7. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
+7. **`unlockedLessons` doubles as the exam play-gate set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes. Course logic only ever looks up course ids, exam logic only exam ids — the two id families coexist inertly in one array, and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field.
+
+8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
 
 #### Client read/write pattern
 
@@ -509,7 +534,7 @@ Before adding a new field to `UserData` or a new KV key:
 
 ### Navigation
 
-Context-based router (`src/context/`). Pages: `"home"` | `"exercise"` | `"word-mix"` | `"fix-errors"`. Navigate by calling `navigateTo()` from `useNavigation()`. Word Mix and Fix Errors both render via `<AppExercise />` with a different `SessionMode`.
+Context-based router (`src/context/`). Pages: `"home"` | `"exercise"` | `"word-mix"` | `"fix-errors"` | `"exam"` | `"exam-session"`. Navigate by calling `navigateTo()` from `useNavigation()`. Word Mix, Fix Errors, and exam-session (with `params.subLessonId`) all render via `<AppExercise />` with a different `SessionMode`; `"exam"` renders the theme page `<AppExam />`. Exam sessions navigate back to `"exam"`, not Home.
 
 ### Exercise Session Flow
 
@@ -665,9 +690,14 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
   @en I am Luca.
   @distractor-en He is Luca.
   @distractor-lu Du bass de Luca.
+
+@sentence
+  @question Wéi heescht Dir?
+  @lu Ech heesche Luca.
+  @en My name is Luca.
 ```
 
-`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens.
+`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens. `@question` (optional) is an examiner question in Luxembourgish rendered above the prompt — such sentences are always presented en→lu (assemble the LU answer), enforced in `buildSentenceExercise`, so **any** lesson on either track can use it. Exam files live at `public/assets/exam/{theme}/{file}.letz`; their in-file `@lesson` id is a lexer-legal label only (`V1.01`), the exam manifest id is authoritative. Every exam SubLesson mixes `@word` and `@sentence` content (enforced by `tests/integration/exam-manifest-letz.test.ts`) so Sessions alternate exercise types.
 
 ### Testing
 
@@ -684,10 +714,13 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
 | `src/exercise/error-pool.ts`                | 14    | primary pool, fallback pool, independent words/phrases, deduplication |
 | `src/exercise/selection.ts`                 | 17    | bucketedPick boundaries, pickFromPool re-roll, pickPair, pickSentence |
-| `src/exercise/exercise-builders.ts`         | 20    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions |
+| `src/exercise/exercise-builders.ts`         | 32    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions, question→direction override, chunkIntoWordMatchExercises |
 | `src/exercise/modes/lesson.ts`              | 11    | shape, upper-bound clamp, edge cases |
 | `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
-| `src/exercise/modes/fix-errors.ts`          | 9     | empty pool, word-only/phrase errors, fallback |
+| `src/exercise/modes/fix-errors.ts`          | 11    | empty pool, word-only/phrase errors, fallback, global scope (exam Q&A rebuild) |
+| `src/exercise/modes/exam.ts`                | 13    | chunking + merge edges, @question direction forcing, determinism, boundaries |
+| `src/exam/exam-catalog.ts`                  | 3     | flattenExamManifest ordering + theme propagation |
+| `src/exam/exam-progression.ts`              | 11    | play-gate chain, theme independence, mastery-does-not-unlock, load selection |
 | `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
 | `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
 | `worker/lib/user.ts`                        | 36    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |

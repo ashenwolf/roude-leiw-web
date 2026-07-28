@@ -1,13 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { lessonSlotTypeDistribution, planLessonMode } from "../../../../src/exercise/modes/lesson.ts";
-import {
-  LESSON_SLOTS_PER_BLOCK,
-  LESSON_TOTAL_SLOTS,
-  LESSON_WORD_MATCH_SHARE_MAX,
-  LESSON_WORD_MATCH_SHARE_MIN,
-  MASTERY_CORRECT_COUNT,
-} from "../../../../src/exercise/constants.ts";
+import { LESSON, MASTERY_CORRECT_COUNT } from "../../../../src/exercise/constants.ts";
 import { phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
 
 import type { Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
@@ -48,22 +42,22 @@ describe("planLessonMode — shape", () => {
     lesson("A1_02", [["Merci", "thanks"]], [sentence("Goodbye", "Äddi")]),
   ];
 
-  it("returns LESSON_TOTAL_SLOTS planned slots", () => {
+  it("returns LESSON.totalSlots planned slots", () => {
     const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
-    expect(config.plannedSlots).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.plannedSlots).toBe(LESSON.totalSlots);
   });
 
   it("queue length matches planned slots when enough words available", () => {
     const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
-    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
   });
 
   it("blockBoundaries are [5, 10, 15]", () => {
     const config = planLessonMode(lessons, "A1_02");
     expect(config.blockBoundaries).toEqual([
-      LESSON_SLOTS_PER_BLOCK,
-      2 * LESSON_SLOTS_PER_BLOCK,
-      3 * LESSON_SLOTS_PER_BLOCK,
+      LESSON.slotsPerBlock,
+      2 * LESSON.slotsPerBlock,
+      3 * LESSON.slotsPerBlock,
     ]);
   });
 
@@ -132,7 +126,7 @@ describe("planLessonMode — edge cases", () => {
     const l = lesson("A1_01", [["Moien", "hi"]]);
     // No third arg → all entries treated as not-yet-mastered, but planner still runs.
     const config = planLessonMode([l], "A1_01");
-    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
   });
 });
 
@@ -190,7 +184,7 @@ describe("planLessonMode — not-yet-mastered bucket", () => {
     // RNG always rolls into the not-yet-mastered bucket (0.0). Re-roll fallback
     // must keep producing word-match slots from the current-lesson pool.
     const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng);
-    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
 
@@ -244,15 +238,15 @@ describe("lessonSlotTypeDistribution", () => {
     buckets.find((b) => b.name === "word-match")!.upTo;
 
   it("falls back to MIN when there is no backlog", () => {
-    expect(share(lessonSlotTypeDistribution(0, 0))).toBe(LESSON_WORD_MATCH_SHARE_MIN);
+    expect(share(lessonSlotTypeDistribution(0, 0))).toBe(LESSON.wordMatchShare.min);
   });
 
   it("clamps to MAX when backlog is all words", () => {
-    expect(share(lessonSlotTypeDistribution(100, 0))).toBe(LESSON_WORD_MATCH_SHARE_MAX);
+    expect(share(lessonSlotTypeDistribution(100, 0))).toBe(LESSON.wordMatchShare.max);
   });
 
   it("clamps to MIN when backlog is all sentences", () => {
-    expect(share(lessonSlotTypeDistribution(0, 100))).toBe(LESSON_WORD_MATCH_SHARE_MIN);
+    expect(share(lessonSlotTypeDistribution(0, 100))).toBe(LESSON.wordMatchShare.min);
   });
 
   it("scales with the word ratio inside the clamp band", () => {
@@ -281,7 +275,7 @@ describe("planLessonMode — adaptive split integration", () => {
     // Under the old fixed 0.2 split this same roll would have been sentence-builder.
     const wordCount = planLessonMode([l], "A1_01", userWords, () => 0.5).queue
       .filter((s) => s.type === "word-match").length;
-    expect(wordCount).toBe(LESSON_TOTAL_SLOTS);
+    expect(wordCount).toBe(LESSON.totalSlots);
   });
 });
 
@@ -313,7 +307,7 @@ describe("planLessonMode — deduplication", () => {
     //                     sentence-idx=i/20, direction=en-lu]
     // sentence-idx i/20 ensures each of the 15 slots selects a distinct sentence
     // (sentences 0..14) so the deduplication check always finds a fresh key.
-    const seq = Array.from({ length: LESSON_TOTAL_SLOTS }, (_, i) =>
+    const seq = Array.from({ length: LESSON.totalSlots }, (_, i) =>
       [0.5, 0.5, 0.0, i / 20, 0.5],
     ).flat();
     let idx = 0;
@@ -322,7 +316,7 @@ describe("planLessonMode — deduplication", () => {
     const keys = config.queue
       .filter((s) => s.type === "sentence-builder")
       .map((s) => (s.type === "sentence-builder" ? s.item.phraseKey : ""));
-    expect(keys.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(keys.length).toBe(LESSON.totalSlots);
     expect(new Set(keys).size).toBe(keys.length);
   });
 
@@ -332,8 +326,40 @@ describe("planLessonMode — deduplication", () => {
     const s2 = sentence("Bye", "Äddi");
     const l = lesson("A1_01", [["Foo", "bar"]], [s1, s2]);
     const config = planLessonMode([l], "A1_01", {}, sentenceRng);
-    // Should still produce LESSON_TOTAL_SLOTS slots (not silently drop them).
-    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    // Should still produce LESSON.totalSlots slots (not silently drop them).
+    expect(config.queue.length).toBe(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "sentence-builder")).toBe(true);
+  });
+});
+
+// ─── @question support (shared with the exam track) ───────────────────────────
+
+describe("planLessonMode — question sentences", () => {
+  // Course lessons are not a special case: a `.letz` sentence carrying
+  // @question behaves in Lesson Mode exactly as it does in Exam Mode, because
+  // the rule lives in buildSentenceExercise (Layer 1), not in either planner.
+  const questionSentence: SentenceEntry = {
+    enVariants: ["My name is Luca."],
+    luVariants: ["Ech heesche Luca."],
+    question: "Wéi heescht Dir?",
+    distractorsEn: [],
+    distractorsLu: [],
+  };
+
+  it("carries the question into the exercise and forces en→lu", () => {
+    // 0.9 would roll lu-en for a plain sentence; the question must win.
+    const seq = [0.5, 0.9];
+    let idx = 0;
+    const rng = () => seq[idx++ % seq.length];
+    const l = lesson("A1_01", [["Moien", "hi"]], [questionSentence]);
+    const config = planLessonMode([l], "A1_01", {}, rng);
+    const slots = config.queue.filter((s) => s.type === "sentence-builder");
+    expect(slots.length).toBeGreaterThan(0);
+    for (const slot of slots) {
+      if (slot.type === "sentence-builder") {
+        expect(slot.item.question).toBe("Wéi heescht Dir?");
+        expect(slot.item.direction).toBe("en-lu");
+      }
+    }
   });
 });

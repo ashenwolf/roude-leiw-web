@@ -1,0 +1,22 @@
+{
+  "themes": [
+    {
+      "id": "vacation",
+      "title": "Vacation & Travel",
+      "subLessons": [
+        { "id": "vacation.01", "file": "vacation/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "vacation.02", "file": "vacation/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "vacation.03", "file": "vacation/03_questions.letz", "title": "Talking About It" }
+      ]
+    },
+    {
+      "id": "family",
+      "title": "Family & Myself",
+      "subLessons": [
+        { "id": "family.01", "file": "family/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "family.02", "file": "family/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "family.03", "file": "family/03_questions.letz", "title": "Talking About It" }
+      ]
+    }
+  ]
+}

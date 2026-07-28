@@ -13,6 +13,7 @@ export const SESSION_XP = {
   lesson: 100,
   "fix-errors": 90,
   "word-mix": 80,
+  exam: 100,
 } as const satisfies Record<string, number>;
 
 // ── Level table ────────────────────────────────────────────────────────────

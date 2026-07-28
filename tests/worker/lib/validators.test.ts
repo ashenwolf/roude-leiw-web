@@ -113,4 +113,15 @@ describe("validateProgressSync", () => {
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.reason).toContain("durationSeconds");
   });
+
+  // Exam-track sub-lesson ids (e.g. "vacation.01") ride the newlyUnlockedLessons
+  // channel as the play-gate — this pins the dependency on LESSON_ID_RX.
+  it("accepts exam-track sub-lesson ids in newlyUnlockedLessons", () => {
+    const r = validateProgressSync(
+      { ...valid(), newlyUnlockedLessons: ["vacation.01", "family.03", "A1.05"] },
+      TODAY,
+    );
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.value.newlyUnlockedLessons).toEqual(["vacation.01", "family.03", "A1.05"]);
+  });
 });

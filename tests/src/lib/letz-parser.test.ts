@@ -164,6 +164,54 @@ describe("parseLetz", () => {
     expect(lesson.sentences).toHaveLength(1);
   });
 
+  it("parses @question inside a @sentence block", () => {
+    const content = `
+@lesson V1.03 "Talking About Vacation"
+
+@sentence
+@question Wou fuert Dir an d'Vakanz?
+@lu Mir fueren a Frankräich.
+@en We are going to France.
+    `.trim();
+
+    const lesson = parseLetz(content, "V1.03");
+    expect(lesson.sentences[0].question).toBe("Wou fuert Dir an d'Vakanz?");
+    expect(lesson.sentences[0].luVariants).toEqual(["Mir fueren a Frankräich."]);
+    expect(lesson.sentences[0].enVariants).toEqual(["We are going to France."]);
+  });
+
+  it("leaves question undefined when @question is absent", () => {
+    const content = `
+@lesson A1.01 "Greetings"
+
+@sentence
+@lu Moien!
+@en Hi!
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.sentences[0].question).toBeUndefined();
+  });
+
+  it("scopes @question to its own @sentence block", () => {
+    const content = `
+@lesson V1.03 "Q&A"
+
+@sentence
+@question Wéi geet et?
+@lu Et geet gutt.
+@en I am fine.
+
+@sentence
+@lu Moien!
+@en Hi!
+    `.trim();
+
+    const lesson = parseLetz(content, "V1.03");
+    expect(lesson.sentences[0].question).toBe("Wéi geet et?");
+    expect(lesson.sentences[1].question).toBeUndefined();
+  });
+
   it("parses mixed @word and @sentence content correctly", () => {
     const content = `
 @lesson A1.01 "Greetings"

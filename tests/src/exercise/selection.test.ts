@@ -1,12 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { bucketedPick, pickFromPool, pickPair, pickSentence } from "../../../src/exercise/selection.ts";
-import {
-  SLOT_TYPE_DISTRIBUTION,
-  LESSON_WORD_MATCH_BUCKETS,
-  LESSON_SENTENCE_LESSON_BUCKETS,
-  WORD_MIX_BUCKETS,
-} from "../../../src/exercise/constants.ts";
+import { FIX_ERRORS, LESSON, WORD_MIX } from "../../../src/exercise/constants.ts";
 
 import type { Lesson, SentenceEntry, WordEntry } from "../../../src/exercise/letz-parser.ts";
 
@@ -37,33 +32,33 @@ const fakeRng = (...values: number[]) => {
 
 describe("bucketedPick", () => {
   it("selects the first bucket whose upTo > roll", () => {
-    expect(bucketedPick(0.0, SLOT_TYPE_DISTRIBUTION)).toBe("word-match");
-    expect(bucketedPick(0.19, SLOT_TYPE_DISTRIBUTION)).toBe("word-match");
-    expect(bucketedPick(0.2, SLOT_TYPE_DISTRIBUTION)).toBe("sentence-builder");
-    expect(bucketedPick(0.99, SLOT_TYPE_DISTRIBUTION)).toBe("sentence-builder");
+    expect(bucketedPick(0.0, FIX_ERRORS.buckets.slotType)).toBe("word-match");
+    expect(bucketedPick(0.19, FIX_ERRORS.buckets.slotType)).toBe("word-match");
+    expect(bucketedPick(0.2, FIX_ERRORS.buckets.slotType)).toBe("sentence-builder");
+    expect(bucketedPick(0.99, FIX_ERRORS.buckets.slotType)).toBe("sentence-builder");
   });
 
   it("maps lesson word-match buckets correctly", () => {
-    expect(bucketedPick(0.0, LESSON_WORD_MATCH_BUCKETS)).toBe("not-yet-mastered");
-    expect(bucketedPick(0.29, LESSON_WORD_MATCH_BUCKETS)).toBe("not-yet-mastered");
-    expect(bucketedPick(0.3, LESSON_WORD_MATCH_BUCKETS)).toBe("current");
-    expect(bucketedPick(0.84, LESSON_WORD_MATCH_BUCKETS)).toBe("current");
-    expect(bucketedPick(0.85, LESSON_WORD_MATCH_BUCKETS)).toBe("previous");
-    expect(bucketedPick(0.99, LESSON_WORD_MATCH_BUCKETS)).toBe("previous");
+    expect(bucketedPick(0.0, LESSON.buckets.wordMatch)).toBe("not-yet-mastered");
+    expect(bucketedPick(0.29, LESSON.buckets.wordMatch)).toBe("not-yet-mastered");
+    expect(bucketedPick(0.3, LESSON.buckets.wordMatch)).toBe("current");
+    expect(bucketedPick(0.84, LESSON.buckets.wordMatch)).toBe("current");
+    expect(bucketedPick(0.85, LESSON.buckets.wordMatch)).toBe("previous");
+    expect(bucketedPick(0.99, LESSON.buckets.wordMatch)).toBe("previous");
   });
 
   it("maps word-mix buckets correctly", () => {
-    expect(bucketedPick(0.0, WORD_MIX_BUCKETS)).toBe("errors");
-    expect(bucketedPick(0.24, WORD_MIX_BUCKETS)).toBe("errors");
-    expect(bucketedPick(0.25, WORD_MIX_BUCKETS)).toBe("current");
-    expect(bucketedPick(0.49, WORD_MIX_BUCKETS)).toBe("current");
-    expect(bucketedPick(0.5, WORD_MIX_BUCKETS)).toBe("previous");
-    expect(bucketedPick(0.99, WORD_MIX_BUCKETS)).toBe("previous");
+    expect(bucketedPick(0.0, WORD_MIX.buckets.pairSource)).toBe("errors");
+    expect(bucketedPick(0.24, WORD_MIX.buckets.pairSource)).toBe("errors");
+    expect(bucketedPick(0.25, WORD_MIX.buckets.pairSource)).toBe("current");
+    expect(bucketedPick(0.49, WORD_MIX.buckets.pairSource)).toBe("current");
+    expect(bucketedPick(0.5, WORD_MIX.buckets.pairSource)).toBe("previous");
+    expect(bucketedPick(0.99, WORD_MIX.buckets.pairSource)).toBe("previous");
   });
 
   it("falls back to the last bucket for a roll of exactly 1.0", () => {
     // Edge case: roll = 1.0 exceeds all `upTo` bounds.
-    expect(bucketedPick(1.0, LESSON_WORD_MATCH_BUCKETS)).toBe("previous");
+    expect(bucketedPick(1.0, LESSON.buckets.wordMatch)).toBe("previous");
   });
 });
 
@@ -77,7 +72,7 @@ describe("pickFromPool", () => {
   it("picks from the bucket that the roll selects", () => {
     // roll=0.5 → 'current' bucket; index roll=0.0 → candidates[0]
     const rng = fakeRng(0.5, 0.0);
-    const result = pickFromPool(pools, LESSON_WORD_MATCH_BUCKETS, rng);
+    const result = pickFromPool(pools, LESSON.buckets.wordMatch, rng);
     expect(result).toEqual(word("A", "a"));
   });
 
@@ -86,7 +81,7 @@ describe("pickFromPool", () => {
     const rng = fakeRng(0.9, 0.5, 0.0);
     const result = pickFromPool(
       { "not-yet-mastered": [], current, previous: [] },
-      LESSON_WORD_MATCH_BUCKETS,
+      LESSON.buckets.wordMatch,
       rng,
     );
     expect(result).toBeDefined();
@@ -96,7 +91,7 @@ describe("pickFromPool", () => {
   it("returns undefined when all pools are empty", () => {
     const result = pickFromPool(
       { "not-yet-mastered": [], current: [], previous: [] },
-      LESSON_WORD_MATCH_BUCKETS,
+      LESSON.buckets.wordMatch,
     );
     expect(result).toBeUndefined();
   });
@@ -104,8 +99,8 @@ describe("pickFromPool", () => {
   it("allows duplicate picks (with-replacement sampling)", () => {
     // Always roll into 'current' bucket, always pick index 0 — produces duplicates
     const rng = fakeRng(0.5, 0.0);
-    const r1 = pickFromPool(pools, LESSON_WORD_MATCH_BUCKETS, rng);
-    const r2 = pickFromPool(pools, LESSON_WORD_MATCH_BUCKETS, rng);
+    const r1 = pickFromPool(pools, LESSON.buckets.wordMatch, rng);
+    const r2 = pickFromPool(pools, LESSON.buckets.wordMatch, rng);
     expect(r1).toEqual(r2);
   });
 
@@ -115,15 +110,15 @@ describe("pickFromPool", () => {
     const prev = [word("P", "p")];
 
     expect(
-      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX_BUCKETS, fakeRng(0.1, 0.0)),
+      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX.buckets.pairSource, fakeRng(0.1, 0.0)),
     ).toEqual(word("E", "e"));
 
     expect(
-      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX_BUCKETS, fakeRng(0.3, 0.0)),
+      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX.buckets.pairSource, fakeRng(0.3, 0.0)),
     ).toEqual(word("C", "c"));
 
     expect(
-      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX_BUCKETS, fakeRng(0.7, 0.0)),
+      pickFromPool({ errors, current: cur, previous: prev }, WORD_MIX.buckets.pairSource, fakeRng(0.7, 0.0)),
     ).toEqual(word("P", "p"));
   });
 });
@@ -138,7 +133,7 @@ describe("pickPair", () => {
     const rng = fakeRng(0.5, 0.0);
     const result = pickPair(
       { "not-yet-mastered": [], current, previous },
-      LESSON_WORD_MATCH_BUCKETS,
+      LESSON.buckets.wordMatch,
       rng,
     );
     expect(result).toEqual(word("Moien", "hi"));
@@ -150,7 +145,7 @@ describe("pickPair", () => {
     const rng = fakeRng(0.5, 0.9, 0.0);
     const result = pickPair(
       { "not-yet-mastered": [], current: [], previous },
-      LESSON_WORD_MATCH_BUCKETS,
+      LESSON.buckets.wordMatch,
       rng,
     );
     expect(result).toEqual(word("Äddi", "bye"));
@@ -160,7 +155,7 @@ describe("pickPair", () => {
     expect(
       pickPair(
         { "not-yet-mastered": [], current: [], previous: [] },
-        LESSON_WORD_MATCH_BUCKETS,
+        LESSON.buckets.wordMatch,
       ),
     ).toBeUndefined();
   });
@@ -178,7 +173,7 @@ describe("pickSentence", () => {
     const rng = fakeRng(0.5, 0.0, 0.0);
     const result = pickSentence(
       { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
-      LESSON_SENTENCE_LESSON_BUCKETS,
+      LESSON.buckets.sentenceLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L1");
@@ -190,7 +185,7 @@ describe("pickSentence", () => {
     const rng = fakeRng(0.9, 0.0, 0.0);
     const result = pickSentence(
       { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
-      LESSON_SENTENCE_LESSON_BUCKETS,
+      LESSON.buckets.sentenceLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L2");
@@ -202,7 +197,7 @@ describe("pickSentence", () => {
     const rng = fakeRng(0.5, 0.9, 0.0, 0.0);
     const result = pickSentence(
       { "not-yet-mastered": [], current: [], previous: [previousLesson] },
-      LESSON_SENTENCE_LESSON_BUCKETS,
+      LESSON.buckets.sentenceLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L2");
@@ -212,7 +207,7 @@ describe("pickSentence", () => {
     expect(
       pickSentence(
         { "not-yet-mastered": [], current: [], previous: [] },
-        LESSON_SENTENCE_LESSON_BUCKETS,
+        LESSON.buckets.sentenceLesson,
       ),
     ).toBeUndefined();
   });
@@ -223,7 +218,7 @@ describe("pickSentence", () => {
     const rng = fakeRng(0.5, 0.0);
     const result = pickSentence(
       { "not-yet-mastered": [], current: [emptyLesson], previous: [] },
-      LESSON_SENTENCE_LESSON_BUCKETS,
+      LESSON.buckets.sentenceLesson,
       rng,
     );
     expect(result).toBeUndefined();

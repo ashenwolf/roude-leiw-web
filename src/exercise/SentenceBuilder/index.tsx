@@ -48,7 +48,18 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
 
   return (
     <div className="flex flex-col gap-6 p-2">
-      <p className="text-center text-lg font-semibold text-gray-800 px-2">
+      {item.question !== undefined && (
+        <p className="text-center text-xl font-bold text-gray-900 px-2">
+          {item.question}
+        </p>
+      )}
+      <p
+        className={
+          item.question !== undefined
+            ? "text-center text-sm italic text-gray-500 px-2"
+            : "text-center text-lg font-semibold text-gray-800 px-2"
+        }
+      >
         {item.promptText}
       </p>
 

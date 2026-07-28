@@ -1,12 +1,7 @@
 // Layer 4 — Fix Errors Mode planner.
 // See CLAUDE.md > Architecture Reference > Mode specs > Fix Errors.
 
-import {
-  LESSON_SLOTS_PER_BLOCK,
-  LESSON_TOTAL_SLOTS,
-  LESSON_WORD_MATCH_PAIR_COUNT,
-  SLOT_TYPE_DISTRIBUTION,
-} from "../constants";
+import { FIX_ERRORS, LESSON } from "../constants";
 import { selectErrorPool } from "../error-pool";
 import { buildSentenceExercise, buildWordMatchExercise } from "../exercise-builders";
 import { findCurrentLessonId } from "../progression";
@@ -19,9 +14,9 @@ import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
 
 const BLOCK_BOUNDARIES = [
-  LESSON_SLOTS_PER_BLOCK,
-  2 * LESSON_SLOTS_PER_BLOCK,
-  3 * LESSON_SLOTS_PER_BLOCK,
+  LESSON.slotsPerBlock,
+  2 * LESSON.slotsPerBlock,
+  3 * LESSON.slotsPerBlock,
 ] as const;
 
 // Single-bucket pool — all draws come from the error pool.
@@ -47,7 +42,7 @@ export const planFixErrorsMode = (
     return {
       lessons,
       queue: [],
-      plannedSlots: LESSON_TOTAL_SLOTS,
+      plannedSlots: LESSON.totalSlots,
       currentLessonId,
       blockBoundaries: BLOCK_BOUNDARIES,
       hasCorrectionBlock: true,
@@ -59,7 +54,7 @@ export const planFixErrorsMode = (
   const phrasePool = errorPool.phrases;
 
   const queue: Exercise[] = [];
-  for (let i = 0; i < LESSON_TOTAL_SLOTS; i++) {
+  for (let i = 0; i < LESSON.totalSlots; i++) {
     const slot = buildSlot(wordPools, phrasePool, rng);
     if (slot) queue.push(slot);
   }
@@ -67,7 +62,7 @@ export const planFixErrorsMode = (
   return {
     lessons,
     queue,
-    plannedSlots: LESSON_TOTAL_SLOTS,
+    plannedSlots: LESSON.totalSlots,
     currentLessonId,
     blockBoundaries: BLOCK_BOUNDARIES,
     hasCorrectionBlock: true,
@@ -86,7 +81,7 @@ const buildSlot = (
   const hasPhrases = phrasePool.length > 0;
 
   for (let attempt = 0; attempt < 20; attempt++) {
-    const slotType = bucketedPick(rng(), SLOT_TYPE_DISTRIBUTION);
+    const slotType = bucketedPick(rng(), FIX_ERRORS.buckets.slotType);
 
     if (slotType === "sentence-builder" && hasPhrases) {
       const { sentence, direction } = phrasePool[Math.floor(rng() * phrasePool.length)];
@@ -95,7 +90,7 @@ const buildSlot = (
 
     if (slotType === "word-match" && hasWords) {
       // Independent draws with replacement from the error pool
-      const pairs = Array.from({ length: LESSON_WORD_MATCH_PAIR_COUNT }, () =>
+      const pairs = Array.from({ length: LESSON.wordMatchPairs }, () =>
         pickPair(wordPools, ERRORS_ONLY_BUCKET, rng),
       ).filter((p): p is WordEntry => p !== undefined);
 
@@ -106,7 +101,7 @@ const buildSlot = (
 
   // Fallback: if only one pool type available, use it
   if (hasWords) {
-    const pairs = Array.from({ length: LESSON_WORD_MATCH_PAIR_COUNT }, () =>
+    const pairs = Array.from({ length: LESSON.wordMatchPairs }, () =>
       pickPair(wordPools, ERRORS_ONLY_BUCKET, rng),
     ).filter((p): p is WordEntry => p !== undefined);
     return pairs.length > 0 ? buildWordMatchExercise(pairs) : null;

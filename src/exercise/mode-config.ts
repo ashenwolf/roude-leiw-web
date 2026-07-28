@@ -9,7 +9,8 @@ import type { Exercise } from "./types";
 export type SessionMode =
   | { kind: "lesson"; lessonId?: string }
   | { kind: "word-mix" }
-  | { kind: "fix-errors" };
+  | { kind: "fix-errors" }
+  | { kind: "exam"; subLessonId: string };
 
 // ─── ModeConfig ───────────────────────────────────────────────────────────────
 

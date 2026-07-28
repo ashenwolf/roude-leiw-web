@@ -1,0 +1,88 @@
+# Exam track — Theme: Family & Myself — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+# Question words and connectors are drilled as vocabulary alongside them.
+
+@lesson F1.03 "Talking About Family"
+
+@word wéi vill = how many
+@word wéi al = how old
+@word wiem = whom
+@word jo = yes
+@word nee = no
+@word schonn = already
+@word nach net = not yet
+@word dacks = often
+@word heiansdo = sometimes
+@word d'Chauffer = driver
+@word d'Infirmière = nurse
+
+@sentence
+@question Hutt Dir Geschwëster?
+@lu Jo, ech hunn ee Brudder an zwou Schwësteren.
+@en Yes, I have one brother and two sisters.
+@distractor-lu keng
+@distractor-lu Kanner
+
+@sentence
+@question Wéi heescht Äre Papp?
+@lu Mäi Papp heescht Pierre.
+@en My father is called Pierre.
+@distractor-lu Mamm
+@distractor-lu wunnt
+
+@sentence
+@question Wou wunnt Är Famill?
+@lu Meng Famill wunnt zu Lëtzebuerg.
+@en My family lives in Luxembourg.
+@distractor-lu schafft
+@distractor-lu op
+
+@sentence
+@question Sidd Dir bestuet?
+@lu Jo, ech si scho zéng Joer bestuet.
+@en Yes, I have been married for ten years.
+@distractor-lu nach
+@distractor-lu Deeg
+
+@sentence
+@question Hutt Dir Kanner?
+@lu Jo, ech hunn eng Duechter an ee Jong.
+@en Yes, I have a daughter and a son.
+@distractor-lu keng
+@distractor-lu Bridder
+
+@sentence
+@question Wat maachen Är Elteren?
+@lu Mäi Papp ass Chauffer a meng Mamm ass Infirmière.
+@en My father is a driver and my mother is a nurse.
+@distractor-lu Duechter
+@distractor-lu waren
+
+@sentence
+@question Wéi al ass Äre Brudder?
+@lu Mäi Brudder ass drësseg Joer al.
+@en My brother is thirty years old.
+@distractor-lu jonk
+@distractor-lu Wochen
+
+@sentence
+@question Gesitt Dir Är Famill dacks?
+@lu Jo, mir gesinn eis all Weekend.
+@en Yes, we see each other every weekend.
+@distractor-lu ni
+@distractor-lu Mount
+
+@sentence
+@question Wou wunnt Dir a mat wiem?
+@lu Ech wunnen a menger Wunneng mat menger Famill.
+@en I live in my apartment with my family.
+@distractor-lu eleng
+@distractor-lu Haus
+
+@sentence
+@question Wat maacht Dir gär mat Ärer Famill?
+@lu Mir kachen a schwätze gär zesummen.
+@en We like cooking and talking together.
+@distractor-lu eleng
+@distractor-lu schaffen

@@ -16,6 +16,9 @@ import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "../ui/Popup";
 import { DebugPanel } from "../ui/DebugPanel";
 
+import type { AppPages, NavigationParams } from "../context/navigation";
+import type { WordStats } from "../context/auth";
+import type { Lesson } from "../exercise/letz-parser";
 import type { SessionMode } from "../exercise/mode-config";
 import type { ProgressView } from "../exercise/session-progress";
 import type { Exercise } from "../exercise/types";
@@ -39,24 +42,46 @@ const ExerciseError = ({ error, onBack }: ExerciseErrorProps) => (
   </div>
 );
 
+/** All user-facing copy for a Mode in one place — extend when adding a Mode. */
+type ModeLabels = {
+  title: string;
+  readyText: (totalSlots: number) => string;
+  emptyText: string;
+};
+
+const MODE_LABELS: Record<SessionMode["kind"], ModeLabels> = {
+  lesson: {
+    title: "Word Match Exercise",
+    readyText: (n) => `Complete ${n} exercises to finish the session.`,
+    emptyText: "Nothing to practice here yet.",
+  },
+  "word-mix": {
+    title: "Word Mix",
+    readyText: () => "Test yourself across all words you've seen.",
+    emptyText: "Nothing to practice here yet.",
+  },
+  "fix-errors": {
+    title: "Fix Your Mistakes",
+    readyText: () => "Drill the words and phrases you got wrong.",
+    emptyText: "No mistakes to fix right now — nice work!",
+  },
+  exam: {
+    title: "Theme Practice",
+    readyText: (n) => `Practice this topic for the Sproochentest — ${n} exercises.`,
+    emptyText: "This sub-lesson has no content yet.",
+  },
+};
+
 type ExerciseReadyProps = { totalSlots: number; onStart: () => void; onBack: () => void; mode: SessionMode };
 const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
-    <h2 className="text-2xl font-bold text-gray-800">
-      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
-    </h2>
-    <p className="text-gray-600 text-center">
-      {mode.kind === "word-mix"
-        ? "Test yourself across all words you've seen."
-        : mode.kind === "fix-errors"
-        ? "Drill the words and phrases you got wrong."
-        : `Complete ${totalSlots} exercises to finish the session.`}
-    </p>
+    <h2 className="text-2xl font-bold text-gray-800">{MODE_LABELS[mode.kind].title}</h2>
+    <p className="text-gray-600 text-center">{MODE_LABELS[mode.kind].readyText(totalSlots)}</p>
     <div className="w-full max-w-xs">
       <Button onClick={onStart}>Start</Button>
     </div>
     <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors">
-      Back to Home
+      Back
     </button>
   </div>
 );
@@ -67,16 +92,10 @@ const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps
 type ExerciseEmptyProps = { mode: SessionMode; onBack: () => void };
 const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
-    <h2 className="text-2xl font-bold text-gray-800">
-      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
-    </h2>
-    <p className="text-gray-600 text-center">
-      {mode.kind === "fix-errors"
-        ? "No mistakes to fix right now — nice work!"
-        : "Nothing to practice here yet."}
-    </p>
+    <h2 className="text-2xl font-bold text-gray-800">{MODE_LABELS[mode.kind].title}</h2>
+    <p className="text-gray-600 text-center">{MODE_LABELS[mode.kind].emptyText}</p>
     <div className="w-full max-w-xs">
-      <Button onClick={onBack}>Back to Home</Button>
+      <Button onClick={onBack}>Back</Button>
     </div>
   </div>
 );
@@ -84,6 +103,7 @@ const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
 type ExerciseActiveProps = {
   state: SessionStatus;
   currentSlotIndex: number;
+  completedSections: number;
   lastSlotOutcome: "success" | "mistake" | null;
   progressView: ProgressView;
   currentBatch: Exercise | undefined;
@@ -99,6 +119,7 @@ type ExerciseActiveProps = {
 const ExerciseActive = ({
   state,
   currentSlotIndex,
+  completedSections,
   lastSlotOutcome,
   progressView,
   currentBatch,
@@ -133,7 +154,7 @@ const ExerciseActive = ({
 
     <div className="mt-4">
       <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors text-sm">
-        ← Back to Home
+        ← Back
       </button>
     </div>
 
@@ -151,7 +172,7 @@ const ExerciseActive = ({
     <SectionMilestonePopup
       visible={state === "section_complete"}
       onDismiss={onDismissMilestone}
-      section={Math.floor((currentSlotIndex + 1) / 5)}
+      section={completedSections}
     />
 
     <CelebrationPopup
@@ -162,6 +183,52 @@ const ExerciseActive = ({
   </div>
 );
 
+// ── Mode derivation & unlock effects (pure) ─────────────────────────────
+
+const toSessionMode = (page: AppPages, params: NavigationParams): SessionMode => {
+  switch (page) {
+    case "word-mix": return { kind: "word-mix" };
+    case "fix-errors": return { kind: "fix-errors" };
+    case "exam-session": return { kind: "exam", subLessonId: params.subLessonId ?? "" };
+    default: return { kind: "lesson", lessonId: params.lessonId };
+  }
+};
+
+type UnlockContext = {
+  lessons: Lesson[];
+  words: Record<string, WordStats>;
+  wordResults: WordResultMap;
+  unlockedLessons: string[];
+  sessionCompleted: boolean;
+};
+
+/**
+ * Ids this flush should append to the persisted unlock set.
+ *
+ * Lesson Mode derives course unlocks from stats, so it runs on abandon too —
+ * unlock is earned by answering, not by finishing. The Exam play-gate rides the
+ * same channel but only on a completed Session: abandoning a SubLesson must
+ * not mark it played. Word Mix and Fix Errors unlock nothing.
+ */
+const collectUnlockIds = (mode: SessionMode, ctx: UnlockContext): string[] => {
+  switch (mode.kind) {
+    case "lesson": {
+      const persisted = new Set(ctx.unlockedLessons);
+      return computeUnlockedLessonIds(
+        ctx.lessons,
+        mergeWordStats(ctx.words, ctx.wordResults),
+        ctx.unlockedLessons,
+      ).filter((id) => !persisted.has(id));
+    }
+    case "exam":
+      return ctx.sessionCompleted && !ctx.unlockedLessons.includes(mode.subLessonId)
+        ? [mode.subLessonId]
+        : [];
+    default:
+      return [];
+  }
+};
+
 // ── Page Component ──────────────────────────────────────────────────────
 
 export const AppExercise = () => {
@@ -170,13 +237,10 @@ export const AppExercise = () => {
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
-  const mode: SessionMode =
-    currentPage === "word-mix" ? { kind: "word-mix" }
-    : currentPage === "fix-errors" ? { kind: "fix-errors" }
-    : { kind: "lesson", lessonId: params.lessonId };
+  const mode = toSessionMode(currentPage, params);
 
   // session is defined first so handlers below can reference it without TDZ risk
-  const session = useExerciseSession({ userWords: words, mode });
+  const session = useExerciseSession({ userWords: words, unlockedLessons, mode });
 
   // Accumulate word results and duration across all slots. Flushed once on
   // session complete or abandon so local state and the remote POST update together.
@@ -189,27 +253,27 @@ export const AppExercise = () => {
     if (session.state === "active") timer.start();
   }, [session.state, session.currentSlotIndex, timer]);
 
-  const goHome = () => {
+  // Exam sessions come from (and return to) the theme page, not Home.
+  const goBack = () => {
     refreshGuestProgress();
-    navigateTo("home");
+    navigateTo(mode.kind === "exam" ? "exam" : "home");
   };
 
   // Merge accumulated results into local + remote state, then clear the buffer.
-  const flushProgress = (extraUnlockCheck: boolean, xpEarned = 0) => {
+  const flushProgress = (sessionCompleted: boolean, xpEarned = 0) => {
     const wordResults = pendingResults.current;
     const durationSeconds = pendingDuration.current;
     pendingResults.current = {};
     pendingDuration.current = 0;
 
-    const newlyUnlockedLessons = extraUnlockCheck
-      ? computeUnlockedLessonIds(
-          session.lessons,
-          mergeWordStats(words, wordResults),
-          unlockedLessons,
-        ).filter((id) => !new Set(unlockedLessons).has(id))
-      : [];
-
-    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
+    const unlockIds = collectUnlockIds(mode, {
+      lessons: session.lessons,
+      words,
+      wordResults,
+      unlockedLessons,
+      sessionCompleted,
+    });
+    syncBatch(wordResults, durationSeconds, unlockIds, xpEarned);
   };
 
   const handleSlotSync = (wordResults: WordResultMap) => {
@@ -233,7 +297,7 @@ export const AppExercise = () => {
 
   const handleTryAgain = () => {
     posthog?.capture("session_restarted", { lesson_id: params.lessonId });
-    flushProgress(mode.kind === "lesson");
+    flushProgress(true); // try-again is only reachable from the completion popup
     timer.reset();
     session.resetSession();
   };
@@ -244,20 +308,20 @@ export const AppExercise = () => {
       slot_index: session.currentSlotIndex,
       total_slots: session.totalSlots,
     });
-    flushProgress(mode.kind === "lesson");
-    goHome();
+    flushProgress(false);
+    goBack();
   };
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
-    flushProgress(mode.kind === "lesson", SESSION_XP[mode.kind]);
-    goHome();
+    flushProgress(true, SESSION_XP[mode.kind]);
+    goBack();
   };
 
   if (session.state === "loading") return <ExerciseLoading />;
-  if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
+  if (session.state === "error") return <ExerciseError error={session.error} onBack={goBack} />;
   if (session.state === "ready") {
-    if (session.totalSlots === 0) return <ExerciseEmpty mode={mode} onBack={goHome} />;
+    if (session.totalSlots === 0) return <ExerciseEmpty mode={mode} onBack={goBack} />;
     const handleStart = () => {
       posthog?.capture("exercise_started", {
         lesson_id: params.lessonId,
@@ -270,7 +334,7 @@ export const AppExercise = () => {
       <ExerciseReady
         totalSlots={session.totalSlots}
         onStart={handleStart}
-        onBack={goHome}
+        onBack={goBack}
         mode={mode}
       />
     );
@@ -281,6 +345,7 @@ export const AppExercise = () => {
       <ExerciseActive
         state={session.state}
         currentSlotIndex={session.currentSlotIndex}
+        completedSections={session.completedSections}
         lastSlotOutcome={session.lastSlotOutcome}
         progressView={session.progressView}
         currentBatch={session.currentBatch}

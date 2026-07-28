@@ -100,17 +100,23 @@ export const loadLessonsUpToCursor = async (
 };
 
 /**
- * Fetch and parse a single lesson file
+ * Fetch and parse any .letz file by URL. Shared by the course catalog (below)
+ * and the exam catalog (src/exam/exam-catalog.ts).
  */
-export const fetchLesson = async (level: string, filename: string): Promise<Lesson> => {
-  const url = `${LESSONS_BASE_PATH}/${level}/${filename}`;
+export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Lesson> => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch lesson ${url}: ${response.statusText}`);
   }
   const content = await response.text();
-  return await parseLetzContent(content, `${level}/${filename}`);
+  return await parseLetzContent(content, fallbackId);
 };
+
+/**
+ * Fetch and parse a single lesson file
+ */
+export const fetchLesson = (level: string, filename: string): Promise<Lesson> =>
+  fetchLetzFile(`${LESSONS_BASE_PATH}/${level}/${filename}`, `${level}/${filename}`);
 
 // Module-level cache — all lessons, regardless of level.
 // Reset on error so the next call retries the fetch.

@@ -49,6 +49,43 @@ export const buildWordMatchExercise = (pairs: WordEntry[]): WordMatchBatch => ({
 });
 
 /**
+ * Splits an ordered word list into consecutive WordMatch exercises of
+ * `pairCount` pairs each. A trailing chunk smaller than `minChunk` is merged
+ * into the previous exercise instead of forming a degenerate 1–2 pair slot.
+ *
+ * Mode-agnostic: any Mode that wants "cover this whole word list" slots uses
+ * it, passing its own sizing. Callers shuffle first if they want random order.
+ */
+export const chunkIntoWordMatchExercises = (
+  entries: ReadonlyArray<WordEntry>,
+  { pairCount, minChunk }: { pairCount: number; minChunk: number },
+): WordMatchBatch[] => {
+  const chunks = Array.from(
+    { length: Math.ceil(entries.length / pairCount) },
+    (_, i) => entries.slice(i * pairCount, (i + 1) * pairCount),
+  );
+  const last = chunks[chunks.length - 1];
+  const merged =
+    chunks.length > 1 && last.length < minChunk
+      ? [...chunks.slice(0, -2), [...chunks[chunks.length - 2], ...last]]
+      : chunks;
+  return merged.filter((chunk) => chunk.length > 0).map(buildWordMatchExercise);
+};
+
+/**
+ * The direction a Sentence must be presented in.
+ *
+ * A Sentence carrying a `question` is an examiner prompt: the learner answers
+ * it in Luxembourgish, so it is **always** assembled en→lu regardless of what
+ * the caller rolled. This is a property of the content, not of the Mode — every
+ * Mode that schedules sentences gets the rule for free by going through here.
+ */
+export const resolveSentenceDirection = (
+  entry: SentenceEntry,
+  rolled: "en-lu" | "lu-en",
+): "en-lu" | "lu-en" => (entry.question !== undefined ? "en-lu" : rolled);
+
+/**
  * Builds a sentence-builder exercise from a single sentence entry.
  *
  * Token set = multiset union of all accepted answer variants so the player can
@@ -56,12 +93,16 @@ export const buildWordMatchExercise = (pairs: WordEntry[]): WordMatchBatch => ({
  * (e.g. "d'Mamm an d'Papp" needs two "d'" chips).
  *
  * Distractors: authored first; auto-filled from `lessonVocab` when absent.
+ *
+ * `direction` is normalized through `resolveSentenceDirection`, so a
+ * question-carrying Sentence is en→lu no matter which direction was requested.
  */
 export const buildSentenceExercise = (
   entry: SentenceEntry,
-  direction: "en-lu" | "lu-en",
+  requestedDirection: "en-lu" | "lu-en",
   lessonVocab: string[],
 ): SentenceBuilderBatch => {
+  const direction = resolveSentenceDirection(entry, requestedDirection);
   const isEnToLu = direction === "en-lu";
   const targetLang = isEnToLu ? "lu" : "en";
 
@@ -109,6 +150,7 @@ export const buildSentenceExercise = (
     // Record under the actual presented direction so the error pool can later
     // repeat the exact direction the user struggled with.
     phraseKey: phraseKey(direction, entry.enVariants[0]),
+    ...(entry.question !== undefined ? { question: entry.question } : {}),
   };
 
   return { type: "sentence-builder", item };

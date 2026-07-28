@@ -1,13 +1,7 @@
 // Layer 4 — Word Mix Mode planner.
 // See CLAUDE.md > Architecture Reference > Mode specs > Word Mix.
 
-import {
-  BLOCK_COUNT,
-  WORD_MIX_BUCKETS,
-  WORD_MIX_PAIRS_PER_SLOT,
-  WORD_MIX_SLOTS_PER_BLOCK,
-  WORD_MIX_TOTAL_SLOTS,
-} from "../constants";
+import { BLOCK_COUNT, WORD_MIX } from "../constants";
 import { selectErrorPool } from "../error-pool";
 import { buildWordMatchExercise } from "../exercise-builders";
 import { findCurrentLessonId } from "../progression";
@@ -20,7 +14,7 @@ import type { Exercise } from "../types";
 
 // Word Mix: 3 Blocks × 1 Slot each → milestones at 1, 2, 3
 const BLOCK_BOUNDARIES = Array.from({ length: BLOCK_COUNT }, (_, i) =>
-  (i + 1) * WORD_MIX_SLOTS_PER_BLOCK,
+  (i + 1) * WORD_MIX.slotsPerBlock,
 );
 
 /**
@@ -42,7 +36,7 @@ export const planWordMixMode = (
     return {
       lessons,
       queue: [],
-      plannedSlots: WORD_MIX_TOTAL_SLOTS,
+      plannedSlots: WORD_MIX.totalSlots,
       currentLessonId,
       blockBoundaries: BLOCK_BOUNDARIES,
       hasCorrectionBlock: false,
@@ -59,17 +53,17 @@ export const planWordMixMode = (
     previous: pool.slice(0, -1).flatMap((l) => l.entries),
   };
 
-  // 3 slots, each a WordMatch Exercise with WORD_MIX_PAIRS_PER_SLOT pairs.
+  // 3 slots, each a WordMatch Exercise with WORD_MIX.pairsPerSlot pairs.
   // Pairs are seeded here, not per-slot-start.
   const queue: Exercise[] = Array.from(
-    { length: WORD_MIX_TOTAL_SLOTS },
+    { length: WORD_MIX.totalSlots },
     () => buildWordMatchExercise(buildPairs(wordPools, rng)),
   );
 
   return {
     lessons,
     queue,
-    plannedSlots: WORD_MIX_TOTAL_SLOTS,
+    plannedSlots: WORD_MIX.totalSlots,
     currentLessonId,
     blockBoundaries: BLOCK_BOUNDARIES,
     hasCorrectionBlock: false,
@@ -83,6 +77,6 @@ const buildPairs = (
   wordPools: Record<"errors" | "current" | "previous", ReadonlyArray<WordEntry>>,
   rng: () => number,
 ): WordEntry[] =>
-  Array.from({ length: WORD_MIX_PAIRS_PER_SLOT }, () =>
-    pickPair(wordPools, WORD_MIX_BUCKETS, rng),
+  Array.from({ length: WORD_MIX.pairsPerSlot }, () =>
+    pickPair(wordPools, WORD_MIX.buckets.pairSource, rng),
   ).filter((p): p is WordEntry => p !== undefined);

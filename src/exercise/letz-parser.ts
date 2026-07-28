@@ -26,6 +26,8 @@ export type WordEntry = {
 export type SentenceEntry = {
   luVariants: string[];
   enVariants: string[];
+  /** Examiner-style question (in Luxembourgish) this sentence answers — exam-track Q&A. */
+  question?: string;
   distractorsEn?: string[];
   distractorsLu?: string[];
 };

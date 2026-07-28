@@ -1,11 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { planWordMixMode } from "../../../../src/exercise/modes/word-mix.ts";
-import {
-  WORD_MIX_TOTAL_SLOTS,
-  WORD_MIX_PAIRS_PER_SLOT,
-  MIN_ANSWERS,
-} from "../../../../src/exercise/constants.ts";
+import { MIN_ANSWERS, WORD_MIX } from "../../../../src/exercise/constants.ts";
 import { wordKey } from "../../../../src/exercise/progression.ts";
 
 import type { WordStats } from "../../../../src/context/auth.ts";
@@ -30,10 +26,10 @@ describe("planWordMixMode — shape", () => {
     lesson("A1_02", [["Merci", "thanks"], ["Jo", "yes"]]),
   ];
 
-  it("returns WORD_MIX_TOTAL_SLOTS planned slots", () => {
+  it("returns WORD_MIX.totalSlots planned slots", () => {
     const config = planWordMixMode(lessons, {});
-    expect(config.plannedSlots).toBe(WORD_MIX_TOTAL_SLOTS);
-    expect(config.queue.length).toBe(WORD_MIX_TOTAL_SLOTS);
+    expect(config.plannedSlots).toBe(WORD_MIX.totalSlots);
+    expect(config.queue.length).toBe(WORD_MIX.totalSlots);
   });
 
   it("every slot is a word-match exercise", () => {
@@ -41,11 +37,11 @@ describe("planWordMixMode — shape", () => {
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
 
-  it("each word-match slot has WORD_MIX_PAIRS_PER_SLOT pairs", () => {
+  it("each word-match slot has WORD_MIX.pairsPerSlot pairs", () => {
     const config = planWordMixMode(lessons, {});
     config.queue.forEach((slot) => {
       if (slot.type === "word-match") {
-        expect(slot.pairs).toHaveLength(WORD_MIX_PAIRS_PER_SLOT);
+        expect(slot.pairs).toHaveLength(WORD_MIX.pairsPerSlot);
       }
     });
   });

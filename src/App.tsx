@@ -9,11 +9,17 @@ const AppExercise = lazy(() =>
   import("./page/AppExercise").then((m) => ({ default: m.AppExercise })),
 );
 
+const AppExam = lazy(() =>
+  import("./page/AppExam").then((m) => ({ default: m.AppExam })),
+);
+
 const PageMapper = {
   home: AppHome,
   exercise: AppExercise,
   "word-mix": AppExercise,
   "fix-errors": AppExercise,
+  exam: AppExam,
+  "exam-session": AppExercise,
 };
 
 const PageFallback = () => (
