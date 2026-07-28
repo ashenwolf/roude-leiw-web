@@ -1,8 +1,21 @@
 # Exam track — Theme: Family & Myself — Sub-lesson 3: Talking About It
 # @question sentences: the examiner asks in Luxembourgish, the learner
 # assembles the Luxembourgish answer (always en→lu).
+# Question words and connectors are drilled as vocabulary alongside them.
 
 @lesson F1.03 "Talking About Family"
+
+@word wéi vill = how many
+@word wéi al = how old
+@word wiem = whom
+@word jo = yes
+@word nee = no
+@word schonn = already
+@word nach net = not yet
+@word dacks = often
+@word heiansdo = sometimes
+@word d'Chauffer = driver
+@word d'Infirmière = nurse
 
 @sentence
 @question Hutt Dir Geschwëster?
@@ -59,3 +72,17 @@
 @en Yes, we see each other every weekend.
 @distractor-lu ni
 @distractor-lu Mount
+
+@sentence
+@question Wou wunnt Dir a mat wiem?
+@lu Ech wunnen a menger Wunneng mat menger Famill.
+@en I live in my apartment with my family.
+@distractor-lu eleng
+@distractor-lu Haus
+
+@sentence
+@question Wat maacht Dir gär mat Ärer Famill?
+@lu Mir kachen a schwätze gär zesummen.
+@en We like cooking and talking together.
+@distractor-lu eleng
+@distractor-lu schaffen

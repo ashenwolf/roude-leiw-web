@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef } from "react";
 
 import { loadExamMeta, fetchSubLesson } from "../exam/exam-catalog";
-import { LESSON_TOTAL_SLOTS, LESSON_WORD_MATCH_PAIR_COUNT } from "./constants";
+import { LESSON } from "./constants";
 import { loadErrorScopeLessons } from "./error-scope";
 import { loadAllLessons } from "./lesson-loader";
 import { planExamMode } from "./modes/exam";
@@ -22,8 +22,8 @@ import type { Exercise } from "./types";
 // ============================================================================
 
 export const SESSION_CONFIG = {
-  PLANNED_SLOTS: LESSON_TOTAL_SLOTS,
-  WORD_MATCH_SIZE: LESSON_WORD_MATCH_PAIR_COUNT,
+  PLANNED_SLOTS: LESSON.totalSlots,
+  WORD_MATCH_SIZE: LESSON.wordMatchPairs,
 } as const;
 
 // ============================================================================
@@ -53,20 +53,23 @@ const loadModeConfig = async (
   words: Record<string, WordStats>,
   unlockedLessons: ReadonlyArray<string>,
 ): Promise<ModeConfig> => {
-  if (mode.kind === "exam") {
-    const metas = await loadExamMeta();
-    const meta = metas.find((m) => m.id === mode.subLessonId);
-    if (!meta) throw new Error(`Unknown exam sub-lesson: ${mode.subLessonId}`);
-    return planExamMode(await fetchSubLesson(meta));
+  switch (mode.kind) {
+    case "exam": {
+      const metas = await loadExamMeta();
+      const meta = metas.find((m) => m.id === mode.subLessonId);
+      if (!meta) throw new Error(`Unknown exam sub-lesson: ${mode.subLessonId}`);
+      return planExamMode(await fetchSubLesson(meta));
+    }
+    case "fix-errors":
+      // Global scope: the pool spans course lessons AND exam sub-lessons.
+      return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words);
+    case "word-mix":
+      return planWordMixMode(await loadAllLessons(), words);
+    case "lesson": {
+      const lessons = await loadAllLessons();
+      return planLessonMode(lessons, mode.lessonId ?? findCurrentLessonId(lessons, words), words);
+    }
   }
-  // Fix Errors is GLOBAL: its pool spans course lessons AND exam sub-lessons.
-  if (mode.kind === "fix-errors") {
-    return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words);
-  }
-  const lessons = await loadAllLessons();
-  return mode.kind === "word-mix"
-    ? planWordMixMode(lessons, words)
-    : planLessonMode(lessons, mode.lessonId ?? findCurrentLessonId(lessons, words), words);
 };
 
 export const useExerciseSession = ({

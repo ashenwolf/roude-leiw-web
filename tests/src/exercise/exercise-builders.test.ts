@@ -4,6 +4,7 @@ import {
   tokenizeSentence,
   buildWordMatchExercise,
   buildSentenceExercise,
+  chunkIntoWordMatchExercises,
 } from "../../../src/exercise/exercise-builders.ts";
 
 import type { SentenceEntry, WordEntry } from "../../../src/exercise/letz-parser.ts";
@@ -84,10 +85,20 @@ describe("buildSentenceExercise — en→lu direction", () => {
     expect(ex.item.question).toBe("Wou fuert Dir?");
   });
 
-  it("drops question in lu→en direction (LU sentence is already shown)", () => {
+  // The question→direction rule is intrinsic to the content, so a caller that
+  // rolls lu→en for a question sentence is overridden rather than obeyed —
+  // every Mode gets the behaviour without repeating the rule.
+  it("overrides a rolled lu→en direction to en→lu for question sentences", () => {
     const entry = { ...sentence(["We are going to France."], ["Mir fueren a Frankräich."]), question: "Wou fuert Dir?" };
     const ex = buildSentenceExercise(entry, "lu-en", []);
-    expect(ex.item.question).toBeUndefined();
+    expect(ex.item.direction).toBe("en-lu");
+    expect(ex.item.question).toBe("Wou fuert Dir?");
+    expect(ex.item.phraseKey).toBe("phrase:en-lu:We are going to France.");
+  });
+
+  it("leaves direction alone for sentences without a question", () => {
+    const ex = buildSentenceExercise(sentence(["Good morning"], ["Gudde Moien"]), "lu-en", []);
+    expect(ex.item.direction).toBe("lu-en");
   });
 
   it("leaves question undefined when the entry has none", () => {
@@ -200,5 +211,39 @@ describe("buildSentenceExercise — lu→en direction", () => {
   it("direction field is lu-en", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien"]);
     expect(buildSentenceExercise(entry, "lu-en", []).item.direction).toBe("lu-en");
+  });
+});
+
+// ─── chunkIntoWordMatchExercises ──────────────────────────────────────────────
+
+describe("chunkIntoWordMatchExercises", () => {
+  const words = (n: number): WordEntry[] =>
+    Array.from({ length: n }, (_, i) => word(`lu${i}`, `en${i}`));
+  const sizing = { pairCount: 5, minChunk: 3 };
+
+  it("splits into exact chunks when evenly divisible", () => {
+    expect(chunkIntoWordMatchExercises(words(15), sizing).map((e) => e.pairs.length)).toEqual([5, 5, 5]);
+  });
+
+  it("merges a trailing chunk below minChunk into the previous exercise", () => {
+    expect(chunkIntoWordMatchExercises(words(12), sizing).map((e) => e.pairs.length)).toEqual([5, 7]);
+  });
+
+  it("keeps a trailing chunk at or above minChunk", () => {
+    expect(chunkIntoWordMatchExercises(words(8), sizing).map((e) => e.pairs.length)).toEqual([5, 3]);
+  });
+
+  it("keeps a lone undersized chunk", () => {
+    expect(chunkIntoWordMatchExercises(words(2), sizing).map((e) => e.pairs.length)).toEqual([2]);
+  });
+
+  it("returns nothing for an empty list", () => {
+    expect(chunkIntoWordMatchExercises([], sizing)).toEqual([]);
+  });
+
+  it("covers every entry exactly once", () => {
+    const pairs = chunkIntoWordMatchExercises(words(23), sizing).flatMap((e) => e.pairs);
+    expect(pairs).toHaveLength(23);
+    expect(new Set(pairs.map(([lu]) => lu)).size).toBe(23);
   });
 });

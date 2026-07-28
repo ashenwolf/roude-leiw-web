@@ -1,8 +1,20 @@
 # Exam track — Theme: Vacation & Travel — Sub-lesson 3: Talking About It
 # @question sentences: the examiner asks in Luxembourgish, the learner
 # assembles the Luxembourgish answer (always en→lu).
+# Question words and connectors are drilled as vocabulary alongside them.
 
 @lesson V1.03 "Talking About Vacation"
+
+@word wou = where
+@word wéini = when
+@word wéi laang = how long
+@word mat wiem = with whom
+@word firwat = why
+@word am léifsten = most of all
+@word dacks = often
+@word ni = never
+@word ëmmer = always
+@word zesummen = together
 
 @sentence
 @question Wou fuert Dir dëst Joer an d'Vakanz?
@@ -59,3 +71,17 @@
 @en The weather is warm and the sun is shining.
 @distractor-lu kal
 @distractor-lu reent
+
+@sentence
+@question Firwat fuert Dir gär an d'Bierger?
+@lu Ech ginn do gär wanderen.
+@en I like to go hiking there.
+@distractor-lu schwammen
+@distractor-lu ni
+
+@sentence
+@question Wéini fuert Dir am léifsten ewech?
+@lu Ech fueren am léifsten am Summer ewech.
+@en I like to go away in summer the most.
+@distractor-lu Wanter
+@distractor-lu bleiwen

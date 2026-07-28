@@ -43,6 +43,18 @@ describe("exam manifest .letz files parse cleanly", () => {
     }
   }
 
+  // Every sub-lesson mixes both Element kinds so each Session alternates
+  // word-match and sentence-builder slots rather than being all of one type.
+  it("every sub-lesson mixes vocabulary with sentences", () => {
+    for (const theme of manifest.themes) {
+      for (const sub of theme.subLessons) {
+        const parsed = parseLetz(readFileSync(join(examDir, sub.file), "utf-8"), sub.id);
+        expect(parsed.entries.length, `${sub.id}: needs vocabulary`).toBeGreaterThanOrEqual(10);
+        expect(parsed.sentences.length, `${sub.id}: needs sentences`).toBeGreaterThanOrEqual(3);
+      }
+    }
+  });
+
   it("sub-lesson ids are unique across the exam catalog", () => {
     const ids = manifest.themes.flatMap((t) => t.subLessons.map((s) => s.id));
     expect(new Set(ids).size).toBe(ids.length);

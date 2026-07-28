@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { planFixErrorsMode } from "../../../../src/exercise/modes/fix-errors.ts";
-import { LESSON_TOTAL_SLOTS, LESSON_SLOTS_PER_BLOCK, MIN_ANSWERS } from "../../../../src/exercise/constants.ts";
+import { LESSON, MIN_ANSWERS } from "../../../../src/exercise/constants.ts";
 import { wordKey, phraseKey } from "../../../../src/exercise/progression.ts";
 
 import type { WordStats } from "../../../../src/context/auth.ts";
@@ -48,14 +48,14 @@ describe("planFixErrorsMode — empty error pool", () => {
 describe("planFixErrorsMode — shape", () => {
   const errorWordStats = s(MIN_ANSWERS, 0, MIN_ANSWERS); // shown >= MIN_ANSWERS, 0% success
 
-  it("produces LESSON_TOTAL_SLOTS slots when error pool is non-empty", () => {
+  it("produces LESSON.totalSlots slots when error pool is non-empty", () => {
     const lessons = [lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]])];
     const stats = {
       [wordKey("Moien", "hi")]: errorWordStats,
       [wordKey("Äddi", "bye")]: errorWordStats,
     };
     const config = planFixErrorsMode(lessons, stats);
-    expect(config.queue.length).toBe(LESSON_TOTAL_SLOTS);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
   });
 
   it("blockBoundaries are [5, 10, 15]", () => {
@@ -63,9 +63,9 @@ describe("planFixErrorsMode — shape", () => {
     const stats = { [wordKey("Moien", "hi")]: errorWordStats };
     const config = planFixErrorsMode(lessons, stats);
     expect(config.blockBoundaries).toEqual([
-      LESSON_SLOTS_PER_BLOCK,
-      2 * LESSON_SLOTS_PER_BLOCK,
-      3 * LESSON_SLOTS_PER_BLOCK,
+      LESSON.slotsPerBlock,
+      2 * LESSON.slotsPerBlock,
+      3 * LESSON.slotsPerBlock,
     ]);
   });
 

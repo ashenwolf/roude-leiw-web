@@ -11,40 +11,56 @@ import { SubLessonPath } from "../ui/SubLessonPath";
 import type { SubLessonMeta } from "../exam/exam-catalog";
 import type { Lesson } from "../exercise/letz-parser";
 
-export const AppExam = () => {
-  const { navigateTo } = useNavigation();
-  const posthog = usePostHog();
-  const { words, unlockedLessons } = useProgress();
-
-  // Phase 1: manifest — theme/sub-lesson titles render immediately.
+/** Phase 1 — exam manifest only: theme and SubLesson titles paint immediately. */
+const useExamMetas = () => {
   const [metas, setMetas] = useState<SubLessonMeta[]>([]);
-  const [metasLoading, setMetasLoading] = useState(true);
-
-  // Phase 2: content for unlocked/played sub-lessons only — populates progress rings.
-  const [loaded, setLoaded] = useState<Record<string, Lesson>>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadExamMeta()
-      .then((m) => {
-        setMetas(m);
-        setMetasLoading(false);
+      .then((loaded) => {
+        setMetas(loaded);
+        setLoading(false);
       })
-      .catch(() => setMetasLoading(false));
+      .catch(() => setLoading(false));
   }, []);
 
-  // Re-runs when the played set changes (auth resolves after mount, and a
-  // completed session grows it) — same rationale as AppHome's cascade.
+  return { metas, loading };
+};
+
+/**
+ * Phase 2 — content for playable SubLessons only, keyed by manifest id.
+ * Re-runs when the played set changes (auth resolves after mount, and a
+ * completed Session grows it) — same rationale as AppHome's cascade.
+ */
+const useSubLessonContent = (metas: SubLessonMeta[], unlockedLessons: string[]) => {
+  const [loaded, setLoaded] = useState<Record<string, Lesson>>({});
+
   useEffect(() => {
     if (metas.length === 0) return;
     const controller = new AbortController();
-    const toLoad = selectSubLessonsToLoad(metas, unlockedLessons);
-    Promise.all(toLoad.map((meta) => fetchSubLesson(meta).then((lesson) => [meta.id, lesson] as const)))
+    Promise.all(
+      selectSubLessonsToLoad(metas, unlockedLessons).map((meta) =>
+        fetchSubLesson(meta).then((lesson) => [meta.id, lesson] as const),
+      ),
+    )
       .then((entries) => {
         if (!controller.signal.aborted) setLoaded(Object.fromEntries(entries));
       })
       .catch(() => {}); // theme page stays usable with titles only
     return () => controller.abort();
   }, [metas, unlockedLessons]);
+
+  return loaded;
+};
+
+export const AppExam = () => {
+  const { navigateTo } = useNavigation();
+  const posthog = usePostHog();
+  const { words, unlockedLessons } = useProgress();
+
+  const { metas, loading: metasLoading } = useExamMetas();
+  const loaded = useSubLessonContent(metas, unlockedLessons);
 
   const view = useMemo(
     () => computeExamView(metas, loaded, words, unlockedLessons),

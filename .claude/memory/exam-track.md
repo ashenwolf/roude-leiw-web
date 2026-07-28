@@ -40,7 +40,15 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
 - **Exam Mode plans deterministically** (`planExamMode`): every element once,
   words chunked into 5-pair WordMatch slots (trailing <3 merges), one
   SentenceBuilder slot per sentence, slot list shuffled. No stats input, no
-  buckets. `@question` sentences are forced en→lu.
+  buckets.
+- **Modes own coverage/order only; exercise construction is shared** (PR #10
+  review). `chunkIntoWordMatchExercises` and the `@question` → en→lu rule
+  (`resolveSentenceDirection`, applied inside `buildSentenceExercise`) live in
+  Layer 1, so course lessons can use `@question` with identical behaviour and
+  future Exercise types reach every Mode. What is deliberately NOT unified:
+  Lesson samples from weighted buckets while Exam covers everything once —
+  different strategies, same bricks. Merging the planners would mean one
+  function with a mode flag, which is what the layering exists to avoid.
 - **Fix Errors is GLOBAL; Word Mix and Home stats stay course-scoped.**
   (User decision 2026-07-28, superseding the earlier exam-scoped-Fix-Errors
   plan.) `selectErrorPool` is scope-agnostic — the lessons argument defines
@@ -66,13 +74,22 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
   (manifest NetworkFirst, `.letz` StaleWhileRevalidate) in `vite.config.ts`.
 - XP: `SESSION_XP.exam = 100`. Streak/duration needed nothing (mode-agnostic).
 
+## Content conventions
+
+- **Every SubLesson mixes `@word` and `@sentence`** (PR #10 review) so a Session
+  alternates word-match and sentence-builder slots instead of being all one
+  type. The three-step path still sets the emphasis: 01 vocabulary-heavy
+  (~40 words + 3 sentences), 02 phrases, 03 Q&A — the latter two carry ~10-12
+  supporting words each. Enforced by `tests/integration/exam-manifest-letz.test.ts`.
+
 ## Follow-ups (P1/P2)
 
-- **Vocabulary verification via LOD:** the `lod` MCP tools returned 403 from
-  the remote CI environment, so the two shipped themes (vacation, family) were
-  authored from standard textbook vocabulary but NOT dictionary-verified.
-  Re-run `lod_lookup` on the LU sides locally before treating the content as
-  final.
+- **Vocabulary verification via LOD:** the `lod` MCP tools return 403 from the
+  remote CI environment (network policy, retried across sessions), so both
+  themes were authored from standard textbook vocabulary but are NOT
+  dictionary-verified. Re-run `lod_lookup` on the LU sides locally before
+  treating the content as final — genders, plurals, and Eifeler-Regel forms
+  are the risk areas.
 - Theme-completion/readiness stat; audio playback on prompts;
   speaking-prompt Exercise type (self-graded); more themes (work, free time,
   housing, health, past/future, Luxembourg).

@@ -1,28 +1,80 @@
 # Exam track — Theme: Vacation & Travel — Sub-lesson 1: Vocabulary
 # Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
 # The manifest id (vacation.01) is the authoritative identity; V1.01 is a label.
+#
+# Every sub-lesson mixes words AND sentences so each session alternates
+# word-match and sentence-builder slots; the emphasis here is vocabulary.
 
 @lesson V1.01 "Vacation Vocabulary"
 
+# --- Travel & transport ---
 @word d'Vakanz = vacation
 @word d'Rees = trip
 @word Reesen = trips
 @word de Fliger = airplane
 @word den Zuch = train
 @word de Bus = bus
-@word d'Plage = beach
-@word d'Mier = sea
-@word den Hotel = hotel
+@word d'Auto = car
+@word de Fluchhafen = airport
+@word d'Gare = train station
+@word den Ticket = ticket
 @word de Pass = passport
 @word d'Valise = suitcase
-@word den Ticket = ticket
-@word d'Sonn = sun
-@word d'Kaart = map
+@word d'Grenz = border
+@word d'Ausland = abroad
+
+# --- Places & nature ---
+@word d'Plage = beach
+@word d'Mier = sea
+@word de Séi = lake
+@word de Bierg = mountain
+@word d'Bierger = mountains
 @word d'Land = country
 @word d'Stad = city
-@word d'Ausland = abroad
+@word den Hotel = hotel
+@word de Camping = campsite
+@word d'Zelt = tent
+@word d'Landschaft = landscape
+
+# --- Weather & time ---
+@word d'Sonn = sun
+@word d'Wieder = weather
+@word de Reen = rain
+@word waarm = warm
+@word kal = cold
+@word d'Woch = week
+@word de Mount = month
+
+# --- Doing things ---
 @word reesen = to travel
 @word fléien = to fly
 @word buchen = to book
 @word schwammen = to swim
 @word besichen = to visit
+@word wanderen = to hike
+@word d'Foto = photo
+@word d'Erënnerung = memory
+
+@sentence
+@lu Ech fuere gär op d'Mier.
+@en I like going to the sea.
+@distractor-lu Bierg
+@distractor-lu schaffen
+@distractor-en mountain
+@distractor-en work
+
+@sentence
+@lu Am Summer ass d'Wieder waarm.
+@en In summer the weather is warm.
+@distractor-lu Wanter
+@distractor-lu kal
+@distractor-en winter
+@distractor-en cold
+
+@sentence
+@lu Mir schlofen an engem Zelt um Camping.
+@en We sleep in a tent at the campsite.
+@distractor-lu Hotel
+@distractor-lu iessen
+@distractor-en hotel
+@distractor-en eat

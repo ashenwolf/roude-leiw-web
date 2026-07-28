@@ -201,7 +201,8 @@ Layer 3: SessionMachine              one reducer (Block/Slot transitions, popups
 Layer 2: Exercises (plug-in)         WordMatchExercise, SentenceBuilderExercise, …
                                      ↓ built from
 Layer 1: Selection primitives        bucketedPick(roll, buckets), pickPair, pickSentence,
-                                     buildWordMatchExercise, buildSentenceExercise
+                                     buildWordMatchExercise, buildSentenceExercise,
+                                     chunkIntoWordMatchExercises, resolveSentenceDirection
                                      ↓ reading from
 Layer 0: Pure derivations            selectErrorPool, classifyElement, computeCursor,
                                      unlockedSet, MIN_ANSWERS, thresholds
@@ -254,8 +255,8 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 
 **Exam** — `planExamMode(subLesson)`.
 - Input: ONE SubLesson's `Lesson` (loaded via `src/exam/exam-catalog.ts`, never `loadAllLessons`). No stats input — the plan is content-deterministic ("we only shuffle it").
-- Shape: every Element exactly once. Words: shuffled, chunked into 5-pair WordMatch Slots (trailing chunk < `EXAM_WORD_MATCH_MIN_CHUNK` (3) merges into the previous Slot). Sentences: one SentenceBuilder Slot each. Combined Slot list shuffled.
-- Direction: a Sentence with `question` is always en→lu (assemble the LU answer to the LU examiner question); plain Sentences use the Lesson direction roll.
+- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — 5 pairs per Slot, trailing chunk < `minChunk` (3) merges into the previous Slot. Sentences: one SentenceBuilder Slot each. Combined Slot list shuffled.
+- Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically.
 - Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
 - Outcomes: same as Lesson. `completionEffect: 'noop'`.
 - Play-gate (edge, in `AppExercise.flushProgress`): a **completed** exam Session pushes its SubLesson's manifest id through `newlyUnlockedLessons`; abandoning marks nothing. `computeExamView` (`src/exam/exam-progression.ts`) unlocks the next SubLesson in the Theme when the previous id is in the persisted set. Mastery (`computeLessonProgress`) is the visible progress ring but gates nothing on this track.
@@ -696,7 +697,7 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
   @en My name is Luca.
 ```
 
-`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens. `@question` (optional, exam track) is an examiner question in Luxembourgish rendered above the prompt — such sentences are always presented en→lu (assemble the LU answer). Exam files live at `public/assets/exam/{theme}/{file}.letz`; their in-file `@lesson` id is a lexer-legal label only (`V1.01`), the exam manifest id is authoritative.
+`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens. `@question` (optional) is an examiner question in Luxembourgish rendered above the prompt — such sentences are always presented en→lu (assemble the LU answer), enforced in `buildSentenceExercise`, so **any** lesson on either track can use it. Exam files live at `public/assets/exam/{theme}/{file}.letz`; their in-file `@lesson` id is a lexer-legal label only (`V1.01`), the exam manifest id is authoritative. Every exam SubLesson mixes `@word` and `@sentence` content (enforced by `tests/integration/exam-manifest-letz.test.ts`) so Sessions alternate exercise types.
 
 ### Testing
 
@@ -713,7 +714,7 @@ Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means mo
 | `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
 | `src/exercise/error-pool.ts`                | 14    | primary pool, fallback pool, independent words/phrases, deduplication |
 | `src/exercise/selection.ts`                 | 17    | bucketedPick boundaries, pickFromPool re-roll, pickPair, pickSentence |
-| `src/exercise/exercise-builders.ts`         | 20    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions |
+| `src/exercise/exercise-builders.ts`         | 32    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions, question→direction override, chunkIntoWordMatchExercises |
 | `src/exercise/modes/lesson.ts`              | 11    | shape, upper-bound clamp, edge cases |
 | `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
 | `src/exercise/modes/fix-errors.ts`          | 11    | empty pool, word-only/phrase errors, fallback, global scope (exam Q&A rebuild) |

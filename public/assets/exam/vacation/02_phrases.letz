@@ -1,7 +1,22 @@
 # Exam track — Theme: Vacation & Travel — Sub-lesson 2: Key Phrases
 # Plain sentences (no @question): presented in either direction.
+# Mixed with the vocabulary these phrases lean on, so sessions alternate
+# word-match and sentence-builder slots.
 
 @lesson V1.02 "Vacation Phrases"
+
+@word d'Fräizäit = free time
+@word de Congé = time off
+@word d'Auslandsrees = trip abroad
+@word iwwernuechten = to stay overnight
+@word packen = to pack
+@word plangen = to plan
+@word ukommen = to arrive
+@word zeréckkommen = to come back
+@word bleiwen = to stay
+@word d'Souvenir = souvenir
+@word wäit = far
+@word no = near
 
 @sentence
 @lu Ech fuere gär un d'Mier.
@@ -66,3 +81,27 @@
 @distractor-lu däin
 @distractor-en bought
 @distractor-en your
+
+@sentence
+@lu Mir kommen e Sonndeg zeréck.
+@en We are coming back on Sunday.
+@distractor-lu fueren
+@distractor-lu Méindeg
+@distractor-en leaving
+@distractor-en Monday
+
+@sentence
+@lu Ech hunn dräi Wochen Congé am Summer.
+@en I have three weeks off in summer.
+@distractor-lu zwou
+@distractor-lu Wanter
+@distractor-en two
+@distractor-en winter
+
+@sentence
+@lu D'Bierger si vun hei net wäit.
+@en The mountains are not far from here.
+@distractor-lu Plage
+@distractor-lu no
+@distractor-en beach
+@distractor-en near

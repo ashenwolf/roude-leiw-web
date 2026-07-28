@@ -17,49 +17,51 @@ import { StatsRow } from "../ui/StatsRow";
 import { StreakBadge } from "../ui/StreakBadge";
 import { XPBar } from "../ui/XPBar";
 
+import type { WordStats } from "../context/auth";
 import type { Lesson } from "../exercise/letz-parser";
 import type { LessonMeta } from "../exercise/lesson-loader";
 
-export const AppHome = () => {
-  const { navigateTo } = useNavigation();
-  const posthog = usePostHog();
-  const { words, streak, dailySessions, unlockedLessons, totalXP, todayXP } = useProgress();
+/** Phase 1 — manifest only: lesson titles paint before any .letz is fetched. */
+const useLessonMetas = () => {
+  const [metas, setMetas] = useState<LessonMeta[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Phase 1: manifest — renders lesson titles immediately (no .letz fetches).
-  const [lessonMetas, setLessonMetas] = useState<LessonMeta[]>([]);
-  const [metasLoading, setMetasLoading] = useState(true);
-
-  // Phase 2: full content for unlocked lessons only — populates progress + unlock.
-  const [lessons, setLessons] = useState<Lesson[]>([]);
-
-  // Exam sub-lessons in error-pool scope (Fix Errors is global across tracks).
-  // Only affects the error pool below — course stats/progress never read these.
-  const [examErrorLessons, setExamErrorLessons] = useState<Lesson[]>([]);
-
-  // Phase 1: load manifest
   useEffect(() => {
     loadLessonMeta()
-      .then((metas) => {
-        setLessonMetas(metas);
-        setMetasLoading(false);
+      .then((loaded) => {
+        setMetas(loaded);
+        setLoading(false);
       })
-      .catch(() => setMetasLoading(false));
+      .catch(() => setLoading(false));
   }, []);
 
-  // Phase 2: cascade-load unlocked .letz files. Re-runs whenever stats arrive or
-  // change — on a hard reload `/api/auth/me` resolves AFTER mount, so `words` and
-  // `unlockedLessons` start empty and only populate later; freezing them at mount
-  // would stop the cascade at the first lesson and leave completed lessons'
-  // successors locked-and-unloaded. The cascade stops after the first lesson that
-  // is neither currently passing nor in the persisted-unlocked set (sticky
-  // unlock), so we only fetch lessons the user has access to. The AbortController
-  // drops a stale resolution if `words` changes again mid-fetch.
+  return { metas, loading };
+};
+
+/**
+ * Phase 2 — cascade-load the .letz content the user has access to.
+ *
+ * Re-runs whenever stats arrive or change: on a hard reload `/api/auth/me`
+ * resolves AFTER mount, so `words`/`unlockedLessons` start empty and only
+ * populate later; freezing them at mount would stop the cascade at the first
+ * lesson and leave completed lessons' successors locked-and-unloaded. The
+ * cascade stops after the first lesson that is neither currently passing nor in
+ * the persisted-unlocked set (sticky unlock). The AbortController drops a stale
+ * resolution if `words` changes again mid-fetch.
+ */
+const useUnlockedLessons = (
+  metas: LessonMeta[],
+  words: Record<string, WordStats>,
+  unlockedLessons: string[],
+) => {
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+
   useEffect(() => {
-    if (lessonMetas.length === 0) return;
+    if (metas.length === 0) return;
     const controller = new AbortController();
     const persisted = new Set(unlockedLessons);
     loadLessonsUpToCursor(
-      lessonMetas,
+      metas,
       (lesson) =>
         persisted.has(lesson.meta.id) ||
         computeLessonProgress(lesson, words).percentage >= UNLOCK_LESSON_THRESHOLD,
@@ -67,15 +69,37 @@ export const AppHome = () => {
       if (!controller.signal.aborted) setLessons(loaded);
     });
     return () => controller.abort();
-  }, [lessonMetas, words, unlockedLessons]);
+  }, [metas, words, unlockedLessons]);
+
+  return lessons;
+};
+
+/**
+ * Exam SubLessons in error-pool scope — Fix Errors is global across both
+ * tracks. Feeds the error pool only; course stats and progress never read these.
+ */
+const useExamErrorLessons = (unlockedLessons: string[]) => {
+  const [lessons, setLessons] = useState<Lesson[]>([]);
 
   useEffect(() => {
     const controller = new AbortController();
     loadExamErrorLessons(unlockedLessons).then((loaded) => {
-      if (!controller.signal.aborted) setExamErrorLessons(loaded);
+      if (!controller.signal.aborted) setLessons(loaded);
     });
     return () => controller.abort();
   }, [unlockedLessons]);
+
+  return lessons;
+};
+
+export const AppHome = () => {
+  const { navigateTo } = useNavigation();
+  const posthog = usePostHog();
+  const { words, streak, dailySessions, unlockedLessons, totalXP, todayXP } = useProgress();
+
+  const { metas: lessonMetas, loading: metasLoading } = useLessonMetas();
+  const lessons = useUnlockedLessons(lessonMetas, words, unlockedLessons);
+  const examErrorLessons = useExamErrorLessons(unlockedLessons);
 
   // Single producer: everything AppHome needs about lessons + progress.
   // Uses loaded (unlocked) lessons only — locked lessons show as empty in progressMap.

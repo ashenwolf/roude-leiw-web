@@ -2,16 +2,28 @@ import { CheckCircleIcon, LockIcon } from "./icons";
 
 import type { SubLessonView, ThemeView } from "../exam/exam-progression";
 
-// Visual states mirror LessonCard's palette (locked / current / unlocked / complete)
-// in a vertical path layout — one node per sub-lesson, in theme order.
-const nodeClasses = (view: SubLessonView, isCurrent: boolean): string =>
-  view.played
-    ? "bg-green-100 border-green-400"
-    : isCurrent
-      ? "bg-lime-50 border-lime-400 ring-2 ring-lime-300 ring-offset-1"
-      : view.unlocked
-        ? "bg-white border-gray-200 hover:border-lime-300 hover:shadow-sm"
-        : "bg-gray-100 border-gray-200 opacity-50 cursor-not-allowed";
+// One node per sub-lesson in a vertical path. Visual states mirror LessonCard's
+// palette (locked / current / unlocked / played).
+type NodeState = "played" | "current" | "unlocked" | "locked";
+
+const NODE_STATES: Record<NodeState, { className: string }> = {
+  played: { className: "bg-green-100 border-green-400" },
+  current: { className: "bg-lime-50 border-lime-400 ring-2 ring-lime-300 ring-offset-1" },
+  unlocked: { className: "bg-white border-gray-200 hover:border-lime-300 hover:shadow-sm" },
+  locked: { className: "bg-gray-100 border-gray-200 opacity-50 cursor-not-allowed" },
+};
+
+const nodeState = (view: SubLessonView, isCurrent: boolean): NodeState => {
+  if (view.played) return "played";
+  if (!view.unlocked) return "locked";
+  return isCurrent ? "current" : "unlocked";
+};
+
+const NodeBadge = ({ state, step }: { state: NodeState; step: string }) => {
+  if (state === "played") return <CheckCircleIcon className="w-5 h-5 text-green-500" />;
+  if (state === "locked") return <LockIcon className="w-4 h-4 text-gray-400" />;
+  return <span className="text-sm font-bold text-gray-600">{step}</span>;
+};
 
 type SubLessonNodeProps = {
   view: SubLessonView;
@@ -20,22 +32,17 @@ type SubLessonNodeProps = {
 };
 
 const SubLessonNode = ({ view, isCurrent, onSelect }: SubLessonNodeProps) => {
+  const state = nodeState(view, isCurrent);
   const pct = view.progress ? Math.round(view.progress.percentage * 100) : 0;
 
   return (
     <button
       onClick={onSelect}
       disabled={!view.unlocked}
-      className={`flex items-center gap-3 w-full rounded-xl border-2 p-3 transition-all duration-200 ${nodeClasses(view, isCurrent)}`}
+      className={`flex items-center gap-3 w-full rounded-xl border-2 p-3 transition-all duration-200 ${NODE_STATES[state].className}`}
     >
       <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-white/70 border border-gray-200">
-        {view.played ? (
-          <CheckCircleIcon className="w-5 h-5 text-green-500" />
-        ) : view.unlocked ? (
-          <span className="text-sm font-bold text-gray-600">{view.meta.id.split(".").pop()}</span>
-        ) : (
-          <LockIcon className="w-4 h-4 text-gray-400" />
-        )}
+        <NodeBadge state={state} step={view.meta.id.split(".").pop() ?? ""} />
       </span>
 
       <span className="flex flex-col items-start flex-1 min-w-0">

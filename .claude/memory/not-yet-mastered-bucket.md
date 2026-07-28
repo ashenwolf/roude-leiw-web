@@ -1,6 +1,6 @@
 # Lesson Mode not-yet-mastered bucket
 
-Added 2026-05-27 as `under-exposed` (keyed off `shown < MIN_ANSWERS`). **Renamed and redefined 2026-07-21 to `not-yet-mastered` (keyed off `correct < MASTERY_CORRECT_COUNT`)** — see "Straggler abandonment fix" below. Lesson Mode's `LESSON_WORD_MATCH_BUCKETS` and `LESSON_SENTENCE_LESSON_BUCKETS` (in `src/exercise/constants.ts`) carry this as a third bucket at 30% weight, sitting in front of `current` and `previous`. The bucket draws from current-lesson Elements that have not yet passed the unlock gate.
+Added 2026-05-27 as `under-exposed` (keyed off `shown < MIN_ANSWERS`). **Renamed and redefined 2026-07-21 to `not-yet-mastered` (keyed off `correct < MASTERY_CORRECT_COUNT`)** — see "Straggler abandonment fix" below. Lesson Mode's `LESSON.buckets.wordMatch` and `LESSON.buckets.sentenceLesson` (in `src/exercise/constants.ts`) carry this as a third bucket at 30% weight, sitting in front of `current` and `previous`. The bucket draws from current-lesson Elements that have not yet passed the unlock gate.
 
 ## Why this exists
 
@@ -46,7 +46,7 @@ The previously-rejected alternative of changing `pickSentence` to take a sentenc
 
 ## Adaptive word-match/sentence split (added 2026-07-21)
 
-Distinct from *which* element the not-yet-mastered bucket picks: this controls *how often word-match runs at all*. The slot-type roll was a fixed 20% word-match / 80% sentence-builder (`SLOT_TYPE_DISTRIBUTION`), which starves word practice in a word-heavy lesson (100+ unmastered words getting 1/5 of the exposure).
+Distinct from *which* element the not-yet-mastered bucket picks: this controls *how often word-match runs at all*. The slot-type roll was a fixed 20% word-match / 80% sentence-builder (now `FIX_ERRORS.buckets.slotType`), which starves word practice in a word-heavy lesson (100+ unmastered words getting 1/5 of the exposure).
 
 Lesson Mode now derives the split at plan time via `lessonSlotTypeDistribution(unmasteredWords, unmasteredSentences)` in `modes/lesson.ts`:
 
@@ -54,9 +54,9 @@ Lesson Mode now derives the split at plan time via `lessonSlotTypeDistribution(u
 share = clamp(unmasteredWords / (unmasteredWords + unmasteredSentences), MIN, MAX)
 ```
 
-Bounds in `constants.ts`: `LESSON_WORD_MATCH_SHARE_MIN = 0.2` (the historical floor — sentence practice never starves in a word-light lesson), `LESSON_WORD_MATCH_SHARE_MAX = 0.6` (sentence-builder stays present even in the most word-heavy lesson; sentences also drill vocab implicitly). No backlog at all → falls back to MIN. Counts are **current-lesson** unmastered elements only (`unmasteredWords.length`, `notYetMasteredSentences.length`); previous-lesson review is incidental, not what the unlock gate waits on.
+Bounds in `constants.ts`: `LESSON.wordMatchShare.min = 0.2` (the historical floor — sentence practice never starves in a word-light lesson), `LESSON.wordMatchShare.max = 0.6` (sentence-builder stays present even in the most word-heavy lesson; sentences also drill vocab implicitly). No backlog at all → falls back to MIN. Counts are **current-lesson** unmastered elements only (`unmasteredWords.length`, `notYetMasteredSentences.length`); previous-lesson review is incidental, not what the unlock gate waits on.
 
-The helper returns a bucket table in the same shape as `SLOT_TYPE_DISTRIBUTION`, so it drops straight into `bucketedPick`. `SLOT_TYPE_DISTRIBUTION` is retained as the fixed split for **Fix Errors** mode (its backlog is by definition all struggling elements, so adaptive weighting doesn't apply). One-shot at plan time — mid-session results don't re-derive the split (pipeline invariant).
+The helper returns a bucket table in the same shape as the bucket tables, so it drops straight into `bucketedPick`. `FIX_ERRORS.buckets.slotType` is retained as the fixed split for **Fix Errors** mode (its backlog is by definition all struggling elements, so adaptive weighting doesn't apply). One-shot at plan time — mid-session results don't re-derive the split (pipeline invariant).
 
 Considered and rejected: deficit-proportional weighting (account for 5 pairs/word-slot vs 1 element/sentence-slot to equalize sessions-to-unlock). More precise but more logic; start with the linear ratio clamp and escalate only if word starvation persists after content splitting.
 
@@ -72,7 +72,7 @@ Word-match slots use `pickUniquePairs` — picks `count*4` candidates via with-r
 - `src/exercise/modes/lesson.ts` — builds the `not-yet-mastered` sub-pool from `userWords`. Word predicate `isWordNotYetMastered` uses `wordKey`; sentence predicate uses `combinedPhraseStats`. Both compare `correct` against `MASTERY_CORRECT_COUNT` to align with the unlock gate.
 - `src/exercise/use-exercise-session.ts` — passes `userWords` into `planLessonMode` (both initial load and `resetSession`).
 - `tests/src/exercise/modes/lesson.test.ts` — "not-yet-mastered bucket" + "adaptive slot-type split" describe blocks.
-- `src/exercise/modes/lesson.ts` — `lessonSlotTypeDistribution` (adaptive split) + `LESSON_WORD_MATCH_SHARE_{MIN,MAX}` in `constants.ts`.
+- `src/exercise/modes/lesson.ts` — `lessonSlotTypeDistribution` (adaptive split) + `LESSON.wordMatchShare` in `constants.ts`.
 
 `combinedPhraseStats` sums both presentation directions, so the sentence predicate correctly treats a phrase as one Element regardless of which direction the user practised.
 

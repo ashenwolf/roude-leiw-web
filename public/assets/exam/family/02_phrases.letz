@@ -1,7 +1,22 @@
 # Exam track — Theme: Family & Myself — Sub-lesson 2: Key Phrases
 # Plain sentences (no @question): presented in either direction.
+# Mixed with the vocabulary these phrases lean on, so sessions alternate
+# word-match and sentence-builder slots.
 
 @lesson F1.02 "Family Phrases"
+
+@word d'Haus = house
+@word d'Wunneng = apartment
+@word d'Spidol = hospital
+@word d'Schoul = school
+@word d'Büro = office
+@word d'Duerf = village
+@word de Weekend = weekend
+@word all Dag = every day
+@word zesummen = together
+@word bei = at (someone's)
+@word méi jonk = younger
+@word méi al = older
 
 @sentence
 @lu Ech hunn zwee Bridder an eng Schwëster.
@@ -66,3 +81,27 @@
 @distractor-lu Aarbecht
 @distractor-en son
 @distractor-en work
+
+@sentence
+@lu Mir wunnen zesummen an enger Wunneng.
+@en We live together in an apartment.
+@distractor-lu Haus
+@distractor-lu eleng
+@distractor-en house
+@distractor-en alone
+
+@sentence
+@lu Mäi Cousin wunnt an engem klengen Duerf.
+@en My cousin lives in a small village.
+@distractor-lu Stad
+@distractor-lu grousse
+@distractor-en city
+@distractor-en big
+
+@sentence
+@lu De Weekend gi mir bei meng Elteren.
+@en At the weekend we go to my parents'.
+@distractor-lu Méindeg
+@distractor-lu Kanner
+@distractor-en Monday
+@distractor-en children
