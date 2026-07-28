@@ -4,10 +4,12 @@ import {
   mergeWordResults,
   mergeDailySession,
   computeStreak,
+  normalizeDailySession,
+  normalizeDailySessions,
   MAX_WORD_KEYS,
   MAX_DAILY_SESSIONS,
 } from "../../../worker/lib/user.ts";
-import type { WordResult } from "../../../worker/types.ts";
+import type { DailySession, WordResult } from "../../../worker/types.ts";
 
 // ============================================================================
 // mergeWordResults
@@ -123,6 +125,84 @@ describe("mergeDailySession", () => {
     expect(Object.keys(merged)).toHaveLength(MAX_DAILY_SESSIONS);
     expect(merged[newest]).toBeDefined();
     expect(merged[dateAt(0)]).toBeUndefined();
+  });
+});
+
+// ============================================================================
+// normalizeDailySession / normalizeDailySessions
+// ============================================================================
+
+describe("normalizeDailySession", () => {
+  // Legacy fields are typed as a separate optional shape; cast through the
+  // intersection so the fixtures compile without leaking the legacy type to
+  // production call sites.
+  const legacy = (raw: Record<string, number>) => raw as unknown as DailySession;
+
+  it("passes through a current-shape record unchanged", () => {
+    const current: DailySession = { totalItems: 10, durationSeconds: 60, correct: 9, incorrect: 1, xp: 100 };
+    expect(normalizeDailySession(current)).toEqual(current);
+  });
+
+  it("maps legacy field names onto the current shape", () => {
+    const legacyRecord = legacy({ totalPairs: 40, durationMs: 5000, correctMatches: 39, incorrectMatches: 1 });
+    expect(normalizeDailySession(legacyRecord)).toEqual({
+      totalItems: 40, durationSeconds: 5, correct: 39, incorrect: 1, xp: 0,
+    });
+  });
+
+  it("defaults xp to 0 when the record predates xp tracking", () => {
+    const noXp: DailySession = { totalItems: 5, durationSeconds: 10, correct: 5, incorrect: 0 };
+    expect(normalizeDailySession(noXp).xp).toBe(0);
+  });
+
+  it("rounds durationMs → durationSeconds", () => {
+    expect(normalizeDailySession(legacy({ durationMs: 1499 })).durationSeconds).toBe(1);
+    expect(normalizeDailySession(legacy({ durationMs: 1500 })).durationSeconds).toBe(2);
+  });
+
+  it("yields zeros for an empty record", () => {
+    expect(normalizeDailySession({} as DailySession)).toEqual({
+      totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 0,
+    });
+  });
+
+  it("is idempotent — second pass returns the same value", () => {
+    const legacyRecord = legacy({ totalPairs: 7, durationMs: 3500, correctMatches: 7, incorrectMatches: 0 });
+    const once = normalizeDailySession(legacyRecord);
+    const twice = normalizeDailySession(once);
+    expect(twice).toEqual(once);
+  });
+});
+
+describe("normalizeDailySessions", () => {
+  it("normalizes every entry independently of the others", () => {
+    const sessions = {
+      "2026-02-23": { totalPairs: 40, durationMs: 0, correctMatches: 40, incorrectMatches: 2 },
+      "2026-04-14": { totalItems: 117, durationSeconds: 140, correct: 117, incorrect: 10 },
+      "2026-05-21": { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 1090 },
+    } as unknown as Record<string, DailySession>;
+
+    expect(normalizeDailySessions(sessions)).toEqual({
+      "2026-02-23": { totalItems: 40, durationSeconds: 0, correct: 40, incorrect: 2, xp: 0 },
+      "2026-04-14": { totalItems: 117, durationSeconds: 140, correct: 117, incorrect: 10, xp: 0 },
+      "2026-05-21": { totalItems: 0, durationSeconds: 0, correct: 0, incorrect: 0, xp: 1090 },
+    });
+  });
+
+  it("returns {} for an empty input", () => {
+    expect(normalizeDailySessions({})).toEqual({});
+  });
+
+  it("downstream merges no longer produce NaN when accumulating onto a legacy date", () => {
+    const sessions = normalizeDailySessions({
+      "2026-02-23": { totalPairs: 40, durationMs: 0, correctMatches: 40, incorrectMatches: 2 },
+    } as unknown as Record<string, DailySession>);
+    const merged = mergeDailySession(sessions, "2026-02-23", 30, [
+      { key: "Moien|hi", shown: 1, correct: 1, incorrect: 0 },
+    ]);
+    expect(merged["2026-02-23"]).toEqual({
+      totalItems: 41, durationSeconds: 30, correct: 41, incorrect: 2, xp: 0,
+    });
   });
 });
 

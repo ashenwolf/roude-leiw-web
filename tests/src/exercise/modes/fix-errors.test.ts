@@ -123,4 +123,20 @@ describe("planFixErrorsMode — phrase errors", () => {
     const config = planFixErrorsMode(lessons, stats, sentenceRng);
     expect(config.queue.some((b) => b.type === "sentence-builder")).toBe(true);
   });
+
+  it("repeats the exact direction the user failed", () => {
+    const sent = sentence("Good morning", "Gudde Moien");
+    const lessons = [lesson("A1_01", [["Moien", "hi"]], [sent])];
+    // Only the lu-en direction is in the error pool.
+    const stats = {
+      [phraseKey("lu-en", "Good morning")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+    };
+    const sentenceRng = () => 0.5; // always sentence-builder
+    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const sentenceSlots = config.queue.filter((b) => b.type === "sentence-builder");
+    expect(sentenceSlots.length).toBeGreaterThan(0);
+    for (const slot of sentenceSlots) {
+      if (slot.type === "sentence-builder") expect(slot.item.direction).toBe("lu-en");
+    }
+  });
 });

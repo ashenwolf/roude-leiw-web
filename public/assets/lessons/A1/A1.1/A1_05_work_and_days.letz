@@ -30,6 +30,21 @@
 @word zu Nuecht iessen = to have dinner
 @word schlofe goen = to go to sleep
 
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Bank = bank
+@word d'Post = post office
+@word d'Leit = people
+@word de Projet = project
+@word de Bus = bus
+@word den Telefon = telephone
+@word de Staat = state
+@word de Plang = plan
+@word de Direkter = director
+@word d'Strategie = strategy
+@word de Ministère = ministry
+@word de Coiffer = hairdresser
+@word den Enkel = grandchild
+
 # --- Sentences (Quizlet cards 1-30) ---
 
 @sentence
@@ -139,26 +154,21 @@
 @sentence
 @lu Hatt schafft vill um Computer.
 @en She works on the computer a lot.
-@distractor-en to go for a shower
-@distractor-en to do sports
+@distractor-en phone
+@distractor-en garden
 @distractor-lu an d'Dusch goen
 @distractor-lu Sport maachen
 
 @sentence
 @lu Wou schaffs du?
+@lu Wou schafft Dir?
 @en Where do you work?
 @distractor-en how
 @distractor-en when
+@distractor-en Monday
 @distractor-lu Wéi
 @distractor-lu Wéini
-
-@sentence
-@lu Wou schafft Dir?
-@en Where do you work?
-@distractor-en Monday
-@distractor-en Friday
 @distractor-lu Méindeg
-@distractor-lu Freideg
 
 @sentence
 @lu Hie schafft beim Coiffer.
@@ -186,19 +196,14 @@
 
 @sentence
 @lu Ech schaffen op enger Bank.
+@lu Ech schaffe bei enger Bank.
 @en I work at a bank.
 @distractor-en Sunday
 @distractor-en Monday
+@distractor-en Tuesday
 @distractor-lu Sonndeg
 @distractor-lu Méindeg
-
-@sentence
-@lu Ech schaffe bei enger Bank.
-@en I work at a bank.
-@distractor-en Tuesday
-@distractor-en Wednesday
 @distractor-lu Dënschdeg
-@distractor-lu Mëttwoch
 
 @sentence
 @lu Ech schaffen un engem Projet.
@@ -227,8 +232,8 @@
 @sentence
 @lu Ech schaffen am Gaart.
 @en I work in the garden.
-@distractor-en to go to work
-@distractor-en to go to sleep
+@distractor-en office
+@distractor-en bank
 @distractor-lu schaffe goen
 @distractor-lu schlofe goen
 

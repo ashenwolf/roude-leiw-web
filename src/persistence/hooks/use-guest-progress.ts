@@ -7,7 +7,7 @@ import type { WordResultMap } from "../../exercise/WordMatch/types";
 
 const STORAGE_KEY = "roude-leiw-guest";
 
-type GuestData = {
+export type GuestData = {
   words: Record<string, WordStats>;
   dailySessions: Record<string, DailySession>;
   unlockedLessons?: string[];
@@ -73,12 +73,13 @@ const syncBatchToStorage = (
   wordResults: WordResultMap,
   durationSeconds: number,
   newlyUnlockedLessons: string[] = [],
+  xpEarned = 0,
 ): void => {
   const today = new Date().toISOString().slice(0, 10);
   const prev = readStorage();
   const updated: GuestData = {
     words: mergeWordStats(prev.words, wordResults),
-    dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationSeconds),
+    dailySessions: mergeDailySession(prev.dailySessions, today, wordResults, durationSeconds, xpEarned),
     unlockedLessons:
       newlyUnlockedLessons.length === 0
         ? prev.unlockedLessons ?? []
@@ -117,8 +118,8 @@ export const useGuestProgress = () => {
   const data = useSyncExternalStore(subscribe, getSnapshot);
 
   const syncBatch = useCallback(
-    (wordResults: WordResultMap, durationSeconds: number, newlyUnlockedLessons: string[] = []) => {
-      syncBatchToStorage(wordResults, durationSeconds, newlyUnlockedLessons);
+    (wordResults: WordResultMap, durationSeconds: number, newlyUnlockedLessons: string[] = [], xpEarned = 0) => {
+      syncBatchToStorage(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
     },
     [],
   );

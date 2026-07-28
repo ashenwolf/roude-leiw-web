@@ -6,7 +6,9 @@ import type { UserData, WordResult, DailySession } from "../types.ts";
 
 export const getUser = async (kv: KVNamespace, userId: string) => {
   const raw = await kv.get(`user:${userId}`);
-  return raw ? (JSON.parse(raw) as UserData) : null;
+  if (!raw) return null;
+  const parsed = JSON.parse(raw) as UserData;
+  return { ...parsed, dailySessions: normalizeDailySessions(parsed.dailySessions) };
 };
 
 export const saveUser = async (kv: KVNamespace, userData: UserData) => {
@@ -30,6 +32,39 @@ export const linkEmailToUser = async (kv: KVNamespace, email: string, userId: st
  */
 export const MAX_WORD_KEYS = 10_000;
 export const MAX_DAILY_SESSIONS = 365 * 5;
+
+/**
+ * Legacy daily-session shape written by clients before April 2026. Kept so the
+ * normalizer below can map old records into the current `DailySession` shape on
+ * read; remove this and `normalizeDailySession` once we're confident every KV
+ * blob has been re-saved through `saveUser` (which writes the new shape).
+ */
+type LegacyDailySession = {
+  totalPairs?: number;
+  durationMs?: number;
+  correctMatches?: number;
+  incorrectMatches?: number;
+};
+
+/**
+ * Map any persisted daily-session shape to the current `DailySession`. Pure +
+ * idempotent: records already in the new shape pass through unchanged. Applied
+ * at the read boundary (`getUser`) so every consumer downstream sees one shape.
+ */
+export const normalizeDailySession = (raw: DailySession & LegacyDailySession): DailySession => ({
+  totalItems: raw.totalItems ?? raw.totalPairs ?? 0,
+  durationSeconds:
+    raw.durationSeconds ?? (typeof raw.durationMs === "number" ? Math.round(raw.durationMs / 1000) : 0),
+  correct: raw.correct ?? raw.correctMatches ?? 0,
+  incorrect: raw.incorrect ?? raw.incorrectMatches ?? 0,
+  xp: raw.xp ?? 0,
+});
+
+export const normalizeDailySessions = (
+  sessions: UserData["dailySessions"],
+): UserData["dailySessions"] =>
+  Object.fromEntries(Object.entries(sessions).map(([date, s]) => [date, normalizeDailySession(s)]));
+
 /** Defensive cap on the persisted unlock set — well above any plausible catalog. */
 export const MAX_UNLOCKED_LESSONS = 500;
 

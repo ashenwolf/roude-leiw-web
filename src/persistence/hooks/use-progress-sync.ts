@@ -19,9 +19,11 @@ export const useProgressSync = () => {
   const { auth } = useAuth();
   const posthog = usePostHog();
 
+  /** Resolves true iff the server accepted the payload (2xx). Never rejects —
+   *  fire-and-forget callers can ignore the result; the migration path must not. */
   const syncProgress = useCallback(
-    async ({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned }: SyncPayload) => {
-      if (auth.status !== "authenticated") return;
+    async ({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned }: SyncPayload): Promise<boolean> => {
+      if (auth.status !== "authenticated") return false;
 
       const today = new Date().toISOString().slice(0, 10);
 
@@ -30,7 +32,7 @@ export const useProgressSync = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           wordResults: toApiFormat(wordResults),
-          durationSeconds,
+          durationSeconds: Math.round(durationSeconds),
           date: today,
           xpEarned: xpEarned ?? 0,
           newlyUnlockedLessons: newlyUnlockedLessons ?? [],
@@ -49,6 +51,8 @@ export const useProgressSync = () => {
           status: response.status,
         });
       }
+
+      return response !== null && response.ok;
     },
     [auth.status, posthog],
   );

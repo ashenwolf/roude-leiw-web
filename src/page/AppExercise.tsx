@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
@@ -58,6 +58,26 @@ const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps
     <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors">
       Back to Home
     </button>
+  </div>
+);
+
+// Defensive guard for an empty session queue (e.g. Fix Errors with an empty
+// error pool): without it, Start would transition to `active` with no exercise
+// to render — a dead end.
+type ExerciseEmptyProps = { mode: SessionMode; onBack: () => void };
+const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
+  <div className="flex flex-col items-center gap-6 py-8">
+    <h2 className="text-2xl font-bold text-gray-800">
+      {mode.kind === "word-mix" ? "Word Mix" : mode.kind === "fix-errors" ? "Fix Your Mistakes" : "Word Match Exercise"}
+    </h2>
+    <p className="text-gray-600 text-center">
+      {mode.kind === "fix-errors"
+        ? "No mistakes to fix right now — nice work!"
+        : "Nothing to practice here yet."}
+    </p>
+    <div className="w-full max-w-xs">
+      <Button onClick={onBack}>Back to Home</Button>
+    </div>
   </div>
 );
 
@@ -146,7 +166,7 @@ const ExerciseActive = ({
 
 export const AppExercise = () => {
   const { navigateTo, params, currentPage } = useNavigation();
-  const { words, unlockedLessons, syncBatch, awardXP } = useProgress();
+  const { words, unlockedLessons, syncBatch } = useProgress();
   const timer = useActivityTimer();
   const posthog = usePostHog();
 
@@ -157,6 +177,11 @@ export const AppExercise = () => {
 
   // session is defined first so handlers below can reference it without TDZ risk
   const session = useExerciseSession({ userWords: words, mode });
+
+  // Accumulate word results and duration across all slots. Flushed once on
+  // session complete or abandon so local state and the remote POST update together.
+  const pendingResults = useRef<WordResultMap>({});
+  const pendingDuration = useRef<number>(0);
 
   // Anchor the activity timer when a new slot becomes visible so the user's
   // think-time before the first interaction is measured against this moment.
@@ -169,6 +194,24 @@ export const AppExercise = () => {
     navigateTo("home");
   };
 
+  // Merge accumulated results into local + remote state, then clear the buffer.
+  const flushProgress = (extraUnlockCheck: boolean, xpEarned = 0) => {
+    const wordResults = pendingResults.current;
+    const durationSeconds = pendingDuration.current;
+    pendingResults.current = {};
+    pendingDuration.current = 0;
+
+    const newlyUnlockedLessons = extraUnlockCheck
+      ? computeUnlockedLessonIds(
+          session.lessons,
+          mergeWordStats(words, wordResults),
+          unlockedLessons,
+        ).filter((id) => !new Set(unlockedLessons).has(id))
+      : [];
+
+    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
+  };
+
   const handleSlotSync = (wordResults: WordResultMap) => {
     const durationSeconds = timer.getElapsedSeconds();
     timer.reset();
@@ -178,17 +221,8 @@ export const AppExercise = () => {
       lesson_id: params.lessonId,
       duration_seconds: durationSeconds,
     });
-    // Compute any lessons that became unlocked because of this slot's results.
-    // The diff is what persistence stores; the union there is what later renders
-    // read back as "sticky" unlocked set.
-    const merged = mergeWordStats(words, wordResults);
-    const persistedSet = new Set(unlockedLessons);
-    const newlyUnlockedLessons = computeUnlockedLessonIds(
-      session.lessons,
-      merged,
-      unlockedLessons,
-    ).filter((id) => !persistedSet.has(id));
-    syncBatch(wordResults, durationSeconds, newlyUnlockedLessons);
+    pendingResults.current = mergeWordStats(pendingResults.current, wordResults);
+    pendingDuration.current += durationSeconds;
     session.handleSlotComplete(wordResults); // determines outcome + re-queues if end of plan
   };
 
@@ -199,6 +233,7 @@ export const AppExercise = () => {
 
   const handleTryAgain = () => {
     posthog?.capture("session_restarted", { lesson_id: params.lessonId });
+    flushProgress(mode.kind === "lesson");
     timer.reset();
     session.resetSession();
   };
@@ -209,18 +244,20 @@ export const AppExercise = () => {
       slot_index: session.currentSlotIndex,
       total_slots: session.totalSlots,
     });
+    flushProgress(mode.kind === "lesson");
     goHome();
   };
 
   const handleSessionComplete = () => {
     posthog?.capture("session_completed", { lesson_id: params.lessonId });
-    awardXP(SESSION_XP[mode.kind]);
+    flushProgress(mode.kind === "lesson", SESSION_XP[mode.kind]);
     goHome();
   };
 
   if (session.state === "loading") return <ExerciseLoading />;
   if (session.state === "error") return <ExerciseError error={session.error} onBack={goHome} />;
   if (session.state === "ready") {
+    if (session.totalSlots === 0) return <ExerciseEmpty mode={mode} onBack={goHome} />;
     const handleStart = () => {
       posthog?.capture("exercise_started", {
         lesson_id: params.lessonId,

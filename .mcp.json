@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lod": {
+      "command": "node",
+      "args": ["tools/lod-mcp/server.mjs"]
+    }
+  }
+}

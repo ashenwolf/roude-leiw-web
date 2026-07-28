@@ -20,9 +20,6 @@
 
 # --- Farewells (Quizlet cards 13-22, 38) ---
 @word Äddi = Bye
-@word Awar = Bye
-@word Awuer = Bye
-@word Ciao = Bye
 @word Bis geschwënn = See you soon
 @word Bis herno = See you later
 @word Bis muer = See you tomorrow
@@ -41,10 +38,30 @@
 @word Entschëllegt = Excuse me
 @word Pardon = Sorry
 @word Wannechgelift = Please
-@word Wannechgelift = there you go
 @word Jo = Yes
 @word Nee = No
-@word neen = No
+
+# --- Vocabulary from sentences (coverage backfill) ---
+@word d'Zäit = time
+@word d'Glas = glass
+@word d'Waasser = water
+@word de Kaffi = coffee
+@word den Zocker = sugar
+@word d'Stéck = piece
+@word d'Zitroun = lemon
+@word kleng = small
+@word traureg = sad
+@word frou = happy
+@word hongereg = hungry
+@word sauer = sour
+@word alles = everything
+@word eppes = something
+@word vill = a lot
+@word gär = gladly
+@word drénken = to drink
+@word hëllefen = to help
+@word kréien = to get
+@word soen = to say
 
 # --- Sentences (Quizlet cards 7-12, 23-33, 39-54, 58-66, 68) ---
 
@@ -53,8 +70,10 @@
 @en Hi, how are you?
 @distractor-en evening
 @distractor-en morning
+@distractor-en where
 @distractor-lu Äddi
 @distractor-lu Owend
+@distractor-lu Wou
 
 @sentence
 @lu Kann ech hëllefen?
@@ -66,19 +85,14 @@
 
 @sentence
 @lu Schwätz du Lëtzebuergesch?
+@lu Schwätzt Dir Lëtzebuergesch?
 @en Do you speak Luxembourgish?
 @distractor-en sorry
 @distractor-en bye
+@distractor-en hello
 @distractor-lu Pardon
 @distractor-lu Ciao
-
-@sentence
-@lu Schwätzt Dir Lëtzebuergesch?
-@en Do you speak Luxembourgish?
-@distractor-en hello
-@distractor-en thanks
 @distractor-lu Bonjour
-@distractor-lu Merci
 
 @sentence
 @lu Mir kënnen och du soen.
@@ -87,14 +101,6 @@
 @distractor-en no
 @distractor-lu Jo
 @distractor-lu Nee
-
-@sentence
-@lu Mir kënnen eis och duzen.
-@en We can also address each other informally.
-@distractor-en evening
-@distractor-en welcome
-@distractor-lu Owend
-@distractor-lu Wëllkomm
 
 @sentence
 @lu Ech sinn d'Christine.
@@ -114,11 +120,16 @@
 
 @sentence
 @lu Wéi geet et Iech?
+@lu Wéi geet et dir?
 @en How are you?
 @distractor-en welcome
 @distractor-en bye
+@distractor-en evening
+@distractor-en where
 @distractor-lu Wëllkomm
 @distractor-lu Äddi
+@distractor-lu Owend
+@distractor-lu Wou
 
 @sentence
 @lu Mir geet et gutt.
@@ -127,14 +138,6 @@
 @distractor-en good
 @distractor-lu Jo
 @distractor-lu Salut
-
-@sentence
-@lu Wéi geet et dir?
-@en How are you?
-@distractor-en evening
-@distractor-en morning
-@distractor-lu Owend
-@distractor-lu Moien
 
 @sentence
 @lu A bei dir?
@@ -146,19 +149,14 @@
 
 @sentence
 @lu Ech ginn dir e Bic.
+@lu Ech ginn Iech e Bic.
 @en I give you a pen.
 @distractor-en welcome
 @distractor-en bye
+@distractor-en hello
 @distractor-lu Wëllkomm
 @distractor-lu Äddi
-
-@sentence
-@lu Ech ginn Iech e Bic.
-@en I give you a pen.
-@distractor-en hello
-@distractor-en yes
 @distractor-lu Bonjour
-@distractor-lu Jo
 
 @sentence
 @lu Du gëss mir e Bic.
@@ -354,7 +352,7 @@
 
 @sentence
 @lu Wëllt Dir Zocker?
-@en Do you want any sugar?
+@en Do you want sugar?
 @distractor-en yes
 @distractor-en hi
 @distractor-lu Jo
@@ -375,14 +373,6 @@
 @distractor-en sorry
 @distractor-lu Merci
 @distractor-lu Pardon
-
-@sentence
-@lu Huelt Iech scho Plaz.
-@en You can already take a seat.
-@distractor-en hello
-@distractor-en yes
-@distractor-lu Bonjour
-@distractor-lu Jo
 
 @sentence
 @lu Jo, gären.
