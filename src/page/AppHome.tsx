@@ -231,8 +231,11 @@ export const AppHome = () => {
         </div>
       </div>
 
-      {/* Practice mode buttons — sticky at bottom */}
-      <div className="mt-auto sticky bottom-0 bg-white pt-2 pb-0 mx-[-1.5rem] mb-[-1.5rem] px-6 border-t border-gray-100">
+      {/* Practice mode buttons — pinned to the frame's bottom edge. Its own
+          bottom padding clears the iOS home indicator / floating browser bar
+          (env inset is 0 on desktop, where the 0.5rem keeps the buttons off the
+          frame's rounded corner). */}
+      <div className="mt-auto sticky bottom-0 bg-white pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] mx-[-1.5rem] px-6 border-t border-gray-100">
         <div className="flex gap-2">
           <Button color="word-mix" size="sm" onClick={handleStartWordMix}>
             <span className="flex items-center justify-center gap-1.5">
