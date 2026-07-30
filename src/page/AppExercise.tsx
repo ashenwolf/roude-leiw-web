@@ -131,7 +131,8 @@ const ExerciseActive = ({
   onTryAgain,
   onBack,
 }: ExerciseActiveProps) => (
-  <div className="flex flex-col gap-6">
+  // pb keeps the old spacing now that <main> has no bottom padding
+  <div className="flex flex-col gap-6 pb-6">
     <ProgressBar view={progressView} />
 
     {currentBatch?.type === "word-match" && (

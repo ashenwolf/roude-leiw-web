@@ -33,7 +33,12 @@ export const AppWrapper = ({ children }: AppWrapperProps) => (
             <UserMenu />
           </div>
         </header>
-        <main className="relative flex-1 overflow-auto p-6 min-h-0">
+        {/* No bottom padding: a page may pin a bar to the frame's bottom edge
+            (AppHome's practice-mode bar). Padding here would sit outside that
+            bar's containing block and hold it 1.5rem short of the edge, leaving
+            a strip for scrolling content to show through. Pages own their own
+            bottom spacing. */}
+        <main className="relative flex-1 overflow-auto px-6 pt-6 min-h-0">
           <ErrorBoundary>{children}</ErrorBoundary>
         </main>
       </AuthProvider>

@@ -80,8 +80,9 @@ export const AppExam = () => {
     );
   }
 
+  // pb keeps the old spacing now that <main> has no bottom padding
   return (
-    <div className="flex flex-col gap-5 pb-4">
+    <div className="flex flex-col gap-5 pb-10">
       <div className="flex items-center gap-2">
         <GraduationCapIcon className="w-6 h-6 text-rose-500" />
         <h2 className="text-xl font-bold text-gray-800">Sproochentest Prep</h2>
