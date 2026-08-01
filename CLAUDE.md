@@ -25,7 +25,7 @@ Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under
 
 **Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2), build sentences from token tiles, and revisit content they've struggled with. There are three exercise Modes from the Home screen: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
 
-A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially by playing, not by mastery. Exam content is a parallel catalog — it never enters Word Mix or Home's stats. **Fix Errors is the one global Mode**: its error pool spans both tracks (course lessons + played/unlocked exam SubLessons).
+A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially — a SubLesson opens the next one once it is **fully passed**, the same mastery gate the course track uses between lessons. Exam content is a parallel catalog — it never enters Word Mix or Home's stats. **Fix Errors is the one global Mode**: its error pool spans both tracks (course lessons + played/unlocked exam SubLessons).
 
 Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persistence.
 
@@ -101,7 +101,7 @@ src/
 │
 ├── exam/                             # Exam track — parallel to the course catalog
 │   ├── exam-catalog.ts               # ExamManifest/SubLessonMeta types + loaders (theme-first, no level)
-│   └── exam-progression.ts           # Pure: computeExamView (play-gate unlock), selectSubLessonsToLoad
+│   └── exam-progression.ts           # Pure: computeExamView (pass-gate unlock), selectSubLessonsToLoad
 │
 ├── exercise/                         # Core game logic — producer pipeline (see Glossary for terms)
 │   ├── use-exercise-session.ts       # Hook: thin wiring (load + dispatch only)
@@ -259,15 +259,16 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically.
 - Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
 - Outcomes: same as Lesson. `completionEffect: 'noop'`.
-- Play-gate (edge, in `AppExercise.flushProgress`): a **completed** exam Session pushes its SubLesson's manifest id through `newlyUnlockedLessons`; abandoning marks nothing. `computeExamView` (`src/exam/exam-progression.ts`) unlocks the next SubLesson in the Theme when the previous id is in the persisted set. Mastery (`computeLessonProgress`) is the visible progress ring but gates nothing on this track.
+- Pass-gate: `computeExamView` (`src/exam/exam-progression.ts`) unlocks the next SubLesson in a Theme once the previous one is **passed** — `computeLessonProgress(...).isComplete`, i.e. every Element at `correct >= MASTERY_CORRECT_COUNT`. Same gate and same constant as the course track. `passed` implies `unlocked`, so the chain advances exactly one step at a time.
+- Played-marker (edge, in `AppExercise.flushProgress`): a **completed** exam Session pushes its SubLesson's manifest id through `newlyUnlockedLessons`; abandoning marks nothing. That id no longer opens the next step — it keeps the SubLesson unlocked (sticky access) and puts it in the content-load / error-pool scope.
 
-#### Unlock rule (Lesson Mode only)
+#### Unlock rule (both tracks)
 
-For each Element defined in the lesson's `.letz` file:
+One rule gates progression on the course track (lesson → next lesson) and on the exam track (SubLesson → next SubLesson in its Theme). For each Element defined in the lesson's `.letz` file:
 - Element passes iff `correct >= MASTERY_CORRECT_COUNT` (3). There is **no** accuracy ratio and **no** minimum-shown gate — three correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
 - For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct >= 3` (`combinedPhraseStats`). Both directions count toward the one phrase Element.
 
-The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (0.8).
+The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (**1.0** — every Element must pass; raised from 0.8 in July 2026, see [exam-and-lesson-pass-gate](.claude/memory/exam-and-lesson-pass-gate.md)).
 
 Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 
@@ -508,7 +509,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 6. **Sessions and CSRF use TTLs, not deletion sweeps.** Cloudflare KV `expirationTtl` handles cleanup. Don't write background jobs to expire stale rows.
 
-7. **`unlockedLessons` doubles as the exam play-gate set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes. Course logic only ever looks up course ids, exam logic only exam ids — the two id families coexist inertly in one array, and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field.
+7. **`unlockedLessons` doubles as the exam played-SubLesson set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes. Course logic only ever looks up course ids, exam logic only exam ids — the two id families coexist inertly in one array, and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field. On the exam track these ids no longer gate the next step (that's the mastery pass-gate); they mark a SubLesson as opened — sticky access plus content-load / error-pool scope.
 
 8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
 
@@ -703,29 +704,29 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (352 tests):**
+**What's covered (420 tests):**
 
 | Module                                      | Tests | Notes |
 |---------------------------------------------|-------|-------|
-| `src/exercise/WordMatch/game-logic.ts`      | 23    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
+| `src/exercise/WordMatch/game-logic.ts`      | 24    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
 | `src/exercise/SentenceBuilder/sentence-logic.ts` | 24 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
-| `src/exercise/progression.ts`               | 35    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
-| `src/exercise/session-reducer.ts`           | 27    | every action × every state, blockBoundaries-based section detection |
+| `src/exercise/progression.ts`               | 49    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
+| `src/exercise/session-reducer.ts`           | 33    | every action × every state, blockBoundaries-based section detection |
 | `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
-| `src/exercise/error-pool.ts`                | 14    | primary pool, fallback pool, independent words/phrases, deduplication |
+| `src/exercise/error-pool.ts`                | 15    | primary pool, fallback pool, independent words/phrases, deduplication |
 | `src/exercise/selection.ts`                 | 17    | bucketedPick boundaries, pickFromPool re-roll, pickPair, pickSentence |
 | `src/exercise/exercise-builders.ts`         | 32    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions, question→direction override, chunkIntoWordMatchExercises |
-| `src/exercise/modes/lesson.ts`              | 11    | shape, upper-bound clamp, edge cases |
+| `src/exercise/modes/lesson.ts`              | 27    | shape, upper-bound clamp, edge cases |
 | `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
 | `src/exercise/modes/fix-errors.ts`          | 11    | empty pool, word-only/phrase errors, fallback, global scope (exam Q&A rebuild) |
 | `src/exercise/modes/exam.ts`                | 13    | chunking + merge edges, @question direction forcing, determinism, boundaries |
 | `src/exam/exam-catalog.ts`                  | 3     | flattenExamManifest ordering + theme propagation |
-| `src/exam/exam-progression.ts`              | 11    | play-gate chain, theme independence, mastery-does-not-unlock, load selection |
-| `src/lib/letz-parser.ts`                    | 15    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
+| `src/exam/exam-progression.ts`              | 15    | pass-gate chain (playing alone does not open the next step), sticky access, theme independence, load selection |
+| `src/lib/letz-parser.ts`                    | 18    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
 | `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
-| `worker/lib/user.ts`                        | 36    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
+| `worker/lib/user.ts`                        | 32    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
 | `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
-| `worker/lib/validators.ts`                  | 12    | payload validation bounds |
+| `worker/lib/validators.ts`                  | 14    | payload validation bounds |
 | `src/persistence/migration.ts`              | 23    | buildMigrationChunks: per-chunk validator bounds, counter splitting, duration/XP spread, exact total reconstruction |
 | `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
 

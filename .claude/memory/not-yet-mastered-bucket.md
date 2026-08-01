@@ -12,7 +12,7 @@ Originally the bucket keyed off `shown < MIN_ANSWERS` because the *old* unlock g
 
 - A hard Element shown 10× but only correct twice is **not mastered** (`correct = 2 < 3`), so it drags the lesson percentage down.
 - But it had **cleared `shown >= MIN_ANSWERS`**, so it dropped out of the old `under-exposed` pool and competed for a uniform draw across the whole lesson (~0.04 picks/session in a 193-element lesson). Effectively never seen again.
-- Result: the lesson could sit below the 80% unlock gate **forever** — the "stuck at a percentage" symptom.
+- Result: the lesson could sit below the unlock gate **forever** — the "stuck at a percentage" symptom. (The gate was 80% of Elements then and is 100% since 2026-08-01, see [[exam-and-lesson-pass-gate]] — which makes this bucket the only thing keeping the last stragglers reachable.)
 
 Fix: the bucket now keys off `correct < MASTERY_CORRECT_COUNT` — the *same predicate as the unlock gate* (`isElementMastered`). This covers never-seen elements (correct=0) AND well-shown stragglers (shown=10, correct=2) with one aligned rule, and an Element only leaves the bias pool once it has actually passed. Word predicate: `isWordNotYetMastered` in `modes/lesson.ts`. Sentence predicate: `combinedPhraseStats(...).correct < MASTERY_CORRECT_COUNT` (both directions summed).
 

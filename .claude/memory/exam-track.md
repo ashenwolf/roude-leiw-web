@@ -26,15 +26,19 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
   files use compact ids (`V1.01`) and everything (play-gate, progress keys,
   navigation) keys off the manifest id. The exam integration test deliberately
   does NOT assert in-file id == manifest id (the course one does).
-- **Play-gate, not mastery-gate.** A SubLesson unlocks the next in its theme
-  once **played to completion**. Persisted by pushing the manifest id through
-  the existing `newlyUnlockedLessons` sync channel — no new `UserData` field,
-  no validator change (`LESSON_ID_RX` already admits the ids; pinned by a
-  validator test). Abandoning marks nothing (gated in
-  `AppExercise.flushProgress` on `sessionCompleted`; note Lesson Mode's course
-  unlock-check still runs on abandon — that behavior was intentionally kept).
-  Mastery-gating was rejected because shared stat keys can pre-complete a
-  SubLesson the user never opened (stats are content-addressed `lu|en`).
+- ~~**Play-gate, not mastery-gate.**~~ **SUPERSEDED 2026-08-01 — the gate is now
+  mastery, see [[exam-and-lesson-pass-gate]].** The original decision: a
+  SubLesson unlocks the next in its theme once **played to completion**, with
+  mastery-gating rejected because shared stat keys can pre-complete a SubLesson
+  the user never opened (stats are content-addressed `lu|en`). That objection is
+  answered at a 100% gate (each SubLesson's `@sentence` Elements are unique to
+  it) and defensively by `passed => unlocked` in `toSubLessonView`.
+  What survives unchanged: the manifest id is still pushed through the existing
+  `newlyUnlockedLessons` sync channel on a completed Session — no new `UserData`
+  field, no validator change (`LESSON_ID_RX` already admits the ids; pinned by a
+  validator test), abandoning marks nothing — but it now records the SubLesson
+  as *played* (sticky access + content-load / error-pool scope) rather than
+  opening the next step. Lesson Mode's course unlock-check still runs on abandon.
 - **Themes all open, mutually independent, independent of course progress.**
   The ~B1 audience may skip the A1 course entirely.
 - **Exam Mode plans deterministically** (`planExamMode`): every element once,

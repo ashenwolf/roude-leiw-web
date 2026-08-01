@@ -207,9 +207,11 @@ type UnlockContext = {
  * Ids this flush should append to the persisted unlock set.
  *
  * Lesson Mode derives course unlocks from stats, so it runs on abandon too —
- * unlock is earned by answering, not by finishing. The Exam play-gate rides the
- * same channel but only on a completed Session: abandoning a SubLesson must
- * not mark it played. Word Mix and Fix Errors unlock nothing.
+ * unlock is earned by answering, not by finishing. Exam ids ride the same
+ * channel but only on a completed Session: they mark the SubLesson as PLAYED
+ * (sticky access + error-pool scope), while what opens the next step in the
+ * Theme is the pass-gate on stats — see src/exam/exam-progression.ts.
+ * Word Mix and Fix Errors unlock nothing.
  */
 const collectUnlockIds = (mode: SessionMode, ctx: UnlockContext): string[] => {
   switch (mode.kind) {
