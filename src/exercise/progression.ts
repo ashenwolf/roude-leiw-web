@@ -146,7 +146,7 @@ export type LessonProgress = {
   /** Elements that pass the unlock check (correct >= MASTERY_CORRECT_COUNT). */
   mastered: number;
   percentage: number;
-  /** True when percentage >= UNLOCK_LESSON_THRESHOLD (80% of elements pass). */
+  /** True when percentage >= UNLOCK_LESSON_THRESHOLD (every element passes). */
   isComplete: boolean;
 };
 

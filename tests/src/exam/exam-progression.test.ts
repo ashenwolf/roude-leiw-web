@@ -17,6 +17,12 @@ const lesson = (id: string, words: [string, string][]): Lesson => ({
   sentences: [],
 });
 
+/** Stats that pass the mastery gate for every word of the given sub-lessons. */
+const masteredWords = (...lessons: Lesson[]): Record<string, WordStats> =>
+  Object.fromEntries(
+    lessons.flatMap((l) => l.entries.map((e) => [`${e.lu}|${e.en}`, s(5, 5, 0)] as const)),
+  );
+
 const meta = (id: string, themeId: string): SubLessonMeta => ({
   id,
   themeId,
@@ -50,14 +56,53 @@ describe("computeExamView", () => {
     expect(view.themes[1].subLessons.map((v) => v.unlocked)).toEqual([true, false]);
   });
 
-  it("unlocks the next sub-lesson once the previous one is played", () => {
-    const view = computeExamView(CATALOG, {}, {}, ["vacation.01"]);
-    expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, true, false]);
+  it("playing a sub-lesson does NOT unlock the next one (pass-gate, not play-gate)", () => {
+    const content = { "vacation.01": lesson("V1.01", [["Moien", "hi"], ["Äddi", "bye"]]) };
+    const partial = { "Moien|hi": s(5, 5, 0) }; // 1 of 2 elements mastered
+    const view = computeExamView(CATALOG, content, partial, ["vacation.01"]);
     expect(view.themes[0].subLessons.map((v) => v.played)).toEqual([true, false, false]);
+    expect(view.themes[0].subLessons.map((v) => v.passed)).toEqual([false, false, false]);
+    expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, false, false]);
   });
 
-  it("keeps themes independent: playing vacation does not unlock family", () => {
+  it("unlocks the next sub-lesson once the previous one is fully passed", () => {
+    const first = lesson("V1.01", [["Moien", "hi"], ["Äddi", "bye"]]);
+    const view = computeExamView(
+      CATALOG,
+      { "vacation.01": first },
+      masteredWords(first),
+      ["vacation.01"],
+    );
+    expect(view.themes[0].subLessons.map((v) => v.passed)).toEqual([true, false, false]);
+    expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, true, false]);
+  });
+
+  it("opens one step at a time — passing 01 never reaches 03", () => {
+    const first = lesson("V1.01", [["Moien", "hi"]]);
+    const second = lesson("V1.02", [["Merci", "thanks"]]);
+    const view = computeExamView(
+      CATALOG,
+      { "vacation.01": first, "vacation.02": second },
+      masteredWords(first),
+      ["vacation.01"],
+    );
+    expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, true, false]);
+  });
+
+  it("keeps an already-played sub-lesson unlocked even if the previous is not passed", () => {
+    // Sticky access: the stricter gate must not take back a step the user already opened.
     const view = computeExamView(CATALOG, {}, {}, ["vacation.01", "vacation.02"]);
+    expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, true, false]);
+  });
+
+  it("keeps themes independent: passing vacation does not unlock family", () => {
+    const first = lesson("V1.01", [["Moien", "hi"]]);
+    const view = computeExamView(
+      CATALOG,
+      { "vacation.01": first },
+      masteredWords(first),
+      ["vacation.01"],
+    );
     expect(view.themes[1].subLessons.map((v) => v.unlocked)).toEqual([true, false]);
   });
 
@@ -66,12 +111,20 @@ describe("computeExamView", () => {
     expect(view.themes[0].subLessons.map((v) => v.unlocked)).toEqual([true, false, false]);
   });
 
-  it("mastery does NOT unlock the next sub-lesson (play-gate, not mastery-gate)", () => {
-    const content = { "vacation.01": lesson("V1.01", [["Moien", "hi"]]) };
-    const mastered = { "Moien|hi": s(5, 5, 0) };
-    const view = computeExamView(CATALOG, content, mastered, []);
-    expect(view.themes[0].subLessons[0].progress?.isComplete).toBe(true);
+  it("cannot pass a sub-lesson whose content is not loaded", () => {
+    const first = lesson("V1.01", [["Moien", "hi"]]);
+    const view = computeExamView(CATALOG, {}, masteredWords(first), []);
+    expect(view.themes[0].subLessons[0].passed).toBe(false);
     expect(view.themes[0].subLessons[1].unlocked).toBe(false);
+  });
+
+  it("a locked sub-lesson never counts as passed, so it cannot open the one after it", () => {
+    // Content for a locked step can be loaded (it is the next node after a played
+    // one); shared stat keys must still not let the chain skip a step.
+    const second = lesson("V1.02", [["Merci", "thanks"]]);
+    const view = computeExamView(CATALOG, { "vacation.02": second }, masteredWords(second), []);
+    expect(view.themes[0].subLessons[1].passed).toBe(false);
+    expect(view.themes[0].subLessons[2].unlocked).toBe(false);
   });
 
   it("computes progress for loaded sub-lessons and null for unloaded ones", () => {

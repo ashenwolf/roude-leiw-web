@@ -78,9 +78,11 @@ export const planLessonMode = (
   // "Not yet mastered" is measured against the unlock gate itself
   // (`correct < MASTERY_CORRECT_COUNT`), NOT `shown`. This is the load-bearing
   // fix for stragglers: a word shown 10× but only correct twice is unmastered,
-  // caps the lesson below the 80% gate, and — under the old `shown < MIN_ANSWERS`
-  // rule — had dropped out of every priority bucket. Keying off `correct` keeps
-  // such stragglers in the bias pool until they actually pass the gate.
+  // holds the lesson below the unlock gate, and — under the old
+  // `shown < MIN_ANSWERS` rule — had dropped out of every priority bucket. Keying
+  // off `correct` keeps such stragglers in the bias pool until they actually pass
+  // the gate. Load-bearing now that the gate is 100% of Elements: a single
+  // straggler the planner can't reach would stall the lesson forever.
   const isWordNotYetMastered = (e: WordEntry) =>
     (userWords[wordKey(e.lu, e.en)]?.correct ?? 0) < MASTERY_CORRECT_COUNT;
 

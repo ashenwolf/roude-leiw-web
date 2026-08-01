@@ -3,24 +3,26 @@ import { CheckCircleIcon, LockIcon } from "./icons";
 import type { SubLessonView, ThemeView } from "../exam/exam-progression";
 
 // One node per sub-lesson in a vertical path. Visual states mirror LessonCard's
-// palette (locked / current / unlocked / played).
-type NodeState = "played" | "current" | "unlocked" | "locked";
+// palette (locked / current / unlocked / passed). The green check means PASSED
+// (fully mastered) — the same thing that opens the next node, so a checked node
+// is never followed by a locked one.
+type NodeState = "passed" | "current" | "unlocked" | "locked";
 
 const NODE_STATES: Record<NodeState, { className: string }> = {
-  played: { className: "bg-green-100 border-green-400" },
+  passed: { className: "bg-green-100 border-green-400" },
   current: { className: "bg-lime-50 border-lime-400 ring-2 ring-lime-300 ring-offset-1" },
   unlocked: { className: "bg-white border-gray-200 hover:border-lime-300 hover:shadow-sm" },
   locked: { className: "bg-gray-100 border-gray-200 opacity-50 cursor-not-allowed" },
 };
 
 const nodeState = (view: SubLessonView, isCurrent: boolean): NodeState => {
-  if (view.played) return "played";
+  if (view.passed) return "passed";
   if (!view.unlocked) return "locked";
   return isCurrent ? "current" : "unlocked";
 };
 
 const NodeBadge = ({ state, step }: { state: NodeState; step: string }) => {
-  if (state === "played") return <CheckCircleIcon className="w-5 h-5 text-green-500" />;
+  if (state === "passed") return <CheckCircleIcon className="w-5 h-5 text-green-500" />;
   if (state === "locked") return <LockIcon className="w-4 h-4 text-gray-400" />;
   return <span className="text-sm font-bold text-gray-600">{step}</span>;
 };
@@ -71,7 +73,7 @@ type SubLessonPathProps = {
 };
 
 export const SubLessonPath = ({ theme, onSelectSubLesson }: SubLessonPathProps) => {
-  const currentId = theme.subLessons.find((v) => v.unlocked && !v.played)?.meta.id;
+  const currentId = theme.subLessons.find((v) => v.unlocked && !v.passed)?.meta.id;
 
   return (
     <div className="flex flex-col gap-2">

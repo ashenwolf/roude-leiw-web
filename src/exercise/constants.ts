@@ -33,8 +33,16 @@ export const UNLOCK_ELEMENT_THRESHOLD = 0.8;
  */
 export const MASTERY_CORRECT_COUNT = 3;
 
-/** A lesson unlocks the next lesson if `passingElements / totalElements >= this`. */
-export const UNLOCK_LESSON_THRESHOLD = 0.8;
+/**
+ * A lesson unlocks the next lesson if `passingElements / totalElements >= this`.
+ *
+ * 1.0 — **every** Element must pass the mastery gate. The same constant gates the
+ * exam track (a SubLesson opens the next step in its Theme once it is fully
+ * passed), so "done" means the same thing on both tracks. Unlock stays sticky:
+ * `correct` is monotonic and already-unlocked ids are persisted, so nothing
+ * re-locks if a later mistake drops live accuracy.
+ */
+export const UNLOCK_LESSON_THRESHOLD = 1.0;
 
 // --- Block / Slot shape ------------------------------------------------------
 

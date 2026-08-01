@@ -180,7 +180,7 @@ describe("computeLessonProgress", () => {
     const progress = computeLessonProgress(greetings, words);
     expect(progress.mastered).toBe(2);
     expect(progress.percentage).toBeCloseTo(2 / 3);
-    // 2/3 = 0.667 < UNLOCK_LESSON_THRESHOLD (0.8) → not complete
+    // 2/3 < UNLOCK_LESSON_THRESHOLD (1.0) → not complete
     expect(progress.isComplete).toBe(false);
   });
 
@@ -201,7 +201,7 @@ describe("computeLessonProgress", () => {
     expect(progress.percentage).toBe(0);
   });
 
-  it("5-element lesson: 4/5 passing (80%) → isComplete true", () => {
+  it("5-element lesson: 4/5 passing (80%) → isComplete false, one straggler is enough to hold it", () => {
     const big = lesson("A1.02", ["a", "a"], ["b", "b"], ["c", "c"], ["d", "d"], ["e", "e"]);
     const words = {
       "a|a": passing(), "b|b": passing(), "c|c": passing(), "d|d": passing(),
@@ -210,7 +210,16 @@ describe("computeLessonProgress", () => {
     const progress = computeLessonProgress(big, words);
     expect(progress.mastered).toBe(4);
     expect(progress.percentage).toBeCloseTo(4 / 5);
-    expect(progress.isComplete).toBe(true); // 0.8 >= 0.8 ✓
+    expect(progress.isComplete).toBe(false); // 0.8 < 1.0 ✗
+  });
+
+  it("5-element lesson: the last element passing flips isComplete", () => {
+    const big = lesson("A1.02", ["a", "a"], ["b", "b"], ["c", "c"], ["d", "d"], ["e", "e"]);
+    const words = {
+      "a|a": passing(), "b|b": passing(), "c|c": passing(), "d|d": passing(),
+      "e|e": barelyPassing(),
+    };
+    expect(computeLessonProgress(big, words).isComplete).toBe(true);
   });
 
   it("lesson with sentences — unpassed phrase counts toward total", () => {
@@ -295,13 +304,19 @@ describe("computeUnlockedLessonIds", () => {
     expect(unlocked).not.toContain("A1.02");
   });
 
-  it("unlocks next lesson when previous lesson passes the 80% threshold", () => {
-    // Both A1.01 words pass → A1.01 percentage = 2/2 = 1.0 >= 0.8 → A1.02 unlocked
+  it("unlocks next lesson when every element of the previous lesson passes", () => {
+    // Both A1.01 words pass → A1.01 percentage = 2/2 = 1.0 >= 1.0 → A1.02 unlocked
     const words = allPassing([["Moien", "hi"], ["Äddi", "bye"]]);
     const unlocked = computeUnlockedLessonIds(lessons, words);
     expect(unlocked).toContain("A1.01");
     expect(unlocked).toContain("A1.02");
     expect(unlocked).not.toContain("A1.03");
+  });
+
+  it("does NOT unlock next lesson while a single element is still unmastered", () => {
+    // 1 of 2 elements passing = 50% — the old 80% gate is gone, 100% is required.
+    const words = allPassing([["Moien", "hi"]]);
+    expect(computeUnlockedLessonIds(lessons, words)).not.toContain("A1.02");
   });
 
   it("unlocks all when all prior lessons pass", () => {
