@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 
 import { lessonSlotTypeDistribution, planLessonMode } from "../../../../src/exercise/modes/lesson.ts";
 import { LESSON, MASTERY_CORRECT_COUNT } from "../../../../src/exercise/constants.ts";
-import { phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
+import { computeLessonProgress, phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
 
 import type { Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
 import type { WordStats } from "../../../../src/context/auth.ts";
@@ -320,6 +320,40 @@ describe("planLessonMode — deduplication", () => {
     expect(new Set(keys).size).toBe(keys.length);
   });
 
+  it("keeps strict sentence dedup while the backlog can still fill a session", () => {
+    // 20 unmastered sentences ≥ LESSON.totalSlots → variety guarantee still holds.
+    const sentences = Array.from({ length: 20 }, (_, i) => sentence(`en${i}`, `lu${i}`));
+    const l = lesson("A1_01", [["Foo", "bar"]], sentences);
+    const seq = Array.from({ length: LESSON.totalSlots }, (_, i) =>
+      [0.5, 0.0, 0.0, i / 20, 0.5],
+    ).flat();
+    let idx = 0;
+    const seqRng = () => seq[idx++ % seq.length];
+    const config = planLessonMode([l], "A1_01", {}, seqRng);
+    const keys = config.queue
+      .filter((s) => s.type === "sentence-builder")
+      .map((s) => (s.type === "sentence-builder" ? s.item.phraseKey : ""));
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it("never repeats an already-mastered sentence, even in the endgame", () => {
+    // One straggler + one mastered sentence: the mastered one keeps its cap of 1.
+    const straggler = sentence("stuck", "gepléckt");
+    const done = sentence("done", "fäerdeg");
+    const userWords: Record<string, WordStats> = {
+      [phraseKey("en-lu", "done")]: stats(5, MASTERY_CORRECT_COUNT),
+    };
+    const l = lesson("A1_01", [["Foo", "bar"]], [straggler, done]);
+    // Sentence-builder always; bucket roll 0.5 → `current` pool (both sentences).
+    const seq = [0.5, 0.5, 0.0, 0.99, 0.5]; // sentence-idx 0.99 → the mastered one
+    let idx = 0;
+    const config = planLessonMode([l], "A1_01", userWords, () => seq[idx++ % seq.length]);
+    const doneCount = config.queue.filter(
+      (s) => s.type === "sentence-builder" && s.item.promptText === "done",
+    ).length;
+    expect(doneCount).toBeLessThanOrEqual(1);
+  });
+
   it("allows sentence repeats when pool is smaller than available sentence slots", () => {
     // 2 sentences but sentence-builder always rolls → exhausts unique pool quickly.
     const s1 = sentence("Hello", "Moien");
@@ -329,6 +363,78 @@ describe("planLessonMode — deduplication", () => {
     // Should still produce LESSON.totalSlots slots (not silently drop them).
     expect(config.queue.length).toBe(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "sentence-builder")).toBe(true);
+  });
+});
+
+// ─── Endgame convergence ──────────────────────────────────────────────────────
+
+// A sentence earns at most +1 `correct` per appearance. While each was capped at
+// one appearance per Session, a lesson whose remaining backlog was sentences
+// could not move its percentage for three Sessions — the "stuck at 98%" report.
+// These tests pin the fix: a not-yet-mastered sentence may be scheduled
+// MASTERY_CORRECT_COUNT times, so the tail clears like a word tail does.
+describe("planLessonMode — endgame convergence", () => {
+  // Deterministic PRNG: fixed seeds keep these tests reproducible while staying
+  // robust to how many rng calls the planner's internals happen to make.
+  const seeded = (seed: number) => {
+    let s = seed >>> 0;
+    return () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32;
+  };
+
+  const SEEDS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  // 20 sentences + 10 words; everything mastered except one sentence.
+  const sentences = Array.from({ length: 20 }, (_, i) => sentence(`en${i}`, `lu${i}`));
+  const words: [string, string][] = Array.from({ length: 10 }, (_, i) => [`w${i}`, `word${i}`]);
+  const straggler = sentences[19];
+  const endgameLesson = lesson("A1_01", words, sentences);
+  const endgameStats: Record<string, WordStats> = {
+    ...Object.fromEntries(words.map(([lu, en]) => [wordKey(lu, en), stats(5, MASTERY_CORRECT_COUNT)])),
+    ...Object.fromEntries(
+      sentences
+        .slice(0, 19)
+        .map((s) => [phraseKey("en-lu", s.enVariants[0]), stats(5, MASTERY_CORRECT_COUNT)]),
+    ),
+  };
+
+  const stragglerSlots = (seed: number) =>
+    planLessonMode([endgameLesson], "A1_01", endgameStats, seeded(seed)).queue.filter(
+      (s) => s.type === "sentence-builder" && s.item.promptText === straggler.enVariants[0],
+    ).length;
+
+  it("can schedule the last unmastered sentence enough times to clear the gate in one session", () => {
+    const counts = SEEDS.map(stragglerSlots);
+    expect(Math.max(...counts)).toBe(MASTERY_CORRECT_COUNT);
+  });
+
+  it("schedules it more than once per session — the old cap was 1", () => {
+    const counts = SEEDS.map(stragglerSlots);
+    expect(counts.filter((c) => c > 1).length).toBeGreaterThan(0);
+  });
+
+  it("clears a sentence-only tail within three perfect sessions", () => {
+    // Plays each planned slot correctly and folds the results back into stats,
+    // exactly as a completed Session does via useProgressSync.
+    const playSession = (
+      userWords: Record<string, WordStats>,
+      rng: () => number,
+    ): Record<string, WordStats> =>
+      planLessonMode([endgameLesson], "A1_01", userWords, rng).queue.reduce((acc, ex) => {
+        const keys =
+          ex.type === "word-match"
+            ? ex.pairs.map(([lu, en]) => wordKey(lu, en))
+            : [ex.item.phraseKey];
+        return keys.reduce((inner, key) => {
+          const c = inner[key] ?? { shown: 0, correct: 0, incorrect: 0 };
+          return { ...inner, [key]: { ...c, shown: c.shown + 1, correct: c.correct + 1 } };
+        }, acc);
+      }, userWords);
+
+    SEEDS.forEach((seed) => {
+      const rng = seeded(seed);
+      const after = [1, 2, 3].reduce((s) => playSession(s, rng), endgameStats);
+      expect(computeLessonProgress(endgameLesson, after).isComplete).toBe(true);
+    });
   });
 });
 

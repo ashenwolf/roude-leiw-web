@@ -8,7 +8,7 @@ import { combinedPhraseStats, wordKey } from "../progression";
 import { bucketedPick, pickPair, pickSentence } from "../selection";
 
 import type { WordStats } from "../../context/auth";
-import type { Lesson, WordEntry } from "../letz-parser";
+import type { Lesson, SentenceEntry, WordEntry } from "../letz-parser";
 import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
 import type { Bucket } from "../selection";
@@ -127,12 +127,11 @@ export const planLessonMode = (
     currentLesson.entries.flatMap((e) => tokenizeSentence(e.lu, "lu")),
   )];
 
-  // Shared set tracking sentence keys already used in this session plan.
-  // buildSlot mutates it so no sentence is repeated until the pool is exhausted.
-  const usedSentenceKeys = new Set<string>();
+  const budget = makeSentenceBudget(notYetMasteredSentences);
+
   const queue = Array.from(
     { length: LESSON.totalSlots },
-    () => buildSlot(wordPools, sentencePools, slotTypeDistribution, lessonVocab, rng, usedSentenceKeys),
+    () => buildSlot(wordPools, sentencePools, slotTypeDistribution, lessonVocab, rng, budget),
   ).filter((slot): slot is Exercise => slot !== null);
 
   return {
@@ -150,6 +149,64 @@ export const planLessonMode = (
 
 type WordBucketName = (typeof LESSON.buckets.wordMatch)[number]["name"];
 type SentenceBucketName = (typeof LESSON.buckets.sentenceLesson)[number]["name"];
+
+/** Per-Session scheduling budget for sentences (see `makeSentenceBudget`). */
+type SentenceBudget = {
+  /** Times each sentence identity has already been scheduled this Session. */
+  readonly uses: Map<string, number>;
+  /** Sentence identities in the current lesson still below the mastery gate. */
+  readonly notYetMastered: ReadonlySet<string>;
+  /** Schedulings allowed per not-yet-mastered sentence. 1 = strict dedup. */
+  readonly repeatAllowance: number;
+};
+
+/**
+ * How often a sentence may be scheduled within one Session.
+ *
+ * A sentence earns at most +1 `correct` per appearance, so a flat
+ * once-per-Session cap put a hard floor of MASTERY_CORRECT_COUNT Sessions under
+ * any lesson whose remaining backlog is sentences: the lesson percentage could
+ * not move at all until the third Session, and — because the not-yet-mastered
+ * bucket is probabilistic — usually not until the fourth or fifth. Words never
+ * had that floor (a straggler word can be drawn by several word-match Slots in
+ * one Session and clear the gate immediately), which is why a lesson climbs
+ * smoothly to ~98% and then looks frozen: what survives into the tail is
+ * disproportionately sentences.
+ *
+ * So a not-yet-mastered sentence gets MASTERY_CORRECT_COUNT schedulings —
+ * enough to clear the gate in one clean Session, matching words.
+ *
+ * Repeats unlock only when the remaining backlog is too small to fill a Session
+ * with distinct sentences. Above that threshold there is ample variety, several
+ * sentences cross the gate every Session so the percentage moves on its own, and
+ * strict dedup (the 2026-06-03 variety guarantee) still holds. Already-mastered
+ * sentences are always capped at one appearance: repeating them buys no progress.
+ */
+const makeSentenceBudget = (
+  notYetMasteredSentences: ReadonlyArray<SentenceEntry>,
+): SentenceBudget => ({
+  uses: new Map<string, number>(),
+  notYetMastered: new Set(notYetMasteredSentences.map(sentenceIdentity)),
+  repeatAllowance:
+    notYetMasteredSentences.length > 0 && notYetMasteredSentences.length < LESSON.totalSlots
+      ? MASTERY_CORRECT_COUNT
+      : 1,
+});
+
+/** Direction-agnostic identity of a sentence within a Session plan. */
+const sentenceIdentity = (s: SentenceEntry): string => s.enVariants[0] ?? "";
+
+/**
+ * Records one scheduling of `key` if the budget allows, and reports whether it
+ * did. Mutates `budget.uses` — the budget is shared across all Slots of a Session.
+ */
+const claimSentence = (budget: SentenceBudget, key: string): boolean => {
+  const allowed = budget.notYetMastered.has(key) ? budget.repeatAllowance : 1;
+  const used = budget.uses.get(key) ?? 0;
+  if (used >= allowed) return false;
+  budget.uses.set(key, used + 1);
+  return true;
+};
 
 // Picks up to `count` unique word pairs (deduplicated by wordKey).
 // Generates count*4 candidates via with-replacement draws, then keeps the first
@@ -180,7 +237,7 @@ const buildSlot = (
   slotTypeDistribution: ReadonlyArray<Bucket<SlotType>>,
   lessonVocab: string[],
   rng: () => number,
-  usedSentenceKeys: Set<string>,
+  budget: SentenceBudget,
 ): Exercise | null => {
   for (let attempt = 0; attempt < 10; attempt++) {
     const slotType = bucketedPick(rng(), slotTypeDistribution);
@@ -188,9 +245,8 @@ const buildSlot = (
     if (slotType === "sentence-builder") {
       const picked = pickSentence(sentencePools, LESSON.buckets.sentenceLesson, rng);
       if (!picked) continue; // no sentences in pool → re-roll
-      const key = picked.sentence.enVariants[0] ?? ""; // sentence identity (direction-agnostic)
-      if (usedSentenceKeys.has(key)) continue; // already used this session → try again
-      usedSentenceKeys.add(key);
+      // Out of budget for this sentence (see makeSentenceBudget) → try again.
+      if (!claimSentence(budget, sentenceIdentity(picked.sentence))) continue;
       const direction = bucketedPick(rng(), LESSON.buckets.direction);
       return buildSentenceExercise(picked.sentence, direction, lessonVocab);
     }
@@ -200,11 +256,12 @@ const buildSlot = (
     if (pairs.length > 0) return buildWordMatchExercise(pairs);
   }
 
-  // Retries exhausted — most likely sentence-builder kept rolling but all session
-  // sentences are already used. Accept a sentence repeat rather than skip the slot.
+  // Retries exhausted — most likely sentence-builder kept rolling but every
+  // session sentence is out of budget. Accept a repeat rather than skip the slot.
   const fallback = pickSentence(sentencePools, LESSON.buckets.sentenceLesson, rng);
   if (fallback) {
-    usedSentenceKeys.add(fallback.sentence.enVariants[0] ?? "");
+    const key = sentenceIdentity(fallback.sentence);
+    budget.uses.set(key, (budget.uses.get(key) ?? 0) + 1);
     const direction = bucketedPick(rng(), LESSON.buckets.direction);
     return buildSentenceExercise(fallback.sentence, direction, lessonVocab);
   }
