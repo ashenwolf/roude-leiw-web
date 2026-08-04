@@ -60,16 +60,24 @@ The helper returns a bucket table in the same shape as the bucket tables, so it 
 
 Considered and rejected: deficit-proportional weighting (account for 5 pairs/word-slot vs 1 element/sentence-slot to equalize sessions-to-unlock). More precise but more logic; start with the linear ratio clamp and escalate only if word starvation persists after content splitting.
 
-## Session-level sentence deduplication (added 2026-06-03)
+## Session-level sentence deduplication (added 2026-06-03, **relaxed 2026-08-03**)
 
-`planLessonMode` now passes a shared `usedSentenceKeys: Set<string>` into every `buildSlot` call. When a sentence slot is built, its `phrase:en-lu:…` key is added to the set; future slots skip already-used keys (up to 10 retries), then fall back to allowing repeats only when the pool is exhausted. Guarantees variety across the ~12 sentence slots in a typical 15-slot session as long as the lesson has ≥ 12 unique sentences (A1.01 has 42).
+`planLessonMode` passes a shared **`SentenceBudget`** into every `buildSlot` call — `{ uses: Map<identity, count>, notYetMastered: Set<identity>, repeatAllowance }`, built by `makeSentenceBudget`. `claimSentence` records a scheduling if the sentence is under its allowance, otherwise the slot re-rolls (up to 10 retries), then the fallback path allows a repeat rather than dropping the slot.
+
+Allowance per sentence:
+- **not-yet-mastered, and fewer than `LESSON.totalSlots` of them left** → `MASTERY_CORRECT_COUNT` (3).
+- **everything else** → 1 (the original strict dedup).
+
+Originally the cap was a flat 1 (a plain `Set<string>`), which guaranteed variety across the ~12 sentence slots of a session. That cap turned out to be the **"stuck at 98%" bug** — see [[sentence-endgame-throughput]] for the measurements. A sentence earns at most +1 `correct` per appearance, so a flat cap of 1 put a hard floor of 3 sessions under any lesson whose remaining backlog was sentences, and the lesson percentage was *literally frozen* for all of them. Words never had that floor: `pickUniquePairs` dedupes only *within* one 5-pair slot, so a straggler word can be drawn by several slots in one session and clear the gate immediately.
+
+The variety guarantee is unchanged above the threshold: with ≥ `LESSON.totalSlots` unmastered sentences there is ample distinct material, several sentences cross the gate each session so the percentage moves on its own, and strict dedup still applies. Already-mastered sentences are always capped at 1 — repeating them buys no progress. The cliff at `LESSON.totalSlots` is deliberate and harmless: the frozen-number problem only exists in the tail.
 
 Word-match slots use `pickUniquePairs` — picks `count*4` candidates via with-replacement draws then deduplicates by `wordKey`, so the same pair can't appear twice in one 5-card slot.
 
 ## Touch points if rules change
 
 - `src/exercise/constants.ts` — bucket definitions + doc comments.
-- `src/exercise/modes/lesson.ts` — builds the `not-yet-mastered` sub-pool from `userWords`. Word predicate `isWordNotYetMastered` uses `wordKey`; sentence predicate uses `combinedPhraseStats`. Both compare `correct` against `MASTERY_CORRECT_COUNT` to align with the unlock gate.
+- `src/exercise/modes/lesson.ts` — builds the `not-yet-mastered` sub-pool from `userWords`. Word predicate `isWordNotYetMastered` uses `wordKey`; sentence predicate uses `combinedPhraseStats`. Both compare `correct` against `MASTERY_CORRECT_COUNT` to align with the unlock gate. Also holds `makeSentenceBudget` / `claimSentence` (per-session sentence repeat allowance).
 - `src/exercise/use-exercise-session.ts` — passes `userWords` into `planLessonMode` (both initial load and `resetSession`).
 - `tests/src/exercise/modes/lesson.test.ts` — "not-yet-mastered bucket" + "adaptive slot-type split" describe blocks.
 - `src/exercise/modes/lesson.ts` — `lessonSlotTypeDistribution` (adaptive split) + `LESSON.wordMatchShare` in `constants.ts`.
