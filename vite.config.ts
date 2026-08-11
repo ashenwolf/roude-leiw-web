@@ -28,6 +28,12 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        // public/assets/tmp/ is the gitignored staging folder photos are dropped
+        // into for review — nothing there is referenced by a .letz or served.
+        // Unoptimized originals in it exceed the 2 MiB precache limit, which
+        // fails the build for whoever has a file staged; only the derived WebP
+        // under exam/**/img/ should ever be cached.
+        globIgnores: ["**/assets/tmp/**"],
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {

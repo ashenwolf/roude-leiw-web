@@ -12,6 +12,7 @@
     "deploy:workers": "npm run build && wrangler pages deploy dist",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check-content": "node scripts/check-content.mjs",
     "generate-audio": "node --env-file-if-exists=.env scripts/generate-audio.mjs",
     "sync-audio:upload": "node scripts/sync-audio.mjs upload",
     "sync-audio:download": "node scripts/sync-audio.mjs download"

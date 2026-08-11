@@ -1,0 +1,160 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 1: General Description
+#
+# The Sproochentest speaking exam includes a picture-description task: the
+# examiner shows a photo and the candidate describes it. This theme drills that
+# task for ONE photo: a busy Luxembourgish funfair (Schueberfouer-style) on a
+# sunny summer afternoon — a Ferris wheel and a "Ghost Rider" ride in the
+# background, food and game stalls left and right, a family (woman + boy)
+# walking in the foreground, two girls in black clothes on the right, blue sky
+# with a few clouds.
+#
+# The photo's coverage is split across three sub-lessons, one per exam task:
+#   01 — WHAT: the elements in the scene, their relative positions, what the
+#        people are doing.                          ← this file
+#   02 — WHO:  the people, 1–2 of them described visually.
+#   03 — WHEN: the weather, and a hedged guess at the time of year.
+#
+# PURE DESCRIPTION. No @question examiner prompts and no first-person opinion,
+# preference or feeling — those belong to the topic themes (vacation, shopping,
+# family). A depicted person's *visible* emotion is fine: that is observation.
+# Rule of thumb — if a stranger could not check the sentence against the photo,
+# it does not belong here.
+#
+# Cut in Aug 2026 for failing exactly that test: `Op der Fouer ass vill Musek.`
+# (a photo has no sound), `D'Leit sinn all frou an hu Spaass.` (`hu Spaass` is
+# an inference about an internal state, and `all` generalises past what is
+# visible), and the fries/cotton-candy stall, whose contents are not legible in
+# the frame. Nothing about the *learner* going to the fair was ever here.
+#
+# Vocabulary and grammar are held to A1–A2 deliberately (present tense, simple
+# main clauses, spatial adverbs + prepositions, no attributive adjectives on
+# masculine nouns). This is stricter than the ~B1 guideline the other themes
+# use — the picture task is where beginners can score, so the sentences stay
+# assemblable.
+#
+# The three @fill blocks carry the frames that recur across every picture task
+# (existential "a lot is going on", "in the background I see …", "in the
+# foreground I see …") — the fixed frame teaches the pattern, the blank drills
+# the positional or scene word. See the skill's references/content-contract.md.
+
+@lesson P1.01 "Schueberfouer: General Description"
+
+# The photo all three picture sub-lessons describe. Pre-cropped to 16:9 and
+# encoded as WebP at 880px — see .claude/memory/picture-description-theme.md for
+# the pipeline. @image-alt stays: it is the a11y text, and the caption of the
+# placeholder frame if the file is ever missing.
+@image "/assets/exam/picture/schueberfouer/img/schueberfouer.webp"
+@image-alt "A busy funfair on a sunny afternoon: a Ferris wheel and a rollercoaster in the background, food and game stalls on the left and right, a woman and a boy walking in the foreground, blue sky with a few clouds."
+
+# --- Talking about a picture ---
+@word d'Bild = the picture
+@word de Vierdergrond = the foreground
+@word den Hannergrond = the background
+@word lénks = on the left
+@word riets = on the right
+@word uewen = at the top
+@word ënnen = at the bottom
+@word gesinn = to see
+@word kucken = to look
+
+# --- At the fair ---
+@word d'Fouer = the fair
+@word d'Riserad = the Ferris wheel
+@word d'Buden = the stalls
+@word d'Attraktiounen = the rides
+
+# --- People ---
+@word d'Leit = the people
+@word d'Famill = the family
+@word de Jong = the boy
+@word d'Meedchen = the girl
+@word d'Fra = the woman
+
+# --- Doing things ---
+@word trëppelen = to walk
+@word stoen = to stand
+@word ongeféier = approximately
+
+@sentence
+@lu Op dem Bild gesinn ech vill Leit.
+@en In the picture I see a lot of people.
+@distractor-lu keng
+@distractor-lu Buden
+@distractor-en no
+@distractor-en stalls
+
+@sentence
+@lu Am Vierdergrond trëppelt eng Fra mat engem Jong.
+@en In the foreground a woman is walking with a boy.
+@distractor-lu Meedchen
+@distractor-lu steet
+@distractor-en girl
+@distractor-en stands
+
+@sentence
+@lu Lénks a riets stinn d'Buden.
+@en On the left and on the right there are the stalls.
+@distractor-lu uewen
+@distractor-lu ënnen
+@distractor-en top
+@distractor-en bottom
+
+@sentence
+@lu Ech gesinn d'Attraktiounen uewen an d'Leit ënnen.
+@en I see the rides at the top and the people at the bottom.
+@distractor-lu lénks
+@distractor-lu riets
+@distractor-en left
+@distractor-en right
+
+@sentence
+@lu Ech gesinn ongeféier fënnef Leit am Vierdergrond.
+@en I see about five people in the foreground.
+@distractor-lu Hannergrond
+@distractor-lu zwee
+@distractor-en background
+@distractor-en two
+
+@sentence
+@lu D'Leit trëppelen a kucken d'Attraktiounen.
+@en The people are walking and looking at the rides.
+@distractor-lu stinn
+@distractor-lu Buden
+@distractor-en standing
+@distractor-en stalls
+
+# --- Reusable frames (@fill) ---
+
+# The existential opener. `vill lass` is the idiom for "a lot going on" (LOD
+# `lass` sense 4), and it transfers to any busy scene, which is what makes it a
+# frame rather than a sentence about this photo. Both distractors describe the
+# opposite scene, so neither works in the blank.
+@fill
+@lu Um Bild ass vill [lass].
+@en In the picture a lot is [happening].
+@distractor-lu roueg
+@distractor-lu zou
+@distractor-en quiet
+@distractor-en closed
+
+# The background frame. Two blanks of different word classes (verb, then noun)
+# so they cannot swap — R6. The determiner `d'` stays in the frame, which is
+# what rules out masculine `Bam` and `Vierdergrond` on grammar alone (R4).
+@fill
+@lu Am Hannergrond [gesinn] ech d'[Riserad].
+@en In the background I [see] the [Ferris wheel].
+@distractor-lu Vierdergrond
+@distractor-lu Bam
+@distractor-en foreground
+@distractor-en tree
+
+# The mirror frame for the foreground — the positional word is the blank here,
+# since that is the pair the examiner listens for. Both distractors are
+# grammatical in the slot and factually wrong about the photo.
+@fill
+@lu Am [Vierdergrond] gesinn ech eng Famill.
+@en In the [foreground] I see a family.
+@distractor-lu Hannergrond
+@distractor-lu Riserad
+@distractor-en background
+@distractor-en Ferris wheel
