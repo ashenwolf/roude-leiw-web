@@ -34,6 +34,11 @@ const PillStatusColors = {
 export type PillStatus = keyof typeof PillStatusColors;
 
 const PillSizeMap = {
+  // `inline` is for a pill sitting inside running text (a filled @fill blank). It
+  // sets no font size — it inherits the surrounding text's — and hugs the word
+  // instead of taking a fixed height, so the pill reads as part of the sentence
+  // rather than as a control dropped into it.
+  inline: ["", "px-2", "leading-tight"],
   sm: ["text-sm", "px-4", "h-10"],
   md: ["text-md", "", "h-18"],
   lg: ["text-lg", "", "h-22"],
@@ -55,7 +60,9 @@ export const Pill = ({
   size?: PillSize;
 }) => {
   const [bg, border, , shadow, text] = PillStatusColors[status];
-  const [textSize, px, py] = PillSizeMap[size];
+  // Third slot is the vertical metric: a fixed height for the standalone sizes,
+  // a line-height for `inline` (which must grow with the text it sits in).
+  const [textSize, px, vertical] = PillSizeMap[size];
 
   return (
     <button
@@ -69,7 +76,7 @@ export const Pill = ({
         text,
         textSize,
         px,
-        py,
+        vertical,
         "p-1",
         "rounded-lg",
         "cursor-pointer",

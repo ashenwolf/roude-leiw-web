@@ -50,35 +50,57 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
   const aimed = state.checkResult === null ? targetBlank(state) : null;
   const usedSet = new Set(state.placed.filter((p): p is number => p !== null));
 
-  const blankStatus = (blankIdx: number): PillStatus => {
-    if (state.checkResult !== null) return state.checkResult === "correct" ? "success" : "fail";
-    return blankIdx === aimed ? "selected" : "blanc";
-  };
+  // Only filled blanks are pills, and a filled blank is never the aim point
+  // (tapping one clears it), so there is no "selected" case here.
+  const filledStatus: PillStatus =
+    state.checkResult === null ? "blanc" : state.checkResult === "correct" ? "success" : "fail";
+
+  // An empty blank is a gap in a sentence, not a tile: it reads as an underline,
+  // the same quiet affordance the sentence builder's empty assembled row uses.
+  // Type size is inherited from the sentence container (as it is for `size="inline"`
+  // pills), and the px-2 + 2px border match the filled pill, so a blank sits in the
+  // reading flow at one size and dropping a tile in changes no geometry.
+  const emptyBlankClass = (blankIdx: number): string =>
+    [
+      "align-middle leading-tight px-2 border-2 border-transparent cursor-pointer transition",
+      blankIdx === aimed ? "border-b-sky-400" : "border-b-gray-300",
+    ].join(" ");
 
   return (
     <div className="flex flex-col gap-6 p-2">
       <p className="text-center text-sm italic text-gray-500 px-2">{item.promptText}</p>
 
-      {/* The gapped sentence — inline blanks keep the reading flow intact */}
-      <div className="min-h-36 flex flex-wrap items-center justify-center gap-y-2 border-b-2 border-gray-200 pb-8 px-2">
+      {/* The gapped sentence. This is a *paragraph*, not a flex row: normal inline
+          flow left-aligned, so a sentence that wraps reads as continuous prose with
+          one line-height between lines rather than as centered rows of chips.
+          `leading-8` gives the inline pills and underlines room without opening the
+          lines up. The one `text-sm` is the size for everything in here — fixed
+          segments, empty blanks, and filled `size="inline"` pills all inherit it, and
+          it matches the tile pool's `size="sm"` so a tile keeps its size when it
+          lands in a blank. */}
+      <div className="min-h-36 text-sm leading-8 text-gray-800 border-b-2 border-gray-200 pb-8 px-2">
         {item.frame.map((segment, i) => (
-          <span key={i} className="contents">
-            {segment.length > 0 && (
-              <span className="text-lg text-gray-800 whitespace-pre-wrap">{segment}</span>
-            )}
-            {i < item.blanks.length && (
-              <Pill size="sm" status={blankStatus(i)} onClick={() => handleTapBlank(i)}>
-                {state.placed[i] !== null ? (
-                  item.tokens[state.placed[i] as number]
-                ) : (
-                  // Sized to the answer so the layout doesn't jump when filled,
-                  // while keeping the answer itself invisible.
+          <span key={i}>
+            {segment.length > 0 && <span className="whitespace-pre-wrap">{segment}</span>}
+            {i < item.blanks.length &&
+              (state.placed[i] !== null ? (
+                <Pill
+                  size="inline"
+                  status={filledStatus}
+                  className="align-middle"
+                  onClick={() => handleTapBlank(i)}
+                >
+                  {item.tokens[state.placed[i] as number]}
+                </Pill>
+              ) : (
+                <button className={emptyBlankClass(i)} onClick={() => handleTapBlank(i)}>
+                  {/* Sized to the answer so the layout doesn't jump when filled,
+                      while keeping the answer itself invisible. */}
                   <span className="text-transparent select-none" aria-hidden="true">
                     {item.blanks[i]}
                   </span>
-                )}
-              </Pill>
-            )}
+                </button>
+              ))}
           </span>
         ))}
       </div>
