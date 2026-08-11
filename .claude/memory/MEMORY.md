@@ -1,47 +1,88 @@
-# Project Memory — Index
+# Project memory — index
 
-Persistent notes for this codebase. Loaded by Claude every session via the rule in `CLAUDE.md` § "Memory — required reading and writing".
+**Why this exists:** to record *why* decisions were made, so a future session
+doesn't re-litigate a settled question or walk back into a fixed bug. It is not a
+description of the code — read the code for that.
 
-This is the **canonical** location. The home-dir auto-memory at `~/.claude/projects/-Users-gulenoks-Personal-roude-leiw-web/memory/` is a redirect to here and must not be edited.
+Loaded every session. **Read the file whose area you are about to touch**; don't
+read them all. This is the canonical location; the home-dir auto-memory is a
+redirect and must not be edited.
 
-## Memories
+## Map
 
-- [React 19 features evaluation](react-19-features-evaluation.md) — why Suspense/`use()`/`useOptimistic`/`useTransition`/etc. are intentionally NOT adopted; only Error Boundary + route lazy-load were taken
-- [Bundle code-splitting](bundle-code-splitting.md) — Chevrotain dynamic-imported via `parseLetzContent`; AppExercise via `React.lazy`; initial paint is 40 KB gzipped
-- [Audio pipeline](audio-pipeline.md) — ElevenLabs TTS for sentence audio; gitignored locally, R2 as source of truth. **Build hook disabled 2026-05-21** until app actually consumes audio.
-- [PWA caching](pwa-caching.md) — service-worker runtime cache rules for `/assets/lessons/`; why we don't blanket-`CacheFirst` an index file, how to invalidate on deploy
-- [Stats and XP redesign](stats-and-xp-redesign.md) — two mastery systems (live vs monotonic), sticky unlock, event-based XP, timer fixes, double-incorrect fix, orphan filtering (May 2026)
-- [Progress sync on focus](progress-sync-on-focus.md) — visibility/focus/online listener refetches `/api/auth/me` for cross-device sync; 10s throttle; POST failures logged to PostHog (no retry queue yet, deliberate)
-- [Not-yet-mastered bucket](not-yet-mastered-bucket.md) — Lesson Mode 30% bucket for current-lesson Elements with `correct < MASTERY_CORRECT_COUNT` so RNG can't strand stragglers below the unlock gate; **redefined 2026-07-21** from `shown`-based to `correct`-based to fix a permanent-stuck bug where well-shown-but-unmastered elements were abandoned. Also documents the **adaptive word-match/sentence slot-type split** (2026-07-21): Lesson Mode scales word-match share `clamp(unmasteredWords/backlog, 0.2, 0.6)` so word-heavy lessons get more matching practice
-- [Lesson content sizing](lesson-content-sizing.md) — A1 lessons store nouns 3× (indefinite/definite/plural); dropped indefinite duplicates 2026-07-21; A1.02 still oversized at ~197 elements (progress bar crawls); definite+plural kept by design
-- [Guest migration chunking](guest-migration-chunking.md) — guest→auth migration split into validator-bound chunks, clear-on-success; rejected server-side daily-history migration and client dedup state (June 2026); also phraseKey 64-char truncation + empty-pool dead-end guards
-- [Home cascade & async words](home-cascade-async-words.md) — AppHome lesson cascade must depend on live words/unlockedLessons, not mount-time refs; auth resolves after mount so freezing them left next-lesson locked after a hard reload (June 2026 regression fix)
-- [LOD MCP server](lod-mcp.md) — `tools/lod-mcp/` wraps the official lod.lu dictionary API as MCP tools (`lod_lookup`, `lod_suggest`) for authoritative LU translations + gender when authoring `.letz` content; zero-dep stdio server registered in `.mcp.json`
-- [Passed gate & phrase directions](passed-gate-and-phrase-directions.md) — pass gate simplified to `correct>=3`; phrases stored per-direction but mastery sums both; error pool keeps direction to repeat the exact failed one (June 2026)
-- [Bottom-pinned bar](bottom-pinned-bar.md) — `<main>` deliberately has no bottom padding (pages own their bottom spacing) so Home's sticky practice-mode bar can reach the frame's bottom edge; why the old `mb-[-1.5rem]` trick left a 24px strip of grid showing under the bar, and why the bar isn't hoisted into `AppWrapper` (July 2026)
-- [Exam track](exam-track.md) — Sproochentest Prep design: parallel theme-first catalog (rejected pseudo-level), play-gate via `unlockedLessons` channel (**superseded 2026-08-01**, see below), manifest id authoritative over in-file id, deterministic chunk+shuffle planner, `@question` directive; Fix Errors is global across both tracks (`error-scope.ts`), Word Mix + Home stats stay course-scoped; LOD verification of shipped vocab still pending (July 2026)
-- [Sentence endgame throughput](sentence-endgame-throughput.md) — the "stuck at 98%" bug: sentences were capped at one appearance per Session (+1 `correct` max) while words had no cap, so a sentence tail froze the lesson percentage for 3–5 Sessions; measurements, the `SentenceBudget` fix, and the known-but-unfixed cursor/feedback issues (Aug 2026)
-- [Picture-description theme](picture-description-theme.md) — `picture` exam theme: one sub-lesson per (photo × exam sub-task), not the vocab→phrases→Q&A path — `01` whole scene, `02` one person's appearance, same photo; deliberately A1–A2 against the theme-wide ~B1 guideline (predicative colours, attributives only on feminine nouns); LOD-verified vocab incl. a list of appearance words LOD rejects; why distractors must be checked through `buildSentenceExercise` rather than by eye; no image is displayed in-app yet (Aug 2026)
-- [Exam content authoring](exam-content-authoring.md) — four checks that each caught real errors when adding the `shopping` theme and that the integration test cannot catch: LOD-verify inflected forms in sentences (not just lemmas), Eifeler Regel n-drop on **verbs**, no duplicate EN gloss within a theme, distractor audit through the real builder; also the interview-sourced `03_questions` pattern (Aug 2026)
-- [Exam & lesson pass-gate](exam-and-lesson-pass-gate.md) — one unlock rule for both tracks: `UNLOCK_LESSON_THRESHOLD` 0.8 → **1.0**, and the exam track's play-gate becomes a pass-gate; why the play-marker stayed (sticky access + load/error scope), why `passed` implies `unlocked`, and why 100% raises the priority of splitting oversized lessons (Aug 2026)
+```mermaid
+flowchart LR
+  subgraph prog["Progression"]
+    mu["mastery-and-unlock"]
+    lt["lesson-throughput"]
+  end
+  subgraph content["Content authoring"]
+    et["exam-track"]
+    fill["fill-in-words-exercise"]
+    pic["picture-description-theme"]
+    lod["lod-mcp"]
+  end
+  subgraph plat["Platform"]
+    ps["persistence-and-sync"]
+    fe["frontend-decisions"]
+    au["audio-pipeline"]
+  end
+  mu <--> lt
+  mu --> ps
+  et --> fill
+  et --> pic
+  fill <--> pic
+  content --> lod
+  lt -.->|"sizing pressure"| et
+  fe -.->|"layout budget"| pic
+```
 
-## Maintenance rules
+| File | Read it before you… |
+|---|---|
+| [mastery-and-unlock](mastery-and-unlock.md) | touch the pass gate, stat keys, unlock, cursor/frontier, or XP |
+| [lesson-throughput](lesson-throughput.md) | change selection buckets, session shape, or lesson sizing |
+| [exam-track](exam-track.md) | add a theme, or change the exam catalog/gate |
+| [fill-in-words-exercise](fill-in-words-exercise.md) | author or change `@fill` |
+| [picture-description-theme](picture-description-theme.md) | author a picture theme, or attach a photo |
+| [lod-mcp](lod-mcp.md) | verify Luxembourgish vocabulary |
+| [persistence-and-sync](persistence-and-sync.md) | change sync, merge logic, or guest migration |
+| [frontend-decisions](frontend-decisions.md) | adopt a React feature, change chunks, SW caching, or the shell layout |
+| [audio-pipeline](audio-pipeline.md) | touch audio generation or R2 sync |
 
-Update these files when:
-- A design decision documented here is reversed or refined (update the file in the same commit)
-- A file path or function name cited here is renamed, moved, or removed (update the citation)
-- A new architectural decision lands that future sessions would benefit from remembering — write a new file and link it from this index
+**Not here:** the architecture (CLAUDE.md), authoring procedure and bounds (the
+`letz-content-generator` skill), the threat model (`.claude/security-plan.md`).
 
-Do NOT write things derivable from reading current code or `git log`. Save what would otherwise be lost between sessions: design rationale, conscious tradeoffs, "we considered X and decided no, here's why."
+## Writing rules
 
-## Lessons Learned
+Save: design rationale · conscious tradeoffs · "we considered X and decided no,
+because…" · measurements that justify a choice · traps that cost a debugging
+session.
 
-### Code Style
+Don't save: anything derivable from current code or `git log` · dates and branch
+names · changelogs of when something was fixed · restatements of what a file
+already says · ephemeral task state (use `.claude/plans/`, gitignored).
 
-- **NEVER use `let` or `for` loops.** Always use functional patterns: `reduce`, `map`, `filter`, chaining, recursion. Imperative style is only acceptable when functional becomes genuinely unreadable (almost never).
-- This applies to ALL code — backend workers, frontend React, utility functions, everything.
+**Update in the same commit** as the change that invalidates a claim. A stale
+memory is worse than a missing one — it asserts a wrong fact confidently.
 
-### File Organization
+**Merge rather than append.** If a new decision refines an existing one, rewrite
+that section; don't stack a "superseded 2026-XX-XX" note on top. The history is in
+git.
 
-- **Entry points should be thin.** Worker/app entry points wire things together — routing, middleware — but contain no business logic. Split handlers and logic into separate modules.
-- Avoid large files that mix concerns. Each file should have a single clear responsibility.
+## Code style
+
+- **No `let`, no `for` loops.** `map`/`filter`/`reduce`/chaining/recursion, in
+  every layer — worker, React, utilities. Imperative style only where functional
+  becomes genuinely unreadable (almost never).
+- **Entry points stay thin** — wiring and routing, no business logic.
+
+## Recording decisions — a correction worth keeping
+
+**Don't convert "X suits Y" into "Y is what X is for."** Told that *B1 content
+should lean on `@fill`*, a past session wrote `@fill` up as "the designated home for
+B1" across four files. `@fill`'s actual axis is **reuse across topics** and it is
+level-independent, so the narrowed version would have suppressed A1/A2 frames —
+the opposite of the intent.
+
+When a statement links two things, record the direction actually stated, and check
+whether the converse is also being claimed. If it isn't, say so explicitly.

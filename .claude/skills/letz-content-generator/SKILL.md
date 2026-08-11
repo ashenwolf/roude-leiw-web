@@ -39,17 +39,19 @@ This repo ships an MCP server (`tools/lod-mcp/`, registered in `.mcp.json`) that
 > The tools are loaded only when Claude Code starts. If `lod_lookup` is not available, the session predates `.mcp.json` — ask the user to restart Claude Code, then proceed. (You can still author content without it, but flag entries you couldn't verify.)
 
 **Tools:**
-- `lod_lookup { word, locale?=en, maxEntries?=3 }` → matching entries with `lemma`, `partOfSpeech`, `gender` (`m`/`f`/`n`), `ipa`, and `meanings[]` (each with `translations`, `clarifiers`, `examples`).
-- `lod_suggest { word, locale? }` → spellchecker suggestions (find the correct lemma before `lod_lookup`).
+- `lod_lookup { words[]|word, locale?=en, maxEntries?=3, verbose?=false }` → `{ locale, results[] }`; each result is `{ word, found, entries[] }` where an entry has `lemma`, `pos`, `gender` (`m`/`f`/`n`) and `senses[]` (translation with its clarifier folded in, e.g. `"coffee (beans)"`) — or `{ word, found: 0, suggestions[] }` on a miss.
+- `lod_suggest { word, locale? }` → spellchecker suggestions. **Rarely needed** — a `lod_lookup` miss already returns them.
+
+> **Batch every lookup.** Pass the whole vocabulary list in one `words: [...]` call (≤60, deduped, order preserved) — collect the lemmas first, then make a single call. One call per word costs one model round trip each and is the slow path. Add `verbose: true` only when you actually need IPA or declension info.
 
 **When to call it:**
-1. **Gender → article.** Look up each noun's lemma; map `gender` to the definite article — `m`→`de(n)`, `f`→`d'`, `n`→`d'`/`den`. Don't infer the article from the PDF; confirm it (see step 4).
-2. **Translation sanity.** Cross-check your English gloss against the entry's `translations`. If they diverge, prefer the LOD gloss or flag the conflict in the summary (see step 5).
-3. **Typo / lemma recovery.** When a source word looks misspelled or inflected, run `lod_suggest`, then `lod_lookup` the suggested lemma (see Edge cases).
+1. **Gender → article.** Batch-look-up every noun lemma; map `gender` to the definite article — `m`→`de(n)`, `f`→`d'`, `n`→`d'`/`den`. Don't infer the article from the PDF; confirm it (see step 4).
+2. **Translation sanity.** Cross-check your English gloss against the entry's `senses`. If they diverge, prefer the LOD gloss or flag the conflict in the summary (see step 5).
+3. **Typo / lemma recovery.** A misspelled or inflected source word comes back `found: 0` with `suggestions` inline — re-look-up the suggested lemma in your next batch (see Edge cases).
 
 **Caveats:**
-- **Inflected forms, typos, and proper names return `found: 0`** (not an error). A zero result means "not a dictionary lemma" — recover the lemma with `lod_suggest`, don't invent a translation.
-- **Polysemy / homographs:** a word can have multiple senses or entries (`Bank` = bank *and* bench/`Bänk`; `Kéis` = cheese *and* nonsense; `Post` masc/fem). Pick the sense that fits the lesson context — first result isn't always right. Raise `maxEntries` to see alternatives.
+- **Inflected forms, typos, and proper names return `found: 0`** (not an error). Read the `suggestions` that come with it: non-empty = misspelled, empty = usually a legitimate plural or compound (`Kanner`, `Beem`, `Keessebong`). Never invent a translation for a miss.
+- **Polysemy / homographs:** a word can have multiple senses or entries (`Bank` = bank *and* bench/`Bänk`; `Kéis` = cheese *and* nonsense; `Post` masc/fem). Pick the sense that fits the lesson context — first result isn't always right. The parenthesised clarifier in each sense is what tells them apart; raise `maxEntries` to see more homographs.
 
 ## Step-by-step workflow
 
@@ -131,7 +133,7 @@ Straightforward mapping:
 @word spéit = late
 ```
 
-Before finalizing a batch of `@word` entries, verify them against `lod_lookup` (see "Verifying content with the LOD dictionary" above). For each lemma, confirm the English gloss matches one of the entry's `translations`; if your gloss and LOD's disagree, prefer LOD's or flag the conflict in the output summary.
+Before finalizing a batch of `@word` entries, verify them against `lod_lookup` — **one call with every lemma in `words: [...]`** (see "Verifying content with the LOD dictionary" above). For each lemma, confirm the English gloss matches one of the entry's `senses`; if your gloss and LOD's disagree, prefer LOD's or flag the conflict in the output summary.
 
 ### 5. Process SENTENCE entries
 
@@ -209,7 +211,7 @@ After presenting, briefly summarize what was generated: how many `@word` entries
 
 ## Edge cases and pitfalls
 
-**Suspected typos** — Luxembourgish spelling can be inconsistent across sources (e.g., `Kaf` vs the standard `Kaffi`, or `Lëtzebuesch` vs `Lëtzebuergesch`). When you spot a word that looks like a misspelling or non-standard form, **confirm with the LOD dictionary**: a `lod_lookup` returning `found: 0` means it isn't a dictionary lemma — run `lod_suggest` to get the standard spelling, then `lod_lookup` that lemma to verify. Include the entry using the source spelling but add a warning at the end of the output summary. Format: `⚠️ Possible typo: "Kaf" in source — LOD suggests "Kaffi". Used source form.` Let the user decide whether to correct it.
+**Suspected typos** — Luxembourgish spelling can be inconsistent across sources (e.g., `Kaf` vs the standard `Kaffi`, or `Lëtzebuesch` vs `Lëtzebuergesch`). When you spot a word that looks like a misspelling or non-standard form, **confirm with the LOD dictionary**: a `lod_lookup` returning `found: 0` means it isn't a dictionary lemma, and the `suggestions` returned alongside it give the standard spelling — re-verify that lemma in your next batch call. Include the entry using the source spelling but add a warning at the end of the output summary. Format: `⚠️ Possible typo: "Kaf" in source — LOD suggests "Kaffi". Used source form.` Let the user decide whether to correct it.
 
 **Infinitive extraction** — When a sentence in the source uses a conjugated verb (e.g., `Du bezils d'Rechnung`), it is fine to extract the infinitive form (`bezuelen = to pay`) as a separate `@word` entry even if the infinitive never appears explicitly in the PDF. This is expected and useful — learners need the dictionary form. Verify the infinitive you derived with `lod_lookup` (the conjugated form will return `found: 0`; the infinitive lemma should resolve) — this catches a wrong stem before it ships.
 
@@ -225,6 +227,197 @@ After presenting, briefly summarize what was generated: how many `@word` entries
 
 **Duplicate detection** — The same word often appears in both the Quizlet export and the slides. Deduplicate by Luxembourgish form. If English translations differ slightly, pick the more natural/complete one.
 
-## Format reference
+## Exam-track content (no PDF source)
 
-See `references/letz-format.md` for the complete `.letz` DSL specification if you need to verify syntax details.
+Everything above assumes a PDF source and the **course** track. Exam-track themes
+(`public/assets/exam/`) are authored from scratch and split into **two kinds with
+different content contracts**. Decide which kind you are writing *before* writing
+anything.
+
+| | **Topic themes** (`vacation`, `family`, `shopping`) | **Picture themes** (`picture`) |
+|---|---|---|
+| Exam skill | conversation with the examiner | describing a photo |
+| Path | 3 steps: `01_vocabulary` → `02_phrases` → `03_questions` | 3 tasks per photo: General → Person → Weather |
+| `@question` | **required** in `03_questions` | **forbidden** |
+| First person | **wanted**, personalised via interview | **excluded** — no opinion/preference/attitude |
+| Level | ~B1 | A1–A2 (deliberately stricter) |
+
+### Topic themes: interview the user first — REQUIRED
+
+**Never invent the answers.** Before authoring any `@question` content, ask the
+learner the theme's exam questions conversationally and use *their* answers as
+the source. The whole point is rehearsing what they will actually say in the
+Sproochentest. Use `AskUserQuestion` for closed choices, plain conversation for
+open ones. Record in the file header that the answers are personal, so a later
+session doesn't "improve" them into generic ones.
+
+### Picture themes: pure description
+
+The learner describes what is visibly in the photo. **No `@question` blocks, and
+no first-person opinion, preference, or feeling.** Describing a depicted person's
+visible emotion (`Si lächelt`) is fine — that is observation. Rule of thumb: if a
+stranger couldn't check the sentence against the photo, cut it.
+
+Coverage is a **six-question checklist** — the questions an examiner actually
+asks — mapped onto **three files**, two questions each. Do not create six files.
+
+| Examiner question | File |
+|---|---|
+| **Wou?** what kind of place (name it if recognisable) | `01` General |
+| **Wat maache si?** what the people are doing | `01` General |
+| **Wéi eng Objete gesitt Dir?** objects **with positions** | `01` General |
+| **Wien?** who is there, how many, alone or in groups | `02` Person |
+| **Beschreif eng Persoun** one person in visual detail | `02` Person |
+| **Wéini?** time of day, season, weekday-or-weekend | `03` Weather |
+
+- **`01` must name the place**, not just list objects — `d'Foussgängerzon`,
+  `d'Groussgaass`, `de Buttek`, `d'Gebai`. Naming the setting is the examiner's
+  first question and it is the gap a scene-elements-only file leaves.
+- **`03` is the hedged-inference file**; weather is only its evidence. It also
+  carries time of day (`mëttes`, `nomëttes`) and weekday-vs-weekend guesses.
+  Hedges to teach — the samples use all six: `ech mengen`, `villäicht`,
+  `warscheinlech`, `Ech géif soen`, `Ech sinn net sécher, mee …`,
+  `Et kéint … sinn`, `Et gesäit no … aus`. Spelling trap: `warscheinlech` has no
+  `h` — the German `wahrscheinlich` is the trap and LOD returns `found: 0` for
+  the `h` form. Likewise `Vierdergrond` (foreground), never `Virdergrond`.
+- Hedged inference is **not** a violation of the no-attitude rule: it is a claim
+  about the photo. A preference or feeling of the speaker's own is.
+
+**Converting an existing `@question` block to a plain description** (rather than
+deleting authored, already-verified content): drop the `@question` line; restate
+a yes/no answer as an assertion (`Nee, hir Hoer sinn net kuerz.` → `Hir Hoer sinn
+net kuerz.` — this also removes the free `Jo`/`Nee` first tile); cut anything that
+expresses attitude. **Add `@distractor-en` lines**: `@question` blocks are
+direction-locked to en→lu so they typically carry only `@distractor-lu`, but a
+plain `@sentence` is presented both ways and would otherwise have zero
+distractors in lu→en. The file still parses, so nothing warns you.
+
+Additional picture-theme rules:
+
+- **Register — what `@sentence` may carry.** Present tense, spatial adverbs
+  (`lénks`, `riets`, `uewen`, `ënnen`) + prepositions, and **short two-clause
+  sentences** with the frequent connectors (`well`, `wann`, `mee`) are fine.
+  Attributive adjectives **only on feminine nouns** (`eng blo Box` —
+  uninflected); colours **predicative** for masculine/neuter (`D'Posch ass
+  schwaarz a wäiss.`). That last restriction is about tile-level derivation, so it
+  holds at every level.
+  Verb-final subordinate clauses and declined attributives (`e schwaarze Brëll`,
+  `en normalen Dag`) are better placed in a `@fill`, where the order sits in the
+  fixed frame instead of being assembled token by token. **That does not make
+  `@fill` a B1 feature** — see the `@fill` section below for its actual
+  criterion.
+- **Don't re-teach words** an earlier file in the same theme already teaches —
+  the sequential pass-gate makes it a prerequisite and stat keys are shared.
+- **One theme per photo.** The manifest theme is the photo (`title:
+  "Schueberfouer"`, `kind: "picture"`), and its sub-lesson titles are the bare
+  task (`"General Description"`, `"Person Description"`, `"Weather
+  Description"`). The `"Describing a Picture: "` prefix is added by
+  `themeHeading()` at render time — never bake it into a title. Files live in
+  `public/assets/exam/picture/<photo>/`, with the photo under that directory's
+  `img/`.
+- **The photo itself:** the user drops the original into the gitignored
+  `public/assets/tmp/` for review. Commit only an optimized derivative — WebP,
+  pre-cropped 16:9, ≤880px wide — under `<photo>/img/`. Never commit the
+  original, never `@image` a path under `tmp/`, never delete that folder. Recipe
+  in `references/letz-format.md`.
+- Target **~12–18 Elements per file**. Much larger and the 100% pass-gate makes
+  the progress ring crawl.
+
+### Authoring `@fill` blocks
+
+`@fill` teaches a reusable **pattern** in the fixed frame plus **topic and
+positional words** in the blanks.
+
+**Exam SubLessons only** — Lesson Mode schedules no fill Slots, so a `@fill` under
+`public/assets/lessons/` would make that course lesson unpassable.
+
+> **Read `references/content-contract.md` first.** It carries every mechanized
+> bound with the failing test's exact message, including the three you cannot
+> guess: distractors are counted *after* the builder drops collisions with an
+> answer (so author 3 for margin), `normalizeAnswer` folds case and strips
+> apostrophes (`d'Sonn` and `dSonn` are one tile), and `fillKey` is built from the
+> **raw `@en` line including brackets** — moving a bracket orphans recorded
+> progress.
+
+**The selection test — what belongs in a `@fill`.** It exists to drill the phrases
+and constructions that **span multiple topics**, and it is **not level-scoped**: A1
+openers (`Am Hannergrond gesinn ech …`) are as much fill material as B1 clauses
+(`…, falls et reent`). So never ask "is this B1?" but:
+
+> Does this frame recur across topics, so learning it once pays off in several
+> themes?
+
+A sentence true of exactly one photo fails that test at any level — it is a
+`@sentence`. Flip side of "never reuse a sentence a `@sentence` already teaches":
+`@sentence` teaches *that sentence*, `@fill` teaches a *pattern that outlives it*.
+
+**The promise is that exactly one assignment of tiles to blanks is correct.**
+
+| # | Rule | Enforced by |
+|---|---|---|
+| R1 | Every tile text distinct in one presentation, under `normalizeAnswer` | test |
+| R2 | No two blanks grammatically interchangeable (same word class **and** slot) | **you** |
+| R3 | Every distractor wrong in **every** blank, not just the nearest | test catches literal equality only — **the semantic half is yours** |
+| R4 | Determiners and prepositions stay in the **fixed frame** | **you** |
+| R5 | No blank directly after an `-n`-final word *mid-clause* | test |
+| R6 | Two blanks need different word classes **or** a forced order | **you** |
+| R7 | Blanking a connector is allowed, and is the sharpest trap | **you** |
+
+- **R4 is load-bearing.** With `d'` outside the blank, masculine tiles are
+  grammatically impossible there and exactly one assignment survives.
+- **R5 has a payoff:** the n-drop does not cross a comma, so **two-clause frames
+  are the safer shape**, not the riskier one. A blank mid-clause after `-n` makes
+  the frame *unfixable*; keeping a determiner in the frame
+  (`gesinn ech e [Chantier]`) defuses it.
+- **R6 by construction:** `X a Y` with **both** sides blanked always violates it
+  unless the pair has a forced order (`[fofzeg] bis [siechzeg]` is ascending;
+  `[kuerz] [donkel] Hoer` is length-before-colour). Two coordinated predicative
+  adjectives are always interchangeable — blank one side only. Two blanks are safe
+  only in *different clauses* or *different word classes*.
+- **R7:** often the connector *is* the lesson, so `…, [falls] et reent` is
+  legitimate — but connectors overlap (`well` and `wann` are frequently also true).
+  Contrast (`obwuel`) and sequence (`nodeems`, `éier`) are far easier to make
+  unambiguous than cause/condition. Never blank both the connector **and** a
+  content word that determines which connector is right.
+
+**The annotated frame library** — ~25 photo-independent frames with the rationale
+for each blank — is in `.claude/memory/picture-description-theme.md`. Start from it
+rather than inventing frames.
+
+**Two bugs the tests cannot see, both found by the builder audit** (see
+`references/content-checks.md`): a *semantically valid* distractor is a second
+correct answer (`sécher` in a hedge slot is grammatical **and** coherent), and two
+coordinated adjectives are interchangeable. Run the audit.
+
+### B1: conjunctions and connecting words
+
+Exam content **may venture into B1**, and complex sentences are the vehicle. The
+two categories must not be mixed up — that confusion *is* the B1 error:
+subordinating conjunctions send the verb to the end; connecting words are
+order-neutral and cannot themselves cause inversion.
+
+**The verified inventory, both inversion patterns content must show, the two wrong
+forms class handouts circulate, and the homograph gloss traps are in
+`references/luxembourgish-grammar.md` §§ 2–4.** Don't restate them here.
+
+### Verification
+
+**The full checklist is `references/content-checks.md`** — run it before every
+commit. In short: LOD every LU side and every inflected form in a sentence;
+`npm run check-content` for the n-drop audit; the distractor-survival harness
+through the real builder; then `npm run build`.
+
+Every exam sub-lesson must mix `@word` and `@sentence` content (≥10 words,
+≥3 sentences) so Sessions alternate exercise types — enforced by
+`tests/integration/exam-manifest-letz.test.ts`.
+
+## References
+
+Read the one you need; don't read all four.
+
+| File | Contains |
+|---|---|
+| `references/letz-format.md` | the `.letz` DSL **syntax** — every directive, with examples |
+| `references/content-contract.md` | every **mechanized bound** the build enforces, each row naming the failing test and its message. Consult instead of reading the integration tests. |
+| `references/luxembourgish-grammar.md` | the **language facts** — Eifeler Regel, conjunctions, connectors, homograph traps, noun conventions |
+| `references/content-checks.md` | the **verification checklist**, and why each check is a test, a script, or manual |
