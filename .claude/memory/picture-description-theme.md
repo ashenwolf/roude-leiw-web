@@ -174,8 +174,9 @@ for review — never committed, never referenced by a `.letz` file (nothing ther
 served), and never deleted by an agent (it's the user's working copy).
 
 **Optimization is mandatory and test-enforced:** WebP, pre-cropped 16:9, ≤880px
-wide (2× the largest iPhone logical width). The source PNG here was 5.2 MB; the
-shipped WebP is 76 KB — 68× smaller at a size no learner can tell apart on a phone.
+wide (2× the largest iPhone logical width). To show the scale of what this is for:
+the first photo's source PNG was 5.2 MB and its shipped WebP ~76 KB — a ~68×
+reduction at a size no learner can tell apart on a phone.
 Recipe and bounds are in the skill's format reference. Watch for source artifacts
 when cropping: this scan had a page-number badge the first crop left in.
 

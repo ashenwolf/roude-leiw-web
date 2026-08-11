@@ -58,8 +58,8 @@ the build log.
   the Chevrotain parser, to keep scripts independent of the bundler-targeted tree.
 - **`wrangler r2 object` rather than the S3 SDK:** the SDK would be faster (no
   ~0.5 s CLI boot per call) but needs R2 access keys — an extra dashboard step and
-  an extra secret — plus a heavyweight dep. Concurrency 4 amortizes the boot cost
-  (43 files in ~10 s instead of ~40 s).
+  an extra secret — plus a heavyweight dep. Concurrency 4 amortizes the boot cost,
+  measured at a ~4× speedup on a full lesson's worth of files.
 
 ## CI auth
 

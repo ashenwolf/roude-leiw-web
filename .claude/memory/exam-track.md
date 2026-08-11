@@ -102,9 +102,11 @@ derivation, not clause complexity, so the B1 relaxation does not touch it.
 ## Sizing
 
 A sub-lesson much larger than its siblings crawls under the 100% gate — the
-failure mode [[lesson-throughput]] names splitting as the lever for. Topic
-`01_vocabulary` files sit at 42–68 Elements; the picture theme was split from one
-57-Element file into three at 36/35/27.
+failure mode [[lesson-throughput]] names splitting as the lever for. **A
+vocabulary-first file runs several times the size of its `02`/`03` siblings**,
+which is tolerated because it is front-loaded; the picture theme was split when one
+file reached roughly twice the size of any other sub-lesson. Count with
+`grep -c '^@word'` rather than trusting a number written here.
 
 The **six-question coverage checklist is not a file axis**: two questions land in
 each of three files. Do not grow it to six files — that would re-split vocabulary

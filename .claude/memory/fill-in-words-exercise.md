@@ -1,9 +1,8 @@
 # `@fill` — why the mechanic is shaped this way
 
-**Status: mechanic built Aug 2026; first content shipped in the Schueberfouer
-picture theme the same month (10 blocks across its 3 sub-lessons), so the
-ambiguity rules are enforced over real content.** No course lesson carries
-`@fill` — see "The remaining gap" below for why one can't yet.
+**Status: mechanic built; first content shipped in the Schueberfouer picture
+theme, so the ambiguity rules are now enforced over real content.** No course
+lesson carries `@fill` — see "The remaining gap" below for why one can't yet.
 
 Authoring rules and bounds: the `letz-content-generator` skill and its
 `references/content-contract.md`. This file is the *why*.
@@ -114,8 +113,9 @@ solution, which the one-blank-one-tile model cannot express.
 ## Cost, stated honestly
 
 A new *Exercise type* is the 3-touch-point recipe in CLAUDE.md. A new *Element
-kind* is far wider — the shipped change touched 30 files including tests. The
-CLAUDE.md recipe understates it; that gap is why the ⚠️ note there exists.
+kind* is far wider — the shipped change touched roughly 30 files including tests,
+i.e. an order of magnitude more. The CLAUDE.md recipe understates it; that gap is
+why the ⚠️ note there exists.
 
 ## Open question: where a cross-topic frame lives
 
@@ -141,9 +141,9 @@ is well-defined.
 
 ## First content shipped — Schueberfouer, Aug 2026
 
-The mechanic is no longer dormant. The picture theme's three sub-lessons carry
-**10 `@fill` blocks** (3 / 3 / 4), so `fill-content-rules.test.ts` now runs
-non-vacuously over 20 presentations. What authoring them actually taught:
+The mechanic is no longer dormant: every sub-lesson of the picture theme carries
+`@fill` blocks, so `fill-content-rules.test.ts` runs non-vacuously. What authoring
+them actually taught:
 
 - **The two real ambiguity bugs were both invisible to the tests, and both were
   caught by the throwaway builder audit** — printing every surviving tile per

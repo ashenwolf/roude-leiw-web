@@ -320,8 +320,11 @@ Additional picture-theme rules:
   pre-cropped 16:9, ≤880px wide — under `<photo>/img/`. Never commit the
   original, never `@image` a path under `tmp/`, never delete that folder. Recipe
   in `references/letz-format.md`.
-- Target **~12–18 Elements per file**. Much larger and the 100% pass-gate makes
-  the progress ring crawl.
+- **Keep a file comparable to its siblings.** Every Element needs
+  `MASTERY_CORRECT_COUNT` correct answers before the next sub-lesson opens, so an
+  outlier's progress ring crawls. A vocabulary-first `01` legitimately runs larger
+  than its `02`/`03`; what to avoid is one file several times any other. Check with
+  `grep -c '^@word'` on the theme, not against a number written here.
 
 ### Authoring `@fill` blocks
 

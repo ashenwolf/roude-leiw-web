@@ -3,11 +3,11 @@
 Every numeric limit and string rule that `npm run build` enforces on `.letz`
 content, in one place, with the test that fails and the exact message you'll get.
 
-**Why this file exists:** these bounds previously lived only in test source, so
-authoring a `@fill` block correctly required reading
-`tests/integration/fill-content-rules.test.ts` (268 lines),
-`exam-manifest-letz.test.ts` (178 lines), `buildFillExercise`, `normalizeAnswer`,
-and `lexer.ts`. Author against this table instead. If you change a bound in a
+**Why this file exists:** these bounds otherwise live only in test source, so
+authoring a `@fill` block correctly would mean reading
+`tests/integration/fill-content-rules.test.ts`, `exam-manifest-letz.test.ts`,
+`buildFillExercise`, `normalizeAnswer`, and `lexer.ts`. Author against this table
+instead. If you change a bound in a
 test, change this row in the same commit — a stale row here is worse than no row,
 because it will be trusted.
 
@@ -201,7 +201,7 @@ skipped line. The complete set (`src/lib/letz-parser/lexer.ts`):
 ```
 
 Do not invent directives. Adding one means editing `lexer.ts`, `parser.ts` and
-`visitor.ts` together; adding a new **Element kind** on top of that is a ~15-file
+`visitor.ts` together; adding a new **Element kind** on top of that is a much wider
 change (see CLAUDE.md's ⚠️ note).
 
 Lexer facts that bite while authoring:

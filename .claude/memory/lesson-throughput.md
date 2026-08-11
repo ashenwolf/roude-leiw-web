@@ -68,7 +68,8 @@ Session is in fact working. That also explains the whole grid's shape — lesson
 climb smoothly then stall, because what survives into the tail is
 disproportionately sentences.
 
-Measured on real A1.02 (147 words + 45 sentences), 200 trials:
+Simulated over 200 trials on A1.02 as it was then (~147 words + ~45 sentences) —
+a one-off experiment, not a figure to keep current:
 
 | tail remaining | nothing after 3 rounds (before → after) | median rounds to 100% |
 |---|---|---|
@@ -97,11 +98,12 @@ on normalized stem + exact gloss, which protected gendered pairs like
 `e Frënd`/`eng Frëndin` that share a gloss but each have their own definite form;
 multi-word indefinites with no definite counterpart were kept.
 
-**Still oversized and deferred: A1.02 (~197 Elements) and A1.07 (~119)** against
-~23–45 for A1.03/A1.09. At a 1.0 gate A1.02 needs ~590 correct answers with no
-slack for a straggler. **Splitting oversized lessons into ~40–60-Element lessons
-is the biggest remaining lever** — the 100% gate promoted it from "feels slow" to
-"one unreachable Element blocks the next lesson".
+**Still oversized and deferred: A1.02 and A1.07**, each several times the size of
+A1.03/A1.09. Every Element needs `MASTERY_CORRECT_COUNT` correct answers with no
+slack for a straggler, so A1.02 alone is in the hundreds. **Splitting oversized
+lessons into ~40–60-Element lessons is the biggest remaining lever** — the 100%
+gate promoted it from "feels slow" to "one unreachable Element blocks the next
+lesson". Current sizes: `grep -c '^@word\|^@sentence' public/assets/lessons/A1/A1.1/*.letz`.
 
 ## Ruled out during the 98% investigation — do not re-check
 

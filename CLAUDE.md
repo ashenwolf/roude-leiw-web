@@ -187,7 +187,7 @@ public/
 └── assets/
     ├── lessons/
     │   ├── manifest.json             # Course index by CEFR level → sections → lessons
-    │   └── A1/A1.1/*.letz            # Course content (9 A1 lessons)
+    │   └── A1/A1.1/*.letz            # Course content (A1 lessons)
     └── exam/
         ├── manifest.json             # Exam index: themes → subLessons; each theme has
         │                             #   kind: "topic" | "picture" (no level dimension)
@@ -203,7 +203,7 @@ public/
 
 ### Architecture Reference (binding model)
 
-This subsection is the load-bearing reference for the exercise/session system. The diagrams further down (Data Pipeline, Screen Data Map) describe the current state of the code; the rules here describe what the code is converging on. Both are accurate today within the scope they cover; if they disagree, this section wins and the diagrams will catch up.
+This subsection is the load-bearing reference for the exercise/session system. The diagrams further down (Data Pipeline, Screen Data Map) show the same model as a data-flow view. **If they ever disagree, this section wins** and the diagrams are the ones to fix.
 
 #### Encapsulation layering
 
@@ -238,11 +238,12 @@ Four rules that must hold across this architecture (in addition to the Data Pipe
 All three Modes share the same SessionMachine; they differ only in what `ModeConfig` they emit.
 
 **Lesson** — `planLessonMode(lessons, stats, upperBoundId)`.
-- Shape: 3 Blocks × 5 Slots = 15 Slots base + optional correction Block.
-- Slot type roll: `[0, 0.2]` word-match, `[0.2, 1]` sentence-builder.
+- Shape: `BLOCK_COUNT` Blocks × `LESSON.slotsPerBlock` Slots + optional correction Block.
+- Slot type roll: **adaptive**, not fixed — `lessonSlotTypeDistribution` scales the word-match share with how word-heavy the current lesson's remaining backlog is, clamped by `LESSON.wordMatchShare`. See [lesson-throughput](.claude/memory/lesson-throughput.md) for why.
 - Upper bound is a single lesson id, compared **lexicographically**; pool = all lessons where `lesson.id <= upperBoundId`. "Start Learning" sets it to the **cursor** — the first unlocked lesson that has not passed, *not* the frontier; picking a specific lesson sets it to that lesson (clamps the pool — picking A1.03 when A1.05 is unlocked draws only from A1.01–A1.03). The clamp is load-bearing: the straggler apparatus (not-yet-mastered bucket + adaptive slot-type split) is scoped to the pool's last lesson, so a frontier-based bound left every earlier unfinished lesson reachable only via the thin `previous` bucket.
-- WordMatch Slot: 5 pairs, per-pair independent roll: `[0, 0.8]` current-lesson, `[0.8, 1]` previous-lessons. Re-roll on empty bucket.
-- SentenceBuilder Slot: lesson roll `[0, 0.75]` current / `[0.75, 1]` previous (re-roll on empty); random phrase within picked lesson; direction roll `[0, 0.66]` en→lu / `[0.66, 1]` lu→en.
+- WordMatch Slot: `LESSON.wordMatchPairs` pairs, each drawn by an independent roll over the **three** `LESSON.buckets.wordMatch` buckets — `not-yet-mastered` (current-lesson Elements below the gate) first, then `current`, then `previous`. Re-roll on empty bucket.
+- SentenceBuilder Slot: same three-bucket shape via `LESSON.buckets.sentenceLesson`; random phrase within the picked lesson; direction from `LESSON.buckets.direction`.
+- **Bucket weights live in `constants.ts` — read them there.** They are tuned per-Mode and change; restating them here has drifted before.
 - Outcomes: WordMatch always success (failed pairs → stats only). SentenceBuilder fail → enqueue Slot into correction Block.
 - Correction Block: retry queued Slots; retry-fail re-enqueues at back; drain to empty.
 - Popups: block-success (after Blocks 1 & 2), session-success (after Block 3 if queue empty, or after correction drain). Every Session ends in success after drain.
@@ -250,30 +251,30 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - **Does not schedule fill-blank Slots.** A lesson's `@fill` Elements therefore never pass the unlock gate from Lesson Mode alone — which is why no course `.letz` carries `@fill` today. Adding one means adding a fill bucket to this planner in the same change, or the lesson becomes unpassable.
 
 **Word Mix** — `planWordMixMode(lessons, stats, persistedUnlocked)`.
-- Shape: 3 Blocks × 1 Slot per Block = 3 Slots total. Each Slot = a WordMatch Exercise with 20 pairs (20 Steps). No correction Block.
+- Shape: 3 Blocks × 1 Slot per Block. Each Slot = a WordMatch Exercise of `WORD_MIX.pairsPerSlot` pairs (one Step per pair). No correction Block.
 - Pool: all words from lessons up to and including the **frontier** (review must keep covering passed lessons). The `current` bucket, however, is the **cursor** — so the bias lands on the lesson the user is stuck on, while `previous` means "everything else in the pool" (which can include lessons *after* the cursor).
-- Per-pair bucket roll (applied independently for each of the 60 pairs at plan time): `[0, 0.25]` error pool / `[0.25, 0.5]` current-lesson / `[0.5, 1]` previous-lessons. Re-roll on empty.
+- Per-pair bucket roll, applied independently for **every** pair at plan time over `WORD_MIX.buckets.pairSource`: error pool / current-lesson / previous-lessons. Re-roll on empty. Weights are in `constants.ts`.
 - One-shot plan; mid-Session results do not re-bucket later pairs.
 - Popups: only on Slot/Block complete (3 total — Slot boundary = Block boundary).
 - `completionEffect: 'noop'`.
-- Progress bar: 60 ticks, milestones at 20/40/60.
+- Progress bar: one tick per pair across the whole Session, with a milestone at each Slot boundary.
 - Words only — Word Mix is pair matching by definition, so it schedules no sentence-builder or fill-blank Slots.
 
 **Fix Errors** — `planFixErrorsMode(lessons, stats, persistedUnlocked)`.
 - **Global scope**: `lessons` = all course lessons + exam SubLessons in error scope (played or unlocked — see `loadErrorScopeLessons` in `src/exercise/error-scope.ts`). The planner itself is track-agnostic; the call sites decide the scope. A failed exam Q&A phrase is rebuilt with its `question` in the failed direction.
 - Home button disabled when error pool is empty (same global scope via `loadExamErrorLessons`).
-- Same Session shape as Lesson (3 × 5 + optional correction). **Its own three-way slot-type roll** (`FIX_ERRORS.buckets.slotType`): `[0, 0.2]` word-match, `[0.2, 0.75]` sentence-builder, `[0.75, 1]` fill-blank. Fill's share is carved out of sentence-builder's, not word-match's.
+- Same Session shape as Lesson (`LESSON.totalSlots` + optional correction). **Its own three-way slot-type roll** (`FIX_ERRORS.buckets.slotType`) — word-match / sentence-builder / fill-blank, **fixed**, not adaptive like Lesson's, because its backlog is by definition all struggling Elements. Fill's share is carved out of sentence-builder's, not word-match's.
 - The one Mode that draws from all three error pools — it is where a failed `@fill` gets retried, since neither Lesson nor Word Mix schedules one.
-- WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
+- WordMatch Slot: `LESSON.wordMatchPairs` pairs drawn independently **with replacement** from the word-error pool (duplicates allowed).
 - SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
 - FillBlank Slot: 1 `FillError` from the fill-error pool, same failed-direction rule.
-- Empty pool for rolled type → re-roll, up to 20 attempts, then a fixed-order fallback (word → sentence → fill) so a Session still fills when only one pool has content. **A builder must check its pool before consuming any rng** — otherwise a re-roll shifts every later draw and `fakeRng` tests stop describing real Sessions.
+- Empty pool for rolled type → re-roll a bounded number of times, then a fixed-order fallback (word → sentence → fill) so a Session still fills when only one pool has content. **A builder must check its pool before consuming any rng** — otherwise a re-roll shifts every later draw and `fakeRng` tests stop describing real Sessions.
 - Outcomes & correction Block: identical to Lesson.
 - `completionEffect: 'noop'`.
 
 **Exam** — `planExamMode(subLesson)`.
 - Input: ONE SubLesson's `Lesson` (loaded via `src/exam/exam-catalog.ts`, never `loadAllLessons`). No stats input — the plan is content-deterministic ("we only shuffle it").
-- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — 5 pairs per Slot, trailing chunk < `minChunk` (3) merges into the previous Slot. Sentences: one SentenceBuilder Slot each. Fills: one FillBlank Slot each. Combined Slot list shuffled.
+- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — `pairCount` pairs per Slot, and a trailing chunk below `minChunk` merges into the previous Slot rather than forming a degenerate one. Sentences: one SentenceBuilder Slot each. Fills: one FillBlank Slot each. Combined Slot list shuffled.
 - Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically. Fills roll from the same table with nothing to override it (a `@fill` never carries `@question`).
 - Elements missing a line on either side (`@lu` or `@en` empty) are skipped rather than planned as a broken Slot — applies to both sentences and fills.
 - Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
@@ -284,14 +285,14 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 #### Unlock rule (both tracks)
 
 One rule gates progression on the course track (lesson → next lesson) and on the exam track (SubLesson → next SubLesson in its Theme). For each Element defined in the lesson's `.letz` file:
-- Element passes iff `correct >= MASTERY_CORRECT_COUNT` (3). There is **no** accuracy ratio and **no** minimum-shown gate — three correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
-- For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct >= 3` (`combinedPhraseStats`). Both directions count toward the one phrase Element.
+- Element passes iff `correct >= MASTERY_CORRECT_COUNT`. There is **no** accuracy ratio and **no** minimum-shown gate — enough correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
+- For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct` clears the same constant (`combinedElementStats`). Both directions count toward the one phrase Element.
 
-The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (**1.0** — every Element must pass; see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)).
+The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` — currently **1.0**, i.e. every Element must pass (see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)). Read the value from `constants.ts`; the fact that it *is* 1.0 is load-bearing for content sizing, so it is stated once here and nowhere else.
 
 Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 
-> `MIN_ANSWERS` (5) still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)).
+> `MIN_ANSWERS` still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)).
 
 #### Centralized error pool
 
@@ -327,7 +328,7 @@ Three touch points, nothing else:
 
 The SessionMachine and Mode planners are untouched. If a Mode wants to schedule the new Exercise type in its Slots, the matching Mode planner adds a builder call (the only place that knows which Exercises feed which Modes).
 
-> ⚠️ **This recipe covers a new *mechanic* over existing content.** A new Exercise type that also introduces a new **Element kind** (a new `.letz` block with its own stat key) is a much wider change — ~15 files, because `Lesson.<newKind>` ripples into the parser (`lexer.ts`/`parser.ts`/`visitor.ts`), `progression.ts` (`collectLessonKeys`, `computeLessonProgress`, mastery, `computeOverallStats`), `error-pool.ts`, `lesson-rows.ts`, the Mode planners, `worker/lib/validators.ts`, and every matching test. `@fill` was the first such addition (Aug 2026) and it paid down the two traps this note used to warn about:
+> ⚠️ **This recipe covers a new *mechanic* over existing content.** A new Exercise type that also introduces a new **Element kind** (a new `.letz` block with its own stat key) is a much wider change — it ripples far past the three touch points, because `Lesson.<newKind>` reaches the parser (`lexer.ts`/`parser.ts`/`visitor.ts`), `progression.ts` (`collectLessonKeys`, `computeLessonProgress`, mastery, `computeOverallStats`), `error-pool.ts`, `lesson-rows.ts`, the Mode planners, `worker/lib/validators.ts`, and every matching test. `@fill` was the first such addition (Aug 2026) and it paid down the two traps this note used to warn about:
 >
 > - **Key family, not copy-paste.** `KEYED_ELEMENT_PREFIXES` in `progression.ts` drives `elementKey`/`combinedElementStats`/`elementIdentity`, and `isWordKey` is an explicit "matches no known prefix" check (**never** `!isPhraseKey` — that miscounts every new prefix as vocabulary and inflates `totalWords`/`masteredWords` on Home). Adding a third keyed kind means adding one string to that list, plus a thin named alias if the call sites read better for it.
 > - **Validator first.** `worker/lib/validators.ts` must admit the new key prefix in `isValidKey`, with a test. Miss it and the server rejects **the entire sync batch** containing one such result — not graceful degradation but silent total progress loss for that Session.
@@ -533,7 +534,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
    - **Streaks** ← `computeStreak(dailySessions, today)` in `worker/lib/user.ts`. No `streak` field.
    - **Lesson completion** ← `computeLessonProgress(lesson, words)` in `src/exercise/progression.ts`. No `completedLessons` field.
    - **Lesson unlock** ← `computeUnlockedLessonIds(lessons, words)`. No `unlockedLessons` field.
-   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`. Mastered = `correct >= 3` (applies to every key family — words, phrases, fills).
+   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`, which uses **live accuracy** plus `MIN_ANSWERS` and can fluctuate. Do **not** confuse it with the monotonic pass gate `isElementMastered` (`correct >= MASTERY_CORRECT_COUNT`); the two answer different questions and both apply to every key family. See [mastery-and-unlock](.claude/memory/mastery-and-unlock.md).
    - If you're tempted to add a new "summary" field to KV, ask whether it's a function of existing data. It almost always is.
 
 2. **Send deltas, not snapshots.** The client posts a *batch* (`POST /api/progress/sync` body = what happened in this batch only). The server folds the delta into the cumulative `words` + `dailySessions`. Do not POST the full client snapshot.
@@ -548,7 +549,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 7. **`unlockedLessons` doubles as the exam played-SubLesson set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes. Course logic only ever looks up course ids, exam logic only exam ids — the two id families coexist inertly in one array, and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field. On the exam track these ids no longer gate the next step (that's the mastery pass-gate); they mark a SubLesson as opened — sticky access plus content-load / error-pool scope.
 
-8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (≤200 results/chunk; per-key counters >100 split across chunks; duration spread ≤3600 and XP ≤500 per chunk — the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
+8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (the bounds are tabulated once under **Security > Validate before merge**; per-key counters over the cap are split across chunks and the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
 
 #### Client read/write pattern
 
@@ -595,7 +596,7 @@ loading → ready → active ⇄ slot_complete       (auto-dismissed; advances s
 loading → error                                (load failure)
 ```
 
-Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (see `session-reducer.ts:66`). Today, section boundaries are computed inline in the `SLOT_COMPLETE` handler from `plannedSlots / 3`; the target architecture replaces this with cumulative tick-position boundaries supplied by `ModeConfig` (so Word Mix's three Block boundaries at 20/40/60 ticks and Lesson's variable-tick layout both fall out of the same mechanism). The matching UI projection lives in `session-progress.ts` (`computeProgressView`).
+Transitions are dispatched via `multimethod` keyed on `[action.type, status]`. Section boundaries are **not** computed in the reducer — it reads the `blockBoundaries` array supplied by `ModeConfig`, so Word Mix's three Block boundaries and Lesson's variable-tick layout fall out of one mechanism. The matching UI projection lives in `session-progress.ts` (`computeProgressView`).
 
 **WordMatch SlotState** (`src/exercise/WordMatch/types.ts`, logic in `WordMatch/game-logic.ts`) — per-slot matching game.
 
@@ -759,7 +760,7 @@ Section headings come from `themeHeading(kind, title)` — `"Theme: Vacation & T
 
 `@image "path"` / `@image-alt "text"` are lesson-level (order-independent — they fold onto `meta` in `visitLesson`, so they may sit before `@lesson` or after the content). The value must be **quoted**: a bare `=` or `#` in unquoted `Text` breaks parsing. `@image-alt` doubles as the caption of the placeholder frame shown while `@image` is absent, so a picture SubLesson stays usable before its photo lands — every picture SubLesson is required to declare it.
 
-No directive is currently "designed but not built". The parser rejects unknown `@`-tokens with a lex error, so do not invent new ones — adding one means touching `lexer.ts`, `parser.ts`, and `visitor.ts` together, and a new **Element kind** on top of that is the ~15-file change described above.
+No directive is currently "designed but not built". The parser rejects unknown `@`-tokens with a lex error, so do not invent new ones — adding one means touching `lexer.ts`, `parser.ts`, and `visitor.ts` together, and a new **Element kind** on top of that is the far wider change described above.
 
 ### Testing
 

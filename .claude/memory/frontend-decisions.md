@@ -11,7 +11,7 @@ architecture resists these features by design, not by oversight.
 | Suspense | replaces named loading states with implicit promise-pending state; the discriminated state machines (`SessionStatus`, `AuthState`) *are* the contract |
 | `use()` | the pipeline keeps Promises at exactly three edges; `use()` smears them back into consumers |
 | `useOptimistic` | would force a rewrite of the byte-identical client/server merge, which is more sophisticated than it allows and is guarded by a byte-identity test |
-| `useTransition` / `useDeferredValue` | solve >50ms render jank that doesn't exist here (≤5 lessons, ≤200 words, sub-frame computations) |
+| `useTransition` / `useDeferredValue` | solve >50ms render jank that doesn't exist here — the data set per render is small enough that these computations are sub-frame |
 | `useActionState` / `useFormStatus` | form APIs; there are no forms |
 
 A single Suspense boundary would also break the two-phase progressive Home load
@@ -23,15 +23,17 @@ or (c) the producer/consumer split is being abandoned deliberately.
 
 ## Bundle: three chunks
 
-Initial paint dropped from 189 KB to ~40 KB gzipped by splitting on two seams:
+Splitting on two seams cut initial paint by roughly 80% — the parser turned out to
+be **three to five times the size of everything Home needs**, so keeping it out of
+the eager tree is the whole win. Current figures come from `npm run build`; they
+drift with every dependency bump and are deliberately not recorded here.
 
 1. **Main (eager)** — Home, auth, persistence, ui, manifest loader. Renders Home
    immediately from manifest titles.
-2. **Chevrotain parser** (~136 KB gz) — loaded dynamically inside
+2. **Chevrotain parser** — the largest chunk by far, loaded dynamically inside
    `parseLetzContent` on the first `fetchLesson`, so it parallelizes with the
    `.letz` fetch itself.
-3. **AppExercise** (~15 KB gz) — exercises, mode planners, reducer, popups, via
-   `React.lazy`.
+3. **AppExercise** — exercises, mode planners, reducer, popups, via `React.lazy`.
 
 **Rules:**
 - **Never statically import anything from `src/lib/letz-parser` into a module

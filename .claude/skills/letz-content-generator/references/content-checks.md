@@ -78,7 +78,7 @@ Run all four. The first two are one command each.
 **A vacuously green test proves nothing.** The `@fill` rules were verified by
 planting a deliberately broken probe file and confirming each rule fires by name —
 necessary at the time, because no content existed to run them against. They now run
-over the Schueberfouer picture theme's 10 blocks, but a *new* rule is vacuous until
+over the Schueberfouer picture theme's fills, but a *new* rule is vacuous until
 proven otherwise: **if you extend them, re-plant a probe.**
 
 **The distractor-survival harness is not optional for `@fill`.** Both real
