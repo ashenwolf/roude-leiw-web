@@ -2,6 +2,7 @@
   "themes": [
     {
       "id": "vacation",
+      "kind": "topic",
       "title": "Vacation & Travel",
       "subLessons": [
         { "id": "vacation.01", "file": "vacation/01_vocabulary.letz", "title": "Vocabulary" },
@@ -11,18 +12,29 @@
     },
     {
       "id": "picture",
-      "title": "Describing a Picture",
+      "kind": "picture",
+      "title": "Schueberfouer",
       "subLessons": [
-        { "id": "picture.01", "file": "picture/01_at_the_fair.letz", "title": "Fair: General Description" },
+        {
+          "id": "picture.01",
+          "file": "picture/schueberfouer/01_general.letz",
+          "title": "General Description"
+        },
         {
           "id": "picture.02",
-          "file": "picture/02_the_woman_and_the_boy.letz",
-          "title": "Fair: Person Description"
+          "file": "picture/schueberfouer/02_people.letz",
+          "title": "Person Description"
+        },
+        {
+          "id": "picture.03",
+          "file": "picture/schueberfouer/03_weather.letz",
+          "title": "Weather Description"
         }
       ]
     },
     {
       "id": "shopping",
+      "kind": "topic",
       "title": "Akafe Goen",
       "subLessons": [
         { "id": "shopping.01", "file": "shopping/01_vocabulary.letz", "title": "Vocabulary" },
@@ -32,6 +44,7 @@
     },
     {
       "id": "family",
+      "kind": "topic",
       "title": "Family & Myself",
       "subLessons": [
         { "id": "family.01", "file": "family/01_vocabulary.letz", "title": "Vocabulary" },

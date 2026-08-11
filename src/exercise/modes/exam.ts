@@ -11,6 +11,7 @@
 import { shuffle } from "../../lib/shuffle";
 import { BLOCK_COUNT, EXAM, LESSON } from "../constants";
 import {
+  buildFillExercise,
   buildSentenceExercise,
   chunkIntoWordMatchExercises,
   tokenizeSentence,
@@ -49,7 +50,14 @@ export const planExamMode = (
       buildSentenceExercise(sentence, bucketedPick(rng(), LESSON.buckets.direction), lessonVocab),
     );
 
-  const queue: Exercise[] = shuffle([...wordSlots, ...sentenceSlots], rng);
+  // One fill Element = exactly one Slot: Exam covers everything once, so there is
+  // no bucket or probability work here. Direction is rolled with the same table as
+  // sentences; a fill has no @question, so nothing overrides the roll.
+  const fillSlots = subLesson.fills
+    .filter((fill) => fill.lu.length > 0 && fill.en.length > 0)
+    .map((fill) => buildFillExercise(fill, bucketedPick(rng(), LESSON.buckets.direction)));
+
+  const queue: Exercise[] = shuffle([...wordSlots, ...sentenceSlots, ...fillSlots], rng);
 
   return {
     lessons: [subLesson],

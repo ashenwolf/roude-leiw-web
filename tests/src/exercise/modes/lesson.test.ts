@@ -20,6 +20,7 @@ const lesson = (id: string, words: [string, string][], sentences: SentenceEntry[
   meta: { id, title: id, level: "A1" },
   entries: words.map(([lu, en]) => ({ lu, en })),
   sentences,
+  fills: [],
 });
 
 // RNG that always rolls below the word-match threshold (0.2) → always picks word-match

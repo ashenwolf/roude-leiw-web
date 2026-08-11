@@ -13,6 +13,7 @@ export { AppWrapper } from "./AppWrapper";
 export { Popup, MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "./Popup";
 export { ProgressBar } from "./ProgressBar";
 export { LessonGrid } from "./LessonGrid";
+export { LessonImage } from "./LessonImage";
 export { XPBar } from "./XPBar";
 export { StatsRow } from "./StatsRow";
 export { StreakBadge } from "./StreakBadge";

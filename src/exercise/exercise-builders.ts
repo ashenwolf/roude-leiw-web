@@ -5,12 +5,18 @@
 // See CLAUDE.md > Architecture Reference > Encapsulation layering.
 
 import { shuffle } from "../lib/shuffle";
-import { phraseKey } from "./progression";
+import { fillKey, phraseKey } from "./progression";
 import { entriesToWordPairs } from "./letz-parser";
 import { normalizeAnswer } from "./SentenceBuilder/sentence-logic";
 
-import type { SentenceEntry, WordEntry } from "./letz-parser";
-import type { WordMatchBatch, SentenceBuilderBatch, SentenceBuilderItem } from "./types";
+import type { FillEntry, SentenceEntry, WordEntry } from "./letz-parser";
+import type {
+  FillBlankBatch,
+  FillBlankItem,
+  SentenceBuilderBatch,
+  SentenceBuilderItem,
+  WordMatchBatch,
+} from "./types";
 
 // ─── Tokenization ─────────────────────────────────────────────────────────────
 
@@ -154,4 +160,96 @@ export const buildSentenceExercise = (
   };
 
   return { type: "sentence-builder", item };
+};
+
+// ─── Fill-in-words ────────────────────────────────────────────────────────────
+
+/** Matches one `[bracketed]` blank. Non-greedy and `[^\][]` so nesting can't match. */
+const BLANK_RX = /\[([^[\]]*)\]/g;
+
+export type ParsedFillLine = {
+  /** Fixed segments around the blanks; `frame.length === blanks.length + 1`. */
+  frame: string[];
+  /** Blank contents in order, trimmed, verbatim otherwise (never tokenized). */
+  blanks: string[];
+};
+
+/**
+ * Splits an authored `@fill` line into its fixed frame and its blanks.
+ *
+ * Pure and total: a line with no brackets yields `{ frame: [line], blanks: [] }`,
+ * so callers get a well-formed value rather than an exception, and content rules
+ * (1–4 blanks, balanced brackets) are enforced by the integration tests where the
+ * failure message can name the offending file. Unbalanced brackets simply don't
+ * match `BLANK_RX` and stay as literal frame text — visible in the UI, which is
+ * exactly the kind of loud failure a content slip should produce.
+ *
+ * Whitespace is preserved in the frame (segments carry their own spacing) but
+ * trimmed off each blank, since the tile text is what gets compared.
+ */
+export const parseFillLine = (line: string): ParsedFillLine => {
+  const matches = [...line.matchAll(BLANK_RX)];
+
+  const frame = matches.reduce<{ segments: string[]; cursor: number }>(
+    (acc, m) => ({
+      segments: [...acc.segments, line.slice(acc.cursor, m.index)],
+      cursor: m.index + m[0].length,
+    }),
+    { segments: [], cursor: 0 },
+  );
+
+  return {
+    frame: [...frame.segments, line.slice(frame.cursor)],
+    blanks: matches.map((m) => m[1].trim()),
+  };
+};
+
+/** The complete sentence with its brackets removed — the prompt the learner reads. */
+export const stripBlankMarkers = (line: string): string => line.replace(BLANK_RX, "$1");
+
+/**
+ * Builds a fill-in-words exercise from a single `@fill` entry.
+ *
+ * **One blank = one tile, verbatim.** Unlike `buildSentenceExercise`, neither the
+ * blanks nor the distractors go through `tokenizeSentence`: a multi-word blank
+ * (`[Ferris wheel]`) is a single tile. That is what removes within-blank ordering
+ * ambiguity, and it is a deliberate divergence — do not "unify" the two builders
+ * by tokenizing here (see .claude/memory/fill-in-words-exercise.md).
+ *
+ * `direction` is honoured as requested; there is no question-carrying override,
+ * because a `@fill` has no `@question` (the frame itself is the prompt).
+ *
+ * The prompt is the **source-language sentence with its markers stripped** — the
+ * learner reads a complete sentence and reconstructs the gapped one in the target
+ * language. Distractors colliding with a blank answer under `normalizeAnswer` are
+ * dropped: such a tile would be a free correct answer rather than a wrong one.
+ */
+export const buildFillExercise = (
+  entry: FillEntry,
+  direction: "en-lu" | "lu-en",
+): FillBlankBatch => {
+  const isEnToLu = direction === "en-lu";
+  const targetLine = isEnToLu ? entry.lu : entry.en;
+  const sourceLine = isEnToLu ? entry.en : entry.lu;
+
+  const { frame, blanks } = parseFillLine(targetLine);
+
+  const blankSet = new Set(blanks.map(normalizeAnswer));
+  const rawDistractors = isEnToLu ? (entry.distractorsLu ?? []) : (entry.distractorsEn ?? []);
+  const distractors = rawDistractors
+    .map((d) => d.trim())
+    .filter((d) => d.length > 0 && !blankSet.has(normalizeAnswer(d)));
+
+  const item: FillBlankItem = {
+    frame,
+    blanks,
+    tokens: shuffle([...blanks, ...distractors]),
+    promptText: stripBlankMarkers(sourceLine),
+    direction,
+    // Keyed on the @en line verbatim (brackets included) and on the presented
+    // direction, so the error pool can repeat the exact direction that failed.
+    fillKey: fillKey(direction, entry.en),
+  };
+
+  return { type: "fill-blank", item };
 };

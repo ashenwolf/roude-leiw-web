@@ -228,4 +228,170 @@ describe("parseLetz", () => {
     expect(lesson.entries).toHaveLength(2);
     expect(lesson.sentences).toHaveLength(1);
   });
+
+  // ============================================================================
+  // parseLetz — @image / @image-alt
+  // ============================================================================
+
+  it("parses @image and @image-alt onto meta", () => {
+    const content = `
+@lesson P1.01 "Fair"
+
+@image "/assets/exam/picture/img/fair.jpg"
+@image-alt "A busy funfair on a sunny afternoon."
+
+@word d'Bild = the picture
+    `.trim();
+
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.meta.image).toBe("/assets/exam/picture/img/fair.jpg");
+    expect(lesson.meta.imageAlt).toBe("A busy funfair on a sunny afternoon.");
+  });
+
+  // @image-alt without @image is the shipping state of the picture theme: it is
+  // the caption of the placeholder frame, not merely alt text.
+  it("parses @image-alt alone", () => {
+    const content = `
+@lesson P1.01 "Fair"
+
+@image-alt "A busy funfair."
+
+@word d'Bild = the picture
+    `.trim();
+
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.meta.image).toBeUndefined();
+    expect(lesson.meta.imageAlt).toBe("A busy funfair.");
+  });
+
+  it("omits image fields entirely when neither directive is present", () => {
+    const lesson = parseLetz('@lesson A1.01 "Greetings"\n@word Moien = hi\n', "A1.01");
+    expect(lesson.meta).toEqual({ id: "A1.01", title: "Greetings", level: "A1" });
+  });
+
+  // Lesson-level and order-independent: they fold onto meta in visitLesson, not
+  // in the header rule, so they may sit before @lesson or after the content.
+  it("accepts @image before @lesson and after content", () => {
+    const content = `
+@image "/img/a.jpg"
+
+@lesson A1.01 "Greetings"
+
+@word Moien = hi
+
+@image-alt "Alt text."
+    `.trim();
+
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.meta.id).toBe("A1.01");
+    expect(lesson.meta.image).toBe("/img/a.jpg");
+    expect(lesson.meta.imageAlt).toBe("Alt text.");
+  });
+
+  // A URL with a query string is exactly why the value is QuotedString and not
+  // Text: a bare `=` terminates a Text run, so an unquoted path would not parse.
+  it("accepts a quoted path containing = and #", () => {
+    const content = '@lesson A1.01 "G"\n@image "/img/a.jpg?w=600#x"\n@word Moien = hi\n';
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.meta.image).toBe("/img/a.jpg?w=600#x");
+  });
+
+  it("throws when @image value is unquoted", () => {
+    const content = '@lesson A1.01 "G"\n@image /img/a.jpg\n';
+    expect(() => parseLetz(content, "A1.01")).toThrow(/A1\.01/);
+  });
+
+  // AtImageAlt must precede AtImage in the token list, or maximal-munch lexes
+  // "@image-alt" as AtImage followed by a stray "-alt" Text run.
+  it("does not lex @image-alt as @image", () => {
+    const content = '@lesson A1.01 "G"\n@image-alt "Alt."\n@word Moien = hi\n';
+    const lesson = parseLetz(content, "A1.01");
+    expect(lesson.meta.imageAlt).toBe("Alt.");
+    expect(lesson.meta.image).toBeUndefined();
+  });
+  // ============================================================================
+  // parseLetz — @fill
+  // ============================================================================
+
+  it("parses a @fill block with bracketed blanks intact", () => {
+    const content = `
+@lesson P1.01 "Fair"
+
+@fill
+  @lu Am Hannergrond [gesinn] ech [d'Rad].
+  @en In the background I [see] the [Ferris wheel].
+    `.trim();
+
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.fills).toHaveLength(1);
+    expect(lesson.fills[0].lu).toBe("Am Hannergrond [gesinn] ech [d'Rad].");
+    expect(lesson.fills[0].en).toBe("In the background I [see] the [Ferris wheel].");
+  });
+
+  it("parses @distractor-lu / @distractor-en inside a @fill block", () => {
+    const content = `
+@lesson P1.01 "Fair"
+
+@fill
+  @lu Ech [gesinn] d'Rad.
+  @en I [see] the wheel.
+  @distractor-lu ginn
+  @distractor-lu de Bus
+  @distractor-en give
+    `.trim();
+
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.fills[0].distractorsLu).toEqual(["ginn", "de Bus"]);
+    expect(lesson.fills[0].distractorsEn).toEqual(["give"]);
+  });
+
+  it("omits distractor fields when a @fill has none", () => {
+    const content = '@lesson P1.01 "F"\n@fill\n  @lu Ech [sinn] midd.\n  @en I [am] tired.\n';
+    expect(parseLetz(content, "picture.01").fills[0]).toEqual({
+      lu: "Ech [sinn] midd.",
+      en: "I [am] tired.",
+    });
+  });
+
+  // Exactly one form per side is the mechanic's requirement; the grammar allows
+  // extra @lu/@en lines, and the visitor keeps the first rather than throwing.
+  it("keeps the first @lu / @en when a @fill block repeats them", () => {
+    const content =
+      '@lesson P1.01 "F"\n@fill\n  @lu Ech [sinn] midd.\n  @lu Ech [ginn] midd.\n  @en I [am] tired.\n';
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.fills[0].lu).toBe("Ech [sinn] midd.");
+  });
+
+  it("drops a @fill block missing one side", () => {
+    const content = '@lesson P1.01 "F"\n@fill\n  @lu Ech [sinn] midd.\n';
+    expect(parseLetz(content, "picture.01").fills).toHaveLength(0);
+  });
+
+  it("keeps @fill and @sentence in separate collections", () => {
+    const content = `
+@lesson P1.01 "Fair"
+
+@word d'Rad = the wheel
+
+@sentence
+  @lu Ech gesinn d'Rad.
+  @en I see the wheel.
+
+@fill
+  @lu Ech [gesinn] d'Rad.
+  @en I [see] the wheel.
+    `.trim();
+
+    const lesson = parseLetz(content, "picture.01");
+    expect(lesson.entries).toHaveLength(1);
+    expect(lesson.sentences).toHaveLength(1);
+    expect(lesson.fills).toHaveLength(1);
+    // A @sentence keeps no brackets; a @fill keeps them verbatim.
+    expect(lesson.sentences[0].luVariants[0]).toBe("Ech gesinn d'Rad.");
+    expect(lesson.fills[0].lu).toBe("Ech [gesinn] d'Rad.");
+  });
+
+  it("yields an empty fills array for a file with no @fill blocks", () => {
+    expect(parseLetz('@lesson A1.01 "G"\n@word Moien = hi\n', "A1.01").fills).toEqual([]);
+  });
 });

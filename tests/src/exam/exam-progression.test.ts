@@ -15,6 +15,7 @@ const lesson = (id: string, words: [string, string][]): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: words.map(([lu, en]): WordEntry => ({ lu, en })),
   sentences: [],
+  fills: [],
 });
 
 /** Stats that pass the mastery gate for every word of the given sub-lessons. */

@@ -7,6 +7,7 @@ export { CelebrationIcon } from "./CelebrationIcon";
 export { CheckCircleIcon } from "./CheckCircleIcon";
 export { FireIcon } from "./FireIcon";
 export { GraduationCapIcon } from "./GraduationCapIcon";
+export { ImageIcon } from "./ImageIcon";
 export { LockIcon } from "./LockIcon";
 export { MoonIcon } from "./MoonIcon";
 export { RefreshIcon } from "./RefreshIcon";

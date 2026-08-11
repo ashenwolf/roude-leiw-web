@@ -13,12 +13,15 @@
 // stricter gate can never take back access the user already had), and it tells
 // the theme page / error-pool scope which sub-lessons can carry stats.
 
+import { toLessonImageView } from "../exercise/lesson-image";
 import { computeLessonProgress } from "../exercise/progression";
+import { themeHeading } from "./exam-catalog";
 
 import type { WordStats } from "../context/auth";
 import type { Lesson } from "../exercise/letz-parser";
+import type { LessonImageView } from "../exercise/lesson-image";
 import type { LessonProgress } from "../exercise/progression";
-import type { SubLessonMeta } from "./exam-catalog";
+import type { SubLessonMeta, ThemeKind } from "./exam-catalog";
 
 export type SubLessonView = {
   meta: SubLessonMeta;
@@ -30,11 +33,21 @@ export type SubLessonView = {
   played: boolean;
   /** Mastery ring — null while the sub-lesson's content is not loaded. */
   progress: LessonProgress | null;
+  /**
+   * The sub-lesson's photo or its placeholder — null for one that declares no
+   * `@image`/`@image-alt` at all, and null while content is unloaded (the image
+   * lives in the `.letz` file, not the manifest, so an unfetched node shows none).
+   */
+  image: LessonImageView | null;
 };
 
 export type ThemeView = {
   id: string;
+  kind: ThemeKind;
+  /** Bare title, e.g. "Schueberfouer" — the section heading adds the prefix. */
   title: string;
+  /** Prefixed section heading, e.g. "Describing a Picture: Schueberfouer". */
+  heading: string;
   subLessons: SubLessonView[];
 };
 
@@ -55,7 +68,8 @@ const toSubLessonView = (
   loaded: Record<string, Lesson>,
   userWords: Record<string, WordStats>,
 ): SubLessonView => {
-  const progress = loaded[meta.id] ? computeLessonProgress(loaded[meta.id], userWords) : null;
+  const lesson = loaded[meta.id];
+  const progress = lesson ? computeLessonProgress(lesson, userWords) : null;
   const unlocked = previous === undefined || previous.passed || played.has(meta.id);
   return {
     meta,
@@ -63,6 +77,7 @@ const toSubLessonView = (
     passed: unlocked && (progress?.isComplete ?? false),
     played: played.has(meta.id),
     progress,
+    image: lesson ? toLessonImageView(lesson.meta) : null,
   };
 };
 
@@ -87,7 +102,9 @@ export const computeExamView = (
       const subs = metas.filter((m) => m.themeId === themeId);
       return {
         id: themeId,
+        kind: subs[0].themeKind,
         title: subs[0].themeTitle,
+        heading: themeHeading(subs[0].themeKind, subs[0].themeTitle),
         // Fold, not map: each view's unlock reads the previous view's `passed`.
         subLessons: subs.reduce<SubLessonView[]>(
           (acc, meta) => [

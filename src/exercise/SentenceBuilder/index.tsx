@@ -47,7 +47,9 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const usedSet = new Set(state.assembled);
 
   return (
-    <div className="flex flex-col gap-6 p-2">
+    // Spacing is tight because a picture-description Session renders a full-bleed
+    // 16:9 photo above this and everything still has to fit without scrolling.
+    <div className="flex flex-col gap-3 px-2">
       {item.question !== undefined && (
         <p className="text-center text-xl font-bold text-gray-900 px-2">
           {item.question}
@@ -63,10 +65,12 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
         {item.promptText}
       </p>
 
-      {/* Assembled row — chips stay visible after check for feedback */}
-      <div className="min-h-36 flex flex-wrap content-start gap-2.5 justify-center border-b-2 border-gray-200 pb-8">
+      {/* Assembled row — chips stay visible after check for feedback. The min-h
+          reserve keeps the token pool from jumping as chips move between the two
+          rows; it fits two rows of pills, and shorter answers just leave slack. */}
+      <div className="min-h-24 flex flex-wrap content-start gap-2 justify-center border-b-2 border-gray-200 pb-3">
         {state.assembled.length === 0 ? (
-          <span className="text-gray-400 text-sm w-full text-center mt-3 italic">
+          <span className="text-gray-400 text-sm w-full text-center mt-2 italic">
             Tap words below to build your answer
           </span>
         ) : (
@@ -84,7 +88,7 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
       </div>
 
       {/* Token pool — used tokens show as gray placeholders to keep layout stable */}
-      <div className="min-h-36 flex flex-wrap gap-2.5 justify-center content-start">
+      <div className="min-h-24 flex flex-wrap gap-2 justify-center content-start">
         {item.tokens.map((token, idx) =>
           usedSet.has(idx) ? (
             <div
@@ -106,7 +110,7 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
         )}
       </div>
 
-      <div className="w-full max-w-xs mx-auto">
+      <div className="w-full max-w-xs mx-auto mt-1">
         <Button
           onClick={handleSubmit}
           disabled={state.assembled.length === 0 || state.checkResult !== null}

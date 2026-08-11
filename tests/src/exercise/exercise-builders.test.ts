@@ -5,9 +5,12 @@ import {
   buildWordMatchExercise,
   buildSentenceExercise,
   chunkIntoWordMatchExercises,
+  parseFillLine,
+  stripBlankMarkers,
+  buildFillExercise,
 } from "../../../src/exercise/exercise-builders.ts";
 
-import type { SentenceEntry, WordEntry } from "../../../src/exercise/letz-parser.ts";
+import type { FillEntry, SentenceEntry, WordEntry } from "../../../src/exercise/letz-parser.ts";
 
 // ─── Fixtures ────────────────────────────────────────────────────────────────
 
@@ -19,6 +22,13 @@ const sentence = (
   distractorsEn: string[] = [],
   distractorsLu: string[] = [],
 ): SentenceEntry => ({ enVariants, luVariants, distractorsEn, distractorsLu });
+
+const fill = (
+  en: string,
+  lu: string,
+  distractorsLu: string[] = [],
+  distractorsEn: string[] = [],
+): FillEntry => ({ en, lu, distractorsEn, distractorsLu });
 
 // ─── tokenizeSentence ─────────────────────────────────────────────────────────
 
@@ -245,5 +255,178 @@ describe("chunkIntoWordMatchExercises", () => {
     const pairs = chunkIntoWordMatchExercises(words(23), sizing).flatMap((e) => e.pairs);
     expect(pairs).toHaveLength(23);
     expect(new Set(pairs.map(([lu]) => lu)).size).toBe(23);
+  });
+});
+
+// ─── parseFillLine ────────────────────────────────────────────────────────────
+
+describe("parseFillLine", () => {
+  it("splits a line into frame segments and blanks", () => {
+    const { frame, blanks } = parseFillLine("Am Hannergrond [gesinn] ech [d'Rad].");
+    expect(frame).toEqual(["Am Hannergrond ", " ech ", "."]);
+    expect(blanks).toEqual(["gesinn", "d'Rad"]);
+  });
+
+  it("always returns exactly one more frame segment than blanks", () => {
+    const lines = [
+      "no blanks at all",
+      "[one]",
+      "[a] b [c]",
+      "a [b] c [d] e [f] g [h] i",
+      "[a][b]",
+    ];
+    for (const line of lines) {
+      const { frame, blanks } = parseFillLine(line);
+      expect(frame).toHaveLength(blanks.length + 1);
+    }
+  });
+
+  it("returns the whole line as one frame segment when there are no blanks", () => {
+    expect(parseFillLine("Ech sinn midd.")).toEqual({ frame: ["Ech sinn midd."], blanks: [] });
+  });
+
+  it("keeps a multi-word blank whole — one blank is one tile", () => {
+    expect(parseFillLine("I see the [Ferris wheel].").blanks).toEqual(["Ferris wheel"]);
+  });
+
+  it("trims each blank but preserves frame spacing", () => {
+    const { frame, blanks } = parseFillLine("a [  b  ] c");
+    expect(blanks).toEqual(["b"]);
+    expect(frame).toEqual(["a ", " c"]);
+  });
+
+  it("handles a blank at the start and at the end", () => {
+    expect(parseFillLine("[Moien] ech")).toEqual({ frame: ["", " ech"], blanks: ["Moien"] });
+    expect(parseFillLine("ech [sinn]")).toEqual({ frame: ["ech ", ""], blanks: ["sinn"] });
+  });
+
+  it("handles adjacent blanks with an empty frame segment between them", () => {
+    expect(parseFillLine("[a][b]")).toEqual({ frame: ["", "", ""], blanks: ["a", "b"] });
+  });
+
+  it("leaves an unbalanced bracket as literal frame text (loud, visible failure)", () => {
+    expect(parseFillLine("Ech [gesinn ech")).toEqual({
+      frame: ["Ech [gesinn ech"],
+      blanks: [],
+    });
+  });
+
+  it("treats an empty blank as an empty-string answer rather than throwing", () => {
+    expect(parseFillLine("a [] b")).toEqual({ frame: ["a ", " b"], blanks: [""] });
+  });
+});
+
+// ─── stripBlankMarkers ────────────────────────────────────────────────────────
+
+describe("stripBlankMarkers", () => {
+  it("removes brackets but keeps the words", () => {
+    expect(stripBlankMarkers("Am Hannergrond [gesinn] ech [d'Rad].")).toBe(
+      "Am Hannergrond gesinn ech d'Rad.",
+    );
+  });
+
+  it("is a no-op on a line without blanks", () => {
+    expect(stripBlankMarkers("Ech sinn midd.")).toBe("Ech sinn midd.");
+  });
+
+  it("reproduces the original sentence for any parseFillLine input", () => {
+    const line = "In the background I [see] the [Ferris wheel].";
+    const { frame, blanks } = parseFillLine(line);
+    const rebuilt = frame.reduce((acc, seg, i) => acc + seg + (blanks[i] ?? ""), "");
+    expect(rebuilt).toBe(stripBlankMarkers(line));
+  });
+});
+
+// ─── buildFillExercise ────────────────────────────────────────────────────────
+
+describe("buildFillExercise", () => {
+  const entry = fill(
+    "In the background I [see] the [Ferris wheel].",
+    "Am Hannergrond [gesinn] ech [d'Rad].",
+    ["ginn", "de Bus"],
+    ["give", "the bus"],
+  );
+
+  it("en→lu: gaps the LU line and prompts with the complete EN sentence", () => {
+    const { item } = buildFillExercise(entry, "en-lu");
+    expect(item.blanks).toEqual(["gesinn", "d'Rad"]);
+    expect(item.frame).toEqual(["Am Hannergrond ", " ech ", "."]);
+    expect(item.promptText).toBe("In the background I see the Ferris wheel.");
+    expect(item.direction).toBe("en-lu");
+  });
+
+  it("lu→en: gaps the EN line and prompts with the complete LU sentence", () => {
+    const { item } = buildFillExercise(entry, "lu-en");
+    expect(item.blanks).toEqual(["see", "Ferris wheel"]);
+    expect(item.promptText).toBe("Am Hannergrond gesinn ech d'Rad.");
+    expect(item.direction).toBe("lu-en");
+  });
+
+  it("keys on the @en line and the presented direction", () => {
+    expect(buildFillExercise(entry, "en-lu").item.fillKey).toBe(`fill:en-lu:${entry.en}`);
+    expect(buildFillExercise(entry, "lu-en").item.fillKey).toBe(`fill:lu-en:${entry.en}`);
+  });
+
+  it("truncates the key identity to 64 chars to match the server validator", () => {
+    const long = fill(`${"x".repeat(80)} [a]`, "[b]");
+    const { item } = buildFillExercise(long, "en-lu");
+    expect(item.fillKey).toBe(`fill:en-lu:${long.en.slice(0, 64)}`);
+    expect(item.fillKey.length).toBe("fill:en-lu:".length + 64);
+  });
+
+  it("keeps a multi-word blank as a single tile — no tokenization", () => {
+    const { item } = buildFillExercise(entry, "lu-en");
+    expect(item.tokens).toContain("Ferris wheel");
+    expect(item.tokens).not.toContain("Ferris");
+  });
+
+  it("keeps a multi-word distractor as a single tile", () => {
+    const { item } = buildFillExercise(entry, "lu-en");
+    expect(item.tokens).toContain("the bus");
+    expect(item.tokens).not.toContain("bus");
+  });
+
+  it("offers exactly the blanks plus the direction's distractors as tiles", () => {
+    const { item } = buildFillExercise(entry, "en-lu");
+    expect([...item.tokens].sort()).toEqual(["d'Rad", "de Bus", "gesinn", "ginn"].sort());
+  });
+
+  it("drops a distractor that collides with a blank answer", () => {
+    // "Gesinn!" normalizes to the blank "gesinn" — it would be a free correct tile.
+    const colliding = fill("I [see].", "Ech [gesinn].", ["Gesinn!", "ginn"]);
+    const { item } = buildFillExercise(colliding, "en-lu");
+    expect(item.tokens).toEqual(expect.arrayContaining(["gesinn", "ginn"]));
+    expect(item.tokens).toHaveLength(2);
+  });
+
+  it("drops blank and empty distractors", () => {
+    const padded = fill("I [see].", "Ech [gesinn].", ["  ", "", " ginn "]);
+    const { item } = buildFillExercise(padded, "en-lu");
+    expect([...item.tokens].sort()).toEqual(["gesinn", "ginn"]);
+  });
+
+  it("works with no authored distractors — tiles are just the blanks", () => {
+    const bare = fill("I [see].", "Ech [gesinn].");
+    expect(buildFillExercise(bare, "en-lu").item.tokens).toEqual(["gesinn"]);
+  });
+
+  it("uses only the target language's distractors", () => {
+    const { item } = buildFillExercise(entry, "en-lu");
+    expect(item.tokens).not.toContain("the bus");
+    expect(item.tokens).not.toContain("give");
+  });
+
+  it("allows blank counts to differ between the two directions", () => {
+    // Word order differs per language, so no cross-language correspondence holds.
+    const uneven = fill("I [see] it", "Ech [gesinn] [et]");
+    expect(buildFillExercise(uneven, "en-lu").item.blanks).toHaveLength(2);
+    expect(buildFillExercise(uneven, "lu-en").item.blanks).toHaveLength(1);
+  });
+
+  it("holds frame.length === blanks.length + 1 in both directions", () => {
+    for (const direction of ["en-lu", "lu-en"] as const) {
+      const { item } = buildFillExercise(entry, direction);
+      expect(item.frame).toHaveLength(item.blanks.length + 1);
+    }
   });
 });

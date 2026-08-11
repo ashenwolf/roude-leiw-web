@@ -1,9 +1,9 @@
 import { MIN_ANSWERS, ERROR_THRESHOLD } from "./constants";
-import { wordKey, phraseKey } from "./progression";
+import { wordKey, phraseKey, fillKey } from "./progression";
 
 import type { WordStats } from "../context/auth";
 import type { Direction } from "./progression";
-import type { Lesson, WordEntry, SentenceEntry } from "./letz-parser";
+import type { FillEntry, Lesson, WordEntry, SentenceEntry } from "./letz-parser";
 
 /** A struggling phrase plus the exact direction the user failed it in. */
 export type PhraseError = {
@@ -11,9 +11,21 @@ export type PhraseError = {
   direction: Direction;
 };
 
+/** A struggling fill-in-words item plus the exact direction the user failed it in. */
+export type FillError = {
+  fill: FillEntry;
+  direction: Direction;
+};
+
 export type ErrorPool = {
   words: WordEntry[];
   phrases: PhraseError[];
+  /**
+   * Kept separate from `phrases` rather than folded in: Fix Errors must rebuild a
+   * failed fill as a fill (`buildFillExercise`), not as a sentence — the two
+   * mechanics have different distractor semantics.
+   */
+  fills: FillError[];
 };
 
 /** Same formula as classifyWord — correct / (correct + incorrect). */
@@ -35,8 +47,8 @@ const isFallback = (stats: WordStats | undefined): boolean =>
  * Fallback pool — used when primary is empty for that type; all elements with
  *                 incorrect > 0, sorted ascending by correct/shown (worst first).
  *
- * Words and phrases are computed independently so a caller can get a non-empty
- * phrase pool even when the word pool is full (and vice-versa).
+ * Each element kind is computed independently so a caller can get a non-empty
+ * phrase pool even when the word pool is empty (and vice-versa).
  */
 export const selectErrorPool = (
   userStats: Record<string, WordStats>,
@@ -44,59 +56,83 @@ export const selectErrorPool = (
 ): ErrorPool => ({
   words: selectWordPool(userStats, lessons),
   phrases: selectPhrasePool(userStats, lessons),
+  fills: selectFillPool(userStats, lessons),
 });
 
-// De-duplicates by key (same word pair may appear in multiple lessons).
-const selectWordPool = (
+/**
+ * The primary-then-fallback rule, applied to any keyed candidate map.
+ *
+ * Candidates arrive de-duplicated by stat key (the same element may appear in
+ * several lessons), and the key is what carries the direction — so this one
+ * function serves words (direction-less keys) and directional elements alike.
+ */
+const pickStruggling = <T>(
+  byKey: Map<string, T>,
   userStats: Record<string, WordStats>,
-  lessons: Lesson[],
-): WordEntry[] => {
-  const byKey = new Map<string, WordEntry>();
-  for (const lesson of lessons) {
-    for (const entry of lesson.entries) {
-      byKey.set(wordKey(entry.lu, entry.en), entry);
-    }
-  }
-
+): T[] => {
   const primary = [...byKey.entries()]
     .filter(([key]) => isPrimary(userStats[key]))
-    .map(([, entry]) => entry);
+    .map(([, candidate]) => candidate);
 
   if (primary.length > 0) return primary;
 
   return [...byKey.entries()]
     .filter(([key]) => isFallback(userStats[key]))
     .sort(([a], [b]) => accuracy(userStats[a]!) - accuracy(userStats[b]!))
-    .map(([, entry]) => entry);
+    .map(([, candidate]) => candidate);
 };
 
-// Each candidate is a (sentence, direction) pair keyed by its directional stat
-// key, so a phrase failed in en→lu and the same phrase failed in lu→en are
+const selectWordPool = (
+  userStats: Record<string, WordStats>,
+  lessons: Lesson[],
+): WordEntry[] =>
+  pickStruggling(
+    new Map(
+      lessons.flatMap((lesson) =>
+        lesson.entries.map((entry) => [wordKey(entry.lu, entry.en), entry] as const),
+      ),
+    ),
+    userStats,
+  );
+
+// Each candidate is an (element, direction) pair keyed by its directional stat
+// key, so an element failed in en→lu and the same element failed in lu→en are
 // distinct error entries and Fix Errors repeats the exact failed direction.
 const DIRECTIONS: ReadonlyArray<Direction> = ["en-lu", "lu-en"];
 
 const selectPhrasePool = (
   userStats: Record<string, WordStats>,
   lessons: Lesson[],
-): PhraseError[] => {
-  const byKey = new Map<string, PhraseError>();
-  for (const lesson of lessons) {
-    for (const sentence of lesson.sentences) {
-      if (sentence.enVariants.length === 0) continue;
-      for (const direction of DIRECTIONS) {
-        byKey.set(phraseKey(direction, sentence.enVariants[0]), { sentence, direction });
-      }
-    }
-  }
+): PhraseError[] =>
+  pickStruggling(
+    new Map(
+      lessons.flatMap((lesson) =>
+        lesson.sentences
+          .filter((sentence) => sentence.enVariants.length > 0)
+          .flatMap((sentence) =>
+            DIRECTIONS.map(
+              (direction) =>
+                [phraseKey(direction, sentence.enVariants[0]), { sentence, direction }] as const,
+            ),
+          ),
+      ),
+    ),
+    userStats,
+  );
 
-  const primary = [...byKey.entries()]
-    .filter(([key]) => isPrimary(userStats[key]))
-    .map(([, phrase]) => phrase);
-
-  if (primary.length > 0) return primary;
-
-  return [...byKey.entries()]
-    .filter(([key]) => isFallback(userStats[key]))
-    .sort(([a], [b]) => accuracy(userStats[a]!) - accuracy(userStats[b]!))
-    .map(([, phrase]) => phrase);
-};
+const selectFillPool = (
+  userStats: Record<string, WordStats>,
+  lessons: Lesson[],
+): FillError[] =>
+  pickStruggling(
+    new Map(
+      lessons.flatMap((lesson) =>
+        lesson.fills.flatMap((fill) =>
+          DIRECTIONS.map(
+            (direction) => [fillKey(direction, fill.en), { fill, direction }] as const,
+          ),
+        ),
+      ),
+    ),
+    userStats,
+  );

@@ -5,15 +5,20 @@ import {
   isElementMastered,
   computeLessonProgress,
   computeUnlockedLessonIds,
+  findCurrentLessonId,
+  findFrontierLessonId,
   computeOverallStats,
+  collectLessonKeys,
   phraseKey,
+  fillKey,
   isPhraseKey,
+  isFillKey,
   isWordKey,
   MASTERY,
 } from "../../../src/exercise/progression.ts";
 import { MIN_ANSWERS, MASTERY_CORRECT_COUNT, UNLOCK_ELEMENT_THRESHOLD } from "../../../src/exercise/constants.ts";
 import type { WordStats } from "../../../src/context/auth.ts";
-import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
+import type { FillEntry, Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 
 // ============================================================================
 // Helpers
@@ -26,12 +31,15 @@ const lesson = (id: string, ...pairs: [string, string][]): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: pairs.map(([lu, en]) => ({ lu, en })),
   sentences: [],
+  fills: [],
 });
 
 const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
   luVariants,
   enVariants: [firstEn],
 });
+
+const fill = (en: string, lu: string): FillEntry => ({ lu, en });
 
 // ============================================================================
 // classifyWord — live accuracy-based classification (shown >= 5 AND accuracy)
@@ -126,9 +134,57 @@ describe("phraseKey helpers", () => {
     expect(isPhraseKey("Moien|morning")).toBe(false);
   });
 
-  it("isWordKey is the inverse of isPhraseKey", () => {
+  it("isWordKey excludes every keyed-element prefix, not just phrase", () => {
     expect(isWordKey("Moien|morning")).toBe(true);
     expect(isWordKey("phrase:en-lu:Hello")).toBe(false);
+    // Regression guard: isWordKey used to be `!isPhraseKey`, which counted fill
+    // keys as vocabulary and inflated totalWords/masteredWords on Home.
+    expect(isWordKey("fill:en-lu:I [see] a tree.")).toBe(false);
+    expect(isWordKey("fill:lu-en:I [see] a tree.")).toBe(false);
+  });
+
+  it("fillKey mirrors phraseKey but in its own namespace", () => {
+    expect(fillKey("en-lu", "I [see] a tree.")).toBe("fill:en-lu:I [see] a tree.");
+    expect(fillKey("lu-en", "I [see] a tree.")).toBe("fill:lu-en:I [see] a tree.");
+    // Same English, different kind → different key. This is why fill: is a new
+    // prefix rather than a reuse of phrase:.
+    expect(fillKey("en-lu", "Hi!")).not.toBe(phraseKey("en-lu", "Hi!"));
+  });
+
+  it("fillKey truncates to 64 chars (lockstep with FILL_KEY_RX in the validator)", () => {
+    expect(fillKey("en-lu", "a".repeat(70))).toBe("fill:en-lu:" + "a".repeat(64));
+  });
+
+  it("isFillKey recognises only fill keys", () => {
+    expect(isFillKey("fill:en-lu:Hello")).toBe(true);
+    expect(isFillKey("fill:lu-en:Hello")).toBe(true);
+    expect(isFillKey("phrase:en-lu:Hello")).toBe(false);
+    expect(isFillKey("Moien|morning")).toBe(false);
+  });
+});
+
+// ============================================================================
+// collectLessonKeys
+// ============================================================================
+
+describe("collectLessonKeys", () => {
+  it("emits both directional keys for each sentence and each fill", () => {
+    const keys = collectLessonKeys([
+      {
+        ...lesson("A1.01", ["Moien", "hi"]),
+        sentences: [sentence("Hi there!", "Moien!")],
+        fills: [fill("I [see] a tree.", "Ech [gesinn] en Bam.")],
+      },
+    ]);
+    expect(keys).toEqual(
+      new Set([
+        "Moien|hi",
+        phraseKey("en-lu", "Hi there!"),
+        phraseKey("lu-en", "Hi there!"),
+        fillKey("en-lu", "I [see] a tree."),
+        fillKey("lu-en", "I [see] a tree."),
+      ]),
+    );
   });
 });
 
@@ -278,6 +334,47 @@ describe("computeLessonProgress", () => {
     expect(progress.mastered).toBe(1); // only the word
     expect(progress.isComplete).toBe(false);
   });
+
+  it("lesson with fills — an unpassed fill counts toward total", () => {
+    const withFill: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"]),
+      fills: [fill("I [see] a tree.", "Ech [gesinn] en Bam.")],
+    };
+    const progress = computeLessonProgress(withFill, { "Moien|hi": passing() });
+    expect(progress.total).toBe(2);
+    expect(progress.mastered).toBe(1);
+    expect(progress.isComplete).toBe(false);
+  });
+
+  it("lesson with fills — both directions sum toward the one fill gate", () => {
+    const withFill: Lesson = {
+      ...lesson("A1.01", ["Moien", "hi"]),
+      fills: [fill("I [see] a tree.", "Ech [gesinn] en Bam.")],
+    };
+    const words = {
+      "Moien|hi": passing(),
+      [fillKey("en-lu", "I [see] a tree.")]: s(2, 2, 0), // 2 correct
+      [fillKey("lu-en", "I [see] a tree.")]: s(1, 1, 0), // + 1 = 3 combined
+    };
+    const progress = computeLessonProgress(withFill, words);
+    expect(progress.mastered).toBe(2);
+    expect(progress.isComplete).toBe(true);
+  });
+
+  it("a fill and a phrase with the same English are separate elements", () => {
+    // The distinct key prefix is what keeps them apart — passing the phrase must
+    // not pass the fill (see .claude/memory/fill-in-words-exercise.md).
+    const both: Lesson = {
+      ...lesson("A1.01"),
+      sentences: [sentence("I see a tree.", "Ech gesinn en Bam.")],
+      fills: [fill("I see a tree.", "Ech [gesinn] en Bam.")],
+    };
+    const progress = computeLessonProgress(both, {
+      [phraseKey("en-lu", "I see a tree.")]: passing(),
+    });
+    expect(progress.total).toBe(2);
+    expect(progress.mastered).toBe(1);
+  });
 });
 
 // ============================================================================
@@ -371,6 +468,68 @@ describe("computeUnlockedLessonIds", () => {
 });
 
 // ============================================================================
+// findCurrentLessonId / findFrontierLessonId
+// ============================================================================
+
+describe("findCurrentLessonId — focus cursor", () => {
+  const lessons = [
+    lesson("A1.01", ["Moien", "hi"], ["Äddi", "bye"]),
+    lesson("A1.02", ["eng", "one"], ["zwee", "two"]),
+    lesson("A1.03", ["grouss", "big"], ["kleng", "small"]),
+  ];
+
+  const pass = (...pairs: [string, string][]) =>
+    pairs.reduce<Record<string, WordStats>>(
+      (acc, [lu, en]) => ({ ...acc, [`${lu}|${en}`]: passing() }),
+      {},
+    );
+
+  it("no stats → first lesson", () => {
+    expect(findCurrentLessonId(lessons, {})).toBe("A1.01");
+  });
+
+  it("empty lesson list → empty string", () => {
+    expect(findCurrentLessonId([], {})).toBe("");
+  });
+
+  it("points at the newly unlocked lesson once the previous one passes", () => {
+    const words = pass(["Moien", "hi"], ["Äddi", "bye"]);
+    expect(findCurrentLessonId(lessons, words)).toBe("A1.02");
+  });
+
+  it("skips complete lessons and targets the FIRST unfinished unlocked lesson", () => {
+    // A1.01 half-done, but A1.02 and A1.03 are sticky-unlocked from the old 0.8
+    // gate. The frontier is A1.03; the cursor must stay on A1.01.
+    const words = pass(["Moien", "hi"]);
+    const persisted = ["A1.02", "A1.03"];
+    expect(findCurrentLessonId(lessons, words, persisted)).toBe("A1.01");
+    expect(findFrontierLessonId(lessons, words, persisted)).toBe("A1.03");
+  });
+
+  it("moves past a completed lesson to the next unfinished one", () => {
+    const words = { ...pass(["Moien", "hi"], ["Äddi", "bye"]), ...pass(["eng", "one"]) };
+    expect(findCurrentLessonId(lessons, words, ["A1.02", "A1.03"])).toBe("A1.02");
+  });
+
+  it("falls back to the frontier when every unlocked lesson is complete", () => {
+    const words = pass(
+      ["Moien", "hi"], ["Äddi", "bye"],
+      ["eng", "one"], ["zwee", "two"],
+      ["grouss", "big"], ["kleng", "small"],
+    );
+    expect(findCurrentLessonId(lessons, words)).toBe("A1.03");
+    expect(findFrontierLessonId(lessons, words)).toBe("A1.03");
+  });
+
+  it("skips element-less lessons instead of parking the cursor on them", () => {
+    // An empty lesson can never be `isComplete`, so it would capture the cursor
+    // forever if `total > 0` weren't required.
+    const withEmpty = [lesson("A1.01"), lesson("A1.02", ["eng", "one"])];
+    expect(findCurrentLessonId(withEmpty, {}, ["A1.02"])).toBe("A1.02");
+  });
+});
+
+// ============================================================================
 // computeOverallStats
 // ============================================================================
 
@@ -386,6 +545,8 @@ describe("computeOverallStats", () => {
       overallAccuracy: 0,
       totalSentences: 0,
       masteredSentences: 0,
+      totalFills: 0,
+      masteredFills: 0,
     });
   });
 
@@ -442,5 +603,29 @@ describe("computeOverallStats", () => {
     expect(stats.masteredWords).toBe(1);
     expect(stats.masteredSentences).toBe(1);
     expect(stats.masteredElements).toBe(2);          // 1 word + 1 sentence, not 3
+  });
+
+  it("counts fill keys as fills, never as words", () => {
+    const words = {
+      "word|one": s(5, 4, 0),
+      [fillKey("en-lu", "I [see] a tree.")]: s(5, 4, 1),
+      [fillKey("lu-en", "I [see] a tree.")]: s(5, 4, 1),   // same fill — counted once
+    };
+    const stats = computeOverallStats(words);
+    expect(stats.totalWords).toBe(1);                // NOT 3
+    expect(stats.masteredWords).toBe(1);
+    expect(stats.totalFills).toBe(1);
+    expect(stats.masteredFills).toBe(1);
+    expect(stats.masteredElements).toBe(2);          // 1 word + 1 fill
+  });
+
+  it("keeps a fill and a phrase with identical English apart", () => {
+    const stats = computeOverallStats({
+      [phraseKey("en-lu", "Hi!")]: s(5, 4, 1),
+      [fillKey("en-lu", "Hi!")]: s(5, 4, 1),
+    });
+    expect(stats.totalSentences).toBe(1);
+    expect(stats.totalFills).toBe(1);
+    expect(stats.masteredElements).toBe(2);
   });
 });

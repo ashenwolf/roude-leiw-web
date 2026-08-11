@@ -16,11 +16,18 @@ const MAX_LESSON_ID_LEN = 64;
 const DATE_RX = /^\d{4}-\d{2}-\d{2}$/;
 // Key length bounds live in the regexes themselves: each part is capped at 64 chars,
 // so a word key is at most 129 chars total ({lu ≤64}|{en ≤64}) and a phrase key is at
-// most 77 chars total ("phrase:en-lu:" + {firstEn ≤64}). Phrase keys are per direction
-// (en-lu | lu-en) so the error pool can repeat the exact failed direction; the client's
-// `phraseKey` producer (src/exercise/progression.ts) truncates firstEn to 64 chars to match.
+// most 77 chars total ("phrase:en-lu:" + {firstEn ≤64}). Phrase and fill keys are per
+// direction (en-lu | lu-en) so the error pool can repeat the exact failed direction; the
+// client's `elementKey` producer (src/exercise/progression.ts) truncates firstEn to 64
+// chars to match.
+//
+// One regex per element-kind prefix in `KEYED_ELEMENT_PREFIXES`. A key whose prefix is
+// missing here makes `validateProgressSync` reject the WHOLE batch, so a new client-side
+// prefix without a matching regex is silent total progress loss for that Session — not
+// graceful degradation. Add both in the same change.
 const WORD_KEY_RX = /^[^|]{1,64}\|[^|]{1,64}$/;
 const PHRASE_KEY_RX = /^phrase:(?:en-lu|lu-en):[^|]{1,64}$/;
+const FILL_KEY_RX = /^fill:(?:en-lu|lu-en):[^|]{1,64}$/;
 // Lesson ids are alphanumeric with a few separators (e.g. "A1.01" or "01_greetings").
 const LESSON_ID_RX = /^[A-Za-z0-9._-]{1,64}$/;
 
@@ -31,7 +38,8 @@ const isBoundedInt = (v: unknown, max: number): v is number =>
   typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= max;
 
 const isValidKey = (v: unknown): v is string =>
-  typeof v === "string" && (WORD_KEY_RX.test(v) || PHRASE_KEY_RX.test(v));
+  typeof v === "string" &&
+  (WORD_KEY_RX.test(v) || PHRASE_KEY_RX.test(v) || FILL_KEY_RX.test(v));
 
 const validateWordResult = (raw: unknown, index: number): ValidationResult<WordResult> => {
   if (!isPlainObject(raw)) return err(`wordResults[${index}]: not an object`);

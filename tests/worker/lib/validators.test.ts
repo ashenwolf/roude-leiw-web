@@ -71,6 +71,9 @@ describe("validateProgressSync", () => {
     expect(bad("a|b|c").ok).toBe(false);
     expect(bad("phrase:xx:foo").ok).toBe(false);          // unknown direction
     expect(bad("phrase:en-lu:" + "x".repeat(65)).ok).toBe(false);
+    expect(bad("fill:xx:foo").ok).toBe(false);            // unknown direction
+    expect(bad("fill:en-lu:" + "x".repeat(65)).ok).toBe(false);
+    expect(bad("fills:en-lu:foo").ok).toBe(false);        // near-miss prefix
     expect(bad("x".repeat(65) + "|y").ok).toBe(false);
   });
 
@@ -85,12 +88,46 @@ describe("validateProgressSync", () => {
     expect(check("phrase:en-lu:" + "x".repeat(64))).toBe(true);
     expect(check("phrase:lu-en:" + "x".repeat(64))).toBe(true);
     expect(check("phrase:lu-en:" + "x".repeat(65))).toBe(false);
+    // fill key: same tail bound as a phrase key (75 chars total)
+    expect(check("fill:en-lu:" + "x".repeat(64))).toBe(true);
+    expect(check("fill:lu-en:" + "x".repeat(64))).toBe(true);
+    expect(check("fill:lu-en:" + "x".repeat(65))).toBe(false);
   });
 
   it("accepts phrase keys in both directions", () => {
     expect(
       validateProgressSync(
         { ...valid(), wordResults: [{ key: "phrase:lu-en:Moien", shown: 1, correct: 1, incorrect: 0 }] },
+        TODAY,
+      ).ok,
+    ).toBe(true);
+  });
+
+  /**
+   * Guards the documented failure mode: an unrecognized prefix rejects the ENTIRE
+   * batch, so a single fill result would wipe a whole Session's progress.
+   */
+  it("accepts fill keys in both directions, including bracketed identities", () => {
+    const accepts = (key: string) =>
+      validateProgressSync(
+        { ...valid(), wordResults: [{ key, shown: 1, correct: 1, incorrect: 0 }] },
+        TODAY,
+      ).ok;
+    expect(accepts("fill:en-lu:In the background I [see] the [Ferris wheel].")).toBe(true);
+    expect(accepts("fill:lu-en:In the background I [see] the [Ferris wheel].")).toBe(true);
+  });
+
+  it("does not reject a mixed batch of word, phrase and fill keys", () => {
+    expect(
+      validateProgressSync(
+        {
+          ...valid(),
+          wordResults: [
+            { key: "Moien|hi", shown: 1, correct: 1, incorrect: 0 },
+            { key: "phrase:en-lu:I am Luca.", shown: 1, correct: 1, incorrect: 0 },
+            { key: "fill:en-lu:I [see] a tree.", shown: 1, correct: 0, incorrect: 1 },
+          ],
+        },
         TODAY,
       ).ok,
     ).toBe(true);

@@ -20,6 +20,7 @@ const lesson = (id: string, words: WordEntry[], sentences: SentenceEntry[] = [])
   meta: { id, title: id, level: "A1" },
   entries: words,
   sentences,
+  fills: [],
 });
 
 /** A fake RNG that returns a queue of predetermined values. */
@@ -35,7 +36,9 @@ describe("bucketedPick", () => {
     expect(bucketedPick(0.0, FIX_ERRORS.buckets.slotType)).toBe("word-match");
     expect(bucketedPick(0.19, FIX_ERRORS.buckets.slotType)).toBe("word-match");
     expect(bucketedPick(0.2, FIX_ERRORS.buckets.slotType)).toBe("sentence-builder");
-    expect(bucketedPick(0.99, FIX_ERRORS.buckets.slotType)).toBe("sentence-builder");
+    expect(bucketedPick(0.74, FIX_ERRORS.buckets.slotType)).toBe("sentence-builder");
+    expect(bucketedPick(0.75, FIX_ERRORS.buckets.slotType)).toBe("fill-blank");
+    expect(bucketedPick(0.99, FIX_ERRORS.buckets.slotType)).toBe("fill-blank");
   });
 
   it("maps lesson word-match buckets correctly", () => {

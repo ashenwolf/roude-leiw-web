@@ -97,7 +97,7 @@ export const AppExam = () => {
       ) : (
         view.themes.map((theme) => (
           <div key={theme.id}>
-            <h3 className="text-sm font-semibold text-gray-600 mb-2">{theme.title}</h3>
+            <h3 className="text-sm font-semibold text-gray-600 mb-2">{theme.heading}</h3>
             <SubLessonPath theme={theme} onSelectSubLesson={handleSelectSubLesson} />
           </div>
         ))

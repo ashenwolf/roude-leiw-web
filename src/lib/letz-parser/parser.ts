@@ -2,7 +2,8 @@ import { CstParser } from "chevrotain";
 
 import {
   allTokens,
-  AtDistractorEn, AtDistractorLu, AtEn, AtLesson, AtLu, AtQuestion, AtSentence, AtWord,
+  AtDistractorEn, AtDistractorLu, AtEn, AtFill, AtImage, AtImageAlt, AtLesson, AtLu, AtQuestion,
+  AtSentence, AtWord,
   Comment, Equals, LessonId, NewLine, QuotedString, Text,
 } from "./lexer";
 
@@ -10,11 +11,15 @@ import {
  * LL(1) grammar for .letz lesson files.
  *
  * lesson          ::= statement* EOF
- * statement       ::= comment | header | wordEntry | sentenceBlock | NewLine
+ * statement       ::= comment | header | imageTag | imageAltTag
+ *                   | wordEntry | sentenceBlock | fillBlock | NewLine
  * comment         ::= Comment NewLine?
  * header          ::= AtLesson LessonId QuotedString NewLine?
+ * imageTag        ::= AtImage QuotedString NewLine?
+ * imageAltTag     ::= AtImageAlt QuotedString NewLine?
  * wordEntry       ::= AtWord Text Equals Text NewLine?
  * sentenceBlock   ::= AtSentence NewLine? sentenceTag*
+ * fillBlock       ::= AtFill NewLine? sentenceTag*
  * sentenceTag     ::= luTag | enTag | questionTag | distractorEnTag | distractorLuTag | NewLine
  * luTag           ::= AtLu Text NewLine?
  * enTag           ::= AtEn Text NewLine?
@@ -23,6 +28,17 @@ import {
  * distractorLuTag ::= AtDistractorLu Text NewLine?
  *
  * First-token sets per alternative are all distinct — no lookahead needed.
+ *
+ * `@image`/`@image-alt` values are QuotedString, not Text: a bare `=` inside an
+ * unquoted Text run terminates it (Text excludes `=`), so an unquoted path with a
+ * query string would fail to parse. Quoting makes any path or URL safe.
+ *
+ * `fillBlock` deliberately reuses `sentenceTag`: a @fill carries the same
+ * @lu/@en/@distractor-* tags, and the extra rules a fill must satisfy (exactly
+ * one @lu and one @en, 1–4 balanced [blanks], ≥2 distractors per direction) are
+ * enforced by tests rather than by the grammar. Keeping the grammar permissive
+ * means a content slip yields a test failure with a readable message instead of
+ * an opaque parse error.
  */
 export class LetzParser extends CstParser {
   constructor() {
@@ -38,8 +54,11 @@ export class LetzParser extends CstParser {
     this.OR([
       { ALT: () => this.SUBRULE(this.comment) },
       { ALT: () => this.SUBRULE(this.header) },
+      { ALT: () => this.SUBRULE(this.imageTag) },
+      { ALT: () => this.SUBRULE(this.imageAltTag) },
       { ALT: () => this.SUBRULE(this.wordEntry) },
       { ALT: () => this.SUBRULE(this.sentenceBlock) },
+      { ALT: () => this.SUBRULE(this.fillBlock) },
       { ALT: () => this.CONSUME(NewLine) },
     ]);
   });
@@ -56,6 +75,18 @@ export class LetzParser extends CstParser {
     this.OPTION(() => this.CONSUME(NewLine));
   });
 
+  imageTag = this.RULE("imageTag", () => {
+    this.CONSUME(AtImage);
+    this.CONSUME(QuotedString);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
+  imageAltTag = this.RULE("imageAltTag", () => {
+    this.CONSUME(AtImageAlt);
+    this.CONSUME(QuotedString);
+    this.OPTION(() => this.CONSUME(NewLine));
+  });
+
   wordEntry = this.RULE("wordEntry", () => {
     this.CONSUME(AtWord);
     this.CONSUME(Text);
@@ -66,6 +97,12 @@ export class LetzParser extends CstParser {
 
   sentenceBlock = this.RULE("sentenceBlock", () => {
     this.CONSUME(AtSentence);
+    this.OPTION(() => this.CONSUME(NewLine));
+    this.MANY(() => this.SUBRULE(this.sentenceTag));
+  });
+
+  fillBlock = this.RULE("fillBlock", () => {
+    this.CONSUME(AtFill);
     this.OPTION(() => this.CONSUME(NewLine));
     this.MANY(() => this.SUBRULE(this.sentenceTag));
   });

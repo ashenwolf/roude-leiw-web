@@ -22,6 +22,9 @@ export const Comment = createToken({
 // Directive keywords — all @-prefixed; Text excludes @ so no conflicts
 export const AtLesson      = createToken({ name: "AtLesson",      pattern: /@lesson/ });
 export const AtSentence    = createToken({ name: "AtSentence",    pattern: /@sentence/ });
+export const AtImageAlt    = createToken({ name: "AtImageAlt",    pattern: /@image-alt/ });
+export const AtImage       = createToken({ name: "AtImage",       pattern: /@image/ });
+export const AtFill        = createToken({ name: "AtFill",        pattern: /@fill/ });
 export const AtDistractorEn = createToken({ name: "AtDistractorEn", pattern: /@distractor-en/ });
 export const AtDistractorLu = createToken({ name: "AtDistractorLu", pattern: /@distractor-lu/ });
 export const AtQuestion    = createToken({ name: "AtQuestion",    pattern: /@question/ });
@@ -62,6 +65,9 @@ export const allTokens = [
   Comment,
   AtLesson,
   AtSentence,
+  AtImageAlt,       // before AtImage — longer pattern
+  AtImage,
+  AtFill,
   AtDistractorEn,   // before AtEn — longer pattern
   AtDistractorLu,   // before AtLu — longer pattern
   AtQuestion,

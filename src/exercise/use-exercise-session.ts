@@ -37,15 +37,26 @@ type UseExerciseSessionProps = {
   mode?: SessionMode;
 };
 
-/** Word-match always succeeds; sentence-builder outcome depends on correctness. */
+/**
+ * Word-match always succeeds (failed pairs live in global stats only); the
+ * single-submit Exercises succeed only when their one graded answer was correct.
+ */
 const determineSlotOutcome = (
   batch: Exercise,
   results: WordResultMap,
 ): "success" | "mistake" => {
   if (batch.type === "word-match") return "success";
-  const r = results[batch.item.phraseKey];
+  const key = batch.type === "sentence-builder" ? batch.item.phraseKey : batch.item.fillKey;
+  const r = results[key];
   return r && r.correct > 0 ? "success" : "mistake";
 };
+
+/**
+ * Slots that re-queue into the correction Block on failure: the all-or-nothing
+ * Exercises. A word-match Slot never fails as a Slot, so it is never re-queued.
+ */
+const isCorrectableType = (batch: Exercise): boolean =>
+  batch.type === "sentence-builder" || batch.type === "fill-blank";
 
 /** Load the content the Mode needs, then plan its complete ModeConfig. */
 const loadModeConfig = async (
@@ -62,12 +73,19 @@ const loadModeConfig = async (
     }
     case "fix-errors":
       // Global scope: the pool spans course lessons AND exam sub-lessons.
-      return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words);
+      return planFixErrorsMode(await loadErrorScopeLessons(unlockedLessons), words, unlockedLessons);
     case "word-mix":
-      return planWordMixMode(await loadAllLessons(), words);
+      return planWordMixMode(await loadAllLessons(), words, unlockedLessons);
     case "lesson": {
       const lessons = await loadAllLessons();
-      return planLessonMode(lessons, mode.lessonId ?? findCurrentLessonId(lessons, words), words);
+      // No explicit lessonId ("Start Learning") → the focus cursor, i.e. the first
+      // unlocked lesson still short of the pass gate. Sticky unlock means that is
+      // not necessarily the frontier (see findCurrentLessonId).
+      return planLessonMode(
+        lessons,
+        mode.lessonId ?? findCurrentLessonId(lessons, words, unlockedLessons),
+        words,
+      );
     }
   }
 };
@@ -116,10 +134,10 @@ export const useExerciseSession = ({
     const currentBatch = state.queue[state.currentSlot];
     const outcome = currentBatch ? determineSlotOutcome(currentBatch, results) : "success";
 
-    // Sentence mistakes are re-queued immediately to the back of the queue.
-    // Word match is always "success" — failed words live in global stats only.
+    // Sentence and fill mistakes are re-queued immediately to the back of the
+    // queue. Word match is always "success" — failed words live in stats only.
     const requeueBatch =
-      currentBatch?.type === "sentence-builder" && outcome === "mistake"
+      currentBatch && isCorrectableType(currentBatch) && outcome === "mistake"
         ? currentBatch
         : undefined;
 

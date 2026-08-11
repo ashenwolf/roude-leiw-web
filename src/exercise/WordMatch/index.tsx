@@ -37,11 +37,12 @@ const WordColumn = ({
   onSelect,
   onFadeComplete,
 }: WordColumnProps) => (
-  <div className="flex flex-col gap-4 flex-1">
+  <div className="flex flex-col gap-2.5 flex-1">
     {range(0, displayCount).map((position) => {
       const empty = isSlotEmpty(side, position);
 
-      // Render invisible placeholder for empty slots to maintain layout
+      // Render invisible placeholder for empty slots to maintain layout.
+      // Must match FadingPill's rendered height, or rows misalign as pairs clear.
       if (empty) {
         return <div key={`${side}-${position}`} className="h-18" />;
       }
@@ -73,10 +74,12 @@ export const WordMatch = ({ pairs, onComplete, onMatch }: WordMatchProps) => {
   } = useGame({ pairs, onComplete, onMatch });
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      <h2 className="text-2xl font-bold">Tap the matching pairs</h2>
+    // Tight gaps: a picture-description Session renders a full-bleed 16:9 photo
+    // above this, and five pill rows per column still have to fit unscrolled.
+    <div className="flex flex-col items-center gap-4">
+      <h2 className="text-xl font-bold">Tap the matching pairs</h2>
 
-      <div className="flex gap-8 w-full">
+      <div className="flex gap-4 w-full">
         <WordColumn
           side="left"
           displayCount={displayCount}

@@ -2,10 +2,10 @@ import { describe, it, expect } from "vitest";
 
 import { planFixErrorsMode } from "../../../../src/exercise/modes/fix-errors.ts";
 import { LESSON, MIN_ANSWERS } from "../../../../src/exercise/constants.ts";
-import { wordKey, phraseKey } from "../../../../src/exercise/progression.ts";
+import { wordKey, phraseKey, fillKey } from "../../../../src/exercise/progression.ts";
 
 import type { WordStats } from "../../../../src/context/auth.ts";
-import type { Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
+import type { FillEntry, Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -19,14 +19,18 @@ const sentence = (firstEn: string, lu: string): SentenceEntry => ({
   distractorsLu: [],
 });
 
+const fill = (en: string, lu: string): FillEntry => ({ lu, en });
+
 const lesson = (
   id: string,
   words: [string, string][],
   sentences: SentenceEntry[] = [],
+  fills: FillEntry[] = [],
 ): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: words.map(([lu, en]) => ({ lu, en })),
   sentences,
+  fills,
 });
 
 // ─── Empty error pool ─────────────────────────────────────────────────────────
@@ -92,7 +96,7 @@ describe("planFixErrorsMode — word-only errors", () => {
       [wordKey("Äddi", "bye")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
     };
     const wordMatchRng = () => 0.1; // always < 0.2 → word-match
-    const config = planFixErrorsMode(lessons, stats, wordMatchRng);
+    const config = planFixErrorsMode(lessons, stats, [], wordMatchRng);
     expect(config.queue.every((b) => b.type === "word-match")).toBe(true);
   });
 
@@ -101,7 +105,7 @@ describe("planFixErrorsMode — word-only errors", () => {
     const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
     // Force sentence-builder roll — no phrase errors → should fall back to word-match
     const sentenceRng = () => 0.5;
-    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const config = planFixErrorsMode(lessons, stats, [], sentenceRng);
     expect(config.queue.length).toBeGreaterThan(0);
     expect(config.queue.every((b) => b.type === "word-match")).toBe(true);
   });
@@ -120,7 +124,7 @@ describe("planFixErrorsMode — phrase errors", () => {
       [phraseKey("en-lu", "Good morning")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
     };
     const sentenceRng = () => 0.5; // > 0.2 → sentence-builder
-    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const config = planFixErrorsMode(lessons, stats, [], sentenceRng);
     expect(config.queue.some((b) => b.type === "sentence-builder")).toBe(true);
   });
 
@@ -132,12 +136,63 @@ describe("planFixErrorsMode — phrase errors", () => {
       [phraseKey("lu-en", "Good morning")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
     };
     const sentenceRng = () => 0.5; // always sentence-builder
-    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const config = planFixErrorsMode(lessons, stats, [], sentenceRng);
     const sentenceSlots = config.queue.filter((b) => b.type === "sentence-builder");
     expect(sentenceSlots.length).toBeGreaterThan(0);
     for (const slot of sentenceSlots) {
       if (slot.type === "sentence-builder") expect(slot.item.direction).toBe("lu-en");
     }
+  });
+});
+
+// ─── Fill error pool ──────────────────────────────────────────────────────────
+
+describe("planFixErrorsMode — fill errors", () => {
+  const item = fill("I [see] the wheel", "Ech [gesinn] d'Rad");
+  const fillRng = () => 0.9; // > 0.75 → fill-blank
+
+  it("produces fill-blank slots when rng picks fill and fill errors exist", () => {
+    const lessons = [lesson("A1_01", [["Moien", "hi"]], [], [item])];
+    const stats = { [fillKey("en-lu", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+
+    const config = planFixErrorsMode(lessons, stats, [], fillRng);
+
+    expect(config.queue.every((b) => b.type === "fill-blank")).toBe(true);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
+  });
+
+  it("repeats the exact direction the fill was failed in", () => {
+    const lessons = [lesson("A1_01", [], [], [item])];
+    // Only lu-en is in the error pool — no direction roll may override it.
+    const stats = { [fillKey("lu-en", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+
+    const config = planFixErrorsMode(lessons, stats, [], fillRng);
+
+    for (const slot of config.queue) {
+      if (slot.type === "fill-blank") expect(slot.item.direction).toBe("lu-en");
+    }
+    expect(config.queue.length).toBeGreaterThan(0);
+  });
+
+  it("re-rolls to another type when the fill pool is empty", () => {
+    const lessons = [lesson("A1_01", [["Moien", "hi"]])]; // no fills at all
+    const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+
+    const config = planFixErrorsMode(lessons, stats, [], fillRng);
+
+    expect(config.queue.length).toBe(LESSON.totalSlots);
+    expect(config.queue.every((b) => b.type === "word-match")).toBe(true);
+  });
+
+  it("falls back to a fill slot when it is the only non-empty pool", () => {
+    const lessons = [lesson("A1_01", [], [], [item])];
+    const stats = { [fillKey("en-lu", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+    const wordMatchRng = () => 0.1; // always rolls word-match, whose pool is empty
+
+    const config = planFixErrorsMode(lessons, stats, [], wordMatchRng);
+
+    expect(config.queue.every((b) => b.type === "fill-blank")).toBe(true);
+    expect(config.queue.length).toBe(LESSON.totalSlots);
   });
 });
 
@@ -157,7 +212,7 @@ describe("planFixErrorsMode — global scope", () => {
       [phraseKey("en-lu", "We are going to France.")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
     };
     const sentenceRng = () => 0.5; // always sentence-builder
-    const config = planFixErrorsMode(lessons, stats, sentenceRng);
+    const config = planFixErrorsMode(lessons, stats, [], sentenceRng);
     const sentenceSlots = config.queue.filter((b) => b.type === "sentence-builder");
     expect(sentenceSlots.length).toBeGreaterThan(0);
     for (const slot of sentenceSlots) {

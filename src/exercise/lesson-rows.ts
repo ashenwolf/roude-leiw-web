@@ -17,7 +17,9 @@ export type HomeLessonsView = {
   totalWords: number;
   /** Sentences across loaded lessons (one per @sentence block, direction-agnostic). */
   totalSentences: number;
-  /** totalWords + totalSentences — the denominator for the "Learned X/Y" stat. */
+  /** Fill-in-words items across loaded lessons (one per @fill block, direction-agnostic). */
+  totalFills: number;
+  /** totalWords + totalSentences + totalFills — the denominator for "Learned X/Y". */
   totalElements: number;
 };
 
@@ -27,6 +29,7 @@ const EMPTY_VIEW: HomeLessonsView = {
   currentLessonId: "",
   totalWords: 0,
   totalSentences: 0,
+  totalFills: 0,
   totalElements: 0,
 };
 
@@ -45,6 +48,10 @@ export const projectHomeLessonsView = (
     currentLessonId: findCurrentLessonId(lessons, userWords, persistedUnlocked),
     totalWords: lessons.reduce((sum, l) => sum + l.entries.length, 0),
     totalSentences: lessons.reduce((sum, l) => sum + l.sentences.length, 0),
-    totalElements: lessons.reduce((sum, l) => sum + l.entries.length + l.sentences.length, 0),
+    totalFills: lessons.reduce((sum, l) => sum + l.fills.length, 0),
+    totalElements: lessons.reduce(
+      (sum, l) => sum + l.entries.length + l.sentences.length + l.fills.length,
+      0,
+    ),
   };
 };

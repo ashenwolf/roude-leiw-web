@@ -128,16 +128,26 @@ export const WORD_MIX = {
   buckets: { pairSource: ReadonlyArray<Bucket<"errors" | "current" | "previous">> };
 };
 
-/** Fix Errors — same Session shape as Lesson, fixed slot-type split. */
+/**
+ * Fix Errors — same Session shape as Lesson, fixed slot-type split.
+ *
+ * `fill-blank` takes a share of what was sentence-builder's. A rolled type whose
+ * error pool is empty re-rolls (see `buildSlot` in `modes/fix-errors.ts`), so this
+ * table costs nothing for users whose content carries no `@fill` — most course
+ * lessons today — while giving fills real presence once picture themes ship.
+ */
 export const FIX_ERRORS = {
   buckets: {
     slotType: [
       { name: "word-match", upTo: 0.2 },
-      { name: "sentence-builder", upTo: 1.0 },
+      { name: "sentence-builder", upTo: 0.75 },
+      { name: "fill-blank", upTo: 1.0 },
     ],
   },
 } as const satisfies {
-  buckets: { slotType: ReadonlyArray<Bucket<"word-match" | "sentence-builder">> };
+  buckets: {
+    slotType: ReadonlyArray<Bucket<"word-match" | "sentence-builder" | "fill-blank">>;
+  };
 };
 
 /**

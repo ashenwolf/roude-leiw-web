@@ -9,6 +9,28 @@ import { fetchLetzFile } from "../exercise/lesson-loader";
 import type { Lesson } from "../exercise/letz-parser";
 
 /**
+ * What kind of exam task a theme drills. This is the authoritative discriminator
+ * for the two content contracts — `topic` themes require `@question` with
+ * first-person answers, `picture` themes forbid both `@question` and personal
+ * attitude and require `@image-alt` (see .claude/memory/picture-description-theme.md).
+ *
+ * It replaces the old `id === "picture"` string check, which only worked while
+ * there was exactly one picture theme. Each picture gets its own theme now
+ * ("Schueberfouer", "Christmas Market", …), so the id can no longer carry it.
+ */
+export type ThemeKind = "topic" | "picture";
+
+/** Section heading prefix per kind — the one place this copy lives. */
+export const THEME_KIND_PREFIX: Record<ThemeKind, string> = {
+  topic: "Theme",
+  picture: "Describing a Picture",
+};
+
+/** `"Theme: Vacation & Travel"` / `"Describing a Picture: Schueberfouer"`. */
+export const themeHeading = (kind: ThemeKind, title: string): string =>
+  `${THEME_KIND_PREFIX[kind]}: ${title}`;
+
+/**
  * Manifest structure for the exam track. The manifest id (e.g. "vacation.01")
  * is the authoritative sub-lesson identity — used for the play-gate persisted
  * in `unlockedLessons` — while the in-file `@lesson` id is only a label.
@@ -16,7 +38,8 @@ import type { Lesson } from "../exercise/letz-parser";
 export type ExamManifest = {
   themes: {
     id: string;    // e.g. "vacation"
-    title: string; // e.g. "Vacation & Travel"
+    kind: ThemeKind;
+    title: string; // e.g. "Vacation & Travel" — bare, no prefix (see themeHeading)
     subLessons: {
       id: string;    // e.g. "vacation.01" — must satisfy the sync validator's LESSON_ID_RX
       file: string;  // path relative to the exam base, e.g. "vacation/01_vocabulary.letz"
@@ -29,6 +52,7 @@ export type ExamManifest = {
 export type SubLessonMeta = {
   id: string;
   themeId: string;
+  themeKind: ThemeKind;
   themeTitle: string;
   title: string;
   file: string;
@@ -42,6 +66,7 @@ export const flattenExamManifest = (manifest: ExamManifest): SubLessonMeta[] =>
     theme.subLessons.map((sub) => ({
       id: sub.id,
       themeId: theme.id,
+      themeKind: theme.kind,
       themeTitle: theme.title,
       title: sub.title,
       file: sub.file,

@@ -4,10 +4,14 @@ type ProgressBarProps = {
   view: ProgressView;
 };
 
+// Bar height and gaps are deliberately slim: on a picture-description Session a
+// full-bleed 16:9 photo sits directly below this, and the exercise under it has
+// to fit unscrolled. The bar is an at-a-glance indicator, not a read-a-number
+// one, so h-2 loses nothing.
 export const ProgressBar = ({ view }: ProgressBarProps) => (
-  <div className="w-full flex items-center gap-2">
+  <div className="w-full flex items-center gap-1.5">
     {view.sections.map((section, i) => (
-      <div key={i} className="flex-1 h-4 rounded-full bg-gray-200 overflow-hidden">
+      <div key={i} className="flex-1 h-2 rounded-full bg-gray-200 overflow-hidden">
         <div
           className={[
             "h-full rounded-full transition-all duration-300 ease-out",
@@ -19,7 +23,7 @@ export const ProgressBar = ({ view }: ProgressBarProps) => (
     ))}
 
     {view.overflow && (
-      <div className="w-10 h-4 rounded-full bg-orange-100 overflow-hidden flex-shrink-0">
+      <div className="w-10 h-2 rounded-full bg-orange-100 overflow-hidden flex-shrink-0">
         <div
           className="h-full rounded-full bg-orange-400 transition-all duration-300 ease-out"
           style={{ width: `${view.overflow.fill * 100}%` }}

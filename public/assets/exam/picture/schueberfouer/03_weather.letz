@@ -1,0 +1,199 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 3: Weather Description
+#
+# The WHEN task for the funfair photo of sub-lessons 1–2: the weather, and a
+# guess at the time of year and time of day. The examiner asks it on almost
+# every picture, and it is the one place in this theme where the candidate is
+# allowed to *infer* rather than report — so the point of this file is the
+# hedging vocabulary (`ech mengen`, `warscheinlech`, `et gesäit aus wéi`). The
+# learner must be able to say "it is probably summer" without claiming it as fact.
+#
+# The photo detail this describes: blue sky with a few scattered clouds, bright
+# sun casting short shadows at the bottom of the frame, no rain, people in
+# T-shirts and shorts — a warm summer afternoon.
+#
+# PURE DESCRIPTION, same as 01 and 02 — no @question prompts, no first-person
+# opinion. A hedged inference *about the photo* ("it is probably summer") is not
+# an opinion: it is an observation with a confidence marker, and a stranger can
+# still check it against the picture. `Ech ginn gär op d'Fouer` could not be
+# checked, which is why nothing of that shape is here.
+#
+# Same A1–A2 constraint as the rest of the theme: present tense, simple main
+# clauses, no attributive adjectives on masculine or neuter nouns (which is why
+# there is no `en waarme Nomëtteg` here — `Et ass en Nomëtteg am Summer`
+# instead).
+#
+# Words sub-lessons 1–2 already teach (d'Bild, uewen, ënnen, gesinn, d'Leit,
+# blo, …) are deliberately NOT repeated — the pass-gate makes them
+# prerequisites and stat keys are shared across the app.
+#
+# The three @fill blocks carry this theme's highest-value frames, because the
+# hedge is a *pattern* that transfers to every picture and every topic: the
+# `Ech mengen, …` opener, the `well`-clause that justifies a guess (verb-final —
+# read, not assembled), and the two-clause weather report. Each has a comma
+# before the blank, which is also why the Eifeler Regel cannot bite in them.
+# See references/content-contract.md.
+
+@lesson P1.03 "Schueberfouer: Weather Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/schueberfouer/img/schueberfouer.webp"
+@image-alt "The same funfair photo, seen for the weather: a bright blue sky with a few white clouds, strong sunshine casting short shadows, everyone in summer clothes."
+
+# --- Weather ---
+@word d'Wieder = the weather
+@word den Himmel = the sky
+@word d'Sonn = the sun
+@word d'Wollek = the cloud
+@word d'Wolleken = the clouds
+@word de Reen = the rain
+@word de Schiet = the shadow
+@word schéngen = to shine
+@word sonneg = sunny
+@word waarm = warm
+@word dréchen = dry
+@word schéin = nice
+
+# --- Time of year and time of day ---
+@word de Summer = the summer
+@word d'Joreszäit = the season
+@word de Nomëtteg = the afternoon
+@word d'Woch = the week
+@word mëttes = at midday
+
+# --- Hedging a guess ---
+@word mengen = to think
+@word warscheinlech = probably
+@word villäicht = maybe
+@word well = because
+
+@sentence
+@lu D'Wieder ass schéin a sonneg.
+@en The weather is nice and sunny.
+@distractor-lu Wollek
+@distractor-lu Reen
+@distractor-en cloud
+@distractor-en rain
+
+@sentence
+@lu D'Sonn schéngt an den Himmel ass blo.
+@en The sun is shining and the sky is blue.
+@distractor-lu Wollek
+@distractor-lu gréng
+@distractor-en cloud
+@distractor-en green
+
+@sentence
+@lu Um Himmel sinn e puer Wolleken.
+@en In the sky there are a few clouds.
+@distractor-lu Sonn
+@distractor-lu Beem
+@distractor-en sun
+@distractor-en trees
+
+@sentence
+@lu Op dem Bild ass kee Reen.
+@en In the picture there is no rain.
+@distractor-lu Schiet
+@distractor-lu Wollek
+@distractor-en shadow
+@distractor-en cloud
+
+@sentence
+@lu D'Wieder ass waarm an dréchen.
+@en The weather is warm and dry.
+@distractor-lu kal
+@distractor-lu naass
+@distractor-en cold
+@distractor-en wet
+
+@sentence
+@lu Ech gesinn e Schiet ënnen um Bild.
+@en I see a shadow at the bottom of the picture.
+@distractor-lu Wollek
+@distractor-lu uewen
+@distractor-en cloud
+@distractor-en top
+
+@sentence
+@lu Et gesäit aus wéi de Summer.
+@en It looks like summer.
+@distractor-lu Wanter
+@distractor-lu Fréijoer
+@distractor-en winter
+@distractor-en spring
+
+@sentence
+@lu D'Joreszäit ass warscheinlech de Summer.
+@en The season is probably summer.
+@distractor-lu Wieder
+@distractor-lu Wanter
+@distractor-en weather
+@distractor-en winter
+
+@sentence
+@lu Et ass villäicht en Nomëtteg am Summer.
+@en It is maybe an afternoon in summer.
+@distractor-lu Wanter
+@distractor-lu Wollek
+@distractor-en winter
+@distractor-en cloud
+
+# --- Reusable frames (@fill) ---
+
+# The hedge opener — the single most transferable frame in the whole exam track:
+# `Ech mengen, …` prefixes any guess, on any picture or topic. The comma both
+# marks the clause boundary and exempts the blank from the Eifeler Regel. Season
+# nouns are the blank; both distractors are seasons contradicted by the photo.
+@fill
+@lu Ech mengen, et ass [Summer].
+@en I think it is [summer].
+@distractor-lu Wanter
+@distractor-lu Hierscht
+@distractor-en winter
+@distractor-en autumn
+
+# The justification frame. `well` sends the verb to the end (`schéngt` last), so
+# the learner reads that order rather than assembling it — the @fill/@sentence
+# split again. Blank is the hedging adverb.
+#
+# Distractor choice is load-bearing here and the throwaway builder audit caught
+# it: `sécher` ("certainly") was the obvious-looking distractor and is WRONG as
+# one — it is grammatical *and* coherent in the slot, so it is a second correct
+# answer, breaking R3. The distractors are nouns instead, which cannot occupy an
+# adverb slot before a bare noun, plus `net`, which contradicts the `well`-clause
+# offered as the reason.
+@fill
+@lu Et ass [warscheinlech] Summer, well d'Sonn schéngt.
+@en It is [probably] summer, because the sun is shining.
+@distractor-lu net
+@distractor-lu Wanter
+@distractor-lu Wollek
+@distractor-en not
+@distractor-en winter
+@distractor-en cloud
+
+# The two-clause weather report — the shape a candidate should reach for when
+# asked about the weather anywhere. Two blanks in different clauses and
+# different word classes (adjective, then noun), so they cannot swap.
+@fill
+@lu D'Wieder ass [sonneg], an ech gesinn e puer [Wolleken].
+@en The weather is [sunny], and I see a few [clouds].
+@distractor-lu naass
+@distractor-lu Reen
+@distractor-en wet
+@distractor-en rain
+
+# The time-of-day guess. Two blanks of different word classes (time adverb, then
+# noun after the fixed preposition `der`) so they cannot swap, and `wärend der`
+# stays in the frame — that is what makes the second blank unambiguous. The
+# distractors are the other times of day, each wrong for a sunlit photo with
+# short shadows.
+@fill
+@lu Ech mengen, et ass [mëttes] wärend der [Woch].
+@en I think it is [midday] during the [week].
+@distractor-lu moies
+@distractor-lu nuets
+@distractor-en in the morning
+@distractor-en at night

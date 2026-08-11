@@ -1,6 +1,6 @@
 import type { CstNode, IToken } from "chevrotain";
 
-import type { LessonMeta, SentenceEntry, WordEntry } from "../../exercise/letz-parser";
+import type { FillEntry, LessonMeta, SentenceEntry, WordEntry } from "../../exercise/letz-parser";
 
 import { letzParser } from "./parser";
 
@@ -16,8 +16,11 @@ type StatementCst = {
   children: {
     comment?: [{ children: Record<string, unknown> }];
     header?: [HeaderCst];
+    imageTag?: [QuotedTagCst];
+    imageAltTag?: [QuotedTagCst];
     wordEntry?: [WordEntryCst];
     sentenceBlock?: [SentenceBlockCst];
+    fillBlock?: [SentenceBlockCst];
   };
 };
 
@@ -28,12 +31,19 @@ type HeaderCst = {
   };
 };
 
+type QuotedTagCst = {
+  children: {
+    QuotedString: [IToken];
+  };
+};
+
 type WordEntryCst = {
   children: {
     Text: [IToken, IToken];
   };
 };
 
+// @fill reuses the sentenceTag subrule, so its CST node has the same shape.
 type SentenceBlockCst = {
   children: {
     sentenceTag?: SentenceTagCst[];
@@ -62,6 +72,9 @@ type VisitResult = {
   meta: LessonMeta | null;
   entries: WordEntry[];
   sentences: SentenceEntry[];
+  fills: FillEntry[];
+  image: string | null;
+  imageAlt: string | null;
 };
 
 // --- Visitor ---
@@ -75,8 +88,10 @@ class LetzVisitor extends BaseCstVisitor {
   lesson(ctx: LessonCst): VisitResult {
     return (ctx.statement ?? []).reduce<VisitResult>(
       (acc, stmt) => {
-        const { header, wordEntry, sentenceBlock } = stmt.children;
+        const { header, imageTag, imageAltTag, wordEntry, sentenceBlock, fillBlock } = stmt.children;
         if (header) return { ...acc, meta: this.header(header[0]) };
+        if (imageTag) return { ...acc, image: this.quotedText(imageTag[0]) };
+        if (imageAltTag) return { ...acc, imageAlt: this.quotedText(imageAltTag[0]) };
         if (wordEntry) {
           const entry = this.wordEntry(wordEntry[0]);
           return entry ? { ...acc, entries: [...acc.entries, entry] } : acc;
@@ -85,9 +100,13 @@ class LetzVisitor extends BaseCstVisitor {
           const sentence = this.sentenceBlock(sentenceBlock[0]);
           return sentence ? { ...acc, sentences: [...acc.sentences, sentence] } : acc;
         }
+        if (fillBlock) {
+          const fill = this.fillBlock(fillBlock[0]);
+          return fill ? { ...acc, fills: [...acc.fills, fill] } : acc;
+        }
         return acc;
       },
-      { meta: null, entries: [], sentences: [] },
+      { meta: null, entries: [], sentences: [], fills: [], image: null, imageAlt: null },
     );
   }
 
@@ -123,8 +142,51 @@ class LetzVisitor extends BaseCstVisitor {
     return result.luVariants.length > 0 && result.enVariants.length > 0 ? result : null;
   }
 
+  /**
+   * A @fill block. Shares the sentenceTag subrule with @sentence, so the CST is
+   * identical; the difference is the collapse to ONE lu/en form rather than a
+   * variant list. Extra @lu/@en lines are dropped here (first wins) — the grammar
+   * permits them but multiple accepted variants defeat the mechanic's
+   * exactly-one-correct-form requirement, so a test rejects them at the content
+   * level rather than this silently picking one at runtime.
+   */
+  fillBlock(ctx: SentenceBlockCst): FillEntry | null {
+    const tags = ctx.children.sentenceTag ?? [];
+
+    const collected = tags.reduce<{
+      lu: string[];
+      en: string[];
+      distractorsEn: string[];
+      distractorsLu: string[];
+    }>(
+      (acc, tag) => {
+        const { luTag, enTag, distractorEnTag, distractorLuTag } = tag.children;
+        if (luTag) return { ...acc, lu: [...acc.lu, this.tagText(luTag[0])] };
+        if (enTag) return { ...acc, en: [...acc.en, this.tagText(enTag[0])] };
+        if (distractorEnTag) return { ...acc, distractorsEn: [...acc.distractorsEn, this.tagText(distractorEnTag[0])] };
+        if (distractorLuTag) return { ...acc, distractorsLu: [...acc.distractorsLu, this.tagText(distractorLuTag[0])] };
+        return acc;
+      },
+      { lu: [], en: [], distractorsEn: [], distractorsLu: [] },
+    );
+
+    if (collected.lu.length === 0 || collected.en.length === 0) return null;
+
+    return {
+      lu: collected.lu[0],
+      en: collected.en[0],
+      ...(collected.distractorsEn.length > 0 ? { distractorsEn: collected.distractorsEn } : {}),
+      ...(collected.distractorsLu.length > 0 ? { distractorsLu: collected.distractorsLu } : {}),
+    };
+  }
+
   tagText(ctx: TagCst): string {
     return ctx.children.Text[0].image.trim();
+  }
+
+  /** Unwraps a QuotedString token's surrounding double quotes. */
+  quotedText(ctx: QuotedTagCst): string {
+    return ctx.children.QuotedString[0].image.slice(1, -1).trim();
   }
 }
 
@@ -138,16 +200,27 @@ export const letzVisitor = new LetzVisitor();
 export const visitLesson = (
   cst: CstNode,
   fallbackId: string,
-): { meta: LessonMeta; entries: WordEntry[]; sentences: SentenceEntry[] } => {
+): { meta: LessonMeta; entries: WordEntry[]; sentences: SentenceEntry[]; fills: FillEntry[] } => {
   const result = letzVisitor.visit(cst) as VisitResult;
 
+  // @image / @image-alt are lesson-level and order-independent — they fold onto
+  // meta here rather than in `header`, so they may sit anywhere in the file.
+  // Omitted (rather than undefined-valued) when absent, so `parseLetz` output
+  // stays deep-equal to the pre-@image shape in existing tests.
   return {
-    meta: result.meta ?? {
-      id: fallbackId,
-      title: "Untitled Lesson",
-      level: extractLevel(fallbackId),
+    meta: {
+      ...(result.meta ?? {
+        id: fallbackId,
+        title: "Untitled Lesson",
+        level: extractLevel(fallbackId),
+      }),
+      ...(result.image ? { image: result.image } : {}),
+      ...(result.imageAlt ? { imageAlt: result.imageAlt } : {}),
     },
     entries: result.entries,
     sentences: result.sentences,
+    // A file with no @fill blocks yields [] — the visitor's reduce seeds it, but
+    // guard anyway since `visit` returns undefined fields for an empty CST.
+    fills: result.fills ?? [],
   };
 };

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { flattenExamManifest } from "../../../src/exam/exam-catalog.ts";
+import { flattenExamManifest, themeHeading } from "../../../src/exam/exam-catalog.ts";
 
 import type { ExamManifest } from "../../../src/exam/exam-catalog.ts";
 
@@ -8,6 +8,7 @@ const manifest: ExamManifest = {
   themes: [
     {
       id: "vacation",
+      kind: "topic",
       title: "Vacation & Travel",
       subLessons: [
         { id: "vacation.01", file: "vacation/01_vocabulary.letz", title: "Vocabulary" },
@@ -16,6 +17,7 @@ const manifest: ExamManifest = {
     },
     {
       id: "family",
+      kind: "topic",
       title: "Family & Myself",
       subLessons: [
         { id: "family.01", file: "family/01_vocabulary.letz", title: "Vocabulary" },
@@ -35,6 +37,7 @@ describe("flattenExamManifest", () => {
     expect(metas[0]).toEqual({
       id: "vacation.01",
       themeId: "vacation",
+      themeKind: "topic",
       themeTitle: "Vacation & Travel",
       title: "Vocabulary",
       file: "vacation/01_vocabulary.letz",
@@ -44,5 +47,20 @@ describe("flattenExamManifest", () => {
 
   it("returns an empty list for an empty manifest", () => {
     expect(flattenExamManifest({ themes: [] })).toEqual([]);
+  });
+});
+
+describe("themeHeading", () => {
+  it("prefixes a topic theme", () => {
+    expect(themeHeading("topic", "Vacation & Travel")).toBe("Theme: Vacation & Travel");
+  });
+
+  it("prefixes a picture theme with the task name, not 'Theme'", () => {
+    expect(themeHeading("picture", "Schueberfouer")).toBe(
+      "Describing a Picture: Schueberfouer",
+    );
+    expect(themeHeading("picture", "Christmas Market")).toBe(
+      "Describing a Picture: Christmas Market",
+    );
   });
 });

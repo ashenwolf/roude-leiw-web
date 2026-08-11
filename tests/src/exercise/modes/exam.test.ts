@@ -2,7 +2,12 @@ import { describe, it, expect } from "vitest";
 
 import { planExamMode } from "../../../../src/exercise/modes/exam.ts";
 
-import type { Lesson, SentenceEntry, WordEntry } from "../../../../src/exercise/letz-parser.ts";
+import type {
+  FillEntry,
+  Lesson,
+  SentenceEntry,
+  WordEntry,
+} from "../../../../src/exercise/letz-parser.ts";
 
 // ─── Fixtures ────────────────────────────────────────────────────────────────
 
@@ -20,10 +25,17 @@ const sentence = (en: string, lu: string, question?: string): SentenceEntry => (
   ...(question !== undefined ? { question } : {}),
 });
 
-const subLesson = (entries: WordEntry[], sentences: SentenceEntry[] = []): Lesson => ({
+const fill = (en: string, lu: string): FillEntry => ({ en, lu });
+
+const subLesson = (
+  entries: WordEntry[],
+  sentences: SentenceEntry[] = [],
+  fills: FillEntry[] = [],
+): Lesson => ({
   meta: { id: "vacation.01", title: "Vocabulary", level: "A1" },
   entries,
   sentences,
+  fills,
 });
 
 // ─── planExamMode ─────────────────────────────────────────────────────────────
@@ -97,6 +109,39 @@ describe("planExamMode", () => {
     const broken: SentenceEntry = { enVariants: [], luVariants: ["Moien"] };
     const config = planExamMode(subLesson([], [broken]), fakeRng(0.5));
     expect(config.queue).toHaveLength(0);
+  });
+
+  it("builds one fill-blank slot per fill — every Element covered exactly once", () => {
+    const config = planExamMode(
+      subLesson([], [], [fill("I [see] it", "Ech [gesinn] et"), fill("A [dog]", "En [Hond]")]),
+      fakeRng(0.5),
+    );
+    expect(config.queue).toHaveLength(2);
+    expect(config.queue.every((ex) => ex.type === "fill-blank")).toBe(true);
+  });
+
+  it("rolls direction for fills with the same table as sentences", () => {
+    const item = fill("I [see] it", "Ech [gesinn] et");
+    const enLu = planExamMode(subLesson([], [], [item]), fakeRng(0.1)).queue[0];
+    const luEn = planExamMode(subLesson([], [], [item]), fakeRng(0.9)).queue[0];
+    if (enLu.type === "fill-blank") expect(enLu.item.direction).toBe("en-lu");
+    if (luEn.type === "fill-blank") expect(luEn.item.direction).toBe("lu-en");
+  });
+
+  it("skips fills missing a line on either side", () => {
+    const config = planExamMode(subLesson([], [], [fill("", "Ech [gesinn] et")]), fakeRng(0.5));
+    expect(config.queue).toHaveLength(0);
+  });
+
+  it("mixes fill slots into the same queue as words and sentences", () => {
+    const config = planExamMode(
+      subLesson(words(5), [sentence("Hi", "Moien")], [fill("I [see] it", "Ech [gesinn] et")]),
+      fakeRng(0.5),
+    );
+    expect(new Set(config.queue.map((ex) => ex.type))).toEqual(
+      new Set(["word-match", "sentence-builder", "fill-blank"]),
+    );
+    expect(config.plannedSlots).toBe(3);
   });
 
   it("plans a deterministic slot order given the same rng sequence", () => {

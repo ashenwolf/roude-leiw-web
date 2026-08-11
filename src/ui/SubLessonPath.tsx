@@ -1,4 +1,5 @@
 import { CheckCircleIcon, LockIcon } from "./icons";
+import { LessonImage } from "./LessonImage";
 
 import type { SubLessonView, ThemeView } from "../exam/exam-progression";
 
@@ -46,6 +47,11 @@ const SubLessonNode = ({ view, isCurrent, onSelect }: SubLessonNodeProps) => {
       <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-white/70 border border-gray-200">
         <NodeBadge state={state} step={view.meta.id.split(".").pop() ?? ""} />
       </span>
+
+      {/* Thumb of the photo this sub-lesson describes — absent for every
+          sub-lesson that declares no @image/@image-alt, so the node layout is
+          unchanged for the topic themes. */}
+      {view.image && <LessonImage view={view.image} size="thumb" />}
 
       <span className="flex flex-col items-start flex-1 min-w-0">
         <span className={`text-sm font-medium ${view.unlocked ? "text-gray-700" : "text-gray-400"}`}>

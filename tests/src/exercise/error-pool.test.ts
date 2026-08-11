@@ -4,7 +4,7 @@ import { selectErrorPool } from "../../../src/exercise/error-pool.ts";
 import { MIN_ANSWERS } from "../../../src/exercise/constants.ts";
 
 import type { WordStats } from "../../../src/context/auth.ts";
-import type { Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
+import type { FillEntry, Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 
 // ============================================================================
 // Helpers
@@ -17,6 +17,7 @@ const lesson = (id: string, ...pairs: [string, string][]): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: pairs.map(([lu, en]) => ({ lu, en })),
   sentences: [],
+  fills: [],
 });
 
 const lessonWithSentences = (
@@ -27,6 +28,14 @@ const lessonWithSentences = (
   meta: { id, title: id, level: "A1" },
   entries: pairs.map(([lu, en]) => ({ lu, en })),
   sentences,
+  fills: [],
+});
+
+const lessonWithFills = (id: string, fills: FillEntry[]): Lesson => ({
+  meta: { id, title: id, level: "A1" },
+  entries: [],
+  sentences: [],
+  fills,
 });
 
 const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
@@ -36,8 +45,11 @@ const sentence = (firstEn: string, ...luVariants: string[]): SentenceEntry => ({
   distractorsLu: [],
 });
 
+const fill = (en: string, lu: string): FillEntry => ({ lu, en });
+
 const wordKey = (lu: string, en: string) => `${lu}|${en}`;
 const phraseKey = (direction: "en-lu" | "lu-en", firstEn: string) => `phrase:${direction}:${firstEn}`;
+const fillKey = (direction: "en-lu" | "lu-en", en: string) => `fill:${direction}:${en}`;
 
 // ============================================================================
 // Primary pool — shown >= MIN_ANSWERS AND accuracy < ERROR_THRESHOLD (0.8)
@@ -209,14 +221,82 @@ describe("selectErrorPool — fallback pool", () => {
 
     expect(pool.words).toHaveLength(0);
     expect(pool.phrases).toHaveLength(0);
+    expect(pool.fills).toHaveLength(0);
   });
 });
 
 // ============================================================================
-// Words and phrases are independent
+// Fills — same rule, own pool (Fix Errors must rebuild a fill AS a fill)
 // ============================================================================
 
-describe("selectErrorPool — independence of words and phrases", () => {
+describe("selectErrorPool — fills", () => {
+  const item = fill("I [see] the wheel", "Ech [gesinn] d'Rad");
+
+  it("returns fills meeting primary criteria, tagged with the failed direction", () => {
+    const stats = { [fillKey("lu-en", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+
+    const pool = selectErrorPool(stats, [lessonWithFills("L1", [item])]);
+
+    expect(pool.fills).toHaveLength(1);
+    expect(pool.fills[0].fill).toEqual(item);
+    expect(pool.fills[0].direction).toBe("lu-en");
+    expect(pool.phrases).toHaveLength(0);
+  });
+
+  it("tracks each direction of the same fill as a separate error entry", () => {
+    const stats = {
+      [fillKey("en-lu", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+      [fillKey("lu-en", item.en)]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+    };
+
+    const pool = selectErrorPool(stats, [lessonWithFills("L1", [item])]);
+
+    expect(pool.fills).toHaveLength(2);
+    expect(new Set(pool.fills.map((f) => f.direction))).toEqual(new Set(["en-lu", "lu-en"]));
+  });
+
+  it("uses the fallback pool when no fill meets primary criteria", () => {
+    const stats = { [fillKey("en-lu", item.en)]: s(1, 0, 1) };
+
+    const pool = selectErrorPool(stats, [lessonWithFills("L1", [item])]);
+
+    expect(pool.fills).toHaveLength(1);
+    expect(pool.fills[0].direction).toBe("en-lu");
+  });
+
+  it("fallback sorts fills ascending by accuracy (worst first)", () => {
+    const bad = fill("bad [one]", "schlecht [eent]");
+    const worse = fill("worse [one]", "méi schlecht [eent]");
+    const stats = {
+      [fillKey("en-lu", bad.en)]: s(3, 3, 1), // 75%
+      [fillKey("en-lu", worse.en)]: s(3, 1, 3), // 25% — worst
+    };
+
+    const pool = selectErrorPool(stats, [lessonWithFills("L1", [bad, worse])]);
+
+    expect(pool.fills.map((f) => f.fill.en)).toEqual([worse.en, bad.en]);
+  });
+
+  it("does not confuse a fill with a phrase carrying the same English text", () => {
+    // Identical English, distinct key prefixes → distinct Elements.
+    const text = "Good morning";
+    const stats = { [fillKey("en-lu", text)]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+    const lessons = [
+      { ...lessonWithFills("L1", [fill(text, "Gudde [Moien]")]), sentences: [sentence(text, "Gudde Moien")] },
+    ];
+
+    const pool = selectErrorPool(stats, lessons);
+
+    expect(pool.fills).toHaveLength(1);
+    expect(pool.phrases).toHaveLength(0);
+  });
+});
+
+// ============================================================================
+// Each element kind is computed independently
+// ============================================================================
+
+describe("selectErrorPool — independence of element kinds", () => {
   it("phrase fallback fires independently when word primary is non-empty", () => {
     // Word: primary (shown >= MIN_ANSWERS, low rate)
     const wKey = wordKey("Moien", "hi");
@@ -236,5 +316,21 @@ describe("selectErrorPool — independence of words and phrases", () => {
     // Words uses primary; phrases uses fallback (independently)
     expect(pool.words).toHaveLength(1);
     expect(pool.phrases).toHaveLength(1);
+  });
+
+  it("fill fallback fires independently when word primary is non-empty", () => {
+    const item = fill("I [see] it", "Ech [gesinn] et");
+    const stats = {
+      [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS), // primary
+      [fillKey("lu-en", item.en)]: s(1, 0, 1), // fallback only
+    };
+    const lessons = [
+      { ...lessonWithFills("L1", [item]), entries: [{ lu: "Moien", en: "hi" }] },
+    ];
+
+    const pool = selectErrorPool(stats, lessons);
+
+    expect(pool.words).toHaveLength(1);
+    expect(pool.fills).toHaveLength(1);
   });
 });

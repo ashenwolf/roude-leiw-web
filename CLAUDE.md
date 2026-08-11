@@ -39,18 +39,19 @@ Deployed to Cloudflare Pages with a Cloudflare Worker backend for auth and persi
 
 ## Glossary (binding vocabulary)
 
-This is the canonical vocabulary for the exercise/session system. Use these terms in code, comments, PR descriptions, and conversation. A migration is in progress that renames legacy terms in code (see the "Retired terms" list at the bottom and **Architecture Reference > Migration in progress** below).
+This is the canonical vocabulary for the exercise/session system. Use these terms in code, comments, PR descriptions, and conversation; the "Retired terms" list at the bottom names the legacy words they replaced.
 
 **Content tier** — static, read-only.
 
 | Term | Meaning |
 |---|---|
 | Manifest | Catalog index `{ levels: [{ id, lessons: [{ id, title, file }] }] }`. Title field is part of the target manifest. |
-| Lesson | One `.letz` file's parsed content. `{ id, title, words[], sentences[] }`. |
-| LessonMeta | Light catalog row used by Home (`{ id, title, level }`); no words/sentences. Loaded from manifest only. |
+| Lesson | One `.letz` file's parsed content. `{ meta, entries[], sentences[], fills[] }`. |
+| LessonMeta | Light catalog row used by Home (`{ id, title, level }`, plus optional `image`/`imageAlt`); no words/sentences/fills. Loaded from manifest only. |
 | Word | A `{ lu, en }` pair. |
 | Sentence | A translatable phrase + accepted answers + distractors; may carry a `question` (examiner prompt, exam track). |
-| Element | Umbrella for Word or Sentence (used uniformly by unlock %, error pool, stats). |
+| Fill | A `@fill` block: one LU line and one EN line, each with `[bracketed]` blanks, plus per-language distractors. **One blank = one tile, verbatim** (never tokenized). |
+| Element | Umbrella for Word, Sentence, or Fill (used uniformly by unlock %, error pool, stats). |
 | Theme | Exam-track topic (e.g. Vacation) from `public/assets/exam/manifest.json`. No level; manifest order is display order. |
 | SubLesson | One step of a Theme's path. Content-wise a `Lesson` (one `.letz` file); identity is the **manifest** id (e.g. `vacation.01`), the in-file `@lesson` id is only a label. |
 
@@ -61,7 +62,8 @@ This is the canonical vocabulary for the exercise/session system. Use these term
 | Stats | `{ shown, correct, incorrect }` per element key. |
 | Daily activity | `Record<YYYY-MM-DD, { durationSeconds }>`. |
 | Streak | Derived from daily activity. |
-| Cursor | Max unlocked lesson id; derived. |
+| Cursor | The lesson a Session focuses on: **first unlocked lesson that has not passed** (`findCurrentLessonId`); derived. |
+| Frontier | Max unlocked lesson id (`findFrontierLessonId`); derived. Bounds a *pool*, never the focus — sticky unlock lets it sit above unfinished lessons. |
 | Error pool | Derived set of struggling elements (see **Centralized error pool** below). |
 
 **Runtime tier** — ephemeral, one Session of work.
@@ -72,8 +74,8 @@ This is the canonical vocabulary for the exercise/session system. Use these term
 | Session | One top-level run of a Mode. |
 | Block | A chunk of a Session. Lesson/fix-errors = 3 normal + ≤1 correction. Word-mix = 3. |
 | Slot | One unit of work inside a Block. Holds one Exercise. |
-| Exercise | The mechanic in a Slot. `word-match \| sentence-builder \| …` (plug-in seam). |
-| Step | Smallest user action inside an Exercise. WordMatch = one pair; SentenceBuilder = one submit. |
+| Exercise | The mechanic in a Slot. `word-match \| sentence-builder \| fill-blank \| …` (plug-in seam). |
+| Step | Smallest user action inside an Exercise. WordMatch = one pair; SentenceBuilder and FillBlank = one submit. |
 
 **Retired terms — do not use in new code:** `batch` (use Slot or Exercise), `madness` (use word-mix), `mistakes mode` (use fix-errors), `game` when ambiguous (use Exercise for the mechanic or Session for the run).
 
@@ -111,10 +113,13 @@ src/
 │   ├── mode-config.ts                # Layer 3 contract: SessionMode, ModeConfig, CompletionEffect types
 │   ├── session-reducer.ts            # SessionMachine reducer (Mode-agnostic)
 │   ├── session-progress.ts           # Pure producer: computeProgressView(blockBoundaries)
-│   ├── error-pool.ts                 # Layer 0: selectErrorPool(stats, lessons) → { words, phrases }
-│   ├── selection.ts                  # Layer 1: bucketedPick, pickPair, pickSentence primitives
-│   ├── exercise-builders.ts          # Layer 1: buildWordMatchExercise, buildSentenceExercise, tokenizeSentence
-│   ├── types.ts                      # Exercise discriminated union (word-match | sentence-builder)
+│   ├── error-pool.ts                 # Layer 0: selectErrorPool(stats, lessons) → { words, phrases, fills }
+│   ├── error-scope.ts                # Producer: loadErrorScopeLessons — global (course + played/unlocked exam) pool
+│   ├── lesson-image.ts               # Pure: resolveLessonImage (@image/@image-alt → src or text placeholder)
+│   ├── selection.ts                  # Layer 1: bucketedPick, pickPair, pickSentence, pickFill primitives
+│   ├── exercise-builders.ts          # Layer 1: buildWordMatchExercise, buildSentenceExercise, buildFillExercise,
+│   │                                 #          tokenizeSentence, parseFillLine, stripBlankMarkers
+│   ├── types.ts                      # Exercise discriminated union (word-match | sentence-builder | fill-blank)
 │   ├── progression.ts                # Pure derivations: classifyWord, computeLessonProgress, computeUnlockedLessonIds
 │   ├── lesson-rows.ts                # Producer: (lessons, userWords) → HomeLessonsView
 │   ├── modes/                        # Layer 4 — Mode planners (each returns ModeConfig)
@@ -122,6 +127,12 @@ src/
 │   │   ├── word-mix.ts               # planWordMixMode(lessons, stats) → ModeConfig
 │   │   ├── fix-errors.ts             # planFixErrorsMode(lessons, stats) → ModeConfig
 │   │   └── exam.ts                   # planExamMode(subLesson) → ModeConfig (chunk + shuffle, no stats)
+│   ├── FillBlank/                    # Fill-in-words game (one tile per blank)
+│   │   ├── index.tsx                 # Game UI (gapped frame + tile pool)
+│   │   ├── use-fill-game.ts          # Wiring: state + result tracking
+│   │   ├── types.ts                  # FillGameState (placed[], selectedBlank, checkResult, result)
+│   │   └── fill-logic.ts             # Pure logic: initFillGame, targetBlank, applyTokenTap,
+│   │                                 #   applyBlankTap/Clear, applySubmit, toWordResultMap, correctSentence
 │   ├── SentenceBuilder/              # Sentence assembly game
 │   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
 │   │   ├── use-sentence-game.ts      # Game state machine + result tracking
@@ -178,9 +189,14 @@ public/
     │   ├── manifest.json             # Course index by CEFR level → sections → lessons
     │   └── A1/A1.1/*.letz            # Course content (9 A1 lessons)
     └── exam/
-        ├── manifest.json             # Exam index: themes → subLessons (no level dimension)
-        ├── vacation/*.letz           # 01_vocabulary, 02_phrases, 03_questions
-        └── family/*.letz             # same three-step pattern per theme
+        ├── manifest.json             # Exam index: themes → subLessons; each theme has
+        │                             #   kind: "topic" | "picture" (no level dimension)
+        ├── vacation/*.letz           # topic theme: 01_vocabulary, 02_phrases, 03_questions
+        ├── family/*.letz             # same three-step pattern per topic theme
+        └── picture/                  # picture themes — one directory per photo
+            └── schueberfouer/
+                ├── 0{1,2,3}_*.letz   # general / people / weather, all describing one photo
+                └── img/*.webp        # optimized: 16:9, ≤880px (see memory for the recipe)
 ```
 
 ## Architecture
@@ -188,8 +204,6 @@ public/
 ### Architecture Reference (binding model)
 
 This subsection is the load-bearing reference for the exercise/session system. The diagrams further down (Data Pipeline, Screen Data Map) describe the current state of the code; the rules here describe what the code is converging on. Both are accurate today within the scope they cover; if they disagree, this section wins and the diagrams will catch up.
-
-> **Migration in progress.** A multi-step refactor is converting the existing `batch-planner` + ad-hoc selectors into the layered model below. The full roadmap lives at `/Users/gulenoks/.claude/plans/sleepy-jumping-noodle.md`. Until it lands, some files referenced here (`src/exercise/modes/*`, `src/exercise/mode-config.ts`, `src/exercise/error-pool.ts`, `src/exercise/selection.ts`, `src/exercise/exercise-builders.ts`, `src/lib/streak.ts`) do not yet exist. The vocabulary, layering, and invariants apply now; the code locations apply after the matching migration step lands.
 
 #### Encapsulation layering
 
@@ -226,37 +240,42 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 **Lesson** — `planLessonMode(lessons, stats, upperBoundId)`.
 - Shape: 3 Blocks × 5 Slots = 15 Slots base + optional correction Block.
 - Slot type roll: `[0, 0.2]` word-match, `[0.2, 1]` sentence-builder.
-- Upper bound is a single lesson id, compared **lexicographically**; pool = all lessons where `lesson.id <= upperBoundId`. "Start Learning" sets it to the cursor; picking a specific lesson sets it to that lesson (clamps the pool — picking A1.03 when A1.05 is unlocked draws only from A1.01–A1.03).
+- Upper bound is a single lesson id, compared **lexicographically**; pool = all lessons where `lesson.id <= upperBoundId`. "Start Learning" sets it to the **cursor** — the first unlocked lesson that has not passed, *not* the frontier; picking a specific lesson sets it to that lesson (clamps the pool — picking A1.03 when A1.05 is unlocked draws only from A1.01–A1.03). The clamp is load-bearing: the straggler apparatus (not-yet-mastered bucket + adaptive slot-type split) is scoped to the pool's last lesson, so a frontier-based bound left every earlier unfinished lesson reachable only via the thin `previous` bucket.
 - WordMatch Slot: 5 pairs, per-pair independent roll: `[0, 0.8]` current-lesson, `[0.8, 1]` previous-lessons. Re-roll on empty bucket.
 - SentenceBuilder Slot: lesson roll `[0, 0.75]` current / `[0.75, 1]` previous (re-roll on empty); random phrase within picked lesson; direction roll `[0, 0.66]` en→lu / `[0.66, 1]` lu→en.
 - Outcomes: WordMatch always success (failed pairs → stats only). SentenceBuilder fail → enqueue Slot into correction Block.
 - Correction Block: retry queued Slots; retry-fail re-enqueues at back; drain to empty.
 - Popups: block-success (after Blocks 1 & 2), session-success (after Block 3 if queue empty, or after correction drain). Every Session ends in success after drain.
 - `completionEffect: 'unlock-check'` — wiring hook runs `unlockedSet` after Stats sync.
+- **Does not schedule fill-blank Slots.** A lesson's `@fill` Elements therefore never pass the unlock gate from Lesson Mode alone — which is why no course `.letz` carries `@fill` today. Adding one means adding a fill bucket to this planner in the same change, or the lesson becomes unpassable.
 
-**Word Mix** — `planWordMixMode(lessons, stats)`.
+**Word Mix** — `planWordMixMode(lessons, stats, persistedUnlocked)`.
 - Shape: 3 Blocks × 1 Slot per Block = 3 Slots total. Each Slot = a WordMatch Exercise with 20 pairs (20 Steps). No correction Block.
-- Pool: all words from lessons up to and including cursor.
+- Pool: all words from lessons up to and including the **frontier** (review must keep covering passed lessons). The `current` bucket, however, is the **cursor** — so the bias lands on the lesson the user is stuck on, while `previous` means "everything else in the pool" (which can include lessons *after* the cursor).
 - Per-pair bucket roll (applied independently for each of the 60 pairs at plan time): `[0, 0.25]` error pool / `[0.25, 0.5]` current-lesson / `[0.5, 1]` previous-lessons. Re-roll on empty.
 - One-shot plan; mid-Session results do not re-bucket later pairs.
 - Popups: only on Slot/Block complete (3 total — Slot boundary = Block boundary).
 - `completionEffect: 'noop'`.
 - Progress bar: 60 ticks, milestones at 20/40/60.
+- Words only — Word Mix is pair matching by definition, so it schedules no sentence-builder or fill-blank Slots.
 
-**Fix Errors** — `planFixErrorsMode(lessons, stats)`.
+**Fix Errors** — `planFixErrorsMode(lessons, stats, persistedUnlocked)`.
 - **Global scope**: `lessons` = all course lessons + exam SubLessons in error scope (played or unlocked — see `loadErrorScopeLessons` in `src/exercise/error-scope.ts`). The planner itself is track-agnostic; the call sites decide the scope. A failed exam Q&A phrase is rebuilt with its `question` in the failed direction.
 - Home button disabled when error pool is empty (same global scope via `loadExamErrorLessons`).
-- Same Session shape as Lesson (3 × 5 + optional correction). Same slot type roll.
+- Same Session shape as Lesson (3 × 5 + optional correction). **Its own three-way slot-type roll** (`FIX_ERRORS.buckets.slotType`): `[0, 0.2]` word-match, `[0.2, 0.75]` sentence-builder, `[0.75, 1]` fill-blank. Fill's share is carved out of sentence-builder's, not word-match's.
+- The one Mode that draws from all three error pools — it is where a failed `@fill` gets retried, since neither Lesson nor Word Mix schedules one.
 - WordMatch Slot: 5 pairs drawn independently with replacement from word-error pool (duplicates allowed).
 - SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
-- Empty pool for rolled type → re-roll.
+- FillBlank Slot: 1 `FillError` from the fill-error pool, same failed-direction rule.
+- Empty pool for rolled type → re-roll, up to 20 attempts, then a fixed-order fallback (word → sentence → fill) so a Session still fills when only one pool has content. **A builder must check its pool before consuming any rng** — otherwise a re-roll shifts every later draw and `fakeRng` tests stop describing real Sessions.
 - Outcomes & correction Block: identical to Lesson.
 - `completionEffect: 'noop'`.
 
 **Exam** — `planExamMode(subLesson)`.
 - Input: ONE SubLesson's `Lesson` (loaded via `src/exam/exam-catalog.ts`, never `loadAllLessons`). No stats input — the plan is content-deterministic ("we only shuffle it").
-- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — 5 pairs per Slot, trailing chunk < `minChunk` (3) merges into the previous Slot. Sentences: one SentenceBuilder Slot each. Combined Slot list shuffled.
-- Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically.
+- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — 5 pairs per Slot, trailing chunk < `minChunk` (3) merges into the previous Slot. Sentences: one SentenceBuilder Slot each. Fills: one FillBlank Slot each. Combined Slot list shuffled.
+- Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically. Fills roll from the same table with nothing to override it (a `@fill` never carries `@question`).
+- Elements missing a line on either side (`@lu` or `@en` empty) are skipped rather than planned as a broken Slot — applies to both sentences and fills.
 - Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
 - Outcomes: same as Lesson. `completionEffect: 'noop'`.
 - Pass-gate: `computeExamView` (`src/exam/exam-progression.ts`) unlocks the next SubLesson in a Theme once the previous one is **passed** — `computeLessonProgress(...).isComplete`, i.e. every Element at `correct >= MASTERY_CORRECT_COUNT`. Same gate and same constant as the course track. `passed` implies `unlocked`, so the chain advances exactly one step at a time.
@@ -268,22 +287,25 @@ One rule gates progression on the course track (lesson → next lesson) and on t
 - Element passes iff `correct >= MASTERY_CORRECT_COUNT` (3). There is **no** accuracy ratio and **no** minimum-shown gate — three correct answers passes the Element regardless of how many times it was missed (`isElementMastered` in `progression.ts`).
 - For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct >= 3` (`combinedPhraseStats`). Both directions count toward the one phrase Element.
 
-The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (**1.0** — every Element must pass; raised from 0.8 in July 2026, see [exam-and-lesson-pass-gate](.claude/memory/exam-and-lesson-pass-gate.md)).
+The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` (**1.0** — every Element must pass; see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)).
 
 Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 
-> `MIN_ANSWERS` (5) still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [stats-and-xp-redesign](.claude/memory/stats-and-xp-redesign.md)).
+> `MIN_ANSWERS` (5) still gates the **live** `classifyWord` label and the error pool — not the pass gate. The two systems are intentionally separate (see [mastery-and-unlock](.claude/memory/mastery-and-unlock.md)).
 
 #### Centralized error pool
 
-`selectErrorPool(stats, lessons)` returns `{ words, phrases }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes both pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
+`selectErrorPool(stats, lessons)` returns `{ words, phrases, fills }`. **Single source of truth** for "struggling content" across the app — Fix Errors planner consumes all three pools; Word Mix planner consumes `words` for its `[0, 0.25]` bucket; future features that need "things the user is bad at" consume the same function.
 
-The function is scope-agnostic: the `lessons` argument defines the scope. Fix Errors passes the **global** scope (course + exam, via `src/exercise/error-scope.ts`); Word Mix passes course-lessons-up-to-cursor only.
+The function is scope-agnostic: the `lessons` argument defines the scope. Fix Errors passes the **global** scope (course + exam, via `src/exercise/error-scope.ts`); Word Mix passes course-lessons-up-to-frontier only.
 
-`phrases` is `PhraseError[]` — each entry is `{ sentence, direction }` keyed by its **directional** stat key, so a phrase failed in `en-lu` and the same phrase failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
+`phrases` is `PhraseError[]` and `fills` is `FillError[]` — each entry is `{ sentence | fill, direction }` keyed by its **directional** stat key, so an element failed in `en-lu` and the same element failed in `lu-en` are distinct error entries. Fix Errors rebuilds the exact failed direction. (Mastery sums the directions; the error pool keeps them apart — this is deliberate.)
 
-- Primary: elements with `shown >= MIN_ANSWERS` AND `correct/shown < ERROR_THRESHOLD` (0.9).
-- Fallback (when primary is empty): all elements with `incorrect > 0`, sorted ascending by `correct/shown` (worst first).
+- Primary: elements with `shown >= MIN_ANSWERS` AND `correct / (correct + incorrect) < ERROR_THRESHOLD`.
+- Fallback (when primary is empty): all elements with `incorrect > 0`, worst accuracy first.
+
+The accuracy formula is the same one `classifyWord` uses — **not** `correct/shown`. Read the value of `ERROR_THRESHOLD` from `constants.ts`; don't restate it here.
+- The three kinds are **independent**: each computes its own primary/fallback, so a struggling fill surfaces even when the word pool's primary criteria are already satisfied. A phrase and a fill sharing the same English text are distinct Elements — the key prefix separates them.
 
 Do not re-implement this rule inline; if you need a different definition, add a separate named function in the same module — don't fork.
 
@@ -305,6 +327,13 @@ Three touch points, nothing else:
 
 The SessionMachine and Mode planners are untouched. If a Mode wants to schedule the new Exercise type in its Slots, the matching Mode planner adds a builder call (the only place that knows which Exercises feed which Modes).
 
+> ⚠️ **This recipe covers a new *mechanic* over existing content.** A new Exercise type that also introduces a new **Element kind** (a new `.letz` block with its own stat key) is a much wider change — ~15 files, because `Lesson.<newKind>` ripples into the parser (`lexer.ts`/`parser.ts`/`visitor.ts`), `progression.ts` (`collectLessonKeys`, `computeLessonProgress`, mastery, `computeOverallStats`), `error-pool.ts`, `lesson-rows.ts`, the Mode planners, `worker/lib/validators.ts`, and every matching test. `@fill` was the first such addition (Aug 2026) and it paid down the two traps this note used to warn about:
+>
+> - **Key family, not copy-paste.** `KEYED_ELEMENT_PREFIXES` in `progression.ts` drives `elementKey`/`combinedElementStats`/`elementIdentity`, and `isWordKey` is an explicit "matches no known prefix" check (**never** `!isPhraseKey` — that miscounts every new prefix as vocabulary and inflates `totalWords`/`masteredWords` on Home). Adding a third keyed kind means adding one string to that list, plus a thin named alias if the call sites read better for it.
+> - **Validator first.** `worker/lib/validators.ts` must admit the new key prefix in `isValidKey`, with a test. Miss it and the server rejects **the entire sync batch** containing one such result — not graceful degradation but silent total progress loss for that Session.
+>
+> See [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md) for the full record, including which ambiguity rules a new content-bearing kind should enforce in `tests/integration/`.
+
 ### Data Pipeline (read this first)
 
 This codebase is organized as a **producer/consumer pipeline**. Each stage is a pure function that takes named, plain data and returns named, plain data. React, fetch, and KV writes only appear at the **edges**. Stages do not branch on edge cases the previous stage should have handled.
@@ -324,35 +353,36 @@ This codebase is organized as a **producer/consumer pipeline**. Each stage is a 
 >
 > A sequence diagram squeezed into a flowchart loses the temporal ordering; a state machine drawn as a flowchart hides the cyclic transitions. Choose for clarity, not consistency.
 
-> ⚠️ **Diagram update needed.** The diagram below still references `batch-planner.ts` (deleted) and `planSlots` (replaced). The current architecture has `modes/*.ts` planners feeding a single `SessionMachine` via `ModeConfig`; `lesson-loader` returns `LessonMeta[]` to Home and `Lesson` (full) to Exercise. The binding model is in **Architecture Reference > Encapsulation layering** above. This diagram will be redrawn in a dedicated housekeeping pass.
-
 ```mermaid
 flowchart TD
-  files[".letz files<br/>public/assets/lessons/"]
-  lessons["Lesson[]<br/>{ meta, entries[], sentences[] }"]
+  files[".letz files<br/>public/assets/{lessons,exam}/"]
+  metas["LessonMeta[]<br/>{ id, title, level, image? }"]
+  lessons["Lesson[]<br/>{ meta, entries[], sentences[], fills[] }"]
   homeView["HomeLessonsView"]
-  slotPlan["SlotPlan<br/>{ slots, currentLessonId }"]
-  batch["ExerciseBatch<br/>{ type, pairs | item }"]
-  gameState["GameState + GameEvent[]"]
+  errorPool["ErrorPool<br/>{ words, phrases, fills }"]
+  config["ModeConfig<br/>{ queue: Exercise[], blockBoundaries, … }"]
+  exercise["Exercise<br/>word-match | sentence-builder | fill-blank"]
+  gameState["GameState | SentenceGameState | FillGameState"]
   results["WordResultMap"]
 
   appHome[["&lt;AppHome /&gt; render"]]
-  wordMatch[["&lt;WordMatch /&gt; render"]]
-  sentenceBuilder[["&lt;SentenceBuilder /&gt; render"]]
+  games[["&lt;WordMatch /&gt; · &lt;SentenceBuilder /&gt; · &lt;FillBlank /&gt;"]]
   api[(POST /api/progress/sync<br/>→ KV)]
 
-  files -->|"loadAllLessons()<br/>lesson-loader.ts"| lessons
-  lessons -->|"projectHomeLessonsView()<br/>lesson-rows.ts"| homeView
+  files -->|"loadLessonMeta() / loadExamMeta()<br/>lesson-loader.ts, exam-catalog.ts"| metas
+  files -->|"loadAllLessons() / loadLessonsUpToCursor()<br/>fetchSubLesson()"| lessons
+  metas & lessons -->|"projectHomeLessonsView()<br/>lesson-rows.ts"| homeView
   homeView --> appHome
-  lessons -->|"planSlots()<br/>batch-planner.ts<br/>(uses progression, letz-parser)"| slotPlan
-  slotPlan -.->|"useExerciseSession<br/>(hook = wiring)"| batch
-  batch -->|"initializeGame / applySelection<br/>WordMatch/game-logic.ts"| gameState
-  batch -->|"initSentenceGame / applyTokenTap<br/>SentenceBuilder/sentence-logic.ts"| gameState
-  gameState -.->|"useGame / useSentenceGame<br/>(hook = wiring + timeouts)"| results
-  gameState --> wordMatch
-  gameState --> sentenceBuilder
+  lessons -->|"selectErrorPool(stats, lessons)<br/>error-pool.ts"| errorPool
+  lessons & errorPool -->|"planLessonMode / planWordMixMode<br/>planFixErrorsMode / planExamMode<br/>modes/*.ts (Layer 4)"| config
+  config -->|"buildWordMatchExercise / buildSentenceExercise<br/>buildFillExercise — exercise-builders.ts (Layer 1)"| exercise
+  exercise -.->|"useExerciseSession + session-reducer<br/>(hook = wiring)"| gameState
+  gameState -.->|"useGame / useSentenceGame / useFillGame<br/>(hook = wiring + timeouts)"| results
+  gameState --> games
   results -->|"useProgressSync<br/>(buildPayload + fetch)"| api
 ```
+
+Exercises are built *inside* the planners (one-shot planning), so the `config → exercise` edge is a zoom-in on `ModeConfig.queue`, not a later stage.
 
 Legend: solid arrows = **pure producers** (no React, no I/O). Dashed arrows = **hook wiring** (React state, effects, refs). `[( )]` shapes are side-effect sinks; `[[ ]]` shapes are UI consumers.
 
@@ -397,20 +427,21 @@ flowchart TD
 
   subgraph home["AppHome"]
     direction TB
-    hv["HomeLessonsView\n· progressMap\n· unlockedIds\n· currentLessonId\n· totalWords"]
-    hstats["OverallStats\n· masteredWords\n· overallAccuracy"]
+    hv["HomeLessonsView\n· progressMap · unlockedIds\n· currentLessonId\n· totalWords · totalSentences · totalFills\n· totalElements"]
+    hstats["OverallStats\n· masteredWords · masteredSentences · masteredFills\n· overallAccuracy"]
     hxp["LevelInfo\n· xp · level · xpForNext"]
     htoday["todayMinutes"]
   end
 
   subgraph exercise["AppExercise"]
     direction TB
-    eplan["SlotPlan\n· slots · currentLessonId"]
+    eplan["ModeConfig\n· queue: Exercise[] · plannedSlots\n· blockBoundaries · hasCorrectionBlock\n· completionEffect · currentLessonId"]
     estatus["SessionStatus\nloading → ready → active\n→ slot_complete | section_complete\n→ session_complete"]
-    ebatch{{"ExerciseBatch  ❲discriminated union❳\ntype: 'word-match' | 'sentence-builder'"}}
-    eprog["ProgressView\nsections[] (3 × 5 slots) + overflow\n(computeProgressView)"]
-    wm["❮ word-match ❯  WordMatchBatch\n· pairs: WordPair[]\n→ GameState · slots · wordResults"]
-    sb["❮ sentence-builder ❯  SentenceBuilderBatch\n· item: SentenceBuilderItem\n→ SentenceGameState · result"]
+    ebatch{{"Exercise  ❲discriminated union❳\ntype: 'word-match' | 'sentence-builder' | 'fill-blank'"}}
+    eprog["ProgressView\nsections[] from blockBoundaries + overflow\n(computeProgressView)"]
+    wm["❮ word-match ❯\n· pairs: WordPair[]\n→ GameState · slots · wordResults\n(one progress tick per pair)"]
+    sb["❮ sentence-builder ❯\n· item: SentenceBuilderItem\n→ SentenceGameState · result\n(one tick per submit)"]
+    fb["❮ fill-blank ❯\n· item: FillBlankItem\n  { frame, blanks, tokens, fillKey }\n→ FillGameState · result\n(one tick per submit)"]
   end
 
   words & lessons -->|"projectHomeLessonsView()"| hv
@@ -419,19 +450,20 @@ flowchart TD
   daily --> htoday
   streak --> home
 
-  words & lessons & lessonId -->|"planSlots()\n(also: planMadnessSlots, planMistakesSlots)"| eplan
+  words & lessons & lessonId -->|"planLessonMode / planWordMixMode\nplanFixErrorsMode / planExamMode"| eplan
   eplan --> estatus
   eplan --> eprog
   eplan --> ebatch
   ebatch -->|"type === 'word-match'"| wm
   ebatch -->|"type === 'sentence-builder'"| sb
+  ebatch -->|"type === 'fill-blank'"| fb
 ```
 
-`Lesson[]` is loaded independently on both screens via `loadAllLessons()` (cached by the browser). `words`/`streak`/`dailySessions` come from `useProgress()`, which abstracts over KV (auth) and localStorage (guest).
+`Lesson[]` is loaded independently on both screens via `loadAllLessons()` (cached by the browser). `words`/`streak`/`dailySessions` come from `useProgress()`, which abstracts over KV (auth) and localStorage (guest). The exam track loads one SubLesson at a time via `src/exam/exam-catalog.ts` instead.
 
-**Session modes** — Home screen exposes three Modes: **Lesson** (default), **Word Mix** (broader pair matching across unlocked words), and **Fix Errors** (drills the user's struggling Elements). Today these are backed by three distinct planners in `batch-planner.ts` (`planSlots`, `planMadnessSlots`, `planMistakesSlots`); the target architecture (see **Architecture Reference > Mode specs**) replaces them with three `modes/*.ts` planners that each return a `ModeConfig` consumed by a single Mode-agnostic SessionMachine.
+**Session modes** — Home screen exposes three Modes: **Lesson** (default), **Word Mix** (broader pair matching across unlocked words), and **Fix Errors** (drills the user's struggling Elements); the exam theme page starts a fourth, **Exam**. Each is one `modes/*.ts` planner returning a `ModeConfig` consumed by the single Mode-agnostic SessionMachine — see **Architecture Reference > Mode specs** for what each emits.
 
-**Adding a new Exercise type** — see **Architecture Reference > Adding a new Exercise type** above for the binding 3-step recipe. (Today's `ExerciseBatch` union is renamed `Exercise` as part of the migration.)
+**Adding a new Exercise type** — see **Architecture Reference > Adding a new Exercise type** above for the binding 3-step recipe, and the ⚠️ note there for the wider change a new *Element kind* implies.
 
 ### Authentication
 
@@ -464,7 +496,7 @@ erDiagram
     string id PK "user:{userId}"
     UserProfile profile
     Map words "word key '{lu}|{en}' → WordStats"
-    Map words2 "phrase key 'phrase:en-lu:{firstEn}' or 'phrase:lu-en:{firstEn}' → WordStats"
+    Map words2 "keyed-element key '{phrase|fill}:{en-lu|lu-en}:{firstEn}' → WordStats (same map)"
     Map dailySessions "key 'YYYY-MM-DD' → DailySession"
   }
   EMAIL_INDEX {
@@ -486,7 +518,12 @@ erDiagram
   USER ||--o{ SESSION : "has"
 ```
 
-Word keys use `'{lu}|{en}'`. Phrase keys use `'phrase:en-lu:{firstEn}'` (English→Lux assembly) or `'phrase:lu-en:{firstEn}'` (Lux→English assembly). Use `isPhraseKey(key)` / `isWordKey(key)` helpers in `src/exercise/progression.ts` to distinguish them. Both live in the same `words` map. `phraseKey()` truncates `firstEn` to 64 chars to match the server validator's per-part cap (`PHRASE_KEY_RX`); sentences sharing the same first 64 chars collide onto one key by design.
+Two key families share the one `words` map:
+
+- **Word keys** — `'{lu}|{en}'`.
+- **Keyed-element keys** — `'{kind}:{direction}:{firstEn}'`, where `kind` ∈ `KEYED_ELEMENT_PREFIXES` (`phrase`, `fill`) and `direction` ∈ `en-lu` | `lu-en`. Direction is part of the key: `phrase:en-lu:…` (assemble the LU answer) and `phrase:lu-en:…` are separate stat rows that mastery sums and the error pool keeps apart.
+
+Use `isWordKey(key)` / `isPhraseKey(key)` / `isFillKey(key)` from `src/exercise/progression.ts` to distinguish them. `isWordKey` is an explicit "matches no known prefix" check — **not** `!isPhraseKey`, which would silently count fills as vocabulary. `elementKey()` (and its `phraseKey`/`fillKey` aliases) truncates `firstEn` to 64 chars to match the server validator's per-part cap (`PHRASE_KEY_RX` / `FILL_KEY_RX`); elements sharing the same first 64 chars collide onto one key by design, and `tests/integration/fill-content-rules.test.ts` fails the build if authored content actually collides.
 
 Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `SessionData`). KV CRUD lives in `worker/lib/user.ts` and `worker/lib/session.ts`.
 
@@ -496,7 +533,7 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
    - **Streaks** ← `computeStreak(dailySessions, today)` in `worker/lib/user.ts`. No `streak` field.
    - **Lesson completion** ← `computeLessonProgress(lesson, words)` in `src/exercise/progression.ts`. No `completedLessons` field.
    - **Lesson unlock** ← `computeUnlockedLessonIds(lessons, words)`. No `unlockedLessons` field.
-   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`. Mastered = `correct >= 3` (applies to both word and phrase keys).
+   - **Mastery class** (unseen/learning/struggling/mastered) ← `classifyWord(stats)`. Mastered = `correct >= 3` (applies to every key family — words, phrases, fills).
    - If you're tempted to add a new "summary" field to KV, ask whether it's a function of existing data. It almost always is.
 
 2. **Send deltas, not snapshots.** The client posts a *batch* (`POST /api/progress/sync` body = what happened in this batch only). The server folds the delta into the cumulative `words` + `dailySessions`. Do not POST the full client snapshot.
@@ -582,7 +619,7 @@ Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (s
 
 ### Security
 
-> ⚠️ **Read this before adding a new endpoint, a new persisted field, or a new external resource.** The full rationale and incident history is in `SECURITY_PLAN.md`. The rules below are the load-bearing ones that prevent regressions.
+> ⚠️ **Read this before adding a new endpoint, a new persisted field, or a new external resource.** The full rationale and incident history is in [.claude/security-plan.md](.claude/security-plan.md). The rules below are the load-bearing ones that prevent regressions.
 
 #### Trust boundaries
 
@@ -597,7 +634,7 @@ Transitions are dispatched via `multimethod` keyed on `[action.type, status]` (s
 | Field | Bound |
 |---|---|
 | `wordResults` length | ≤ 200 |
-| `wordResults[].key` | matches `{lu}\|{en}` (≤64+64) OR `phrase:(en-lu\|lu-en):{firstEn}` (≤64) |
+| `wordResults[].key` | matches `{lu}\|{en}` (≤64+64) OR `{kind}:(en-lu\|lu-en):{firstEn}` (≤64) for each kind in `KEYED_ELEMENT_PREFIXES` (`phrase`, `fill`) |
 | `shown`, `correct`, `incorrect` | integer, [0, 100] |
 | `durationSeconds` | integer, [0, 3600] |
 | `date` | `YYYY-MM-DD`, within `[today-2, today+1]` UTC |
@@ -664,7 +701,7 @@ Don't remove either.
 
 #### Rate limiting lives at the edge, not in code
 
-Cloudflare WAF Rate Limiting Rules (configured in the dashboard, see `SECURITY_PLAN.md` A2) cap traffic per endpoint per IP. **Don't write in-Worker rate limit logic** — it's expensive (KV write per request) and easy to get wrong. If a new endpoint needs a tighter limit, add a new WAF rule.
+Cloudflare WAF Rate Limiting Rules (configured in the dashboard, see `.claude/security-plan.md` A2) cap traffic per endpoint per IP. **Don't write in-Worker rate limit logic** — it's expensive (KV write per request) and easy to get wrong. If a new endpoint needs a tighter limit, add a new WAF rule.
 
 #### Tests for security-critical code
 
@@ -696,39 +733,53 @@ Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{f
   @question Wéi heescht Dir?
   @lu Ech heesche Luca.
   @en My name is Luca.
+
+@fill
+  @lu Am Hannergrond [gesinn] ech d'[Riserad].
+  @en In the background I [see] the [Ferris wheel].
+  @distractor-lu Vierdergrond
+  @distractor-lu Bam
+  @distractor-en foreground
+  @distractor-en tree
 ```
 
 `@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens. `@question` (optional) is an examiner question in Luxembourgish rendered above the prompt — such sentences are always presented en→lu (assemble the LU answer), enforced in `buildSentenceExercise`, so **any** lesson on either track can use it. Exam files live at `public/assets/exam/{theme}/{file}.letz`; their in-file `@lesson` id is a lexer-legal label only (`V1.01`), the exam manifest id is authoritative. Every exam SubLesson mixes `@word` and `@sentence` content (enforced by `tests/integration/exam-manifest-letz.test.ts`) so Sessions alternate exercise types.
+
+`@fill` blocks produce fill-in-words items (`fills[]`) used by `FillBlank` — a **distinct Element kind**, not a variant of `@sentence`: own stat key (`fill:{direction}:{firstEn}`), own error pool, own contribution to lesson progress. `[bracketed]` blanks mark the gaps in place, so the correct sentence stays readable in the source. **One blank = one tile, verbatim** — neither blanks nor distractors are tokenized (a `[Ferris wheel]` blank is a single tile), which is what makes "exactly one correct form" achievable. Exactly one `@lu` and one `@en` per block (accepted variants *are* ambiguity here); no `@question` (the frame is the prompt); `@fill` and `@sentence` must never carry the same sentence. `tests/integration/fill-content-rules.test.ts` enforces the mechanizable ambiguity rules over both catalogs — bracket balance, 1–4 blanks per direction, ≥2 surviving distractors, tile distinctness under `normalizeAnswer`, no answer leaking into the frame, the Eifeler-Regel adjacency rule, and stat-key uniqueness after 64-char truncation. Read [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md) before authoring: the rules that are *not* mechanizable (a distractor must be wrong in every blank; determiners and prepositions stay in the fixed frame) are where fill content actually goes wrong.
+
+**Do not read the integration tests to learn the bounds.** `.claude/skills/letz-content-generator/references/content-contract.md` is the authored-content cheat-sheet: every mechanized limit across both test files, each row naming the failing test and its message, plus the facts that are invisible in prose — distractors are counted *after* the builder drops answer collisions, `normalizeAnswer` folds case and strips apostrophes, and `fillKey` is built from the **raw `@en` line including brackets** (so moving a bracket orphans recorded progress). Keep it in lockstep with the tests: change a bound there, change that row in the same commit.
+
+**Content contracts differ by exam theme kind** — every manifest theme declares `kind: "topic" | "picture"` (`ThemeKind` in `src/exam/exam-catalog.ts`), and that field — never the theme id — selects the contract. Topic themes (`vacation`, `family`, `shopping`) are conversation prep and **require** `@question` with interview-sourced first-person answers; picture themes are **pure description**, forbid both `@question` and personal attitude, and require `@image-alt`. Both rules are enforced off `kind` in `tests/integration/exam-manifest-letz.test.ts`.
+
+Section headings come from `themeHeading(kind, title)` — `"Theme: Vacation & Travel"`, `"Describing a Picture: Schueberfouer"` — so **manifest titles stay bare** (a test rejects a baked-in prefix). One picture theme per photo: a second photo is a new theme with its own `picture/<photo>/` directory, not extra sub-lessons under a shared one.
+
+**Attaching a photo:** originals are dropped into `public/assets/tmp/`, which is **gitignored** — a staging folder for review, never committed and never referenced by a `.letz` file. Convert to **WebP**, pre-crop to **16:9**, cap width at **880px** (2× the largest iPhone logical width), and commit only that derived file under `public/assets/exam/<theme>/.../img/`. A test parses the WebP header to assert the file exists and fits the budget, so an unoptimized drop-in fails the build. See [picture-description-theme](.claude/memory/picture-description-theme.md) for the `magick` recipe, [exam-track](.claude/memory/exam-track.md), and the `letz-content-generator` skill before authoring either kind.
+
+**Register split across mechanics** — exam content may reach **B1** via complex sentences. `@sentence` stays assemblable (main clauses plus short two-clause sentences; no declined attributives, since the learner builds every tile), while verb-final subordinate clauses and declined forms are better placed in `@fill` fixed frames, which the learner reads rather than assembles. The conjunction/connector inventory and the inversion rules are in `.claude/skills/letz-content-generator/references/luxembourgish-grammar.md`. **`@fill` itself is not level-scoped** — its criterion is *reuse across topics*, so A1 frames are first-class; see [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md).
+
+`@image "path"` / `@image-alt "text"` are lesson-level (order-independent — they fold onto `meta` in `visitLesson`, so they may sit before `@lesson` or after the content). The value must be **quoted**: a bare `=` or `#` in unquoted `Text` breaks parsing. `@image-alt` doubles as the caption of the placeholder frame shown while `@image` is absent, so a picture SubLesson stays usable before its photo lands — every picture SubLesson is required to declare it.
+
+No directive is currently "designed but not built". The parser rejects unknown `@`-tokens with a lex error, so do not invent new ones — adding one means touching `lexer.ts`, `parser.ts`, and `visitor.ts` together, and a new **Element kind** on top of that is the ~15-file change described above.
 
 ### Testing
 
 Tests run with **Vitest** (`npx vitest run`). The pipeline architecture means most of the app is testable as plain function calls — **the no-mocks rule below depends on staying on-pattern**. If you find yourself reaching for mocks, that's a signal the code under test should be split into a pure core + thin wiring.
 
-**What's covered (420 tests):**
+**What's covered.** Run `npx vitest run` for the current count — per-module counts
+are deliberately not listed here, because they drift on every commit.
 
-| Module                                      | Tests | Notes |
-|---------------------------------------------|-------|-------|
-| `src/exercise/WordMatch/game-logic.ts`      | 24    | initialize, applySelection (match/mismatch/edge cases), applyFadeComplete, applyClearFail, end-to-end accounting |
-| `src/exercise/SentenceBuilder/sentence-logic.ts` | 24 | initSentenceGame, applyTokenTap, applyAssembledTap, applySubmit, toWordResultMap, normalizeAnswer |
-| `src/exercise/progression.ts`               | 49    | classifyWord, computeLessonProgress (new formula), computeUnlockedLessonIds, computeOverallStats, isPhraseKey/isWordKey |
-| `src/exercise/session-reducer.ts`           | 33    | every action × every state, blockBoundaries-based section detection |
-| `src/exercise/session-progress.ts`          | 10    | computeProgressView with blockBoundaries, overflow, Word Mix shape |
-| `src/exercise/error-pool.ts`                | 15    | primary pool, fallback pool, independent words/phrases, deduplication |
-| `src/exercise/selection.ts`                 | 17    | bucketedPick boundaries, pickFromPool re-roll, pickPair, pickSentence |
-| `src/exercise/exercise-builders.ts`         | 32    | tokenizeSentence, buildWordMatchExercise, buildSentenceExercise both directions, question→direction override, chunkIntoWordMatchExercises |
-| `src/exercise/modes/lesson.ts`              | 27    | shape, upper-bound clamp, edge cases |
-| `src/exercise/modes/word-mix.ts`            | 9     | shape, error pool bucket, one-shot planning |
-| `src/exercise/modes/fix-errors.ts`          | 11    | empty pool, word-only/phrase errors, fallback, global scope (exam Q&A rebuild) |
-| `src/exercise/modes/exam.ts`                | 13    | chunking + merge edges, @question direction forcing, determinism, boundaries |
-| `src/exam/exam-catalog.ts`                  | 3     | flattenExamManifest ordering + theme propagation |
-| `src/exam/exam-progression.ts`              | 15    | pass-gate chain (playing alone does not open the next step), sticky access, theme independence, load selection |
-| `src/lib/letz-parser.ts`                    | 18    | grammar, lesson directives, @word/@sentence/@distractor tags, comments |
-| `src/context/auth-stats-delta.test.ts`      | 12    | byte-identity: client merge == server merge, computeStreak |
-| `worker/lib/user.ts`                        | 32    | mergeWordResults, mergeDailySession, caps, normalizeDailySession (legacy → current shape) |
-| `worker/lib/session.ts`                     | 19    | session CRUD, cookie helpers |
-| `worker/lib/validators.ts`                  | 14    | payload validation bounds |
-| `src/persistence/migration.ts`              | 23    | buildMigrationChunks: per-chunk validator bounds, counter splitting, duration/XP spread, exact total reconstruction |
-| `tests/src/persistence/guest-progress.jsdom.test.tsx` | 2 | Node.js 22 experimental `localStorage` patched in-file via `Object.defineProperty` |
+| Area | Modules | What the tests pin down |
+|---|---|---|
+| Exercise logic | `WordMatch/game-logic`, `SentenceBuilder/sentence-logic`, `FillBlank/fill-logic` | selection/match accounting, the one-way `checkResult` lock, all-or-nothing fill grading, duplicate-text tiles |
+| Progression | `progression`, `error-pool`, `exam-progression` | classify vs mastery split, per-kind progress, the `isWordKey` inflation guard, primary/fallback pools per kind and direction, the pass-gate chain |
+| Planning | `selection`, `exercise-builders`, `modes/*` | bucket boundaries and re-roll, both sentence directions, `@question` direction override, chunk merge edges, per-mode Session shape, failed-direction rebuilds |
+| Session | `session-reducer`, `session-progress` | every action × every state, boundary-based section detection, overflow |
+| Parser | `lib/letz-parser`, `lesson-image`, `exam-catalog` | grammar and every directive, image view fallback, manifest flattening order |
+| Persistence | `worker/lib/{user,session,validators}`, `persistence/migration`, `auth-stats-delta` | merge arithmetic and caps, legacy shape normalization, every validator bound and key shape, chunk splitting with exact total reconstruction, client/server merge byte-identity |
+| Authored content | `tests/integration/*` | every `.letz` parses; theme contracts keyed on `kind`; duplicate `@word` per theme; every mechanized `@fill` bound; image budget |
+
+One environment quirk: `guest-progress.jsdom.test.tsx` patches Node 22's
+experimental `localStorage` in-file via `Object.defineProperty`.
 
 **No-mocks rule.** Tests should call pure functions with hand-built fixtures. Do not introduce `vi.mock()`, `vi.spyOn()`, fake fetch, fake KV, or React Testing Library unless a future change genuinely requires it. The existing tests achieve full coverage of business logic via plain function calls — replicate that style.
 

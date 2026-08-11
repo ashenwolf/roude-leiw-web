@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { usePostHog } from "@posthog/react";
 
 import { useNavigation } from "../context/useNavigation";
+import { FillBlank } from "../exercise/FillBlank";
+import { correctSentence } from "../exercise/FillBlank/fill-logic";
 import { SentenceBuilder } from "../exercise/SentenceBuilder";
 import { WordMatch } from "../exercise/WordMatch";
+import { selectLessonImage } from "../exercise/lesson-image";
 import { computeUnlockedLessonIds } from "../exercise/progression";
 import { SESSION_XP } from "../exercise/xp";
 import { useActivityTimer } from "../exercise/use-activity-timer";
@@ -12,12 +15,14 @@ import { mergeWordStats } from "../lib/stats-merge";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
+import { LessonImage } from "../ui/LessonImage";
 import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "../ui/Popup";
 import { DebugPanel } from "../ui/DebugPanel";
 
 import type { AppPages, NavigationParams } from "../context/navigation";
 import type { WordStats } from "../context/auth";
+import type { LessonImageView } from "../exercise/lesson-image";
 import type { Lesson } from "../exercise/letz-parser";
 import type { SessionMode } from "../exercise/mode-config";
 import type { ProgressView } from "../exercise/session-progress";
@@ -72,11 +77,20 @@ const MODE_LABELS: Record<SessionMode["kind"], ModeLabels> = {
   },
 };
 
-type ExerciseReadyProps = { totalSlots: number; onStart: () => void; onBack: () => void; mode: SessionMode };
-const ExerciseReady = ({ totalSlots, onStart, onBack, mode }: ExerciseReadyProps) => (
+type ExerciseReadyProps = {
+  totalSlots: number;
+  onStart: () => void;
+  onBack: () => void;
+  mode: SessionMode;
+  lessonImage: LessonImageView | null;
+};
+const ExerciseReady = ({ totalSlots, onStart, onBack, mode, lessonImage }: ExerciseReadyProps) => (
   <div className="flex flex-col items-center gap-6 py-8">
     <h2 className="text-2xl font-bold text-gray-800">{MODE_LABELS[mode.kind].title}</h2>
     <p className="text-gray-600 text-center">{MODE_LABELS[mode.kind].readyText(totalSlots)}</p>
+    {/* Shown before Start too: a picture Session is about this photo, so the
+        learner should be looking at it while the session loads. */}
+    {lessonImage && <LessonImage view={lessonImage} />}
     <div className="w-full max-w-xs">
       <Button onClick={onStart}>Start</Button>
     </div>
@@ -100,6 +114,16 @@ const ExerciseEmpty = ({ mode, onBack }: ExerciseEmptyProps) => (
   </div>
 );
 
+/**
+ * The answer to show a learner who just got a Slot wrong. Word-match Slots never
+ * fail as a Slot, so they have nothing to reveal.
+ */
+const correctAnswerOf = (batch: Exercise | undefined): string | undefined => {
+  if (batch?.type === "sentence-builder") return batch.item.acceptedAnswers[0];
+  if (batch?.type === "fill-blank") return correctSentence(batch.item);
+  return undefined;
+};
+
 type ExerciseActiveProps = {
   state: SessionStatus;
   currentSlotIndex: number;
@@ -107,6 +131,8 @@ type ExerciseActiveProps = {
   lastSlotOutcome: "success" | "mistake" | null;
   progressView: ProgressView;
   currentBatch: Exercise | undefined;
+  /** Lesson photo/placeholder — persists across Slots for the whole Session. */
+  lessonImage: LessonImageView | null;
   onSlotComplete: (wordResults: WordResultMap) => void;
   onSlotProgress: (done: number, total: number) => void;
   onInteraction: () => void;
@@ -123,6 +149,7 @@ const ExerciseActive = ({
   lastSlotOutcome,
   progressView,
   currentBatch,
+  lessonImage,
   onSlotComplete,
   onSlotProgress,
   onInteraction,
@@ -131,9 +158,19 @@ const ExerciseActive = ({
   onTryAgain,
   onBack,
 }: ExerciseActiveProps) => (
-  // pb keeps the old spacing now that <main> has no bottom padding
-  <div className="flex flex-col gap-6 pb-6">
+  // pb keeps the old spacing now that <main> has no bottom padding. Gaps here are
+  // tight on purpose: a full-bleed 16:9 lesson photo eats ~240px of an ~850px
+  // viewport, and the assembled row plus token pool have to fit under it without
+  // scrolling. Don't restore the roomier spacing without re-measuring that.
+  // The -mt-2 claws back part of <main>'s pt-6 for this page only — a slim
+  // progress bar doesn't need 1.5rem of air above it. It eats padding that
+  // already exists, so nothing clips.
+  <div className="flex flex-col gap-2 pb-3 -mt-2">
     <ProgressBar view={progressView} />
+
+    {/* Outside the keyed Exercise components on purpose: a picture-description
+        Session describes ONE photo, so the photo must not remount per Slot. */}
+    {lessonImage && <LessonImage view={lessonImage} />}
 
     {currentBatch?.type === "word-match" && (
       <WordMatch
@@ -153,7 +190,16 @@ const ExerciseActive = ({
       />
     )}
 
-    <div className="mt-4">
+    {currentBatch?.type === "fill-blank" && (
+      <FillBlank
+        key={`slot-${currentSlotIndex}`}
+        item={currentBatch.item}
+        onResult={onSlotComplete}
+        onInteraction={onInteraction}
+      />
+    )}
+
+    <div>
       <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors text-sm">
         ← Back
       </button>
@@ -164,9 +210,7 @@ const ExerciseActive = ({
       onDismiss={onDismissMilestone}
       outcome={lastSlotOutcome ?? "success"}
       correctAnswer={
-        lastSlotOutcome === "mistake" && currentBatch?.type === "sentence-builder"
-          ? currentBatch.item.acceptedAnswers[0]
-          : undefined
+        lastSlotOutcome === "mistake" ? correctAnswerOf(currentBatch) : undefined
       }
     />
 
@@ -321,6 +365,8 @@ export const AppExercise = () => {
     goBack();
   };
 
+  const lessonImage = selectLessonImage(session.lessons, session.currentLessonId);
+
   if (session.state === "loading") return <ExerciseLoading />;
   if (session.state === "error") return <ExerciseError error={session.error} onBack={goBack} />;
   if (session.state === "ready") {
@@ -339,6 +385,7 @@ export const AppExercise = () => {
         onStart={handleStart}
         onBack={goBack}
         mode={mode}
+        lessonImage={lessonImage}
       />
     );
   }
@@ -352,6 +399,7 @@ export const AppExercise = () => {
         lastSlotOutcome={session.lastSlotOutcome}
         progressView={session.progressView}
         currentBatch={session.currentBatch}
+        lessonImage={lessonImage}
         onSlotComplete={handleSlotSync}
         onSlotProgress={handleSlotProgress}
         onInteraction={timer.registerInteraction}
