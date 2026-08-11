@@ -10,6 +10,13 @@
       ]
     },
     {
+      "id": "picture",
+      "title": "Describing a Picture",
+      "subLessons": [
+        { "id": "picture.01", "file": "picture/01_at_the_fair.letz", "title": "At the Fair" }
+      ]
+    },
+    {
       "id": "family",
       "title": "Family & Myself",
       "subLessons": [

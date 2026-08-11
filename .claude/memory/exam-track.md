@@ -85,6 +85,11 @@ learnluxembourgish.com). Expected learner level ~B1, but level is deliberately
   type. The three-step path still sets the emphasis: 01 vocabulary-heavy
   (~40 words + 3 sentences), 02 phrases, 03 Q&A — the latter two carry ~10-12
   supporting words each. Enforced by `tests/integration/exam-manifest-letz.test.ts`.
+- **The `picture` theme is deliberately single-file and A1–A2**, breaking two
+  otherwise-uniform conventions. See [[picture-description-theme]] for why: the
+  three-step vocab→phrases→Q&A split doesn't fit "describe one photo", and the
+  ~B1 authoring guideline is wrong for the exam task where beginners can score.
+  Both are content decisions only — no schema or planner change.
 
 ## Follow-ups (P1/P2)
 
