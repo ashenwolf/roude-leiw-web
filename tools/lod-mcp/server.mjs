@@ -19,7 +19,7 @@
 import { createInterface } from "node:readline";
 import process from "node:process";
 
-import { lookup, suggest } from "./lib/lod-client.mjs";
+import { lookupMany, suggestMany, wordList } from "./lib/lod-client.mjs";
 
 const PROTOCOL_VERSION = "2025-06-18";
 const SERVER_INFO = { name: "lod", version: "1.0.0" };
@@ -35,48 +35,88 @@ const TOOLS = [
   {
     name: "lod_lookup",
     description:
-      "Look up a Luxembourgish word in the official Lëtzebuerger Online " +
-      "Dictionnaire (lod.lu). Returns the matching dictionary entries with " +
-      "authoritative translations, part of speech, grammatical gender " +
-      "(m/f/n — determines the article), IPA, and example phrases. Inflected " +
-      "forms, typos, and proper names usually return no entries; use " +
-      "lod_suggest to recover from a misspelling.",
+      "Look up Luxembourgish words in the official Lëtzebuerger Online " +
+      "Dictionnaire (lod.lu). Returns authoritative senses (translation plus " +
+      "the clarifier that disambiguates it), part of speech, and grammatical " +
+      "gender (m/f/n — determines the article). " +
+      "PASS A WHOLE BATCH AT ONCE via `words` — verifying a vocabulary list " +
+      "one call per word is the slow path and wastes context. " +
+      "A word with no entries comes back with `found: 0` and spellchecker " +
+      "`suggestions` already filled in, so no follow-up lod_suggest is needed: " +
+      "0 results WITH suggestions means it is misspelled, 0 results with NO " +
+      "suggestions is usually a legitimate inflected form or compound.",
     inputSchema: {
       type: "object",
       properties: {
-        word: { type: "string", description: "The Luxembourgish word (lemma) to look up." },
+        words: {
+          type: "array",
+          items: { type: "string" },
+          minItems: 1,
+          maxItems: 60,
+          description:
+            "Luxembourgish words (lemmas) to look up in one call. Preferred over `word`; duplicates are collapsed.",
+        },
+        word: {
+          type: "string",
+          description: "Single-word convenience form. Use `words` for more than one.",
+        },
         locale: LOCALE_SCHEMA,
         maxEntries: {
           type: "integer",
           minimum: 1,
           maximum: 10,
           default: 3,
-          description: "Max number of homograph/sense entries to resolve.",
+          description: "Max number of homograph entries to resolve per word.",
+        },
+        verbose: {
+          type: "boolean",
+          default: false,
+          description:
+            "Include IPA, declension info and per-sense numbering. Off by default — the slim shape is ~15x smaller and carries the same translation/gender signal.",
         },
       },
-      required: ["word"],
     },
   },
   {
     name: "lod_suggest",
     description:
-      "Get spellchecker suggestions from lod.lu for a possibly-misspelled or " +
-      "inflected Luxembourgish word. Useful to find the correct lemma before " +
-      "calling lod_lookup.",
+      "Get spellchecker suggestions from lod.lu for possibly-misspelled or " +
+      "inflected Luxembourgish words. " +
+      "USUALLY UNNECESSARY: lod_lookup already returns suggestions for any word " +
+      "it finds no entry for — reach for this only to spellcheck words you are " +
+      "not also looking up (e.g. inflected forms inside a sentence). " +
+      "PASS A BATCH via `words`. " +
+      "An empty list means no suggestion, which for Luxembourgish usually " +
+      "indicates a legitimate inflected form or compound rather than an error.",
     inputSchema: {
       type: "object",
       properties: {
-        word: { type: "string", description: "The word to get suggestions for." },
+        words: {
+          type: "array",
+          items: { type: "string" },
+          minItems: 1,
+          maxItems: 60,
+          description:
+            "Words to spellcheck in one call. Preferred over `word`; duplicates are collapsed.",
+        },
+        word: {
+          type: "string",
+          description: "Single-word convenience form. Use `words` for more than one.",
+        },
         locale: LOCALE_SCHEMA,
       },
-      required: ["word"],
     },
   },
 ];
 
 const handlers = {
-  lod_lookup: ({ word, locale, maxEntries }) => lookup(word, { locale, maxEntries }),
-  lod_suggest: async ({ word, locale }) => ({ word, suggestions: await suggest(word, locale) }),
+  lod_lookup: (args) =>
+    lookupMany(wordList(args), {
+      locale: args.locale,
+      maxEntries: args.maxEntries,
+      verbose: args.verbose === true,
+    }),
+  lod_suggest: (args) => suggestMany(wordList(args), { locale: args.locale }),
 };
 
 // --- JSON-RPC plumbing -----------------------------------------------------
@@ -85,8 +125,10 @@ const send = (msg) => process.stdout.write(`${JSON.stringify(msg)}\n`);
 const result = (id, value) => send({ jsonrpc: "2.0", id, result: value });
 const error = (id, code, message) => send({ jsonrpc: "2.0", id, error: { code, message } });
 
+// Compact, not pretty-printed: the only reader is a model, and two-space
+// indentation on a 60-word batch is pure token cost.
 const asTextContent = (value) => ({
-  content: [{ type: "text", text: JSON.stringify(value, null, 2) }],
+  content: [{ type: "text", text: JSON.stringify(value) }],
 });
 
 async function handleToolCall(id, params) {
