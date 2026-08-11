@@ -1,0 +1,111 @@
+# Exam track — Theme: Akafe Goen (Going Shopping) — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level A1–A2 (authoring guideline only).
+# The manifest id (shopping.01) is the authoritative identity; S1.01 is a label.
+#
+# Every sub-lesson mixes words AND sentences so each session alternates
+# word-match and sentence-builder slots; the emphasis here is vocabulary.
+#
+# All @word LU sides verified with lod_lookup (lod.lu) for gloss + gender.
+
+@lesson S1.01 "Shopping Vocabulary"
+
+# --- Shops & places ---
+@word den Akaf = the purchase
+@word de Buttek = the shop
+@word d'Geschäft = the store
+@word de Supermarché = the supermarket
+@word d'Epicerie = the grocer's
+@word d'Bäckerei = the bakery
+@word de Metzler = the butcher
+@word d'Apdikt = the pharmacy
+@word de Maart = the market
+@word d'Keess = the till
+@word d'Solden = the sales
+
+# --- Money & paying ---
+@word d'Geld = the money
+@word de Su = the money
+@word de Präis = the price
+@word d'Rechnung = the bill
+@word de Bong = the voucher
+@word d'Kaart = the card
+@word de Portmonni = the wallet
+@word de Wiessel = the change
+@word d'Reduktioun = the discount
+@word gratis = free of charge
+@word bëlleg = cheap
+@word deier = expensive
+
+# --- Carrying & quantities ---
+@word de Kuerf = the basket
+@word d'Tut = the bag
+@word de Sak = the sack
+@word d'Lëscht = the list
+@word d'Fläsch = the bottle
+@word d'Stéck = the piece
+@word de Kilo = the kilo
+@word hallef = half
+@word genuch = enough
+
+# --- Food & goods ---
+@word d'Iesswueren = the food
+@word d'Wuer = the goods
+@word d'Brout = the bread
+@word d'Mëllech = the milk
+@word de Kéis = the cheese
+@word d'Fleesch = the meat
+@word d'Uebst = the fruit
+@word d'Geméis = the vegetables
+@word den Apel = the apple
+@word d'Gromper = the potato
+@word d'Tomat = the tomato
+@word den Zocker = the sugar
+@word de Botter = the butter
+@word d'Ee = the egg
+@word d'Waasser = the water
+@word de Kaffi = the coffee
+@word d'Kleed = the dress
+@word de Schong = the shoe
+@word de Kaddo = the present
+@word d'Gréisst = the size
+
+# --- People ---
+@word de Verkeefer = the salesperson
+@word de Client = the customer
+
+# --- Doing things ---
+@word akafen = to do the shopping
+@word kafen = to buy
+@word bezuelen = to pay
+@word kaschten = to cost
+@word brauchen = to need
+@word sichen = to look for
+@word huelen = to take
+@word kréien = to get
+@word probéieren = to try on
+@word frësch = fresh
+@word zou = closed
+
+@sentence
+@lu Ech ginn all Samschdeg akafen.
+@en I go shopping every Saturday.
+@distractor-lu Sonndeg
+@distractor-lu schaffen
+@distractor-en Sunday
+@distractor-en work
+
+@sentence
+@lu D'Brout an der Bäckerei ass frësch.
+@en The bread in the bakery is fresh.
+@distractor-lu Mëllech
+@distractor-lu deier
+@distractor-en milk
+@distractor-en expensive
+
+@sentence
+@lu Ech bezuelen ëmmer mat der Kaart.
+@en I always pay by card.
+@distractor-lu Geld
+@distractor-lu sichen
+@distractor-en cash
+@distractor-en look for

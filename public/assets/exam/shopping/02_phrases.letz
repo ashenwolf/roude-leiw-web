@@ -1,0 +1,110 @@
+# Exam track — Theme: Akafe Goen (Going Shopping) — Sub-lesson 2: Key Phrases
+# Plain sentences (no @question): presented in either direction.
+# Mixed with the vocabulary these phrases lean on, so sessions alternate
+# word-match and sentence-builder slots.
+#
+# A1–A2 only: present tense, simple main clauses, no attributive adjectives
+# on masculine nouns (avoids declension the learner has not met).
+
+@lesson S1.02 "Shopping Phrases"
+
+@word d'Kaddoen = the presents
+@word d'Schong = the shoes
+@word d'Tuten = the bags
+@word d'Präisser = the prices
+@word d'Buttecker = the shops
+@word d'Zäit = the time
+@word d'Kéier = the time (occasion)
+@word alles = everything
+@word bëssen = a little
+@word soss = otherwise
+@word no = near
+@word wäit = far
+
+@sentence
+@lu Ech brauch eng Tut, wann ech glift.
+@en I need a bag, please.
+@distractor-lu Kuerf
+@distractor-lu kréien
+@distractor-en basket
+@distractor-en get
+
+@sentence
+@lu Wéi vill kascht dat?
+@en How much does that cost?
+@distractor-lu bezuelen
+@distractor-lu wéini
+@distractor-en pay
+@distractor-en when
+
+@sentence
+@lu De Supermarché ass e Sonndeg zou.
+@en The supermarket is closed on Sunday.
+@distractor-lu Bäckerei
+@distractor-lu Samschdeg
+@distractor-en bakery
+@distractor-en Saturday
+
+@sentence
+@lu Ech hunn meng Lëscht doheem vergiess.
+@en I forgot my list at home.
+@distractor-lu Portmonni
+@distractor-lu Tut
+@distractor-en wallet
+@distractor-en bag
+
+@sentence
+@lu D'Uebst um Maart ass bëlleg.
+@en The fruit at the market is cheap.
+@distractor-lu Geméis
+@distractor-lu deier
+@distractor-en vegetables
+@distractor-en expensive
+
+@sentence
+@lu Ech kafen ee Kilo Grompere.
+@en I am buying one kilo of potatoes.
+@distractor-lu Tomaten
+@distractor-lu zwee
+@distractor-en tomatoes
+@distractor-en two
+
+@sentence
+@lu Kann ech mat der Kaart bezuelen?
+@en Can I pay by card?
+@distractor-lu Geld
+@distractor-lu Bong
+@distractor-en cash
+@distractor-en voucher
+
+@sentence
+@lu Dat ass ze deier fir mech.
+@en That is too expensive for me.
+@distractor-lu bëlleg
+@distractor-lu him
+@distractor-en cheap
+@distractor-en her
+
+@sentence
+@lu Ech sichen e Kaddo fir meng Mamm.
+@en I am looking for a present for my mother.
+@distractor-lu Papp
+@distractor-lu kafen
+@distractor-en father
+@distractor-en buy
+
+@sentence
+@lu D'Bäckerei ass net wäit vun hei.
+@en The bakery is not far from here.
+@distractor-lu Apdikt
+@distractor-lu no
+@distractor-en pharmacy
+@distractor-en near
+
+@sentence
+@lu Ech hunn net genuch Geld mat.
+@en I do not have enough money with me.
+@distractor-lu Zäit
+@distractor-lu vill
+@distractor-en time
+@distractor-en much

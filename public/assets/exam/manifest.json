@@ -18,6 +18,15 @@
       ]
     },
     {
+      "id": "shopping",
+      "title": "Akafe Goen",
+      "subLessons": [
+        { "id": "shopping.01", "file": "shopping/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "shopping.02", "file": "shopping/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "shopping.03", "file": "shopping/03_questions.letz", "title": "Talking About It" }
+      ]
+    },
+    {
       "id": "family",
       "title": "Family & Myself",
       "subLessons": [

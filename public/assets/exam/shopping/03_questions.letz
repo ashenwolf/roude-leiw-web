@@ -1,0 +1,108 @@
+# Exam track — Theme: Akafe Goen (Going Shopping) — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+# Question words and connectors are drilled as vocabulary alongside them.
+#
+# The answers are the user's own (collected in an interview 2026-08-11), so the
+# learner rehearses their real exam answers, not generic ones.
+
+@lesson S1.03 "Talking About Shopping"
+
+@word wéi vill = how much
+@word wéini = when
+@word wou = where
+@word wéi = how
+@word firwat = why
+@word de Frigo = the fridge
+@word d'Tankstell = the petrol station
+@word d'Bicher = the books
+@word d'Kleeder = the clothes
+@word den Handy = the mobile phone
+@word ronn = about
+@word seelen = rarely
+@word no der Aarbecht = after work
+@word an der Woch = per week
+
+@sentence
+@question Wou gitt Dir akafen?
+@lu Ech ginn am Cactus akafen, dee ass no bei mir.
+@en I shop at Cactus, it is near me.
+@distractor-lu wäit
+@distractor-lu Maart
+
+@sentence
+@question Wéini gitt Dir akafen?
+@lu Ech ginn no der Aarbecht owens akafen.
+@en I go shopping in the evening after work.
+@distractor-lu moies
+@distractor-lu Samschdeg
+
+@sentence
+@question Wéi bezuelt Dir am léifsten?
+@lu Ech bezuelen am léifste mat der Kaart.
+@en I prefer to pay by card.
+@distractor-lu Geld
+@distractor-lu ni
+
+@sentence
+@question Wat kaaft Dir dacks?
+@lu Ech kafen dacks Mëllech, Kéis a Fleesch.
+@en I often buy milk, cheese and meat.
+@distractor-lu Uebst
+@distractor-lu seelen
+
+@sentence
+@question Gitt Dir eleng akafen?
+@lu Nee, ech ginn mat menger Famill akafen.
+@en No, I go shopping with my family.
+@distractor-lu eleng
+@distractor-lu jo
+
+@sentence
+@question Maacht Dir eng Lëscht virdrun?
+@lu Nee, ech kucken just an de Frigo.
+@en No, I just look in the fridge.
+@distractor-lu Lëscht
+@distractor-lu schreiwen
+
+@sentence
+@question Gitt Dir gär akafen?
+@lu Nee, dat dauert ze laang fir mech.
+@en No, that takes too long for me.
+@distractor-lu gär
+@distractor-lu kuerz
+
+@sentence
+@question Kaaft Dir och online?
+@lu Jo, ech kafe Kleeder a Bicher online.
+@en Yes, I buy clothes and books online.
+@distractor-lu Iesswueren
+@distractor-lu nee
+
+@sentence
+@question Wéi vill bezuelt Dir an der Woch?
+@lu Ech bezuelen ronn honnert Euro an der Woch.
+@en I pay about one hundred euros per week.
+@distractor-lu Mount
+@distractor-lu fofzeg
+
+@sentence
+@question Kucke Dir op d'Präisser?
+@lu Just bei deiere Saache kucken ech op de Präis.
+@en I only look at the price for expensive things.
+@distractor-lu bëllege
+@distractor-lu ëmmer
+
+@sentence
+@question Gitt Dir op de Maart?
+@lu Seelen, ech hunn net vill Zäit.
+@en Rarely, I do not have much time.
+@distractor-lu dacks
+@distractor-lu Geld
+
+@sentence
+@question Wat maacht Dir, wann e Buttek zou ass?
+@lu Da ginn ech an d'Tankstell, do ass ëmmer op.
+@en Then I go to the petrol station, it is always open.
+@distractor-lu zou
+@distractor-lu Bäckerei
