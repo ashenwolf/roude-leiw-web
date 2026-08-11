@@ -12,7 +12,7 @@
 @word d'Schong = the shoes
 @word d'Tuten = the bags
 @word d'Präisser = the prices
-@word d'Buttecker = the shops
+@word d'Butteker = the shops
 @word d'Zäit = the time
 @word d'Kéier = the time (occasion)
 @word alles = everything
@@ -22,7 +22,7 @@
 @word wäit = far
 
 @sentence
-@lu Ech brauch eng Tut, wann ech glift.
+@lu Ech brauch eng Tut, wann ech gelift.
 @en I need a bag, please.
 @distractor-lu Kuerf
 @distractor-lu kréien
@@ -46,7 +46,7 @@
 @distractor-en Saturday
 
 @sentence
-@lu Ech hunn meng Lëscht doheem vergiess.
+@lu Ech hu meng Lëscht doheem vergiess.
 @en I forgot my list at home.
 @distractor-lu Portmonni
 @distractor-lu Tut

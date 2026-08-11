@@ -32,7 +32,7 @@
 
 @sentence
 @question Wéini gitt Dir akafen?
-@lu Ech ginn no der Aarbecht owens akafen.
+@lu Ech ginn no der Aarbecht owes akafen.
 @en I go shopping in the evening after work.
 @distractor-lu moies
 @distractor-lu Samschdeg
@@ -53,14 +53,14 @@
 
 @sentence
 @question Gitt Dir eleng akafen?
-@lu Nee, ech ginn mat menger Famill akafen.
+@lu Nee, ech gi mat menger Famill akafen.
 @en No, I go shopping with my family.
 @distractor-lu eleng
 @distractor-lu jo
 
 @sentence
 @question Maacht Dir eng Lëscht virdrun?
-@lu Nee, ech kucken just an de Frigo.
+@lu Nee, ech kucke just an de Frigo.
 @en No, I just look in the fridge.
 @distractor-lu Lëscht
 @distractor-lu schreiwen
@@ -81,7 +81,7 @@
 
 @sentence
 @question Wéi vill bezuelt Dir an der Woch?
-@lu Ech bezuelen ronn honnert Euro an der Woch.
+@lu Ech bezuele ronn honnert Euro an der Woch.
 @en I pay about one hundred euros per week.
 @distractor-lu Mount
 @distractor-lu fofzeg
