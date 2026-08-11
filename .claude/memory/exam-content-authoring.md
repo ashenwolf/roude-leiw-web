@@ -43,6 +43,15 @@ It correctly does **not** drop where the next word starts with a listed letter:
 `ech hunn net genuch` (n). Check each occurrence against the letter list rather
 than by ear — the two cases look identical in the source.
 
+Caught again in `picture/02` (2026-08-11), which is why this check is the one
+worth running first on any new file: `si sinn laang` — `sinn` before `l` must
+drop to `si si laang`. Rather than teach a form the learner would then have to
+un-learn in other contexts, the clause was cut (`Nee, hir Hoer sinn net kuerz.`,
+with `laang` demoted to a distractor). **`sinn`/`hunn`/`ginn` before an
+adjective or adverb is the highest-frequency site for this bug** in descriptive
+content, because predicative adjectives are exactly what the A1–A2 constraint
+pushes you toward (see [[picture-description-theme]]).
+
 ## 3. No duplicate English gloss within a theme
 
 Word-match shows several pairs at once; two `@word` entries sharing an EN side
@@ -58,8 +67,12 @@ the dictionary lists the same translation for both.
 
 Already documented in [[picture-description-theme]] and it still applies: a
 throwaway test calling `buildSentenceExercise` over every sentence in both
-directions, printing surviving tiles. `shopping` passed with no drops, but the
-check costs a minute and the failure mode is invisible in source.
+directions, printing surviving tiles. `shopping` passed with no drops, as did
+`picture/02` (22 presentations, both tiles each), but the check costs a minute
+and the failure mode is invisible in source. Signature is
+`(entry, requestedDirection, lessonVocab)`; build the accepted-token set with
+the exported `tokenizeSentence`, not a whitespace split, or `d'Posch`-style
+tokens make the dump over-report.
 
 ## Interview-sourced answers (new pattern)
 

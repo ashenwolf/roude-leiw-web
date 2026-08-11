@@ -22,7 +22,7 @@
 # frou, trëppelen, …) are deliberately NOT repeated here — the theme's pass-gate
 # makes 01 a prerequisite for 02, and stat keys are shared across the app.
 
-@lesson P1.02 "Describing a Picture: The Woman and the Boy"
+@lesson P1.02 "Fair: Person Description"
 
 # --- Hair ---
 @word d'Hoer = the hair
@@ -122,10 +122,10 @@
 
 @sentence
 @question Sinn hir Hoer kuerz?
-@lu Nee, hir Hoer sinn net kuerz, si sinn laang.
-@en No, her hair is not short, it is long.
+@lu Nee, hir Hoer sinn net kuerz.
+@en No, her hair is not short.
 @distractor-lu Jo
-@distractor-lu donkel
+@distractor-lu laang
 
 @sentence
 @question Wat maachen d'Fra an de Jong?
