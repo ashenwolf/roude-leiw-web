@@ -13,7 +13,8 @@
       "id": "picture",
       "title": "Describing a Picture",
       "subLessons": [
-        { "id": "picture.01", "file": "picture/01_at_the_fair.letz", "title": "At the Fair" }
+        { "id": "picture.01", "file": "picture/01_at_the_fair.letz", "title": "At the Fair" },
+        { "id": "picture.02", "file": "picture/02_the_woman_and_the_boy.letz", "title": "The Woman and the Boy" }
       ]
     },
     {

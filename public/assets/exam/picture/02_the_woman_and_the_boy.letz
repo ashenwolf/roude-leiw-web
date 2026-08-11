@@ -1,0 +1,135 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 2: The Woman and the Boy
+#
+# Zooms into ONE person from the photo of sub-lesson 1 (the busy Luxembourgish
+# funfair): the woman walking in the foreground, and the boy she is holding by
+# the hand. The examiner's second question on the picture task is almost always
+# "pick one person and describe them" — hair, clothes, what they are doing — so
+# this drills exactly that.
+#
+# The photo detail this describes: a young woman with dark, shoulder-length hair
+# in a black top and blue denim shorts, carrying a black-and-white patterned
+# handbag; next to her a boy in a green top and light shorts, smiling, holding
+# her hand.
+#
+# Same A1–A2 constraint as sub-lesson 1, with one extra guard that appearance
+# descriptions make easy to break: attributive adjectives are used ONLY on
+# feminine nouns (`eng blo Box`, `eng hell Box`), where Luxembourgish leaves the
+# adjective uninflected. Masculine and neuter attributives (`en schwaarzen
+# T-Shirt`, `e frëndlecht Gesiicht`) need declension the learner hasn't met, so
+# colours are stated predicatively instead (`D'Posch ass schwaarz a wäiss.`).
+#
+# Words that sub-lesson 1 already teaches (d'Fra, de Jong, droen, schwaarz, blo,
+# frou, trëppelen, …) are deliberately NOT repeated here — the theme's pass-gate
+# makes 01 a prerequisite for 02, and stat keys are shared across the app.
+
+@lesson P1.02 "Describing a Picture: The Woman and the Boy"
+
+# --- Hair ---
+@word d'Hoer = the hair
+@word donkel = dark
+@word hell = light
+@word laang = long
+@word kuerz = short
+
+# --- Clothes ---
+@word den T-Shirt = the T-shirt
+@word d'Box = the shorts
+@word d'Jeans = the jeans
+@word de Schung = the shoe
+@word d'Posch = the handbag
+@word wäiss = white
+
+# --- People ---
+@word d'Mamm = the mother
+@word d'Hand = the hand
+@word jonk = young
+
+# --- Doing things ---
+@word halen = to hold
+@word lächelen = to smile
+@word ausgesinn = to look like
+@word nieft = next to
+@word zesummen = together
+
+@sentence
+@lu Hir Hoer sinn donkel a laang.
+@en Her hair is dark and long.
+@distractor-lu kuerz
+@distractor-lu hell
+@distractor-en short
+@distractor-en light
+
+@sentence
+@lu Si huet eng Posch an der Hand.
+@en She has a handbag in her hand.
+@distractor-lu Box
+@distractor-lu dréit
+@distractor-en bag
+@distractor-en wears
+
+@sentence
+@lu D'Posch ass schwaarz a wäiss.
+@en The handbag is black and white.
+@distractor-lu blo
+@distractor-lu gréng
+@distractor-en blue
+@distractor-en green
+
+@sentence
+@lu Si hält d'Hand vum Jong.
+@en She is holding the boy's hand.
+@distractor-lu kuckt
+@distractor-lu Posch
+@distractor-en looks
+@distractor-en handbag
+
+@sentence
+@lu De Jong trëppelt nieft der Fra a lächelt.
+@en The boy is walking next to the woman and smiling.
+@distractor-lu hannert
+@distractor-lu steet
+@distractor-en behind
+@distractor-en standing
+
+@sentence
+@lu De Jong dréit eng hell Box.
+@en The boy is wearing light shorts.
+@distractor-lu donkel
+@distractor-lu Posch
+@distractor-en dark
+@distractor-en handbag
+
+@sentence
+@question Wéi gesäit d'Fra aus?
+@lu D'Fra ass jonk an hir Hoer sinn donkel.
+@en The woman is young and her hair is dark.
+@distractor-lu al
+@distractor-lu hell
+
+@sentence
+@question Wat dréit d'Fra?
+@lu Si dréit eng blo Box an en T-Shirt.
+@en She is wearing blue shorts and a T-shirt.
+@distractor-lu hell
+@distractor-lu Posch
+
+@sentence
+@question Wien ass d'Fra mat dem Jong?
+@lu Si ass d'Mamm vum Jong.
+@en She is the boy's mother.
+@distractor-lu Meedchen
+@distractor-lu Papp
+
+@sentence
+@question Sinn hir Hoer kuerz?
+@lu Nee, hir Hoer sinn net kuerz, si sinn laang.
+@en No, her hair is not short, it is long.
+@distractor-lu Jo
+@distractor-lu donkel
+
+@sentence
+@question Wat maachen d'Fra an de Jong?
+@lu Si trëppelen zesummen op der Fouer.
+@en They are walking together at the fair.
+@distractor-lu eleng
+@distractor-lu stinn
