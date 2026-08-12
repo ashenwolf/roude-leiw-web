@@ -1,0 +1,218 @@
+# Exam track — Describing a Picture: Living Room — Sub-lesson 3: Weather Description
+#
+# The WÉINI task for the living-room photo of sub-lessons 1–2: the time of day,
+# the season, and the weather. This is the one place in the theme where the
+# candidate is allowed to *infer* rather than report, so the point of the file is
+# the hedging register: `ech mengen`, `villäicht`, `warscheinlech`,
+# `Ech géif soen`, `Et kéint … sinn`, `Ech sinn net sécher, mee …`.
+#
+# The photo makes that unavoidable, and that is why this photo is good for the
+# task: the family is INDOORS, so the weather is not visible at all. The honest
+# answer is "I can't see the weather, maybe it is cold" — a real Sproochentest
+# answer, and a better lesson than pretending to read a sky. What evidence there
+# is: daylight and greenery through the window on the left, lamps and a candle
+# lit, everyone in long sleeves and a jumper, hot coffee.
+#
+# PURE DESCRIPTION, same as 01 and 02 — no @question prompts, no first-person
+# opinion. A hedged inference *about the photo* ("it is probably autumn, because
+# everyone is wearing warm clothes") is not an opinion: it is an observation with
+# a confidence marker, and a stranger can still check the evidence against the
+# picture.
+#
+# Same A1–A2 constraint as the rest of the theme: present tense, simple main
+# clauses or short two-clause sentences, no attributive adjectives on masculine or
+# neuter nouns — which is why there is no `en waarmen Owend` here.
+#
+# Words sub-lessons 1–2 already teach (d'Bild, d'Stuff, d'Leit, gesinn, d'Fënster
+# is NOT taught in 01 either, …) are deliberately not repeated — the pass-gate
+# makes them prerequisites and stat keys are shared app-wide. The window belongs
+# to this file rather than 01, because it is this file's only evidence.
+#
+# The three @fill blocks carry the highest-value frames in the theme, because a
+# hedge is a *pattern* that transfers to every picture and every topic: the
+# `Ech mengen, …` opener, the `well`-clause that justifies a guess (verb-final —
+# read, not assembled), and the "I cannot see it, because they are inside" frame
+# that this photo exists to teach.
+
+@lesson L1.03 "Living Room: Weather Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# it during THIS sub-lesson too. The alt text differs on purpose — it describes
+# the detail this file drills.
+@image "/assets/exam/picture/living-room/img/living-room.webp"
+@image-alt "The same living-room photo, seen for the time and the weather: daylight and green leaves through the window on the left, lamps and a candle lit, everyone in long sleeves drinking hot coffee — the weather itself is not visible, because the family is indoors."
+
+# --- Weather and season ---
+@word d'Wieder = the weather
+@word d'Joreszäit = the season
+@word de Summer = the summer
+@word den Hierscht = the autumn
+@word de Wanter = the winter
+@word de Reen = the rain
+@word kal = cold
+@word waarm = warm
+@word reenen = to rain
+
+# --- Evidence in the room ---
+@word d'Fënster = the window
+@word d'Blieder = the leaves
+@word d'Luuchten = the lamps
+@word d'Käerz = the candle
+@word d'Kleedung = the clothing
+@word dobannen = indoors
+@word dobaussen = outdoors
+@word duerch = through
+@word hell = bright
+
+# --- Time ---
+@word den Owend = the evening
+@word de Nomëtteg = the afternoon
+@word d'Woch = the week
+@word de Sonndeg = the Sunday
+@word owes = in the evening
+@word nomëttes = in the afternoon
+
+# --- Hedging a guess ---
+@word mengen = to think
+@word warscheinlech = probably
+@word villäicht = maybe
+@word sécher = sure
+@word well = because
+
+@sentence
+@lu D'Famill ass dobannen an ech gesinn d'Wieder net.
+@en The family is indoors and I do not see the weather.
+@distractor-lu Joreszäit
+@distractor-lu Fënster
+@distractor-en season
+@distractor-en window
+
+@sentence
+@lu Duerch d'Fënster gesinn ech gréng Blieder.
+@en I see green leaves through the window.
+@distractor-lu Luucht
+@distractor-lu Käerz
+@distractor-en lamp
+@distractor-en candle
+
+@sentence
+@lu Villäicht ass et kal dobaussen.
+@en Maybe it is cold outside.
+@distractor-lu waarm
+@distractor-lu Reen
+@distractor-en warm
+@distractor-en rain
+
+@sentence
+@lu Ech sinn net sécher, mee villäicht reent et.
+@en I am not sure, but maybe it is raining.
+@distractor-lu warscheinlech
+@distractor-lu Wieder
+@distractor-en probably
+@distractor-en weather
+
+@sentence
+@lu D'Leit hu waarm Kleedung un.
+@en The people are wearing warm clothing.
+@distractor-lu kal
+@distractor-lu Blieder
+@distractor-en cold
+@distractor-en leaves
+
+@sentence
+@lu D'Joreszäit ass warscheinlech den Hierscht.
+@en The season is probably autumn.
+@distractor-lu Summer
+@distractor-lu Wieder
+@distractor-en summer
+@distractor-en weather
+
+@sentence
+@lu Et ass hell dobaussen an net Owend.
+@en It is bright outside and not evening.
+@distractor-lu kal
+@distractor-lu Käerz
+@distractor-en cold
+@distractor-en candle
+
+@sentence
+@lu D'Luuchten an eng Käerz sinn un.
+@en The lamps and a candle are on.
+@distractor-lu Fënster
+@distractor-lu Kleedung
+@distractor-en window
+@distractor-en clothing
+
+@sentence
+@lu Ech mengen, et ass e Sonndeg nomëttes.
+@en I think it is a Sunday afternoon.
+@distractor-lu owes
+@distractor-lu Woch
+@distractor-en evening
+@distractor-en week
+
+@sentence
+@lu Et kéint och en Owend an der Woch sinn.
+@en It could also be an evening during the week.
+@distractor-lu Nomëtteg
+@distractor-lu Sonndeg
+@distractor-en afternoon
+@distractor-en Sunday
+
+# --- Reusable frames (@fill) ---
+
+# The hedge opener — the most transferable frame in the exam track: `Ech mengen,
+# …` prefixes any guess, on any picture or topic. The comma marks the clause
+# boundary and exempts the blank from the Eifeler Regel. Season nouns are the
+# blank; both season distractors are contradicted by the warm clothing, and the
+# third is a noun of a different kind entirely.
+@fill
+@lu Ech mengen, et ass [Hierscht].
+@en I think it is [autumn].
+@distractor-lu Summer
+@distractor-lu Wanter
+@distractor-lu Wieder
+@distractor-en summer
+@distractor-en winter
+@distractor-en weather
+
+# The justification frame — the shape that turns a guess into an exam-worthy
+# answer. `well` sends the verb to the end (`unhuet` last), so the learner reads
+# that order rather than assembling it.
+#
+# Distractor choice is load-bearing: `sécher` would be grammatical AND coherent
+# in a hedge slot, which makes it a second correct answer, not a wrong one — the
+# trap recorded in the memory file. So the distractors are `net`, which
+# contradicts the reason offered by the `well`-clause, plus two nouns, which
+# cannot occupy an adverb slot before a bare noun at all.
+@fill
+@lu Et ass [warscheinlech] Hierscht, well d'Leit waarm Kleedung unhunn.
+@en It is [probably] autumn, because the people are wearing warm clothing.
+@distractor-lu net
+@distractor-lu Summer
+@distractor-lu Wieder
+@distractor-en not
+@distractor-en summer
+@distractor-en weather
+
+# The frame this photo exists to teach: the candidate cannot see the weather, and
+# saying so with a reason is a full answer rather than a failure. Two blanks in
+# different clauses AND different word classes (noun, then adjective), so they
+# cannot swap (R6). `well si an der Stuff sinn` is verb-final and read, not built.
+#
+# `waarm` was authored here as a distractor and the builder audit killed it: in
+# the second blank it is grammatical AND coherent — the frame's own first clause
+# says the weather is not visible, so "maybe it is warm" is a second correct
+# answer, not a wrong one. Exactly the `sécher`-in-a-hedge-slot trap recorded in
+# .claude/memory/picture-description-theme.md. Every distractor here is a noun
+# instead: impossible in the adjective blank, and false about the photo in the
+# noun blank (the window, the leaves and the candle are all plainly visible).
+@fill
+@lu Ech gesinn d'[Wieder] net, well si an der Stuff sinn, villäicht ass et [kal].
+@en I do not see the [weather], because they are in the living room, maybe it is [cold].
+@distractor-lu Fënster
+@distractor-lu Käerz
+@distractor-lu Blieder
+@distractor-en window
+@distractor-en candle
+@distractor-en leaves

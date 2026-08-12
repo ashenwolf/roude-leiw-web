@@ -51,6 +51,15 @@ Run all four. The first two are one command each.
       silently drops any distractor token colliding with an answer token, so a
       multi-word EN distractor like "at the top" against an answer containing
       "at"/"the" degrades to a bare "top" tile. Invisible in the source.
+      - **Keep every `@sentence` distractor a single word.** Even with no
+        collision, a multi-word one is tokenized into that many loose tiles —
+        `a lot of` becomes three, `construction site` two — which inflates the
+        tile count and hands the learner a scrambled extra phrase to sift. Write
+        `many` / `shop` / `walking` / `right` / `front`, not `a lot of` /
+        `construction site` / `is walking` / `on the right` / `at the front`.
+        (`@fill` is the opposite: a blank and its distractors are never
+        tokenized, so multi-word tiles are fine there.) `grep -n
+        "^@distractor-\(en\|lu\) .* " <files>` lists the offenders.
       - Signature: `(entry, requestedDirection, lessonVocab)` — no rng argument.
       - Build the accepted-token set with the exported `tokenizeSentence(answer,
         lang)`, **not** a whitespace split, or `d'Posch`-style tokens make the dump

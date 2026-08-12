@@ -1,0 +1,240 @@
+# Exam track — Describing a Picture: Living Room — Sub-lesson 2: Person Description
+#
+# The WIEN task for the living-room photo of sub-lesson 1: who is present, and
+# one of them described in visual detail. The examiner's second prompt on the
+# picture task is almost always "pick one person and describe them" — hair,
+# clothes, what they are holding — so this drills exactly that.
+#
+# The photo detail this describes: four people, two younger and two older. On the
+# couch a girl with long dark hair in a dark blue jumper, a woman in a beige
+# knitted jumper holding a white cup, and a man in a dark-green jumper with short
+# hair and a dark-grey beard. In the armchair on the right a teenager in a grey
+# hooded jumper and black trousers. Everyone is wearing jeans or dark trousers;
+# the woman and the girl are smiling, the man is talking.
+#
+# PURE DESCRIPTION, same as 01 — no @question prompts, no first-person opinion.
+# A depicted person's visible emotion (`D'Fra lächelt`) is observation and is
+# wanted; what the *learner* feels about them is not.
+#
+# Same A1–A2 constraint as 01, with the guard appearance descriptions make easy
+# to break: attributive adjectives are used ONLY on feminine nouns, where
+# Luxembourgish leaves them uninflected (`eng wäiss Taass`). Masculine and neuter
+# attributives (`e grénge Pullover`, `de jonke Mann`) need declension the learner
+# has not met, so those are stated predicatively (`Säi Pullover ass gréng.`) or
+# moved into a @fill frame, which the learner reads instead of assembling.
+#
+# Words sub-lesson 1 already teaches (d'Famill, d'Leit, sëtzen, schwätzen,
+# d'Couche, d'Fotell, …) are deliberately NOT repeated — the theme's pass-gate
+# makes 01 a prerequisite for 02 and stat keys are shared app-wide. People,
+# clothes and colours live here, because appearance is this file's task.
+#
+# `zwee` and `zwou` are both taught on purpose: Luxembourgish uses a separate
+# feminine form of "two", and the sentence about two men and two women is where
+# the exam actually needs it.
+#
+# The three @fill blocks carry the frames every person description reuses: the
+# relative clause `e Mann, deen … sëtzt` (verb-final, so it is read rather than
+# assembled), the `huet … Hoer` appearance frame with its attributive before a
+# plural, and the `hunn … un` clothing frame with its separable prefix at the end.
+
+@lesson L1.02 "Living Room: Person Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# it during THIS sub-lesson too. The alt text differs on purpose — it describes
+# the detail this file drills.
+@image "/assets/exam/picture/living-room/img/living-room.webp"
+@image-alt "The same living-room photo, seen for the people in it: a girl with long dark hair in a dark blue jumper, a woman in a beige knitted jumper holding a white cup, a man in a dark-green jumper with a dark-grey beard, and a teenager in a grey hooded jumper in the armchair."
+
+# --- Who is in the picture ---
+@word de Mann = the man
+@word d'Männer = the men
+@word d'Fra = the woman
+@word d'Fraen = the women
+@word d'Meedchen = the girl
+@word de Teenager = the teenager
+@word d'Elteren = the parents
+@word zwee = two
+@word zwou = two (feminine)
+@word dräi = three
+
+# --- Appearance ---
+@word d'Hoer = the hair
+@word de Baart = the beard
+@word laang = long
+@word kuerz = short
+@word donkel = dark
+@word donkelgro = dark grey
+@word jonk = young
+@word al = old
+
+# --- Clothes and colours ---
+@word de Pullover = the jumper
+@word d'Jeans = the jeans
+@word unhunn = to wear
+@word gréng = green
+@word wäiss = white
+
+# --- Doing things ---
+@word d'Taass = the cup
+@word d'Hand = the hand
+@word halen = to hold
+@word lächelen = to smile
+@word laachen = to laugh
+@word nieft = next to
+@word zesummen = together
+
+@sentence
+@lu Ech gesinn zwee Männer an zwou Fraen.
+@en I see two men and two women.
+@distractor-lu dräi
+@distractor-lu Elteren
+@distractor-en three
+@distractor-en parents
+
+@sentence
+@lu Zwee Leit si jonk an zwee Leit sinn al.
+@en Two people are young and two people are old.
+@distractor-lu Fraen
+@distractor-lu Männer
+@distractor-en women
+@distractor-en men
+
+@sentence
+@lu Dräi Leit sëtzen op der Couche.
+@en Three people are sitting on the couch.
+@distractor-lu Fotell
+@distractor-lu stinn
+@distractor-en armchair
+@distractor-en standing
+
+@sentence
+@lu De Teenager sëtzt op der Fotell.
+@en The teenager is sitting in the armchair.
+@distractor-lu Meedchen
+@distractor-lu Couche
+@distractor-en girl
+@distractor-en couch
+
+@sentence
+@lu D'Fra sëtzt nieft dem Meedchen.
+@en The woman is sitting next to the girl.
+@distractor-lu Mann
+@distractor-lu Elteren
+@distractor-en man
+@distractor-en parents
+
+@sentence
+@lu De Mann huet e Baart a seng Hoer si kuerz.
+@en The man has a beard and his hair is short.
+@distractor-lu laang
+@distractor-lu Hand
+@distractor-en long
+@distractor-en hand
+
+@sentence
+@lu Säi Baart ass donkelgro.
+@en His beard is dark grey.
+@distractor-lu gréng
+@distractor-lu wäiss
+@distractor-en green
+@distractor-en white
+
+@sentence
+@lu Säi Pullover ass gréng an hie schwätzt mat der Famill.
+@en His jumper is green and he is talking with the family.
+@distractor-lu donkelgro
+@distractor-lu lächelt
+@distractor-en grey
+@distractor-en smiles
+
+@sentence
+@lu Hir Hoer si laang an donkel.
+@en The girl's hair is long and dark.
+@distractor-lu kuerz
+@distractor-lu hell
+@distractor-en short
+@distractor-en light
+
+@sentence
+@lu Si hält eng wäiss Taass an der Hand.
+@en She is holding a white cup in her hand.
+@distractor-lu gréng
+@distractor-lu Jeans
+@distractor-en green
+@distractor-en jeans
+
+@sentence
+@lu All Persoun huet eng Jeans un.
+@en Every person is wearing jeans.
+@distractor-lu Pullover
+@distractor-lu Taass
+@distractor-en jumper
+@distractor-en cup
+
+@sentence
+@lu D'Fra lächelt an de Mann laacht.
+@en The woman is smiling and the man is laughing.
+@distractor-lu Meedchen
+@distractor-lu Teenager
+@distractor-en girl
+@distractor-en teenager
+
+@sentence
+@lu D'Leit sëtzen zesummen a schwätzen.
+@en The people are sitting together and talking.
+@distractor-lu stinn
+@distractor-lu lächelen
+@distractor-en standing
+@distractor-en smiling
+
+# --- Reusable frames (@fill) ---
+
+# The relative-clause frame — the single most useful shape in a person
+# description: it lets the candidate single out one person before describing
+# them. `deen … sëtzt` is verb-final, so the learner reads that order instead of
+# assembling it, and the comma ends the clause, which is what keeps a later blank
+# safe under the Eifeler Regel. Blank is the verb: `sëtzen` is the wrong form
+# after `deen` and `steet` is grammatical but false for this photo, so both are
+# wrong for different reasons — and a noun cannot fill a verb slot at all.
+@fill
+@lu Ech gesinn e Mann, deen op der Couche [sëtzt].
+@en I see a man who [is sitting] on the couch.
+@distractor-lu steet
+@distractor-lu sëtzen
+@distractor-lu Baart
+@distractor-en is standing
+@distractor-en to sit
+@distractor-en beard
+
+# The appearance frame. `huet [X] Hoer` puts an attributive before a plural noun,
+# where Luxembourgish leaves it uninflected — the shape a @sentence cannot safely
+# ask the learner to assemble, and one that transfers to describing any person.
+# `huet` ends in `-t`, so the blank is safe under the Eifeler Regel (R5), and the
+# determiner-free plural keeps the slot adjective-only (R4).
+#
+# The distractors are impossible hair colours plus a noun, deliberately NOT a
+# plausible-but-different colour: `wäiss` would be arguable for an older man, and
+# arguable in a blank means a second correct answer.
+@fill
+@lu Hie huet [donkelgro] Hoer an e Baart.
+@en He has [dark grey] hair and a beard.
+@distractor-lu blo
+@distractor-lu gréng
+@distractor-lu Taass
+@distractor-en blue
+@distractor-en green
+@distractor-en cup
+
+# The `hunn … un` clothing frame — the separable `un` sits at the end, another
+# order to read rather than build. `e` is fixed in the frame and is masculine, so
+# feminine `Jeans`, `Taass` and `Hand` are ruled out on grammar alone (R4) as
+# well as on meaning.
+@fill
+@lu Hie huet e [Pullover] un.
+@en He is wearing a [jumper].
+@distractor-lu Jeans
+@distractor-lu Taass
+@distractor-lu Hand
+@distractor-en beard
+@distractor-en cup
+@distractor-en hand

@@ -1,0 +1,200 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 1: General Description
+#
+# The second picture theme, and the counterpart to Schueberfouer: where that
+# photo is a summer funfair, this one is a WINTER city street — the Groussgaass
+# (Grand-Rue) pedestrian zone in Luxembourg City. The contrast is deliberate:
+# the seasonal inference in 03 lands on the opposite answer, so the hedging
+# frames get exercised rather than memorised.
+#
+# The photo: a cobbled pedestrian street seen down its length, tall buildings
+# with shops and cafés left and right, a woman in a white jacket and red scarf
+# walking in the foreground, a child in pink further back in the middle, a
+# construction hoarding on the left, bare trees and cars far away at the end.
+#
+# The photo's coverage is split across three sub-lessons, one per exam task:
+#   01 — WHERE + WHAT: naming the place, the objects and their positions, and
+#        what the people are doing.                    ← this file
+#   02 — WHO:  the people, 1–2 of them described visually.
+#   03 — WHEN: the weather, and a hedged guess at the season and time of day.
+#
+# PURE DESCRIPTION. No @question examiner prompts and no first-person opinion,
+# preference or feeling — those belong to the topic themes. A depicted person's
+# visible state is fine: that is observation. Rule of thumb — if a stranger
+# could not check the sentence against the photo, it does not belong here.
+#
+# Not authored, for failing exactly that test: the shop *names* legible on the
+# signs. A brand name is neither Luxembourgish vocabulary nor checkable
+# description, which is why the source description's `e Chantier, dee seet dass
+# Ladurée gebaut gëtt` ships here as the plain `Lénks ass e Chantier.`
+#
+# Vocabulary and grammar are held to A1–A2 deliberately, same as the other
+# picture theme: present tense, simple main clauses, spatial adverbs +
+# prepositions, no attributive adjectives on masculine or neuter nouns.
+#
+# This file NAMES THE PLACE, which is the examiner's first question and the gap
+# a scene-elements-only file leaves: d'Foussgängerzon, d'Groussgaass, de Zentrum.
+# LOD lists Groussgaass as the Luxembourgish name of the Grand-Rue, so it is
+# safe as a named place.
+#
+# Nouns are taught in the number the content actually uses (d'Butteker, d'Beem,
+# d'Autoen as plurals) — an unused singular is a free Element standing between
+# the learner and the 100% gate.
+#
+# The @fill blocks take frames from the library in
+# .claude/memory/picture-description-theme.md that the Schueberfouer theme left
+# unused: the place-noun frame, the two-coordinated-nouns inventory, the
+# additive `Ausserdeem` listing, and the background inventory. See the skill's
+# references/content-contract.md for the mechanized bounds.
+
+@lesson P2.01 "Groussgaass: General Description"
+
+# Pre-cropped to 16:9 and encoded as WebP at 880px — see
+# .claude/memory/picture-description-theme.md for the pipeline. @image-alt stays:
+# it is the a11y text, and the caption of the placeholder frame if the file is
+# ever missing.
+@image "/assets/exam/picture/groussgaass/img/groussgaass.webp"
+@image-alt "A cobbled pedestrian shopping street in a city on a grey winter day: tall buildings with shops on the left and right, a woman in a white jacket and red scarf walking in the foreground, a child in pink further back, a construction hoarding on the left, bare trees at the far end."
+
+# --- Talking about a picture ---
+@word d'Bild = the picture
+@word gesinn = to see
+
+# --- Naming the place ---
+@word d'Stad = the city
+@word d'Strooss = the street
+@word d'Foussgängerzon = the pedestrian zone
+@word d'Groussgaass = the Grand-Rue
+@word de Zentrum = the centre
+
+# --- What is in the street ---
+@word d'Gebaier = the buildings
+@word d'Butteker = the shops
+@word d'Caféen = the pubs
+@word de Chantier = the construction site
+@word d'Stroosseluuchten = the street lamps
+@word d'Autoen = the cars
+@word d'Beem = the trees
+@word héich = tall
+
+# --- Positions ---
+@word lénks = on the left
+@word riets = on the right
+@word hannen = at the back
+
+# --- People and what they do ---
+@word d'Leit = the people
+@word akafen = to do the shopping
+
+@sentence
+@lu Dëst ass e Bild an der Stad.
+@en This is a picture in the city.
+@distractor-lu Duerf
+@distractor-lu Bësch
+@distractor-en village
+@distractor-en forest
+
+@sentence
+@lu Et si vill Leit op enger Strooss.
+@en There are a lot of people on a street.
+@distractor-lu keng
+@distractor-lu Autoen
+@distractor-en no
+@distractor-en cars
+
+@sentence
+@lu Et ass eng Foussgängerzon am Zentrum.
+@en It is a pedestrian zone in the centre.
+@distractor-lu Strooss
+@distractor-lu Buttek
+@distractor-en street
+@distractor-en shop
+
+@sentence
+@lu D'Leit akafen an de Butteker.
+@en The people are shopping in the shops.
+@distractor-lu spillen
+@distractor-lu Caféen
+@distractor-en playing
+@distractor-en pubs
+
+@sentence
+@lu Lénks ass e Chantier.
+@en On the left there is a construction site.
+@distractor-lu riets
+@distractor-lu Gebai
+@distractor-en right
+@distractor-en building
+
+@sentence
+@lu D'Gebaier sinn héich an al.
+@en The buildings are tall and old.
+@distractor-lu kleng
+@distractor-lu jonk
+@distractor-en small
+@distractor-en young
+
+@sentence
+@lu Hannen an der Strooss gesinn ech Beem an Autoen.
+@en At the back of the street I see trees and cars.
+@distractor-lu vir
+@distractor-lu Butteker
+@distractor-en front
+@distractor-en shops
+
+# --- Reusable frames (@fill) ---
+
+# The place-noun frame. `an enger` stays in the frame, so the blank takes a
+# feminine noun only — which rules out masculine `Zentrum` and `Buttek` on
+# grammar alone (R4). Both distractors are also factually wrong about the photo,
+# so the item does not rest on grammar by itself.
+#
+# `op dem Bild` is not padding: the library's bare `D'Persounen sinn …` puts the
+# plural `-n` directly before `sinn`, where the Eifeler Regel drops it
+# (`D'Persoune sinn`). Inserting a phrase that starts with a ZOAH letter keeps the
+# `-n` intact, so the frame teaches the full form rather than one the learner
+# would later have to un-learn. The n-drop audit flags the bare version.
+@fill
+@lu D'Persounen op dem Bild sinn an enger [Foussgängerzon] an der Stad.
+@en The people in the picture are in a [pedestrian zone] in the city.
+@distractor-lu Zentrum
+@distractor-lu Buttek
+@distractor-en centre
+@distractor-en shop
+
+# The inventory frame with two coordinated nouns. Blanking BOTH sides of `X a Y`
+# is an R6 violation by construction — the two tiles would be interchangeable —
+# so only the second side is a blank and `Butteker` stays fixed in the frame.
+# `vill` plus the plural forces a plural tile, so the singular distractors are
+# wrong on agreement as well as on the photo. The conjunction stays `a`, not
+# `an`: `Caféen` starts with a consonant, and an `an` here would put an
+# `-n`-final word directly before the blank and break R5.
+@fill
+@lu Lénks a riets ginn et vill Butteker a [Caféen].
+@en On the left and on the right there are a lot of shops and [pubs].
+@distractor-lu Bam
+@distractor-lu Auto
+@distractor-en tree
+@distractor-en car
+
+# The additive-listing frame. `Ausserdeem` is the connector that moves a
+# candidate past a bare list, and it forces inversion (`gesinn ech`) — an order
+# the learner reads here instead of assembling. Two blanks of different number
+# and slot (plural noun, then singular after the fixed `e`), so they cannot swap.
+@fill
+@lu Ausserdeem gesinn ech [Stroosseluuchten] an e [Chantier].
+@en Besides I see [street lamps] and a [construction site].
+@distractor-lu Autoen
+@distractor-lu Bam
+@distractor-en cars
+@distractor-en tree
+
+# The background inventory — the mirror of the foreground frame in the other
+# picture theme. `vill héich` is fixed, so the blank is a plural noun; both
+# distractors are singular and fail agreement as well as the photo.
+@fill
+@lu Am Hannergrond ginn et vill héich [Gebaier].
+@en In the background there are a lot of tall [buildings].
+@distractor-lu Gebai
+@distractor-lu Bam
+@distractor-en building
+@distractor-en tree

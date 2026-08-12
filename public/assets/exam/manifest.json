@@ -33,6 +33,50 @@
       ]
     },
     {
+      "id": "living-room",
+      "kind": "picture",
+      "title": "Family in the Living Room",
+      "subLessons": [
+        {
+          "id": "living-room.01",
+          "file": "picture/living-room/01_general.letz",
+          "title": "General Description"
+        },
+        {
+          "id": "living-room.02",
+          "file": "picture/living-room/02_people.letz",
+          "title": "Person Description"
+        },
+        {
+          "id": "living-room.03",
+          "file": "picture/living-room/03_weather.letz",
+          "title": "Weather Description"
+        }
+      ]
+    },
+    {
+      "id": "groussgaass",
+      "kind": "picture",
+      "title": "Groussgaass",
+      "subLessons": [
+        {
+          "id": "groussgaass.01",
+          "file": "picture/groussgaass/01_general.letz",
+          "title": "General Description"
+        },
+        {
+          "id": "groussgaass.02",
+          "file": "picture/groussgaass/02_people.letz",
+          "title": "Person Description"
+        },
+        {
+          "id": "groussgaass.03",
+          "file": "picture/groussgaass/03_weather.letz",
+          "title": "Weather Description"
+        }
+      ]
+    },
+    {
       "id": "shopping",
       "kind": "topic",
       "title": "Akafe Goen",

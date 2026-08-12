@@ -1,0 +1,234 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 3: Weather Description
+#
+# The WHEN task for the winter street photo of sub-lessons 1–2: the weather, and
+# a guess at the season, the day and the time of day. The examiner asks it on
+# almost every picture, and it is the one place in this theme where the candidate
+# is allowed to INFER rather than report — so the point of this file is the
+# hedging vocabulary, not the weather words.
+#
+# This is also where the two picture themes pay each other off. Schueberfouer is
+# a sunny summer afternoon; this photo is a grey winter day. The hedge frames are
+# the same, the answers are opposite — so a learner who has played both has to
+# read the evidence rather than recall which season "the picture theme" is about.
+#
+# The photo detail this describes: a pale grey overcast sky, no sun and no
+# shadows, no rain and dry cobbles, bare trees at the far end, everyone in thick
+# coats, hats and scarves. No Christmas lights over the street, which is the
+# evidence for the one negative inference below.
+#
+# The source description's reasoning is preserved as the file's spine, because it
+# is exactly what the exam rewards — a claim plus the visible evidence for it:
+#   "I think it is winter, BECAUSE the people are wearing warm clothes"
+#   "but I think this is not Christmas — there are no Christmas lights"
+#   "the weather is cold, but it is not raining"
+#
+# PURE DESCRIPTION, same as 01 and 02 — no @question prompts, no first-person
+# opinion. A hedged inference *about the photo* ("it is probably winter") is not
+# an opinion: it is an observation with a confidence marker, and a stranger can
+# still check it against the picture. Nothing about the learner liking winter or
+# this street belongs here, and nothing of that shape was authored.
+#
+# Same A1–A2 constraint as the rest of the theme: present tense, simple main
+# clauses, and no attributive adjectives on masculine or neuter nouns — which is
+# why the sky is `Den Himmel ass gro.` and not `en groen Himmel`.
+#
+# Words sub-lessons 1–2 already teach (d'Bild, d'Strooss, d'Leit, d'Kleeder,
+# waarm, gesinn, mengen, …) are deliberately NOT repeated — the pass-gate makes
+# them prerequisites and stat keys are shared across the app. `waarm` in
+# particular is taught in 02 with the clothes it belongs to and is only *used*
+# here, in the `well`-justification.
+#
+# The @fill blocks are this theme's highest-value frames, because a hedge is a
+# pattern that transfers to every picture and every topic. Three of the six
+# hedges the samples use are drilled here — `Ech sinn net sécher, mee villäicht`,
+# `Et kéint … sinn`, and `Et gesäit no … aus` — deliberately NOT the two the
+# Schueberfouer theme already owns (`Ech mengen, …` and `Et ass warscheinlech …`).
+# Each has a comma before its blank, which is also why the Eifeler Regel cannot
+# bite in them.
+
+@lesson P2.03 "Groussgaass: Weather Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/groussgaass/img/groussgaass.webp"
+@image-alt "The same winter street photo, seen for the weather: a pale grey overcast sky with no sun and no shadows, dry cobblestones, bare trees at the far end of the street, and everyone in thick coats, hats and scarves."
+
+# --- Weather ---
+@word d'Wieder = the weather
+@word den Himmel = the sky
+@word d'Sonn = the sun
+@word de Reen = the rain
+@word d'Wolleken = the clouds
+@word kal = cold
+@word gro = grey
+@word bedeckt = overcast
+@word dréchen = dry
+@word reenen = to rain
+
+# --- Season, day and time of day ---
+@word de Wanter = the winter
+@word de Summer = the summer
+@word d'Joreszäit = the season
+@word de Chrëschtdag = Christmas Day
+@word d'Luuchten = the lights
+@word de Dag = the day
+@word d'Woch = the week
+@word d'Blieder = the leaves
+@word gutt = good
+
+# --- Hedging a guess ---
+@word villäicht = maybe
+@word warscheinlech = probably
+@word sécher = certain
+@word well = because
+
+@sentence
+@lu D'Wieder ass kal, mee et reent net.
+@en The weather is cold, but it is not raining.
+@distractor-lu waarm
+@distractor-lu Sonn
+@distractor-en warm
+@distractor-en sun
+
+@sentence
+@lu Den Himmel ass gro a bedeckt.
+@en The sky is grey and overcast.
+@distractor-lu blo
+@distractor-lu Sonn
+@distractor-en blue
+@distractor-en sun
+
+@sentence
+@lu Um Bild ass keng Sonn.
+@en In the picture there is no sun.
+@distractor-lu Wolleken
+@distractor-lu vill
+@distractor-en clouds
+@distractor-en many
+
+@sentence
+@lu D'Strooss ass dréchen.
+@en The street is dry.
+@distractor-lu naass
+@distractor-lu kal
+@distractor-en wet
+@distractor-en cold
+
+@sentence
+@lu Ech mengen, et ass Wanter, well d'Leit waarm Kleeder unhunn.
+@en I think it is winter, because the people have warm clothes on.
+@distractor-lu Summer
+@distractor-lu dréchen
+@distractor-en summer
+@distractor-en dry
+
+@sentence
+@lu Op de Beem gesinn ech keng Blieder.
+@en On the trees I see no leaves.
+@distractor-lu vill
+@distractor-lu Wolleken
+@distractor-en many
+@distractor-en clouds
+
+@sentence
+@lu Ech mengen, dëst ass net de Chrëschtdag.
+@en I think this is not Christmas Day.
+@distractor-lu Wanter
+@distractor-lu Woch
+@distractor-en winter
+@distractor-en week
+
+@sentence
+@lu Et gëtt keng Luuchten an der Strooss.
+@en There are no lights in the street.
+@distractor-lu vill
+@distractor-lu Beem
+@distractor-en many
+@distractor-en trees
+
+@sentence
+@lu D'Joreszäit ass warscheinlech de Wanter.
+@en The season is probably winter.
+@distractor-lu Summer
+@distractor-lu Wieder
+@distractor-en summer
+@distractor-en weather
+
+@sentence
+@lu Fir de Wanter ass d'Wieder gutt.
+@en For winter the weather is good.
+@distractor-lu Summer
+@distractor-lu kal
+@distractor-en summer
+@distractor-en cold
+
+# --- Reusable frames (@fill) ---
+
+# Hedge 1 of 3: the strongest disclaimer in the set, for a guess the photo only
+# weakly supports. The comma both marks the clause boundary and exempts the blank
+# from the Eifeler Regel — `mee villäicht ass et [Wanter]` would otherwise be
+# unfixable after `-n`-final words. Season nouns are the blank; both distractors
+# are seasons the bare trees and thick coats contradict.
+@fill
+@lu Ech sinn net sécher, mee villäicht ass et [Wanter].
+@en I am not sure, but maybe it is [winter].
+@distractor-lu Summer
+@distractor-lu Hierscht
+@distractor-en summer
+@distractor-en autumn
+
+# Hedge 2 of 3: `Et kéint … sinn` — the subjunctive hedge, with the verb at the
+# end, which is exactly the order a learner should read rather than assemble. Two
+# blanks in DIFFERENT CLAUSES (the second is inside the `well`-clause), so they
+# cannot swap — R6 satisfied by position, not by luck.
+#
+# The library's version of this frame blanks `[Dag]` after `en normalen`, and R5
+# rejects it: `normalen` is `-n`-final mid-clause, so the correct frame text would
+# depend on which tile is placed. Moving the blank one slot right to `an der
+# [Woch]` fixes it and improves the item — the fixed `der` now admits only a
+# feminine tile, so masculine `Weekend` is out on grammar alone (R4).
+@fill
+@lu Et kéint en normalen Dag an der [Woch] sinn, well vill [Leit] ënnerwee sinn.
+@en It could be a normal day in the [week], because a lot of [people] are on the way.
+@distractor-lu Weekend
+@distractor-lu Beem
+@distractor-lu Wolleken
+@distractor-en weekend
+@distractor-en trees
+@distractor-en clouds
+
+# Hedge 3 of 3: the split `gesäit no … aus`, the one hedge that is a verb bracket
+# rather than an adverb. The bracket is the pattern, so it stays in the frame.
+# Same R5 fix as hedge 2: the blank sits after `am`, not after the `-n`-final
+# `kalen`, so the frame has one correct spelling regardless of the tile.
+#
+# Distractor choice is load-bearing here and is where the first authored fills in
+# this app went wrong: a hedge slot must NEVER get another hedge as a distractor,
+# because the six hedges are mutually substitutable and a second one would be a
+# second CORRECT answer rather than a wrong one. These are season and weather
+# nouns instead — `Reen` cannot follow `am` in this frame at all, and `Summer`
+# contradicts the `kalen` already fixed in the frame.
+@fill
+@lu Et gesäit no engem kalen Dag am [Wanter] aus.
+@en It looks like a cold day in [winter].
+@distractor-lu Summer
+@distractor-lu Fréijoer
+@distractor-lu Reen
+@distractor-en summer
+@distractor-en spring
+@distractor-en rain
+
+# The negative-evidence frame — a claim plus the absence that supports it, which
+# is the shape of the source description's Christmas reasoning and transfers to
+# any "is it a holiday / is it raining / is it busy" guess. Two blanks in
+# different clauses and different word classes (season noun, then plural noun
+# after the fixed `keng`). `keng` forces a plural, so singular tiles fail on
+# agreement as well as on sense.
+@fill
+@lu Et ass warscheinlech net [Chrëschtdag], well et keng [Luuchten] an der Strooss ginn.
+@en It is probably not [Christmas], because there are no [lights] in the street.
+@distractor-lu Wanter
+@distractor-lu Blieder
+@distractor-en winter
+@distractor-en leaves

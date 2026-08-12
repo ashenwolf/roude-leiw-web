@@ -1,0 +1,187 @@
+# Exam track — Describing a Picture: Living Room — Sub-lesson 1: General Description
+#
+# The photo: a family of four having coffee in a cosy living room. Three sit on
+# an olive couch (a teenage girl left, a woman in a knitted jumper, a man in a
+# dark-green jumper), a fourth sits in a boucle armchair on the right. A wooden
+# coffee table in the middle carries white cups, plates of biscuits, a teapot, a
+# candle and a vase of pink tulips; a patterned rug lies under it and books are
+# stacked on its lower shelf. Behind them: a bookcase full of books, framed
+# photos on the wall, a turntable and a TV on the right, a dining table and a
+# daylight window on the left, plants and lit lamps everywhere.
+#
+# The photo's coverage is split across three sub-lessons, one per exam task:
+#   01 — WOU / WAT: what kind of place it is, what the people are doing, and the
+#        objects with their positions.                       ← this file
+#   02 — WIEN:      who is there, and one person in visual detail.
+#   03 — WÉINI:     time of day and season — hedged, because the scene is indoors.
+#
+# PURE DESCRIPTION. No @question examiner prompts and no first-person opinion,
+# preference or feeling — those belong to the topic themes. A depicted person's
+# *visible* emotion is fine: that is observation. Rule of thumb — if a stranger
+# could not check the sentence against the photo, it does not belong here.
+#
+# Held to A1–A2 like the Schueberfouer theme: present tense, simple main
+# clauses, spatial adverbs and prepositions, no attributive adjectives on
+# masculine or neuter nouns. This is the file that names the setting, which is
+# the examiner's first question — `d'Stuff`, `an engem Haus`, not just a list of
+# furniture.
+#
+# The three @fill blocks carry the frames that recur in any interior photo (the
+# `Et gi vill …` inventory opener, `ënnert dem …` for position, and the
+# what-are-they-doing frame), so the fixed frame teaches the pattern while the
+# blank drills the scene word.
+
+@lesson L1.01 "Living Room: General Description"
+
+# The photo all three sub-lessons describe. Pre-cropped to 16:9 and encoded as
+# WebP at 880px. @image-alt is the a11y text and doubles as the caption of the
+# placeholder frame if the file is ever missing.
+@image "/assets/exam/picture/living-room/img/living-room.webp"
+@image-alt "A family of four having coffee in a cosy living room: three people on an olive couch, one in an armchair on the right, a wooden coffee table with cups, biscuits, a candle and pink tulips, a bookcase and framed photos behind them, a dining table and a bright window on the left."
+
+# --- The place ---
+@word d'Bild = the picture
+@word d'Stuff = the living room
+@word d'Haus = the house
+@word d'Mauer = the wall
+@word den Hannergrond = the background
+
+# --- Furniture ---
+@word d'Couche = the couch
+@word d'Fotell = the armchair
+@word de Salonsdësch = the coffee table
+@word den Iessdësch = the dining table
+@word de Teppech = the carpet
+@word d'Bicherregal = the bookcase
+
+# --- Objects ---
+@word d'Bicher = the books
+@word d'Fotoen = the photos
+@word d'Planz = the plant
+@word d'Tulpen = the tulips
+@word d'Taassen = the cups
+@word de Kaffi = the coffee
+@word d'Kichelcher = the biscuits
+
+# --- Who is there ---
+@word d'Famill = the family
+@word d'Leit = the people
+
+# --- Positions ---
+@word lénks = on the left
+@word riets = on the right
+@word ënnert = under
+
+# --- Doing things ---
+@word gesinn = to see
+@word sëtzen = to sit
+@word stoen = to stand
+@word drénken = to drink
+@word schwätzen = to talk
+
+@sentence
+@lu D'Famill ass an der Stuff an engem Haus.
+@en The family is in the living room in a house.
+@distractor-lu Gaart
+@distractor-lu Kichen
+@distractor-en garden
+@distractor-en kitchen
+
+@sentence
+@lu D'Leit drénke Kaffi a schwätzen.
+@en The people are drinking coffee and talking.
+@distractor-lu iessen
+@distractor-lu Taassen
+@distractor-en eating
+@distractor-en cups
+
+@sentence
+@lu Ech gesinn eng Couche lénks an eng Fotell riets.
+@en I see a couch on the left and an armchair on the right.
+@distractor-lu Iessdësch
+@distractor-lu Teppech
+@distractor-en table
+@distractor-en carpet
+
+@sentence
+@lu Et gi vill Fotoen un der Mauer.
+@en There are a lot of photos on the wall.
+@distractor-lu Teppech
+@distractor-lu Tulpen
+@distractor-en carpet
+@distractor-en tulips
+
+@sentence
+@lu Am Hannergrond lénks steet en Iessdësch.
+@en In the background on the left there is a dining table.
+@distractor-lu riets
+@distractor-lu Salonsdësch
+@distractor-en right
+@distractor-en shelf
+
+@sentence
+@lu Op dem Salonsdësch stinn d'Taassen an d'Kichelcher.
+@en On the coffee table are the cups and the biscuits.
+@distractor-lu Bicher
+@distractor-lu Fotoen
+@distractor-en books
+@distractor-en photos
+
+@sentence
+@lu Riets stinn d'Bicher am Bicherregal.
+@en On the right the books are in the bookcase.
+@distractor-lu lénks
+@distractor-lu Kichelcher
+@distractor-en left
+@distractor-en biscuits
+
+@sentence
+@lu Ech gesinn d'Tulpen op dem Salonsdësch.
+@en The tulips are on the coffee table.
+@distractor-lu Planz
+@distractor-lu Iessdësch
+@distractor-en plant
+@distractor-en shelf
+
+# --- Reusable frames (@fill) ---
+
+# The inventory opener. `Et gi vill … an dësem Zëmmer` transfers to any interior
+# photo, which is what makes it a frame rather than a sentence about this room.
+# `vill` sits in the frame and forces a plural, so both singular distractors are
+# wrong in the blank on grammar alone (R4), and `Zëmmer` carries the dative
+# `dësem` the learner reads instead of assembling.
+@fill
+@lu Et gi vill [Bicher] an dësem Zëmmer.
+@en There are a lot of [books] in this room.
+@distractor-lu Buch
+@distractor-lu Planz
+@distractor-lu Taass
+@distractor-en book
+@distractor-en plant
+@distractor-en cup
+
+# The position frame. The blank sits after `dem`, so only a masculine or neuter
+# noun fits — feminine `Couche` and `Fotell` would need `der` and are ruled out
+# grammatically (R4). `dem` also ends in `-m`, so the Eifeler Regel cannot bite.
+@fill
+@lu Ech gesinn en Teppech ënnert dem [Dësch].
+@en I see a carpet under the [table].
+@distractor-lu Couche
+@distractor-lu Fotell
+@distractor-lu Planz
+@distractor-en couch
+@distractor-en armchair
+@distractor-en plant
+
+# The what-are-they-doing frame. Blank is the verb, and the plural subject
+# `d'Leit` is what makes the singular `drénkt` wrong — the sharpest distractor
+# here, since the two nouns cannot occupy a verb slot at all (R3).
+@fill
+@lu Op dem Bild [drénken] d'Leit Kaffi.
+@en In the picture the people [are drinking] coffee.
+@distractor-lu drénkt
+@distractor-lu Taassen
+@distractor-lu Kichelcher
+@distractor-en drinks
+@distractor-en cups
+@distractor-en biscuits

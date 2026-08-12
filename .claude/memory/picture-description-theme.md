@@ -5,8 +5,13 @@ theme contract are in [[exam-track]]; authoring procedure is in the
 `letz-content-generator` skill. This file holds the two things that are neither:
 the **`@fill` frame library** and the **LOD-verified vocabulary** with its traps.
 
-Shipped: one theme (Schueberfouer funfair), three sub-lessons, photo committed,
-**`@fill` blocks live** — 3 / 3 / 4, the first authored fill content in the app.
+Shipped: **three themes**, each three sub-lessons with the photo committed and
+`@fill` blocks live — Schueberfouer (funfair, an outdoor street scene),
+living-room (a family having coffee **indoors**), and groussgaass (the Grand-Rue
+pedestrian zone on a **grey winter day**). The later two proved the per-photo cost
+is now mostly vocabulary: the frame library below carried over almost unchanged.
+See **Indoor vs outdoor** for the one contract wrinkle a non-street photo adds,
+and **Seasonal contrast** for why the third theme was chosen to be winter.
 
 ## The `@fill` frame library
 
@@ -22,6 +27,20 @@ ceiling (so `Op der Foto gesinn ech vill [Persounen]` shipped as
 `well`-justification). The rest are still just candidates — pick from here when
 authoring the next photo rather than re-deriving from samples.
 
+The living-room theme reused the inventory opener, the relative clause, the
+`Ech mengen, …` hedge and the `well`-justification, and added four rows below
+marked **(2)**. Reuse across two unrelated photos is the evidence that a row is
+a frame and not a sentence about one picture.
+
+The groussgaass theme was authored **entirely from unused rows** — the place-noun
+frame, the two-coordinated-nouns inventory, the additive `Ausserdeem` listing, the
+background inventory, the `op der … Säit` opener, the two-garment `hunn … un`, the
+split `gesäit … aus`, and the three hedges Schueberfouer left alone
+(`Ech sinn net sécher, mee villäicht`, `Et kéint … sinn`, `Et gesäit no … aus`).
+It added no rows, which is the library working as intended: a third photo cost
+zero frame derivation. **Deliberately picking unused rows per theme is the policy**
+— it keeps Fix Errors from drilling the same frame under three different photos.
+
 **Existential / inventory** — *Wou?* and *Objete*
 
 | Frame | Blanks drill |
@@ -33,6 +52,9 @@ authoring the next photo rather than re-deriving from samples.
 | `Ausserdeem gesinn ech [Stroosseluuchten] an e puer [Beem].` | additive listing |
 | `Zum Beispill gesinn ech och e puer [Rucksäck].` | exemplifying listing |
 | `D'Persounen sinn an enger [Foussgängerzon] an der Stad.` | place noun |
+| `Et gi vill [Bicher] an dësem Zëmmer.` **(2)** | interior inventory; `vill` forces a plural, so singulars are wrong on grammar alone |
+| `Ech gesinn en Teppech ënnert dem [Dësch].` **(2)** | position; `dem` admits only m/n nouns, so feminine distractors die for free |
+| `Op dem Bild [drénken] d'Leit Kaffi.` **(2)** | the what-are-they-doing verb; a plural subject makes the singular form the sharpest distractor |
 
 **Hedged inference** — *Wéini?*, the register the theme exists to teach
 
@@ -41,10 +63,11 @@ authoring the next photo rather than re-deriving from samples.
 | `Ech mengen, et ass [d'Groussgaass].` | the guessed thing |
 | `Ech géif soen, et ass [mëttes] oder [nomëttes].` | time-of-day pair |
 | `Ech sinn net sécher, mee villäicht ass et [Wanter].` | season |
-| `Et kéint en normalen [Dag] an der [Woch] sinn.` | day/period nouns |
-| `Et gesäit no engem [normalen] [Dag] an der Stad aus.` | the split `gesäit … aus` |
+| `Et kéint en normalen Dag an der [Woch] sinn.` ⚠ | day/period nouns |
+| `Et gesäit no engem kalen Dag am [Wanter] aus.` ⚠ | the split `gesäit … aus` |
 | `Villäicht sinn dat [Schüler], déi no der [Schoul] heemginn.` | who + where |
 | `…, well d'[Beem] keng [Blieder] hunn.` | the evidence pair |
+| `Ech gesinn d'[Wieder] net, well si an der Stuff sinn, villäicht ass et [kal].` **(2)** | the can't-see-it frame: an indoor photo's honest `Wéini?` answer |
 
 **Person description**
 
@@ -73,6 +96,16 @@ The last two rows deliberately teach **inversion** — the half of the pattern
 content usually omits. In the last one the blanked `dono` is what licenses the
 inverted `kommen`, so the frame teaches the connecting-word rule directly.
 
+⚠ **Two rows above were rewritten after the R5 test rejected them as first
+drafted.** Both originally blanked `[Dag]` straight after a declined `-n`-final
+adjective (`en normalen [Dag]`, `engem [normalen] [Dag]`), which is the Eifeler
+Regel case rule 2 below calls *unfixable* — the frame's own spelling would depend
+on the tile placed. **Moving the blank one slot right fixes it and improves the
+item**: `an der [Woch]` and `am [Wanter]` leave a fixed determiner in front, which
+now excludes tiles on gender alone (masculine `Weekend` dies against `der`). Any
+future row of the shape `<declined adj> [noun]` needs the same treatment — the
+adjective stays, the blank moves past the next preposition.
+
 **Rules these frames encode**, for adding more (mechanics and enforcement: the
 skill's content contract):
 
@@ -98,6 +131,39 @@ skill's content contract):
    different word class (nouns before a bare noun) or contradict the stated evidence
    (`net` against a `well`-clause). Full account: [[fill-in-words-exercise]].
 
+## Indoor vs outdoor: what a non-street photo changes
+
+The six-question checklist is unchanged, but `03` (**Wéini?**) has no sky to read.
+Both readings of that are wrong: skipping the file breaks the theme's shape, and
+inventing a sky the photo doesn't show teaches the learner to fabricate.
+
+The living-room theme resolves it by making the absence the lesson: *"I do not see
+the weather, because they are indoors — maybe it is cold"* is a full Sproochentest
+answer, and the user's own reference notes said so. That turns the photo's
+limitation into the best possible vehicle for the hedging register, because here
+the hedge is **forced** rather than stylistic. The evidence an interior still
+offers: daylight and greenery through a window, lamps and candles lit, sleeve
+length and jumpers, hot drinks.
+
+So an indoor `03` shifts weight from *weather* to *time of day, season by
+clothing, and weekday-vs-weekend* — all three already in the checklist. Prefer an
+indoor photo when the point is to drill hedging; prefer an outdoor one when the
+point is weather vocabulary.
+
+## Seasonal contrast: pick the opposite season on purpose
+
+Schueberfouer is a sunny summer afternoon; groussgaass was authored as a **grey
+winter day** for that reason. The hedge frames are identical across the two themes
+and the correct answers are opposite, so a learner who has played both must read
+the photo's evidence (bare trees, thick coats, no shadows) instead of recalling
+which season "the picture themes" are about. Without the contrast, `[Wanter]` vs
+`[Summer]` degenerates into a single memorised tile and the hedging register — the
+whole reason `03` exists — stops being exercised.
+
+Generalises past season: whenever a new photo can plausibly invert an inference an
+existing theme already teaches (time of day, weekday-vs-weekend, indoors-vs-out),
+pick the inverting one.
+
 ## LOD-verified vocabulary and its traps
 
 Recording the *misses* so the next person-description sub-lesson doesn't repeat
@@ -111,10 +177,21 @@ the lookups. Verification procedure: [[lod-mcp]].
 | `wahrscheinlech` | **`warscheinlech`** (no `h`) |
 | `Risenrad` | **`Riserad`** |
 | `Bréll` | **`Brëll`** |
+| `Sonndag` / `Samschdag` | **`Sonndeg`** / **`Samschdeg`** — every weekday ends `-deg` |
+| `unhuen` | **`unhunn`** (to wear) |
 
 **Not lemmas** (`found: 0`, no usable suggestion — don't keep hunting):
 `Aen`/`Aa` (eyes), `Hemd`, `Sandale`, `Bluse`, `Handtäsch`, `Kleeder`, `Schouen`,
-`Getränk`.
+`Getränk`, and — the whole living-room furniture set a German or French speaker
+reaches for first — `Sofa`, `Sessel`, `Fauteuil`. Use **`Couche`** (f) for the
+couch and **`Fotell`** (f) for the armchair.
+
+**Resolves but with empty `senses`** — the entry exists, so the spelling is
+confirmed, but LOD offers no English gloss to check your translation against:
+`Couche`, `lächelen`, `ënnert`, `nieft`, `Jugendlechen`. For the first four that
+is fine (spelling was the question). `Jugendlechen` is the one to avoid, because
+there the *gloss* was the question — use **`Teenager`** (m), which resolves with
+one.
 
 **Resolve but mean the wrong thing:** `Kleedchen` is a vest/undergarment, not a
 dress (`Kleed` is the dress); `Polo` glosses only the sport; `Buuscht` is
@@ -142,10 +219,39 @@ pl. `Butteker`), `Geschäft` (n), `Gebai` (n), `Stroosseluucht` (f), `Schëld` (
 `Reklamm` (f), `Chantier` (m), `Zonk` (m), `Rucksak` (m), `Akafstut` (f),
 `Kommissioun` (f), `Täsch` (f), `Persoun` (f), `Schüler` (m), `Mantel` (m),
 `Schal` (m), `déck`, `schick`, `rosa`, `konzentréiert`, `undoen` (→ `ugedoen`).
+Interior scene (living-room theme): `Stuff` (f, living room — `Living` (m) also
+resolves), `Couche` (f), `Fotell` (f), `Salonsdësch` (m), `Iessdësch` (m),
+`Teppech` (m), `Bicherregal` (n), `Buch` (n, pl. `Bicher`), `Mauer` (f, the wall
+of a room — `un der Mauer` for things hung *on* it, `op` only for on top of),
+`Haus` (n), `Zëmmer` (n), `Foto` (f, pl. `Fotoen`), `Planz` (f), **`Tulp`** (f,
+pl. `Tulpen` — `Tulpe` is *not* the lemma), `Taass` (f), `Kaffi` (m),
+`Kichelchen` (**m**, pl. `Kichelcher` — the `-chen` diminutive is masculine here,
+unlike German), `Käerz` (f), `Luucht` (f, pl. `Luuchten`), `Fënster` (**f**, not
+n), `Decken` (f, blanket), `Këssen` (m/n), `Spigel` (m), `Vas` (f), `Auer` (f),
+`Famill` (f), `Leit` (pl.), `Meedchen` (n),
+`Teenager` (m), `Elteren` (pl.), `Pullover` (m), `Kleedung` (f), `Baart` (m),
+`donkelgro`, `gemittlech`, `sëtzen`, `stoen`, `drénken`, `schwätzen`, `unhunn`,
+`ënnert`, `nieft`, `zesummen`, `dobannen`, `dobaussen`.
+Winter street (groussgaass theme), on top of the urban set above: `Auto` (m, pl.
+`Autoen`), `Bam` (m, pl. `Beem`), `Caféen` (pl. — the gloss LOD gives is **"pubs"**,
+not "cafés"; use LOD's), `Zentrum` (m), `Stad` (f), `Strooss` (f), `Kand` (n),
+`Mutz` (f, woolly hat), `Rucksak` (m), `Chrëschtdag` (m), `Blieder` (pl.), `Woch`
+(f), `Wolleken` (pl.), `Himmel` (m), `héich`, `al`, `gro`, `bedeckt`, `déck`,
+`dënn`, `glécklech`, `traureg`, `midd`, `lafen`, `trëppelen`, `akafen`, `well`,
+`hannen`, `vir`, `lénks`, `riets`, `an der Mëtt`.
 Function words the frames need: `villäicht`, `ausserdeem`, `ongeféier`, `wéineg`,
 `verschidden`, `lass`, `ënnerwee`, `sécher`, `Beispill` (n), `Hannergrond` (m),
 `Vierdergrond` (m), `mëttes`, `nomëttes`, `dobaussen`, `bedeckt`, `Woch` (f),
 `Blat` (n, pl. `Blieder`), `Mëttegpaus` (f), `treffen`, `heemgoen`, `akafen`.
+
+**`@sentence` distractors must be single words.** `@fill` never tokenizes a
+distractor, so the habit of writing a whole phrase carries over from fill authoring
+and is wrong there: `buildSentenceExercise` runs `tokenizeSentence` over every
+distractor, so `a lot of` ships as **three** loose tiles and `construction site` as
+two. Nothing in the build catches it — only the builder dump does. Eight of them
+shipped into the groussgaass draft before the audit; the fix is always a one-word
+synonym (`many`, `shop`, `walking`, `right`, `front`). Checklist row and the `grep`
+that finds them: the skill's `content-checks.md`.
 
 **Plurals are separate `@word` entries** where a sentence uses the plural — the
 assembled tile must be a word the learner was actually taught. Corollary: teach

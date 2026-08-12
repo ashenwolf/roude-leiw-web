@@ -1,0 +1,210 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 2: Person Description
+#
+# The WHO task for the winter street photo of sub-lesson 1: who is present, and
+# 1–2 of them described visually. The examiner's second prompt on the picture
+# task is almost always "pick one person and describe them" — clothes, what they
+# are doing, roughly how old they look — so this drills exactly that.
+#
+# The photo detail this describes: a woman in the foreground on the left in a
+# white jacket with a long red scarf, carrying a dark blue bag; a small child in
+# the middle further back in a pink coat and a red hat, running with its arms up;
+# a man on the left who looks young, walking behind the child. Several people
+# further back carry rucksacks.
+#
+# PURE DESCRIPTION, same as 01 — no @question prompts, no first-person opinion.
+# A depicted person's visible state (`D'Kand ass glécklech`, `Hie gesäit jonk
+# aus`) is observation and is wanted: the child is mid-run with its arms up and
+# the man's face is visible, so a stranger can check both against the photo.
+#
+# `Ech mengen et leeft mat sengem Papp` from the source description ships as a
+# HEDGED sentence rather than a flat claim — the family relation is genuinely an
+# inference, and the hedge is what keeps it checkable. That is the same licensed
+# non-observation the theme's 03 is built on.
+#
+# Same A1–A2 constraint as the rest of the theme, with the guard that appearance
+# descriptions make easy to break: attributive adjectives are used ONLY on
+# feminine nouns (`eng rout Mutz`, `eng waarm Jackett`), where Luxembourgish
+# leaves the adjective uninflected. Masculine and neuter attributives need
+# declension the learner has not met, so those are stated predicatively instead
+# (`D'Kand … ass glécklech.`, `De Schal ass rout.`) — which is also why there is
+# no `e glécklecht Kand` here.
+#
+# Words sub-lesson 1 already teaches (d'Leit, d'Bild, gesinn, lénks, hannen, …)
+# are deliberately NOT repeated — the theme's pass-gate makes 01 a prerequisite
+# for 02, and stat keys are shared across the app. Overlap with the Schueberfouer
+# theme (d'Fra, trëppelen, jonk, mengen) is accepted: themes are independent and
+# all open, so a learner may reach this one first and the vocabulary has to be
+# taught somewhere in the path they actually play.
+#
+# Every blank tile below is a word this theme teaches. The declined `lénkser`
+# stays in a fixed frame precisely because it is declined — the learner reads it
+# rather than deriving it.
+#
+# The @fill blocks take the person-description frames from the library in
+# .claude/memory/picture-description-theme.md that the other picture theme left
+# unused: the "I am describing the person on the … side" opener, the two-garment
+# `hunn … un` frame, and the split `gesäit … aus` state frame.
+
+@lesson P2.02 "Groussgaass: Person Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/groussgaass/img/groussgaass.webp"
+@image-alt "The same winter street photo, seen for the people in it: a woman in the foreground in a white jacket and a long red scarf carrying a dark blue bag, a small child in a pink coat and red hat running in the middle of the picture, a young-looking man walking on the left."
+
+# --- People ---
+@word d'Kand = the child
+@word d'Fra = the woman
+@word de Mann = the man
+@word de Papp = the father
+
+# --- Clothes ---
+@word d'Mutz = the woolly hat
+@word d'Jackett = the jacket
+@word de Schal = the scarf
+@word d'Kleeder = the clothes
+@word d'Täsch = the bag
+@word de Rucksak = the rucksack
+@word unhunn = to have on
+
+# --- Colours ---
+@word rout = red
+@word blo = blue
+@word wäiss = white
+
+# --- What they are doing ---
+@word trëppelen = to walk
+@word lafen = to run
+@word ausgesinn = to look
+@word mengen = to think
+
+# --- Describing them ---
+@word glécklech = happy
+@word jonk = young
+@word waarm = warm
+@word déck = thick
+@word an der Mëtt = in the middle
+@word am Vierdergrond = in the foreground
+
+@sentence
+@lu D'Kand an der Mëtt vum Bild ass glécklech.
+@en The child in the middle of the picture is happy.
+@distractor-lu traureg
+@distractor-lu Mann
+@distractor-en sad
+@distractor-en man
+
+@sentence
+@lu D'Kand huet eng rout Mutz un.
+@en The child has a red hat on.
+@distractor-lu blo
+@distractor-lu Jackett
+@distractor-en blue
+@distractor-en jacket
+
+@sentence
+@lu D'Kand leeft an der Foussgängerzon.
+@en The child is running in the pedestrian zone.
+@distractor-lu trëppelt
+@distractor-lu Fra
+@distractor-en walking
+@distractor-en woman
+
+@sentence
+@lu Ech mengen, de Mann ass de Papp vum Kand.
+@en I think the man is the child's father.
+@distractor-lu Fra
+@distractor-lu weess
+@distractor-en woman
+@distractor-en know
+
+@sentence
+@lu De Mann ass lénks an hie gesäit jonk aus.
+@en The man is on the left and he looks young.
+@distractor-lu riets
+@distractor-lu al
+@distractor-en right
+@distractor-en old
+
+@sentence
+@lu Am Vierdergrond trëppelt eng Fra.
+@en In the foreground a woman is walking.
+@distractor-lu leeft
+@distractor-lu Kand
+@distractor-en running
+@distractor-en child
+
+@sentence
+@lu D'Jackett vun der Fra ass wäiss an de Schal ass rout.
+@en The woman's jacket is white and the scarf is red.
+@distractor-lu blo
+@distractor-lu Mutz
+@distractor-en blue
+@distractor-en hat
+
+@sentence
+@lu D'Fra huet eng blo Täsch.
+@en The woman has a blue bag.
+@distractor-lu rout
+@distractor-lu Rucksak
+@distractor-en red
+@distractor-en rucksack
+
+@sentence
+@lu Hannen huet e Mann e Rucksak un.
+@en At the back a man has a rucksack on.
+@distractor-lu Täsch
+@distractor-lu vir
+@distractor-en bag
+@distractor-en front
+
+@sentence
+@lu D'Kleeder vun de Leit sinn déck a waarm.
+@en The people's clothes are thick and warm.
+@distractor-lu dënn
+@distractor-lu Mutz
+@distractor-en thin
+@distractor-en hat
+
+# --- Reusable frames (@fill) ---
+
+# The opener for the "describe one person" prompt. It names WHICH person before
+# describing them, which is what stops a candidate drifting between subjects
+# mid-answer. ONE blank: `lénkser` is declined and therefore belongs in the fixed
+# frame (R4) — blanking it would ask the learner to produce a form nothing
+# teaches. `d'` outside the blank leaves only `d'`-taking nouns, and both
+# distractors are wrong about who stands in the left foreground.
+@fill
+@lu Ech beschreiwen d'[Fra] am Vierdergrond op der lénkser Säit.
+@en I am describing the [woman] in the foreground on the left side.
+@distractor-lu Kand
+@distractor-lu Mann
+@distractor-en child
+@distractor-en man
+
+# The two-garment `hunn … un` frame — the separable `un` sits at the end, an
+# order the learner reads rather than builds. The two blanks have different
+# determiners fixed in the frame (`eng` feminine, `e` masculine), so no tile fits
+# both slots: that is R4 doing the disambiguation and R6 satisfied by word class
+# rather than by order. Both distractors are things this woman is not wearing, so
+# each is wrong in either blank on the photo as well as on gender.
+@fill
+@lu Si huet eng waarm [Jackett] an e roude [Schal] un.
+@en She has a warm [jacket] and a red [scarf] on.
+@distractor-lu Mutz
+@distractor-lu Rucksak
+@distractor-en hat
+@distractor-en rucksack
+
+# The visible-state frame with the split `gesäit … aus`. The verb bracket is the
+# pattern being taught, so it stays in the frame and the adjective is the blank.
+# Both distractors are states the photo contradicts — the child is mid-stride
+# with its arms up, which no stranger would read as tired or sad.
+@fill
+@lu D'Kand gesäit [glécklech] aus.
+@en The child looks [happy].
+@distractor-lu midd
+@distractor-lu traureg
+@distractor-en tired
+@distractor-en sad

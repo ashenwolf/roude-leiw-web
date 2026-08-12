@@ -33,6 +33,25 @@ Two enforcing files:
 added `@fill` Elements, you may not drop a file below 10 words / 3 sentences.
 `@fill` blocks do **not** count toward either floor — they are a third kind.
 
+### Duplicate `@word` — scoped to the whole theme, and both sides
+
+| Bound | Test | Failure message |
+|---|---|---|
+| no two `@word` entries in a **theme** share an LU side | M | `${theme.id}: duplicate LU side` |
+| no two `@word` entries in a **theme** share an EN gloss | M | `${theme.id}: duplicate EN gloss` |
+
+The scope is the **theme**, not the file — the sequential pass-gate makes every
+earlier sub-lesson a prerequisite, so re-teaching a word is duplicated work
+against one shared stat key. Both messages name the offending pair, so the
+failure output tells you which file to edit.
+
+**The EN half is a build gate, not advice.** `content-checks.md` lists "distinct
+EN gloss per entry" under *while authoring*, which undersells it: word-match
+shows several pairs at once, so two entries glossed `the shop` make one of them
+unmatchable by reasoning. LU synonyms the dictionary translates identically
+(`d'Geld` / `de Su` → "the money") must be re-glossed so they differ
+(`the money` / `the coin`).
+
 ## 2. `@fill` — brackets and blanks
 
 | Bound | Value | Test | Failure message |
