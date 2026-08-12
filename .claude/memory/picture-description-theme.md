@@ -32,14 +32,22 @@ The living-room theme reused the inventory opener, the relative clause, the
 marked **(2)**. Reuse across two unrelated photos is the evidence that a row is
 a frame and not a sentence about one picture.
 
-The groussgaass theme was authored **entirely from unused rows** — the place-noun
-frame, the two-coordinated-nouns inventory, the additive `Ausserdeem` listing, the
-background inventory, the `op der … Säit` opener, the two-garment `hunn … un`, the
-split `gesäit … aus`, and the three hedges Schueberfouer left alone
-(`Ech sinn net sécher, mee villäicht`, `Et kéint … sinn`, `Et gesäit no … aus`).
-It added no rows, which is the library working as intended: a third photo cost
-zero frame derivation. **Deliberately picking unused rows per theme is the policy**
-— it keeps Fix Errors from drilling the same frame under three different photos.
+The groussgaass theme started from **unused rows** — the place-noun frame, the
+two-coordinated-nouns inventory, the additive `Ausserdeem` listing, the background
+inventory, the `op der … Säit` opener, the two-garment `hunn … un`, the split
+`gesäit … aus`, and the three hedges Schueberfouer left alone (`Ech sinn net
+sécher, mee villäicht`, `Et kéint … sinn`, `Et gesäit no … aus`) — which is the
+library working as intended: reused patterns cost no derivation. It then went
+**past the library** to hit a 10-fills-per-file floor (raised from the original
+3–4; see **Fill density and the connector pass** below), authoring frames for
+every connector in the grammar reference not yet drilled anywhere in the app:
+`mee` (no inversion), `wann`/`obwuel` (the harder leading-clause inversion),
+`ob` ("whether", verb-final), `bis` ("until", verb-final), plus a second
+relative-clause shape per file. None of those connector frames are
+photo-specific — they belong in the library exactly like the original rows,
+and a fourth theme should start from *this* list before re-deriving.
+**Deliberately picking unused rows per theme is the policy** — it keeps Fix
+Errors from drilling the same frame under three different photos.
 
 **Existential / inventory** — *Wou?* and *Objete*
 
@@ -55,6 +63,19 @@ zero frame derivation. **Deliberately picking unused rows per theme is the polic
 | `Et gi vill [Bicher] an dësem Zëmmer.` **(2)** | interior inventory; `vill` forces a plural, so singulars are wrong on grammar alone |
 | `Ech gesinn en Teppech ënnert dem [Dësch].` **(2)** | position; `dem` admits only m/n nouns, so feminine distractors die for free |
 | `Op dem Bild [drénken] d'Leit Kaffi.` **(2)** | the what-are-they-doing verb; a plural subject makes the singular form the sharpest distractor |
+| `Ech gesinn e [Grupp] vu [Leit], deen do viru enger Vitrinn steet.` **(3)** | relative clause; two different-class nouns so they can't swap |
+| `Zum Beispill gesinn ech munch [Persoun] déi mat engem [Kand] ass.` **(3)** | `munch` ("many a") stays outside the blank, un-inflected |
+
+**Connectors** — drilled for their own sake, not tied to any one photo **(3)**
+
+| Frame | Blanks drill |
+|---|---|
+| `D'Leit [akafen] an de Butteker, mee kee kuckt an d'[Vitrinnen].` | `mee` — no inversion, contrast |
+| `Wann do vill Leit an der Strooss sinn, sinn d'Butteker [voller] Clienten.` | `wann` — leading clause forces inversion |
+| `Obwuel hie [jonk] ausgesäit, gesäit hien net [midd] aus.` | `obwuel` — same inversion, concession instead of condition |
+| `Ech weess net, ob et [reent].` | `ob` ("whether") — verb-final |
+| `Ech mengen, et bleift kal, bis d'Wieder sech [ännert].` | `bis` ("until") — verb-final |
+| `D'Strooss gesäit [lieweg] aus, well vill [Leit] amgaang sinn ze akafen.` | `well` outside the hedge register — reasoning is not only for weather guesses |
 
 **Hedged inference** — *Wéini?*, the register the theme exists to teach
 
@@ -68,6 +89,10 @@ zero frame derivation. **Deliberately picking unused rows per theme is the polic
 | `Villäicht sinn dat [Schüler], déi no der [Schoul] heemginn.` | who + where |
 | `…, well d'[Beem] keng [Blieder] hunn.` | the evidence pair |
 | `Ech gesinn d'[Wieder] net, well si an der Stuff sinn, villäicht ass et [kal].` **(2)** | the can't-see-it frame: an indoor photo's honest `Wéini?` answer |
+| `Et ass warscheinlech net [Chrëschtdag], well et keng [Luuchten] an der Strooss ginn.` **(3)** | negative-evidence pair: a claim plus the absence supporting it |
+| `Haut [verschwannen] d'Wolleken net, mee dat stéiert de [Chrëschtdag] net.` **(3)** | `mee` inside the hedge register, not just the connectors table |
+| `Ech gesinn en Dag, deen typesch fir de [Wanter] ass.` **(3)** | relative clause on a season guess |
+| `Ech mengen, dëst ass en normalen Dag an der [Woch] an net e [Feierdag].` ⚠ **(3)** | weekday-vs-holiday guess, distinct from the Christmas-specific row above |
 
 **Person description**
 
@@ -79,6 +104,9 @@ zero frame derivation. **Deliberately picking unused rows per theme is the polic
 | `Si dréit eng [wäiss] Jackett an eng [schwaarz] Box.` | colour + garment |
 | `Ausserdeem hält si eng [blo] [Posch] an der Hand.` | colour + object |
 | `Si gesäit [konzentréiert] aus.` | visible-state adjective |
+| `Si huet eng waarm [Jackett] an e roude [Schal] un.` **(3)** | two-garment `hunn … un`, different-gender determiners disambiguate |
+| `Ech gesinn e Kand, deen och seng [Aarm] an d'Luucht hält.` **(3)** | relative clause on a body-part noun |
+| `Ech mengen, de Mann ass [jonk], well hie net [eeler] ausgesäit.` **(3)** | age guess with its own justification, contradiction-based distractors |
 
 **Two-clause B1 frames** — the shape to prefer, because the n-drop stops at a
 comma so a blank at a clause boundary is *safer* than one mid-clause
@@ -96,15 +124,18 @@ The last two rows deliberately teach **inversion** — the half of the pattern
 content usually omits. In the last one the blanked `dono` is what licenses the
 inverted `kommen`, so the frame teaches the connecting-word rule directly.
 
-⚠ **Two rows above were rewritten after the R5 test rejected them as first
-drafted.** Both originally blanked `[Dag]` straight after a declined `-n`-final
-adjective (`en normalen [Dag]`, `engem [normalen] [Dag]`), which is the Eifeler
-Regel case rule 2 below calls *unfixable* — the frame's own spelling would depend
-on the tile placed. **Moving the blank one slot right fixes it and improves the
-item**: `an der [Woch]` and `am [Wanter]` leave a fixed determiner in front, which
-now excludes tiles on gender alone (masculine `Weekend` dies against `der`). Any
-future row of the shape `<declined adj> [noun]` needs the same treatment — the
-adjective stays, the blank moves past the next preposition.
+⚠ **Three rows above were rewritten after the R5 test rejected them as first
+drafted, all the same bug.** Each originally blanked a noun straight after a
+declined `-n`-final adjective (`en normalen [Dag]`, `engem [normalen] [Dag]`,
+and groussgaass's own `en normalen [Dag] an der Woch`), which is the Eifeler
+Regel case rule 2 below calls *unfixable* — the frame's own spelling would
+depend on the tile placed. **Moving the blank one slot right fixes it and
+improves the item**: `an der [Woch]` and `am [Wanter]` leave a fixed determiner
+in front, which now excludes tiles on gender alone (masculine `Weekend` dies
+against `der`). Any future row of the shape `<declined adj> [noun]` needs the
+same treatment — the adjective stays, the blank moves past the next
+preposition. **This has now recurred three times across two themes** — check
+for `<declined adjective> [noun]` by eye before running the test, not after.
 
 **Rules these frames encode**, for adding more (mechanics and enforcement: the
 skill's content contract):
@@ -130,6 +161,36 @@ skill's content contract):
    only by dumping the builder's tiles. In a hedge blank, distractors must be a
    different word class (nouns before a bare noun) or contradict the stated evidence
    (`net` against a `well`-clause). Full account: [[fill-in-words-exercise]].
+
+## Fill density: 10 per file, not 3–4
+
+Schueberfouer and living-room shipped 3–4 `@fill` per file — enough to cover the
+library rows that fit the photo. groussgaass raised the floor to **10 per file,
+mostly 2–3 blanks**, on explicit request, and the way to get there without
+running out of photo-specific content is a **connector pass**: once the
+photo-derived rows (existential inventory, hedge, person description) are
+exhausted, go through the conjunction/connector inventory in
+`luxembourgish-grammar.md` §2–3 and write one frame per connector not yet
+drilled anywhere in the app — `mee`, `wann`, `obwuel`, `ob`, `bis`, a second
+relative-clause shape. These are **photo-independent by construction**, so they
+never run out, and they double as the load-bearing test of the "harder half"
+the grammar reference calls out: a leading `wann`/`obwuel` clause forcing the
+main clause to invert. A 10-fill file this way ends up drilling roughly as many
+*connectors* as *scene vocabulary* — that split is intentional, not a sign the
+photo ran dry.
+
+**Reaching for a connector immediately surfaces the `<declined adj> [noun]` R5
+trap** (see the ⚠ above) far more than the original library rows did, because
+`wann`/`obwuel`/`ob`/`bis` all send something `-n`-final toward the next word by
+the nature of Luxembourgish word order. Check every connector frame for that
+shape by eye before running the integration test.
+
+**A `verschidden` quantifier is not safe for this pattern.** It is `-n`-final
+and, unlike `munch`/`e puer`, it always sits directly adjacent to the noun it
+quantifies — there is no rewording that keeps `verschidden [Noun]` clear of R5
+without breaking the meaning. Prefer `e puer` (vowel-final, no such problem) for
+any future "several X" frame; `verschidden` was tried once in groussgaass 02 and
+dropped for exactly this reason.
 
 ## Indoor vs outdoor: what a non-street photo changes
 

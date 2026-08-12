@@ -86,6 +86,14 @@
 @word déck = thick
 @word an der Mëtt = in the middle
 @word am Vierdergrond = in the foreground
+@word obwuel = although
+@word hanner = behind
+@word kucken = to watch
+@word midd = tired
+@word traureg = sad
+@word d'Aarm = the arm
+@word eeler = older
+@word erwuessen = adult
 
 @sentence
 @lu D'Kand an der Mëtt vum Bild ass glécklech.
@@ -208,3 +216,108 @@
 @distractor-lu traureg
 @distractor-en tired
 @distractor-en sad
+
+# The `obwuel`-concession frame — the third connector rule after `well` and the
+# `wann`-inversion, and the harder half of it: a leading subordinate clause
+# still forces the main clause to invert (`gesäit hie` before its subject),
+# exactly like `wann`. `obwuel hie` keeps `obwuel` followed by a ZOAH-initial
+# word, and `hie gesäit` then reads naturally into the second blank. Two blanks
+# in different clauses and different word classes (adjective, then adjective
+# after a different verb), so they cannot swap into an equally true sentence —
+# the photo directly contradicts either substitution.
+@fill
+@lu Obwuel hie [jonk] ausgesäit, gesäit hien net [midd] aus.
+@en Although he looks [young], he does not look [tired].
+@distractor-lu al
+@distractor-lu glécklech
+@distractor-en old
+@distractor-en happy
+
+# The `mee`-contrast on who is walking where. `mee` stays a connector (no
+# inversion), so both clauses keep main-clause order. `de Mann do geet` keeps
+# `Mann` followed by the ZOAH-initial `do`, rather than the non-ZOAH `geet`
+# that followed it directly in an earlier draft. Two blanks of different word
+# classes (positional adverb, then noun) in different clauses, so they cannot
+# swap.
+@fill
+@lu D'Fra trëppelt [lénks], mee de Mann do geet [hanner] dem Kand.
+@en The woman is walking [on the left], but the man there is going [behind] the child.
+@distractor-lu riets
+@distractor-lu virun
+@distractor-en on the right
+@distractor-en in front of
+
+# The `well`-justification frame for the hedged father-relation sentence — the
+# reasoning shape a candidate should reach for whenever a claim is inference,
+# not observation. `well` sends the verb to the end (`kuckt` last), so the
+# learner reads that order rather than assembling it. `de Mann` stays fixed
+# (R1: blank the content word, never the determiner); the single blank is the
+# verb, and a noun cannot occupy a verb slot at all.
+@fill
+@lu Ech mengen, de Mann ass de Papp, well hien op d'Kand [kuckt].
+@en I think the man is the father, because he is [looking] at the child.
+@distractor-lu Fra
+@distractor-lu geet
+@distractor-en woman
+@distractor-en is going
+
+# The listing frame with `e puer` — a quantifier that never declines and stays
+# fully outside the blank. `verschidden` was tried here first and dropped: it
+# is `-n`-final, and it always sits directly before its noun, so no phrasing
+# keeps that pair clear of the Eifeler Regel (R5) without breaking the meaning
+# — `e puer`, ending in a vowel, has no such problem. `hunn nach e` keeps the
+# also-`-n`-final `hunn` clear of the blank by inserting `nach` (ZOAH-initial)
+# before it, and the relative clause reorders to `deen op hirem Réck [läit]`
+# rather than `deen si … droen`, since `deen si` would fail the same rule.
+# Two blanks in different clauses and different word classes (noun, then
+# verb), so they cannot swap.
+@fill
+@lu E puer Leit hunn nach e [Rucksak], deen op hirem Réck [läit].
+@en A few people also have a [rucksack], which [lies] on their back.
+@distractor-lu Täsch
+@distractor-lu geet
+@distractor-en bag
+@distractor-en goes
+
+# The two-clause colour-contrast frame — the appearance-description shape a
+# `@sentence` cannot safely ask the learner to assemble on the masculine side,
+# since `säin` would need declension the learner has not met. The colour
+# stays predicative in both clauses, so only the noun and the adjective are
+# blanked, in different clauses and different word classes, and cannot swap.
+@fill
+@lu D'Fra dréit [wäiss], mee de Schal vum Mann ass [donkel].
+@en The woman is wearing [white], but the man's scarf is [dark].
+@distractor-lu blo
+@distractor-lu hell
+@distractor-en blue
+@distractor-en light
+
+# The relative-clause frame on the running child, giving `Aarm` its own frame
+# rather than only appearing in the source description. `deen … huet` is
+# verb-final, so the learner reads it rather than assembling it. `deen och`
+# keeps `deen` followed by the ZOAH-initial `och` rather than the non-ZOAH
+# `seng` that followed it directly in an earlier draft. Blank is the
+# body-part noun; a garment cannot occupy that slot at all on sense, though it
+# is grammatical.
+@fill
+@lu Ech gesinn e Kand, deen och seng [Aarm] an d'Luucht hält.
+@en I see a child who is also holding [its arms] up in the air.
+@distractor-lu Täsch
+@distractor-lu Mutz
+@distractor-en bag
+@distractor-en hat
+
+# The `well`-justification frame for the age guess. `well` sends the verb to
+# the end (`ausgesäit` last), so the learner reads that order rather than
+# assembling it. The comma both ends the `mengen`-clause and exempts the
+# first blank from the Eifeler Regel; the second blank sits after the
+# ZOAH-safe `net`. Two blanks in different clauses and different word classes
+# (age adjective, then age adjective after negation), so a swap would make the
+# sentence contradict itself rather than merely reorder it.
+@fill
+@lu Ech mengen, de Mann ass [jonk], well hie net [eeler] ausgesäit.
+@en I think the man is [young], because he does not look [older].
+@distractor-lu al
+@distractor-lu erwuessen
+@distractor-en old
+@distractor-en adult

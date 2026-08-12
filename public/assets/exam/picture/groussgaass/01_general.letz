@@ -84,10 +84,26 @@
 # --- People and what they do ---
 @word d'Leit = the people
 @word akafen = to do the shopping
+@word ausserdeem = besides
+@word mee = but
+@word wann = when
+@word richteg = correct
+@word wéi = as
+@word de Grupp = the group
+@word munch = many a
+@word d'Enn = the end
+@word wierklech = really
+@word d'Vitrinn = the shop window
+@word de Client = the customer
+@word d'Persoun = the person
+@word lieweg = lively
+@word stoen = to stand
+@word datt = that
+@word falsch = false
 
 @sentence
-@lu Dëst ass e Bild an der Stad.
-@en This is a picture in the city.
+@lu Dëst ass e Bild vun der Groussgaass.
+@en This is a picture of the Grand-Rue.
 @distractor-lu Duerf
 @distractor-lu Bësch
 @distractor-en village
@@ -132,6 +148,22 @@
 @distractor-lu jonk
 @distractor-en small
 @distractor-en young
+
+@sentence
+@lu Viru de Butteker stinn e puer Clienten.
+@en In front of the shops a few customers are standing.
+@distractor-lu trëppelen
+@distractor-lu Autoen
+@distractor-en walking
+@distractor-en cars
+
+@sentence
+@lu Et ass wierklech richteg, datt vill Leit an der Strooss sinn.
+@en It is really true that a lot of people are in the street.
+@distractor-lu falsch
+@distractor-lu Butteker
+@distractor-en false
+@distractor-en shops
 
 @sentence
 @lu Hannen an der Strooss gesinn ech Beem an Autoen.
@@ -198,3 +230,122 @@
 @distractor-lu Bam
 @distractor-en building
 @distractor-en tree
+
+# The `mee`-contrast frame. `mee` is a connecting word (§3 of the grammar
+# reference) and does NOT cause inversion, so `d'Leit akafen` keeps main-clause
+# order on both sides — the frame teaches the connector without smuggling in a
+# subordinate-clause rule it doesn't need. Two blanks in different clauses and
+# different word classes (verb, then plural noun), so they cannot swap (R6).
+@fill
+@lu D'Leit [akafen] an de Butteker, mee kee kuckt an d'[Vitrinnen].
+@en The people are [shopping] in the shops, but nobody looks at the [shop windows].
+@distractor-lu spillen
+@distractor-lu Autoen
+@distractor-en playing
+@distractor-en cars
+
+# The `wann`-inversion frame — the harder half of the connector pattern the
+# grammar reference calls out: a leading `wann`-clause forces the main clause to
+# invert (`voll sinn` before its subject would be un-inverted). `Wann do vill`
+# keeps `Wann` followed by the ZOAH-initial `do`, which is what the Eifeler
+# Regel actually needs — `Wann vill` would drop the `-n` because `v` is outside
+# the list. ONE blank on purpose: a `Leit`/`Clienten` pair in two slots would be
+# an R6 violation — swapping the plural-noun tiles produces an equally
+# grammatical, equally sensible sentence, just not the authored one. The blank
+# is `voller`, a predicative adjective, which cannot swap with a noun at all.
+@fill
+@lu Wann do vill Leit an der Strooss sinn, sinn d'Butteker [voller] Clienten.
+@en When there are a lot of people in the street, the shops are [full] of customers.
+@distractor-lu eidel
+@distractor-lu zou
+@distractor-en empty
+@distractor-en closed
+
+# The `well`-justification frame — the reasoning shape every exam answer should
+# reach for, not just the weather sub-lesson's. `well` sends the verb to the end
+# (`sinn` last), so the learner reads that order instead of assembling it. Two
+# blanks in different clauses (adjective, then noun after the fixed `vill`).
+@fill
+@lu D'Strooss gesäit [lieweg] aus, well vill [Leit] amgaang sinn ze akafen.
+@en The street looks [lively], because a lot of [people] are in the middle of shopping.
+@distractor-lu eidel
+@distractor-lu Autoen
+@distractor-en empty
+@distractor-en cars
+
+# The relative-clause frame — the shape a `@sentence` cannot safely ask the
+# learner to assemble, since `deen … steet` is verb-final. The relative clause
+# itself stays fixed and unblanked: `deen` is a single-`n` grammatical pronoun
+# (the same class as `een`/`kann`, not the stem-final `-nn` nouns like `Mann`),
+# so a blank anywhere near it or after the also-`-n`-final `Vitrinn` would be
+# unfixable under the Eifeler Regel (R5) regardless of word order. Both blanks
+# instead sit in the main clause, after `e` and `vu` (ZOAH-safe), and are
+# different word classes with incompatible grammar — `e` takes a singular
+# noun, `vu` takes the plural, so swapping breaks agreement (R6).
+@fill
+@lu Ech gesinn e [Grupp] vu [Leit], deen do viru enger Vitrinn steet.
+@en I see a [group] of [people] who is standing there in front of a shop window.
+@distractor-lu Chantier
+@distractor-lu Auto
+@distractor-en construction site
+@distractor-en car
+
+# The exemplifying-listing frame, mirrored from the funfair theme's `Zum
+# Beispill` row but built on `munch` instead — "many a" is a fixed A1-safe
+# quantifier that never declines, so it stays outside the blank on purpose,
+# and the blanked noun after it is what forces agreement to do the work: a
+# singular tile is the only grammatical fit, ruling out plural distractors.
+# `Persoun déi` (not `Persoun mat`) keeps the first blank clear of the
+# Eifeler Regel — `déi` starts with `d`, inside ZOAH — while still reading
+# naturally into the second, comma-free clause.
+@fill
+@lu Zum Beispill gesinn ech munch [Persoun] déi mat engem [Kand] ass.
+@en For example I see many a [person] who is with a [child].
+@distractor-lu Autoen
+@distractor-lu Butteker
+@distractor-en cars
+@distractor-en shops
+
+# The `ausserdeem` + `wéi`-comparison frame — `wéi` here is the CONJ sense
+# "as", not the interrogative "how", so the frame also disambiguates a
+# homograph the grammar reference flags. `ausserdeem` forces inversion
+# (`gesinn ech`), matching the additive frame already shipped; the `wéi`-clause
+# stays main-clause order because `wéi` (as) does not send the verb to the end.
+@fill
+@lu Ausserdeem gesinn ech [Autoen], wéi [ëmmer] um Enn vun der Strooss.
+@en Besides I see [cars], as [always] at the end of the street.
+@distractor-lu Beem
+@distractor-lu selten
+@distractor-en trees
+@distractor-en rarely
+
+# The `zum Schluss` positional frame — the exam's "at the far end" shape, kept
+# distinct from `am Hannergrond` (which the photo also uses) so the learner has
+# both. `Do gesinn ech` keeps the verb early and followed by the ZOAH-initial
+# `ech`, so the first blank only has to clear the comma before it, and the
+# second clause's `mee kee … méi` omits repeating the verb (natural ellipsis
+# under coordination) rather than putting a second verb right after a plural
+# blank. `vill` forces a plural and `kee` forces a singular, so the two blanks
+# cannot swap without breaking agreement (R6).
+@fill
+@lu Do gesinn ech nach vill [Autoen], mee kee [Chantier] méi.
+@en There I still see a lot of [cars], but no [construction site] anymore.
+@distractor-lu Beem
+@distractor-lu Buttek
+@distractor-en trees
+@distractor-en shop
+
+# The two-clause `mee`-contrast on the construction site, closing the loop on
+# the source description's own `Lénks ass e Chantier` line with a second clause.
+# `mee` stays a connector (no inversion), so `een do gesäit` keeps main-clause
+# order; `een` sits directly before the ZOAH-initial `do`, which is what keeps
+# it clear of the Eifeler Regel — an earlier draft had `kann`/`gesinn` right
+# after `een` and both fail it. The blank after the fixed `keng` is a plural
+# noun, which the negation and the photo both rule the distractors out of.
+@fill
+@lu Lénks ass e Chantier, mee een do gesäit keng [Butteker].
+@en On the left there is a construction site, but there one sees no [shops].
+@distractor-lu Autoen
+@distractor-lu Beem
+@distractor-en cars
+@distractor-en trees

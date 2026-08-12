@@ -82,6 +82,11 @@
 @word warscheinlech = probably
 @word sécher = certain
 @word well = because
+@word ob = whether
+@word verschwannen = to disappear
+@word Feierdag = the public holiday
+@word normal = normal
+@word haut = today
 
 @sentence
 @lu D'Wieder ass kal, mee et reent net.
@@ -232,3 +237,86 @@
 @distractor-lu Blieder
 @distractor-en winter
 @distractor-en leaves
+
+# The `mee`-contrast frame, closing the loop on the source's own "cold, but not
+# raining" reasoning with a second clause about the ground. `mee` stays a
+# connector (no inversion), so both clauses keep main-clause order. Two blanks
+# in different clauses and different word classes (noun, then adjective), so
+# they cannot swap into an equally true sentence.
+@fill
+@lu Et gëtt keng [Sonn], mee d'Strooss ass [dréchen].
+@en There is no [sun], but the street is [dry].
+@distractor-lu Wollek
+@distractor-lu naass
+@distractor-en cloud
+@distractor-en wet
+
+# The `ob`-uncertainty frame — `ob` ("whether") sends the verb to the end
+# (`reent` last), so the learner reads that order rather than assembling it.
+# The comma exempts the blank right after it from the Eifeler Regel. The blank
+# is the verb in both directions, so the two presentations stay aligned; a
+# noun distractor cannot occupy a verb slot at all (R3), and the weather-verb
+# distractor is grammatical but wrong for a photo with no visible rain.
+@fill
+@lu Ech weess net, ob et [reent].
+@en I do not know if it is [raining].
+@distractor-lu schéngt
+@distractor-lu schneit
+@distractor-en shining
+@distractor-en snowing
+
+# The two-clause `mee`-contrast on the lights, giving `verschwannen` its own
+# frame rather than only appearing as a distractor gloss. `Haut verschwannen`
+# keeps the `-n`-final `D'Wolleken` out of the position right before the verb —
+# the earlier draft had `D'Wolleken [verschwannen]`, which fails R5 regardless
+# of tile. Two blanks in different clauses and different word classes (verb,
+# then noun after the fixed `de`), so they cannot swap.
+@fill
+@lu Haut [verschwannen] d'Wolleken net, mee dat stéiert de [Chrëschtdag] net.
+@en Today the clouds do not [disappear], but that does not bother [Christmas].
+@distractor-lu bleiwen
+@distractor-lu Wanter
+@distractor-en stay
+@distractor-en winter
+
+# The relative-clause frame on the season guess — a shape a `@sentence` cannot
+# safely ask the learner to assemble, since `deen … ass` is verb-final. The
+# comma ends the clause, which is what keeps the blank right after it safe
+# under the Eifeler Regel. Blank is the season noun; both distractors are
+# seasons the photo's bare trees and grey sky contradict.
+@fill
+@lu Ech gesinn en Dag, deen typesch fir de [Wanter] ass.
+@en I see a day that is typical for [winter].
+@distractor-lu Summer
+@distractor-lu Fréijoer
+@distractor-en summer
+@distractor-en spring
+
+# The `Feierdag`-guess frame, giving the theme a weekday/holiday question
+# beyond the Christmas negative-evidence row. The library's shape blanks
+# `[Dag]` right after `en normalen`, and R5 rejects it, same as the day/period
+# frame above — `normalen` is `-n`-final mid-clause, so the frame's spelling
+# would depend on the tile. Moving the blank past `an der` fixes it, and the
+# fixed feminine `der` also excludes masculine `Feierdag` from that slot on
+# grammar alone (R4). `Feierdag` disambiguates from `Chrëschtdag` (a specific
+# holiday) already taught, so the two nouns cannot be confused as one Element.
+@fill
+@lu Ech mengen, dëst ass en normalen Dag an der [Woch] an net e [Feierdag].
+@en I think this is a normal day in the [week] and not a public [holiday].
+@distractor-lu Summer
+@distractor-lu Wanter
+@distractor-en summer
+@distractor-en winter
+
+# The `bis`-duration frame — the connector reference's "until" conjunction,
+# not drilled anywhere else in this theme, applied to how long the cold might
+# last. `bis` sends the verb to the end (`ännert` last). The comma exempts the
+# blank right after it from the Eifeler Regel. Blank is the verb; the two
+# noun distractors cannot occupy a verb slot at all (R3).
+@fill
+@lu Ech mengen, et bleift kal, bis d'Wieder sech [ännert].
+@en I think it stays cold until the weather [changes].
+@distractor-lu Wanter
+@distractor-lu Summer
+@distractor-en winter
+@distractor-en summer
