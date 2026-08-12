@@ -1,0 +1,269 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 3: Weather Description
+#
+# The WÉINI task for the Christmas-market photo of sub-lessons 1–2: the time of
+# day, and a hedged guess at what kind of day this is. The examiner asks it on
+# almost every picture, and it is the one place in this theme where the candidate
+# is allowed to INFER rather than report — so the point of this file is the
+# hedging vocabulary, not the weather words.
+#
+# This photo's inference angle is new relative to the other three: it does not
+# ask season (the decorations already answer that) or weather (the sky gives
+# little to read — grey and overcast, no rain, no strong light or dark). What it
+# DOES give the candidate to reason with is: (1) festive lights and garlands are
+# lit despite a bright, un-dark sky — so is this evening or daytime?, and (2) a
+# crowd of people and children gathered at a food stall — is that an ordinary day
+# or a special one?
+#
+# Sub-lesson (2) is the direct mirror of groussgaass/03's negative-evidence frame
+# (`Et ass warscheinlech net Chrëschtdag, well et keng Luuchten … ginn.`): there
+# the ABSENCE of lights argued against Christmas; here the PRESENCE of lights and
+# garlands argues for it. A learner who has played both themes must read the
+# photo's actual evidence rather than recall a fixed answer — the same payoff the
+# groussgaass/Schueberfouer summer/winter contrast was built for.
+#
+# Sub-lesson (1) inverts groussgaass's OTHER hedge frame: there, "a lot of people
+# on the way" was evidence for an ORDINARY weekday; here the same evidence (a
+# crowd, but gathered at a market stall rather than walking through) argues for a
+# SPECIAL day. Same observable fact, opposite conclusion depending on what the
+# people are doing — a genuinely new angle, not a rename of the groussgaass frame.
+#
+# The photo detail this describes: a pale grey, overcast daytime sky (no sun, no
+# darkness), the stall's string lights and garlands lit regardless, no rain, dry
+# ground, everyone in winter coats — evidence for cold rather than for a
+# particular time of day.
+#
+# PURE DESCRIPTION, same as 01 and 02 — no @question prompts, no first-person
+# opinion. A hedged inference *about the photo* ("I think it is Christmas Day,
+# because the lights are on") is not an opinion: it is an observation with a
+# confidence marker, and a stranger can still check it against the picture.
+# Nothing about the learner's own feelings about Christmas or markets belongs
+# here, and nothing of that shape was authored.
+#
+# Same A1–A2 constraint as the rest of the theme: present tense, simple main
+# clauses or short two-clause sentences, no attributive adjectives on masculine
+# or neuter nouns.
+#
+# Words sub-lessons 1–2 already teach (d'Bild, d'Leit, d'Luuchten, gesinn,
+# de Chrëschtmaart, d'Stad, …) are deliberately NOT repeated — the pass-gate
+# makes them prerequisites and stat keys are shared across the app.
+#
+# Ten @fill blocks — this theme's highest-value frames, because a hedge is a
+# pattern that transfers to every picture and every topic. All six hedges the
+# samples use appear across this theme's three files; here `Ech mengen, …` and
+# `Et ass warscheinlech …` are reused (the two hedges Schueberfouer already
+# owns) on the NEW positive Christmas-evidence claim rather than a season guess,
+# `Et gesäit no … aus`, `Ech sinn net sécher, mee villäicht` and `Et kéint … sinn`
+# carry the day-type and near-holiday inferences, and `Ech weess net, ob …`
+# drills the uncertain-`ob` pattern on a checkable visual fact. See the skill's
+# references/content-contract.md for the mechanized bounds.
+
+@lesson P3.03 "Chrëschtmaart: Weather Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/chreschtmaart/img/chreschtmaart.webp"
+@image-alt "The same Christmas-market photo, seen for the time of day: a pale grey overcast daytime sky, the stall's string lights and fir garlands lit despite the daylight, dry ground, no rain, everyone in winter coats."
+
+# --- Weather and sky ---
+@word d'Wieder = the weather
+@word den Himmel = the sky
+@word d'Sonn = the sun
+@word d'Wollek = the cloud
+@word d'Wolleken = the clouds
+@word gro = grey
+@word bedeckt = overcast
+@word reenen = to rain
+@word schneien = to snow
+
+# --- Time and season words ---
+@word den Dag = the day
+@word den Owend = the evening
+@word d'Woch = the week
+@word de Chrëschtmount = December
+@word d'Chrëschtdeeg = the Christmas holidays
+@word de Chrëschtdag = Christmas Day
+@word blénken = to twinkle, to sparkle
+@word no = near, close
+
+# --- Hedging a guess ---
+@word mengen = to think
+@word warscheinlech = probably
+@word villäicht = maybe
+@word sécher = sure
+@word well = because
+@word wëssen = to know
+@word kafen = to buy
+
+# --- Seasons (contrast for the hedges) ---
+@word de Wanter = the winter
+@word de Summer = the summer
+@word d'Fréijoer = the spring
+@word den Hierscht = the autumn
+
+@sentence
+@lu Den Himmel ass gro a bedeckt.
+@en The sky is grey and overcast.
+@distractor-lu blo
+@distractor-lu Sonn
+@distractor-en blue
+@distractor-en sun
+
+@sentence
+@lu D'Wieder ass kal, mee et reent net.
+@en The weather is cold, but it is not raining.
+@distractor-lu waarm
+@distractor-lu Wollek
+@distractor-en warm
+@distractor-en cloud
+
+@sentence
+@lu D'Luuchten um Stand blénken.
+@en The lights at the stall are sparkling.
+@distractor-lu schéngen
+@distractor-lu Beem
+@distractor-en shine
+@distractor-en trees
+
+@sentence
+@lu Ech mengen, et ass den Dag, net den Owend.
+@en I think it is daytime, not evening.
+@distractor-lu nuets
+@distractor-lu Wieder
+@distractor-en at night
+@distractor-en weather
+
+@sentence
+@lu De Chrëschtmaart ass am Chrëschtmount.
+@en The Christmas market is in December.
+@distractor-lu Summer
+@distractor-lu Stad
+@distractor-en summer
+@distractor-en city
+
+@sentence
+@lu Et ass warscheinlech kal um Chrëschtmaart.
+@en It is probably cold at the Christmas market.
+@distractor-lu waarm
+@distractor-lu Wieder
+@distractor-en warm
+@distractor-en weather
+
+# --- Reusable frames (@fill) ---
+
+# The positive mirror of groussgaass's negative-evidence frame: there the
+# ABSENCE of lights argued against Christmas, here their PRESENCE argues for it.
+# Two blanks in different clauses (main clause noun, then the well-clause noun),
+# so they cannot swap (R6). The determiner `d'` stays fixed before the second
+# blank, ruling out a masculine tile there on grammar alone (R4); `well` keeps
+# the verb `sinn` at the end, an order the learner reads rather than assembles.
+@fill
+@lu Ech mengen, et ass [Chrëschtdag], well d'[Luuchten] un sinn.
+@en I think it is [Christmas Day], because the [lights] are on.
+@distractor-lu Summer
+@distractor-lu Fréijoer
+@distractor-lu Wieder
+@distractor-en summer
+@distractor-en spring
+@distractor-en weather
+
+# The new "many people" inversion: the same observable fact groussgaass used as
+# evidence for an ORDINARY day here argues for a SPECIAL one, because the people
+# are gathered at a market stall rather than walking through. `vill` stays fixed
+# and forces a plural, so a singular tile fails on agreement as well as on sense.
+@fill
+@lu Et ass warscheinlech net en normalen Dag, well vill [Leit] um Maart sinn.
+@en It is probably not a normal day, because a lot of [people] are at the market.
+@distractor-lu Wolleken
+@distractor-lu Beem
+@distractor-en clouds
+@distractor-en trees
+
+# The split `gesäit … aus` hedge, contrasted with a `mee`-clause — the frame
+# teaches that a scene can look one way and the checkable weather fact can still
+# differ. The comma before the blank both marks the clause boundary and exempts
+# it from the Eifeler Regel.
+@fill
+@lu Et gesäit no engem kalen Chrëschtmaart aus, mee d'Wieder ass [gro].
+@en It looks like a cold Christmas market, but the weather is [grey].
+@distractor-lu sonneg
+@distractor-lu waarm
+@distractor-en sunny
+@distractor-en warm
+
+# The `no sinn` proximity frame — "the holidays are near" is the shape of
+# reasoning that transfers to any pre-holiday photo. One blank, and the fixed
+# noun before it ends in a non-`-n` consonant, so no comma is needed for R5.
+# Distractors are adjectives that cannot coherently describe a date drawing
+# closer, so they fail on sense rather than on grammar (R3).
+@fill
+@lu Vill Leit sinn um Chrëschtmaart, well d'Chrëschtdeeg [no] sinn.
+@en A lot of people are at the Christmas market, because the Christmas holidays are [near].
+@distractor-lu midd
+@distractor-lu glécklech
+@distractor-en tired
+@distractor-en happy
+
+# Hedge: `Ech sinn net sécher, mee villäicht` — the strongest disclaimer in the
+# set, used here for a guess the photo only weakly supports (the sky gives
+# little to read). The comma both marks the clause boundary and exempts the
+# blank from the Eifeler Regel. Season nouns are the blank; both distractors are
+# seasons the coats and lit decorations contradict.
+@fill
+@lu Ech sinn net sécher, mee villäicht ass et [Wanter].
+@en I am not sure, but maybe it is [winter].
+@distractor-lu Summer
+@distractor-lu Fréijoer
+@distractor-en summer
+@distractor-en spring
+
+# Hedge: `Et kéint … sinn`, the subjunctive hedge, with the verb at the end —
+# exactly the order a learner should read rather than assemble. Two blanks in
+# DIFFERENT CLAUSES (the second inside the `well`-clause), so they cannot swap
+# (R6). `der` stays fixed before the first blank, admitting only a feminine
+# tile — masculine `Chrëschtmount` is out on grammar alone (R4).
+@fill
+@lu Et kéint eng normal [Woch] sinn, well d'Leit [Iessen] kafen.
+@en It could be a normal [week], because the people are buying [food].
+@distractor-lu Chrëschtmount
+@distractor-lu Wieder
+@distractor-lu Beem
+@distractor-en December
+@distractor-en weather
+@distractor-en trees
+
+# The uncertain-`ob` pattern, drilled here on a different verb than groussgaass's
+# rain guess: whether it is going to snow is exactly the kind of thing a
+# stranger can verify against a grey winter sky. `ob` sends the verb to the end,
+# an order the learner reads rather than assembles; the comma exempts the blank
+# right after it from the Eifeler Regel.
+@fill
+@lu Ech weess net, ob et [schneit].
+@en I do not know whether it is [snowing].
+@distractor-lu schéngt
+@distractor-lu blénkt
+@distractor-en shining
+@distractor-en sparkling
+
+# The two-clause weather report from Schueberfouer, reused with this photo's
+# actual sky. Two blanks in different clauses and different word classes
+# (adjective, then noun), so they cannot swap.
+@fill
+@lu D'Wieder ass [gro], an ech gesinn keng [Sonn].
+@en The weather is [grey], and I see no [sun].
+@distractor-lu sonneg
+@distractor-lu Wollek
+@distractor-en sunny
+@distractor-en cloud
+
+# The `Ech mengen, …` opener reused on the theme's OTHER new inference — time of
+# day rather than season, since the lit decorations make that the harder of the
+# two questions this photo raises. Comma exempts the blank from the Eifeler
+# Regel; both distractors are times of day the daylight sky contradicts.
+@fill
+@lu Ech mengen, et ass [Dag].
+@en I think it is [daytime].
+@distractor-lu Owend
+@distractor-lu Nuecht
+@distractor-en evening
+@distractor-en night

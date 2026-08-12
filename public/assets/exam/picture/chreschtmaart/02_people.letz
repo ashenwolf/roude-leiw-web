@@ -1,0 +1,262 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 2: Person Description
+#
+# The WIEN task for the Christmas-market photo of sub-lesson 1: who is present,
+# and 1–2 of them described visually. The examiner's second prompt on the picture
+# task is almost always "pick one person and describe them" — clothes, what they
+# are doing, roughly how old they look — so this drills exactly that.
+#
+# The photo detail this describes: two men standing at the stall's counter, both
+# in dark winter jackets and light trousers, ordering food; in the foreground a
+# girl with her hair in a ponytail wearing a blue fluffy hooded jacket, and next
+# to her a smaller child in a bright yellow high-visibility vest.
+#
+# PURE DESCRIPTION, same as 01 — no @question prompts, no first-person opinion.
+# A depicted person's visible state (`Si gesäit kal aus`) is observation and is
+# wanted: both children are dressed for cold weather and that is checkable
+# against the photo.
+#
+# Same A1–A2 constraint as the rest of the theme, with the guard that appearance
+# descriptions make easy to break: attributive adjectives are used ONLY on
+# feminine nouns (`eng blo Jackett`), where Luxembourgish leaves the adjective
+# uninflected. Masculine and neuter attributives need declension the learner has
+# not met, so those are stated predicatively instead (`De Mantel ass donkel.`).
+#
+# Words sub-lesson 1 already teaches (d'Leit, d'Kanner, d'Bild, gesinn, lénks,
+# riets, …) are deliberately NOT repeated — the theme's pass-gate makes 01 a
+# prerequisite for 02, and stat keys are shared across the app. Overlap with the
+# other picture themes (de Mann, jonk, donkel) is accepted: themes are
+# independent and all open, so a learner may reach this one first.
+#
+# Ten @fill blocks carry this file's share of the answering-pattern drill: the
+# split `gesäit … aus` state frame, the `hunn … un` clothing frame for both a
+# masculine and a feminine garment, the "describing the person on the … side"
+# opener, the relative clause, the possessive appearance frame, and the numeral
+# pair — most of the person-description library, each reused with a pairing or
+# blank no earlier picture theme has taught for THIS photo's people.
+
+@lesson P3.02 "Chrëschtmaart: Person Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/chreschtmaart/img/chreschtmaart.webp"
+@image-alt "The same Christmas-market photo, seen for the people in it: two men in dark winter jackets ordering at the counter, a girl with a ponytail in a blue fluffy hooded jacket in the foreground, and next to her a smaller child in a bright yellow high-visibility vest."
+
+# --- People ---
+@word de Mann = the man
+@word d'Männer = the men
+@word d'Meedchen = the girl
+@word d'Kand = the child
+
+# --- Clothes ---
+@word de Mantel = the coat
+@word d'Jackett = the jacket
+@word d'Kaputz = the hood
+@word d'Box = the trousers
+
+# --- Colours ---
+@word donkel = dark
+@word hell = light
+@word blo = blue
+@word giel = yellow
+
+# --- What they are doing ---
+@word ausgesinn = to look
+@word niewent = next to
+@word hunn = to have
+
+# --- Describing them ---
+@word jonk = young
+@word kal = cold
+@word glécklech = happy
+@word ongeféier = approximately
+
+@sentence
+@lu Zwee Männer stinn um Stand a bestellen.
+@en Two men are standing at the stall and ordering.
+@distractor-lu waarden
+@distractor-lu Kanner
+@distractor-en waiting
+@distractor-en children
+
+@sentence
+@lu De Mann lénks huet e Mantel un an de Mantel ass donkel.
+@en The man on the left is wearing a coat and the coat is dark.
+@distractor-lu hell
+@distractor-lu Kaputz
+@distractor-en light
+@distractor-en hood
+
+@sentence
+@lu Hir Box ass hell.
+@en Their trousers are light.
+@distractor-lu donkel
+@distractor-lu Mantel
+@distractor-en dark
+@distractor-en coat
+
+@sentence
+@lu Am Vierdergrond ass e Meedchen mat engem Kand.
+@en In the foreground there is a girl with a child.
+@distractor-lu Mann
+@distractor-lu Stand
+@distractor-en man
+@distractor-en stall
+
+@sentence
+@lu D'Meedchen huet eng blo Jackett mat enger Kaputz un.
+@en The girl is wearing a blue jacket with a hood.
+@distractor-lu giel
+@distractor-lu Box
+@distractor-en yellow
+@distractor-en trousers
+
+@sentence
+@lu D'Kand niewent hir huet eng giel Jackett un.
+@en The child next to her is wearing a yellow jacket.
+@distractor-lu blo
+@distractor-lu Mantel
+@distractor-en blue
+@distractor-en coat
+
+@sentence
+@lu D'Meedchen ass jonk an et gesäit kal aus.
+@en The girl is young and looks cold.
+@distractor-lu al
+@distractor-lu waarm
+@distractor-en old
+@distractor-en warm
+
+@sentence
+@lu D'Kanner sinn ongeféier fënnef Joer al.
+@en The children are approximately five years old.
+@distractor-lu zéng
+@distractor-lu Männer
+@distractor-en ten
+@distractor-en men
+
+# --- Reusable frames (@fill) ---
+
+# The visible-state frame with the split `gesäit … aus`. The verb bracket is the
+# pattern being taught, so it stays in the frame and the adjective is the blank.
+# Both distractors are states the thick jacket and hood contradict, so the item
+# does not rest on grammar alone.
+@fill
+@lu D'Meedchen gesäit [kal] aus.
+@en The girl looks [cold].
+@distractor-lu waarm
+@distractor-lu midd
+@distractor-en warm
+@distractor-en tired
+
+# The `hunn … un` clothing frame for a masculine garment — the separable `un`
+# sits at the end, an order the learner reads rather than builds. `e` is fixed in
+# the frame and masculine, so feminine `Jackett` and `Box` are ruled out on
+# grammar alone (R4) as well as on the photo.
+@fill
+@lu Déi zwee Männer hunn e [Mantel] un.
+@en The two men are wearing a [coat].
+@distractor-lu Jackett
+@distractor-lu Box
+@distractor-en jacket
+@distractor-en trousers
+
+# The same clothing frame with a feminine garment and determiner, so the
+# opposite gender rules out `Mantel` and `Box` this time — R4 doing the work from
+# the other side. `eng` is fixed and feminine.
+@fill
+@lu D'Meedchen huet eng [Jackett] un.
+@en The girl is wearing a [jacket].
+@distractor-lu Mantel
+@distractor-lu Kaputz
+@distractor-en coat
+@distractor-en hood
+
+# The "describing the person on the … side" opener from groussgaass, reused for
+# a different person and side. `lénkser` is declined and stays in the fixed
+# frame (R4) — blanking it would ask the learner to produce a form nothing
+# teaches. `de` outside the blank leaves only `de`-taking nouns, and both
+# distractors are wrong about who stands there.
+@fill
+@lu Ech beschreiwen de [Mann] op der lénkser Säit.
+@en I am describing the [man] on the left side.
+@distractor-lu Meedchen
+@distractor-lu Kand
+@distractor-en girl
+@distractor-en child
+
+# The relative-clause frame from Schueberfouer, reused with a market verb.
+# `deen … bestellt` is verb-final, so the learner reads the order instead of
+# assembling it, and the comma ends the clause, which is what keeps the blank
+# after `Mann` safe under the Eifeler Regel. Blank is the verb: a noun cannot
+# fill a verb slot at all (R3).
+@fill
+@lu Ech gesinn e Mann, deen um Stand [bestellt].
+@en I see a man who [is ordering] at the stall.
+@distractor-lu Kand
+@distractor-lu Jackett
+@distractor-en child
+@distractor-en jacket
+
+# The numeral-plus-noun pair for the market's two men. `Beim Stand sinn` puts
+# the finite verb before both blanks, so the numeral tile is the word directly
+# in front of the noun blank rather than `sinn` — `zwee` does not end in `-n`,
+# which is what keeps the frame clear of the Eifeler Regel (R5). Different word
+# classes in the two blanks (numeral, then plural noun), so they cannot swap
+# (R6).
+@fill
+@lu Beim Stand sinn et [zwee] [Männer].
+@en At the stall there are [two] [men].
+@distractor-lu Kanner
+@distractor-lu Meedercher
+@distractor-en children
+@distractor-en girls
+
+# The possessive appearance frame — `Hiren/Säin … ass …` recurs for any person,
+# here applied to the girl's jacket colour rather than hair. One blank on
+# purpose: the two-blank version would join two predicative adjectives with no
+# forced order, an R6 violation (see the library's hair-colour precedent).
+@fill
+@lu Hir Jackett ass [blo] a si huet eng Kaputz un.
+@en Her jacket is [blue] and she is wearing a hood.
+@distractor-lu giel
+@distractor-lu donkel
+@distractor-en yellow
+@distractor-en dark
+
+# The visible-state frame reused for the second child, with the opposite
+# state to the earlier `[kal]` blank — both are checkable against the photo's
+# two children, so the pair together teaches that the same frame can carry
+# either answer depending on which person is described.
+@fill
+@lu D'Kand niewent hir gesäit [glécklech] aus.
+@en The child next to her looks [happy].
+@distractor-lu midd
+@distractor-lu traureg
+@distractor-en tired
+@distractor-en sad
+
+# The relative-clause frame reused a second time with a different subject and
+# verb — a girl who has something on, rather than a man who is doing something.
+# The comma ends the clause, keeping the blank after `Meedchen` safe under the
+# Eifeler Regel; the blank is the garment noun, and `eng` fixed before it rules
+# out masculine tiles on grammar (R4) as well as on the photo.
+@fill
+@lu Ech gesinn e Meedchen, dat eng [Jackett] un huet.
+@en I see a girl who has a [jacket] on.
+@distractor-lu Mantel
+@distractor-lu Kaputz
+@distractor-en coat
+@distractor-en hood
+
+# The `hunn … un` clothing frame a third time, now for the trousers rather than
+# the jacket, and with the plural subject `d'Männer` making the plural verb form
+# the correct tile — the singular distractor fails on agreement (R3) as well as
+# the two masculine-noun distractors failing on gender (R4).
+@fill
+@lu D'Männer [hunn] hell Box un.
+@en The men [have] light trousers on.
+@distractor-lu huet
+@distractor-lu Mantel
+@distractor-en has
+@distractor-en coat

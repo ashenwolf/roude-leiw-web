@@ -77,6 +77,28 @@
       ]
     },
     {
+      "id": "chreschtmaart",
+      "kind": "picture",
+      "title": "Chrëschtmaart",
+      "subLessons": [
+        {
+          "id": "chreschtmaart.01",
+          "file": "picture/chreschtmaart/01_general.letz",
+          "title": "General Description"
+        },
+        {
+          "id": "chreschtmaart.02",
+          "file": "picture/chreschtmaart/02_people.letz",
+          "title": "Person Description"
+        },
+        {
+          "id": "chreschtmaart.03",
+          "file": "picture/chreschtmaart/03_weather.letz",
+          "title": "Weather Description"
+        }
+      ]
+    },
+    {
       "id": "shopping",
       "kind": "topic",
       "title": "Akafe Goen",

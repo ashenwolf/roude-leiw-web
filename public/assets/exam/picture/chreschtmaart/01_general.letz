@@ -1,0 +1,273 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 1: General Description
+#
+# The fourth picture theme, and the first EVENING / HOLIDAY scene: a Luxembourg
+# City Christmas market food stall at dusk, lit up with strings of lights and
+# garlands. Where the other three photos ask "what season, what time of day", this
+# one already answers both visually — so its new inference angle is different: is
+# this a normal day or a special one, and how busy is it. That is drilled in 03.
+#
+# The photo: a wooden Christmas-market stall selling grilled food, decorated with
+# fir garlands, red baubles and strings of warm lights, with a large model
+# hamburger, a reindeer figure and a red Santa figure on its roof. Two men stand at
+# the counter ordering; several children in winter coats and one in a high-vis
+# vest stand in the foreground; more stalls and bare trees with fairy lights are
+# visible behind, and the sky is grey daytime overcast rather than dark.
+#
+# The photo's coverage is split across three sub-lessons, one per exam task:
+#   01 — WOU + WAT: naming the place, the objects and their positions, and what
+#        the people are doing.                              ← this file
+#   02 — WIEN: the people, 1–2 of them described visually.
+#   03 — WÉINI: the time of day and whether this looks like an ordinary day.
+#
+# PURE DESCRIPTION. No @question examiner prompts and no first-person opinion,
+# preference or feeling — those belong to the topic themes. A depicted person's
+# visible state is fine: that is observation. Rule of thumb — if a stranger could
+# not check the sentence against the photo, it does not belong here.
+#
+# Not authored, for failing exactly that test: the stall's own signage
+# ("Grill Bar Rond", "Choucroute Garnie") and prices on the chalkboard. A brand
+# name or a price tag is neither Luxembourgish vocabulary nor checkable
+# description of the *scene*, so the stall ships here as the plain
+# `de Stand mat Iessen`.
+#
+# Vocabulary and grammar are held to A1–A2 deliberately, same as the other
+# picture themes: present tense, simple main clauses, spatial adverbs +
+# prepositions, no attributive adjectives on masculine or neuter nouns.
+#
+# This file NAMES THE PLACE, which is the examiner's first question:
+# de Chrëschtmaart. LOD lists it as a plain dictionary compound ("Christmas
+# market"), so it is safe to teach as ordinary vocabulary, not a proper noun.
+#
+# Nouns are taught in the number the content actually uses (d'Luuchten,
+# d'Kanner, d'Buden as plurals) — an unused singular is a free Element standing
+# between the learner and the 100% gate.
+#
+# Ten @fill blocks, not the usual three — this is the theme's answering-pattern
+# drill, so it carries more of the reusable frame library than a single-photo
+# file would otherwise need: the existential opener, the background/foreground
+# pair, the two-coordinated-nouns inventory, the exemplifying `Zum Beispill`
+# listing, the additive `Ausserdeem` listing, the place-noun frame, and the
+# what-are-they-doing frame — most reused shapes from the library, each given a
+# pairing or blank no earlier picture theme has taught. See the skill's
+# references/content-contract.md for the mechanized bounds.
+
+@lesson P3.01 "Chrëschtmaart: General Description"
+
+# Pre-cropped to 16:9 and encoded as WebP at 880px — see
+# .claude/memory/picture-description-theme.md for the pipeline. @image-alt stays:
+# it is the a11y text, and the caption of the placeholder frame if the file is
+# ever missing.
+@image "/assets/exam/picture/chreschtmaart/img/chreschtmaart.webp"
+@image-alt "A decorated Christmas-market food stall at a city square: strings of warm lights and fir garlands with red baubles, a large model hamburger and a reindeer figure on the roof, two men ordering at the counter, several children in winter coats in the foreground, more stalls and bare trees with lights behind."
+
+# --- Talking about a picture ---
+@word d'Bild = the picture
+@word gesinn = to see
+
+# --- Naming the place ---
+@word de Chrëschtmaart = the Christmas market
+@word d'Stad = the city
+@word d'Plaz = the square
+
+# --- What is at the market ---
+@word de Stand = the stall
+@word d'Buden = the stalls
+@word d'Iessen = the food
+@word d'Luuchten = the lights
+@word d'Guirlande = the garland
+@word de Bam = the tree
+@word d'Beem = the trees
+
+# --- Positions ---
+@word lénks = on the left
+@word riets = on the right
+@word virun = in front of
+@word de Vierdergrond = the foreground
+@word den Hannergrond = the background
+
+# --- People and what they do ---
+@word d'Leit = the people
+@word d'Kanner = the children
+@word bestellen = to order
+@word waarden = to wait
+@word verkafen = to sell
+@word d'Famill = the family
+@word d'Famillen = the families
+@word d'Fotoen = the photos
+
+@sentence
+@lu Dëst ass e Bild vum Chrëschtmaart.
+@en This is a picture of the Christmas market.
+@distractor-lu Buttek
+@distractor-lu Schoul
+@distractor-en shop
+@distractor-en school
+
+@sentence
+@lu Et si vill Leit op der Plaz.
+@en There are a lot of people on the square.
+@distractor-lu keng
+@distractor-lu Buden
+@distractor-en no
+@distractor-en stalls
+
+@sentence
+@lu De Chrëschtmaart ass an der Stad.
+@en The Christmas market is in the city.
+@distractor-lu Bam
+@distractor-lu Haus
+@distractor-en tree
+@distractor-en house
+
+@sentence
+@lu Zwee Männer bestellen um Stand.
+@en Two men are ordering at the stall.
+@distractor-lu waarden
+@distractor-lu Kanner
+@distractor-en waiting
+@distractor-en children
+
+@sentence
+@lu Virun dem Stand stinn e puer Kanner.
+@en In front of the stall there are a few children.
+@distractor-lu hannert
+@distractor-lu Männer
+@distractor-en behind
+@distractor-en men
+
+@sentence
+@lu De Stand ass mat Luuchten a Guirlande dekoréiert.
+@en The stall is decorated with lights and a garland.
+@distractor-lu Blieder
+@distractor-lu Wolleken
+@distractor-en leaves
+@distractor-en clouds
+
+@sentence
+@lu Hannert dem Stand gesinn ech méi Buden a Beem.
+@en Behind the stall I see more stalls and trees.
+@distractor-lu virun
+@distractor-lu Kanner
+@distractor-en in front
+@distractor-en children
+
+# --- Reusable frames (@fill) ---
+
+# The inventory frame with two coordinated nouns — the shape Schueberfouer and
+# groussgaass already used, but with a pairing neither has taught. Only the
+# second side is a blank (both sides blanked would violate R6 by construction),
+# and `d'` stays fixed in the frame, so masculine `Bam` and `Chrëschtmaart` are
+# both ruled out on grammar as well as on the photo.
+@fill
+@lu Ech gesinn d'Buden an d'[Luuchten].
+@en I see the stalls and the [lights].
+@distractor-lu Bam
+@distractor-lu Chrëschtmaart
+@distractor-en tree
+@distractor-en Christmas market
+
+# The exemplifying-listing frame — `Zum Beispill` introduces one example from a
+# larger scene, a pattern that transfers to any busy photo. `e puer` forces a
+# plural, so the singular distractors fail on agreement as well as on the photo.
+@fill
+@lu Zum Beispill gesinn ech e puer [Kanner].
+@en For example I see a few [children].
+@distractor-lu Bam
+@distractor-lu Stand
+@distractor-en tree
+@distractor-en stall
+
+# The background inventory — the same frame groussgaass used for buildings, here
+# applied to a scene word neither picture theme has taught yet. `méi héich` is
+# fixed, so the blank is a plural noun; both distractors are singular and fail
+# agreement as well as the photo.
+@fill
+@lu Am Hannergrond ginn et méi héich [Beem].
+@en In the background there are more tall [trees].
+@distractor-lu Bam
+@distractor-lu Stand
+@distractor-en tree
+@distractor-en stall
+
+# The existential opener Schueberfouer used for a busy funfair, reused here for a
+# busy market — the idiom `vill lass` transfers to any crowded scene, which is
+# what makes it a frame rather than a sentence about this photo. Both
+# distractors describe the opposite scene, so neither works in the blank.
+@fill
+@lu Um Chrëschtmaart ass vill [lass].
+@en At the Christmas market a lot is [happening].
+@distractor-lu roueg
+@distractor-lu zou
+@distractor-en quiet
+@distractor-en closed
+
+# The background/foreground pair, mirrored from Schueberfouer with new nouns:
+# the position word stays fixed in the frame and the scene noun is the blank, so
+# `d'` rules out masculine tiles on grammar (R4) as well as on the photo.
+@fill
+@lu Am Vierdergrond gesinn ech d'[Kanner].
+@en In the foreground I see the [children].
+@distractor-lu Bam
+@distractor-lu Stand
+@distractor-en tree
+@distractor-en stall
+
+# The additive-listing frame groussgaass used for street furniture, reused here
+# for the market's food and photos. `Ausserdeem` forces inversion (`gesinn ech`),
+# an order the learner reads rather than assembles. Two blanks of different
+# number and slot (plural noun, then singular after the fixed `d'`), so they
+# cannot swap; `d'` also keeps both blanks clear of the Eifeler Regel (R5),
+# unlike an indefinite `en` would.
+@fill
+@lu Ausserdeem gesinn ech [Fotoen] an d'[Iessen].
+@en Besides I see [photos] and the [food].
+@distractor-lu Buden
+@distractor-lu Bam
+@distractor-en stalls
+@distractor-en tree
+
+# The place-noun frame from groussgaass, reused for a different named place.
+# `an der` stays fixed, so the blank takes only a feminine noun — ruling out
+# masculine `Chrëschtmaart` and `Bam` on grammar alone (R4) as well as on the
+# photo.
+@fill
+@lu D'Leit op dem Bild sinn an enger [Stad].
+@en The people in the picture are in a [city].
+@distractor-lu Chrëschtmaart
+@distractor-lu Bam
+@distractor-en Christmas market
+@distractor-en tree
+
+# The what-are-they-doing frame from living-room, reused with a new verb. The
+# blank is the verb, and the plural subject `d'Leit` makes the singular form the
+# sharpest distractor — a noun cannot occupy a verb slot at all (R3).
+@fill
+@lu Um Chrëschtmaart [kucken] d'Leit d'Buden.
+@en At the Christmas market the people [look at] the stalls.
+@distractor-lu kuckt
+@distractor-lu Iesswueren
+@distractor-en looks at
+@distractor-en food
+
+# The exemplifying frame reused with the market's families, and a second blank
+# in a different clause and word class (place noun after the fixed `um`), so
+# they cannot swap (R6).
+@fill
+@lu Zum Beispill gesinn ech e puer [Famillen] um [Chrëschtmaart].
+@en For example I see a few [families] at the [Christmas market].
+@distractor-lu Kanner
+@distractor-lu Buttek
+@distractor-en children
+@distractor-en shop
+
+# The Schueberfouer foreground/background mirror frame, here with the position
+# word as the blank instead of the noun — the pair the examiner listens for.
+# Both distractors are grammatical in the slot and factually wrong about the
+# photo (the family stands in front of the stall, not behind it).
+@fill
+@lu Am [Vierdergrond] gesinn ech eng Famill.
+@en In the [foreground] I see a family.
+@distractor-lu Hannergrond
+@distractor-lu Chrëschtmaart
+@distractor-en background
+@distractor-en Christmas market
