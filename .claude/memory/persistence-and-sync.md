@@ -1,7 +1,7 @@
 # Persistence, sync, and guest migration
 
-The *mechanics* are in CLAUDE.md § Data Persistence; this is the reasoning behind
-the awkward parts.
+The *mechanics* are in [`.claude/reference/persistence.md`](../reference/persistence.md);
+this is the reasoning behind the awkward parts.
 
 ## Sync is fire-and-forget, and that is a measured choice
 

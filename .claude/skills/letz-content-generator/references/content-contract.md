@@ -221,7 +221,7 @@ skipped line. The complete set (`src/lib/letz-parser/lexer.ts`):
 
 Do not invent directives. Adding one means editing `lexer.ts`, `parser.ts` and
 `visitor.ts` together; adding a new **Element kind** on top of that is a much wider
-change (see CLAUDE.md's ⚠️ note).
+change (see the ⚠️ note in `.claude/reference/mode-specs.md`).
 
 Lexer facts that bite while authoring:
 - `Text` is `/[^=\r\n#@]+/` — a value containing `=`, `#` or `@` **cannot** be

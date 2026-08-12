@@ -4,7 +4,7 @@
  *
  * If this test fails, the guest→auth migration path is broken — a session played
  * as a guest would produce different stats than the same session played as an
- * authenticated user. See CLAUDE.md > Architecture Reference > Post-Session refresh.
+ * authenticated user. See .claude/reference/mode-specs.md > Post-Session refresh invariant.
  */
 import { describe, it, expect } from "vitest";
 

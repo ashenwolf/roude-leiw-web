@@ -1,5 +1,5 @@
 // Layer 3 contract — produced by Mode planners (Layer 4), consumed by SessionMachine.
-// See CLAUDE.md > Architecture Reference > Pipeline alignment invariants.
+// See .claude/reference/mode-specs.md > Pipeline alignment invariants.
 
 import type { Lesson } from "./letz-parser";
 import type { Exercise } from "./types";

@@ -6,7 +6,7 @@
 // (`chunkIntoWordMatchExercises`, `buildSentenceExercise`), which is why
 // @question handling, tokenization, and distractor rules behave identically
 // here and in Lesson Mode.
-// See CLAUDE.md > Architecture Reference > Mode specs > Exam.
+// See .claude/reference/mode-specs.md > Mode specs > Exam.
 
 import { shuffle } from "../../lib/shuffle";
 import { BLOCK_COUNT, EXAM, LESSON } from "../constants";

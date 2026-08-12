@@ -2,7 +2,7 @@
 // deliberately separate so course pipelines (Word Mix, Fix Errors, Home stats) never
 // see exam content. Theme-first, no level dimension: themes correspond to
 // Sproochentest oral-exam topics; sub-lesson order within a theme is manifest order.
-// See CLAUDE.md > Architecture Reference > Exam track.
+// See .claude/memory/exam-track.md.
 
 import { fetchLetzFile } from "../exercise/lesson-loader";
 

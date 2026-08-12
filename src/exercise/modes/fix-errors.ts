@@ -1,5 +1,5 @@
 // Layer 4 — Fix Errors Mode planner.
-// See CLAUDE.md > Architecture Reference > Mode specs > Fix Errors.
+// See .claude/reference/mode-specs.md > Mode specs > Fix Errors.
 
 import { FIX_ERRORS, LESSON } from "../constants";
 import { selectErrorPool } from "../error-pool";

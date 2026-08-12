@@ -1,6 +1,6 @@
 // Canonical constants for the exercise/session system. Every magic number
 // tied to mode shape, slot/pair counts, or selection probabilities lives here.
-// See CLAUDE.md > Architecture Reference for the binding model.
+// See .claude/reference/mode-specs.md for the binding model.
 
 // --- Stats gate (global) -----------------------------------------------------
 

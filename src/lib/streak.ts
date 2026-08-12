@@ -1,7 +1,7 @@
 /**
  * Shared streak computation — imported by both the worker and the client.
  * Must produce byte-identical results on both sides; do NOT duplicate this logic.
- * See CLAUDE.md > Architecture Reference > Post-Session refresh invariant.
+ * See .claude/reference/mode-specs.md > Post-Session refresh invariant.
  */
 
 import type { DailySession, StreakInfo } from "../context/auth";

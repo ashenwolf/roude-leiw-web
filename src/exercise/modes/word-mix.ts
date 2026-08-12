@@ -1,5 +1,5 @@
 // Layer 4 — Word Mix Mode planner.
-// See CLAUDE.md > Architecture Reference > Mode specs > Word Mix.
+// See .claude/reference/mode-specs.md > Mode specs > Word Mix.
 
 import { BLOCK_COUNT, WORD_MIX } from "../constants";
 import { selectErrorPool } from "../error-pool";

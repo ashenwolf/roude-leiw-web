@@ -112,10 +112,11 @@ solution, which the one-blank-one-tile model cannot express.
 
 ## Cost, stated honestly
 
-A new *Exercise type* is the 3-touch-point recipe in CLAUDE.md. A new *Element
+A new *Exercise type* is the 3-touch-point recipe in
+[`.claude/reference/mode-specs.md`](../reference/mode-specs.md). A new *Element
 kind* is far wider — the shipped change touched roughly 30 files including tests,
-i.e. an order of magnitude more. The CLAUDE.md recipe understates it; that gap is
-why the ⚠️ note there exists.
+i.e. an order of magnitude more. The 3-touch-point recipe understates it; that
+gap is why the ⚠️ note there exists.
 
 ## Open question: where a cross-topic frame lives
 

@@ -115,8 +115,9 @@ export const AppHome = () => {
 
   const levelInfo = useMemo(() => computePlayerLevel(totalXP), [totalXP]);
 
-  // Single source of truth for "struggling content" (see CLAUDE.md, Centralized
-  // error pool). GLOBAL scope: course lessons + in-scope exam sub-lessons.
+  // Single source of truth for "struggling content" (see
+  // .claude/reference/mode-specs.md > Centralized error pool). GLOBAL scope:
+  // course lessons + in-scope exam sub-lessons.
   // While phase-2 lessons are still loading, `lessons` is empty and
   // both pools come back empty → button stays disabled (safe default).
   const errorPool = useMemo(

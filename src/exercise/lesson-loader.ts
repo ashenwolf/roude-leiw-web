@@ -17,7 +17,7 @@ export type LessonMeta = {
  *
  * `title` is the user-facing lesson title from the `.letz` `@lesson` directive,
  * duplicated into the manifest so Home can render lesson cards without fetching
- * any `.letz` content (see CLAUDE.md > Architecture Reference > Migration note).
+ * any `.letz` content.
  *
  * Sections group lessons within a level (e.g. "A1.1 — Basics"); Home renders one
  * lesson grid per section. Lesson IDs remain flat within their level for

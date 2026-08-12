@@ -1,6 +1,6 @@
 // Layer 1 — Selection primitives.
 // Pure functions: no React, no fetch, no KV. Mode planners (Layer 4) import from here.
-// See CLAUDE.md > Architecture Reference > Encapsulation layering.
+// See .claude/reference/mode-specs.md > Encapsulation layering.
 
 import type { Lesson, WordEntry, SentenceEntry } from "./letz-parser";
 

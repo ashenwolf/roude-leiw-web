@@ -50,7 +50,7 @@ export type AuthContextType = {
    * Optimistically apply a stats delta to the local auth state without waiting
    * for the server round-trip. Must be called before (or alongside) the POST so
    * Home re-renders immediately after a Session ends.
-   * See CLAUDE.md > Architecture Reference > Post-Session refresh invariant.
+   * See .claude/reference/mode-specs.md > Post-Session refresh invariant.
    */
   applyStatsDelta: (
     wordResults: Record<string, WordStats>,

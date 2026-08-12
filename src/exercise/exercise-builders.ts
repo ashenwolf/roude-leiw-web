@@ -2,7 +2,7 @@
 // Pure factories: receive already-selected content, return a typed Exercise value.
 // Selection (which words/sentences to use) is the caller's job; these functions
 // only concern themselves with the Exercise data shape.
-// See CLAUDE.md > Architecture Reference > Encapsulation layering.
+// See .claude/reference/mode-specs.md > Encapsulation layering.
 
 import { shuffle } from "../lib/shuffle";
 import { fillKey, phraseKey } from "./progression";

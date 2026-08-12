@@ -1,6 +1,6 @@
 // Layer 4 — Lesson Mode planner.
 // Reads lessons + stats, emits a complete ModeConfig with every Slot pre-built.
-// See CLAUDE.md > Architecture Reference > Mode specs > Lesson.
+// See .claude/reference/mode-specs.md > Mode specs > Lesson.
 
 import { LESSON, MASTERY_CORRECT_COUNT } from "../constants";
 import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
@@ -51,7 +51,7 @@ const BLOCK_BOUNDARIES = [
  *
  * Pool = all lessons where `lesson.meta.id <= upperBoundId` (lexicographic).
  * "Start Learning" passes the cursor as upperBoundId; picking a specific lesson
- * passes that lesson's id (clamps the pool — see CLAUDE.md > Mode specs > Lesson).
+ * passes that lesson's id (clamps the pool — see .claude/reference/mode-specs.md > Mode specs > Lesson).
  */
 export const planLessonMode = (
   lessons: Lesson[],
