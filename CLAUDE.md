@@ -105,7 +105,7 @@ src/
 │   ├── exam-catalog.ts               # ExamManifest/SubLessonMeta types + loaders (theme-first, no level)
 │   └── exam-progression.ts           # Pure: computeExamView (pass-gate unlock), selectSubLessonsToLoad
 │
-├── exercise/                         # Core game logic — producer pipeline (see Glossary for terms)
+├── exercise/                         # Core game logic — producer pipeline (see Glossary + Architecture Reference for layers/terms)
 │   ├── use-exercise-session.ts       # Hook: thin wiring (load + dispatch only)
 │   ├── lesson-loader.ts              # Producer: manifest → LessonMeta[] (cheap); .letz files → Lesson (lazy, per Session)
 │   ├── letz-parser.ts                # Facade: entriesToWordPairs()
@@ -116,32 +116,19 @@ src/
 │   ├── error-pool.ts                 # Layer 0: selectErrorPool(stats, lessons) → { words, phrases, fills }
 │   ├── error-scope.ts                # Producer: loadErrorScopeLessons — global (course + played/unlocked exam) pool
 │   ├── lesson-image.ts               # Pure: resolveLessonImage (@image/@image-alt → src or text placeholder)
-│   ├── selection.ts                  # Layer 1: bucketedPick, pickPair, pickSentence, pickFill primitives
-│   ├── exercise-builders.ts          # Layer 1: buildWordMatchExercise, buildSentenceExercise, buildFillExercise,
-│   │                                 #          tokenizeSentence, parseFillLine, stripBlankMarkers
+│   ├── selection.ts                  # Layer 1 primitives (bucketedPick, pickPair, pickSentence, pickFill)
+│   ├── exercise-builders.ts          # Layer 1 builders (buildWordMatchExercise/buildSentenceExercise/buildFillExercise, tokenizeSentence)
 │   ├── types.ts                      # Exercise discriminated union (word-match | sentence-builder | fill-blank)
 │   ├── progression.ts                # Pure derivations: classifyWord, computeLessonProgress, computeUnlockedLessonIds
 │   ├── lesson-rows.ts                # Producer: (lessons, userWords) → HomeLessonsView
-│   ├── modes/                        # Layer 4 — Mode planners (each returns ModeConfig)
-│   │   ├── lesson.ts                 # planLessonMode(lessons, upperBoundId) → ModeConfig
-│   │   ├── word-mix.ts               # planWordMixMode(lessons, stats) → ModeConfig
-│   │   ├── fix-errors.ts             # planFixErrorsMode(lessons, stats) → ModeConfig
-│   │   └── exam.ts                   # planExamMode(subLesson) → ModeConfig (chunk + shuffle, no stats)
-│   ├── FillBlank/                    # Fill-in-words game (one tile per blank)
-│   │   ├── index.tsx                 # Game UI (gapped frame + tile pool)
-│   │   ├── use-fill-game.ts          # Wiring: state + result tracking
-│   │   ├── types.ts                  # FillGameState (placed[], selectedBlank, checkResult, result)
-│   │   └── fill-logic.ts             # Pure logic: initFillGame, targetBlank, applyTokenTap,
-│   │                                 #   applyBlankTap/Clear, applySubmit, toWordResultMap, correctSentence
-│   ├── SentenceBuilder/              # Sentence assembly game
-│   │   ├── index.tsx                 # Game UI (token tiles + assembled area)
-│   │   ├── use-sentence-game.ts      # Game state machine + result tracking
-│   │   ├── types.ts                  # SentencePuzzle, TokenState, SentenceGameState
-│   │   └── sentence-logic.ts        # Pure logic: initSentenceGame, applyTokenTap, applySubmit, toWordResultMap
-│   └── WordMatch/                    # Matching game
-│       ├── index.tsx                 # Game UI (left/right columns)
-│       ├── use-game.ts               # Game state machine + word result tracking
-│       └── types.ts                  # WordPair, SlotState, GameState, WordResultMap
+│   ├── modes/                        # Layer 4 — Mode planners (each returns ModeConfig; specs below)
+│   │   ├── lesson.ts
+│   │   ├── word-mix.ts
+│   │   ├── fix-errors.ts
+│   │   └── exam.ts
+│   ├── FillBlank/                    # Fill-in-words game — index.tsx (UI), use-fill-game.ts (wiring), fill-logic.ts (pure), types.ts
+│   ├── SentenceBuilder/              # Sentence assembly game — same split as FillBlank
+│   └── WordMatch/                    # Matching game — same split as FillBlank
 │
 ├── persistence/                      # Backend sync
 │   ├── migration.ts                  # Pure: buildMigrationChunks — splits guest totals into validator-bound sync payloads
@@ -328,12 +315,7 @@ Three touch points, nothing else:
 
 The SessionMachine and Mode planners are untouched. If a Mode wants to schedule the new Exercise type in its Slots, the matching Mode planner adds a builder call (the only place that knows which Exercises feed which Modes).
 
-> ⚠️ **This recipe covers a new *mechanic* over existing content.** A new Exercise type that also introduces a new **Element kind** (a new `.letz` block with its own stat key) is a much wider change — it ripples far past the three touch points, because `Lesson.<newKind>` reaches the parser (`lexer.ts`/`parser.ts`/`visitor.ts`), `progression.ts` (`collectLessonKeys`, `computeLessonProgress`, mastery, `computeOverallStats`), `error-pool.ts`, `lesson-rows.ts`, the Mode planners, `worker/lib/validators.ts`, and every matching test. `@fill` was the first such addition (Aug 2026) and it paid down the two traps this note used to warn about:
->
-> - **Key family, not copy-paste.** `KEYED_ELEMENT_PREFIXES` in `progression.ts` drives `elementKey`/`combinedElementStats`/`elementIdentity`, and `isWordKey` is an explicit "matches no known prefix" check (**never** `!isPhraseKey` — that miscounts every new prefix as vocabulary and inflates `totalWords`/`masteredWords` on Home). Adding a third keyed kind means adding one string to that list, plus a thin named alias if the call sites read better for it.
-> - **Validator first.** `worker/lib/validators.ts` must admit the new key prefix in `isValidKey`, with a test. Miss it and the server rejects **the entire sync batch** containing one such result — not graceful degradation but silent total progress loss for that Session.
->
-> See [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md) for the full record, including which ambiguity rules a new content-bearing kind should enforce in `tests/integration/`.
+> ⚠️ **This recipe covers a new *mechanic* over existing content.** A new Exercise type that also introduces a new **Element kind** (a new `.letz` block with its own stat key) is a much wider change — it ripples past the three touch points into the parser (`lexer.ts`/`parser.ts`/`visitor.ts`), `progression.ts` (key family, mastery, `computeOverallStats`), `error-pool.ts`, `lesson-rows.ts`, the Mode planners, `worker/lib/validators.ts`, and every matching test. `@fill` (Aug 2026) was the first such addition. See [mastery-and-unlock](.claude/memory/mastery-and-unlock.md) § key family for the two traps it paid down (`isWordKey` vs `!isPhraseKey`, validator-first) and [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md) for the full record.
 
 ### Data Pipeline (read this first)
 
@@ -479,7 +461,7 @@ Guest mode is preserved — the app works without login; auth is additive.
 
 ### Data Persistence
 
-> ⚠️ **Keep this section accurate every session.** Treat the storage diagram, key shapes, and rules as load-bearing — same contract as the Data Pipeline section. When you add a new KV key, change a stored shape, alter merge semantics, or introduce a new client-side store, update this section in the same change.
+> ⚠️ **Keep this section accurate every session.** Treat the storage diagram, key shapes, and rules as load-bearing — same contract as the Data Pipeline section. When you add a new KV key, change a stored shape, alter merge semantics, or introduce a new client-side store, update this section in the same change. The *reasoning* behind the fire-and-forget sync, focus-refetch, and migration tradeoffs lives in [persistence-and-sync](.claude/memory/persistence-and-sync.md) — this section states the mechanics only.
 
 #### Three storage tiers
 
@@ -547,9 +529,9 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 6. **Sessions and CSRF use TTLs, not deletion sweeps.** Cloudflare KV `expirationTtl` handles cleanup. Don't write background jobs to expire stale rows.
 
-7. **`unlockedLessons` doubles as the exam played-SubLesson set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes. Course logic only ever looks up course ids, exam logic only exam ids — the two id families coexist inertly in one array, and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field. On the exam track these ids no longer gate the next step (that's the mastery pass-gate); they mark a SubLesson as opened — sticky access plus content-load / error-pool scope.
+7. **`unlockedLessons` doubles as the exam played-SubLesson set.** Exam SubLesson manifest ids (e.g. `vacation.01`) are pushed through the same `newlyUnlockedLessons` channel when an exam Session completes — course logic only ever looks up course ids, exam logic only exam ids, so the two id families coexist inertly in one array and guest→auth migration carries both for free. Don't add a separate `playedSubLessons` field.
 
-8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` is structurally a subset of `UserData` (no profile). The guest→auth migration in `use-progress.ts` posts lifetime guest totals through the same `/api/progress/sync` endpoint — but those totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads (the bounds are tabulated once under **Security > Validate before merge**; per-key counters over the cap are split across chunks and the additive server merge reconstructs exact totals). Chunks POST sequentially, stopping at the first failure; `localStorage` is cleared **only when every chunk succeeded** (`syncProgress` returns a success boolean). On failure guest data stays put and the next page load retries from scratch — chunks already merged before the failure then double-count (additive merge, no idempotency key); accepted tradeoff, documented in the effect. Per-day history/streak cannot migrate (validator date window is [today-2, today+1]); all guest progress lands on today's date.
+8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` (`UserData` minus `profile`). Lifetime guest totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads that reconstruct exact totals via the additive server merge. Chunks POST sequentially; `localStorage` clears **only when every chunk succeeded**. See [persistence-and-sync](.claude/memory/persistence-and-sync.md) for the accepted failure-mode tradeoffs (partial-chunk double-count, streak-history loss on migration).
 
 #### Client read/write pattern
 
@@ -715,52 +697,13 @@ If you can't write a test without a mock, the code isn't on-pattern — extract 
 
 ### Lesson File Format (`.letz`)
 
-Custom DSL parsed by Chevrotain. Files live at `public/assets/lessons/{level}/{filename}.letz`.
+Custom DSL parsed by Chevrotain. Course files: `public/assets/lessons/{level}/{filename}.letz`. Exam files: `public/assets/exam/{theme}/{file}.letz` (in-file `@lesson` id is a cosmetic label there; the manifest id is authoritative).
 
-```
-@lesson A1.01 "Basic Greetings"
+Directives: `@lesson`, `@word` (→ `entries[]`), `@sentence` + `@lu`/`@en`/`@question`/`@distractor-en`/`@distractor-lu` (→ `sentences[]`, used by `SentenceBuilder`), `@fill` + `@lu`/`@en`/`@distractor-*` with `[bracketed]` blanks (→ `fills[]`, used by `FillBlank`), `@image`/`@image-alt` (lesson-level, quoted values). The parser hard-errors on unknown `@`-tokens — adding a directive means touching `lexer.ts`/`parser.ts`/`visitor.ts` together, and a new directive that's also a new **Element kind** is the wider change flagged above.
 
-@word Moien = good morning
-@word Äddi = bye
-@word Merci = thanks
+`@fill` is a **distinct Element kind** from `@sentence` (own stat key `fill:{direction}:{firstEn}`, own error pool) — one blank = one tile verbatim, exactly one `@lu`/`@en` per block, no `@question`, never the same sentence as a `@sentence`. **Exam SubLessons only** — `planLessonMode` schedules no fill Slots, so `@fill` under `public/assets/lessons/` would be unpassable.
 
-@sentence
-  @lu Ech sinn de Luca.
-  @en I am Luca.
-  @distractor-en He is Luca.
-  @distractor-lu Du bass de Luca.
-
-@sentence
-  @question Wéi heescht Dir?
-  @lu Ech heesche Luca.
-  @en My name is Luca.
-
-@fill
-  @lu Am Hannergrond [gesinn] ech d'[Riserad].
-  @en In the background I [see] the [Ferris wheel].
-  @distractor-lu Vierdergrond
-  @distractor-lu Bam
-  @distractor-en foreground
-  @distractor-en tree
-```
-
-`@word` entries produce vocabulary pairs (`entries[]`). `@sentence` blocks produce assembly puzzles (`sentences[]`) used by `SentenceBuilder`; `@distractor-en` / `@distractor-lu` supply wrong-answer tokens. `@question` (optional) is an examiner question in Luxembourgish rendered above the prompt — such sentences are always presented en→lu (assemble the LU answer), enforced in `buildSentenceExercise`, so **any** lesson on either track can use it. Exam files live at `public/assets/exam/{theme}/{file}.letz`; their in-file `@lesson` id is a lexer-legal label only (`V1.01`), the exam manifest id is authoritative. Every exam SubLesson mixes `@word` and `@sentence` content (enforced by `tests/integration/exam-manifest-letz.test.ts`) so Sessions alternate exercise types.
-
-`@fill` blocks produce fill-in-words items (`fills[]`) used by `FillBlank` — a **distinct Element kind**, not a variant of `@sentence`: own stat key (`fill:{direction}:{firstEn}`), own error pool, own contribution to lesson progress. `[bracketed]` blanks mark the gaps in place, so the correct sentence stays readable in the source. **One blank = one tile, verbatim** — neither blanks nor distractors are tokenized (a `[Ferris wheel]` blank is a single tile), which is what makes "exactly one correct form" achievable. Exactly one `@lu` and one `@en` per block (accepted variants *are* ambiguity here); no `@question` (the frame is the prompt); `@fill` and `@sentence` must never carry the same sentence. `tests/integration/fill-content-rules.test.ts` enforces the mechanizable ambiguity rules over both catalogs — bracket balance, 1–4 blanks per direction, ≥2 surviving distractors, tile distinctness under `normalizeAnswer`, no answer leaking into the frame, the Eifeler-Regel adjacency rule, and stat-key uniqueness after 64-char truncation. Read [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md) before authoring: the rules that are *not* mechanizable (a distractor must be wrong in every blank; determiners and prepositions stay in the fixed frame) are where fill content actually goes wrong.
-
-**Do not read the integration tests to learn the bounds.** `.claude/skills/letz-content-generator/references/content-contract.md` is the authored-content cheat-sheet: every mechanized limit across both test files, each row naming the failing test and its message, plus the facts that are invisible in prose — distractors are counted *after* the builder drops answer collisions, `normalizeAnswer` folds case and strips apostrophes, and `fillKey` is built from the **raw `@en` line including brackets** (so moving a bracket orphans recorded progress). Keep it in lockstep with the tests: change a bound there, change that row in the same commit.
-
-**Content contracts differ by exam theme kind** — every manifest theme declares `kind: "topic" | "picture"` (`ThemeKind` in `src/exam/exam-catalog.ts`), and that field — never the theme id — selects the contract. Topic themes (`vacation`, `family`, `shopping`) are conversation prep and **require** `@question` with interview-sourced first-person answers; picture themes are **pure description**, forbid both `@question` and personal attitude, and require `@image-alt`. Both rules are enforced off `kind` in `tests/integration/exam-manifest-letz.test.ts`.
-
-Section headings come from `themeHeading(kind, title)` — `"Theme: Vacation & Travel"`, `"Describing a Picture: Schueberfouer"` — so **manifest titles stay bare** (a test rejects a baked-in prefix). One picture theme per photo: a second photo is a new theme with its own `picture/<photo>/` directory, not extra sub-lessons under a shared one.
-
-**Attaching a photo:** originals are dropped into `public/assets/tmp/`, which is **gitignored** — a staging folder for review, never committed and never referenced by a `.letz` file. Convert to **WebP**, pre-crop to **16:9**, cap width at **880px** (2× the largest iPhone logical width), and commit only that derived file under `public/assets/exam/<theme>/.../img/`. A test parses the WebP header to assert the file exists and fits the budget, so an unoptimized drop-in fails the build. See [picture-description-theme](.claude/memory/picture-description-theme.md) for the `magick` recipe, [exam-track](.claude/memory/exam-track.md), and the `letz-content-generator` skill before authoring either kind.
-
-**Register split across mechanics** — exam content may reach **B1** via complex sentences. `@sentence` stays assemblable (main clauses plus short two-clause sentences; no declined attributives, since the learner builds every tile), while verb-final subordinate clauses and declined forms are better placed in `@fill` fixed frames, which the learner reads rather than assembles. The conjunction/connector inventory and the inversion rules are in `.claude/skills/letz-content-generator/references/luxembourgish-grammar.md`. **`@fill` itself is not level-scoped** — its criterion is *reuse across topics*, so A1 frames are first-class; see [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md).
-
-`@image "path"` / `@image-alt "text"` are lesson-level (order-independent — they fold onto `meta` in `visitLesson`, so they may sit before `@lesson` or after the content). The value must be **quoted**: a bare `=` or `#` in unquoted `Text` breaks parsing. `@image-alt` doubles as the caption of the placeholder frame shown while `@image` is absent, so a picture SubLesson stays usable before its photo lands — every picture SubLesson is required to declare it.
-
-No directive is currently "designed but not built". The parser rejects unknown `@`-tokens with a lex error, so do not invent new ones — adding one means touching `lexer.ts`, `parser.ts`, and `visitor.ts` together, and a new **Element kind** on top of that is the far wider change described above.
+**Full syntax, every mechanized bound, and authoring procedure live in the `letz-content-generator` skill** — read `references/letz-format.md` (syntax), `references/content-contract.md` (every bound + failing test, don't read the tests instead), and `references/luxembourgish-grammar.md` (connectors, inversion, homograph traps) before authoring. Design rationale (why `@fill` is shaped this way, the picture-theme frame library, exam theme contracts): [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md), [picture-description-theme](.claude/memory/picture-description-theme.md), [exam-track](.claude/memory/exam-track.md).
 
 ### Testing
 
@@ -820,29 +763,10 @@ Icons live in `src/ui/icons/`. They are hand-copied SVG paths from **Phosphor Ic
 
 `IconBase` uses `viewBox="0 0 256 256"` (Phosphor's native grid). Size and color are controlled via `className` (`w-*`/`h-*` for size, `text-*` for color).
 
-
 ### Memory — required reading and writing
 
-- Every time the user makes a correction, add the lesson to `.claude/memory/MEMORY.md` and check that file at the start of each session to avoid repeating mistakes.
+Persistent memory lives **in the repo** at `.claude/memory/`, not the home-dir auto-memory (deprecated — a thin redirect, do not write there). **Read `.claude/memory/MEMORY.md` at the start of every session** — it is the index and holds the writing rules (what's worth recording, what isn't) and the code-style rules. Read the specific file whose area you're about to touch before making architectural decisions there.
 
-This project's persistent memory store lives **in the repo** at `.claude/memory/` so it travels with the code, is reviewed in PRs, and is shared across every developer and machine.
-
-> Any home-dir auto-memory at `~/.claude/projects/-Users-gulenoks-Personal-roude-leiw-web/memory/` is **deprecated** — it is a thin redirect to this directory. Do not write there.
-
-**Read `.claude/memory/MEMORY.md` at the start of every session.** It is the index of all persisted project knowledge. Files linked from it must be read before making architectural decisions or writing code that touches the areas they describe.
-
-**Maintain memory throughout each session.** When you learn something a future session would benefit from, write a new file in `.claude/memory/` and add a one-line pointer in `MEMORY.md`. Commit memory changes alongside the code change that motivated them — same PR, same commit when feasible.
-
-Worth recording:
-- **Design choices and their rationale** — why a particular structure was chosen over alternatives
-- **Conscious tradeoffs** — shortcuts taken, known limitations, deferred work with reasons
-- **"We considered X and decided no" notes** — prevents future re-litigation of settled decisions
-- **Non-obvious project context** — stakeholder constraints, deadlines, integration quirks
-- **Development log** — significant refactors, renames, deletions, migrations not obvious from git history
-
-Not worth recording (do not save):
-- Anything derivable from reading the current code or `git log`
-- Code-style rules — those belong in `.claude/memory/MEMORY.md`
-- Ephemeral task state — use plans (`.claude/plans/`, gitignored) or the TaskCreate tool
+When you learn something a future session would benefit from — design rationale, a conscious tradeoff, a "we considered X and decided no" — write it to the matching memory file (or a new one) and add a one-line pointer in `MEMORY.md`, in the same commit as the change that motivated it.
 
 **Keeping it up to date is part of "done."** If a change you make invalidates a citation, file path, or design claim in a memory file, update that file in the same commit. Stale memory is worse than missing memory — it asserts a wrong fact with confidence.
