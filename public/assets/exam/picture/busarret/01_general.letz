@@ -1,0 +1,264 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 1: General Description
+#
+# The fifth picture theme, and the first PUBLIC-TRANSPORT scene: a bus stop on a
+# city street, overcast daytime, several people waiting under a glass shelter
+# while a line-9 bus pulls up. Where the other themes are a market, a funfair, a
+# living room and a pedestrian street, this one adds routine commuting as a WOU +
+# WAT scene, and its own WÉINI angle in 03: the trees are bare (like groussgaass's
+# winter photo) but the people are in noticeably lighter clothing — evidence that
+# points two different ways at once, which is new relative to the earlier themes'
+# single-direction evidence.
+#
+# The photo: a bus shelter on a city sidewalk, a green advertisement poster and a
+# street lamp beside it, bare trees either side, tall pastel-coloured buildings
+# behind, a couple of parked cars on the left, and on the right a blue-white-orange
+# city bus pulling up to the stop. Several people wait at the shelter; a man with a
+# backpack stands near the front on the sidewalk.
+#
+# The photo's coverage is split across three sub-lessons, one per exam task:
+#   01 — WOU + WAT: naming the place, the objects and their positions, and what
+#        the people are doing.                              ← this file
+#   02 — WIEN: the people, 1–2 of them described visually.
+#   03 — WÉINI: the time of day and a hedged guess at the season, weighing
+#        contradictory evidence.
+#
+# PURE DESCRIPTION. No @question examiner prompts and no first-person opinion,
+# preference or feeling — those belong to the topic themes. A depicted person's
+# visible state is fine: that is observation. Rule of thumb — if a stranger could
+# not check the sentence against the photo, it does not belong here.
+#
+# Not authored, for failing exactly that test: the shelter's own signage
+# ("Badanstalt"), the poster's brand text ("BFRESH"), and the bus's route number
+# and destination display. Brand text and route numbers are neither Luxembourgish
+# vocabulary nor checkable description of the *scene*, so the bus ships here as
+# the plain `de Bus`.
+#
+# Vocabulary and grammar are held to A1–A2 deliberately, same as the other
+# picture themes: present tense, simple main clauses, spatial adverbs +
+# prepositions, no attributive adjectives on masculine or neuter nouns.
+#
+# This file NAMES THE PLACE, which is the examiner's first question:
+# de Busarrêt. LOD lists both `Busarrêt` (m) and `Bushaltestell` (f) as plain
+# dictionary words for "bus stop" — `Busarrêt` is the shorter, more colloquial
+# term and is used throughout this theme.
+#
+# Nouns are taught in the number the content actually uses (d'Beem, d'Autoen,
+# d'Gebaier as plurals only — no unused singular) — an unused singular is a free
+# Element standing between the learner and the 100% gate.
+#
+# Ten @fill blocks, matching the theme's answering-pattern density: the existential
+# "vill lass" idiom, the background/foreground pair, the additive `Ausserdeem`
+# listing, the exemplifying `Zum Beispill` listing, the coordinated-inventory
+# frame, the place-noun frame, the what-are-they-doing verb frame, and one row
+# each for `wann` (inversion) and `well` (justification) — most reused shapes from
+# the library, each given a pairing no earlier picture theme has taught. See the
+# skill's references/content-contract.md for the mechanized bounds.
+
+@lesson P4.01 "Busarrêt: General Description"
+
+# Pre-cropped to 16:9 and encoded as WebP at 880px — see
+# .claude/memory/picture-description-theme.md for the pipeline. @image-alt stays:
+# it is the a11y text, and the caption of the placeholder frame if the file is
+# ever missing.
+@image "/assets/exam/picture/busarret/img/busarret.webp"
+@image-alt "A bus stop on a city street: several people wait under a glass shelter next to a green advertisement poster and a street lamp, bare trees either side, tall pastel buildings behind, parked cars on the left, and a blue-white-orange city bus pulling up on the right."
+
+# --- Talking about a picture ---
+@word d'Bild = the picture
+@word gesinn = to see
+
+# --- Naming the place ---
+@word de Busarrêt = the bus stop
+@word de Bus = the bus
+@word d'Strooss = the street
+@word d'Stad = the city
+
+# --- What is at the stop ---
+@word d'Gebaier = the buildings
+@word d'Beem = the trees
+@word d'Autoen = the cars
+@word d'Stroosseluucht = the street lamp
+@word d'Reklamm = the advertisement
+@word de Rucksak = the backpack
+
+# --- Positions ---
+@word lénks = on the left
+@word riets = on the right
+@word hannert = behind
+@word de Vierdergrond = the foreground
+@word den Hannergrond = the background
+
+# --- People and what they do ---
+@word d'Leit = the people
+@word waarden = to wait
+@word ukommen = to arrive
+
+@sentence
+@lu Dëst ass e Bild vun engem Busarrêt.
+@en This is a picture of a bus stop.
+@distractor-lu Buttek
+@distractor-lu Schoul
+@distractor-en shop
+@distractor-en school
+
+@sentence
+@lu Vill Leit waarden op de Bus.
+@en A lot of people are waiting for the bus.
+@distractor-lu kee
+@distractor-lu Auto
+@distractor-en no
+@distractor-en car
+
+@sentence
+@lu Lénks vum Busarrêt stinn Autoen.
+@en On the left of the bus stop there are cars.
+@distractor-lu riets
+@distractor-lu Beem
+@distractor-en right
+@distractor-en trees
+
+@sentence
+@lu Hannert dem Busarrêt stinn héich Gebaier.
+@en Behind the bus stop there are tall buildings.
+@distractor-lu virun
+@distractor-lu Autoen
+@distractor-en in front
+@distractor-en cars
+
+@sentence
+@lu Nieft dem Busarrêt steet eng Stroosseluucht.
+@en Next to the bus stop there is a street lamp.
+@distractor-lu Bam
+@distractor-lu Reklamm
+@distractor-en tree
+@distractor-en advertisement
+
+@sentence
+@lu Riets kënnt de Bus un.
+@en On the right the bus is arriving.
+@distractor-lu lénks
+@distractor-lu Auto
+@distractor-en left
+@distractor-en car
+
+@sentence
+@lu De Mann ass jonk an huet e Rucksak.
+@en The man is young and has a backpack.
+@distractor-lu al
+@distractor-lu Kap
+@distractor-en old
+@distractor-en cap
+
+# --- Reusable frames (@fill) ---
+
+# The existential idiom Schueberfouer/chreschtmaart used for a busy scene, reused
+# here for a bus stop — "vill lass" transfers to any scene with activity, which is
+# what makes it a frame rather than a sentence about this photo.
+@fill
+@lu Um Busarrêt ass vill [lass].
+@en At the bus stop a lot is [happening].
+@distractor-lu roueg
+@distractor-lu zou
+@distractor-en quiet
+@distractor-en closed
+
+# The background inventory, reused with a new scene noun. `héich` stays fixed
+# before the blank, so the plural noun is the answer and singular distractors
+# fail on agreement (R3) as well as on the photo.
+@fill
+@lu Am Hannergrond ginn et héich [Gebaier].
+@en In the background there are tall [buildings].
+@distractor-lu Bam
+@distractor-lu Bus
+@distractor-en tree
+@distractor-en bus
+
+# The foreground inventory, mirrored from the background one above with a
+# different position word and noun. `d'` stays fixed, ruling out masculine tiles
+# on grammar (R4) as well as on the photo.
+@fill
+@lu Am Vierdergrond gesinn ech d'[Leit].
+@en In the foreground I see the [people].
+@distractor-lu Bus
+@distractor-lu Bam
+@distractor-en bus
+@distractor-en tree
+
+# The additive-listing frame, reused for the stop's cars and advertisement.
+# `Ausserdeem` forces inversion (`gesinn ech`), an order the learner reads rather
+# than assembles. Two blanks of different slot (bare plural noun, then singular
+# after the fixed `d'`), so they cannot swap (R6); `d'` also keeps the second
+# blank clear of the Eifeler Regel (R5).
+@fill
+@lu Ausserdeem gesinn ech [Autoen] an d'[Reklamm].
+@en Besides I see [cars] and the [advertisement].
+@distractor-lu Gebaier
+@distractor-lu Bam
+@distractor-en buildings
+@distractor-en tree
+
+# The exemplifying-listing frame — `e puer` forces a plural, so the singular
+# distractors fail on agreement as well as on the photo.
+@fill
+@lu Zum Beispill gesinn ech e puer [Beem].
+@en For example I see a few [trees].
+@distractor-lu Bus
+@distractor-lu Reklamm
+@distractor-en bus
+@distractor-en advertisement
+
+# A single-noun coordinated-inventory frame — bare trees stand on both sides of
+# the street, so `lénks a riets` stays fixed and the blank is the one scene noun,
+# with `vill` forcing a plural. Both distractors are single, one-sided items
+# (one bus, one poster), so neither is true of "on the left and right".
+@fill
+@lu Lénks a riets ginn et vill [Beem].
+@en On the left and right there are many [trees].
+@distractor-lu Bus
+@distractor-lu Reklamm
+@distractor-en bus
+@distractor-en advertisement
+
+# The place-noun frame from groussgaass/chreschtmaart, reused for a street rather
+# than a square. `enger` stays fixed and feminine, ruling out masculine `Bus` and
+# neuter `Gebai` on grammar alone (R4) as well as on the photo.
+@fill
+@lu D'Leit op dem Bild sinn an enger [Strooss].
+@en The people in the picture are in a [street].
+@distractor-lu Bus
+@distractor-lu Gebai
+@distractor-en bus
+@distractor-en building
+
+# The what-are-they-doing verb frame. The blank is the verb, and the plural
+# subject `d'Leit` makes the singular form the sharpest distractor — a noun
+# cannot occupy a verb slot at all (R3).
+@fill
+@lu Um Busarrêt [waarden] d'Leit op de Bus.
+@en At the bus stop the people [are waiting] for the bus.
+@distractor-lu waart
+@distractor-lu Autoen
+@distractor-en waits
+@distractor-en cars
+
+# `wann` — the leading clause forces inversion in the main clause, an order the
+# learner reads rather than assembles. The blank is the inverted verb; the two
+# distractors are other verbs that do not fit a bus arriving.
+@fill
+@lu Wann vill Leit waarden, [kënnt] de Bus séier.
+@en When a lot of people are waiting, the bus [comes] quickly.
+@distractor-lu geet
+@distractor-lu bleift
+@distractor-en goes
+@distractor-en stays
+
+# `well` outside the hedge register — reasoning about the scene, not a weather
+# guess. The comma both ends the clause and exempts the blank from the Eifeler
+# Regel.
+@fill
+@lu De Busarrêt gesäit [voll] aus, well vill Leit do sinn.
+@en The bus stop looks [full], because a lot of people are there.
+@distractor-lu eidel
+@distractor-lu laang
+@distractor-en empty
+@distractor-en long

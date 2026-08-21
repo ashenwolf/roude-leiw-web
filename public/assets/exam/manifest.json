@@ -99,6 +99,28 @@
       ]
     },
     {
+      "id": "busarret",
+      "kind": "picture",
+      "title": "Busarrêt",
+      "subLessons": [
+        {
+          "id": "busarret.01",
+          "file": "picture/busarret/01_general.letz",
+          "title": "General Description"
+        },
+        {
+          "id": "busarret.02",
+          "file": "picture/busarret/02_people.letz",
+          "title": "Person Description"
+        },
+        {
+          "id": "busarret.03",
+          "file": "picture/busarret/03_weather.letz",
+          "title": "Weather Description"
+        }
+      ]
+    },
+    {
       "id": "shopping",
       "kind": "topic",
       "title": "Akafe Goen",

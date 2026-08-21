@@ -1,0 +1,243 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 3: Weather Description
+#
+# The WÉINI task for the bus-stop photo of sub-lessons 1–2: the time of day, and a
+# hedged guess at the season. The examiner asks it on almost every picture, and it
+# is the one place in this theme where the candidate is allowed to INFER rather
+# than report — so the point of this file is the hedging vocabulary, not the
+# weather words.
+#
+# This photo's inference angle is new relative to the other four themes: the
+# evidence points TWO WAYS AT ONCE. The bare trees argue for winter, the same as
+# groussgaass — but unlike groussgaass, nobody here is in a thick coat: the older
+# man's coat is a light beige, one woman is bare-legged in a dress, no one wears a
+# hat or gloves. A learner who has played groussgaass must not just recall "bare
+# trees → winter"; they have to weigh the CLOTHING evidence against the TREE
+# evidence and conclude the milder answer, spring. That is the theme's actual
+# teaching point — hedging is for when the evidence conflicts, not just when it
+# is absent (chreschtmaart) or consistent (groussgaass).
+#
+# The second inference: the sky is bright and overcast with no visible sun, no
+# rain, no strong shadows — daytime, most likely around midday. And the crowd
+# itself is evidence for an ORDINARY weekday: people waiting at a bus stop, in
+# ones and twos, is what a normal commute looks like, unlike chreschtmaart's
+# festive gathering. This mirrors groussgaass's "vill Leit ënnerwee" weekday
+# inference, but grounded in a different, equally checkable fact: people waiting
+# for public transport, presumably on their way to work.
+#
+# The photo detail this describes: a pale, bright, overcast sky with no visible
+# sun and no rain; bare trees; the older man in a light beige coat, no hat or
+# gloves visible on anyone, one woman in a dress with bare legs — evidence against
+# deep winter despite the bare trees.
+#
+# PURE DESCRIPTION, same as 01 and 02 — no @question prompts, no first-person
+# opinion. A hedged inference *about the photo* ("I think it is spring, because
+# the people are not wearing thick coats") is not an opinion: it is an observation
+# with a confidence marker, and a stranger can still check it against the picture.
+#
+# Same A1–A2 constraint as the rest of the theme: present tense, simple main
+# clauses or short two-clause sentences, no attributive adjectives on masculine
+# or neuter nouns.
+#
+# Words sub-lessons 1–2 already teach (d'Bild, d'Leit, de Busarrêt, gesinn, …) are
+# deliberately NOT repeated — the pass-gate makes them prerequisites and stat keys
+# are shared across the app.
+#
+# Ten @fill blocks — this theme's highest-value frames, because a hedge is a
+# pattern that transfers to every picture and every topic. The contradictory-
+# evidence pair (`Ech mengen, … well d'Leit keng décke Mäntel undoen` and its
+# `mee`-contrast companion) is this file's new contribution to the library; the
+# rest reuse `Ech sinn net sécher, mee villäicht`, `Et kéint … sinn`, `Ech weess
+# net, ob …`, `bis` (a natural fit for a bus stop), and `obwuel` on fresh
+# vocabulary. See the skill's references/content-contract.md for the mechanized
+# bounds.
+
+@lesson P4.03 "Busarrêt: Weather Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/busarret/img/busarret.webp"
+@image-alt "The same bus-stop photo, seen for the weather: a pale, bright overcast sky with no visible sun and no rain, bare trees, and people in light coats and no hats — evidence against deep winter despite the bare trees."
+
+# --- Weather and sky ---
+@word d'Wieder = the weather
+@word den Himmel = the sky
+@word d'Sonn = the sun
+@word d'Wolleken = the clouds
+@word bedeckt = overcast
+@word reenen = to rain
+
+# --- Time and season words ---
+@word den Dag = the day
+@word de Mëtteg = the afternoon
+@word mëttes = in the afternoon
+@word d'Woch = the week
+@word besonnesch = special
+@word d'Blieder = the leaves
+
+# --- Hedging a guess ---
+@word mengen = to think
+@word warscheinlech = probably
+@word sécher = sure
+@word well = because
+@word schaffen = to work
+
+# --- Seasons (contrast for the hedges) ---
+@word de Wanter = the winter
+@word de Summer = the summer
+@word d'Fréijoer = the spring
+
+@sentence
+@lu Den Himmel ass gro a bedeckt.
+@en The sky is grey and overcast.
+@distractor-lu blo
+@distractor-lu Sonn
+@distractor-en blue
+@distractor-en sun
+
+@sentence
+@lu Et reent net, mee et ass frësch.
+@en It is not raining, but it is fresh.
+@distractor-lu waarm
+@distractor-lu Wollek
+@distractor-en warm
+@distractor-en cloud
+
+@sentence
+@lu D'Beem hu keng Blieder.
+@en The trees have no leaves.
+@distractor-lu Autoen
+@distractor-lu Bus
+@distractor-en cars
+@distractor-en bus
+
+@sentence
+@lu Ech mengen, et ass mëttes.
+@en I think it is afternoon.
+@distractor-lu nuets
+@distractor-lu Owend
+@distractor-en at night
+@distractor-en evening
+
+@sentence
+@lu Vill Leit waarden op de Bus, well si schaffen.
+@en A lot of people are waiting for the bus, because they work.
+@distractor-lu spillen
+@distractor-lu Kanner
+@distractor-en play
+@distractor-en children
+
+@sentence
+@lu Den Dag ass warscheinlech normal a net besonnesch.
+@en The day is probably normal and not special.
+@distractor-lu kal
+@distractor-lu gro
+@distractor-en cold
+@distractor-en grey
+
+# --- Reusable frames (@fill) ---
+
+# The contradictory-evidence hedge — this file's new contribution to the library.
+# `Ech mengen, …` opens as usual, but the justification now needs BOTH facts, not
+# one: bare trees alone would suggest `Wanter`, and no thick coats alone would
+# suggest `Summer` just as well — only stating both together, contrasted with
+# `mee`, rules out each distractor from a different half of the sentence. The
+# comma before the blank exempts it from the Eifeler Regel.
+@fill
+@lu Ech mengen, et ass [Fréijoer], well d'Beem keng Blieder hunn, mee d'Leit keng décke Mäntel undoen.
+@en I think it is [spring], because the trees have no leaves, but the people are not wearing thick coats.
+@distractor-lu Wanter
+@distractor-lu Summer
+@distractor-en winter
+@distractor-en summer
+
+# The `mee`-contrast companion to the frame above: the bare-trees evidence stated
+# plainly, then contradicted. `mee` takes no inversion, so this is the no-inversion
+# half of the connector pair the `wann`/`obwuel` frames elsewhere complete.
+@fill
+@lu D'Beem hu keng [Blieder], mee et ass net kal.
+@en The trees have no [leaves], but it is not cold.
+@distractor-lu Wolleken
+@distractor-lu Autoen
+@distractor-en clouds
+@distractor-en cars
+
+# Hedge: `Ech sinn net sécher, mee villäicht` — the strongest disclaimer in the
+# set, used here for the time of day rather than a season guess, since the flat
+# light gives little to read. The comma both marks the clause boundary and
+# exempts the blank from the Eifeler Regel.
+@fill
+@lu Ech sinn net sécher, mee villäicht ass et [Mëtteg].
+@en I am not sure, but maybe it is [midday].
+@distractor-lu Owend
+@distractor-lu Nuecht
+@distractor-en evening
+@distractor-en night
+
+# Hedge: `Et kéint … sinn`, the subjunctive hedge, mirrored from groussgaass with
+# the blank moved past the fixed `en normalen Dag` — the declined attributive
+# stays whole in the frame (never the blank itself), and `der` before the blank
+# admits only a feminine tile, ruling out masculine `Chrëschtmount` on grammar
+# alone (R4) as well as on the photo.
+@fill
+@lu Et kéint en normalen Dag an der [Woch] sinn, well vill Leit um Busarrêt waarden.
+@en It could be a normal day of the [week], because a lot of people are waiting at the bus stop.
+@distractor-lu Chrëschtmount
+@distractor-lu Stad
+@distractor-en December
+@distractor-en city
+
+# The uncertain-`ob` pattern, drilled here on the checkable question of rain.
+# `ob` sends the verb to the end, an order the learner reads rather than
+# assembles; the comma exempts the blank right after it from the Eifeler Regel.
+@fill
+@lu Ech weess net, ob et [reent].
+@en I do not know whether it is [raining].
+@distractor-lu schneit
+@distractor-lu blénkt
+@distractor-en snowing
+@distractor-en sparkling
+
+# `bis` ("until") — a natural fit for a bus stop, unlike the earlier themes'
+# more generic use of the same connector. Verb-final, so the learner reads the
+# order rather than assembling it.
+@fill
+@lu D'Leit waarden, bis de Bus [kënnt].
+@en The people wait until the bus [comes].
+@distractor-lu fiert
+@distractor-lu geet
+@distractor-en drives
+@distractor-en goes
+
+# `obwuel` — the harder leading-clause inversion, concession rather than
+# condition. The comma ends the clause, which is what keeps the blank after it
+# safe under the Eifeler Regel regardless of the preceding word.
+@fill
+@lu Obwuel den Himmel gro ass, [reent] et net.
+@en Although the sky is grey, it is not [raining].
+@distractor-lu schneit
+@distractor-lu blénkt
+@distractor-en snowing
+@distractor-en sparkling
+
+# The split `gesäit … aus` hedge, applied to the weather itself rather than a
+# person or the scene. The comma before the blank marks the clause boundary and
+# exempts it from the Eifeler Regel.
+@fill
+@lu D'Wieder gesäit [mëll] aus, mee et ass frësch.
+@en The weather looks [mild], but it is fresh.
+@distractor-lu sonneg
+@distractor-lu waarm
+@distractor-en sunny
+@distractor-en warm
+
+# The new "people at a routine stop" weekday inference, `well`-justified. The
+# comma both ends the clause and exempts the blank from the Eifeler Regel; the
+# blank is the verb, so a noun cannot fill the slot at all (R3).
+@fill
+@lu D'Leit sinn um Busarrêt, well si [schaffen].
+@en The people are at the bus stop, because they [work].
+@distractor-lu spillen
+@distractor-lu kafen
+@distractor-en play
+@distractor-en shop

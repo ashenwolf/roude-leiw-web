@@ -1,0 +1,245 @@
+# Exam track — Theme: Describing a Picture — Sub-lesson 2: Person Description
+#
+# The WIEN task for the bus-stop photo of sub-lesson 1: who is present, and 1–2 of
+# them described visually. The examiner's second prompt on the picture task is
+# almost always "pick one person and describe them" — clothes, what they are
+# doing, roughly how old they look — so this drills exactly that.
+#
+# The photo detail this describes: an older man standing near the shelter, in a
+# beige coat and dark trousers, with a black cap, standing calmly and waiting; and
+# in front of him, closer to the camera, a younger man standing with a backpack at
+# his feet, in a grey pullover and blue jeans.
+#
+# PURE DESCRIPTION, same as 01 — no @question prompts, no first-person opinion.
+# A depicted person's visible state (`Hie gesäit roueg aus`) is observation and is
+# wanted: the older man's posture and expression are checkable against the photo.
+#
+# Same A1–A2 constraint as the rest of the theme, with the guard that appearance
+# descriptions make easy to break: attributive adjectives are used ONLY on
+# feminine nouns (`eng schwaarz Kap`), where Luxembourgish leaves the adjective
+# uninflected. Masculine and neuter attributives need declension the learner has
+# not met, so those are stated predicatively instead (`Säi Mantel ass beige.`) —
+# except inside `@fill` frames, where a declined attributive may sit in the FIXED
+# frame text (never in the blank itself), the same escape hatch groussgaass/
+# chreschtmaart use for `en normalen Dag`.
+#
+# Words sub-lesson 1 already teaches (d'Leit, d'Bild, gesinn, lénks, riets, …) are
+# deliberately NOT repeated — the theme's pass-gate makes 01 a prerequisite for
+# 02, and stat keys are shared across the app. Overlap with the other picture
+# themes (de Mann, jonk, gro) is accepted: themes are independent and all open, so
+# a learner may reach this one first.
+#
+# Ten @fill blocks carry this file's share of the answering-pattern drill: the
+# split `gesäit … aus` state frame (used twice, for opposite subjects), the
+# `hunn … un` clothing frame for both a masculine and a feminine garment, a
+# checkable-feature opener in place of the usual side opener, two relative-clause
+# shapes (singular and plural, so the learner sees the verb agreement contrast),
+# a numeral pair, a possessive appearance frame, and an additive garment-colour
+# frame — most of the person-description library, each reused with a pairing or
+# blank no earlier picture theme has taught for THIS photo's people.
+
+@lesson P4.02 "Busarrêt: Person Description"
+
+# Same photo as 01, declared again: @image is per-file, and the learner must see
+# the photo during THIS sub-lesson too. The alt text differs on purpose — it
+# describes the detail this file drills.
+@image "/assets/exam/picture/busarret/img/busarret.webp"
+@image-alt "The same bus-stop photo, seen for the people in it: an older man in a beige coat and black cap standing calmly near the shelter, and in front of him a younger man in a grey pullover and blue jeans standing with a backpack at his feet."
+
+# --- People ---
+@word de Mann = the man
+@word d'Männer = the men
+@word eeler = older
+@word jonk = young
+
+# --- Clothes ---
+@word d'Kap = the cap
+@word de Mantel = the coat
+@word de Pullover = the pullover
+@word d'Box = the trousers
+@word d'Jeans = the jeans
+
+# --- Colours ---
+@word schwaarz = black
+@word beige = beige
+@word gro = grey
+
+# --- What they are doing ---
+@word hunn = to have
+@word ongeféier = approximately
+
+# --- Describing them ---
+@word roueg = calm
+@word gedëlleg = patient
+@word midd = tired
+
+@sentence
+@lu Zwee Männer stinn um Busarrêt.
+@en Two men are standing at the bus stop.
+@distractor-lu dräi
+@distractor-lu Fraen
+@distractor-en three
+@distractor-en women
+
+@sentence
+@lu Den eelere Mann huet eng schwaarz Kap un.
+@en The older man is wearing a black cap.
+@distractor-lu gro
+@distractor-lu Box
+@distractor-en grey
+@distractor-en trousers
+
+@sentence
+@lu Säi Mantel ass beige.
+@en His coat is beige.
+@distractor-lu schwaarz
+@distractor-lu Kap
+@distractor-en black
+@distractor-en cap
+
+@sentence
+@lu Hie steet gedëlleg um Busarrêt.
+@en He stands patiently at the bus stop.
+@distractor-lu leeft
+@distractor-lu sëtzt
+@distractor-en runs
+@distractor-en sits
+
+@sentence
+@lu Säi Pullover ass gro.
+@en His pullover is grey.
+@distractor-lu blo
+@distractor-lu Box
+@distractor-en blue
+@distractor-en trousers
+
+@sentence
+@lu Hien huet eng blo Jeans un.
+@en He is wearing blue jeans.
+@distractor-lu schwaarz
+@distractor-lu Mantel
+@distractor-en black
+@distractor-en coat
+
+@sentence
+@lu Hien huet e Rucksak bei sech.
+@en He has a backpack with him.
+@distractor-lu Kap
+@distractor-lu Box
+@distractor-en cap
+@distractor-en trousers
+
+@sentence
+@lu Den eelere Mann ass ongeféier siwwenzeg Joer al.
+@en The older man is approximately seventy years old.
+@distractor-lu sechzeg
+@distractor-lu zéng
+@distractor-en sixty
+@distractor-en ten
+
+# --- Reusable frames (@fill) ---
+
+# The visible-state frame with the split `gesäit … aus`. The verb bracket is the
+# pattern being taught, so it stays in the frame and the adjective is the blank.
+# Both distractors are states nothing in the photo supports for this man.
+@fill
+@lu Den eelere Mann gesäit [roueg] aus.
+@en The older man looks [calm].
+@distractor-lu midd
+@distractor-lu traureg
+@distractor-en tired
+@distractor-en sad
+
+# The `hunn … un` clothing frame for a masculine garment — the separable `un`
+# sits at the end, an order the learner reads rather than builds. `e` is fixed in
+# the frame and masculine, so feminine `Kap` and `Box` are ruled out on grammar
+# alone (R4) as well as on the photo.
+@fill
+@lu Den eelere Mann huet e [Mantel] un.
+@en The older man is wearing a [coat].
+@distractor-lu Kap
+@distractor-lu Box
+@distractor-en cap
+@distractor-en trousers
+
+# The same clothing frame with a feminine garment and determiner, so the
+# opposite gender rules out `Mantel` this time — R4 doing the work from the other
+# side.
+@fill
+@lu Den eelere Mann huet eng [Kap] un.
+@en The older man is wearing a [cap].
+@distractor-lu Mantel
+@distractor-lu Rucksak
+@distractor-en coat
+@distractor-en backpack
+
+# A checkable-feature opener, in place of the usual side opener — identifying the
+# person by what he is wearing rather than by position. `de` stays fixed and
+# masculine, ruling out neuter `Meedchen`/`Kand` on grammar as well as on the
+# photo.
+@fill
+@lu Ech beschreiwen de [Mann] mat der Kap.
+@en I am describing the [man] with the cap.
+@distractor-lu Meedchen
+@distractor-lu Kand
+@distractor-en girl
+@distractor-en child
+
+# The relative-clause frame, singular. `deen … waart` is verb-final, so the
+# learner reads the order instead of assembling it. Blank is the verb: a noun
+# cannot fill a verb slot at all (R3).
+@fill
+@lu Ech gesinn e Mann, deen um Busarrêt [waart].
+@en I see a man who [is waiting] at the bus stop.
+@distractor-lu Kap
+@distractor-lu Rucksak
+@distractor-en cap
+@distractor-en backpack
+
+# The same relative-clause frame, plural — `déi … waarden` contrasts the singular
+# verb form above, so the pair together drills the agreement rather than just the
+# word order.
+@fill
+@lu Ech gesinn zwee Männer, déi um Busarrêt [waarden].
+@en I see two men who [are waiting] at the bus stop.
+@distractor-lu Kap
+@distractor-lu Rucksak
+@distractor-en cap
+@distractor-en backpack
+
+# The numeral-plus-noun pair, mirrored from chreschtmaart with a different
+# number and noun. `Beim Busarrêt sinn et` puts the finite verb before both
+# blanks, so the numeral tile is the word directly in front of the noun blank
+# rather than `sinn` — `dräi` does not end in `-n`, which is what keeps the frame
+# clear of the Eifeler Regel (R5). Different word classes in the two blanks
+# (numeral, then plural noun), so they cannot swap (R6).
+@fill
+@lu Beim Busarrêt sinn et [dräi] [Fraen].
+@en At the bus stop there are [three] [women].
+@distractor-lu Kanner
+@distractor-lu Männer
+@distractor-en children
+@distractor-en men
+
+# The possessive appearance frame — `Säi … ass …` recurs for any person, here
+# applied to the older man's coat colour. One blank on purpose: a two-blank
+# version would join two predicative adjectives with no forced order, an R6
+# violation.
+@fill
+@lu Säi Mantel ass [beige] a hie huet eng Kap un.
+@en His coat is [beige] and he is wearing a cap.
+@distractor-lu schwaarz
+@distractor-lu gro
+@distractor-en black
+@distractor-en grey
+
+# The visible-state frame reused for the younger man, with a different checkable
+# feature than the older man's calm — his age rather than his mood, which the
+# photo's two men make a natural contrast pair.
+@fill
+@lu De Mann mat dem Rucksak gesäit [jonk] aus.
+@en The man with the backpack looks [young].
+@distractor-lu al
+@distractor-lu midd
+@distractor-en old
+@distractor-en tired

@@ -5,14 +5,16 @@ theme contract are in [[exam-track]]; authoring procedure is in the
 `letz-content-generator` skill. This file holds the two things that are neither:
 the **`@fill` frame library** and the **LOD-verified vocabulary** with its traps.
 
-Shipped: **four themes**, each three sub-lessons with the photo committed and
+Shipped: **five themes**, each three sub-lessons with the photo committed and
 `@fill` blocks live — Schueberfouer (funfair, an outdoor street scene),
 living-room (a family having coffee **indoors**), groussgaass (the Grand-Rue
-pedestrian zone on a **grey winter day**), and chreschtmaart (a Christmas-market
-food stall at dusk). Each new theme after the first proved the per-photo cost is
-now mostly vocabulary: the frame library below carried over almost unchanged.
-See **Indoor vs outdoor** for the one contract wrinkle a non-street photo adds,
-and **Seasonal contrast** for why the third theme was chosen to be winter.
+pedestrian zone on a **grey winter day**), chreschtmaart (a Christmas-market
+food stall at dusk), and busarrêt (a city bus stop, overcast daytime). Each new
+theme after the first proved the per-photo cost is now mostly vocabulary: the
+frame library below carried over almost unchanged. See **Indoor vs outdoor**
+for the one contract wrinkle a non-street photo adds, **Seasonal contrast** for
+why the third theme was chosen to be winter, and **Contradictory evidence** for
+why the fifth theme's season is deliberately ambiguous rather than clean.
 
 **Candidate next photos**, backed by real (LOD-verified) sample answers already
 mined into the vocabulary buckets below rather than needing fresh derivation:
@@ -260,6 +262,44 @@ Generalises past season: whenever a new photo can plausibly invert an inference 
 existing theme already teaches (time of day, weekday-vs-weekend, indoors-vs-out),
 pick the inverting one.
 
+## Contradictory evidence: a third option besides absent/consistent
+
+groussgaass's evidence for `Wanter` is consistent (bare trees, thick coats — both
+point the same way); living-room's is absent (no window view at all). busarrêt's
+fifth theme adds a third shape on purpose: **conflicting** evidence. The trees are
+bare (→ `Wanter`, same as groussgaass), but nobody is in a thick coat, hat, or
+gloves (→ argues against `Wanter`, and *for* `Summer` just as well as for
+`Fréijoer`). A learner who has only played groussgaass cannot pattern-match "bare
+trees → winter" here; they have to weigh both facts and land on the milder answer.
+
+**This nearly shipped a real ambiguity bug, caught only by the distractor-survival
+harness, not by any mechanized rule.** The first draft's hedge cited only one piece
+of evidence: `Ech mengen, et ass [Fréijoer], well d'Leit keng décke Mäntel undoen.`
+("I think it's spring, because people aren't wearing thick coats.") Dumping the
+tiles and reasoning through each distractor swap showed `Summer` fits that single
+clause just as well as `Fréijoer` — thick coats are equally absent in summer, and
+nothing else in *that sentence* rules summer out. The fix folds in the *other*
+half of the evidence with a `mee`-contrast inside the same `well`-clause:
+`well d'Beem keng Blieder hunn, mee d'Leit keng décke Mäntel undoen` — bare trees
+alone rules out `Summer`, no-thick-coats alone rules out `Wanter`, and only
+`Fréijoer` survives both halves. **The general lesson: when a hedge's justification
+is a single fact, check whether that fact alone is also consistent with a
+distractor season/time — if so, the justification needs both facts, not one,
+joined by `mee`/`an` inside the same clause.** This is exactly the class of bug the
+correctness rule in `content-checks.md` names ("if swapping it in produces a
+grammatically correct and photo-consistent result, it's broken") but that no
+integration test can catch, because it requires reasoning about the *photo's
+actual evidence*, not just the sentence's grammar.
+
+A second, smaller catch from the same pass: a coordinated "on the left and right"
+inventory frame (`Lénks a riets ginn et vill [Autoen]`) is only as good as the
+photo actually showing the noun on *both* sides — this photo's parked cars are
+only on the left, so the frame was authored with the wrong noun. Bare trees, which
+genuinely flank both sides of the street, were the fix. Check any "both sides"
+claim against the photo's actual left/right symmetry before authoring it, the same
+way a hedge's justification needs checking against the *whole* photo, not just the
+clause it sits in.
+
 ## LOD-verified vocabulary and its traps
 
 Recording the *misses* so the next person-description sub-lesson doesn't repeat
@@ -358,6 +398,28 @@ not "cafés"; use LOD's), `Zentrum` (m), `Stad` (f), `Strooss` (f), `Kand` (n),
 from "easy/simple". Never gloss both as bare "light" in the same theme — same
 principle as the content contract's "distinct EN gloss per entry" rule, just
 across two different lemmas instead of two entries for one.
+
+Public transport (busarrêt theme): `Busarrêt` (**m**, "bus stop" — LOD also lists
+`Bushaltestell` (f) for the same sense; `Busarrêt` is the shorter, more colloquial
+pick), `Bus` (m), `Linn` (f, transport line — not used in the end, see below),
+`waarden` (to wait), `ukommen` (to arrive), `Gebai` (n, pl. `Gebaier` — `Gebailer`
+is a *mis*spelling LOD itself corrects to `Gebaier`, the opposite direction from
+the usual found:0-means-legitimate heuristic, so double-check a plural by feeding
+the guess back through `lod_suggest` rather than trusting a first found:0),
+`eeler` (older), `Kap` (f, peaked cap — not `Kapp`, m, "head"), `gedëlleg`
+(patient), `Dreckskiwwel` (m, bin — not the German-shaped `Dreckskuebel`),
+`Trottoir` (m, pavement), `sechzeg`/`siwwenzeg` (sixty/seventy), `Fra`/`Fraen`
+(woman/women), `dréit`/`droen` (wears/to wear — `dréit` is found:0 with no
+suggestion, a legitimate inflected form by the same pattern as `stinn`/`waart`),
+`mëll` (mild, of weather — homograph-adjacent to `mëll` "soft"; disambiguate by
+context), `besonnesch` (special), `Mëtteg` (m, midday/afternoon), `schaffen` (to
+work — homograph of `Schäffen`, alderman, so check the POS tag).
+
+**Rejected as a scene word:** `Linn` ("line", as in a numbered bus route) resolves
+fine but was dropped from the theme — the bus's actual route number and
+destination display are exactly the kind of non-Luxembourgish signage the picture
+contract excludes (same reasoning as chreschtmaart's stall-brand exclusion), and
+teaching `Linn` without a number to attach it to had no scene use.
 
 Market / street / café scenes (candidate, unshipped — see "Candidate next
 photos" below): `Poubelle` (f, bin), `Speck` (m, bacon), `Gromperekichelchen`
