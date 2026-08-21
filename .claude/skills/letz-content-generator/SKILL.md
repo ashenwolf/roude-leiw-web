@@ -9,7 +9,10 @@ description: >
   Also trigger when the user uploads Luxembourgish lesson PDFs and asks to process, extract,
   or convert them — even if they don't mention ".letz" by name. If the user mentions
   "Luxembourgish lesson" together with "convert", "extract", "process", "generate", or
-  "vocabulary", this skill applies.
+  "vocabulary", this skill applies. For exam-track content instead (no PDF source), use
+  exam-picture-description (photo description themes) or exam-theme-discussion
+  (topic/conversation themes) — this skill's .letz syntax and mechanized-bounds
+  references are shared by both.
 ---
 
 # Letz Content Generator
@@ -231,188 +234,31 @@ After presenting, briefly summarize what was generated: how many `@word` entries
 
 Everything above assumes a PDF source and the **course** track. Exam-track themes
 (`public/assets/exam/`) are authored from scratch and split into **two kinds with
-different content contracts**. Decide which kind you are writing *before* writing
-anything.
+different content contracts**. This skill covers `.letz` syntax and the shared
+mechanized bounds (`references/`), but the actual authoring workflow for each
+kind now lives in its own dedicated skill — invoke the right one rather than
+following this section by hand:
 
 | | **Topic themes** (`vacation`, `family`, `shopping`) | **Picture themes** (`picture`) |
 |---|---|---|
+| Skill | `exam-theme-discussion` | `exam-picture-description` |
 | Exam skill | conversation with the examiner | describing a photo |
 | Path | 3 steps: `01_vocabulary` → `02_phrases` → `03_questions` | 3 tasks per photo: General → Person → Weather |
 | `@question` | **required** in `03_questions` | **forbidden** |
 | First person | **wanted**, personalised via interview | **excluded** — no opinion/preference/attitude |
 | Level | ~B1 | A1–A2 (deliberately stricter) |
 
-### Topic themes: interview the user first — REQUIRED
+Both skills share this skill's `references/` directory (syntax, mechanized
+bounds, grammar facts, verification checklist) and the `.claude/memory/`
+exam-track files (`exam-track.md`, `picture-description-theme.md`,
+`fill-in-words-exercise.md`) — don't duplicate those into a new spot; update them
+in place if a bound or frame changes.
 
-**Never invent the answers.** Before authoring any `@question` content, ask the
-learner the theme's exam questions conversationally and use *their* answers as
-the source. The whole point is rehearsing what they will actually say in the
-Sproochentest. Use `AskUserQuestion` for closed choices, plain conversation for
-open ones. Record in the file header that the answers are personal, so a later
-session doesn't "improve" them into generic ones.
-
-### Picture themes: pure description
-
-The learner describes what is visibly in the photo. **No `@question` blocks, and
-no first-person opinion, preference, or feeling.** Describing a depicted person's
-visible emotion (`Si lächelt`) is fine — that is observation. Rule of thumb: if a
-stranger couldn't check the sentence against the photo, cut it.
-
-Coverage is a **six-question checklist** — the questions an examiner actually
-asks — mapped onto **three files**, two questions each. Do not create six files.
-
-| Examiner question | File |
-|---|---|
-| **Wou?** what kind of place (name it if recognisable) | `01` General |
-| **Wat maache si?** what the people are doing | `01` General |
-| **Wéi eng Objete gesitt Dir?** objects **with positions** | `01` General |
-| **Wien?** who is there, how many, alone or in groups | `02` Person |
-| **Beschreif eng Persoun** one person in visual detail | `02` Person |
-| **Wéini?** time of day, season, weekday-or-weekend | `03` Weather |
-
-- **`01` must name the place**, not just list objects — `d'Foussgängerzon`,
-  `d'Groussgaass`, `de Buttek`, `d'Gebai`. Naming the setting is the examiner's
-  first question and it is the gap a scene-elements-only file leaves.
-- **`03` is the hedged-inference file**; weather is only its evidence. It also
-  carries time of day (`mëttes`, `nomëttes`) and weekday-vs-weekend guesses.
-  Hedges to teach — the samples use all six: `ech mengen`, `villäicht`,
-  `warscheinlech`, `Ech géif soen`, `Ech sinn net sécher, mee …`,
-  `Et kéint … sinn`, `Et gesäit no … aus`. Spelling trap: `warscheinlech` has no
-  `h` — the German `wahrscheinlich` is the trap and LOD returns `found: 0` for
-  the `h` form. Likewise `Vierdergrond` (foreground), never `Virdergrond`.
-- Hedged inference is **not** a violation of the no-attitude rule: it is a claim
-  about the photo. A preference or feeling of the speaker's own is.
-
-**Converting an existing `@question` block to a plain description** (rather than
-deleting authored, already-verified content): drop the `@question` line; restate
-a yes/no answer as an assertion (`Nee, hir Hoer sinn net kuerz.` → `Hir Hoer sinn
-net kuerz.` — this also removes the free `Jo`/`Nee` first tile); cut anything that
-expresses attitude. **Add `@distractor-en` lines**: `@question` blocks are
-direction-locked to en→lu so they typically carry only `@distractor-lu`, but a
-plain `@sentence` is presented both ways and would otherwise have zero
-distractors in lu→en. The file still parses, so nothing warns you.
-
-Additional picture-theme rules:
-
-- **Register — what `@sentence` may carry.** Present tense, spatial adverbs
-  (`lénks`, `riets`, `uewen`, `ënnen`) + prepositions, and **short two-clause
-  sentences** with the frequent connectors (`well`, `wann`, `mee`) are fine.
-  Attributive adjectives **only on feminine nouns** (`eng blo Box` —
-  uninflected); colours **predicative** for masculine/neuter (`D'Posch ass
-  schwaarz a wäiss.`). That last restriction is about tile-level derivation, so it
-  holds at every level.
-  Verb-final subordinate clauses and declined attributives (`e schwaarze Brëll`,
-  `en normalen Dag`) are better placed in a `@fill`, where the order sits in the
-  fixed frame instead of being assembled token by token. **That does not make
-  `@fill` a B1 feature** — see the `@fill` section below for its actual
-  criterion.
-- **Don't re-teach words** an earlier file in the same theme already teaches —
-  the sequential pass-gate makes it a prerequisite and stat keys are shared.
-- **One theme per photo.** The manifest theme is the photo (`title:
-  "Schueberfouer"`, `kind: "picture"`), and its sub-lesson titles are the bare
-  task (`"General Description"`, `"Person Description"`, `"Weather
-  Description"`). The `"Describing a Picture: "` prefix is added by
-  `themeHeading()` at render time — never bake it into a title. Files live in
-  `public/assets/exam/picture/<photo>/`, with the photo under that directory's
-  `img/`.
-- **The photo itself:** the user drops the original into the gitignored
-  `public/assets/tmp/` for review. Commit only an optimized derivative — WebP,
-  pre-cropped 16:9, ≤880px wide — under `<photo>/img/`. Never commit the
-  original, never `@image` a path under `tmp/`, never delete that folder. Recipe
-  in `references/letz-format.md`.
-- **Keep a file comparable to its siblings.** Every Element needs
-  `MASTERY_CORRECT_COUNT` correct answers before the next sub-lesson opens, so an
-  outlier's progress ring crawls. A vocabulary-first `01` legitimately runs larger
-  than its `02`/`03`; what to avoid is one file several times any other. Check with
-  `grep -c '^@word'` on the theme, not against a number written here.
-
-### Authoring `@fill` blocks
-
-`@fill` teaches a reusable **pattern** in the fixed frame plus **topic and
-positional words** in the blanks.
-
-**Exam SubLessons only** — Lesson Mode schedules no fill Slots, so a `@fill` under
-`public/assets/lessons/` would make that course lesson unpassable.
-
-> **Read `references/content-contract.md` first.** It carries every mechanized
-> bound with the failing test's exact message, including the three you cannot
-> guess: distractors are counted *after* the builder drops collisions with an
-> answer (so author 3 for margin), `normalizeAnswer` folds case and strips
-> apostrophes (`d'Sonn` and `dSonn` are one tile), and `fillKey` is built from the
-> **raw `@en` line including brackets** — moving a bracket orphans recorded
-> progress.
-
-**The selection test — what belongs in a `@fill`.** It exists to drill the phrases
-and constructions that **span multiple topics**, and it is **not level-scoped**: A1
-openers (`Am Hannergrond gesinn ech …`) are as much fill material as B1 clauses
-(`…, falls et reent`). So never ask "is this B1?" but:
-
-> Does this frame recur across topics, so learning it once pays off in several
-> themes?
-
-A sentence true of exactly one photo fails that test at any level — it is a
-`@sentence`. Flip side of "never reuse a sentence a `@sentence` already teaches":
-`@sentence` teaches *that sentence*, `@fill` teaches a *pattern that outlives it*.
-
-**The promise is that exactly one assignment of tiles to blanks is correct.**
-
-| # | Rule | Enforced by |
-|---|---|---|
-| R1 | Every tile text distinct in one presentation, under `normalizeAnswer` | test |
-| R2 | No two blanks grammatically interchangeable (same word class **and** slot) | **you** |
-| R3 | Every distractor wrong in **every** blank, not just the nearest | test catches literal equality only — **the semantic half is yours** |
-| R4 | Determiners and prepositions stay in the **fixed frame** | **you** |
-| R5 | No blank directly after an `-n`-final word *mid-clause* | test |
-| R6 | Two blanks need different word classes **or** a forced order | **you** |
-| R7 | Blanking a connector is allowed, and is the sharpest trap | **you** |
-
-- **R4 is load-bearing.** With `d'` outside the blank, masculine tiles are
-  grammatically impossible there and exactly one assignment survives.
-- **R5 has a payoff:** the n-drop does not cross a comma, so **two-clause frames
-  are the safer shape**, not the riskier one. A blank mid-clause after `-n` makes
-  the frame *unfixable*; keeping a determiner in the frame
-  (`gesinn ech e [Chantier]`) defuses it.
-- **R6 by construction:** `X a Y` with **both** sides blanked always violates it
-  unless the pair has a forced order (`[fofzeg] bis [siechzeg]` is ascending;
-  `[kuerz] [donkel] Hoer` is length-before-colour). Two coordinated predicative
-  adjectives are always interchangeable — blank one side only. Two blanks are safe
-  only in *different clauses* or *different word classes*.
-- **R7:** often the connector *is* the lesson, so `…, [falls] et reent` is
-  legitimate — but connectors overlap (`well` and `wann` are frequently also true).
-  Contrast (`obwuel`) and sequence (`nodeems`, `éier`) are far easier to make
-  unambiguous than cause/condition. Never blank both the connector **and** a
-  content word that determines which connector is right.
-
-**The annotated frame library** — ~25 photo-independent frames with the rationale
-for each blank — is in `.claude/memory/picture-description-theme.md`. Start from it
-rather than inventing frames.
-
-**Two bugs the tests cannot see, both found by the builder audit** (see
-`references/content-checks.md`): a *semantically valid* distractor is a second
-correct answer (`sécher` in a hedge slot is grammatical **and** coherent), and two
-coordinated adjectives are interchangeable. Run the audit.
-
-### B1: conjunctions and connecting words
-
-Exam content **may venture into B1**, and complex sentences are the vehicle. The
-two categories must not be mixed up — that confusion *is* the B1 error:
-subordinating conjunctions send the verb to the end; connecting words are
-order-neutral and cannot themselves cause inversion.
-
-**The verified inventory, both inversion patterns content must show, the two wrong
-forms class handouts circulate, and the homograph gloss traps are in
-`references/luxembourgish-grammar.md` §§ 2–4.** Don't restate them here.
-
-### Verification
-
-**The full checklist is `references/content-checks.md`** — run it before every
-commit. In short: LOD every LU side and every inflected form in a sentence;
-`npm run check-content` for the n-drop audit; the distractor-survival harness
-through the real builder; then `npm run build`.
-
-Every exam sub-lesson must mix `@word` and `@sentence` content (≥10 words,
-≥3 sentences) so Sessions alternate exercise types — enforced by
-`tests/integration/exam-manifest-letz.test.ts`.
+`@fill` (fill-in-words) is legal on the exam track only — never under
+`public/assets/lessons/`, since Lesson Mode schedules no fill Slots. Its full
+authoring rules (R1–R7, the selection test, the frame library) are covered in
+both exam skills; see `references/content-contract.md` §§2–5 for the mechanized
+half.
 
 ## References
 

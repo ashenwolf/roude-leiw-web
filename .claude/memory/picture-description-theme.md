@@ -5,13 +5,23 @@ theme contract are in [[exam-track]]; authoring procedure is in the
 `letz-content-generator` skill. This file holds the two things that are neither:
 the **`@fill` frame library** and the **LOD-verified vocabulary** with its traps.
 
-Shipped: **three themes**, each three sub-lessons with the photo committed and
+Shipped: **four themes**, each three sub-lessons with the photo committed and
 `@fill` blocks live — Schueberfouer (funfair, an outdoor street scene),
-living-room (a family having coffee **indoors**), and groussgaass (the Grand-Rue
-pedestrian zone on a **grey winter day**). The later two proved the per-photo cost
-is now mostly vocabulary: the frame library below carried over almost unchanged.
+living-room (a family having coffee **indoors**), groussgaass (the Grand-Rue
+pedestrian zone on a **grey winter day**), and chreschtmaart (a Christmas-market
+food stall at dusk). Each new theme after the first proved the per-photo cost is
+now mostly vocabulary: the frame library below carried over almost unchanged.
 See **Indoor vs outdoor** for the one contract wrinkle a non-street photo adds,
 and **Seasonal contrast** for why the third theme was chosen to be winter.
+
+**Candidate next photos**, backed by real (LOD-verified) sample answers already
+mined into the vocabulary buckets below rather than needing fresh derivation:
+a Kirchberg-view café (named places: `Alstad`, `Kierchbierg`), a Knuedler
+flea market (`Knuedler`, `Gemeng`, `Kathedral`, `Tuerm`, `Floumaart`), a WG/
+common-room (distinct indoor angle from living-room — a shared student space,
+not a family's own room), and a street decorated for `Nationalfeierdag`
+(flags — `Fändel`). Pick one whose inference angle **inverts** an existing
+theme's (see **Seasonal contrast**) over one that repeats it.
 
 ## The `@fill` frame library
 
@@ -45,9 +55,9 @@ every connector in the grammar reference not yet drilled anywhere in the app:
 `ob` ("whether", verb-final), `bis` ("until", verb-final), plus a second
 relative-clause shape per file. None of those connector frames are
 photo-specific — they belong in the library exactly like the original rows,
-and a fourth theme should start from *this* list before re-deriving.
+and the next new theme should start from *this* list before re-deriving.
 **Deliberately picking unused rows per theme is the policy** — it keeps Fix
-Errors from drilling the same frame under three different photos.
+Errors from drilling the same frame under multiple different photos.
 
 **Existential / inventory** — *Wou?* and *Objete*
 
@@ -93,6 +103,7 @@ Errors from drilling the same frame under three different photos.
 | `Haut [verschwannen] d'Wolleken net, mee dat stéiert de [Chrëschtdag] net.` **(3)** | `mee` inside the hedge register, not just the connectors table |
 | `Ech gesinn en Dag, deen typesch fir de [Wanter] ass.` **(3)** | relative clause on a season guess |
 | `Ech mengen, dëst ass en normalen Dag an der [Woch] an net e [Feierdag].` ⚠ **(3)** | weekday-vs-holiday guess, distinct from the Christmas-specific row above |
+| `Et gesäit aus, wéi wann hie [midd] wier.` | the `wéi wann` + conditional hedge ([[luxembourgish-grammar]] §2) — more vivid than the plain `gesäit … aus`; `wier` won't resolve in LOD (it's an inflected conditional of `sinn`, not its own lemma) so don't flag it as an error |
 
 **Person description**
 
@@ -107,6 +118,9 @@ Errors from drilling the same frame under three different photos.
 | `Si huet eng waarm [Jackett] an e roude [Schal] un.` **(3)** | two-garment `hunn … un`, different-gender determiners disambiguate |
 | `Ech gesinn e Kand, deen och seng [Aarm] an d'Luucht hält.` **(3)** | relative clause on a body-part noun |
 | `Ech mengen, de Mann ass [jonk], well hie net [eeler] ausgesäit.` **(3)** | age guess with its own justification, contradiction-based distractors |
+| `Si dréit e rosa Schal mat schwaarze [Punkten].` | pattern-on-clothing noun; adjective stays fixed in the frame either way, so this is safe to author before the plural-attributive question below is resolved |
+| `Ech mengen, si ass ënnerwee fir hir [Kommissiounen] ze maachen.` | `fir … ze` purpose clause ([[luxembourgish-grammar]] §5) as a hedged guess at WHY the person is there — the one confirmed picture-theme use of `ze`/`fir … ze`, despite the grammar reference's blanket "less relevant to picture description" note |
+| `Ech kann [säi]/[hir] Gesiicht net gesinn.` | the limits-of-observation frame — acknowledging what *isn't* visible (face turned away, too far, too small) rather than describing what is. Recurred independently across two unrelated sample answers (a market stall and a flea-market crowd), which is exactly the frame library's own bar for "this is a pattern, not a one-off sentence" |
 
 **Two-clause B1 frames** — the shape to prefer, because the n-drop stops at a
 comma so a blank at a clause boundary is *safer* than one mid-clause
@@ -153,14 +167,35 @@ skill's content contract):
    sub-lesson 02.
 4. **`villäicht` / `Ech géif soen` / `Ech sinn net sécher, mee …` / `Et kéint …
    sinn` / `Et gesäit no … aus` / `Ech mengen` are six distinct hedges** and real
-   samples use all six. Teach them as **frames, not `@word` entries** — a hedge is a
-   pattern, and `@word` reduces it to a lexical item the learner cannot deploy.
+   samples use all six, plus a confirmed more-vivid seventh, `wéi wann` +
+   conditional (`Et gesäit aus, wéi wann hie midd wier.`). Teach them as **frames,
+   not `@word` entries** — a hedge is a pattern, and `@word` reduces it to a
+   lexical item the learner cannot deploy.
 5. **Never use one hedge as another hedge's distractor.** Because all six are
    mutually substitutable, `sécher` in the `[warscheinlech]` blank is a *second
    correct answer*, not a wrong one — it was authored, shipped nowhere, and caught
    only by dumping the builder's tiles. In a hedge blank, distractors must be a
    different word class (nouns before a bare noun) or contradict the stated evidence
    (`net` against a `well`-clause). Full account: [[fill-in-words-exercise]].
+6. **Open question, not yet verified: plural attributive adjectives.** Real sample
+   answers write `kuerz donkel Hoer`, `méi déck Jacketten a Mäntel`, `schwaarze
+   Punkten` — attributive adjectives on **plural** nouns, which the current register
+   rule (feminine-singular-only, uninflected) doesn't cover at all. Luxembourgish
+   plural attributives may take a uniform `-e` regardless of gender the same way
+   feminine singular is invariant, but this hasn't been confirmed against a grammar
+   source or LOD (which doesn't expose declension tables through the MCP). Until
+   verified: keep such phrases in `@fill` frames with the adjective fixed in the
+   frame (safe regardless of the answer), don't promote plural attributives into
+   `@sentence` register, and don't assert the rule in `luxembourgish-grammar.md` as
+   fact.
+7. **Real sample answers include general-knowledge trivia that fails the
+   "stranger could check it against the photo" test — don't copy it in.**
+   Confirmed examples: a Schueberfouer answer citing its exact opening dates and
+   the century it was founded. A well-prepared exam candidate might legitimately
+   say this out loud, but it isn't a claim *about the photo*, so it doesn't belong
+   in a picture theme (it would fit a topic theme about local traditions, if one
+   is ever built). When mining a real sample answer for frames, filter for this
+   before filtering for anything else.
 
 ## Fill density: 10 per file, not 3–4
 
@@ -240,12 +275,27 @@ the lookups. Verification procedure: [[lod-mcp]].
 | `Bréll` | **`Brëll`** |
 | `Sonndag` / `Samschdag` | **`Sonndeg`** / **`Samschdeg`** — every weekday ends `-deg` |
 | `unhuen` | **`unhunn`** (to wear) |
+| `Athmosphär` | **`Atmosphär`** (no `h`) — same German-cognate trap as `warscheinlech`, third recurrence |
+| `karréiert` | **`karéiert`** (one `r`, checkered/plaid) |
+| `Kotelett(en)` | **`Kotlett(en)`** (no middle `e`) |
+
+**Prefer this word, don't keep hunting a synonym:** `Kannerwon` for "pram/
+stroller" doesn't resolve and none of its suggestions mean that — use `Kutsch`
+(f), which is a confirmed lemma with exactly that sense (also "carriage").
+`Scheminee` for "chimney" doesn't resolve either — use `Kamäin` (m), which
+covers both "fireplace" and "chimney".
 
 **Not lemmas** (`found: 0`, no usable suggestion — don't keep hunting):
-`Aen`/`Aa` (eyes), `Hemd`, `Sandale`, `Bluse`, `Handtäsch`, `Kleeder`, `Schouen`,
-`Getränk`, and — the whole living-room furniture set a German or French speaker
-reaches for first — `Sofa`, `Sessel`, `Fauteuil`. Use **`Couche`** (f) for the
-couch and **`Fotell`** (f) for the armchair.
+`Aen`/`Aa` (eyes), `Sandale`, `Bluse`, `Handtäsch`, `Kleeder`, `Schouen`,
+`Getränk`, `entspaant`, and — the whole living-room furniture set a German or
+French speaker reaches for first — `Sofa`, `Sessel`, `Fauteuil`. Use
+**`Couche`** (f) for the couch and **`Fotell`** (f) for the armchair; **`Canapé`**
+(m) also resolves as a further alternative for the couch, though with empty
+`senses` (spelling confirmed, gloss not) — treat it the same as the
+empty-`senses` group below.
+
+**`Hemd` resolved: it isn't the lemma, but `Hiem` (n) is** — "shirt", confirmed
+with a clean gloss. Use `Hiem`, not `Hemd`.
 
 **Resolves but with empty `senses`** — the entry exists, so the spelling is
 confirmed, but LOD offers no English gloss to check your translation against:
@@ -279,7 +329,8 @@ Luxembourgish name of the Grand-Rue, so it is safe as a named place), `Buttek` (
 pl. `Butteker`), `Geschäft` (n), `Gebai` (n), `Stroosseluucht` (f), `Schëld` (n),
 `Reklamm` (f), `Chantier` (m), `Zonk` (m), `Rucksak` (m), `Akafstut` (f),
 `Kommissioun` (f), `Täsch` (f), `Persoun` (f), `Schüler` (m), `Mantel` (m),
-`Schal` (m), `déck`, `schick`, `rosa`, `konzentréiert`, `undoen` (→ `ugedoen`).
+`Schal` (m), `Punkt` (m, dot/pattern — "mat schwaarze Punkten"), `déck`,
+`schick`, `rosa`, `konzentréiert`, `undoen` (→ `ugedoen`).
 Interior scene (living-room theme): `Stuff` (f, living room — `Living` (m) also
 resolves), `Couche` (f), `Fotell` (f), `Salonsdësch` (m), `Iessdësch` (m),
 `Teppech` (m), `Bicherregal` (n), `Buch` (n, pl. `Bicher`), `Mauer` (f, the wall
@@ -300,9 +351,38 @@ not "cafés"; use LOD's), `Zentrum` (m), `Stad` (f), `Strooss` (f), `Kand` (n),
 (f), `Wolleken` (pl.), `Himmel` (m), `héich`, `al`, `gro`, `bedeckt`, `déck`,
 `dënn`, `glécklech`, `traureg`, `midd`, `lafen`, `trëppelen`, `akafen`, `well`,
 `hannen`, `vir`, `lénks`, `riets`, `an der Mëtt`.
+
+**`hell` vs `liicht` — both gloss loosely to English "light", but disjointly.**
+`hell` is light-**coloured** (already taught); `liicht` is light-**weight**
+(`eng liicht Jackett`, a lightweight jacket) — confirmed as a distinct LOD sense
+from "easy/simple". Never gloss both as bare "light" in the same theme — same
+principle as the content contract's "distinct EN gloss per entry" rule, just
+across two different lemmas instead of two entries for one.
+
+Market / street / café scenes (candidate, unshipped — see "Candidate next
+photos" below): `Poubelle` (f, bin), `Speck` (m, bacon), `Gromperekichelchen`
+(**m**, potato pancake — the `-chen` diminutive is masculine here too), `Kotlett`
+(pl. `Kotletten`), `Student` (m, distinct from `Schüler`), `Terrass` (f),
+`Floumaart` (m, flea market), `Gemeng` (f, town hall / local council), `Kathedral`
+(f — LOD also lists it as the proper name of the Luxembourg City cathedral),
+`Tuerm` (m, tower), `Alstad` (f, old town), `Kierchbierg` (proper noun, the
+business district), `Knuedler` (proper noun — LOD confirms it as Place Guillaume
+II, so it is safe as a named place like `Groussgaass`), `Fändel` (m, flag),
+`Hond` (m, dog), `Jupe` (f, skirt), `Short` (m, shorts), `Poncho` (m),
+`Turnschlapp` (f, trainer/gym shoe — prefer over unverified `Sneakers`),
+`faarweg` (colourful), `Mapp` (f, folder), `Fläsch` (f, bottle), `hannendrun`
+(behind, referring back to something just named), `mateneen` (with each other).
+Common-room / WG scene (candidate, unshipped, distinct indoor angle from the
+living-room theme — a shared student space rather than a family's own room):
+`Hiem` (n, shirt — not `Hemd`), `Kamäin` (m, fireplace/chimney — not
+`Scheminee`), `Stëmmung` (f, atmosphere/mood), `bléien` (to bloom), `wierken`
+(to seem/appear, alt. to `schéngen`), `drécken` (to push/press), `frëndlech`
+(friendly), `Canapé` (m, alt. for `Couche`).
 Function words the frames need: `villäicht`, `ausserdeem`, `ongeféier`, `wéineg`,
 `verschidden`, `lass`, `ënnerwee`, `sécher`, `Beispill` (n), `Hannergrond` (m),
-`Vierdergrond` (m), `mëttes`, `nomëttes`, `dobaussen`, `bedeckt`, `Woch` (f),
+`Vierdergrond` (m), `mëttes`, `nomëttes`, `moies` (in the morning — fills the gap
+the existing hedge vocabulary left; only `mëttes`/`nomëttes` were taught before),
+`dobaussen`, `bedeckt`, `Woch` (f),
 `Blat` (n, pl. `Blieder`), `Mëttegpaus` (f), `treffen`, `heemgoen`, `akafen`.
 
 **`@sentence` distractors must be single words.** `@fill` never tokenizes a

@@ -70,8 +70,20 @@ the characteristic B1 error, so content must keep them apart.
 | `éier` / `bevir` | before | `Ech iessen, éier ech op d'Aarbecht fueren.` |
 | `wärenddeems` | while | `Ech lauschtere Musek, wärenddeems ech lafen.` |
 | `nodeems` | after | `Ech duschen, nodeems ech trainéiert hunn.` |
-| `bis` | until | `Ech waarden, bis den Dokter mech rifft.` |
+| `bis` (dass) | until | `Ech waarden, bis den Dokter mech rifft.` |
 | `andeems` | by (doing) | `Ech verbessere mech, andeems ech vill üben.` |
+| `wéi wann` | as if | `Et gesäit aus, wéi wann hie midd wier.` |
+
+**`wéi wann` ("as if") additionally forces the conditional/subjunctive** on the
+verb it sends to the end — not just plain present. `wier` is the conditional of
+`sinn` ("would be"); it will not resolve in `lod_lookup` (LOD indexes lemmas, and
+inflected conditional forms aren't their own entry — a miss here is not an error
+signal, unlike a miss on an infinitive). Real Sproochentest picture-description
+answers pair this with the visible-state hedge:
+`Et gesäit (sou) aus, wéi wann hien interesséiert wier eppes ze kafen.` ("It looks
+as if he would be interested in buying something") — note the further stacking
+with `ze` + infinitive (§5), also clause-final. Confirmed use case and rationale:
+`.claude/memory/picture-description-theme.md`'s hedge inventory.
 
 ⚠️ **Class handouts circulate two wrong forms.** A handout is a teaching aid, not a
 dictionary:
@@ -81,7 +93,8 @@ dictionary:
 - **`befir`** → `bevir`. LOD returns `found: 0` and suggests `bevir`.
 
 `datt` and `dass` are both valid. Pick one per theme rather than teaching both as
-separate Elements.
+separate Elements. Same for `bis` vs. the fuller `bis dass` — pick one form per
+theme.
 
 ---
 
@@ -127,7 +140,72 @@ unmatchable-by-reasoning. Disambiguate these explicitly:
 
 ---
 
-## 5. Noun entries
+## 5. `ze`-infinitive and `fir … ze` (purpose clauses)
+
+Useful for topic-theme personal answers ("I try to…", "I plan to…", "in order
+to…") — `firwat`/`wat plangt Dir` answers lean on this constantly. Also confirmed
+in picture-description content, narrowly: hedging *why* a depicted person is
+doing something (`Ech mengen, si ass ënnerwee fir hir Kommissiounen ze
+maachen.`) — see the person-description frame table in
+`.claude/memory/picture-description-theme.md`. Still not a fit for the theme's
+plain present-tense observations generally.
+
+**`ze` + infinitive** — follows a fixed set of expressions:
+
+| Pattern | Example |
+|---|---|
+| `Et ass wichteg … ze` | `Et ass wichteg op d'mannst 8 Stonnen ze schlofen.` |
+| `Et ass gutt … ze` | |
+| `Ech probéieren … ze` | `Ech probéiere méi Sport ze maachen.` |
+| `Ech plangen … ze` | |
+
+**`fir … ze`** — expresses purpose ("in order to"). Structure:
+`fir` + object/complement + `ze` + infinitive.
+
+```
+Ech maache Sport fir gesond ze bleiwen.
+```
+
+**A third, distinct use: `… déi ze [VERB] sinn`** — an adjectival/passive-ish
+"is to be done" sense, not purpose. Confirmed in a real sample:
+`Saachen, déi ze verkafe sinn` ("things that are for sale / to be sold").
+Relevant to shopping-topic content (`wat ass ze verkafen?`) as much as to
+picture description. Don't conflate with `fir … ze` — there is no `fir` here,
+and the meaning is "available/intended to be Xed", not "in order to X".
+
+**Separable verbs**: the `ze` infixes between the separable prefix and the verb
+stem — `prefix + ze + verb`, e.g. a verb with prefix `un-` (`unkafen`, to buy/
+shop for) becomes `unzekafen` in the `ze`-infinitive. LOD-verify the base
+separable verb before deriving its `ze`-form; don't guess the prefix.
+
+**Impersonal `ee`/`een` + modal** — a separate but frequently co-occurring
+pattern: `kann ee` / `et kann ee` ("one can …") is the generic-subject way to
+describe what's generally available or visible, without naming a specific
+person. Confirmed real use: `Beim Stand kann ee Gromperekichelcher kafen.`,
+`Et kann ee vill gréng gesinn.` Useful in both picture description (describing
+options/sights in general, not tied to one depicted person) and topic-theme
+answers about a place or custom.
+
+**The 5 modal verbs never take `ze`** — `wëllen`, `mussen`, `däerfen`, `sollen`,
+`kënnen` take a bare infinitive:
+
+- ✗ `Ech muss ze schaffen.`
+- ✓ `Ech muss schaffen.`
+
+**Position**: `ze` + infinitive (or the whole `fir … ze` group) stays together at
+the **very end of the clause** — including inside a subordinate clause, where it
+sits after the subordinate verb that sends it there:
+
+```
+Ech si frou, well ech geplangt hu fir am Summer an Italien ze fueren.
+```
+
+That example also stacks with §2: `well` sends the finite verb (`hu`) to the end
+of its clause, and the `fir … ze` purpose group trails after it, still clause-final.
+
+---
+
+## 6. Noun entries
 
 Always use the **definite article** form, and confirm gender with `lod_lookup`
 rather than inferring it from a source PDF: `m` → `de`/`den`, `f` → `d'`,
