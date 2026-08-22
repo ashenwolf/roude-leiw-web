@@ -139,6 +139,16 @@
         { "id": "family.02", "file": "family/02_phrases.letz", "title": "Key Phrases" },
         { "id": "family.03", "file": "family/03_questions.letz", "title": "Talking About It" }
       ]
+    },
+    {
+      "id": "hobbies",
+      "kind": "topic",
+      "title": "Hobbies & Free Time",
+      "subLessons": [
+        { "id": "hobbies.01", "file": "hobbies/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "hobbies.02", "file": "hobbies/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "hobbies.03", "file": "hobbies/03_questions.letz", "title": "Talking About It" }
+      ]
     }
   ]
 }

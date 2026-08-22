@@ -1,0 +1,53 @@
+# Exam track — Theme: Hobbien & Fräizäit — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Every sub-lesson mixes words AND sentences so each session alternates
+# word-match and sentence-builder slots; the emphasis here is vocabulary.
+
+@lesson H1.01 "Hobbies Vocabulary"
+
+@word den Hobby = the hobby
+@word d'Fräizäit = the free time
+@word d'Aktivitéit = the activity
+@word kreativ = creative
+@word spannend = exciting
+@word interessant = interesting
+@word molen = to paint
+@word sangen = to sing
+@word lauschteren = to listen
+@word d'Musek = the music
+@word liesen = to read
+@word d'Bicher = the books
+@word interesséieren = to interest
+
+@sentence
+@lu A menger Fräizäit lauschteren ech gär Musek.
+@en In my free time I like listening to music.
+@distractor-lu kucken
+@distractor-lu sangen
+@distractor-en watching
+@distractor-en singing
+
+@sentence
+@lu Ech molen a sange gär.
+@en I like painting and singing.
+@distractor-lu liesen
+@distractor-lu lauschteren
+@distractor-en reading
+@distractor-en listening
+
+@sentence
+@lu Ech liese gär Bicher, well si mech interesséieren.
+@en I like reading books, because they interest me.
+@distractor-lu kaschten
+@distractor-lu molen
+@distractor-en cost
+@distractor-en paint
+
+@sentence
+@lu Wann ech Zäit hunn, molen ech gär.
+@en When I have time, I like painting.
+@distractor-lu sangen
+@distractor-lu lauschteren
+@distractor-en sing
+@distractor-en listen

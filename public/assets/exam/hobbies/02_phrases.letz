@@ -1,0 +1,108 @@
+# Exam track — Theme: Hobbien & Fräizäit — Sub-lesson 2: Key Phrases
+# Plain sentences (no @question): presented in either direction.
+# Mixed with the vocabulary these phrases lean on, so sessions alternate
+# word-match and sentence-builder slots. Grounded in the user's real hobbies
+# (photography, hiking, rock music, dance, dioramas) rather than generic
+# statements — see .claude/memory/exam-track.md on why topic content should
+# stay personal even outside the @question file.
+
+@lesson H1.02 "Hobbies Phrases"
+
+@word wanderen = to hike
+@word de Bierg = the mountain
+@word fotografeieren = to take photographs
+@word d'Fotografie = photography
+@word d'Kamera = the camera
+@word d'Landschaft = the landscape
+@word de Concert = the concert
+@word d'Rockmusek = rock music
+@word d'Instrument = the instrument
+@word de Sport = the sport
+@word spillen = to play
+@word dobaussen = outdoors
+@word de Fotoapparat = the camera (apparatus)
+@word d'Diorama = the diorama
+@word d'Miniatur = the miniature
+@word d'Duerf = the village
+@word bauen = to build
+@word d'Material = the material
+
+@sentence
+@lu Am Summer wanderen ech gär dobaussen, an ech ginn oft op de Bierg.
+@en In summer I like being outdoors, and I often go up the mountain.
+@distractor-lu fotografeieren
+@distractor-lu Concert
+@distractor-en photograph
+@distractor-en concert
+
+@sentence
+@lu Ech fotografeiere gär d'Landschaft mat menger Kamera.
+@en I like photographing the landscape with my camera.
+@distractor-lu Musek
+@distractor-lu Concert
+@distractor-en music
+@distractor-en concert
+
+@sentence
+@lu Ech lauschtere gär Rockmusek, an ech ginn heiansdo op e Concert.
+@en I like listening to rock music, and I sometimes go to a concert.
+@distractor-lu Sport
+@distractor-lu Instrument
+@distractor-en sport
+@distractor-en instrument
+
+@sentence
+@lu Ech hu wéi Kand gär gedanzt, mee haut spillen ech kee Instrument.
+@en As a child I liked dancing, but today I don't play an instrument.
+@distractor-lu Sport
+@distractor-lu Concert
+@distractor-en sport
+@distractor-en concert
+
+@sentence
+@lu Ech reparéiere gär Saachen a menger neier Wunneng.
+@en I like repairing things in my new apartment.
+@distractor-lu Kamera
+@distractor-lu Musek
+@distractor-en camera
+@distractor-en music
+
+@sentence
+@lu Wann ech Zäit hunn, liesen ech gär e Buch.
+@en When I have time, I like reading a book.
+@distractor-lu reent
+@distractor-lu Stad
+@distractor-en rains
+@distractor-en city
+
+@sentence
+@lu Ech géif gär Miniature vun Dierfer bauen.
+@en I would like to build miniatures of villages.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport
+
+@sentence
+@lu Mäi Papp hat e Fotoapparat, an ech maachen och gär Fotoen.
+@en My father had a camera, and I also like taking photos.
+@distractor-lu Instrument
+@distractor-lu Concert
+@distractor-en instrument
+@distractor-en concert
+
+@sentence
+@lu D'nächst Joer wëll ech op Norwegen fueren.
+@en Next year I want to go to Norway.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@lu Ech hu scho Material fir Diorama doheem, mee ech muss nach Zäit fannen.
+@en I already have material for dioramas at home, but I still need to find time.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport

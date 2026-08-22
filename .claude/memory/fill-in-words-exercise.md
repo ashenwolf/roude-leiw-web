@@ -175,6 +175,25 @@ them actually taught:
   fill instead. Loose stem matching means infinitives (`stoen`→`stinn`) are false
   positives — adjudicate by hand.
 
+## Second theme, first topic-track fill — Hobbies, Aug 2026
+
+`hobbies/03_questions.letz` is the first **topic** theme (not picture) to carry
+`@fill`, confirming the mechanic isn't picture-specific. It surfaced a third
+ambiguity-bug shape, same family as the `sécher` bug above but from a different
+source:
+
+- **A high-frequency verb makes its own distractors coherent.** In
+  `Wann ech Zäit hunn, maachen ech [Fotoen]`, the first-drafted distractor
+  `Sport` is *wrong as one* — `Sport maachen` ("to do sports") is itself a
+  real, common Luxembourgish collocation, so the filled sentence reads as a
+  second true statement, not a wrong one. `maachen`/`hunn`/`ginn` are exactly
+  the verbs this bites hardest, because they collocate promiscuously (`Musek
+  maachen`, `Concert maachen` are both real too). Fix: distractors that are
+  *objects, not activities* (`Bicher`, `Kamera`) — things the verb cannot
+  plausibly govern in this sense at all, not just things the narrator didn't
+  mean. **When the frame's fixed verb is a generic do/have/make verb, audit
+  every noun distractor for its own idiom with that verb before trusting it.**
+
 ## The remaining gap
 
 **`planLessonMode` schedules no fill Slots.** Only Exam and Fix Errors do. So a

@@ -93,11 +93,19 @@ Only after the interview is complete, move to authoring.
 ### 4. Author `02_phrases.letz`
 
 - Plain `@sentence` blocks — no `@question` — presented in either direction.
-- Common phrases about the topic at ~A2, using the connector inventory from
-  `luxembourgish-grammar.md` §§2–3 for two-clause sentences: coordinating
-  (`mee`/`awer`, `an`, `oder`) stays order-neutral, subordinating (`well`,
-  `wann`, `obwuel`, `ob`, …) sends the verb to the end — don't mix the two
-  categories up, that confusion *is* the B1-level error.
+- **Personal, grounded in the same interview facts as `03` — never an abstract
+  claim about the world.** `02` is not exempt from personalization just because
+  it lacks `@question`: "Painting is a creative activity." and "Concerts are
+  always exciting." are exactly the kind of generic filler to never write. `02`
+  differs from `03` in *depth*, not in *whose facts it uses* — shorter, simpler
+  restatements of the learner's real answers ("My father had a camera, and I
+  also like taking photos."), not truisms. If the interview covered more ground
+  than fits in `03`'s Q&A, `02` is where the overflow facts belong.
+- Use the connector inventory from `luxembourgish-grammar.md` §§2–3 for
+  two-clause sentences: coordinating (`mee`/`awer`, `an`, `oder`) stays
+  order-neutral, subordinating (`well`, `wann`, `obwuel`, `ob`, …) sends the
+  verb to the end — don't mix the two categories up, that confusion *is* the
+  B1-level error.
 - Introduce any new vocabulary the phrases need as `@word` entries in this same
   file; ≥10 words / ≥3 sentences floor still applies here too.
 - Single-word distractors only for every `@sentence` — a multi-word distractor
@@ -140,15 +148,27 @@ connector patterns the phrases and answers use — this is the "answers as
 sentence and fill" split: `@sentence`+`@question` teaches *this learner's
 specific answer*, `@fill` teaches the *pattern* that transfers to any topic
 (the same reuse criterion as the picture-theme frame library — "does this frame
-recur across topics?"). Good candidates: a `well`-causal clause giving a reason
-tied to the topic, a `wann`-conditional, an `obwuel`-contrast, a comparative.
+recur across topics?"). **Write at least 10 `@fill` blocks, not a token 3** — a
+short well-causal/wann-conditional/comparative set exercises the mechanic too
+thinly to justify a dedicated Slot type. Vary the connector and blank-word-class
+across all 10 so they don't collapse into restatements of each other: causal
+(`well`), conditional (`wann`), contrast (`obwuel`), comparative (`léiwer wéi`),
+purpose (`fir … ze`), a fronted-adverb inversion (`dofir`, `dann`), a duration or
+number blank, a frequency-adverb blank, a hedge (`Ech mengen, …`). Ground each
+frame's *fixed text* in the theme's real facts too (not a bare grammar
+template) — reuse-scoped does not mean context-free.
 `@fill` is legal at any level (it is **not** B1-scoped, just reuse-scoped) —
 apply R1–R7 from `content-contract.md` §2–5 exactly as in a picture theme:
 determiners/prepositions stay in the fixed frame (R4), no blank directly after
-an `-n`-final word mid-clause (R5), two blanks need different word classes or a
-forced order (R6), every distractor wrong in every blank (R3, yours to verify).
-A `@fill` must never repeat a sentence a `@sentence` in this file already
-teaches.
+an `-n`-final word mid-clause (R5) — including immediately after `hunn`/`sinn`/
+`ginn` with no comma, a common trap when fronting the blank as an adverb — two
+blanks need different word classes or a forced order (R6), every distractor
+wrong in every blank (R3, yours to verify — watch for a common do/have/make verb
+in the fixed frame making an otherwise-safe noun distractor into a real
+collocation, e.g. `Sport` is a bad distractor next to `maachen`). A `@fill` must
+never repeat a sentence a `@sentence` in this file already teaches. Run the
+distractor-survival dump (step 7.5) over every fill before calling this step
+done, not just the `@sentence` blocks.
 
 ### 6. Update the manifest
 

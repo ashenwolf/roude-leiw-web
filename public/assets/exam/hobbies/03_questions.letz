@@ -1,0 +1,296 @@
+# Exam track — Theme: Hobbien & Fräizäit — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview on 2026-08-21/22 —
+# do not "improve" or genericize them in a later editing pass. The point is
+# that the learner rehearses what they will actually say in the Sproochentest.
+#
+# The three @fill blocks carry frames that recur across any topic: a
+# well-causal reason, a wann-conditional, and a comparative with "léiwer wéi".
+
+@lesson H1.03 "Talking About Hobbies"
+
+@word de Canapé = the couch
+@word d'Tëlee = the TV
+@word sech leeën = to lie down
+@word kucken = to watch
+@word firwat = why
+@word wéini = when
+@word mat wiem = with whom
+@word wéi vill = how much / how many
+@word de Papp = the father
+@word de Camping = the campsite
+@word den Hond = the dog
+@word den Apparat = the appliance
+@word reparéieren = to repair
+@word motivéieren = to motivate
+@word mengen = to think, to believe
+@word ophalen = to stop
+@word plënneren = to move (house)
+@word installéieren = to install
+@word zesummebauen = to assemble
+@word héieren = to hear
+@word kafen = to buy
+
+@sentence
+@question Wat maacht Dir gär doheem?
+@lu Ech leeë mech gär op de Canapé, an ech liese gär Bicher a kucke gär Tëlee.
+@en I like to lie down on the couch, and I like reading books and watching TV.
+@distractor-lu kafen
+@distractor-lu Musek
+@distractor-en buy
+@distractor-en music
+
+@sentence
+@question Hutt Dir e kreativen Hobby?
+@lu Jo, Fotoe maachen ass meng kreativ Aktivitéit.
+@en Yes, taking photos is my creative activity.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport
+
+@sentence
+@question Säit wéini maacht Dir Fotoen?
+@lu Ech maache Fotoe säit ech Kand sinn, well mäi Papp e Fotoapparat hat.
+@en I've been taking photos since I was a child, because my father had a camera.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wéini maacht Dir Fotoen?
+@lu Ech maache Fotoen, wa mir reesen oder Vakanz hunn.
+@en I take photos when we travel or when we're on vacation.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Beschreift Ären Hobby!
+@lu Ech maache gär Fotoe vu Bierger, a bei kloer Nuecht probéieren ech Stären ze fotografeieren.
+@en I like taking photos of mountains, and on clear nights I try to photograph stars.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Firwat hutt Dir Ären Hobby gär?
+@lu Ech fotografeiere gär, fir Erënnerungen ze maachen an déi schéinste Plaze mat anerer ze deelen.
+@en I like taking photos, in order to make memories and share the most beautiful places with others.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wéi een anere kreativen Hobby géif Iech interesséieren?
+@lu Ech géif gär Diorama maachen, an dat si Miniature vun Dierfer.
+@en I would like to make dioramas, and those are miniatures of villages.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport
+
+@sentence
+@question Wat fir Aktivitéiten maacht Dir gär am Summer dobaussen?
+@lu Wann d'Wieder schéin ass, wanderen ech gär an d'Bierger.
+@en When the weather is nice, I like hiking in the mountains.
+@distractor-lu Concert
+@distractor-lu Instrument
+@distractor-en concert
+@distractor-en instrument
+
+@sentence
+@question An zu Lëtzebuerg?
+@lu Wann ech laang Vakanz hunn, fueren ech a Frankräich oder an d'Schwäiz, mee de Weekend fueren ech an d'Mëllerdall zu Lëtzebuerg.
+@en If I have a long vacation, I go to France or Switzerland, but on the weekend I go to the Mëllerdall in Luxembourg.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wat hutt Dir gär als Kand gemaach, a fir wéi laang?
+@lu Als Kand hunn ech gär gedanzt, an ech war fir siwe Joer an enger Danzschoul, wou mir Tango, Walzer a Rumba gedanzt hunn.
+@en As a child I liked dancing, and I was at a dance school for seven years, where we danced tango, waltz, and rumba.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport
+
+@sentence
+@question Firwat hutt Dir opgehal, an interesséiert Iech dat haut nach?
+@lu Ech si geplënnert, an d'Danzschoul war ze wäit fort, mee ech sinn nach ëmmer e bësschen interesséiert.
+@en I moved, and the dance school was too far away, but I'm still a little interested today.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wéi eng Bicher liest Dir gär?
+@lu Ech liese gär Science-Fiction, an ech hu virun kuerzem Colony vum Max Kidruk gelies.
+@en I like reading science fiction, and I recently read Colony by Max Kidruk.
+@distractor-lu Musek
+@distractor-lu Fotoen
+@distractor-en music
+@distractor-en photos
+
+@sentence
+@question Wat gefält Iech u Bicher?
+@lu Ech interesséiere mech fir de Weltraum, an d'Auteure weisen dacks d'Probleemer vun haut an der Zukunft.
+@en I'm interested in space, and the authors often show today's problems in the future.
+@distractor-lu Bicher
+@distractor-lu Musek
+@distractor-en books
+@distractor-en music
+
+@sentence
+@question Lauschtert Dir Musek? Wéi eng Zort, a wéi oft gitt Dir op Concerten?
+@lu Jo, ech lauschtere gär Rockmusek, an ech ginn op d'mannst véier oder fënnef Mol am Joer an d'Rockhal.
+@en Yes, I like listening to rock music, and I go to the Rockhal at least four or five times a year.
+@distractor-lu Bicher
+@distractor-lu Sport
+@distractor-en books
+@distractor-en sport
+
+@sentence
+@question Op wéi ee Concert waart Dir fir d'lescht?
+@lu Mir sinn zulescht op e Concert vun Offspring gaangen, an dat ass eng interessant Punkrock Band aus Amerika.
+@en We most recently went to an Offspring concert, and that's an interesting punk rock band from America.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wou war de Concert, a wéi huet e Iech gefall?
+@lu De Concert war op der Plaz bei der Luxexpo a ganz spannend, mee mir sinn ze spéit komm, dofir hu mir net all Lidder gehéiert.
+@en The concert was at the square near the Luxexpo and really exciting, but we arrived too late, so we didn't hear every song.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Spillt Dir en Instrument? Firwat net?
+@lu Nee, ech spille kee Instrument, an ech hu mir eng Gittar kaf, mee ech hu keng Gedold fir ze üben.
+@en No, I don't play an instrument, and I bought myself a guitar, but I don't have the patience to practice.
+@distractor-lu Musek
+@distractor-lu Concert
+@distractor-en music
+@distractor-en concert
+
+@sentence
+@question Wat sinn Är Pläng fir d'nächst Joer wat Är Fräizäit ugeet?
+@lu Ech plangen, fir d'nächst Joer op Norwegen ze fueren, an engem Camping ze wunnen a mat mengem Hond ze wanderen.
+@en I'm planning to go to Norway next year, live at a campsite, and hike with my dog.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Kënnt Dir doheem en Apparat oder eng Maschinn reparéieren?
+@lu Mir hunn eng nei Wunneng, an ech muss vill doheem reparéieren, an ech muss Luuchten installéieren a Miwwelen zesummebauen.
+@en We have a new apartment, and I have to repair a lot at home, and I have to install lights and assemble furniture.
+@distractor-lu Musek
+@distractor-lu Bicher
+@distractor-en music
+@distractor-en books
+
+@sentence
+@question Wéi kann ee Kanner motivéieren méi kreativ ze sinn?
+@lu Ech mengen, Kanner ginn duerch d'Beispill vun den Eltere motivéiert.
+@en I think children get motivated through the example set by their parents.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech hu mäin Hobby gär, well hie mech [glécklech] mécht.
+@en I like my hobby, because it makes me [happy].
+@distractor-lu deier
+@distractor-lu wäit
+@distractor-en expensive
+@distractor-en far
+
+@fill
+@lu Wann ech Zäit hunn, maachen ech [Fotoen].
+@en When I have time, I take [photos].
+@distractor-lu Bicher
+@distractor-lu Kamera
+@distractor-en books
+@distractor-en camera
+
+@fill
+@lu Ech hu Fotografie léiwer [wéi] Sport.
+@en I prefer photography [over] sports.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech spille kee Instrument, obwuel ech eng [Gittar] hunn.
+@en I don't play an instrument, although I have a [guitar].
+@distractor-lu Kamera
+@distractor-lu Concert
+@distractor-en camera
+@distractor-en concert
+
+@fill
+@lu Ech maachen Diorama, fir [kreativ] ze sinn.
+@en I do dioramas, in order to be [creative].
+@distractor-lu deier
+@distractor-lu wäit
+@distractor-en expensive
+@distractor-en far
+
+@fill
+@lu Fir [siwe] Joer hunn ech gedanzt.
+@en For [seven] years I danced.
+@distractor-lu dräi
+@distractor-lu fënnef
+@distractor-en three
+@distractor-en five
+
+@fill
+@lu Ech mengen, [dacks] reparéieren ech Saachen doheem.
+@en I think I [often] repair things at home.
+@distractor-lu heiansdo
+@distractor-lu ni
+@distractor-en sometimes
+@distractor-en never
+
+@fill
+@lu D'Wunneng ass nei, [dofir] muss ech vill reparéieren.
+@en The apartment is new, [that's why] I have to repair a lot.
+@distractor-lu well
+@distractor-lu an
+@distractor-en because
+@distractor-en and
+
+@fill
+@lu Ech hu gär gedanzt, wann ech [Zäit] hat.
+@en I liked dancing, when I had [time].
+@distractor-lu Kamera
+@distractor-lu Bierg
+@distractor-en camera
+@distractor-en mountain
+
+@fill
+@lu Ech muss nach [Motivatioun] fannen, fir Diorama ze maachen.
+@en I still need to find [motivation], in order to make dioramas.
+@distractor-lu Musek
+@distractor-lu Sport
+@distractor-en music
+@distractor-en sport

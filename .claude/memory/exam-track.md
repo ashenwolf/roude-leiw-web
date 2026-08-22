@@ -76,6 +76,24 @@ will actually say in the Sproochentest, so generic answers defeat the exercise.
 Record in the file header that the answers are personal, or a later cleanup pass
 will "improve" them into neutral content.
 
+**Correction (user) — personalization is not scoped to `03_questions` alone.**
+A first pass at the hobbies theme filled `02_phrases` with abstract truisms
+("Painting is a creative activity.", "Concerts are always exciting.") on the
+theory that `02` is generic per-topic phrasing, not interview-sourced. Rejected:
+every `@sentence`, in every sub-lesson, should be grounded in the learner's real
+facts once an interview has happened — `02` just gets the *shorter, simpler*
+restatements ("My father had a camera, and I also like taking photos.") rather
+than `03`'s fuller justified answers. An abstract claim about the world is never
+an acceptable substitute for a personal one, even in a non-`@question` file.
+
+**`@fill` needs real depth, not a token 3.** The first hobbies draft shipped 3
+`@fill` blocks per the picture-theme precedent; corrected to a **≥10 floor**.
+Below that the mechanic barely exercises `fill-content-rules.test.ts` and gives
+the learner too few reusable frames to be worth a dedicated Slot type. Generating
+10 distinct, non-overlapping, unambiguous frames is real authoring work — budget
+for a full pass of R1–R7 + the distractor-survival dump per frame, not a quick
+addendum after the `@sentence` blocks are done.
+
 ## Register split across mechanics
 
 Exam content **may venture into B1**, and the vehicle is complex sentences with
