@@ -1,0 +1,484 @@
+# A1/A1.2/A1_16_jobs_and_workplaces.letz
+# Source: PDF slide deck "L7 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 7)
+# (m)/(f)/(pl) markers stripped; (formal)/(informal) qualifiers stripped.
+# Matching exercises ("Kombinéiert", "Wat maache si?", "Op eng Annonce reagéieren")
+# resolved to their answer-key order and reproduced as completed sentences.
+# "Receptionist"/"Receptionistin" corrected to LOD-verified "Receptionnist"/"Receptionnistin".
+
+@lesson A1.16 "Jobs & Workplaces"
+
+# --- Talking about your job ---
+@word de Beruff = the profession
+@word d'Aarbecht = the work
+@word d'Erfarung = the experience
+@word d'Annonce = the advertisement
+@word d'Plaz = the position
+@word fräi = free
+@word zanter = since
+@word Bis muer = see you tomorrow
+
+# --- Professions (masculine / feminine) ---
+@word de Sportler = the sportsman
+@word d'Sportlerin = the sportswoman
+
+@word de Botzmann = the cleaning man
+@word d'Botzfra = the cleaning woman
+
+@word de Kach = the chef
+@word d'Kächin = the female chef
+
+@word den Informatiker = the computer specialist
+@word d'Informatikerin = the female computer specialist
+
+@word de Fotograf = the photographer
+@word d'Fotografin = the female photographer
+
+@word den Aarbechter = the worker
+@word d'Aarbechterin = the female worker
+
+@word den Zänndokter = the dentist
+@word d'Zänndoktesch = the female dentist
+
+@word de Sekretär = the secretary
+@word d'Sekretärin = the female secretary
+
+@word de Verkeefer = the salesman
+@word d'Verkeeferin = the saleswoman
+
+@word den Direkter = the director
+@word d'Direktesch = the female director
+
+@word de Mecanicien = the mechanic
+@word d'Mecanicienne = the female mechanic
+
+@word den Employé = the employee
+@word d'Employée = the female employee
+
+@word de Coiffeur = the hairdresser
+@word d'Coiffeuse = the female hairdresser
+
+@word de Receptionnist = the receptionist
+@word d'Receptionnistin = the female receptionist
+
+@word de Bäcker = the baker
+@word d'Bäckesch = the female baker
+
+@word de Bauer = the farmer
+@word d'Bauerin = the female farmer
+
+@word den Dokter = the doctor
+@word d'Doktesch = the female doctor
+
+@word den Architekt = the architect
+@word d'Architektin = the female architect
+
+@word den Affekot = the lawyer
+@word d'Affekotin = the female lawyer
+
+@word de Steemetzer = the stonemason
+@word d'Steemetzesch = the female stonemason
+
+@word den Elektriker = the electrician
+@word d'Elektrikerin = the female electrician
+
+@word den Educateur = the child care worker
+@word d'Educatrice = the female child care worker
+
+@word de Riichter = the judge
+@word d'Riichterin = the female judge
+
+@word de Museker = the musician
+@word d'Musekerin = the female musician
+
+@word den Déierendokter = the veterinarian
+@word d'Déierendoktesch = the female veterinarian
+
+# --- Vocabulary from sentences (coverage backfill) ---
+@word de Student = the student
+@word de Proff = the teacher
+@word de Caissier = the cashier
+@word de Serveur = the waiter
+@word d'Serveuse = the waitress
+@word de Libraire = the bookseller
+@word d'Violonistin = the violinist
+
+# --- Workplaces ---
+@word d'Praxis = the doctor's practice
+@word de Coiffeurssalon = the hairdresser's salon
+@word d'Librairie = the bookstore
+@word de Bicherbuttek = the bookshop
+@word d'Bibliothéik = the library
+@word de Chantier = the construction site
+@word de Garage = the garage
+@word d'Sportshal = the sports hall
+@word d'Bäckerei = the bakery
+@word de Studio = the studio
+@word de Geriicht = the court
+@word d'Entreprise = the company
+@word d'Universitéit = the university
+@word de Finanzsecteur = the finance sector
+@word de Büro = the office
+@word de Metro = the metro
+@word d'Geschäft = the business
+
+# --- Work verbs ---
+@word reparéieren = to repair
+@word kontrolléieren = to check
+@word schneiden = to cut
+@word verkafen = to sell
+@word fleegen = to take care of
+@word bauen = to build
+@word trainéieren = to train
+@word preparéieren = to prepare
+@word baken = to bake
+@word botzen = to clean
+
+# --- Other vocabulary from sentences ---
+@word den Orchester = the orchestra
+@word d'Gei = the violin
+@word d'Fotoen = the photos
+@word d'Menüen = the menus
+@word d'Autoen = the cars
+@word d'Hoer = the hair
+@word d'Wueren = the goods
+@word d'Haiser = the houses
+@word d'Déieren = the animals
+@word normalerweis = usually
+@word d'Gastronomie = the catering trade
+
+@sentence
+@lu Wat bass du vu Beruff?
+@en What do you do for a living?
+@distractor-en how
+@distractor-en where
+@distractor-lu Wéi
+@distractor-lu Wou
+
+@sentence
+@lu Ech schaffen als Verkeefer an engem Supermarché.
+@en I work as a salesman in a supermarket.
+@distractor-en Monday
+@distractor-en book
+@distractor-lu Méindeg
+@distractor-lu Buch
+
+@sentence
+@lu Ech schaffen als Serveuse an engem Café.
+@en I work as a waitress in a café.
+@distractor-en Tuesday
+@distractor-en window
+@distractor-lu Dënschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Ech si Student op der Universitéit.
+@en I am a student at the university.
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
+
+@sentence
+@lu Ech schaffen am Finanzsecteur.
+@en I work in finance.
+@distractor-en Wednesday
+@distractor-en book
+@distractor-lu Mëttwoch
+@distractor-lu Buch
+
+@sentence
+@lu Ech schaffen als Sekretär bei engem Zänndokter.
+@en I work as a secretary at a dentist's.
+@distractor-en Thursday
+@distractor-en window
+@distractor-lu Donneschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu De Mecanicien reparéiert Autoen an enger Garage.
+@en The mechanic repairs cars in a garage.
+@distractor-en Friday
+@distractor-en book
+@distractor-lu Freideg
+@distractor-lu Buch
+
+@sentence
+@lu Den Zänndokter kontrolléiert d'Zänn an enger Praxis.
+@en The dentist checks teeth at a practice.
+@distractor-en Saturday
+@distractor-en window
+@distractor-lu Samschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu De Coiffeur schneit Hoer an engem Coiffeurssalon.
+@en The hairdresser cuts hair at a hair salon.
+@distractor-en Sunday
+@distractor-en book
+@distractor-lu Sonndeg
+@distractor-lu Buch
+
+@sentence
+@lu D'Sportlerin trainéiert an enger Sportshal.
+@en The sportswoman trains in a sports hall.
+@distractor-en Monday
+@distractor-en window
+@distractor-lu Méindeg
+@distractor-lu Fënster
+
+@sentence
+@lu De Kach preparéiert Menüen an engem Restaurant.
+@en The chef prepares menus in a restaurant.
+@distractor-en Tuesday
+@distractor-en book
+@distractor-lu Dënschdeg
+@distractor-lu Buch
+
+@sentence
+@lu D'Fotografin mécht Fotoen an engem Studio.
+@en The photographer takes photos in a studio.
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
+
+@sentence
+@lu D'Bäckesch baakt Brout an enger Bäckerei.
+@en The baker bakes bread in a bakery.
+@distractor-en Wednesday
+@distractor-en window
+@distractor-lu Mëttwoch
+@distractor-lu Fënster
+
+@sentence
+@lu De Verkeefer verkeeft Wueren an engem Buttek.
+@lu De Verkeefer verkeeft Wueren an engem Geschäft.
+@en The salesman sells goods in a shop.
+@distractor-en Thursday
+@distractor-en book
+@distractor-lu Donneschdeg
+@distractor-lu Buch
+
+@sentence
+@lu De Caissier schafft an engem Supermarché.
+@en The cashier works in a supermarket.
+@distractor-en Friday
+@distractor-en window
+@distractor-lu Freideg
+@distractor-lu Fënster
+
+@sentence
+@lu E Serveur schafft an engem Café.
+@en A waiter works in a café.
+@distractor-en Saturday
+@distractor-en book
+@distractor-lu Samschdeg
+@distractor-lu Buch
+
+@sentence
+@lu Si schafft als Doktesch an enger Praxis.
+@en She works as a doctor at a practice.
+@distractor-en Sunday
+@distractor-en window
+@distractor-lu Sonndeg
+@distractor-lu Fënster
+
+@sentence
+@lu Hien ass Affekot a schafft op dem Geriicht.
+@en He is a lawyer and works at the court.
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
+
+@sentence
+@lu E Libraire schafft an engem Bicherbuttek.
+@en A bookseller works in a bookshop.
+@distractor-en Monday
+@distractor-en window
+@distractor-lu Méindeg
+@distractor-lu Fënster
+
+@sentence
+@lu Si ass Violonistin.
+@en She is a violinist.
+@distractor-en already
+@distractor-en how
+@distractor-lu schonn
+@distractor-lu Wéi
+
+@sentence
+@lu Si spillt Gei an engem Orchester.
+@en She plays violin in an orchestra.
+@distractor-en Tuesday
+@distractor-en window
+@distractor-lu Dënschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Si ass Déierendoktesch.
+@en She is a veterinarian.
+@distractor-en Wednesday
+@distractor-en book
+@distractor-lu Mëttwoch
+@distractor-lu Buch
+
+@sentence
+@lu Si fleegt Déieren an enger Praxis.
+@en She takes care of animals at a practice.
+@distractor-en Thursday
+@distractor-en window
+@distractor-lu Donneschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Si ass Botzfra.
+@en She is a cleaner.
+@distractor-en Friday
+@distractor-en book
+@distractor-lu Freideg
+@distractor-lu Buch
+
+@sentence
+@lu Si botzt bei Leit doheem.
+@en She cleans at people's homes.
+@distractor-en Saturday
+@distractor-en window
+@distractor-lu Samschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Hien ass Aarbechter.
+@en He is a worker.
+@distractor-en Sunday
+@distractor-en book
+@distractor-lu Sonndeg
+@distractor-lu Buch
+
+@sentence
+@lu Hie baut Haiser op engem Chantier.
+@en He builds houses at a construction site.
+@distractor-en Monday
+@distractor-en book
+@distractor-lu Méindeg
+@distractor-lu Buch
+
+@sentence
+@lu Gees du mam Auto schaffen?
+@en Are you driving to work?
+@distractor-en who
+@distractor-en book
+@distractor-lu Wien
+@distractor-lu Buch
+
+@sentence
+@lu Ech ginn net mam Auto schaffen.
+@en I don't go to work by car.
+@distractor-en Tuesday
+@distractor-en window
+@distractor-lu Dënschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Ech fuere mam Bus.
+@en I go by bus.
+@distractor-en Wednesday
+@distractor-en book
+@distractor-lu Mëttwoch
+@distractor-lu Buch
+
+@sentence
+@lu A wéi fiers du op d'Aarbecht?
+@en And how do you get to work?
+@distractor-en who
+@distractor-en already
+@distractor-lu Wien
+@distractor-lu schonn
+
+@sentence
+@lu Ech fuere net op d'Aarbecht.
+@en I don't drive to work.
+@distractor-en Thursday
+@distractor-en book
+@distractor-lu Donneschdeg
+@distractor-lu Buch
+
+@sentence
+@lu Ech schaffe vun doheem.
+@en I work from home.
+@distractor-en Friday
+@distractor-en window
+@distractor-lu Freideg
+@distractor-lu Fënster
+
+@sentence
+@lu Ech si Proff a ginn Onlinecoursen.
+@en I am a teacher and give online courses.
+@distractor-en Saturday
+@distractor-en book
+@distractor-lu Samschdeg
+@distractor-lu Buch
+
+@sentence
+@lu Schafft deng Fra och doheem?
+@en Does your wife also work from home?
+@distractor-en Sunday
+@distractor-en window
+@distractor-lu Sonndeg
+@distractor-lu Fënster
+
+@sentence
+@lu Si schafft op engem Büro.
+@en She works at an office.
+@distractor-en Monday
+@distractor-en book
+@distractor-lu Méindeg
+@distractor-lu Buch
+
+@sentence
+@lu Si fiert normalerweis mam Metro op d'Aarbecht.
+@en She usually goes to work by metro.
+@distractor-en Tuesday
+@distractor-en window
+@distractor-lu Dënschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Meng Fra an ech schaffen an enger grousser Entreprise.
+@en My wife and I work at a large company.
+@distractor-en Wednesday
+@distractor-en book
+@distractor-lu Mëttwoch
+@distractor-lu Buch
+
+@sentence
+@lu Ech ruffe fir d'Annonce als Kach un.
+@en I'm calling about the ad for a chef.
+@distractor-en Thursday
+@distractor-en window
+@distractor-lu Donneschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Ass déi Plaz nach fräi?
+@en Is the position still available?
+@distractor-en Friday
+@distractor-en book
+@distractor-lu Freideg
+@distractor-lu Buch
+
+@sentence
+@lu Hutt Dir Erfarung an der Gastronomie?
+@en Do you have experience in the catering trade?
+@distractor-en Saturday
+@distractor-en window
+@distractor-lu Samschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Ech hunn dräi Joer an engem Restaurant geschafft.
+@en I worked three years in a restaurant.
+@distractor-en Sunday
+@distractor-en book
+@distractor-lu Sonndeg
+@distractor-lu Buch

@@ -1,0 +1,465 @@
+# A1/A1.2/A1_14_grocery_shopping.letz
+# Source: PDF slide deck "L5 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 5)
+# (m)/(f)/(n)/(pl) markers stripped; "the" dropped from English glosses to match
+# this course's established style. Distractor tokens are sourced from other
+# entries within this same lesson.
+
+@lesson A1.14 "Grocery Shopping"
+
+# --- Fruits ---
+@word den Apel = apple
+@word d'Äppel = apples
+@word d'Bir = pear
+@word d'Biren = pears
+@word d'Drauf = grape
+@word d'Drauwen = grapes
+@word d'Orange = orange
+@word d'Orangë = oranges
+@word d'Banann = banana
+@word d'Banannen = bananas
+@word d'Tomat = tomato
+@word d'Tomaten = tomatoes
+
+# --- Vegetables ---
+@word d'Gromper = potato
+@word d'Gromperen = potatoes
+@word d'Muert = carrot
+@word d'Muerten = carrots
+@word d'Boun = bean
+@word d'Bounen = beans
+@word d'Zwiwwel = onion
+@word d'Zwiwwelen = onions
+@word d'Spargel = asparagus
+@word d'Spargelen = asparagus spears
+@word d'Zalot = salad
+@word d'Zaloten = salads
+@word d'Heet = head of lettuce
+@word d'Heeder = heads of lettuce
+
+# --- Produce qualities ---
+@word séiss = sweet
+@word sauer = sour
+@word zeideg = ripe
+@word säfteg = juicy
+@word dréchen = dry
+@word frësch = fresh
+@word bëlleg = cheap
+@word deier = expensive
+@word schlecht = bad
+@word kal = cold
+
+# --- Bakery ---
+@word d'Bréitchen = bread roll
+@word d'Bréidercher = bread rolls
+@word d'Mëtsch = Danish pastry
+@word d'Mëtschen = Danish pastries
+@word d'Tranche = slice
+@word d'Tranchen = slices
+@word d'Schockelasrull = pain au chocolat
+@word d'Schockelasrullen = pains au chocolat
+@word de Croissant = croissant
+@word d'Croissanten = croissants
+@word de Kuch = cake
+@word d'Kuchen = cakes
+@word d'Taart = tart
+@word d'Taarten = tarts
+@word d'Brout = bread
+
+# --- Other groceries ---
+@word d'Fleesch = meat
+@word d'Rëndsfleesch = beef
+@word d'Miel = flour
+@word den Hunneg = honey
+@word den Ueleg = oil
+@word d'Ee = egg
+@word d'Eeër = eggs
+@word d'Mëllech = milk
+@word de Béier = beer
+@word de Knätsch = chewing gum
+@word de Kéis = cheese
+@word d'Planz = plant
+@word d'Planzen = plants
+
+# --- Measures & packaging ---
+@word d'Stéck = piece
+@word de Sak = sack
+@word d'Tut = bag
+@word de Pak = pack
+@word d'Päck = packs
+@word d'Béchs = can
+@word de Kilo = kilo
+@word d'Këscht = box
+@word de Liter = liter
+@word d'Dosen = dozen
+@word d'Fläsch = bottle
+@word d'Fläschen = bottles
+@word d'Waasser = water
+
+# --- Shops & people ---
+@word de Maart = market
+@word d'Määrt = markets
+@word de Buttek = shop
+@word d'Butteker = shops
+@word d'Geschäft = store
+@word d'Geschäfter = stores
+@word den Zeitungsbuttek = newsagent's
+@word d'Zeitungsbutteker = newsagents
+@word d'Metzlerei = butcher's shop
+@word d'Metzlereien = butcher's shops
+@word de Metzler = butcher
+@word d'Metzler = butchers
+@word de Bäcker = baker
+@word d'Bäcker = bakers
+@word d'Bäckerei = bakery
+@word d'Bäckereien = bakeries
+
+# --- Verbs ---
+@word kafen = to buy
+@word iessen = to eat
+@word drénken = to drink
+@word kréien = to get
+@word bezuelen = to pay
+@word huelen = to take
+@word boer bezuelen = to pay cash
+
+# --- Shopping phrases & other vocabulary ---
+@word d'Kaart = card
+@word tipptopp = great
+@word haut = today
+@word Lëtzebuerg = Luxembourg
+
+@sentence
+@lu Ass dat alles?
+@en Is that all?
+@distractor-en cheap
+@distractor-en expensive
+@distractor-lu bëlleg
+@distractor-lu deier
+
+@sentence
+@lu Soss nach eppes?
+@en Anything else?
+@distractor-en sweet
+@distractor-en sour
+@distractor-lu séiss
+@distractor-lu sauer
+
+@sentence
+@lu Wat kritt Dir?
+@en What can I get you?
+@distractor-en cheap
+@distractor-en fresh
+@distractor-lu bëlleg
+@distractor-lu frësch
+
+@sentence
+@lu U wiem ass et?
+@en Whose turn is it?
+@distractor-en cold
+@distractor-en sweet
+@distractor-lu kal
+@distractor-lu séiss
+
+@sentence
+@lu Et ass u mir!
+@en It's my turn!
+@distractor-en cheap
+@distractor-en bad
+@distractor-lu bëlleg
+@distractor-lu schlecht
+
+@sentence
+@lu Dat mécht sechs Euro.
+@en That's six euros.
+@distractor-en cheap
+@distractor-en expensive
+@distractor-lu bëlleg
+@distractor-lu deier
+
+@sentence
+@lu Bezuelt Dir boer oder mat der Kaart?
+@en Do you pay cash or by card?
+@distractor-en fresh
+@distractor-en sweet
+@distractor-lu frësch
+@distractor-lu séiss
+
+@sentence
+@lu Hutt Dir d'Cactus Kaart?
+@en Do you have the Cactus card?
+@distractor-en cheap
+@distractor-en fresh
+@distractor-lu bëlleg
+@distractor-lu frësch
+
+@sentence
+@lu Jo, dat ass alles.
+@en Yes, that is all.
+@distractor-en cash
+@distractor-en card
+@distractor-lu boer
+@distractor-lu Kaart
+
+@sentence
+@lu Dat mécht 2,20€, wgl.
+@en That's 2.20€, please.
+@distractor-en expensive
+@distractor-en cash
+@distractor-lu deier
+@distractor-lu boer
+
+@sentence
+@lu Entschëllegt, sinn d'Äppel séiss oder sauer?
+@en Excuse me, are the apples sweet or sour?
+@distractor-en ripe
+@distractor-en juicy
+@distractor-lu zeideg
+@distractor-lu säfteg
+
+@sentence
+@lu D'Äppel si séiss!
+@en The apples are sweet!
+@distractor-en dry
+@distractor-en juicy
+@distractor-lu dréchen
+@distractor-lu säfteg
+
+@sentence
+@lu Ech hätt gär zwee Äppel, wgl.
+@en I would like two apples, please.
+@distractor-en pears
+@distractor-en oranges
+@distractor-lu Biren
+@distractor-lu Orangë
+
+@sentence
+@lu Gitt mir zwee Äppel, wgl.!
+@en Give me two apples, please!
+@distractor-en oranges
+@distractor-en bananas
+@distractor-lu Orangë
+@distractor-lu Banannen
+
+@sentence
+@lu Wéi vill kaschten d'Muerten?
+@en How much do the carrots cost?
+@distractor-en potatoes
+@distractor-en onions
+@distractor-lu Gromperen
+@distractor-lu Zwiwwelen
+
+@sentence
+@lu D'Muerte kaschten 1,50€ de Kilo.
+@en The carrots cost 1.50€ per kilo.
+@distractor-en liter
+@distractor-en piece
+@distractor-lu Liter
+@distractor-lu Stéck
+
+@sentence
+@lu Ech hätt gär zwee Kilo Muerten, wgl.
+@en I would like two kilos of carrots, please.
+@distractor-en potatoes
+@distractor-en boxes
+@distractor-lu Gromperen
+@distractor-lu Këschten
+
+@sentence
+@lu Wéi vill Grompere kritt Dir?
+@en How many potatoes are you getting?
+@distractor-en carrots
+@distractor-en onions
+@distractor-lu Muerten
+@distractor-lu Zwiwwelen
+
+@sentence
+@lu Wéi ee Fleesch?
+@en Which meat?
+@distractor-en bread
+@distractor-en cheese
+@distractor-lu Brout
+@distractor-lu Kéis
+
+@sentence
+@lu Kann ech zwou Këschten Orangë kréien, wgl.?
+@en Can I get two boxes of oranges, please?
+@distractor-en bananas
+@distractor-en bags
+@distractor-lu Banannen
+@distractor-lu Tuten
+
+@sentence
+@lu Ech huele fënnef Banannen, wgl.
+@en I'll take five bananas, please.
+@distractor-en oranges
+@distractor-en grapes
+@distractor-lu Orangë
+@distractor-lu Drauwen
+
+@sentence
+@lu Gitt mir ee Brout, wgl.!
+@en Give me one bread, please!
+@distractor-en cake
+@distractor-en tart
+@distractor-lu Kuch
+@distractor-lu Taart
+
+@sentence
+@lu Kann ech sechs Bréidercher kréien, wgl.?
+@en Can I get six bread rolls, please?
+@distractor-en croissants
+@distractor-en cakes
+@distractor-lu Croissanten
+@distractor-lu Kuchen
+
+@sentence
+@lu Ech hätt gär zwee Kilo Biren, wgl.!
+@en I would like two kilos of pears, please!
+@distractor-en apples
+@distractor-en liters
+@distractor-lu Äppel
+@distractor-lu Liter
+
+@sentence
+@lu Ech huelen och eng Tut Drauwen, wgl.!
+@en I'll also take a bag of grapes, please!
+@distractor-en box
+@distractor-en bananas
+@distractor-lu Këscht
+@distractor-lu Banannen
+
+@sentence
+@lu Wéi vill kascht ee Croissant?
+@en How much is one croissant?
+@distractor-en bread roll
+@distractor-en cake
+@distractor-lu Bréitchen
+@distractor-lu Kuch
+
+@sentence
+@lu Wéi vill kaschten zwee Croissanten?
+@en How much are two croissants?
+@distractor-en bread rolls
+@distractor-en cakes
+@distractor-lu Bréidercher
+@distractor-lu Kuchen
+
+@sentence
+@lu Wéi vill kaschten zwou Fläschen?
+@en How much are two bottles?
+@distractor-en boxes
+@distractor-en kilos
+@distractor-lu Këschten
+@distractor-lu Kilo
+
+@sentence
+@lu Wéi vill kascht ee Bréitchen?
+@en How much does one bread roll cost?
+@distractor-en croissant
+@distractor-en tart
+@distractor-lu Croissant
+@distractor-lu Taart
+
+@sentence
+@lu Wéi vill kascht een Heet Zalot?
+@en How much is one head of lettuce?
+@distractor-en bag
+@distractor-en box
+@distractor-lu Tut
+@distractor-lu Këscht
+
+@sentence
+@lu Wéi vill kascht eng Tut Äppel?
+@en How much is a bag of apples?
+@distractor-en box
+@distractor-en sack
+@distractor-lu Këscht
+@distractor-lu Sak
+
+@sentence
+@lu Wéi vill Euro kaschten zwou Dosen Eeër?
+@en How many euros do two dozen eggs cost?
+@distractor-en boxes
+@distractor-en kilos
+@distractor-lu Këschten
+@distractor-lu Kilo
+
+@sentence
+@lu Wéi vill kascht e Pak Knätsch?
+@en How much does a pack of chewing gum cost?
+@distractor-en box
+@distractor-en bag
+@distractor-lu Këscht
+@distractor-lu Tut
+
+@sentence
+@lu Wéi vill kaschte 6 Këschte Mëllech?
+@en How much do six boxes of milk cost?
+@distractor-en liters
+@distractor-en kilos
+@distractor-lu Liter
+@distractor-lu Kilo
+
+@sentence
+@lu Sinn d'Orangë säfteg?
+@en Are the oranges juicy?
+@distractor-en dry
+@distractor-en ripe
+@distractor-lu dréchen
+@distractor-lu zeideg
+
+@sentence
+@lu Sinn d'Drauwen säfteg?
+@en Are the grapes juicy?
+@distractor-en sweet
+@distractor-en sour
+@distractor-lu séiss
+@distractor-lu sauer
+
+@sentence
+@lu Ass d'Brout vun haut?
+@en Is the bread from today?
+@distractor-en fresh
+@distractor-en cheap
+@distractor-lu frësch
+@distractor-lu bëlleg
+
+@sentence
+@lu Sinn d'Banannen zeideg?
+@en Are the bananas ripe?
+@distractor-en sweet
+@distractor-en juicy
+@distractor-lu séiss
+@distractor-lu säfteg
+
+@sentence
+@lu Ass de Sak Gromperen vu Lëtzebuerg?
+@en Is the sack of potatoes from Luxembourg?
+@distractor-en box
+@distractor-en expensive
+@distractor-lu Këscht
+@distractor-lu deier
+
+@sentence
+@lu Sinn d'Tomaten séiss?
+@en Are the tomatoes sweet?
+@distractor-en sour
+@distractor-en fresh
+@distractor-lu sauer
+@distractor-lu frësch
+
+@sentence
+@lu Sinn d'Spargelen frësch?
+@en Is the asparagus fresh?
+@distractor-en cheap
+@distractor-en expensive
+@distractor-lu bëlleg
+@distractor-lu deier
+
+@sentence
+@lu Ass de Béier kal?
+@en Is the beer cold?
+@distractor-en cheap
+@distractor-en fresh
+@distractor-lu bëlleg
+@distractor-lu frësch

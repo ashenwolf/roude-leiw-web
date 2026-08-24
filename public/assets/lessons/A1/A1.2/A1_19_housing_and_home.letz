@@ -1,0 +1,580 @@
+# A1/A1.2/A1_19_housing_and_home.letz
+# Source: PDF slide deck "L10 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 10)
+# (m)/(f)/(n) gender markers stripped; plural nouns taught only where a sentence
+# actually uses them; verb conjugation tables reduced to the infinitive.
+
+@lesson A1.19 "Housing & Home"
+
+# --- Quantifiers & degree ---
+@word vill = a lot, much
+@word wéineg = few
+@word just = just, only
+@word souguer = even
+@word leider = unfortunately
+@word wierklech = really
+@word méi = more
+@word ganz = very
+@word immens = extremely
+@word relativ = rather
+@word genuch = enough
+@word sou = so
+@word e bësse = a bit
+
+# --- Distance & location ---
+@word ze = too
+@word wäit = far
+@word no = close
+@word no bei der Stad = close to the city
+@word baussen = outside
+@word bannen = inside
+@word niewent = next to, beside
+
+# --- Descriptive adjectives ---
+@word séier = quick, fast
+@word propper = clean
+@word knaschteg = dirty
+@word interessant = interesting
+@word kleng = small
+@word grouss = big
+@word deier = expensive
+@word bëlleg = cheap
+@word roueg = quiet
+@word sympathesch = likeable
+@word franséisch = French
+@word oppen = open
+@word haart = loud
+@word kannerfrëndlech = child-friendly
+@word fein = nice
+@word separat = separate
+@word bestued = married
+@word däischter = dark
+@word modern = modern
+@word schéin = beautiful, nice
+@word waarm = warm
+@word aneres = other, else
+
+# --- Ordinals ---
+@word éischt = first
+@word zweet = second
+
+# --- Connectors ---
+@word well = because
+
+# --- Verbs ---
+@word wunnen = to live
+@word mathuelen = to take, to take away
+@word leien = to lie down
+@word léien = to lie, to tell untruths
+@word gefalen = to appeal to, to like
+@word bestueden = to marry
+@word fueren = to drive, to go
+@word ze verlounen = for rent
+@word ze verkafen = for sale
+
+# --- Housing types ---
+@word d'Wunneng = the home
+@word d'Wunnengen = the homes
+@word d'Appartement = the apartment
+@word d'Haus = the house
+@word d'Duerf = the village
+@word d'Stad = the city
+@word d'Wunnengssich = the house-hunt
+
+# --- Rooms & features ---
+@word d'Kichen = the kitchen
+@word d'Zëmmer = the room
+@word d'Schlofzëmmeren = the bedrooms
+@word d'Buedzëmmer = the bathroom
+@word d'Buedbidden = the bathtub
+@word d'Dusch = the shower
+@word d'Toilett = the toilet
+@word de Balcon = the balcony
+@word de Gaart = the garden
+@word d'Terrass = the terrace
+@word de Keller = the cellar
+@word de Lift = the elevator
+@word d'Parkplaz = the parking space
+@word d'Garage = the garage
+@word d'Stuff = the living room
+@word de Späicher = the attic
+@word de Stack = the floor
+@word de Rez-de-chaussée = the ground floor
+
+# --- Life & surroundings ---
+@word d'Liewen = the life
+@word d'Virdeeler = the advantages
+@word d'Nodeeler = the disadvantages
+@word d'Géigend = the neighbourhood
+@word den Noper = the neighbour
+@word d'Famill = the family
+@word de Lëtzebuerger = the Luxembourger
+@word d'Spillplaz = the playground
+@word d'Autoen = the cars
+@word den Honger = the hunger
+@word de Restaurant = the restaurant
+@word de Summer = the summer
+@word d'Leit = the people
+
+@sentence
+@lu Du hues Recht.
+@en You are right.
+@distractor-lu roueg
+@distractor-lu grouss
+@distractor-en quiet
+@distractor-en big
+
+@sentence
+@lu Wunns du an engem Duerf oder an der Stad?
+@en Do you live in a village or in the city?
+@distractor-en house
+@distractor-en apartment
+@distractor-lu Haus
+@distractor-lu Appartement
+
+@sentence
+@lu Ech wunnen an der Stad.
+@en I live in the city.
+@distractor-en village
+@distractor-en house
+@distractor-lu Duerf
+@distractor-lu Haus
+
+@sentence
+@lu D'Duerf ass ze wäit vun der Stad.
+@en The village is too far from the city.
+@distractor-en close
+@distractor-en cheap
+@distractor-lu no
+@distractor-lu bëlleg
+
+@sentence
+@lu Et gëtt vill Autoen an der Stad.
+@en There are many cars in the city.
+@distractor-en few
+@distractor-en quiet
+@distractor-lu wéineg
+@distractor-lu roueg
+
+@sentence
+@lu Am Duerf gëtt et wéineg Autoen.
+@en In the village there are few cars.
+@distractor-en many
+@distractor-en expensive
+@distractor-lu vill
+@distractor-lu deier
+
+@sentence
+@lu Mäin Appartement ass zu Bartreng.
+@en My apartment is in Bertrange.
+@distractor-en house
+@distractor-en village
+@distractor-lu Haus
+@distractor-lu Duerf
+
+@sentence
+@lu Vill Leit liewen an der Stad oder no bei der Stad.
+@en Many people live in the city or close to the city.
+@distractor-en few
+@distractor-en village
+@distractor-lu wéineg
+@distractor-lu Duerf
+
+@sentence
+@lu D'Liewen an der Stad huet Virdeeler an Nodeeler!
+@en Life in the city has advantages and disadvantages!
+@distractor-en village
+@distractor-en quiet
+@distractor-lu Duerf
+@distractor-lu roueg
+
+@sentence
+@lu D'Wunnengen zu Lëtzebuerg sinn deier, mä d'Liewen zu Lëtzebuerg huet och vill Virdeeler!
+@en Housing in Luxembourg is expensive, but life in Luxembourg has also many advantages!
+@distractor-en disadvantages
+@distractor-en cheap
+@distractor-lu Nodeeler
+@distractor-lu bëlleg
+
+@sentence
+@lu Am Duerf sinn d'Wunnenge méi bëlleg.
+@en In the village, housing is cheaper.
+@distractor-en expensive
+@distractor-en city
+@distractor-lu deier
+@distractor-lu Stad
+
+@sentence
+@lu An der Stad sinn d'Wunnenge méi deier.
+@en In the city, housing is more expensive.
+@distractor-en cheap
+@distractor-en village
+@distractor-lu bëlleg
+@distractor-lu Duerf
+
+@sentence
+@lu An der Stad gëtt et net genuch Parkplazen.
+@en In the city there aren't enough parking spaces.
+@distractor-en garage
+@distractor-en cellar
+@distractor-lu Garage
+@distractor-lu Keller
+
+@sentence
+@lu An der Stad ass et knaschteg.
+@en In the city it is dirty.
+@distractor-en clean
+@distractor-en quiet
+@distractor-lu propper
+@distractor-lu roueg
+
+@sentence
+@lu Gëtt et eng Parkplaz?
+@en Is there a parking space?
+@distractor-en garage
+@distractor-en cellar
+@distractor-lu Garage
+@distractor-lu Keller
+
+@sentence
+@lu Jo, d'Parkplaz ass baussen, awer no beim Haus.
+@en Yes, the parking space is outside, but close to the house.
+@distractor-en inside
+@distractor-en far
+@distractor-lu bannen
+@distractor-lu wäit
+
+@sentence
+@lu Ass d'Haus ze verkafen?
+@en Is the house for sale?
+@distractor-en village
+@distractor-en expensive
+@distractor-lu Duerf
+@distractor-lu deier
+
+@sentence
+@lu Nee, et ass leider just ze verlounen.
+@en No, unfortunately it's only for rent.
+@distractor-en village
+@distractor-en expensive
+@distractor-lu Duerf
+@distractor-lu deier
+
+@sentence
+@lu Ass d'Appartement ze verlounen?
+@en Is the apartment for rent?
+@distractor-en house
+@distractor-en village
+@distractor-lu Haus
+@distractor-lu Duerf
+
+@sentence
+@lu Nee, et ass ze verkafen.
+@en No, it's for sale.
+@distractor-en cheap
+@distractor-en big
+@distractor-lu bëlleg
+@distractor-lu grouss
+
+@sentence
+@lu Ech sinn op Wunnengssich.
+@en I'm looking for a place to live.
+@distractor-en village
+@distractor-en expensive
+@distractor-lu Duerf
+@distractor-lu deier
+
+@sentence
+@lu Wou ass d'Appartement?
+@en Where is the apartment?
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart
+
+@sentence
+@lu Wéi grouss ass d'Appartement?
+@en How big is the apartment?
+@distractor-en cheap
+@distractor-en quiet
+@distractor-lu bëlleg
+@distractor-lu roueg
+
+@sentence
+@lu Op wéi engem Stack ass d'Appartement?
+@en On which floor is the apartment?
+@distractor-en big
+@distractor-en expensive
+@distractor-lu grouss
+@distractor-lu deier
+
+@sentence
+@lu Wéi vill kascht et?
+@en How much does it cost?
+@distractor-en big
+@distractor-en quiet
+@distractor-lu grouss
+@distractor-lu roueg
+
+@sentence
+@lu D'Appartement ass zu Stroossen.
+@en The apartment is in Strassen.
+@distractor-en expensive
+@distractor-en small
+@distractor-lu deier
+@distractor-lu kleng
+
+@sentence
+@lu Et ass um éischte Stack.
+@en It is on the first floor.
+@distractor-en second
+@distractor-en house
+@distractor-lu zweet
+@distractor-lu Haus
+
+@sentence
+@lu Et gëtt eng grouss Kichen.
+@en There is a big kitchen.
+@distractor-en bathroom
+@distractor-en small
+@distractor-lu Buedzëmmer
+@distractor-lu kleng
+
+@sentence
+@lu Et gëtt keng separat Toilett.
+@en There is no separate toilet.
+@distractor-en kitchen
+@distractor-en shower
+@distractor-lu Kichen
+@distractor-lu Dusch
+
+@sentence
+@lu Et gëtt ee Buedzëmmer.
+@en There is one bathroom.
+@distractor-en shower
+@distractor-en kitchen
+@distractor-lu Dusch
+@distractor-lu Kichen
+
+@sentence
+@lu Et gëtt keng Terrass.
+@en There is no terrace.
+@distractor-en garden
+@distractor-en balcony
+@distractor-lu Gaart
+@distractor-lu Balcon
+
+@sentence
+@lu Et gëtt ee Keller.
+@en There is a cellar.
+@distractor-en attic
+@distractor-en garage
+@distractor-lu Späicher
+@distractor-lu Garage
+
+@sentence
+@lu Et gëtt keng Garage.
+@en There is no garage.
+@distractor-en cellar
+@distractor-en elevator
+@distractor-lu Keller
+@distractor-lu Lift
+
+@sentence
+@lu Ech wunnen an engem klengen Duerf!
+@en I live in a small village!
+@distractor-en big
+@distractor-en city
+@distractor-lu grouss
+@distractor-lu Stad
+
+@sentence
+@lu Mir gefält d'Haus, well et an enger roueger Géigend ass.
+@en I like the house, because it's in a quiet neighbourhood.
+@distractor-en expensive
+@distractor-en small
+@distractor-lu deier
+@distractor-lu kleng
+
+@sentence
+@lu Ech hätt gär en Haus mat engem ganz groussen Balcon.
+@en I would really like a house with a very big balcony.
+@distractor-en garden
+@distractor-en terrace
+@distractor-lu Gaart
+@distractor-lu Terrass
+
+@sentence
+@lu Mir wunnen niewent enger franséischer Famill.
+@en We live next to a French family.
+@distractor-en neighbour
+@distractor-en married
+@distractor-lu Noper
+@distractor-lu bestued
+
+@sentence
+@lu Si ass mat engem sympathesche Lëtzebuerger bestued.
+@en She is married to a nice Luxembourger.
+@distractor-en French
+@distractor-en open
+@distractor-lu franséisch
+@distractor-lu oppen
+
+@sentence
+@lu Am groussen Buedzëmmer ass eng Buedbidden, am klengen Buedzëmmer ass eng Dusch.
+@en In the big bathroom there is a bathtub, in the small bathroom there is a shower.
+@distractor-en kitchen
+@distractor-en garden
+@distractor-lu Kichen
+@distractor-lu Gaart
+
+@sentence
+@lu Ech gi mat groussem Honger an de Restaurant.
+@en I go to the restaurant very hungry.
+@distractor-en small
+@distractor-en French
+@distractor-lu kleng
+@distractor-lu franséisch
+
+@sentence
+@lu De Keller ass grouss, mä en ass däischter.
+@en The cellar is large, but it is dark.
+@distractor-en modern
+@distractor-en small
+@distractor-lu modern
+@distractor-lu kleng
+
+@sentence
+@lu D'Kichen ass modern, mä se ass deier.
+@en The kitchen is modern, but it is expensive.
+@distractor-en dark
+@distractor-en cheap
+@distractor-lu däischter
+@distractor-lu bëlleg
+
+@sentence
+@lu D'Haus ass schéin, mee et ass e bësse kleng.
+@en The house is beautiful, but it is a bit small.
+@distractor-en big
+@distractor-en dark
+@distractor-lu grouss
+@distractor-lu däischter
+
+@sentence
+@lu Hues du d'Schlofzëmmere gesinn?
+@en Did you see the bedrooms?
+@distractor-en kitchen
+@distractor-en garden
+@distractor-lu Kichen
+@distractor-lu Gaart
+
+@sentence
+@lu Ech hu se gesinn.
+@en I saw them.
+@distractor-en house
+@distractor-en village
+@distractor-lu Haus
+@distractor-lu Duerf
+
+@sentence
+@lu Se si sou schéin!
+@en They are so beautiful!
+@distractor-en small
+@distractor-en dark
+@distractor-lu kleng
+@distractor-lu däischter
+
+@sentence
+@lu Ass d'Wunneng um éischte Stack?
+@en Is the apartment on the first floor?
+@distractor-en second
+@distractor-en quiet
+@distractor-lu zweet
+@distractor-lu roueg
+
+@sentence
+@lu Nee, se läit leider um Rez-de-chaussée.
+@en No, unfortunately it's on the ground floor.
+@distractor-en first
+@distractor-en quiet
+@distractor-lu éischt
+@distractor-lu roueg
+
+@sentence
+@lu Ass d'Kiche separat?
+@en Is the kitchen separate?
+@distractor-en married
+@distractor-en big
+@distractor-lu bestued
+@distractor-lu grouss
+
+@sentence
+@lu Nee, se ass leider oppen.
+@en No, unfortunately it's open.
+@distractor-en dirty
+@distractor-en big
+@distractor-lu knaschteg
+@distractor-lu grouss
+
+@sentence
+@lu Ass de Späicher grouss?
+@en Is the attic big?
+@distractor-en small
+@distractor-en cheap
+@distractor-lu kleng
+@distractor-lu bëlleg
+
+@sentence
+@lu Jo, mee e gëtt am Summer leider immens waarm!
+@en Yes, but unfortunately it gets extremely warm in the summer!
+@distractor-en attic
+@distractor-en garden
+@distractor-lu Späicher
+@distractor-lu Gaart
+
+@sentence
+@lu Sinn d'Stroossen roueg?
+@en Are the streets quiet?
+@distractor-en loud
+@distractor-en dirty
+@distractor-lu haart
+@distractor-lu knaschteg
+
+@sentence
+@lu Nee, se si leider relativ haart.
+@en No, unfortunately they are rather loud.
+@distractor-en quiet
+@distractor-en dirty
+@distractor-lu roueg
+@distractor-lu knaschteg
+
+@sentence
+@lu Ass d'Géigend kannerfrëndlech?
+@en Is the neighbourhood child-friendly?
+@distractor-en quiet
+@distractor-en far
+@distractor-lu roueg
+@distractor-lu wäit
+
+@sentence
+@lu Jo, se huet souguer eng Spillplaz!
+@en Yes, it even has a playground!
+@distractor-en garden
+@distractor-en family
+@distractor-lu Gaart
+@distractor-lu Famill
+
+@sentence
+@lu Gëtt et e Lift?
+@en Is there an elevator?
+@distractor-en garage
+@distractor-en cellar
+@distractor-lu Garage
+@distractor-lu Keller
+
+@sentence
+@lu Jo, mee e fiert just bis op den zweete Stack.
+@en Yes, but it only goes up to the second floor.
+@distractor-en first
+@distractor-en quiet
+@distractor-lu éischt
+@distractor-lu roueg

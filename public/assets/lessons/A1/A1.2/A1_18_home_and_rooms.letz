@@ -1,0 +1,581 @@
+# A1/A1.2/A1_18_home_and_rooms.letz
+# Source: PDF slide deck "L9 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 9)
+# (m)/(f)/(n)/(pl) markers stripped; kept only the article. Synonym pairs in the
+# deck (Schlofkummer/Schlofzëmmer, d'Couche/de Canapé, Këssen/Pillem,
+# däischter/donkel) are taught once, using the form that appears in a sentence.
+
+@lesson A1.18 "Home & Rooms"
+
+# --- Dwelling types, floors & area ---
+@word d'Wunneng = the home
+@word d'Wunnengen = the homes
+
+@word d'Appartement = the flat
+@word d'Appartementer = the flats
+
+@word d'Haus = the house
+@word d'Haiser = the houses
+
+@word den éischte Stack = the first floor
+@word de Rez-de-chaussée = the ground floor
+
+@word d'Duerf = the village
+@word d'Stad = the city
+@word d'Géigend = the neighbourhood
+
+# --- Rooms ---
+@word de Gank = the hallway
+@word d'Iesszëmmer = the dining room
+@word d'Kichen = the kitchen
+
+@word d'Schlofzëmmer = the bedroom
+@word d'Schlofzëmmeren = the bedrooms
+@word d'Eltereschlofzëmmer = the parents' bedroom
+@word d'Kannerschlofzëmmer = the children's bedroom
+
+@word d'Buedzëmmer = the bathroom
+@word d'Buedbidden = the bathtub
+
+@word de Living = the living room
+@word d'Stuff = the lounge
+
+@word de Späicher = the attic
+@word de Keller = the cellar
+
+@word d'Zëmmer = the room
+@word d'Zëmmeren = the rooms
+
+@word d'Toilette = the toilet
+@word d'Toiletten = the toilets
+
+@word de Balcon = the balcony
+@word d'Balconen = the balconies
+
+@word d'Garage = the garage
+@word d'Garagen = the garages
+
+@word d'Terrass = the terrace
+@word d'Terrassen = the terraces
+
+@word d'Piscine = the swimming pool
+@word d'Piscinnen = the swimming pools
+
+@word d'Fënster = the window
+@word d'Fënsteren = the windows
+
+# --- Furniture & household objects ---
+@word de Frigo = the fridge
+@word d'Frigoen = the fridges
+
+@word d'Fotell = the armchair
+@word d'Fotellen = the armchairs
+
+@word d'Dusch = the shower
+
+@word d'Bett = the bed
+@word d'Better = the beds
+
+@word de Schaf = the wardrobe
+@word d'Schief = the wardrobes
+
+@word d'Luucht = the light
+@word d'Steeluucht = the floor lamp
+
+@word den Iessdësch = the dining table
+
+@word de Stull = the chair
+@word d'Still = the chairs
+
+@word de Spigel = the mirror
+@word d'Spigelen = the mirrors
+
+@word de Canapé = the couch
+
+@word d'Kommoud = the chest of drawers
+@word d'Kommouden = the chests of drawers
+
+@word d'Wäschmaschinn = the washing machine
+
+@word den Teppech = the carpet
+@word d'Teppecher = the carpets
+
+@word d'Spullmaschinn = the dishwasher
+
+@word d'Këssen = the pillow
+
+@word den Dësch = the table
+@word de Kaffisdësch = the breakfast table
+@word de Salonsdësch = the coffee table
+@word de Bicherschaf = the bookcase
+
+@word d'Kaerz = the candle
+@word d'Käerzen = the candles
+
+@word de Buedem = the floor
+@word d'Buedduch = the bath towel
+
+@word d'Tëlee = the TV
+
+@word de Besuch = the visit
+@word d'Plaz = the space
+
+# --- Adjectives: size, condition, style, colour ---
+@word grouss = big
+@word kleng = small
+@word hell = bright
+@word däischter = dark
+@word modern = modern
+@word almoudesch = old-fashioned
+@word deier = expensive
+@word bëlleg = cheap
+@word roueg = quiet
+@word oppen = open
+@word waarm = warm
+@word kal = cold
+@word schéin = beautiful
+@word ellen = ugly
+@word hëlzen = wooden
+@word metallen = metallic
+@word gemittlech = cozy
+@word propper = clean
+@word knaschteg = dirty
+@word eegen = own
+@word breet = wide
+@word wäiss = white
+@word giel = yellow
+@word beige = beige
+@word blo = blue
+@word sportlech = sporty
+@word rout = red
+@word amerikanesch = American
+@word separat = separate
+@word laang = long
+
+# --- Verbs ---
+@word wunnen = to live
+@word zoumaachen = to close
+@word opmaachen = to open
+@word bueden = to bathe
+@word stockéieren = to store
+@word iessen = to eat
+@word gefalen = to please
+@word beschreiwen = to describe
+
+# --- Numbers, directions & question words ---
+@word vill = many
+@word véier = four
+@word zwee = two
+@word lénks = left
+@word riets = right
+@word normalerweis = normally
+@word do = there
+@word wiem = whom
+@word wuer = where (direction)
+
+@sentence
+@lu Dat ass e grousst Haus.
+@en That is a big house.
+@distractor-en small
+@distractor-en cheap
+@distractor-lu kleng
+@distractor-lu bëlleg
+
+@sentence
+@lu Dat ass en deiert Haus.
+@en That is an expensive house.
+@distractor-en cheap
+@distractor-en old-fashioned
+@distractor-lu bëlleg
+@distractor-lu almoudesch
+
+@sentence
+@lu Dat ass en almoudescht Haus.
+@en That is an old-fashioned house.
+@distractor-en expensive
+@distractor-en modern
+@distractor-lu deier
+@distractor-lu modern
+
+@sentence
+@lu Dat ass e schéinen Auto.
+@en That is a beautiful car.
+@distractor-en ugly
+@distractor-en red
+@distractor-lu ellen
+@distractor-lu rout
+
+@sentence
+@lu Dat ass e sportlechen Auto.
+@en That is a sporty car.
+@distractor-en beautiful
+@distractor-en blue
+@distractor-lu schéin
+@distractor-lu blo
+
+@sentence
+@lu Dat ass e rouden Auto.
+@en That is a red car.
+@distractor-en blue
+@distractor-en white
+@distractor-lu blo
+@distractor-lu wäiss
+
+@sentence
+@lu Wéi wunns du?
+@en How do you live?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Ech wunnen an engem Haus.
+@en I live in a house.
+@distractor-en apartment
+@distractor-en floor
+@distractor-lu Appartement
+@distractor-lu Stack
+
+@sentence
+@lu Ech wunnen an engem Appartement.
+@en I live in an apartment.
+@distractor-en house
+@distractor-en floor
+@distractor-lu Haus
+@distractor-lu Stack
+
+@sentence
+@lu Op wéi engem Stack?
+@en On which floor?
+@distractor-en house
+@distractor-en where
+@distractor-lu Haus
+@distractor-lu Wou
+
+@sentence
+@lu Ech wunnen op dem éischte Stack.
+@en I live on the first floor.
+@distractor-en house
+@distractor-en cellar
+@distractor-lu Haus
+@distractor-lu Keller
+
+@sentence
+@lu Zanter wéini wunnt Dir do?
+@en Since when do you live there?
+@distractor-en where
+@distractor-en how
+@distractor-lu Wou
+@distractor-lu Wéi
+
+@sentence
+@lu Ech wunnen zanter 2020 do.
+@en I have lived there since 2020.
+@distractor-en house
+@distractor-en cellar
+@distractor-lu Haus
+@distractor-lu Keller
+
+@sentence
+@lu Wou hutt Dir virdru gewunnt?
+@en Where did you live before?
+@distractor-en when
+@distractor-en who
+@distractor-lu Wéini
+@distractor-lu Wien
+
+@sentence
+@lu Mir hu virdrun zu Kiew gewunnt.
+@en We lived in Kyiv before.
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart
+
+@sentence
+@lu Wat hues du léiwer?
+@en What do you prefer?
+@distractor-en where
+@distractor-en how
+@distractor-lu Wou
+@distractor-lu Wéi
+
+@sentence
+@lu Mäin Haus huet e Living, eng Kichen an zwee Buedzëmmer.
+@en My house has a living room, a kitchen and two bathrooms.
+@distractor-en cellar
+@distractor-en attic
+@distractor-lu Keller
+@distractor-lu Späicher
+
+@sentence
+@lu D'Buedzëmmer sinn hell.
+@en The bathrooms are bright.
+@distractor-en dark
+@distractor-en small
+@distractor-lu däischter
+@distractor-lu kleng
+
+@sentence
+@lu De Living ass grouss a modern.
+@en The living room is big and modern.
+@distractor-en old-fashioned
+@distractor-en small
+@distractor-lu almoudesch
+@distractor-lu kleng
+
+@sentence
+@lu D'Kichen ass oppen a ganz hell.
+@en The kitchen is open and very bright.
+@distractor-en dark
+@distractor-en dirty
+@distractor-lu däischter
+@distractor-lu knaschteg
+
+@sentence
+@lu Mir hunn och e Gaart an eng Piscine.
+@en We also have a garden and a swimming pool.
+@distractor-en terrace
+@distractor-en balcony
+@distractor-lu Terrass
+@distractor-lu Balcon
+
+@sentence
+@lu Ech wunnen zesumme mat menger Fra.
+@en I live together with my wife.
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart
+
+@sentence
+@lu Mir hunn eng oppe Kichen.
+@en We have an open kitchen.
+@distractor-en bathroom
+@distractor-en bedroom
+@distractor-lu Buedzëmmer
+@distractor-lu Schlofzëmmer
+
+@sentence
+@lu Meng Kichen huet e groussen hëlzenen Dësch an véier Still.
+@en My kitchen has a big wooden table and four chairs.
+@distractor-en two
+@distractor-en metal
+@distractor-lu zwee
+@distractor-lu metallen
+
+@sentence
+@lu Mir hunn och vill Schief an e grousse Frigo an der Kichen.
+@en We also have many cupboards and a big fridge in the kitchen.
+@distractor-en table
+@distractor-en chair
+@distractor-lu Dësch
+@distractor-lu Stull
+
+@sentence
+@lu Mäi Living huet e grousse bloe Canapé an eng modern Tëlee.
+@en My living room has a big blue couch and a modern TV.
+@distractor-en red
+@distractor-en old-fashioned
+@distractor-lu rout
+@distractor-lu almoudesch
+
+@sentence
+@lu Mir hunn och e klenge Salonsdësch an e grousse Spigel.
+@en We also have a small coffee table and a big mirror.
+@distractor-en window
+@distractor-en lamp
+@distractor-lu Fënster
+@distractor-lu Luucht
+
+@sentence
+@lu Am Living hu mir e klenge Bicherschaf a vill Käerzen.
+@en In the living room we have a small bookcase and many candles.
+@distractor-en wardrobe
+@distractor-en pillow
+@distractor-lu Schaf
+@distractor-lu Këssen
+
+@sentence
+@lu Mäin Haus ass kleng, mä ganz gemittlech.
+@en My house is small, but very cozy.
+@distractor-en big
+@distractor-en dirty
+@distractor-lu grouss
+@distractor-lu knaschteg
+
+@sentence
+@lu Um Rez-de-chaussée sinn d'Kichen, d'Stuff an eng separat Toilette.
+@en On the ground floor are the kitchen, the lounge and a separate toilet.
+@distractor-en attic
+@distractor-en cellar
+@distractor-lu Späicher
+@distractor-lu Keller
+
+@sentence
+@lu Et gëtt keen Iesszëmmer.
+@en There is no dining room.
+@distractor-en bathroom
+@distractor-en bedroom
+@distractor-lu Buedzëmmer
+@distractor-lu Schlofzëmmer
+
+@sentence
+@lu Mir iessen normalerweis an der Kichen.
+@en We normally eat in the kitchen.
+@distractor-en lounge
+@distractor-en garden
+@distractor-lu Stuff
+@distractor-lu Gaart
+
+@sentence
+@lu Wa mir Besuch hunn, iesse mir an der Stuff.
+@en When we have guests, we eat in the lounge.
+@distractor-en kitchen
+@distractor-en garage
+@distractor-lu Kichen
+@distractor-lu Garage
+
+@sentence
+@lu Um éischte Stack sinn d'Buedzëmmer an zwee Schlofzëmmeren.
+@en On the first floor are the bathroom and two bedrooms.
+@distractor-en four
+@distractor-en dining room
+@distractor-lu véier
+@distractor-lu Iesszëmmer
+
+@sentence
+@lu Lénks ass d'Eltereschlofzëmmer a riets ass d'Kannerschlofzëmmer.
+@en On the left is the parents' bedroom and on the right is the children's bedroom.
+@distractor-en garage
+@distractor-en attic
+@distractor-lu Garage
+@distractor-lu Späicher
+
+@sentence
+@lu Mir hunn e klenge Gaart, mä mir hu keng Terrass.
+@en We have a small garden, but we don't have a terrace.
+@distractor-en swimming pool
+@distractor-en balcony
+@distractor-lu Piscine
+@distractor-lu Balcon
+
+@sentence
+@lu An der Garage ass Plaz fir den Auto a fir Saachen ze stockéieren.
+@en In the garage there's room for the car and to store things.
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart
+
+@sentence
+@lu Mir hu kee Keller a kee Späicher.
+@en We have no cellar and no attic.
+@distractor-en garage
+@distractor-en terrace
+@distractor-lu Garage
+@distractor-lu Terrass
+
+@sentence
+@lu Si hu keen Iesszëmmer.
+@en They have no dining room.
+@distractor-en bathroom
+@distractor-en kitchen
+@distractor-lu Buedzëmmer
+@distractor-lu Kichen
+
+@sentence
+@lu Si iessen an der Stuff, nëmme wa si Besuch hunn.
+@en They eat in the lounge, only when they have guests.
+@distractor-en kitchen
+@distractor-en garden
+@distractor-lu Kichen
+@distractor-lu Gaart
+
+@sentence
+@lu Hire Gaart ass kleng.
+@en Her garden is small.
+@distractor-en big
+@distractor-en terrace
+@distractor-lu grouss
+@distractor-lu Terrass
+
+@sentence
+@lu Si stockéieren hir Saachen an der Garage.
+@en They store their things in the garage.
+@distractor-en cellar
+@distractor-en attic
+@distractor-lu Keller
+@distractor-lu Späicher
+
+@sentence
+@lu Si hu kee Keller!
+@en They don't have a cellar!
+@distractor-en attic
+@distractor-en garden
+@distractor-lu Späicher
+@distractor-lu Gaart
+
+@sentence
+@lu Wou ass Är Wunneng?
+@en Where is your home?
+@distractor-en how
+@distractor-en when
+@distractor-lu Wéi
+@distractor-lu Wéini
+
+@sentence
+@lu Wunnt Dir an engem Duerf oder an enger Stad?
+@en Do you live in a village or in a city?
+@distractor-en house
+@distractor-en apartment
+@distractor-lu Haus
+@distractor-lu Appartement
+
+@sentence
+@lu Wéi laang wunnt Dir schonn do?
+@en How long have you been living there?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Mat wiem wunnt Dir?
+@en With whom do you live?
+@distractor-en where
+@distractor-en how
+@distractor-lu Wou
+@distractor-lu Wéi
+
+@sentence
+@lu Wéi vill Zëmmeren huet Är Wunneng?
+@en How many rooms does your home have?
+@distractor-en houses
+@distractor-en gardens
+@distractor-lu Haiser
+@distractor-lu Gäert
+
+@sentence
+@lu Hutt Dir e Gaart?
+@en Do you have a garden?
+@distractor-en balcony
+@distractor-en terrace
+@distractor-lu Balcon
+@distractor-lu Terrass
+
+@sentence
+@lu Gefält Iech Är Wunneng?
+@en Do you like your home?
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart
+
+@sentence
+@lu Beschreift Är Dramwunneng!
+@en Describe your dream home!
+@distractor-en house
+@distractor-en garden
+@distractor-lu Haus
+@distractor-lu Gaart

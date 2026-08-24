@@ -1,0 +1,270 @@
+# A1/A1.2/A1_10_personal_details.letz
+# Source: PDF slide deck "L1 .pdf" (A1 Conversation course, Lesson 1)
+# (m)/(f)/(n) gender markers stripped; verb conjugation tables reduced to the infinitive;
+# the alphabet letter-name chart and unanswered conjugation drills are skipped as
+# pronunciation hints / exercises with no given answer.
+
+@lesson A1.10 "Personal Details"
+
+# --- Verbs ---
+@word wunnen = to live
+@word kommen = to come
+@word virstellen = to introduce
+@word buschtawéieren = to spell
+@word iessen = to eat
+@word bestueden = to get married
+@word wëllen = to want
+@word hunn = to have
+
+# --- Time & manner ---
+@word muer = tomorrow
+@word spéit = late
+@word ze spéit = too late
+@word net méi = not anymore
+@word direkt = immediately
+@word ëmmer = always
+@word zanter = since
+@word zesummen = together
+@word léiwer = rather
+
+# --- Fixed phrases & greetings ---
+@word ech heeschen = my name is
+@word Mech och = Me too
+@word Bis dann = See you then
+@word Bis geschwënn = See you soon
+@word Äddi = Goodbye
+@word Merci = Thanks
+
+# --- Small words ---
+@word nee = no
+@word net = not
+@word och = too
+@word oder = or
+@word gutt = good
+@word sech = himself
+@word vill = many
+@word al = old
+
+# --- Nouns: time of day ---
+@word de Moien = the morning
+@word de Mëtteg = noon
+@word den Owend = the evening
+@word den Nomëtteg = the afternoon
+
+# --- Nouns: alphabet & measure words ---
+@word de Buschtaf = the letter
+@word d'Joer = the year
+
+# --- Numbers ---
+@word eent = one
+@word zwee = two
+@word dräi = three
+@word aacht = eight
+@word zéng = ten
+@word eelef = eleven
+@word zwielef = twelve
+@word fofzéng = fifteen
+@word siechzéng = sixteen
+@word uechtzéng = eighteen
+@word nonzéng = nineteen
+@word zwanzeg = twenty
+@word eenanzwanzeg = twenty-one
+@word véierandrësseg = thirty-four
+@word véierzeg = forty
+@word sechsavéierzeg = forty-six
+@word siwenafofzeg = fifty-seven
+@word eenasiechzeg = sixty-one
+@word néngasiwwenzeg = seventy-nine
+@word achtzeg = eighty
+@word néngannonzeg = ninety-nine
+@word honnert = one hundred
+@word honnerteent = one hundred and one
+
+# --- Civil status ---
+@word bestuet = married
+@word gescheet = divorced
+@word getrennt = separated
+@word verloobt = engaged
+@word de Jonggesell = the bachelor
+@word d'Jonggesellin = the bachelorette
+
+# --- Places & origin ---
+@word Frankräich = France
+@word Paräis = Paris
+@word d'Belsch = Belgium
+@word Bréissel = Brussels
+@word d'Ukrain = Ukraine
+@word Lëtzebuerg = Luxembourg
+@word d'Stad = the city
+
+@sentence
+@lu Ech heesche Luc.
+@en My name is Luc.
+@distractor-en come
+@distractor-en live
+@distractor-lu kommen
+@distractor-lu wunnen
+
+@sentence
+@lu Wéi heesche si?
+@en What are they called?
+@distractor-en late
+@distractor-en always
+@distractor-lu spéit
+@distractor-lu ëmmer
+
+@sentence
+@lu Wéi al bass du?
+@lu Wéi al sidd Dir?
+@en How old are you?
+@distractor-en come
+@distractor-en live
+@distractor-lu kommen
+@distractor-lu wunnen
+
+@sentence
+@lu Wéi vill Joer hues du?
+@lu Wéi vill Joer hutt Dir?
+@en How many years have you?
+@distractor-en late
+@distractor-en always
+@distractor-lu spéit
+@distractor-lu ëmmer
+
+@sentence
+@lu Ech si véierzeg Joer al.
+@en I am forty years old.
+@distractor-en married
+@distractor-en divorced
+@distractor-lu bestuet
+@distractor-lu gescheet
+
+@sentence
+@lu Ech hu véierzeg Joer.
+@en I am forty years old.
+@distractor-en married
+@distractor-en separated
+@distractor-lu bestuet
+@distractor-lu getrennt
+
+@sentence
+@lu Mir sinn zanter 5 Joer bestuet.
+@en We have been married for 5 years.
+@distractor-en divorced
+@distractor-en separated
+@distractor-lu gescheet
+@distractor-lu getrennt
+
+@sentence
+@lu Si si getrennt.
+@en They are separated.
+@distractor-en married
+@distractor-en engaged
+@distractor-lu bestuet
+@distractor-lu verloobt
+
+@sentence
+@lu D'Marie an de Simon wunnen net méi zesummen.
+@en Marie and Simon don't live together anymore.
+@distractor-en married
+@distractor-en engaged
+@distractor-lu bestuet
+@distractor-lu verloobt
+
+@sentence
+@lu Hien ass léiwer Jonggesell.
+@en He prefers to be a bachelor.
+@distractor-en married
+@distractor-en separated
+@distractor-lu bestuet
+@distractor-lu getrennt
+
+@sentence
+@lu D'Elise an den John si gescheet.
+@en Elise and John are divorced.
+@distractor-en engaged
+@distractor-en married
+@distractor-lu verloobt
+@distractor-lu bestuet
+
+@sentence
+@lu Den Emile wëllt sech net bestueden.
+@en Emile doesn't want to get married.
+@distractor-en divorced
+@distractor-en engaged
+@distractor-lu gescheet
+@distractor-lu verloobt
+
+@sentence
+@lu Kënnt de Max vu Lëtzebuerg oder aus Frankräich?
+@en Is Max from Luxembourg or from France?
+@distractor-en Belgium
+@distractor-en Brussels
+@distractor-lu Belsch
+@distractor-lu Bréissel
+
+@sentence
+@lu Ech kommen aus Frankräich, vu Paräis.
+@en I come from France, from Paris.
+@distractor-en Belgium
+@distractor-en Brussels
+@distractor-lu Belsch
+@distractor-lu Bréissel
+
+@sentence
+@lu Ech kommen aus der Belsch, vu Bréissel.
+@en I come from Belgium, from Brussels.
+@distractor-en France
+@distractor-en Paris
+@distractor-lu Frankräich
+@distractor-lu Paräis
+
+@sentence
+@lu Ech kommen aus der Stad.
+@en I come from Luxembourg City.
+@distractor-en Belgium
+@distractor-en France
+@distractor-lu Belsch
+@distractor-lu Frankräich
+
+@sentence
+@lu Vu wou kënns du?
+@lu Vu wou kommt Dir?
+@en Where do you come from?
+@distractor-en old
+@distractor-en many
+@distractor-lu al
+@distractor-lu vill
+
+@sentence
+@lu Kënns du vu Lëtzebuerg?
+@en Are you from Luxembourg?
+@distractor-en Belgium
+@distractor-en Ukraine
+@distractor-lu Belsch
+@distractor-lu Ukrain
+
+@sentence
+@lu Nee, ech kommen net vu Lëtzebuerg.
+@en No, I'm not from Luxembourg.
+@distractor-en France
+@distractor-en Brussels
+@distractor-lu Frankräich
+@distractor-lu Bréissel
+
+@sentence
+@lu Merci, mir geet et och gutt!
+@en Thanks, I'm doing well too!
+@distractor-en old
+@distractor-en married
+@distractor-lu al
+@distractor-lu bestuet
+
+@sentence
+@lu Et geet mir gutt.
+@lu Mir geet et gutt.
+@en I am doing well.
+@distractor-en married
+@distractor-en old
+@distractor-lu bestuet
+@distractor-lu al

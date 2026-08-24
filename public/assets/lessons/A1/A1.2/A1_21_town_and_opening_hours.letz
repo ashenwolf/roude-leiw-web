@@ -1,0 +1,281 @@
+# A1/A1.2/A1_21_town_and_opening_hours.letz
+# Source: PDF slide deck "L12 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 12)
+# (m)/(f)/(n)/(pl) gender markers stripped; nouns re-cased to the definite article,
+# gender confirmed via LOD lookup. Distractor tokens are sourced from other entries
+# within this same lesson, or from common A1 vocabulary already taught earlier.
+
+@lesson A1.21 "Town & Opening Hours"
+
+# --- Town & places ---
+@word d'Reklamm = the advertisement
+@word d'Reklammen = the advertisements
+@word d'Ëffnungszäiten = the opening hours
+@word gemittlech = cosy
+@word de Quartier = the quarter
+@word den Noper = the neighbour
+@word d'Noperen = the neighbours
+@word de Maart = the market
+@word d'Mäert = the markets
+@word praktesch = practical, functional
+@word d'Ruin = the ruin
+@word d'Ruinen = the ruins
+@word de Bistro = the pub, the café
+@word d'Bistroen = the pubs, the cafés
+@word de Panneau = the sign, the panel
+@word d'Panneauen = the signs, the panels
+@word d'Schëld = the sign
+@word d'Schëlder = the signs
+@word d'Geschicht = the story, the history
+@word ongeféier = approximately
+@word de Floss = the river
+@word d'Fléss = the rivers
+@word duerch = through
+@word d'Stad = the city
+
+# --- Seasons & time ---
+@word d'Fréijoer = the spring
+@word de Summer = the summer
+@word den Hierscht = the autumn
+@word de Wanter = the winter
+@word d'Mëtt = the middle
+@word d'Statu = the statue
+@word d'Statuen = the statues
+@word ënnert = under, below
+@word d'Auer = the hour, o'clock
+
+# --- Opening hours ---
+@word op = open
+@word zou = closed
+@word opmaachen = to open
+@word zoumaachen = to close
+@word d'Apdikt = the pharmacy
+@word de Coiffeur = the hairdresser
+@word de Supermarché = the supermarket
+@word freides = on Fridays
+@word samsdes = on Saturdays
+@word sonndes = on Sundays
+@word moies = in the mornings
+@word nomëttes = in the afternoons
+@word owes = in the evenings
+
+# --- Places & institutions ---
+@word de Musée = the museum
+@word de Kino = the cinema
+@word den Theater = the theatre
+@word d'Schoul = the school
+@word d'Spidol = the hospital
+@word de Bësch = the forest
+@word de Park = the park
+@word d'Spillplaz = the playground
+@word de Chantier = the building site
+@word d'Plage = the beach
+@word d'Bank = the bank
+@word d'Post = the post office
+@word d'Gemeng = the municipality
+@word d'Universitéit = the university
+@word de Büro = the office
+@word d'Hochzäit = the wedding
+@word de Concert = the concert
+@word d'Ausstellung = the exhibition
+
+# --- People & professions ---
+@word den Dokter = the doctor
+@word de Professer = the professor
+@word de Stagiaire = the intern
+@word de Manager = the manager
+@word d'Bomi = the grandma
+@word d'Schlaang = the queue
+@word d'Stéck = the play
+
+# --- Verbs ---
+@word fannen = to find
+@word ophalen = to stop, to end
+@word daueren = to last
+
+# --- Descriptive words & countries ---
+@word reegelméisseg = regularly
+@word laang = long
+@word kuerz = short
+@word séier = fast, quick
+@word schlecht = badly
+@word heiansdo = sometimes
+@word haut = today
+@word muer = tomorrow
+@word Spuenien = Spain
+@word Italien = Italy
+
+@sentence
+@lu Ech fanne mäi Kaffi op dem Dësch.
+@en I find my coffee on the table.
+@distractor-en window
+@distractor-en cinema
+@distractor-lu Fënster
+@distractor-lu Kino
+
+@sentence
+@lu Den Tour dauert laang.
+@en The tour lasts a long time.
+@distractor-en short
+@distractor-en fast
+@distractor-lu kuerz
+@distractor-lu séier
+
+@sentence
+@lu Den Tour hält op.
+@en The tour comes to an end.
+@distractor-en concert
+@distractor-en wedding
+@distractor-lu Concert
+@distractor-lu Hochzäit
+
+@sentence
+@lu De Floss fléisst duerch d'Stad.
+@en The river flows through the city.
+@distractor-en forest
+@distractor-en park
+@distractor-lu Bësch
+@distractor-lu Park
+
+@sentence
+@lu Ass d'Apdikt freides moies op?
+@en Is the pharmacy open on Friday mornings?
+@distractor-en closed
+@distractor-en Saturday
+@distractor-lu zou
+@distractor-lu samsdes
+
+@sentence
+@lu D'Apdikt ass samsdes nomëttes zou.
+@en The pharmacy is closed on Saturday afternoons.
+@distractor-en open
+@distractor-en morning
+@distractor-lu op
+@distractor-lu moies
+
+@sentence
+@lu Wéini ass de Coiffeur zou?
+@en When is the hairdresser closed?
+@distractor-en open
+@distractor-en where
+@distractor-lu op
+@distractor-lu Wou
+
+@sentence
+@lu De Supermarché mécht samsdes moies um aacht Auer op.
+@en The supermarket opens on Saturday mornings at eight o'clock.
+@distractor-en closes
+@distractor-en nine
+@distractor-lu zou
+@distractor-lu néng
+
+@sentence
+@lu De Supermarché mécht freides owes um néng Auer zou.
+@en The supermarket closes on Friday evenings at nine o'clock.
+@distractor-en opens
+@distractor-en eight
+@distractor-lu op
+@distractor-lu aacht
+
+@sentence
+@lu Ech ginn an de Supermarché.
+@en I go to the supermarket.
+@distractor-en pharmacy
+@distractor-en cinema
+@distractor-lu Apdikt
+@distractor-lu Kino
+
+@sentence
+@lu Ech sinn am Supermarché.
+@en I am in the supermarket.
+@distractor-en pharmacy
+@distractor-en museum
+@distractor-lu Apdikt
+@distractor-lu Musée
+
+@sentence
+@lu Ech schaffen zanter zéng Joer op enger Bank.
+@en I have been working at a bank for ten years.
+@distractor-en five
+@distractor-en office
+@distractor-lu fënnef
+@distractor-lu Büro
+
+@sentence
+@lu Bei der Bomi iessen ech ëmmer gutt.
+@en At Grandma's, I always eat well.
+@distractor-en badly
+@distractor-en sometimes
+@distractor-lu schlecht
+@distractor-lu heiansdo
+
+@sentence
+@lu Mir fuere reegelméisseg a Spuenien.
+@en We regularly go to Spain.
+@distractor-en sometimes
+@distractor-en Italy
+@distractor-lu heiansdo
+@distractor-lu Italien
+
+@sentence
+@lu D'Nicole fiert muer bei den Dokter.
+@en Nicole is going to the doctor tomorrow.
+@distractor-en today
+@distractor-en hairdresser
+@distractor-lu haut
+@distractor-lu Coiffeur
+
+@sentence
+@lu Hie waart an der Schlaang op dem Maart.
+@en He is waiting in the queue at the market.
+@distractor-en beach
+@distractor-en park
+@distractor-lu Plage
+@distractor-lu Park
+
+@sentence
+@lu De Jeff schafft als Professer op der Universitéit.
+@en Jeff works as a professor at the university.
+@distractor-en doctor
+@distractor-en intern
+@distractor-lu Dokter
+@distractor-lu Stagiaire
+
+@sentence
+@lu Den Tom ass Stagiaire bei engem Coiffeur.
+@en Tom is an intern at a hairdresser's.
+@distractor-en manager
+@distractor-en doctor
+@distractor-lu Manager
+@distractor-lu Dokter
+
+@sentence
+@lu D'Monique schafft als Infirmière an engem Spidol.
+@en Monique works as a nurse in a hospital.
+@distractor-en school
+@distractor-en office
+@distractor-lu Schoul
+@distractor-lu Büro
+
+@sentence
+@lu Mäi Papp ass Manager bei Luxtrust.
+@en My dad is a manager at Luxtrust.
+@distractor-en intern
+@distractor-en professor
+@distractor-lu Stagiaire
+@distractor-lu Professer
+
+@sentence
+@lu Si kucken e Stéck vum Molière an dem Theater.
+@en They are watching a play by Molière at the theatre.
+@distractor-en museum
+@distractor-en cinema
+@distractor-lu Musée
+@distractor-lu Kino
+
+@sentence
+@lu Ech wunnen an der Stad.
+@en I live in the city.
+@distractor-en forest
+@distractor-en quarter
+@distractor-lu Bësch
+@distractor-lu Quartier

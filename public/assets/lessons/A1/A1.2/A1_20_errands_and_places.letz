@@ -1,0 +1,444 @@
+# A1/A1.2/A1_20_errands_and_places.letz
+# Source: PDF slide deck "L11 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 11)
+# Vocabulary drawn from the deck's "Vocabulaire" tables and "Prepositions of place" section;
+# sentences from the deck's picture-description slides, matching exercise, and train-ticket dialogue.
+# (m)/(f)/(n)/(pl) gender/number markers stripped; genders confirmed via lod.lu.
+# "italienesch" corrected to "italieenesch" per lod.lu suggestion.
+# "Busstatioun" (not a real LOD entry) replaced with "Busarrêt" (bus stop).
+
+@lesson A1.20 "Errands & Places"
+
+# --- Train travel ---
+@word Garen = the train stations
+@word Zich = the trains
+@word de Quai = the platform
+@word den Depart = the departure
+@word d'Arrivée = the arrival
+@word ukommen = to arrive
+@word fortfueren = to depart
+@word den Ticket = the ticket
+@word de Billjee = the travel ticket
+@word Bréissel = Brussels
+@word Frankfurt = Frankfurt
+
+# --- Errands & shops ---
+@word Kommissioune maachen = doing errands
+@word d'Papeterie = the stationer's
+@word de Kiosk = the kiosk
+@word d'Schräinerei = the carpenter's workshop
+@word d'Crèche = the nursery
+@word Crèchen = the nurseries
+@word d'Kleedergeschäft = the clothes shop
+@word de Kleederbuttek = the clothes store
+@word de Bicherbuttek = the book shop
+@word den Zeitungsbuttek = the newsstand
+@word de Busarrêt = the bus stop
+@word d'Bibliothéik = the library
+@word de Policebureau = the police station
+@word d'Metrosstatioun = the underground station
+@word d'Parfümerie = the perfume shop
+
+# --- Objects ---
+@word d'Pult = the desk
+@word Pulter = the desks
+@word Classeuren = the folders
+@word d'Këscht = the box
+@word den Teddybier = the teddy bear
+@word d'Glace = the ice cream
+@word d'Zeitung = the newspaper
+@word d'Bänk = the bench
+
+# --- People ---
+@word de Schwoer = the brother-in-law
+@word den Här = the gentleman
+@word d'Damm = the lady
+@word de Bouf = the lad
+@word de Mupp = the doggie
+@word d'Serveuse = the waitress
+@word d'Famill = the family
+
+# --- Prepositions of place ---
+@word virun = in front of
+@word ënnert = under
+@word iwwert = over
+@word op = on
+@word an = in
+@word no bei = close to
+@word nobäi = nearby
+@word vis-à-vis vun = opposite of
+
+# --- Descriptive words ---
+@word fräi = free
+@word voll = full
+@word italieenesch = Italian
+@word d'Foussgängerzon = the pedestrian zone
+@word de Präis = the price
+@word Präisser = the prices
+@word d'Differenz = the difference
+@word Differenzen = the differences
+@word den Ënnerscheed = the distinction
+
+# --- Verbs ---
+@word fléien = to fly
+@word stoen = to stand
+@word schwiewen = to float
+
+@sentence
+@lu Et deet mir leed.
+@en I am sorry.
+@distractor-en happy
+@distractor-en worried
+@distractor-lu frou
+@distractor-lu besuergt
+
+@sentence
+@lu Ech brauch e Bic.
+@en I need a pen.
+@distractor-en newspaper
+@distractor-en ticket
+@distractor-lu Zeitung
+@distractor-lu Billjee
+
+@sentence
+@lu Ass d'Gare nobäi?
+@en Is the train station nearby?
+@distractor-en far
+@distractor-en full
+@distractor-lu wäit
+@distractor-lu voll
+
+@sentence
+@lu Gëtt et eng Papeterie nobäi?
+@en Is there a stationer's nearby?
+@distractor-en bakery
+@distractor-en far
+@distractor-lu Bäckerei
+@distractor-lu wäit
+
+@sentence
+@lu Ech muss en Zuchbilljee fir op Frankfurt kafen.
+@en I have to buy a train ticket to Frankfurt.
+@distractor-en price
+@distractor-en book
+@distractor-lu Präis
+@distractor-lu Buch
+
+@sentence
+@lu Den Zuch fiert um uechzéng Auer zwanzeg fort.
+@en The train leaves at 18:20.
+@distractor-en platform
+@distractor-en departure
+@distractor-lu Quai
+@distractor-lu Depart
+
+@sentence
+@lu Ech gi mäi Kand an d'Crèche sichen.
+@en I'm picking up my child from the nursery.
+@distractor-en desk
+@distractor-en workshop
+@distractor-lu Pult
+@distractor-lu Schräinerei
+
+@sentence
+@lu Ech gi mäin neit Pult an d'Schräinerei sichen.
+@en I'm picking up my new desk from the carpenter's workshop.
+@distractor-en child
+@distractor-en nursery
+@distractor-lu Kand
+@distractor-lu Crèche
+
+@sentence
+@lu Ech gi mäi Schwoer op d'Gare sichen.
+@en I'm picking up my brother-in-law from the train station.
+@distractor-en sister
+@distractor-en bookshop
+@distractor-lu Schwëster
+@distractor-lu Bicherbuttek
+
+@sentence
+@lu Ech brauch dräi Classeure vun der Papeterie.
+@en I need three folders from the stationer's.
+@distractor-en pen
+@distractor-en kiosk
+@distractor-lu Bic
+@distractor-lu Kiosk
+
+@sentence
+@lu Den Zuch kënnt um hallwer néng un.
+@en The train arrives at half past eight.
+@distractor-en leaves
+@distractor-en seven
+@distractor-lu fort
+@distractor-lu siwen
+
+@sentence
+@lu Den Zuch kënnt um siechzéng Auer dräiavéierzeg un.
+@en The train arrives at 16:43.
+@distractor-en platform
+@distractor-en departure
+@distractor-lu Quai
+@distractor-lu Depart
+
+@sentence
+@lu D'Arrivée vum Zuch ass um Quai dräi.
+@en The arrival of the train is on platform three.
+@distractor-en departure
+@distractor-en two
+@distractor-lu Depart
+@distractor-lu zwee
+
+@sentence
+@lu Ech ginn an d'Foussgängerzon.
+@en I'm going into the pedestrian zone.
+@distractor-en library
+@distractor-en shop
+@distractor-lu Bibliothéik
+@distractor-lu Buttek
+
+@sentence
+@lu D'Kleedergeschäft ass an der Foussgängerzon.
+@en The clothes shop is in the pedestrian zone.
+@distractor-en bookshop
+@distractor-en pharmacy
+@distractor-lu Bicherbuttek
+@distractor-lu Apdikt
+
+@sentence
+@lu De Ball ass an der Këscht.
+@en The ball is in the box.
+@distractor-en on
+@distractor-en under
+@distractor-lu op
+@distractor-lu ënnert
+
+@sentence
+@lu De Ball ass op der Këscht.
+@en The ball is on the box.
+@distractor-en in
+@distractor-en over
+@distractor-lu an
+@distractor-lu iwwert
+
+@sentence
+@lu De Ball ass ënnert der Këscht.
+@en The ball is under the box.
+@distractor-en on
+@distractor-en front
+@distractor-lu op
+@distractor-lu virun
+
+@sentence
+@lu De Ball ass virun der Këscht.
+@en The ball is in front of the box.
+@distractor-en under
+@distractor-en opposite
+@distractor-lu ënnert
+@distractor-lu vis-à-vis
+
+@sentence
+@lu De Ball läit no bei der Këscht.
+@en The ball is close to the box.
+@distractor-en far
+@distractor-en under
+@distractor-lu wäit
+@distractor-lu ënnert
+
+@sentence
+@lu De Ball ass vis-à-vis vun der Këscht.
+@en The ball is opposite the box.
+@distractor-en close
+@distractor-en in
+@distractor-lu bei
+@distractor-lu an
+
+@sentence
+@lu De Ball schwieft iwwert der Këscht.
+@en The ball floats above the box.
+@distractor-en flies
+@distractor-en under
+@distractor-lu fléit
+@distractor-lu ënnert
+
+@sentence
+@lu E Papp steet mat sengem Bouf virun engem Zeitungsbuttek.
+@en A father is standing with his son in front of a newsstand.
+@distractor-en bookshop
+@distractor-en behind
+@distractor-lu Bicherbuttek
+@distractor-lu hannert
+
+@sentence
+@lu Den Zeitungsbuttek ass niewent enger Bäckerei.
+@en The newsstand is next to a bakery.
+@distractor-en pharmacy
+@distractor-en opposite
+@distractor-lu Apdikt
+@distractor-lu vis-à-vis
+
+@sentence
+@lu Iwwert der Apdikt kucken zwee Leit aus der Fënster.
+@en Above the pharmacy, two people are looking out of the window.
+@distractor-en three
+@distractor-en door
+@distractor-lu dräi
+@distractor-lu Dier
+
+@sentence
+@lu D'Mamm mat hirem Kand steet iwwert der Apdikt.
+@en The mother with her child is standing above the pharmacy.
+@distractor-en father
+@distractor-en under
+@distractor-lu Papp
+@distractor-lu ënnert
+
+@sentence
+@lu De Mann a seng Fra sëtzen op enger Bänk, an hire Mupp läit ënnert der Bänk.
+@en The man and his wife are sitting on a bench, and their dog is lying under the bench.
+@distractor-en cat
+@distractor-en over
+@distractor-lu Kaz
+@distractor-lu iwwert
+
+@sentence
+@lu Eng Damm an en Här sëtzen op enger Bänk.
+@en A lady and a gentleman are sitting on a bench.
+@distractor-en standing
+@distractor-en under
+@distractor-lu stoen
+@distractor-lu ënnert
+
+@sentence
+@lu De Kleederbuttek ass tëschent der Parfümerie an der Apdikt.
+@en The clothes shop is between the perfume shop and the pharmacy.
+@distractor-en bakery
+@distractor-en next
+@distractor-lu Bäckerei
+@distractor-lu niewent
+
+@sentence
+@lu D'Klinick ass niewent dem Policebureau.
+@en The hospital is next to the police station.
+@distractor-en supermarket
+@distractor-en behind
+@distractor-lu Supermarché
+@distractor-lu hannert
+
+@sentence
+@lu De Supermarché ass hannert dem Bicherbuttek.
+@en The supermarket is behind the book shop.
+@distractor-en hospital
+@distractor-en next
+@distractor-lu Klinick
+@distractor-lu niewent
+
+@sentence
+@lu De Busarrêt ass vis-à-vis vun dem italieenesche Restaurant.
+@en The bus stop is opposite the Italian restaurant.
+@distractor-en library
+@distractor-en near
+@distractor-lu Bibliothéik
+@distractor-lu bei
+
+@sentence
+@lu De Bicherbuttek ass no bei dem Busarrêt.
+@en The book shop is close to the bus stop.
+@distractor-en library
+@distractor-en far
+@distractor-lu Bibliothéik
+@distractor-lu wäit
+
+@sentence
+@lu Ech si virun der Bibliothéik.
+@en I am in front of the library.
+@distractor-en behind
+@distractor-en bookshop
+@distractor-lu hannert
+@distractor-lu Bicherbuttek
+
+@sentence
+@lu De Café ass tëschent der Metrosstatioun an dem Restaurant.
+@en The café is between the underground station and the restaurant.
+@distractor-en bus
+@distractor-en bookshop
+@distractor-lu Busarrêt
+@distractor-lu Bicherbuttek
+
+@sentence
+@lu Bonjour, wéi kann ech Iech hëllefen?
+@en Hello, how can I help you?
+@distractor-en desk
+@distractor-en pen
+@distractor-lu Pult
+@distractor-lu Bic
+
+@sentence
+@lu Ech hätt gär e Billjee fir op Bréissel.
+@en I would like a ticket to Brussels.
+@distractor-en Frankfurt
+@distractor-en pen
+@distractor-lu Frankfurt
+@distractor-lu Bic
+
+@sentence
+@lu Wéini wëllt Dir fueren?
+@en When do you want to travel?
+@distractor-en who
+@distractor-en where
+@distractor-lu Wien
+@distractor-lu Wou
+
+@sentence
+@lu Muer den Owend géint sechs Auer.
+@en Tomorrow evening around six o'clock.
+@distractor-en morning
+@distractor-en five
+@distractor-lu Moien
+@distractor-lu fënnef
+
+@sentence
+@lu Fuert Dir gär éischt oder zweet Klass?
+@en Do you prefer to travel first or second class?
+@distractor-en third
+@distractor-en train
+@distractor-lu drëtt
+@distractor-lu Zuch
+
+@sentence
+@lu Wéi vill kascht de Billjee?
+@en How much does the ticket cost?
+@distractor-en price
+@distractor-en desk
+@distractor-lu Präis
+@distractor-lu Pult
+
+@sentence
+@lu De Billjee kascht 75 Euro.
+@en The ticket costs 75 euros.
+@distractor-en free
+@distractor-en full
+@distractor-lu fräi
+@distractor-lu voll
+
+@sentence
+@lu Wëllt Dir eng Sëtzplaz reservéieren?
+@en Would you like to reserve a seat?
+@distractor-en ticket
+@distractor-en box
+@distractor-lu Billjee
+@distractor-lu Këscht
+
+@sentence
+@lu Bezuelt Dir boer oder mat der Kaart?
+@en Are you paying in cash or by card?
+@distractor-en check
+@distractor-en free
+@distractor-lu Scheck
+@distractor-lu fräi
+
+@sentence
+@lu Ech bezuele mat der Kaart.
+@en I'm paying by card.
+@distractor-en cash
+@distractor-en ticket
+@distractor-lu boer
+@distractor-lu Billjee

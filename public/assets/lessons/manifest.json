@@ -17,6 +17,24 @@
             { "id": "A1.08", "file": "A1.1/A1_08_places_and_directions.letz", "title": "Places & Directions" },
             { "id": "A1.09", "file": "A1.1/A1_09_verbs_review.letz", "title": "Verbs Review" }
           ]
+        },
+        {
+          "id": "A1.2",
+          "title": "Conversation",
+          "lessons": [
+            { "id": "A1.10", "file": "A1.2/A1_10_personal_details.letz", "title": "Personal Details" },
+            { "id": "A1.11", "file": "A1.2/A1_11_more_about_yourself.letz", "title": "More About Yourself" },
+            { "id": "A1.12", "file": "A1.2/A1_12_family_and_appearance.letz", "title": "Family & Appearance" },
+            { "id": "A1.13", "file": "A1.2/A1_13_hobbies_and_free_time.letz", "title": "Hobbies & Free Time" },
+            { "id": "A1.14", "file": "A1.2/A1_14_grocery_shopping.letz", "title": "Grocery Shopping" },
+            { "id": "A1.15", "file": "A1.2/A1_15_health_and_cooking.letz", "title": "Health & Cooking" },
+            { "id": "A1.16", "file": "A1.2/A1_16_jobs_and_workplaces.letz", "title": "Jobs & Workplaces" },
+            { "id": "A1.17", "file": "A1.2/A1_17_daily_work_routine.letz", "title": "Daily Work Routine" },
+            { "id": "A1.18", "file": "A1.2/A1_18_home_and_rooms.letz", "title": "Home & Rooms" },
+            { "id": "A1.19", "file": "A1.2/A1_19_housing_and_home.letz", "title": "Housing & Home" },
+            { "id": "A1.20", "file": "A1.2/A1_20_errands_and_places.letz", "title": "Errands & Places" },
+            { "id": "A1.21", "file": "A1.2/A1_21_town_and_opening_hours.letz", "title": "Town & Opening Hours" }
+          ]
         }
       ]
     }

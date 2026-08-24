@@ -1,0 +1,365 @@
+# A1/A1.2/A1_12_family_and_appearance.letz
+# Source: PDF slide deck "L3 (Part 1) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 3, Part 1)
+# Source: PDF slide deck "L3 (Part 2) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 3, Part 2)
+# (m)/(f)/(n)/(pl) markers stripped; nouns given in definite-article form.
+# "Bréll" corrected to "Brëll" per LOD; glossed "the eyeglasses" to disambiguate
+#   from "Glieser = glasses" (drinking glasses) taught in A1.1/A1_07.
+# Already taught elsewhere and reused only inside sentences/distractors here,
+#   not re-taught as @word: kleng, grouss, al, nei, waarm, rout, gro, brong,
+#   schwaarz, riicht, kuerz, laang, jonk, bestuet, d'Hoer, d'Kand/Kanner,
+#   de Papp, d'Mamm, de Brudder, d'Schwëster, de Jong, d'Meedchen/Meedercher,
+#   den Enkel, d'Duechter, d'Bomi.
+
+@lesson A1.12 "Family & Appearance"
+
+# --- Family: parents & grandparents ---
+@word d'Famill = the family
+@word d'Familljen = the families
+@word no Famill = close family
+@word d'Grousselteren = the grandparents
+@word d'Elteren = the parents
+@word de Grousspapp = the grandfather
+@word d'Grousspappen = the grandfathers
+@word d'Groussmamm = the grandmother
+@word d'Groussmammen = the grandmothers
+@word de Bopa = the grandpa
+@word d'Bopaen = the grandpas
+
+# --- Family: siblings & extended family ---
+@word d'Geschwëster = the siblings
+@word de Monni = the uncle
+@word d'Monnien = the uncles
+@word d'Tatta = the aunt
+@word d'Tattaen = the aunts
+@word de Cousin = the cousin (male)
+@word d'Cousinen = the cousins (male)
+@word d'Cousine = the cousin (female)
+@word d'Cousineën = the cousins (female)
+@word den Neveu = the nephew
+@word d'Neveuen = the nephews
+@word d'Niess = the niece
+@word d'Niessen = the nieces
+
+# --- Family: in-laws ---
+@word de Schwoer = the brother-in-law
+@word d'Schwoeren = the brothers-in-law
+@word d'Schwéiesch = the sister-in-law
+@word d'Schwéieschen = the sisters-in-law
+@word d'Schwéiermamm = the mother-in-law
+@word de Schwéierpapp = the father-in-law
+@word d'Schwéierelteren = the parents-in-law
+@word den Eedem = the son-in-law
+@word d'Eedemen = the sons-in-law
+@word d'Schnauer = the daughter-in-law
+@word d'Schnaueren = the daughters-in-law
+
+# --- Appearance: body ---
+@word d'A = the eye
+@word d'Aen = the eyes
+@word d'Nues = the nose
+@word de Brëll = the eyeglasses
+@word d'Glatz = the bald head
+
+# --- Appearance: adjectives ---
+@word déck = big, fat, thick
+@word gekrauselt = curly
+@word dënn = thin, skinny
+@word kal = cold
+@word sportlech = sporty
+@word schwéier = difficult, heavy
+
+# --- Life status & accessories ---
+@word leedeg = single
+@word de Piercing = the piercing
+
+# --- Verbs ---
+@word fëmmen = to smoke
+@word beschreiwen = to describe
+
+@sentence
+@lu D'Sara ass meng Niess.
+@en Sara is my niece.
+@distractor-en aunt
+@distractor-en cousin
+@distractor-lu Tatta
+@distractor-lu Cousine
+
+@sentence
+@lu De Robert ass mäi Schwoer.
+@en Robert is my brother-in-law.
+@distractor-en uncle
+@distractor-en nephew
+@distractor-lu Monni
+@distractor-lu Neveu
+
+@sentence
+@lu De Jemp ass mäi Schwéierpapp.
+@en Jemp is my father-in-law.
+@distractor-en mother-in-law
+@distractor-en uncle
+@distractor-lu Schwéiermamm
+@distractor-lu Monni
+
+@sentence
+@lu D'Nora ass meng Schwéiesch.
+@en Nora is my sister-in-law.
+@distractor-en aunt
+@distractor-en niece
+@distractor-lu Tatta
+@distractor-lu Niess
+
+@sentence
+@lu Mäi Papp ass grouss.
+@en My father is tall.
+@distractor-en mother
+@distractor-en small
+@distractor-lu Mamm
+@distractor-lu kleng
+
+@sentence
+@lu Meng Mamm ass kleng.
+@en My mother is small.
+@distractor-en father
+@distractor-en big
+@distractor-lu Papp
+@distractor-lu grouss
+
+@sentence
+@lu Ech hunn ee grousse Brudder.
+@en I have one big brother.
+@distractor-en sister
+@distractor-en small
+@distractor-lu Schwëster
+@distractor-lu kleng
+
+@sentence
+@lu Ech hunn zwou Schwësteren.
+@en I have two sisters.
+@distractor-en brothers
+@distractor-en one
+@distractor-lu Bridder
+@distractor-lu ee
+
+@sentence
+@lu Mäi Papp huet just eng Schwéiesch.
+@en My father only has one sister-in-law.
+@distractor-en brother-in-law
+@distractor-en mother
+@distractor-lu Schwoer
+@distractor-lu Mamm
+
+@sentence
+@lu Ech hunn och sechs Cousineën.
+@en I also have six female cousins.
+@distractor-en male
+@distractor-en nephew
+@distractor-lu Cousin
+@distractor-lu Neveu
+
+@sentence
+@lu Mir hunn zwee Jongen an zwee Meedercher.
+@en We have two sons and two daughters.
+@distractor-en parents
+@distractor-en sisters
+@distractor-lu Elteren
+@distractor-lu Schwësteren
+
+@sentence
+@lu Mir hunn zwou Schnaueren an zwee Eedemen.
+@en We have two daughters-in-law and two sons-in-law.
+@distractor-en nephews
+@distractor-en nieces
+@distractor-lu Neveuen
+@distractor-lu Niessen
+
+@sentence
+@lu Mir hunn och ganz vill Enkelkanner.
+@en We also have a lot of grandchildren.
+@distractor-en children
+@distractor-en parents
+@distractor-lu Kanner
+@distractor-lu Elteren
+
+@sentence
+@lu Hien huet gekrauselt Hoer an e Brëll.
+@en He has curly hair and glasses.
+@distractor-en straight
+@distractor-en bald
+@distractor-lu riicht
+@distractor-lu Glatz
+
+@sentence
+@lu Si huet riicht, schwaarz Hoer a kee Brëll.
+@en She has straight, black hair and no glasses.
+@distractor-en curly
+@distractor-en grey
+@distractor-lu gekrauselt
+@distractor-lu gro
+
+@sentence
+@lu Wunnt däi Brudder an der Belsch?
+@en Does your brother live in Belgium?
+@distractor-en sister
+@distractor-en father
+@distractor-lu Schwëster
+@distractor-lu Papp
+
+@sentence
+@lu Deng Schwéiesch ass ganz sympathesch.
+@en Your sister-in-law is very likeable.
+@distractor-en uncle
+@distractor-en aunt
+@distractor-lu Monni
+@distractor-lu Tatta
+
+@sentence
+@lu Sinn dat Är Kanner?
+@en Are those your children?
+@distractor-en siblings
+@distractor-en parents
+@distractor-lu Geschwëster
+@distractor-lu Elteren
+
+@sentence
+@lu Jo, dat si meng Kanner.
+@en Yes, those are my children.
+@distractor-en siblings
+@distractor-en parents
+@distractor-lu Geschwëster
+@distractor-lu Elteren
+
+@sentence
+@lu Vu wou kënnt Ären Mann?
+@en Where does your husband come from?
+@distractor-en wife
+@distractor-en brother
+@distractor-lu Fra
+@distractor-lu Brudder
+
+@sentence
+@lu Ass Äert Kand zu Lëtzebuerg gebuer?
+@en Is your child born in Luxembourg?
+@distractor-en children
+@distractor-en married
+@distractor-lu Kanner
+@distractor-lu bestuet
+
+@sentence
+@lu Nee, eist Kand ass net zu Lëtzebuerg gebuer.
+@en No, our child is not born in Luxembourg.
+@distractor-en children
+@distractor-en single
+@distractor-lu Kanner
+@distractor-lu leedeg
+
+@sentence
+@lu Hues du Kanner?
+@en Do you have children?
+@distractor-en siblings
+@distractor-en married
+@distractor-lu Geschwëster
+@distractor-lu bestuet
+
+@sentence
+@lu Nee, ech hu keng Kanner.
+@en No, I don't have children.
+@distractor-en siblings
+@distractor-en house
+@distractor-lu Geschwëster
+@distractor-lu Haus
+
+@sentence
+@lu Bass du bestuet?
+@en Are you married?
+@distractor-en single
+@distractor-en young
+@distractor-lu leedeg
+@distractor-lu jonk
+
+@sentence
+@lu Nee, ech sinn net bestuet.
+@en No, I am not married.
+@distractor-en single
+@distractor-en young
+@distractor-lu leedeg
+@distractor-lu jonk
+
+@sentence
+@lu Hues du Geschwëster?
+@en Do you have siblings?
+@distractor-en children
+@distractor-en married
+@distractor-lu Kanner
+@distractor-lu bestuet
+
+@sentence
+@lu Nee, ech hu keng Geschwëster.
+@en No, I don't have siblings.
+@distractor-en children
+@distractor-en house
+@distractor-lu Kanner
+@distractor-lu Haus
+
+@sentence
+@lu Hutt Dir en Haus an der Stad?
+@en Do you have a house in the city?
+@distractor-en children
+@distractor-en married
+@distractor-lu Kanner
+@distractor-lu bestuet
+
+@sentence
+@lu Nee, mir hu keen Haus an der Stad.
+@en No, we don't have a house in the city.
+@distractor-en children
+@distractor-en siblings
+@distractor-lu Kanner
+@distractor-lu Geschwëster
+
+@sentence
+@lu Ech stelle meng Schwëster vir.
+@en I introduce my sister.
+@distractor-en brother
+@distractor-en describe
+@distractor-lu Brudder
+@distractor-lu beschreiwen
+
+@sentence
+@lu Meng Schwëster heescht Nisha.
+@en My sister is called Nisha.
+@distractor-en brother
+@distractor-en married
+@distractor-lu Brudder
+@distractor-lu bestuet
+
+@sentence
+@lu Hatt ass 32 Joer al a wunnt a Malawi, an Afrika.
+@en She is 32 years old and lives in Malawi, in Africa.
+@distractor-en young
+@distractor-en sporty
+@distractor-lu jonk
+@distractor-lu sportlech
+
+@sentence
+@lu Hatt huet laang a gekrauselt, schwaarz Hoer.
+@en She has long and curly, black hair.
+@distractor-en short
+@distractor-en straight
+@distractor-lu kuerz
+@distractor-lu riicht
+
+@sentence
+@lu Hatt huet brong Aen an hatt ass dënn.
+@en She has brown eyes and she is thin.
+@distractor-en grey
+@distractor-en fat
+@distractor-lu gro
+@distractor-lu déck
+
+@sentence
+@lu Hatt ass ganz sportlech an huet e Piercing an der Nues.
+@en She is very sporty and has a piercing in the nose.
+@distractor-en eye
+@distractor-en married
+@distractor-lu A
+@distractor-lu bestuet

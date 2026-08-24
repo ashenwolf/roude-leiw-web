@@ -1,0 +1,254 @@
+# A1/A1.2/A1_11_more_about_yourself.letz
+# Source: PDF slide deck "L2 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 2)
+# Gender markers (m)/(f)/(n) stripped; (formal)/(informal) qualifiers stripped.
+# Words already taught in A1.01-A1.09 (al, d'Stad, kënnen, wunnen, fueren,
+# schaffen, schwätzen) are reused in sentences below but not re-declared here.
+
+@lesson A1.11 "More About Yourself"
+
+# --- Age, marital & relationship status ---
+@word den Alter = the age
+@word jonk = young
+@word bestuet = married
+@word Single = single
+
+# --- Places ---
+@word de Wunnuert = the place of residence
+@word den Aarbechtsuert = the work place
+@word d'Land = the country
+@word de Bierg = the mountain
+@word d'Belsch = Belgium
+@word Lëtzebuerg = Luxembourg
+@word Däitschland = Germany
+@word Berlin = Berlin
+@word Sandweiler = Sandweiler
+
+# --- Languages ---
+@word Franséisch = French
+@word Däitsch = German
+@word fléissend = fluently
+
+# --- Professions ---
+@word de Beruff = the profession
+@word den Dokter = the doctor
+@word d'Doktesch = the doctor
+@word de Proff = the secondary school teacher
+@word de Schoulmeeschter = the primary school teacher
+@word d'Schouljoffer = the primary school teacher (female)
+
+# --- Family & pets ---
+@word d'Duechter = the daughter
+@word d'Duechteren = the daughters
+@word d'Kaz = the cat
+@word d'Kazen = the cats
+@word de Mupp = the pooch
+@word d'Muppen = the pooches
+
+# --- Other useful words ---
+@word keng = no, none
+@word mee = but
+@word laang = long
+@word doheem = at home
+@word geschwënn = soon
+@word buschtawéieren = to spell
+
+@sentence
+@lu Ech si jonk.
+@en I am young.
+@distractor-en old
+@distractor-en married
+@distractor-lu al
+@distractor-lu bestuet
+
+@sentence
+@lu Hien ass al.
+@en He is old.
+@distractor-en young
+@distractor-en married
+@distractor-lu jonk
+@distractor-lu bestuet
+
+@sentence
+@lu Ech si Single.
+@en I am single.
+@distractor-en married
+@distractor-en young
+@distractor-lu bestuet
+@distractor-lu jonk
+
+@sentence
+@lu Ech si bestuet.
+@en I am married.
+@distractor-en single
+@distractor-en old
+@distractor-lu Single
+@distractor-lu al
+
+@sentence
+@lu Ech sinn doheem.
+@en I am at home.
+@distractor-en soon
+@distractor-en long
+@distractor-lu geschwënn
+@distractor-lu laang
+
+@sentence
+@lu D'Duechter ass jonk.
+@en The daughter is young.
+@distractor-en old
+@distractor-en married
+@distractor-lu al
+@distractor-lu bestuet
+
+@sentence
+@lu De Schoulmeeschter ass al.
+@en The teacher is old.
+@distractor-en friend
+@distractor-en doctor
+@distractor-lu Frënd
+@distractor-lu Dokter
+
+@sentence
+@lu Hatt huet e Frënd.
+@en She has a boyfriend.
+@distractor-en girlfriend
+@distractor-en husband
+@distractor-lu Frëndin
+@distractor-lu Mann
+
+@sentence
+@lu Meng Fra heescht Maria.
+@en My wife is called Maria.
+@distractor-en husband
+@distractor-en son
+@distractor-lu Mann
+@distractor-lu Jong
+
+@sentence
+@lu Wéi al bass du?
+@lu Wéi al sidd Dir?
+@en How old are you?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Ech wunnen zu Lëtzebuerg.
+@en I live in Luxembourg.
+@distractor-en Belgium
+@distractor-en Germany
+@distractor-lu Belsch
+@distractor-lu Däitschland
+
+@sentence
+@lu Ech fueren an d'Belsch.
+@en I am driving to Belgium.
+@distractor-en France
+@distractor-en Luxembourg
+@distractor-lu Frankräich
+@distractor-lu Lëtzebuerg
+
+@sentence
+@lu Ech schaffen zu Sandweiler.
+@en I work in Sandweiler.
+@distractor-en Belgium
+@distractor-en Germany
+@distractor-lu Belsch
+@distractor-lu Däitschland
+
+@sentence
+@lu Mir wunnen op d'Land.
+@en We live in the countryside.
+@distractor-en mountain
+@distractor-en city
+@distractor-lu Bierg
+@distractor-lu Stad
+
+@sentence
+@lu D'Doktesch wunnt an der Stad.
+@en The doctor lives in the city.
+@distractor-en teacher
+@distractor-en mountain
+@distractor-lu Proff
+@distractor-lu Bierg
+
+@sentence
+@lu D'Kaz ass op dem Bierg.
+@en The cat is on the mountain.
+@distractor-en dog
+@distractor-en city
+@distractor-lu Mupp
+@distractor-lu Stad
+
+@sentence
+@lu Wéi ass Äre Familljennumm?
+@en What is your surname?
+@distractor-en forename
+@distractor-en age
+@distractor-lu Virnumm
+@distractor-lu Alter
+
+@sentence
+@lu Wéi buschtawéiert een dat?
+@en How does one spell that?
+@distractor-en write
+@distractor-en repeat
+@distractor-lu schreiwen
+@distractor-lu widderhuelen
+
+@sentence
+@lu Ech si Proff vu Beruff.
+@en I am a teacher by profession.
+@distractor-en doctor
+@distractor-en salesman
+@distractor-lu Dokter
+@distractor-lu Verkeefer
+
+@sentence
+@lu Hie schwätzt fléissend Englesch.
+@en He speaks English fluently.
+@distractor-en she
+@distractor-en French
+@distractor-lu Hatt
+@distractor-lu Franséisch
+
+@sentence
+@lu Ech schwätze relativ gutt Franséisch.
+@en I speak French relatively well.
+@distractor-en German
+@distractor-en fluently
+@distractor-lu Däitsch
+@distractor-lu fléissend
+
+@sentence
+@lu Ech schwätzen e bëssen Däitsch.
+@en I speak a little German.
+@distractor-en French
+@distractor-en fluently
+@distractor-lu Franséisch
+@distractor-lu fléissend
+
+@sentence
+@lu Ech kommen aus Däitschland, vu Berlin.
+@en I come from Germany, from Berlin.
+@distractor-en France
+@distractor-en Belgium
+@distractor-lu Frankräich
+@distractor-lu Belsch
+
+@sentence
+@lu Mir hu keng Kanner, mee eng Kaz.
+@en We have no children, but a cat.
+@distractor-en dog
+@distractor-en book
+@distractor-lu Mupp
+@distractor-lu Buch
+
+@sentence
+@lu Wéi laang wunnt Dir schonn zu Lëtzebuerg?
+@en How long have you already been living in Luxembourg?
+@distractor-en soon
+@distractor-en Belgium
+@distractor-lu geschwënn
+@distractor-lu Belsch

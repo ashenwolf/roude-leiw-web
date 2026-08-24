@@ -1,0 +1,357 @@
+# A1/A1.2/A1_13_hobbies_and_free_time.letz
+# Source: PDF slide deck "L4 (Part 1) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 4, Part 1)
+# Source: PDF slide deck "L4 (Part 2) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 4, Part 2)
+# Deck title: "4. Cours: Hobby a Fräizäit". Both parts merged and deduplicated by
+# Luxembourgish form. Time-telling/weekday/frequency vocabulary is included
+# because the deck teaches it specifically to let learners say when/how often
+# they do their hobbies.
+
+@lesson A1.13 "Hobbies & Free Time"
+
+@word baken = to bake
+@word gär = gladly
+@word schwammen = to swim
+@word schwamme goen = to go swimming
+@word spadséiere goen = to go for a walk
+@word lafen = to run
+@word lafe goen = to go for a run
+@word Musek lauschteren = to listen to music
+@word sangen = to sing
+@word lauschteren = to listen
+@word héieren = to hear
+@word kachen = to cook
+@word molen = to draw
+@word spillen = to play
+@word Gittar spillen = to play the guitar
+@word Piano spillen = to play the piano
+@word Fotoen maachen = to take photos
+@word Timberen sammelen = to collect stamps
+@word Vëlo fueren = to ride the bike
+@word Fussball spillen = to play football
+@word kucken = to look
+@word gesinn = to see
+@word ausgesinn = to look (appear)
+
+@word opstoen = to get up
+@word iessen = to eat
+@word drénken = to drink
+@word liesen = to read
+@word relaxéieren = to relax
+@word fueren = to drive
+@word trainéieren = to train
+@word schaffen = to work
+@word kënnen = to be able to
+@word léieren = to learn
+
+@word ee Mol d'Woch = once a week
+@word zwee Mol de Mount = twice a month
+@word dräi Mol d'Joer = three times a year
+@word all Dag = every day
+@word ëmmer = always
+@word oft = often
+@word heiansdo = sometimes
+@word seelen = rarely
+@word ni = never
+@word normalerweis = normally
+
+@word moies = in the morning
+@word owes = in the evening
+@word duerno = afterwards
+@word dann = then
+@word zu Mëtteg = at noon
+@word den Owend = the evening
+@word heem = home
+
+@word méindes = on Mondays
+@word dënschdes = on Tuesdays
+@word mëttwochs = on Wednesdays
+@word donneschdes = on Thursdays
+@word freides = on Fridays
+@word samschdes = on Saturdays
+@word sonndes = on Sundays
+@word wiertes = on weekdays
+@word de Weekend = the weekend
+
+@word de Méindeg = Monday
+@word de Freideg = Friday
+@word de Samschdeg = Saturday
+@word de Sonndeg = Sunday
+
+@word typesch = typical
+@word gutt = good
+@word net = not
+@word just = only
+@word mech = me
+
+@word d'Auer = the clock
+@word de Kaffi = the coffee
+@word d'Zeitung = the newspaper
+@word de Kino = the cinema
+@word d'Tëlee = the TV
+@word de Liiblingsrestaurant = the favourite restaurant
+@word d'Mëttegiessen = the lunch
+@word Lëtzebuergesch = Luxembourgish
+@word de Marathon = the marathon
+@word d'Fräizäit = the free time
+@word den Hobby = the hobby
+@word de Partner = the partner
+@word d'Fra = the wife
+@word d'Kuchen = the cakes
+@word d'Kanner = the children
+
+@sentence
+@lu Ech bake gär Kuchen.
+@en I like baking cakes.
+@distractor-en cook
+@distractor-en read
+@distractor-lu kachen
+@distractor-lu liesen
+
+@sentence
+@lu Ech ginn zwee Mol d'Woch schwammen.
+@en I go swimming twice a week.
+@distractor-en run
+@distractor-en month
+@distractor-lu lafen
+@distractor-lu Mount
+
+@sentence
+@lu Ech gi gär de Weekend spadséieren.
+@en I like going for a walk at the weekend.
+@distractor-en run
+@distractor-en bake
+@distractor-lu lafen
+@distractor-lu baken
+
+@sentence
+@lu Ech lauschteren all Dag Musek.
+@en I listen to music every day.
+@distractor-en sometimes
+@distractor-en sing
+@distractor-lu heiansdo
+@distractor-lu sangen
+
+@sentence
+@lu Kanns du mech héieren?
+@en Can you hear me?
+@distractor-en see
+@distractor-en look
+@distractor-lu gesinn
+@distractor-lu kucken
+
+@sentence
+@lu Heiansdo kacht mäi Partner, heiansdo kachen ech.
+@en Sometimes my partner cooks, sometimes I cook.
+@distractor-en always
+@distractor-en piano
+@distractor-lu ëmmer
+@distractor-lu Piano
+
+@sentence
+@lu Sonndes spillen ech oft mat menge Kanner.
+@en On Sundays I often play with my children.
+@distractor-en Saturdays
+@distractor-en rarely
+@distractor-lu samschdes
+@distractor-lu seelen
+
+@sentence
+@lu Ech spillen all Dag Piano.
+@en I play the piano every day.
+@distractor-en guitar
+@distractor-en week
+@distractor-lu Gittar
+@distractor-lu Woch
+
+@sentence
+@lu Um zéng Auer spillen ech Piano.
+@en At ten o'clock I play the piano.
+@distractor-en eight
+@distractor-en guitar
+@distractor-lu aacht
+@distractor-lu Gittar
+
+@sentence
+@lu A menger Fräizäit maachen ech gär Fotoen.
+@en In my free time I like taking photos.
+@distractor-en stamps
+@distractor-en hobby
+@distractor-lu Timberen
+@distractor-lu Hobby
+
+@sentence
+@lu Ech gesi meng Fra just den Owend.
+@en I only see my wife in the evening.
+@distractor-en morning
+@distractor-en newspaper
+@distractor-lu moies
+@distractor-lu Zeitung
+
+@sentence
+@lu Du gesäis gutt aus!
+@en You look good!
+@distractor-en bad
+@distractor-en run
+@distractor-lu net
+@distractor-lu lafen
+
+@sentence
+@lu Wéi vill Auer ass et?
+@en What time is it?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Et ass eng Auer.
+@en It's one o'clock.
+@distractor-en two
+@distractor-en three
+@distractor-lu zwou
+@distractor-lu dräi
+
+@sentence
+@lu Et ass fënnef op siwen.
+@en It's five past seven.
+@distractor-en ten
+@distractor-en eight
+@distractor-lu zéng
+@distractor-lu aacht
+
+@sentence
+@lu Et ass Véierel op siwen.
+@en It's quarter past seven.
+@distractor-en half
+@distractor-en six
+@distractor-lu hallwer
+@distractor-lu sechs
+
+@sentence
+@lu Et ass hallwer aacht.
+@en It's half past seven.
+@distractor-en quarter
+@distractor-en nine
+@distractor-lu Véierel
+@distractor-lu néng
+
+@sentence
+@lu Et ass Véierel vir aacht.
+@en It's quarter to eight.
+@distractor-en nine
+@distractor-en ten
+@distractor-lu néng
+@distractor-lu zéng
+
+@sentence
+@lu Et ass zéng vir aacht.
+@en It's ten to eight.
+@distractor-en five
+@distractor-en seven
+@distractor-lu fënnef
+@distractor-lu siwen
+
+@sentence
+@lu Et ass fënnef vir hallwer aacht.
+@en It's twenty-five past seven.
+@distractor-en six
+@distractor-en nine
+@distractor-lu sechs
+@distractor-lu néng
+
+@sentence
+@lu Ech ginn um hallwer néng lafen.
+@en I go running at half past eight.
+@distractor-en swim
+@distractor-en nine
+@distractor-lu schwammen
+@distractor-lu néng
+
+@sentence
+@lu Ech schaffe wiertes, vu méindes bis freides.
+@en I work on weekdays, from Monday to Friday.
+@distractor-en weekend
+@distractor-en Sunday
+@distractor-lu Weekend
+@distractor-lu sonndes
+
+@sentence
+@lu Ech stinn normalerweis um aacht Auer op.
+@en I normally get up at eight o'clock.
+@distractor-en always
+@distractor-en nine
+@distractor-lu ëmmer
+@distractor-lu néng
+
+@sentence
+@lu Ech ginn e Freideg an de Kino.
+@lu E Freideg ginn ech an de Kino.
+@en I go to the cinema on Friday.
+@distractor-en Saturday
+@distractor-en restaurant
+@distractor-lu Samschdeg
+@distractor-lu Liiblingsrestaurant
+
+@sentence
+@lu E Samschdeg kucken ech d'Tëlee.
+@en On Saturday I watch TV.
+@distractor-en Sunday
+@distractor-en newspaper
+@distractor-lu Sonndeg
+@distractor-lu Zeitung
+
+@sentence
+@lu An e Sonndeg léieren ech Lëtzebuergesch.
+@en And on Sunday I learn Luxembourgish.
+@distractor-en sing
+@distractor-en Monday
+@distractor-lu sangen
+@distractor-lu Méindeg
+
+@sentence
+@lu E Sonndeg relaxéieren ech!
+@en On Sunday I relax!
+@distractor-en Saturday
+@distractor-en work
+@distractor-lu Samschdeg
+@distractor-lu schaffen
+
+@sentence
+@lu Um zéng Auer drénken ech Kaffi.
+@en At ten o'clock I have breakfast.
+@distractor-en eight
+@distractor-en newspaper
+@distractor-lu aacht
+@distractor-lu Zeitung
+
+@sentence
+@lu Nom Kaffi liesen ech d'Zeitung.
+@en After breakfast I read the newspaper.
+@distractor-en evening
+@distractor-en drink
+@distractor-lu Owend
+@distractor-lu drénken
+
+@sentence
+@lu Duerno lauschteren ech gär Musek.
+@en Then I like listening to music.
+@distractor-en morning
+@distractor-en watch
+@distractor-lu moies
+@distractor-lu kucken
+
+@sentence
+@lu Zu Mëtteg ginn ech an mäi Liiblingsrestaurant.
+@en At noon I go to my favourite restaurant.
+@distractor-en evening
+@distractor-en cinema
+@distractor-lu Owend
+@distractor-lu Kino
+
+@sentence
+@lu Nom Mëttegiesse ginn ech spadséieren, an da fueren ech heem.
+@en After lunch I go for a walk, and then I drive home.
+@distractor-en run
+@distractor-en swim
+@distractor-lu lafen
+@distractor-lu schwammen

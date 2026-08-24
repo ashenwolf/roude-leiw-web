@@ -1,0 +1,395 @@
+# A1/A1.2/A1_17_daily_work_routine.letz
+# Source: PDF slide deck "L8 (Part 1) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 8, Part 1)
+# Source: PDF slide deck "L8 (Deel 2) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 8, Part 2)
+# Slash variants and bracket alternatives are split into atomic pairs;
+# (m)/(f)/(n)/(pl) markers stripped; (formal)/(informal) qualifiers stripped.
+# "regelméisseg" and "Bensin" corrected to LOD's "reegelméisseg"/"Bensinn".
+# Distractor tokens are sourced from other entries within this same lesson where possible.
+
+@lesson A1.17 "Daily Work Routine"
+
+# --- Professions ---
+@word de Schräiner = carpenter
+@word d'Schräinerei = carpenter's workshop
+@word de Metzler = butcher
+@word d'Metzlerei = butcher's shop
+@word de Bäcker = baker
+@word d'Bäckerei = bakery
+@word de Bréifdréier = postman
+@word d'Apdiktesch = pharmacist
+@word d'Apdikt = pharmacy
+@word d'Infirmière = nurse
+@word de Paschtouer = priest
+@word de Caissier = cashier
+@word d'Caissière = cashier
+@word de Patissier = pastry chef
+@word d'Patisserie = pastry shop
+@word de Garçon = waiter
+@word d'Serveuse = waitress
+@word den Affekot = lawyer
+@word d'Léierin = teacher
+@word d'Bankemployée = bank employee
+@word den Ingenieur = engineer
+@word den Informatiker = computer specialist
+@word d'Educatrice = childcare worker
+@word d'Zänndoktesch = dentist
+@word de Babysitter = babysitter
+
+# --- Workplaces ---
+@word d'Geriicht = court
+@word d'Schoul = school
+@word de Restaurant = restaurant
+@word d'Bank = bank
+@word d'Post = post office
+@word d'Kierch = church
+@word de Supermarché = supermarket
+@word d'Spidol = hospital
+@word d'Praxis = doctor's practice
+
+# --- Daily routine / separable verbs ---
+@word ophalen = to stop
+@word ufänken = to start
+@word opstoen = to get up
+@word fortfueren = to leave
+@word ukommen = to arrive
+@word heemfueren = to drive home
+@word laanschtkommen = to come by
+@word duschen = to shower
+@word drénken = to drink
+@word d'Mëttespaus = lunch break
+@word de Feierowend = end of the workday
+@word den Aarbechtsdag = workday
+@word d'Aarbechtszäit = working hours
+
+# --- Getting to work / transport ---
+@word goen = to go
+@word fueren = to drive
+@word den Auto = car
+@word de Bus = bus
+@word den Zuch = train
+@word d'Metro = metro
+@word de Vëlo = bike
+@word zu Fouss = on foot
+@word den Trafick = traffic
+@word d'Autobunn = motorway
+@word de Bensinn = petrol
+@word de Motor = engine
+@word de Mecanicien = mechanic
+@word d'Parkplaz = parking space
+@word d'Verbindung = connection
+@word d'Verbindungen = connections
+@word d'Firma = company
+@word d'Stonn = hour
+
+# --- Adjectives & adverbs ---
+@word deier = expensive
+@word bëlleg = cheap
+@word praktesch = practical
+@word séier = quick
+@word futti = broken
+@word reegelméisseg = regular
+@word normalerweis = normally
+@word ëmmer = always
+@word heiansdo = sometimes
+@word natierlech = of course
+@word ausserdeem = besides
+@word gutt = good
+
+# --- Other nouns ---
+@word d'Aarbecht = work
+@word den Dësch = table
+@word d'Dëscher = tables
+@word de Stull = chair
+@word d'Still = chairs
+@word d'Holz = wood
+@word d'Brout = bread
+@word de Kaffi = coffee
+@word d'Websäiten = websites
+@word d'Erfarung = experience
+@word d'Erfarungen = experiences
+@word d'Kolonie = holiday camp
+@word d'Transportmëttel = means of transport
+@word d'Transportmëttelen = means of transport
+@word d'Iddi = idea
+@word de Problem = problem
+@word Kee Problem = no problem
+
+@sentence
+@lu De Motor ass futti.
+@en The engine is broken.
+@distractor-en new
+@distractor-en cheap
+@distractor-lu nei
+@distractor-lu bëlleg
+
+@sentence
+@lu Dat ass eng gutt Iddi.
+@en That's a good idea.
+@distractor-en bad
+@distractor-en problem
+@distractor-lu schlecht
+@distractor-lu Problem
+
+@sentence
+@lu Ech schaffe mat Holz.
+@en I work with wood.
+@distractor-en bread
+@distractor-en engine
+@distractor-lu Brout
+@distractor-lu Motor
+
+@sentence
+@lu Ech maachen Dëscher a Still.
+@en I make tables and chairs.
+@distractor-en car
+@distractor-en bike
+@distractor-lu Auto
+@distractor-lu Vëlo
+
+@sentence
+@lu Ech verstinn e bësse Lëtzebuergesch.
+@en I understand a little Luxembourgish.
+@distractor-en much
+@distractor-en French
+@distractor-lu vill
+@distractor-lu Franséisch
+
+@sentence
+@lu Ech gi mam Auto schaffen.
+@en I go to work by car.
+@distractor-en bus
+@distractor-en train
+@distractor-lu Bus
+@distractor-lu Zuch
+
+@sentence
+@lu Ech ginn zu Fouss schaffen.
+@en I go to work on foot.
+@distractor-en car
+@distractor-en train
+@distractor-lu Auto
+@distractor-lu Zuch
+
+@sentence
+@lu Fiers du mam Bus op d'Aarbecht?
+@en Do you go to work by bus?
+@distractor-en car
+@distractor-en foot
+@distractor-lu Auto
+@distractor-lu Fouss
+
+@sentence
+@lu Ech fuere mam Zuch op d'Aarbecht.
+@en I go to work by train.
+@distractor-en bus
+@distractor-en bike
+@distractor-lu Bus
+@distractor-lu Vëlo
+
+@sentence
+@lu Si fiert mam Auto op d'Aarbecht.
+@en She goes to work by car.
+@distractor-en he
+@distractor-en we
+@distractor-lu Hien
+@distractor-lu Mir
+
+@sentence
+@lu Wéini ass d'Mëttespaus?
+@en When is the lunch break?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Wat iesst Dir?
+@en What do you eat?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Wou iesst Dir?
+@en Where do you eat?
+@distractor-en what
+@distractor-en who
+@distractor-lu Wat
+@distractor-lu Wien
+
+@sentence
+@lu Mat wiem iesst Dir?
+@en With whom do you eat?
+@distractor-en where
+@distractor-en what
+@distractor-lu Wou
+@distractor-lu Wat
+
+@sentence
+@lu Wat maacht Dir no der Aarbecht?
+@en What do you do after work?
+@distractor-en where
+@distractor-en school
+@distractor-lu Wou
+@distractor-lu Schoul
+
+@sentence
+@lu Wou schafft d'Claudine am Summer?
+@en Where does Claudine work in the summer?
+@distractor-en when
+@distractor-en winter
+@distractor-lu Wéini
+@distractor-lu Wanter
+
+@sentence
+@lu Wéi al ass d'Claudine?
+@en How old is Claudine?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Wéini brauch d'Madame Scheier e Babysitter?
+@en When does Madame Scheier need a babysitter?
+@distractor-en where
+@distractor-en who
+@distractor-lu Wou
+@distractor-lu Wien
+
+@sentence
+@lu Wéi vill bezilt si pro Stonn?
+@en How much does she pay per hour?
+@distractor-en who
+@distractor-en workday
+@distractor-lu Wien
+@distractor-lu Feierowend
+
+@sentence
+@lu Ech fänken um zéng Auer mat der Aarbecht un.
+@en I start work at ten o'clock.
+@distractor-en stop
+@distractor-en nine
+@distractor-lu halen
+@distractor-lu néng
+
+@sentence
+@lu Ech fänken u Sport ze maachen.
+@en I start doing sports.
+@distractor-en stop
+@distractor-en swim
+@distractor-lu halen
+@distractor-lu schwammen
+
+@sentence
+@lu Ech maachen um fënnef Auer Feierowend.
+@en I finish work at five o'clock.
+@distractor-en morning
+@distractor-en break
+@distractor-lu moies
+@distractor-lu Mëttespaus
+
+@sentence
+@lu Hie schafft vu véier Auer moies bis zwou Auer mëttes.
+@en He works from four o'clock in the morning until two o'clock at noon.
+@distractor-en three
+@distractor-en evening
+@distractor-lu dräi
+@distractor-lu owes
+
+@sentence
+@lu Si schafft an enger Praxis a kontrolléiert Zänn.
+@en She works at a doctor's practice and checks teeth.
+@distractor-en hair
+@distractor-en bread
+@distractor-lu Hoer
+@distractor-lu Brout
+
+@sentence
+@lu Ech schreiwe Computerprogrammer.
+@en I write computer programs.
+@distractor-en website
+@distractor-en application
+@distractor-lu Websäit
+@distractor-lu Applikatioun
+
+@sentence
+@lu Ech programméiere Websäiten.
+@en I program websites.
+@distractor-en application
+@distractor-en car
+@distractor-lu Applikatioun
+@distractor-lu Auto
+
+@sentence
+@lu Normalerweis stinn ech um sechs Auer op.
+@en I normally get up at six o'clock.
+@distractor-en always
+@distractor-en quick
+@distractor-lu ëmmer
+@distractor-lu séier
+
+@sentence
+@lu Ech duschen an da fueren ech direkt vun doheem fort.
+@en I shower and then leave home directly.
+@distractor-en bread
+@distractor-en school
+@distractor-lu Brout
+@distractor-lu Schoul
+
+@sentence
+@lu Ech kommen um siwen Auer op der Aarbecht un.
+@en I arrive at work at seven o'clock.
+@distractor-en eight
+@distractor-en home
+@distractor-lu aacht
+@distractor-lu heem
+
+@sentence
+@lu Op der Aarbecht drénken ech Kaffi an duerno fänken ech u mat schaffen.
+@en At work I drink coffee and afterwards I start working.
+@distractor-en bread
+@distractor-en broken
+@distractor-lu Brout
+@distractor-lu futti
+
+@sentence
+@lu Ech schaffe bis véier Auer a maache just eng kuerz Mëttespaus.
+@en I work until four o'clock and just take a short lunch break.
+@distractor-en long
+@distractor-en traffic
+@distractor-lu laang
+@distractor-lu Trafick
+
+@sentence
+@lu Um véier Auer halen ech op mat schaffen a fueren heem.
+@en At four o'clock I stop working and drive home.
+@distractor-en start
+@distractor-en car
+@distractor-lu fänken
+@distractor-lu Auto
+
+@sentence
+@lu Ech kommen um hallwer fënnef doheem un.
+@en I arrive home at half past four.
+@distractor-en six
+@distractor-en work
+@distractor-lu sechs
+@distractor-lu Aarbecht
+
+@sentence
+@lu Ech schaffen normalerweis vun aacht Auer moies bis fënnef Auer nomëttes.
+@en I normally work from eight o'clock in the morning until five o'clock in the afternoon.
+@distractor-en always
+@distractor-en nine
+@distractor-lu ëmmer
+@distractor-lu néng
+
+@sentence
+@lu Ech fänken heiansdo um néng Auer moies u mat schaffen.
+@en I sometimes start working at nine o'clock in the morning.
+@distractor-en always
+@distractor-en stop
+@distractor-lu ëmmer
+@distractor-lu halen

@@ -1,0 +1,489 @@
+# A1/A1.2/A1_15_health_and_cooking.letz
+# Source: PDF slide deck "L6 (Part 1) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 6, Part 1)
+# Source: PDF slide deck "L6 (Part 2) a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 6, Part 2)
+# (m)/(f)/(n)/(pl) markers stripped; "the" dropped from English glosses to match
+# this course's established style. Distractor tokens are sourced from other
+# entries within this same lesson (or, where noted in the report, an earlier
+# A1.2 lesson's vocabulary).
+
+@lesson A1.15 "Health & Cooking"
+
+# --- Time & degree ---
+@word haut = today
+@word muer = tomorrow
+@word gëschter = yesterday
+@word dréngend = urgent
+@word fir d'éischt = first, firstly
+@word op d'mannst = at least
+@word ze vill = too much
+@word ouni = without
+@word géint = against
+
+# --- Cooking verbs ---
+@word lauschteren = to listen
+@word beäntweren = to answer
+@word broden = to fry
+@word schielen = to peel
+@word rappen = to grate
+@word plattdrécken = to flatten
+@word ofschmaachen = to season
+@word zerstoussen = to crush
+@word mëschen = to mix
+@word muelen = to grind
+@word preparéieren = to prepare
+@word kachen = to cook
+@word schëdden = to pour
+
+# --- Cooking nouns ---
+@word d'Salz = salt
+@word de Peffer = pepper
+@word d'Muskatnoss = nutmeg
+@word d'Kraut = herb
+@word d'Kraider = herbs
+@word de Péiterséileg = parsley
+@word d'Bratzel = chives
+@word den Deeg = dough
+@word de Läffel = spoon
+@word den Iessläffel = tablespoon
+@word d'Pan = frying pan
+@word de Pefferkär = peppercorn
+@word de Bifdeck = steak
+@word den Olivenueleg = olive oil
+@word de Gromperekichelchen = potato fritter
+@word d'Gromperekichelcher = potato fritters
+@word d'Ënn = onion
+@word d'Ënnen = onions
+@word d'Uebstzalot = fruit salad
+@word griichesch = Greek
+@word d'Bouneschlupp = bean soup
+@word d'Mettwurscht = sausage
+@word d'Britt = stock
+
+# --- Illness ---
+@word erkaalt sinn = to have a cold
+@word de Schnapp hunn = to have a runny nose
+@word den Houscht = cough
+@word houschten = to cough
+@word d'Féiwer = fever
+@word d'Gripp = flu
+@word eng Erkältung = a cold
+@word de Krankeschäin = sick note
+@word den Thermometer = thermometer
+@word de Grad = degree
+@word weisen = to show
+
+# --- Body parts ---
+@word de Kapp = head
+@word d'Käpp = heads
+@word d'A = eye
+@word d'Aen = eyes
+@word d'Nues = nose
+@word d'Nuesen = noses
+@word de Bauch = stomach
+@word d'Bäich = stomachs
+@word d'Hand = hand
+@word d'Hänn = hands
+@word den Hals = throat
+@word de Réck = back
+@word d'Récker = backs
+@word den Aarm = arm
+@word d'Äerm = arms
+@word d'Been = leg
+@word de Knéi = knee
+@word d'Knéien = knees
+@word de Fouss = foot
+@word d'Féiss = feet
+@word d'Ouer = ear
+@word d'Oueren = ears
+@word d'Zant = tooth
+@word d'Zänn = teeth
+
+# --- Medicine ---
+@word d'Rezept = prescription
+@word d'Rezepter = prescriptions
+@word de Sirop = cough syrup
+@word d'Siroppen = cough syrups
+@word d'Pastill = lozenge
+@word d'Pastillen = lozenges
+@word d'Medikament = medication
+@word d'Medikamenter = medications
+
+# --- Verbs ---
+@word mengen = to think
+@word bleiwen = to stay
+@word brauchen = to need
+@word verdonsten = to evaporate
+@word benotzen = to use
+@word fëmmen = to smoke
+@word spillen = to play
+@word schaffen = to work
+@word ophalen = to stop
+
+# --- Other vocabulary ---
+@word de Bopa = grandpa
+@word d'Boma = grandma
+@word de Wäisswäin = white wine
+@word de Schockela = chocolate
+@word de Fussball = football
+@word d'Musek = music
+@word den Computer = computer
+@word doheem = at home
+@word d'Aarbecht = work
+@word haart = loud
+
+# --- Fixed phrases ---
+@word net gutt = not good
+@word Villmools Merci = thank you very much
+@word Äddi an eng gutt Besserung = Goodbye and get well soon
+
+@sentence
+@lu Wéi geet et Iech?
+@en How are you?
+@distractor-en why
+@distractor-en when
+@distractor-lu Firwat
+@distractor-lu Wéini
+
+@sentence
+@lu Hutt Dir Féiwer?
+@en Do you have a fever?
+@distractor-en cough
+@distractor-en flu
+@distractor-lu Houscht
+@distractor-lu Gripp
+
+@sentence
+@lu Jo, ech mengen.
+@en Yes, I think so.
+@distractor-en to need
+@distractor-en to stay
+@distractor-lu brauchen
+@distractor-lu bleiwen
+
+@sentence
+@lu Dir hutt eng Gripp!
+@en You have the flu!
+@distractor-en cough
+@distractor-en fever
+@distractor-lu Houscht
+@distractor-lu Féiwer
+
+@sentence
+@lu Kann ech schaffe goen?
+@en Can I go to work?
+@distractor-en to stay
+@distractor-en to need
+@distractor-lu bleiwen
+@distractor-lu brauchen
+
+@sentence
+@lu Ech hunn d'Zänn wéi.
+@en My teeth hurt.
+@distractor-en syrup
+@distractor-en lozenge
+@distractor-lu Sirop
+@distractor-lu Pastill
+
+@sentence
+@lu Ech hunn den Hals wéi!
+@en My throat hurts!
+@distractor-en knee
+@distractor-en ear
+@distractor-lu Knéi
+@distractor-lu Ouer
+
+@sentence
+@lu Ech hunn de Knéi wéi!
+@en My knee hurts!
+@distractor-en foot
+@distractor-en arm
+@distractor-lu Fouss
+@distractor-lu Aarm
+
+@sentence
+@lu Ech hunn de Bauch wéi!
+@en My stomach hurts!
+@distractor-en ear
+@distractor-en back
+@distractor-lu Ouer
+@distractor-lu Réck
+
+@sentence
+@lu Ech hunn d'Ouere wéi!
+@en My ears hurt!
+@distractor-en eye
+@distractor-en tooth
+@distractor-lu A
+@distractor-lu Zant
+
+@sentence
+@lu Ech hunn de Réck wéi!
+@en My back hurts!
+@distractor-en hand
+@distractor-en arm
+@distractor-lu Hand
+@distractor-lu Aarm
+
+@sentence
+@lu Dann iesst kee Schockela méi!
+@en Then don't eat chocolate anymore!
+@distractor-en cheese
+@distractor-en bread
+@distractor-lu Kéis
+@distractor-lu Brout
+
+@sentence
+@lu Da kacht ouni Ënnen!
+@en Then cook without onions!
+@distractor-en tomatoes
+@distractor-en potatoes
+@distractor-lu Tomaten
+@distractor-lu Gromperen
+
+@sentence
+@lu Dann halt op mat Fëmmen!
+@en Then stop smoking!
+@distractor-en to play
+@distractor-en to fry
+@distractor-lu spillen
+@distractor-lu broden
+
+@sentence
+@lu Da spillt kee Fussball méi!
+@en Then don't play soccer anymore!
+@distractor-en music
+@distractor-en computer
+@distractor-lu Musek
+@distractor-lu Computer
+
+@sentence
+@lu Da lauschtert keng haart Musek!
+@en Then don't listen to loud music!
+@distractor-en to smoke
+@distractor-en to cook
+@distractor-lu fëmmen
+@distractor-lu kachen
+
+@sentence
+@lu Da schafft net esou vill um Computer!
+@en Then don't work so much on the computer!
+@distractor-en to smoke
+@distractor-en to play
+@distractor-lu fëmmen
+@distractor-lu spillen
+
+@sentence
+@lu Wat ass am Deeg?
+@en What is in the dough?
+@distractor-en pan
+@distractor-en spoon
+@distractor-lu Pan
+@distractor-lu Läffel
+
+@sentence
+@lu Nëmmen ee Iessläffel.
+@en Just one tablespoon.
+@distractor-en pan
+@distractor-en dough
+@distractor-lu Pan
+@distractor-lu Deeg
+
+@sentence
+@lu Wéi een Ueleg benotz du?
+@en Which oil do you use?
+@distractor-en salt
+@distractor-en pepper
+@distractor-lu Salz
+@distractor-lu Peffer
+
+@sentence
+@lu Wie kënnt den Owend iessen?
+@en Who is coming for dinner?
+@distractor-en to cook
+@distractor-en to fry
+@distractor-lu kachen
+@distractor-lu broden
+
+@sentence
+@lu De Bopa an d'Boma kommen.
+@en Grandpa and grandma are coming.
+@distractor-en steak
+@distractor-en sausage
+@distractor-lu Bifdeck
+@distractor-lu Mettwurscht
+
+@sentence
+@lu Ech hunn den Hals an de Kapp wéi.
+@en My throat and my head hurt.
+@distractor-en stomach
+@distractor-en back
+@distractor-lu Bauch
+@distractor-lu Réck
+
+@sentence
+@lu Ech hunn och de Schnapp an den Houscht.
+@en I also have a runny nose and a cough.
+@distractor-en fever
+@distractor-en flu
+@distractor-lu Féiwer
+@distractor-lu Gripp
+
+@sentence
+@lu Hien huet haut de Bauch wéi.
+@en Today he has a stomach ache.
+@distractor-en back
+@distractor-en throat
+@distractor-lu Réck
+@distractor-lu Hals
+
+@sentence
+@lu Den Thermometer weist néngandrësseg Grad.
+@en The thermometer shows thirty-nine degrees.
+@distractor-en sick note
+@distractor-en prescription
+@distractor-lu Krankeschäin
+@distractor-lu Rezept
+
+@sentence
+@lu Wéini soll ech d'Britt an d'Pan mëschen?
+@en When should I pour the stock into the pan?
+@distractor-en oil
+@distractor-en dough
+@distractor-lu Ueleg
+@distractor-lu Deeg
+
+@sentence
+@lu Wann de Wäisswäin verdonst ass.
+@en When the white wine has evaporated.
+@distractor-en to cook
+@distractor-en to mix
+@distractor-lu kachen
+@distractor-lu mëschen
+
+@sentence
+@lu Normalerweis benotzen ech just Olivenueleg.
+@en Normally, I only use olive oil.
+@distractor-en pepper
+@distractor-en salt
+@distractor-lu Peffer
+@distractor-lu Salz
+
+@sentence
+@lu Wéi vill Ueleg mësche mir an d'Pan?
+@en How much oil do we pour into the pan?
+@distractor-en salt
+@distractor-en pepper
+@distractor-lu Salz
+@distractor-lu Peffer
+
+@sentence
+@lu Eeër, Miel, Salz an e bësse Waasser.
+@en Eggs, flour, salt and a bit of water.
+@distractor-en pepper
+@distractor-en herbs
+@distractor-lu Peffer
+@distractor-lu Kraider
+
+@sentence
+@lu Jo, ech brauch e Krankeschäin.
+@en Yes, I need a sick note.
+@distractor-en prescription
+@distractor-en syrup
+@distractor-lu Rezept
+@distractor-lu Sirop
+
+@sentence
+@lu Braucht Dir e Krankeschäin fir d'Aarbecht?
+@en Do you need a sick note for work?
+@distractor-en thermometer
+@distractor-en degree
+@distractor-lu Thermometer
+@distractor-lu Grad
+
+@sentence
+@lu Wat fir Medikamenter kann ech huelen?
+@en What medications can I take?
+@distractor-en prescription
+@distractor-en sick note
+@distractor-lu Rezept
+@distractor-lu Krankeschäin
+
+@sentence
+@lu Ech schreiwen lech e Rezept.
+@en I'll write you a prescription.
+@distractor-en sick note
+@distractor-en thermometer
+@distractor-lu Krankeschäin
+@distractor-lu Thermometer
+
+@sentence
+@lu Dir musst op d'mannst dräi Deeg doheem bleiwen.
+@en You must stay home for at least three days.
+@distractor-en to work
+@distractor-en to need
+@distractor-lu schaffen
+@distractor-lu brauchen
+
+@sentence
+@lu D'Grompere schielen a graff rappen.
+@en Peel the potatoes and roughly grate them.
+@distractor-en to mix
+@distractor-en to crush
+@distractor-lu mëschen
+@distractor-lu zerstoussen
+
+@sentence
+@lu Mat Salz, Peffer, Muskatnoss an de Kraider ofschmaachen.
+@en Season with salt, pepper, nutmeg and the herbs.
+@distractor-en dough
+@distractor-en chives
+@distractor-lu Deeg
+@distractor-lu Bratzel
+
+@sentence
+@lu Mam Miel an den Eeër en Deeg preparéieren.
+@en Prepare a dough with the flour and the eggs.
+@distractor-en onion
+@distractor-en chives
+@distractor-lu Ënn
+@distractor-lu Bratzel
+
+@sentence
+@lu Ueleg an d'Pan schëdden.
+@en Pour oil into the frying pan.
+@distractor-en to fry
+@distractor-en to flatten
+@distractor-lu broden
+@distractor-lu plattdrécken
+
+@sentence
+@lu Den Deeg mat de gerappte Grompere mëschen.
+@en Mix the dough with the grated potatoes.
+@distractor-en to peel
+@distractor-en to season
+@distractor-lu schielen
+@distractor-lu ofschmaachen
+
+@sentence
+@lu Pro Gromperekichelchen e Läffel vum Deeg plattdrécken.
+@en Per potato fritter, flatten a spoon of dough.
+@distractor-en to crush
+@distractor-en to grind
+@distractor-lu zerstoussen
+@distractor-lu muelen
+
+@sentence
+@lu De Jos huet gëschter ze vill Gromperekichelcher giess.
+@en Jos ate too many potato fritters yesterday.
+@distractor-en sausage
+@distractor-en steak
+@distractor-lu Mettwurscht
+@distractor-lu Bifdeck
+
+@sentence
+@lu Dir huelt e Sirop fir den Houscht, Pastillen fir den Hals an eppes géint d'Féiwer.
+@en You take a syrup for the cough, lozenges for the throat and something against the fever.
+@distractor-en prescription
+@distractor-en sick note
+@distractor-lu Rezept
+@distractor-lu Krankeschäin
