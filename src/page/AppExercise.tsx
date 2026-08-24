@@ -158,14 +158,10 @@ const ExerciseActive = ({
   onTryAgain,
   onBack,
 }: ExerciseActiveProps) => (
-  // pb keeps the old spacing now that <main> has no bottom padding. Gaps here are
-  // tight on purpose: a full-bleed 16:9 lesson photo eats ~240px of an ~850px
-  // viewport, and the assembled row plus token pool have to fit under it without
-  // scrolling. Don't restore the roomier spacing without re-measuring that.
-  // The -mt-2 claws back part of <main>'s pt-6 for this page only — a slim
-  // progress bar doesn't need 1.5rem of air above it. It eats padding that
-  // already exists, so nothing clips.
-  <div className="flex flex-col gap-2 pb-3 -mt-2">
+  // flex-1 stretches this to <main>'s full height, which SentenceBuilder/FillBlank
+  // rely on to pin their PinnedBottomBar. -mt-2 claws back part of <main>'s pt-6 —
+  // a slim progress bar doesn't need 1.5rem of air above it.
+  <div className="flex flex-col flex-1 gap-2 pb-3 -mt-2">
     <ProgressBar view={progressView} />
 
     {/* Outside the keyed Exercise components on purpose: a picture-description

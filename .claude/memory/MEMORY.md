@@ -46,7 +46,7 @@ flowchart LR
 | [picture-description-theme](picture-description-theme.md) | author a picture theme, or attach a photo |
 | [lod-mcp](lod-mcp.md) | verify Luxembourgish vocabulary |
 | [persistence-and-sync](persistence-and-sync.md) | change sync, merge logic, or guest migration |
-| [frontend-decisions](frontend-decisions.md) | adopt a React feature, change chunks, SW caching, or the shell layout |
+| [frontend-decisions](frontend-decisions.md) | adopt a React feature, change chunks, SW caching, the shell layout, or an exercise's vertical layout |
 | [audio-pipeline](audio-pipeline.md) | touch audio generation or R2 sync |
 
 **Not here:** the architecture (CLAUDE.md), authoring procedure and bounds (the

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
+import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
+import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
 import { toWordResultMap } from "./sentence-logic";
 import { useSentenceGame } from "./use-sentence-game";
@@ -14,6 +16,54 @@ type Props = {
   onResult: (results: WordResultMap) => void;
   onInteraction?: () => void;
 };
+
+type AssembledRowProps = {
+  tokens: string[];
+  assembled: number[];
+  status: PillStatus;
+  onTap?: (assembledPos: number) => void;
+};
+
+/**
+ * The answer under construction, stacked in one grid cell on top of an invisible
+ * copy of the whole token set. That copy fixes the row at the tallest the answer
+ * can ever be — a subset of the same tiles can never wrap to more lines — so
+ * placing a tile changes no geometry and nothing on screen shifts under the
+ * learner's finger. Chips stay visible after Check, as the feedback.
+ */
+const AssembledRow = ({ tokens, assembled, status, onTap }: AssembledRowProps) => (
+  <div className="grid border-b-2 border-gray-200 pb-3 px-2">
+    <div
+      aria-hidden="true"
+      className="invisible col-start-1 row-start-1 flex flex-wrap gap-2 justify-center"
+    >
+      {tokens.map((token, idx) => (
+        <Pill key={idx} size="sm" status="blanc">
+          {token}
+        </Pill>
+      ))}
+    </div>
+
+    <div className="col-start-1 row-start-1 flex flex-wrap content-start gap-2 justify-center">
+      {assembled.length === 0 ? (
+        <span className="text-gray-400 text-sm w-full text-center mt-2 italic">
+          Tap words below to build your answer
+        </span>
+      ) : (
+        assembled.map((tokenIdx, assembledPos) => (
+          <Pill
+            key={assembledPos}
+            size="sm"
+            status={status}
+            onClick={onTap ? () => onTap(assembledPos) : undefined}
+          >
+            {tokens[tokenIdx]}
+          </Pill>
+        ))
+      )}
+    </div>
+  </div>
+);
 
 export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const { state, tapToken, tapAssembled, submit } = useSentenceGame(item);
@@ -47,48 +97,32 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const usedSet = new Set(state.assembled);
 
   return (
-    // Spacing is tight because a picture-description Session renders a full-bleed
-    // 16:9 photo above this and everything still has to fit without scrolling.
-    <div className="flex flex-col gap-3 px-2">
-      {item.question !== undefined && (
-        <p className="text-center text-xl font-bold text-gray-900 px-2">
-          {item.question}
-        </p>
-      )}
-      <p
-        className={
-          item.question !== undefined
-            ? "text-center text-sm italic text-gray-500 px-2"
-            : "text-center text-lg font-semibold text-gray-800 px-2"
-        }
-      >
-        {item.promptText}
-      </p>
-
-      {/* Assembled row — chips stay visible after check for feedback. The min-h
-          reserve keeps the token pool from jumping as chips move between the two
-          rows; it fits two rows of pills, and shorter answers just leave slack. */}
-      <div className="min-h-24 flex flex-wrap content-start gap-2 justify-center border-b-2 border-gray-200 pb-3">
-        {state.assembled.length === 0 ? (
-          <span className="text-gray-400 text-sm w-full text-center mt-2 italic">
-            Tap words below to build your answer
-          </span>
-        ) : (
-          state.assembled.map((tokenIdx, assembledPos) => (
-            <Pill
-              key={assembledPos}
-              size="sm"
-              status={assembledStatus}
-              onClick={canTapAssembled ? () => handleTapAssembled(assembledPos) : undefined}
-            >
-              {item.tokens[tokenIdx]}
-            </Pill>
-          ))
+    <div className="flex flex-col flex-1">
+      <ExerciseAnswerArea className="gap-3">
+        {item.question !== undefined && (
+          <p className="text-center text-xl font-bold text-gray-900 px-2">
+            {item.question}
+          </p>
         )}
-      </div>
+        <p
+          className={
+            item.question !== undefined
+              ? "text-center text-sm italic text-gray-500 px-2"
+              : "text-center text-lg font-semibold text-gray-800 px-2"
+          }
+        >
+          {item.promptText}
+        </p>
 
-      {/* Token pool — used tokens show as gray placeholders to keep layout stable */}
-      <div className="min-h-24 flex flex-wrap gap-2 justify-center content-start">
+        <AssembledRow
+          tokens={item.tokens}
+          assembled={state.assembled}
+          status={assembledStatus}
+          onTap={canTapAssembled ? handleTapAssembled : undefined}
+        />
+      </ExerciseAnswerArea>
+
+      <ExerciseTilePool className="gap-2">
         {item.tokens.map((token, idx) =>
           usedSet.has(idx) ? (
             <div
@@ -98,26 +132,23 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
               <span className="text-sm text-transparent select-none" aria-hidden="true">{token}</span>
             </div>
           ) : (
-            <Pill
-              key={idx}
-              size="sm"
-              status="blanc"
-              onClick={() => handleTapToken(idx)}
-            >
+            <Pill key={idx} size="sm" status="blanc" onClick={() => handleTapToken(idx)}>
               {token}
             </Pill>
           )
         )}
-      </div>
+      </ExerciseTilePool>
 
-      <div className="w-full max-w-xs mx-auto mt-1">
-        <Button
-          onClick={handleSubmit}
-          disabled={state.assembled.length === 0 || state.checkResult !== null}
-        >
-          Check
-        </Button>
-      </div>
+      <PinnedBottomBar>
+        <div className="w-full max-w-xs mx-auto">
+          <Button
+            onClick={handleSubmit}
+            disabled={state.assembled.length === 0 || state.checkResult !== null}
+          >
+            Check
+          </Button>
+        </div>
+      </PinnedBottomBar>
     </div>
   );
 };

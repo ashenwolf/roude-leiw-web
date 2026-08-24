@@ -38,7 +38,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => (
             bar's containing block and hold it 1.5rem short of the edge, leaving
             a strip for scrolling content to show through. Pages own their own
             bottom spacing. */}
-        <main className="relative flex-1 overflow-auto px-6 pt-6 min-h-0">
+        <main className="relative flex flex-col flex-1 overflow-auto px-6 pt-6 min-h-0">
           <ErrorBoundary>{children}</ErrorBoundary>
         </main>
       </AuthProvider>

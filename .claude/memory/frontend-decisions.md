@@ -88,8 +88,10 @@ to actually reach the scrollport bottom; nothing else is load-bearing.**
 **Also rejected: hoisting the bar into `AppWrapper`** as a flex sibling of
 header/main. Structurally nicest — the scroll area would shrink instead of the grid
 scrolling under the bar — but `AppWrapper` wraps `<App/>`, so a page-owned bar needs
-a context slot or a portal. Real machinery for one page's bar; revisit if a second
-page wants one.
+a context slot or a portal. When SentenceBuilder/FillBlank became the second and
+third users, the cheap answer held: extract the proven pattern as `PinnedBottomBar`
+and give `<main>` `flex flex-col` so pages can claim its height with `flex-1`. Still
+no context slot or portal.
 
 **Safe-area insets:** the bar's bottom padding is
 `max(0.5rem, env(safe-area-inset-bottom))`. `viewport-fit=cover` means the frame
@@ -97,6 +99,35 @@ extends under the iOS home indicator; the header already handled the top. The
 `0.5rem` floor also keeps buttons off the desktop phone-frame's rounded corner,
 which zero padding clipped.
 
+## Exercise vertical layout: a tap must move nothing
+
+`SentenceBuilder`/`FillBlank` are three stacked regions — `ExerciseAnswerArea`
+(prompt + answer, `flex-1` and centred), `ExerciseTilePool` (tap targets, sitting
+directly above the bar), `PinnedBottomBar` (Check). Thumb-zone research (Hoober,
+Apple HIG, Material) puts the one-handed sweet spot at bottom-centre and the top
+out of reach, so tap targets belong low; the literal bottom edge is *also* awkward
+(full thumb curl, OS gesture area), which is what the bar's own bottom padding buys.
+
+**The trap: `justify-center` plus content that grows on tap.** Centring the whole
+exercise looks right until the first tap — an answer wrapping to a second row
+changes the content height, the block re-centres, and the pool slides out from
+under the finger already in flight. The learner then misses the next tile. This is
+the worst failure mode of the three we cycled through (dead reserve space → pool
+stranded at the top → pool moving), and the least obvious from a screenshot.
+
+**Centring is only allowed over constant-height content.** Both exercises earn it:
+a FillBlank blank is pre-sized to its own answer with transparent text, and
+`AssembledRow` grid-stacks the answer over an `invisible` copy of the *whole* token
+set, so the row is always as tall as the fullest answer can be. Reserving from the
+full set (not the correct answer) matters — the learner can place distractors too.
+A used tile leaves a same-sized grey placeholder, so the pool never reflows either.
+Verified by measuring every tile's `getBoundingClientRect()` before and after taps:
+identical to the pixel, including the tap that wrapped the answer to a second row.
+
+**Don't add anything that grows on tap into `ExerciseAnswerArea`** without giving
+it a constant reserve — the regression is silent and only reproduces on a device
+where the thumb is already moving.
+
 Related: [[persistence-and-sync]] (the optimistic merge `useOptimistic` would
 break), [[picture-description-theme]] (the full-bleed image and its vertical
-budget).
+budget — with a photo above, the answer area just centres in what's left).

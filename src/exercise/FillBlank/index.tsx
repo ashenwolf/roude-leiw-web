@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
+import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
+import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
 import { isComplete, targetBlank, toWordResultMap } from "./fill-logic";
 import { useFillGame } from "./use-fill-game";
@@ -67,46 +69,47 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
     ].join(" ");
 
   return (
-    <div className="flex flex-col gap-6 p-2">
-      <p className="text-center text-sm italic text-gray-500 px-2">{item.promptText}</p>
+    <div className="flex flex-col flex-1">
+      <ExerciseAnswerArea className="gap-4">
+        <p className="text-center text-sm italic text-gray-500 px-2">{item.promptText}</p>
 
-      {/* The gapped sentence. This is a *paragraph*, not a flex row: normal inline
-          flow left-aligned, so a sentence that wraps reads as continuous prose with
-          one line-height between lines rather than as centered rows of chips.
-          `leading-8` gives the inline pills and underlines room without opening the
-          lines up. The one `text-sm` is the size for everything in here — fixed
-          segments, empty blanks, and filled `size="inline"` pills all inherit it, and
-          it matches the tile pool's `size="sm"` so a tile keeps its size when it
-          lands in a blank. */}
-      <div className="min-h-36 text-sm leading-8 text-gray-800 border-b-2 border-gray-200 pb-8 px-2">
-        {item.frame.map((segment, i) => (
-          <span key={i}>
-            {segment.length > 0 && <span className="whitespace-pre-wrap">{segment}</span>}
-            {i < item.blanks.length &&
-              (state.placed[i] !== null ? (
-                <Pill
-                  size="inline"
-                  status={filledStatus}
-                  className="align-middle"
-                  onClick={() => handleTapBlank(i)}
-                >
-                  {item.tokens[state.placed[i] as number]}
-                </Pill>
-              ) : (
-                <button className={emptyBlankClass(i)} onClick={() => handleTapBlank(i)}>
-                  {/* Sized to the answer so the layout doesn't jump when filled,
-                      while keeping the answer itself invisible. */}
-                  <span className="text-transparent select-none" aria-hidden="true">
-                    {item.blanks[i]}
-                  </span>
-                </button>
-              ))}
-          </span>
-        ))}
-      </div>
+        {/* The gapped sentence. This is a *paragraph*, not a flex row: normal inline
+            flow left-aligned, so a sentence that wraps reads as continuous prose with
+            one line-height between lines rather than as centered rows of chips.
+            `leading-8` gives the inline pills and underlines room without opening the
+            lines up. The one `text-sm` is the size for everything in here — fixed
+            segments, empty blanks, and filled `size="inline"` pills all inherit it, and
+            it matches the tile pool's `size="sm"` so a tile keeps its size when it
+            lands in a blank. */}
+        <div className="text-sm leading-8 text-gray-800 border-b-2 border-gray-200 pb-4 px-2">
+          {item.frame.map((segment, i) => (
+            <span key={i}>
+              {segment.length > 0 && <span className="whitespace-pre-wrap">{segment}</span>}
+              {i < item.blanks.length &&
+                (state.placed[i] !== null ? (
+                  <Pill
+                    size="inline"
+                    status={filledStatus}
+                    className="align-middle"
+                    onClick={() => handleTapBlank(i)}
+                  >
+                    {item.tokens[state.placed[i] as number]}
+                  </Pill>
+                ) : (
+                  <button className={emptyBlankClass(i)} onClick={() => handleTapBlank(i)}>
+                    {/* Sized to the answer so the layout doesn't jump when filled,
+                        while keeping the answer itself invisible. */}
+                    <span className="text-transparent select-none" aria-hidden="true">
+                      {item.blanks[i]}
+                    </span>
+                  </button>
+                ))}
+            </span>
+          ))}
+        </div>
+      </ExerciseAnswerArea>
 
-      {/* Tile pool — placed tiles leave a gray placeholder to keep layout stable */}
-      <div className="min-h-36 flex flex-wrap gap-2.5 justify-center content-start">
+      <ExerciseTilePool className="gap-2.5">
         {item.tokens.map((token, idx) =>
           usedSet.has(idx) ? (
             <div
@@ -121,16 +124,18 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
             </Pill>
           )
         )}
-      </div>
+      </ExerciseTilePool>
 
-      <div className="w-full max-w-xs mx-auto">
-        <Button
-          onClick={handleSubmit}
-          disabled={!isComplete(state) || state.checkResult !== null}
-        >
-          Check
-        </Button>
-      </div>
+      <PinnedBottomBar>
+        <div className="w-full max-w-xs mx-auto">
+          <Button
+            onClick={handleSubmit}
+            disabled={!isComplete(state) || state.checkResult !== null}
+          >
+            Check
+          </Button>
+        </div>
+      </PinnedBottomBar>
     </div>
   );
 };

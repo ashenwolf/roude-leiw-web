@@ -13,6 +13,7 @@ import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
 import { GraduationCapIcon, RefreshIcon, ShuffleIcon } from "../ui/icons";
 import { LessonGrid } from "../ui/LessonGrid";
+import { PinnedBottomBar } from "../ui/PinnedBottomBar";
 import { StatsRow } from "../ui/StatsRow";
 import { StreakBadge } from "../ui/StreakBadge";
 import { XPBar } from "../ui/XPBar";
@@ -232,11 +233,7 @@ export const AppHome = () => {
         </div>
       </div>
 
-      {/* Practice mode buttons — pinned to the frame's bottom edge. Its own
-          bottom padding clears the iOS home indicator / floating browser bar
-          (env inset is 0 on desktop, where the 0.5rem keeps the buttons off the
-          frame's rounded corner). */}
-      <div className="mt-auto sticky bottom-0 bg-white pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] mx-[-1.5rem] px-6 border-t border-gray-100">
+      <PinnedBottomBar>
         <div className="flex gap-2">
           <Button color="word-mix" size="sm" onClick={handleStartWordMix}>
             <span className="flex items-center justify-center gap-1.5">
@@ -249,7 +246,7 @@ export const AppHome = () => {
             </span>
           </Button>
         </div>
-      </div>
+      </PinnedBottomBar>
     </div>
   );
 };
