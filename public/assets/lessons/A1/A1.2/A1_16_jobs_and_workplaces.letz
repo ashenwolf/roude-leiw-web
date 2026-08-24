@@ -8,14 +8,10 @@
 @lesson A1.16 "Jobs & Workplaces"
 
 # --- Talking about your job ---
-@word de Beruff = the profession
-@word d'Aarbecht = the work
 @word d'Erfarung = the experience
 @word d'Annonce = the advertisement
 @word d'Plaz = the position
 @word fräi = free
-@word zanter = since
-@word Bis muer = see you tomorrow
 
 # --- Professions (masculine / feminine) ---
 @word de Sportler = the sportsman
@@ -42,9 +38,6 @@
 @word de Sekretär = the secretary
 @word d'Sekretärin = the female secretary
 
-@word de Verkeefer = the salesman
-@word d'Verkeeferin = the saleswoman
-
 @word den Direkter = the director
 @word d'Direktesch = the female director
 
@@ -60,14 +53,8 @@
 @word de Receptionnist = the receptionist
 @word d'Receptionnistin = the female receptionist
 
-@word de Bäcker = the baker
-@word d'Bäckesch = the female baker
-
 @word de Bauer = the farmer
 @word d'Bauerin = the female farmer
-
-@word den Dokter = the doctor
-@word d'Doktesch = the female doctor
 
 @word den Architekt = the architect
 @word d'Architektin = the female architect
@@ -84,7 +71,6 @@
 @word den Educateur = the child care worker
 @word d'Educatrice = the female child care worker
 
-@word de Riichter = the judge
 @word d'Riichterin = the female judge
 
 @word de Museker = the musician
@@ -95,7 +81,6 @@
 
 # --- Vocabulary from sentences (coverage backfill) ---
 @word de Student = the student
-@word de Proff = the teacher
 @word de Caissier = the cashier
 @word de Serveur = the waiter
 @word d'Serveuse = the waitress
@@ -111,7 +96,6 @@
 @word de Chantier = the construction site
 @word de Garage = the garage
 @word d'Sportshal = the sports hall
-@word d'Bäckerei = the bakery
 @word de Studio = the studio
 @word de Geriicht = the court
 @word d'Entreprise = the company
@@ -119,7 +103,6 @@
 @word de Finanzsecteur = the finance sector
 @word de Büro = the office
 @word de Metro = the metro
-@word d'Geschäft = the business
 
 # --- Work verbs ---
 @word reparéieren = to repair
@@ -128,9 +111,6 @@
 @word verkafen = to sell
 @word fleegen = to take care of
 @word bauen = to build
-@word trainéieren = to train
-@word preparéieren = to prepare
-@word baken = to bake
 @word botzen = to clean
 
 # --- Other vocabulary from sentences ---
@@ -139,11 +119,9 @@
 @word d'Fotoen = the photos
 @word d'Menüen = the menus
 @word d'Autoen = the cars
-@word d'Hoer = the hair
 @word d'Wueren = the goods
 @word d'Haiser = the houses
 @word d'Déieren = the animals
-@word normalerweis = usually
 @word d'Gastronomie = the catering trade
 
 @sentence

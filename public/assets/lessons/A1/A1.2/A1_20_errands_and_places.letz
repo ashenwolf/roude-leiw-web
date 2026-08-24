@@ -14,26 +14,19 @@
 @word de Quai = the platform
 @word den Depart = the departure
 @word d'Arrivée = the arrival
-@word ukommen = to arrive
-@word fortfueren = to depart
 @word den Ticket = the ticket
 @word de Billjee = the travel ticket
-@word Bréissel = Brussels
 @word Frankfurt = Frankfurt
 
 # --- Errands & shops ---
 @word Kommissioune maachen = doing errands
 @word d'Papeterie = the stationer's
 @word de Kiosk = the kiosk
-@word d'Schräinerei = the carpenter's workshop
 @word d'Crèche = the nursery
 @word Crèchen = the nurseries
 @word d'Kleedergeschäft = the clothes shop
 @word de Kleederbuttek = the clothes store
-@word de Bicherbuttek = the book shop
-@word den Zeitungsbuttek = the newsstand
 @word de Busarrêt = the bus stop
-@word d'Bibliothéik = the library
 @word de Policebureau = the police station
 @word d'Metrosstatioun = the underground station
 @word d'Parfümerie = the perfume shop
@@ -42,20 +35,14 @@
 @word d'Pult = the desk
 @word Pulter = the desks
 @word Classeuren = the folders
-@word d'Këscht = the box
 @word den Teddybier = the teddy bear
 @word d'Glace = the ice cream
-@word d'Zeitung = the newspaper
 @word d'Bänk = the bench
 
 # --- People ---
-@word de Schwoer = the brother-in-law
 @word den Här = the gentleman
 @word d'Damm = the lady
 @word de Bouf = the lad
-@word de Mupp = the doggie
-@word d'Serveuse = the waitress
-@word d'Famill = the family
 
 # --- Prepositions of place ---
 @word virun = in front of
@@ -68,7 +55,6 @@
 @word vis-à-vis vun = opposite of
 
 # --- Descriptive words ---
-@word fräi = free
 @word voll = full
 @word italieenesch = Italian
 @word d'Foussgängerzon = the pedestrian zone
@@ -79,7 +65,6 @@
 @word den Ënnerscheed = the distinction
 
 # --- Verbs ---
-@word fléien = to fly
 @word stoen = to stand
 @word schwiewen = to float
 

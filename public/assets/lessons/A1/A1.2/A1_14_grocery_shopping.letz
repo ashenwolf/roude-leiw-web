@@ -7,7 +7,6 @@
 @lesson A1.14 "Grocery Shopping"
 
 # --- Fruits ---
-@word den Apel = apple
 @word d'Äppel = apples
 @word d'Bir = pear
 @word d'Biren = pears
@@ -15,13 +14,10 @@
 @word d'Drauwen = grapes
 @word d'Orange = orange
 @word d'Orangë = oranges
-@word d'Banann = banana
 @word d'Banannen = bananas
-@word d'Tomat = tomato
 @word d'Tomaten = tomatoes
 
 # --- Vegetables ---
-@word d'Gromper = potato
 @word d'Gromperen = potatoes
 @word d'Muert = carrot
 @word d'Muerten = carrots
@@ -31,42 +27,30 @@
 @word d'Zwiwwelen = onions
 @word d'Spargel = asparagus
 @word d'Spargelen = asparagus spears
-@word d'Zalot = salad
 @word d'Zaloten = salads
 @word d'Heet = head of lettuce
 @word d'Heeder = heads of lettuce
 
 # --- Produce qualities ---
 @word séiss = sweet
-@word sauer = sour
 @word zeideg = ripe
 @word säfteg = juicy
 @word dréchen = dry
 @word frësch = fresh
-@word bëlleg = cheap
 @word deier = expensive
 @word schlecht = bad
-@word kal = cold
 
 # --- Bakery ---
-@word d'Bréitchen = bread roll
 @word d'Bréidercher = bread rolls
 @word d'Mëtsch = Danish pastry
 @word d'Mëtschen = Danish pastries
-@word d'Tranche = slice
 @word d'Tranchen = slices
 @word d'Schockelasrull = pain au chocolat
 @word d'Schockelasrullen = pains au chocolat
-@word de Croissant = croissant
 @word d'Croissanten = croissants
-@word de Kuch = cake
-@word d'Kuchen = cakes
-@word d'Taart = tart
 @word d'Taarten = tarts
-@word d'Brout = bread
 
 # --- Other groceries ---
-@word d'Fleesch = meat
 @word d'Rëndsfleesch = beef
 @word d'Miel = flour
 @word den Hunneg = honey
@@ -74,59 +58,41 @@
 @word d'Ee = egg
 @word d'Eeër = eggs
 @word d'Mëllech = milk
-@word de Béier = beer
 @word de Knätsch = chewing gum
-@word de Kéis = cheese
 @word d'Planz = plant
 @word d'Planzen = plants
 
 # --- Measures & packaging ---
-@word d'Stéck = piece
 @word de Sak = sack
-@word d'Tut = bag
 @word de Pak = pack
 @word d'Päck = packs
-@word d'Béchs = can
 @word de Kilo = kilo
 @word d'Këscht = box
 @word de Liter = liter
 @word d'Dosen = dozen
-@word d'Fläsch = bottle
 @word d'Fläschen = bottles
-@word d'Waasser = water
 
 # --- Shops & people ---
-@word de Maart = market
 @word d'Määrt = markets
-@word de Buttek = shop
 @word d'Butteker = shops
 @word d'Geschäft = store
 @word d'Geschäfter = stores
 @word den Zeitungsbuttek = newsagent's
 @word d'Zeitungsbutteker = newsagents
-@word d'Metzlerei = butcher's shop
 @word d'Metzlereien = butcher's shops
 @word de Metzler = butcher
 @word d'Metzler = butchers
-@word de Bäcker = baker
 @word d'Bäcker = bakers
-@word d'Bäckerei = bakery
 @word d'Bäckereien = bakeries
 
 # --- Verbs ---
-@word kafen = to buy
-@word iessen = to eat
-@word drénken = to drink
-@word kréien = to get
 @word bezuelen = to pay
-@word huelen = to take
 @word boer bezuelen = to pay cash
 
 # --- Shopping phrases & other vocabulary ---
 @word d'Kaart = card
 @word tipptopp = great
 @word haut = today
-@word Lëtzebuerg = Luxembourg
 
 @sentence
 @lu Ass dat alles?

@@ -7,14 +7,9 @@
 @lesson A1.10 "Personal Details"
 
 # --- Verbs ---
-@word wunnen = to live
-@word kommen = to come
-@word virstellen = to introduce
 @word buschtawéieren = to spell
 @word iessen = to eat
 @word bestueden = to get married
-@word wëllen = to want
-@word hunn = to have
 
 # --- Time & manner ---
 @word muer = tomorrow
@@ -24,16 +19,10 @@
 @word direkt = immediately
 @word ëmmer = always
 @word zanter = since
-@word zesummen = together
-@word léiwer = rather
 
 # --- Fixed phrases & greetings ---
 @word ech heeschen = my name is
 @word Mech och = Me too
-@word Bis dann = See you then
-@word Bis geschwënn = See you soon
-@word Äddi = Goodbye
-@word Merci = Thanks
 
 # --- Small words ---
 @word nee = no
@@ -42,8 +31,6 @@
 @word oder = or
 @word gutt = good
 @word sech = himself
-@word vill = many
-@word al = old
 
 # --- Nouns: time of day ---
 @word de Moien = the morning
@@ -53,14 +40,8 @@
 
 # --- Nouns: alphabet & measure words ---
 @word de Buschtaf = the letter
-@word d'Joer = the year
 
 # --- Numbers ---
-@word eent = one
-@word zwee = two
-@word dräi = three
-@word aacht = eight
-@word zéng = ten
 @word eelef = eleven
 @word zwielef = twelve
 @word fofzéng = fifteen
@@ -95,7 +76,6 @@
 @word Bréissel = Brussels
 @word d'Ukrain = Ukraine
 @word Lëtzebuerg = Luxembourg
-@word d'Stad = the city
 
 @sentence
 @lu Ech heesche Luc.

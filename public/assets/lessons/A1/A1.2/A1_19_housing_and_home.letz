@@ -6,51 +6,30 @@
 @lesson A1.19 "Housing & Home"
 
 # --- Quantifiers & degree ---
-@word vill = a lot, much
 @word wéineg = few
-@word just = just, only
 @word souguer = even
 @word leider = unfortunately
 @word wierklech = really
-@word méi = more
 @word ganz = very
 @word immens = extremely
 @word relativ = rather
-@word genuch = enough
 @word sou = so
 @word e bësse = a bit
 
 # --- Distance & location ---
 @word ze = too
-@word wäit = far
 @word no = close
 @word no bei der Stad = close to the city
 @word baussen = outside
 @word bannen = inside
-@word niewent = next to, beside
 
 # --- Descriptive adjectives ---
-@word séier = quick, fast
-@word propper = clean
-@word knaschteg = dirty
 @word interessant = interesting
-@word kleng = small
-@word grouss = big
-@word deier = expensive
-@word bëlleg = cheap
-@word roueg = quiet
 @word sympathesch = likeable
 @word franséisch = French
-@word oppen = open
-@word haart = loud
 @word kannerfrëndlech = child-friendly
 @word fein = nice
-@word separat = separate
 @word bestued = married
-@word däischter = dark
-@word modern = modern
-@word schéin = beautiful, nice
-@word waarm = warm
 @word aneres = other, else
 
 # --- Ordinals ---
@@ -61,59 +40,29 @@
 @word well = because
 
 # --- Verbs ---
-@word wunnen = to live
 @word mathuelen = to take, to take away
 @word leien = to lie down
 @word léien = to lie, to tell untruths
-@word gefalen = to appeal to, to like
-@word bestueden = to marry
-@word fueren = to drive, to go
 @word ze verlounen = for rent
 @word ze verkafen = for sale
 
 # --- Housing types ---
-@word d'Wunneng = the home
-@word d'Wunnengen = the homes
-@word d'Appartement = the apartment
-@word d'Haus = the house
-@word d'Duerf = the village
-@word d'Stad = the city
 @word d'Wunnengssich = the house-hunt
 
 # --- Rooms & features ---
-@word d'Kichen = the kitchen
-@word d'Zëmmer = the room
-@word d'Schlofzëmmeren = the bedrooms
-@word d'Buedzëmmer = the bathroom
-@word d'Buedbidden = the bathtub
-@word d'Dusch = the shower
 @word d'Toilett = the toilet
-@word de Balcon = the balcony
-@word de Gaart = the garden
-@word d'Terrass = the terrace
-@word de Keller = the cellar
 @word de Lift = the elevator
-@word d'Parkplaz = the parking space
-@word d'Garage = the garage
-@word d'Stuff = the living room
-@word de Späicher = the attic
 @word de Stack = the floor
-@word de Rez-de-chaussée = the ground floor
 
 # --- Life & surroundings ---
 @word d'Liewen = the life
 @word d'Virdeeler = the advantages
 @word d'Nodeeler = the disadvantages
-@word d'Géigend = the neighbourhood
 @word den Noper = the neighbour
-@word d'Famill = the family
 @word de Lëtzebuerger = the Luxembourger
 @word d'Spillplaz = the playground
-@word d'Autoen = the cars
 @word den Honger = the hunger
-@word de Restaurant = the restaurant
 @word de Summer = the summer
-@word d'Leit = the people
 
 @sentence
 @lu Du hues Recht.

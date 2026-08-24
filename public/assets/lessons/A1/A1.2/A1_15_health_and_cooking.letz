@@ -9,8 +9,6 @@
 @lesson A1.15 "Health & Cooking"
 
 # --- Time & degree ---
-@word haut = today
-@word muer = tomorrow
 @word gëschter = yesterday
 @word dréngend = urgent
 @word fir d'éischt = first, firstly
@@ -20,7 +18,6 @@
 @word géint = against
 
 # --- Cooking verbs ---
-@word lauschteren = to listen
 @word beäntweren = to answer
 @word broden = to fry
 @word schielen = to peel
@@ -31,7 +28,6 @@
 @word mëschen = to mix
 @word muelen = to grind
 @word preparéieren = to prepare
-@word kachen = to cook
 @word schëdden = to pour
 
 # --- Cooking nouns ---
@@ -51,7 +47,6 @@
 @word den Olivenueleg = olive oil
 @word de Gromperekichelchen = potato fritter
 @word d'Gromperekichelcher = potato fritters
-@word d'Ënn = onion
 @word d'Ënnen = onions
 @word d'Uebstzalot = fruit salad
 @word griichesch = Greek
@@ -73,22 +68,16 @@
 @word weisen = to show
 
 # --- Body parts ---
-@word de Kapp = head
 @word d'Käpp = heads
-@word d'A = eye
-@word d'Aen = eyes
-@word d'Nues = nose
 @word d'Nuesen = noses
 @word de Bauch = stomach
 @word d'Bäich = stomachs
-@word d'Hand = hand
 @word d'Hänn = hands
 @word den Hals = throat
 @word de Réck = back
 @word d'Récker = backs
 @word den Aarm = arm
 @word d'Äerm = arms
-@word d'Been = leg
 @word de Knéi = knee
 @word d'Knéien = knees
 @word de Fouss = foot
@@ -99,7 +88,6 @@
 @word d'Zänn = teeth
 
 # --- Medicine ---
-@word d'Rezept = prescription
 @word d'Rezepter = prescriptions
 @word de Sirop = cough syrup
 @word d'Siroppen = cough syrups
@@ -114,20 +102,15 @@
 @word brauchen = to need
 @word verdonsten = to evaporate
 @word benotzen = to use
-@word fëmmen = to smoke
-@word spillen = to play
-@word schaffen = to work
 @word ophalen = to stop
 
 # --- Other vocabulary ---
-@word de Bopa = grandpa
 @word d'Boma = grandma
 @word de Wäisswäin = white wine
 @word de Schockela = chocolate
 @word de Fussball = football
 @word d'Musek = music
 @word den Computer = computer
-@word doheem = at home
 @word d'Aarbecht = work
 @word haart = loud
 

@@ -10,13 +10,9 @@
 @word d'Reklamm = the advertisement
 @word d'Reklammen = the advertisements
 @word d'Ëffnungszäiten = the opening hours
-@word gemittlech = cosy
 @word de Quartier = the quarter
-@word den Noper = the neighbour
 @word d'Noperen = the neighbours
-@word de Maart = the market
 @word d'Mäert = the markets
-@word praktesch = practical, functional
 @word d'Ruin = the ruin
 @word d'Ruinen = the ruins
 @word de Bistro = the pub, the café
@@ -30,77 +26,39 @@
 @word de Floss = the river
 @word d'Fléss = the rivers
 @word duerch = through
-@word d'Stad = the city
 
 # --- Seasons & time ---
 @word d'Fréijoer = the spring
-@word de Summer = the summer
 @word den Hierscht = the autumn
 @word de Wanter = the winter
 @word d'Mëtt = the middle
 @word d'Statu = the statue
 @word d'Statuen = the statues
-@word ënnert = under, below
-@word d'Auer = the hour, o'clock
 
 # --- Opening hours ---
-@word op = open
 @word zou = closed
-@word opmaachen = to open
-@word zoumaachen = to close
-@word d'Apdikt = the pharmacy
-@word de Coiffeur = the hairdresser
-@word de Supermarché = the supermarket
-@word freides = on Fridays
 @word samsdes = on Saturdays
-@word sonndes = on Sundays
-@word moies = in the mornings
 @word nomëttes = in the afternoons
-@word owes = in the evenings
 
 # --- Places & institutions ---
 @word de Musée = the museum
-@word de Kino = the cinema
-@word den Theater = the theatre
-@word d'Schoul = the school
-@word d'Spidol = the hospital
 @word de Bësch = the forest
-@word de Park = the park
-@word d'Spillplaz = the playground
-@word de Chantier = the building site
 @word d'Plage = the beach
-@word d'Bank = the bank
-@word d'Post = the post office
-@word d'Gemeng = the municipality
-@word d'Universitéit = the university
-@word de Büro = the office
 @word d'Hochzäit = the wedding
 @word de Concert = the concert
 @word d'Ausstellung = the exhibition
 
 # --- People & professions ---
-@word den Dokter = the doctor
 @word de Professer = the professor
 @word de Stagiaire = the intern
 @word de Manager = the manager
 @word d'Bomi = the grandma
 @word d'Schlaang = the queue
-@word d'Stéck = the play
 
 # --- Verbs ---
-@word fannen = to find
-@word ophalen = to stop, to end
 @word daueren = to last
 
 # --- Descriptive words & countries ---
-@word reegelméisseg = regularly
-@word laang = long
-@word kuerz = short
-@word séier = fast, quick
-@word schlecht = badly
-@word heiansdo = sometimes
-@word haut = today
-@word muer = tomorrow
 @word Spuenien = Spain
 @word Italien = Italy
 

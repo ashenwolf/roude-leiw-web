@@ -13,31 +13,21 @@
 @word d'Appartement = the flat
 @word d'Appartementer = the flats
 
-@word d'Haus = the house
-@word d'Haiser = the houses
-
-@word den éischte Stack = the first floor
-@word de Rez-de-chaussée = the ground floor
-
 @word d'Duerf = the village
-@word d'Stad = the city
 @word d'Géigend = the neighbourhood
 
 # --- Rooms ---
 @word de Gank = the hallway
 @word d'Iesszëmmer = the dining room
-@word d'Kichen = the kitchen
 
 @word d'Schlofzëmmer = the bedroom
 @word d'Schlofzëmmeren = the bedrooms
 @word d'Eltereschlofzëmmer = the parents' bedroom
 @word d'Kannerschlofzëmmer = the children's bedroom
 
-@word d'Buedzëmmer = the bathroom
 @word d'Buedbidden = the bathtub
 
 @word de Living = the living room
-@word d'Stuff = the lounge
 
 @word de Späicher = the attic
 @word de Keller = the cellar
@@ -45,7 +35,6 @@
 @word d'Zëmmer = the room
 @word d'Zëmmeren = the rooms
 
-@word d'Toilette = the toilet
 @word d'Toiletten = the toilets
 
 @word de Balcon = the balcony
@@ -60,7 +49,6 @@
 @word d'Piscine = the swimming pool
 @word d'Piscinnen = the swimming pools
 
-@word d'Fënster = the window
 @word d'Fënsteren = the windows
 
 # --- Furniture & household objects ---
@@ -72,19 +60,13 @@
 
 @word d'Dusch = the shower
 
-@word d'Bett = the bed
 @word d'Better = the beds
 
-@word de Schaf = the wardrobe
 @word d'Schief = the wardrobes
 
-@word d'Luucht = the light
 @word d'Steeluucht = the floor lamp
 
 @word den Iessdësch = the dining table
-
-@word de Stull = the chair
-@word d'Still = the chairs
 
 @word de Spigel = the mirror
 @word d'Spigelen = the mirrors
@@ -103,7 +85,6 @@
 
 @word d'Këssen = the pillow
 
-@word den Dësch = the table
 @word de Kaffisdësch = the breakfast table
 @word de Salonsdësch = the coffee table
 @word de Bicherschaf = the bookcase
@@ -114,25 +95,14 @@
 @word de Buedem = the floor
 @word d'Buedduch = the bath towel
 
-@word d'Tëlee = the TV
-
 @word de Besuch = the visit
-@word d'Plaz = the space
 
 # --- Adjectives: size, condition, style, colour ---
-@word grouss = big
-@word kleng = small
-@word hell = bright
 @word däischter = dark
 @word modern = modern
 @word almoudesch = old-fashioned
-@word deier = expensive
-@word bëlleg = cheap
 @word roueg = quiet
 @word oppen = open
-@word waarm = warm
-@word kal = cold
-@word schéin = beautiful
 @word ellen = ugly
 @word hëlzen = wooden
 @word metallen = metallic
@@ -141,33 +111,18 @@
 @word knaschteg = dirty
 @word eegen = own
 @word breet = wide
-@word wäiss = white
-@word giel = yellow
 @word beige = beige
-@word blo = blue
-@word sportlech = sporty
-@word rout = red
 @word amerikanesch = American
 @word separat = separate
-@word laang = long
 
 # --- Verbs ---
-@word wunnen = to live
 @word zoumaachen = to close
 @word opmaachen = to open
 @word bueden = to bathe
 @word stockéieren = to store
-@word iessen = to eat
 @word gefalen = to please
-@word beschreiwen = to describe
 
 # --- Numbers, directions & question words ---
-@word vill = many
-@word véier = four
-@word zwee = two
-@word lénks = left
-@word riets = right
-@word normalerweis = normally
 @word do = there
 @word wiem = whom
 @word wuer = where (direction)

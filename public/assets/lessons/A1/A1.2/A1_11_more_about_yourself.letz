@@ -9,7 +9,6 @@
 # --- Age, marital & relationship status ---
 @word den Alter = the age
 @word jonk = young
-@word bestuet = married
 @word Single = single
 
 # --- Places ---
@@ -17,8 +16,6 @@
 @word den Aarbechtsuert = the work place
 @word d'Land = the country
 @word de Bierg = the mountain
-@word d'Belsch = Belgium
-@word Lëtzebuerg = Luxembourg
 @word Däitschland = Germany
 @word Berlin = Berlin
 @word Sandweiler = Sandweiler
@@ -50,7 +47,6 @@
 @word laang = long
 @word doheem = at home
 @word geschwënn = soon
-@word buschtawéieren = to spell
 
 @sentence
 @lu Ech si jonk.
