@@ -198,9 +198,9 @@ export const AppHome = () => {
         <Button onClick={handleStartLearning}>Start Learning</Button>
 
         {/* Exam track — a destination (theme page), not a practice mode */}
-        <Button color="exam" size="sm" onClick={handleOpenExam}>
+        <Button color="exam" onClick={handleOpenExam}>
           <span className="flex items-center justify-center gap-1.5">
-            <GraduationCapIcon className="w-4 h-4" /> Sproochentest Prep
+            <GraduationCapIcon className="w-5 h-5" /> Sproochentest Prep
           </span>
         </Button>
 

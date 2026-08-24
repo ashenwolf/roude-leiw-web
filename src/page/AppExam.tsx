@@ -5,11 +5,18 @@ import { useNavigation } from "../context/useNavigation";
 import { loadExamMeta, fetchSubLesson } from "../exam/exam-catalog";
 import { computeExamView, selectSubLessonsToLoad } from "../exam/exam-progression";
 import { useProgress } from "../persistence/hooks/use-progress";
-import { GraduationCapIcon } from "../ui/icons";
+import { Button } from "../ui/Button";
+import { GraduationCapIcon, ImageIcon } from "../ui/icons";
 import { SubLessonPath } from "../ui/SubLessonPath";
 
-import type { SubLessonMeta } from "../exam/exam-catalog";
+import type { SubLessonMeta, ThemeKind } from "../exam/exam-catalog";
 import type { Lesson } from "../exercise/letz-parser";
+
+/** Category-picker labels — distinct from `THEME_KIND_PREFIX`, which prefixes section headings. */
+const KIND_LABEL: Record<ThemeKind, string> = {
+  picture: "Picture Description",
+  topic: "Discussion Theme",
+};
 
 /** Phase 1 — exam manifest only: theme and SubLesson titles paint immediately. */
 const useExamMetas = () => {
@@ -59,6 +66,8 @@ export const AppExam = () => {
   const posthog = usePostHog();
   const { words, unlockedLessons } = useProgress();
 
+  const [selectedKind, setSelectedKind] = useState<ThemeKind | null>(null);
+
   const { metas, loading: metasLoading } = useExamMetas();
   const loaded = useSubLessonContent(metas, unlockedLessons);
 
@@ -66,6 +75,11 @@ export const AppExam = () => {
     () => computeExamView(metas, loaded, words, unlockedLessons),
     [metas, loaded, words, unlockedLessons],
   );
+
+  const handleSelectKind = (kind: ThemeKind) => {
+    posthog?.capture("exam_kind_selected", { kind });
+    setSelectedKind(kind);
+  };
 
   const handleSelectSubLesson = (subLessonId: string) => {
     posthog?.capture("exam_sub_lesson_selected", { sub_lesson_id: subLessonId });
@@ -80,22 +94,57 @@ export const AppExam = () => {
     );
   }
 
+  if (selectedKind === null) {
+    return (
+      <div className="flex flex-col gap-5 pb-10">
+        <div className="flex items-center gap-2">
+          <GraduationCapIcon className="w-6 h-6 text-rose-500" />
+          <h2 className="text-xl font-bold text-gray-800">Sproochentest Prep</h2>
+        </div>
+        <p className="text-sm text-gray-500 -mt-3">
+          Themed practice for the speaking exam. Choose what you want to practice.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <Button color="exam" onClick={() => handleSelectKind("picture")}>
+            <span className="flex items-center justify-center gap-1.5">
+              <ImageIcon className="w-5 h-5" /> {KIND_LABEL.picture}
+            </span>
+          </Button>
+          <Button color="exam" onClick={() => handleSelectKind("topic")}>
+            <span className="flex items-center justify-center gap-1.5">
+              <GraduationCapIcon className="w-5 h-5" /> {KIND_LABEL.topic}
+            </span>
+          </Button>
+        </div>
+
+        <button
+          onClick={() => navigateTo("home")}
+          className="text-gray-500 hover:text-gray-700 transition-colors text-sm self-start"
+        >
+          ← Back to Home
+        </button>
+      </div>
+    );
+  }
+
+  const themes = view.themes.filter((theme) => theme.kind === selectedKind);
+
   // pb keeps the old spacing now that <main> has no bottom padding
   return (
     <div className="flex flex-col gap-5 pb-10">
       <div className="flex items-center gap-2">
         <GraduationCapIcon className="w-6 h-6 text-rose-500" />
-        <h2 className="text-xl font-bold text-gray-800">Sproochentest Prep</h2>
+        <h2 className="text-xl font-bold text-gray-800">{KIND_LABEL[selectedKind]}</h2>
       </div>
       <p className="text-sm text-gray-500 -mt-3">
-        Themed practice for the speaking exam. Pick a topic — each one builds up
-        from vocabulary to answering questions.
+        Pick a topic — each one builds up from vocabulary to answering questions.
       </p>
 
-      {view.themes.length === 0 ? (
+      {themes.length === 0 ? (
         <p className="text-gray-500 text-center py-8">No themes available yet.</p>
       ) : (
-        view.themes.map((theme) => (
+        themes.map((theme) => (
           <div key={theme.id}>
             <h3 className="text-sm font-semibold text-gray-600 mb-2">{theme.heading}</h3>
             <SubLessonPath theme={theme} onSelectSubLesson={handleSelectSubLesson} />
@@ -104,10 +153,10 @@ export const AppExam = () => {
       )}
 
       <button
-        onClick={() => navigateTo("home")}
+        onClick={() => setSelectedKind(null)}
         className="text-gray-500 hover:text-gray-700 transition-colors text-sm self-start"
       >
-        ← Back to Home
+        ← Back
       </button>
     </div>
   );
