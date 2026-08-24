@@ -5,9 +5,9 @@
       "kind": "topic",
       "title": "Vacation & Travel",
       "subLessons": [
-        { "id": "vacation.01", "file": "vacation/01_vocabulary.letz", "title": "Vocabulary" },
-        { "id": "vacation.02", "file": "vacation/02_phrases.letz", "title": "Key Phrases" },
-        { "id": "vacation.03", "file": "vacation/03_questions.letz", "title": "Talking About It" }
+        { "id": "vacation.01", "file": "topic/vacation/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "vacation.02", "file": "topic/vacation/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "vacation.03", "file": "topic/vacation/03_questions.letz", "title": "Talking About It" }
       ]
     },
     {
@@ -125,9 +125,9 @@
       "kind": "topic",
       "title": "Akafe Goen",
       "subLessons": [
-        { "id": "shopping.01", "file": "shopping/01_vocabulary.letz", "title": "Vocabulary" },
-        { "id": "shopping.02", "file": "shopping/02_phrases.letz", "title": "Key Phrases" },
-        { "id": "shopping.03", "file": "shopping/03_questions.letz", "title": "Talking About It" }
+        { "id": "shopping.01", "file": "topic/shopping/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "shopping.02", "file": "topic/shopping/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "shopping.03", "file": "topic/shopping/03_questions.letz", "title": "Talking About It" }
       ]
     },
     {
@@ -135,9 +135,9 @@
       "kind": "topic",
       "title": "Family & Myself",
       "subLessons": [
-        { "id": "family.01", "file": "family/01_vocabulary.letz", "title": "Vocabulary" },
-        { "id": "family.02", "file": "family/02_phrases.letz", "title": "Key Phrases" },
-        { "id": "family.03", "file": "family/03_questions.letz", "title": "Talking About It" }
+        { "id": "family.01", "file": "topic/family/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "family.02", "file": "topic/family/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "family.03", "file": "topic/family/03_questions.letz", "title": "Talking About It" }
       ]
     },
     {
@@ -145,9 +145,9 @@
       "kind": "topic",
       "title": "Hobbies & Free Time",
       "subLessons": [
-        { "id": "hobbies.01", "file": "hobbies/01_vocabulary.letz", "title": "Vocabulary" },
-        { "id": "hobbies.02", "file": "hobbies/02_phrases.letz", "title": "Key Phrases" },
-        { "id": "hobbies.03", "file": "hobbies/03_questions.letz", "title": "Talking About It" }
+        { "id": "hobbies.01", "file": "topic/hobbies/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "hobbies.02", "file": "topic/hobbies/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "hobbies.03", "file": "topic/hobbies/03_questions.letz", "title": "Talking About It" }
       ]
     }
   ]

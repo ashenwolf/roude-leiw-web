@@ -87,7 +87,7 @@ Context-based router (`src/context/`). Pages: `"home"` | `"exercise"` | `"word-m
 
 ### Lesson File Format (`.letz`)
 
-Custom DSL parsed by Chevrotain. Course files: `public/assets/lessons/{level}/{filename}.letz`. Exam files: `public/assets/exam/{theme}/{file}.letz` (in-file `@lesson` id is a cosmetic label there; the manifest id is authoritative).
+Custom DSL parsed by Chevrotain. Course files: `public/assets/lessons/{level}/{filename}.letz`. Exam files: `public/assets/exam/{kind}/{theme}/{file}.letz` — `{kind}` is `topic` or `picture`, mirroring the manifest's `kind` discriminator (in-file `@lesson` id is a cosmetic label there; the manifest id is authoritative).
 
 Directives: `@lesson`, `@word` (→ `entries[]`), `@sentence` + `@lu`/`@en`/`@question`/`@distractor-en`/`@distractor-lu` (→ `sentences[]`, used by `SentenceBuilder`), `@fill` + `@lu`/`@en`/`@distractor-*` with `[bracketed]` blanks (→ `fills[]`, used by `FillBlank`), `@image`/`@image-alt` (lesson-level, quoted values). The parser hard-errors on unknown `@`-tokens — adding a directive means touching `lexer.ts`/`parser.ts`/`visitor.ts` together, and a new directive that's also a new **Element kind** is the wider change flagged in [`.claude/reference/mode-specs.md`](.claude/reference/mode-specs.md).
 

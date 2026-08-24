@@ -17,7 +17,7 @@ description: >
 
 ## What this skill produces
 
-One topic theme for the exam track (`public/assets/exam/<theme-id>/`):
+One topic theme for the exam track (`public/assets/exam/topic/<theme-id>/`):
 
 - `01_vocabulary.letz` — word-match vocabulary for the topic
 - `02_phrases.letz` — plain key-phrase sentences (no `@question`)
@@ -58,7 +58,7 @@ Luxembourgish word and every inflected form inside a sentence.
   confirm the list with the user before interviewing on it.
 - Check `public/assets/exam/manifest.json` for existing theme ids to avoid a
   collision, and pick an unused `@lesson` id prefix
-  (`grep -h '^@lesson' public/assets/exam/*/*.letz`).
+  (`grep -h '^@lesson' public/assets/exam/topic/*/*.letz`).
 
 ### 2. Interview the learner — REQUIRED, before writing any `@question` content
 
@@ -180,9 +180,9 @@ Add to `public/assets/exam/manifest.json`:
   "kind": "topic",
   "title": "<Theme Title>",
   "subLessons": [
-    { "id": "<theme-id>.01", "file": "<theme-id>/01_vocabulary.letz", "title": "Vocabulary" },
-    { "id": "<theme-id>.02", "file": "<theme-id>/02_phrases.letz", "title": "Key Phrases" },
-    { "id": "<theme-id>.03", "file": "<theme-id>/03_questions.letz", "title": "Talking About It" }
+    { "id": "<theme-id>.01", "file": "topic/<theme-id>/01_vocabulary.letz", "title": "Vocabulary" },
+    { "id": "<theme-id>.02", "file": "topic/<theme-id>/02_phrases.letz", "title": "Key Phrases" },
+    { "id": "<theme-id>.03", "file": "topic/<theme-id>/03_questions.letz", "title": "Talking About It" }
   ]
 }
 ```
