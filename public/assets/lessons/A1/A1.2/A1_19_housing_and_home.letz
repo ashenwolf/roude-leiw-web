@@ -29,7 +29,6 @@
 @word franséisch = French
 @word kannerfrëndlech = child-friendly
 @word fein = nice
-@word bestued = married
 @word aneres = other, else
 
 # --- Ordinals ---
@@ -79,14 +78,6 @@
 @distractor-en apartment
 @distractor-lu Haus
 @distractor-lu Appartement
-
-@sentence
-@lu Ech wunnen an der Stad.
-@en I live in the city.
-@distractor-en village
-@distractor-en house
-@distractor-lu Duerf
-@distractor-lu Haus
 
 @sentence
 @lu D'Duerf ass ze wäit vun der Stad.
@@ -358,10 +349,10 @@
 @distractor-en neighbour
 @distractor-en married
 @distractor-lu Noper
-@distractor-lu bestued
+@distractor-lu bestuet
 
 @sentence
-@lu Si ass mat engem sympathesche Lëtzebuerger bestued.
+@lu Si ass mat engem sympathesche Lëtzebuerger bestuet.
 @en She is married to a nice Luxembourger.
 @distractor-en French
 @distractor-en open
@@ -453,7 +444,7 @@
 @en Is the kitchen separate?
 @distractor-en married
 @distractor-en big
-@distractor-lu bestued
+@distractor-lu bestuet
 @distractor-lu grouss
 
 @sentence

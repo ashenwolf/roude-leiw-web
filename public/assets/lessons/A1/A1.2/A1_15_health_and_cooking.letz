@@ -120,14 +120,6 @@
 @word Äddi an eng gutt Besserung = Goodbye and get well soon
 
 @sentence
-@lu Wéi geet et Iech?
-@en How are you?
-@distractor-en why
-@distractor-en when
-@distractor-lu Firwat
-@distractor-lu Wéini
-
-@sentence
 @lu Hutt Dir Féiwer?
 @en Do you have a fever?
 @distractor-en cough

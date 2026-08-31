@@ -103,29 +103,13 @@
 @distractor-lu wunnen
 
 @sentence
-@lu Wéi vill Joer hues du?
-@lu Wéi vill Joer hutt Dir?
-@en How many years have you?
-@distractor-en late
-@distractor-en always
-@distractor-lu spéit
-@distractor-lu ëmmer
-
-@sentence
 @lu Ech si véierzeg Joer al.
+@lu Ech hu véierzeg Joer.
 @en I am forty years old.
 @distractor-en married
 @distractor-en divorced
 @distractor-lu bestuet
 @distractor-lu gescheet
-
-@sentence
-@lu Ech hu véierzeg Joer.
-@en I am forty years old.
-@distractor-en married
-@distractor-en separated
-@distractor-lu bestuet
-@distractor-lu getrennt
 
 @sentence
 @lu Mir sinn zanter 5 Joer bestuet.
@@ -208,15 +192,6 @@
 @distractor-lu Frankräich
 
 @sentence
-@lu Vu wou kënns du?
-@lu Vu wou kommt Dir?
-@en Where do you come from?
-@distractor-en old
-@distractor-en many
-@distractor-lu al
-@distractor-lu vill
-
-@sentence
 @lu Kënns du vu Lëtzebuerg?
 @en Are you from Luxembourg?
 @distractor-en Belgium
@@ -242,7 +217,6 @@
 
 @sentence
 @lu Et geet mir gutt.
-@lu Mir geet et gutt.
 @en I am doing well.
 @distractor-en married
 @distractor-en old
