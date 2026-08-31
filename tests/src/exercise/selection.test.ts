@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { bucketedPick, pickFromPool, pickPair, pickSentence } from "../../../src/exercise/selection.ts";
+import { bucketedPick, pickFromPool, pickPair, pickPhrase } from "../../../src/exercise/selection.ts";
 import { FIX_ERRORS, LESSON, WORD_MIX } from "../../../src/exercise/constants.ts";
 
 import type { Lesson, SentenceEntry, WordEntry } from "../../../src/exercise/letz-parser.ts";
@@ -164,43 +164,48 @@ describe("pickPair", () => {
   });
 });
 
-// ─── pickSentence ─────────────────────────────────────────────────────────────
+// ─── pickPhrase ───────────────────────────────────────────────────────────────
 
-describe("pickSentence", () => {
+describe("pickPhrase", () => {
   const sent = sentence("Good morning", "Gudde Moien");
   const currentLesson = lesson("L1", [], [sent]);
   const previousLesson = lesson("L2", [], [sentence("Goodbye", "Äddi")]);
 
-  it("picks from current lesson bucket and returns lesson + sentence", () => {
-    // roll 0.5 → current bucket; lesson index 0; sentence index 0
+  it("picks from current lesson bucket and returns lesson + phrase", () => {
+    // roll 0.5 → current bucket; lesson index 0; phrase index 0
     const rng = fakeRng(0.5, 0.0, 0.0);
-    const result = pickSentence(
+    const result = pickPhrase(
       { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
-      LESSON.buckets.sentenceLesson,
+      LESSON.buckets.phraseLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L1");
-    expect(result?.sentence.enVariants[0]).toBe("Good morning");
+    expect(result?.phrase.kind).toBe("sentence");
+    expect(result?.phrase.kind === "sentence" && result.phrase.sentence.enVariants[0]).toBe(
+      "Good morning",
+    );
   });
 
   it("picks from previous lesson bucket when roll hits previous", () => {
-    // roll → previous bucket; lesson index 0; sentence index 0
+    // roll → previous bucket; lesson index 0; phrase index 0
     const rng = fakeRng(0.9, 0.0, 0.0);
-    const result = pickSentence(
+    const result = pickPhrase(
       { "not-yet-mastered": [], current: [currentLesson], previous: [previousLesson] },
-      LESSON.buckets.sentenceLesson,
+      LESSON.buckets.phraseLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L2");
-    expect(result?.sentence.enVariants[0]).toBe("Goodbye");
+    expect(result?.phrase.kind === "sentence" && result.phrase.sentence.enVariants[0]).toBe(
+      "Goodbye",
+    );
   });
 
   it("re-rolls when current lesson pool is empty", () => {
-    // First → current (empty) → continue; second → previous → lesson 0; sentence 0
+    // First → current (empty) → continue; second → previous → lesson 0; phrase 0
     const rng = fakeRng(0.5, 0.9, 0.0, 0.0);
-    const result = pickSentence(
+    const result = pickPhrase(
       { "not-yet-mastered": [], current: [], previous: [previousLesson] },
-      LESSON.buckets.sentenceLesson,
+      LESSON.buckets.phraseLesson,
       rng,
     );
     expect(result?.lesson.meta.id).toBe("L2");
@@ -208,22 +213,40 @@ describe("pickSentence", () => {
 
   it("returns undefined when all lesson pools are empty", () => {
     expect(
-      pickSentence(
+      pickPhrase(
         { "not-yet-mastered": [], current: [], previous: [] },
-        LESSON.buckets.sentenceLesson,
+        LESSON.buckets.phraseLesson,
       ),
     ).toBeUndefined();
   });
 
-  it("returns undefined when chosen lesson has no sentences", () => {
+  it("returns undefined when chosen lesson teaches no phrases", () => {
     const emptyLesson = lesson("L3", [word("A", "a")], []);
-    // roll 0.5 → current bucket; lesson index 0 → emptyLesson (no sentences)
+    // roll 0.5 → current bucket; lesson index 0 → emptyLesson (no phrases)
     const rng = fakeRng(0.5, 0.0);
-    const result = pickSentence(
+    const result = pickPhrase(
       { "not-yet-mastered": [], current: [emptyLesson], previous: [] },
-      LESSON.buckets.sentenceLesson,
+      LESSON.buckets.phraseLesson,
       rng,
     );
     expect(result).toBeUndefined();
+  });
+
+  // The reason sentences and fills share one pool: a fill is drawn on the same
+  // terms as a sentence, so exposure follows how many of each a lesson declares
+  // rather than a tuned share constant.
+  it("draws fills from the same pool as sentences", () => {
+    const withFill = {
+      ...lesson("L4", [], [sentence("Good morning", "Gudde Moien")]),
+      fills: [{ en: "I go [to] work", lu: "Ech ginn [op] d'Aarbecht" }],
+    };
+    // roll 0.5 → current bucket; lesson index 0; phrase index 1 → the fill
+    const rng = fakeRng(0.5, 0.0, 0.99);
+    const result = pickPhrase(
+      { "not-yet-mastered": [], current: [withFill], previous: [] },
+      LESSON.buckets.phraseLesson,
+      rng,
+    );
+    expect(result?.phrase.kind).toBe("fill");
   });
 });

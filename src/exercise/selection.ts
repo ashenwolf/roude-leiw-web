@@ -2,7 +2,7 @@
 // Pure functions: no React, no fetch, no KV. Mode planners (Layer 4) import from here.
 // See .claude/reference/mode-specs.md > Encapsulation layering.
 
-import type { Lesson, WordEntry, SentenceEntry } from "./letz-parser";
+import type { Lesson, WordEntry, SentenceEntry, FillEntry } from "./letz-parser";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -66,19 +66,33 @@ export const pickPair = <K extends string>(
   rng: () => number = Math.random,
 ): WordEntry | undefined => pickFromPool(pools, buckets, rng);
 
+/** One `@sentence` or one `@fill`: the same Element to every stage that schedules it. */
+export type Phrase =
+  | { readonly kind: "sentence"; readonly sentence: SentenceEntry }
+  | { readonly kind: "fill"; readonly fill: FillEntry };
+
+export const phrasesOf = (lesson: Lesson): ReadonlyArray<Phrase> => [
+  ...lesson.sentences.map((sentence) => ({ kind: "sentence" as const, sentence })),
+  ...lesson.fills.map((fill) => ({ kind: "fill" as const, fill })),
+];
+
 /**
- * Picks a lesson from bucket-partitioned lesson pools, then picks a random
- * sentence within that lesson.
- * Returns `undefined` if all lesson pools are empty or the chosen lesson has
- * no sentences.
+ * Picks a lesson from bucket-partitioned lesson pools, then one phrase uniformly
+ * within it. Two-stage on purpose: the buckets are lesson-scoped, so flattening
+ * first would let a phrase-heavy lesson dominate the review pool.
+ *
+ * Drawing sentences and fills from one list gives a lesson's fills exposure in
+ * proportion to how many it declares — no share constant, and a fill-free lesson
+ * can never yield one.
  */
-export const pickSentence = <K extends string>(
+export const pickPhrase = <K extends string>(
   lessonPools: Record<K, ReadonlyArray<Lesson>>,
   buckets: ReadonlyArray<Bucket<K>>,
   rng: () => number = Math.random,
-): { lesson: Lesson; sentence: SentenceEntry } | undefined => {
+): { lesson: Lesson; phrase: Phrase } | undefined => {
   const lesson = pickFromPool(lessonPools, buckets, rng);
-  if (!lesson || lesson.sentences.length === 0) return undefined;
-  const sentence = lesson.sentences[Math.floor(rng() * lesson.sentences.length)];
-  return { lesson, sentence };
+  if (!lesson) return undefined;
+  const phrases = phrasesOf(lesson);
+  if (phrases.length === 0) return undefined;
+  return { lesson, phrase: phrases[Math.floor(rng() * phrases.length)] };
 };

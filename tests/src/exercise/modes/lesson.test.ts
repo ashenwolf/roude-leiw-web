@@ -272,46 +272,31 @@ describe("lessonSlotTypeDistribution", () => {
     expect(buckets[buckets.length - 1].upTo).toBe(1.0);
   });
 
-  // The fill bucket exists only for lessons that declare @fill. Every A1 lesson is
-  // fill-free, so the fill-free table must stay exactly two buckets: a third one
-  // would shift rng consumption and change plans that are meant to be untouched.
-  it("omits the fill bucket entirely when the lesson has no fills", () => {
-    expect(lessonSlotTypeDistribution(50, 50, false).map((b) => b.name)).toEqual([
+  // Two slot types, always. A fill competes for the same phrase slot as a
+  // sentence, so no third bucket and no fill-free special case exist.
+  it("is always two buckets", () => {
+    expect(lessonSlotTypeDistribution(50, 50).map((b) => b.name)).toEqual([
       "word-match",
-      "sentence-builder",
+      "phrase",
     ]);
   });
 
-  it("adds a fill bucket only when the lesson has fills", () => {
-    expect(lessonSlotTypeDistribution(50, 50, true).map((b) => b.name)).toEqual([
-      "word-match",
-      "sentence-builder",
-      "fill-blank",
-    ]);
-  });
-
-  it("carves the fill share out of sentence-builder, leaving word-match untouched", () => {
-    const without = lessonSlotTypeDistribution(50, 50, false);
-    const with_ = lessonSlotTypeDistribution(50, 50, true);
-    // word-match keeps its adaptive share either way — word exposure is what the
-    // adaptive share exists to protect, so fill must not eat into it.
-    expect(share(with_)).toBe(share(without));
-    // ...and the slice fill takes is exactly fillShare of what remains.
-    const remaining = 1 - share(with_);
-    const fillSlice = 1 - with_.find((b) => b.name === "sentence-builder")!.upTo;
-    expect(fillSlice).toBeCloseTo(remaining * LESSON.fillShare);
-  });
-
-  it("still closes at 1.0 with the fill bucket present", () => {
-    const buckets = lessonSlotTypeDistribution(50, 50, true);
-    expect(buckets[buckets.length - 1].upTo).toBe(1.0);
+  // The backlog the split reacts to must be the backlog that exists: fills count
+  // toward it, so a fill-heavy lesson does not over-weight word-match.
+  it("treats phrase backlog identically however it splits between sentences and fills", () => {
+    expect(share(lessonSlotTypeDistribution(40, 60))).toBe(
+      share(lessonSlotTypeDistribution(40, 60)),
+    );
+    // 40 words against 60 phrases is the same split whether those 60 are all
+    // sentences, all fills, or a mix — the planner passes one summed count.
+    expect(share(lessonSlotTypeDistribution(40, 60))).toBeCloseTo(0.4);
   });
 });
 
-// The reason this planner change exists. The unlock gate requires EVERY Element to
-// reach MASTERY_CORRECT_COUNT, so an Element the planner can never schedule makes
-// its lesson permanently unpassable. Before this change `planLessonMode` had no
-// fill branch, so a course lesson carrying `@fill` was a trap.
+// The unlock gate requires EVERY Element to reach MASTERY_CORRECT_COUNT, so an
+// Element the planner can never schedule makes its lesson permanently unpassable.
+// `planLessonMode` originally had no fill branch at all, which made a course
+// `@fill` a trap.
 describe("planLessonMode — fill reachability", () => {
   const withFills = lesson(
     "A1_01",
@@ -320,7 +305,8 @@ describe("planLessonMode — fill reachability", () => {
     [fill("I go [to] work", "Ech ginn [op] d'Aarbecht")],
   );
 
-  // Roll 1.0 lands in the last bucket, which is fill-blank once fills exist.
+  // 0.99 rolls into the phrase bucket, then picks the LAST phrase of the lesson —
+  // the fill, since `phrasesOf` orders sentences before fills.
   const fillRng = () => 0.99;
 
   it("schedules fill-blank slots for a lesson that declares fills", () => {
@@ -337,6 +323,36 @@ describe("planLessonMode — fill reachability", () => {
   it("fills the whole session rather than dropping slots when fill is rolled", () => {
     const queue = planLessonMode([withFills], "A1_01", {}, fillRng).queue;
     expect(queue.length).toBe(LESSON.totalSlots);
+  });
+
+  // A fill-only lesson is the sharpest version of the reachability question: if
+  // fills were not first-class phrases, every phrase slot here would come up empty.
+  it("schedules fills for a lesson whose only phrases are fills", () => {
+    const fillOnly = lesson(
+      "A1_01",
+      [["Moien", "hi"]],
+      [],
+      [fill("I go [to] work", "Ech ginn [op] d'Aarbecht")],
+    );
+    const queue = planLessonMode([fillOnly], "A1_01", {}, fillRng).queue;
+    expect(queue.some((s) => s.type === "fill-blank")).toBe(true);
+    expect(queue.length).toBe(LESSON.totalSlots);
+  });
+
+  // A fill and a sentence share one repeat budget, so a lesson whose only phrase
+  // is a fill plans exactly like one whose only phrase is a sentence — including
+  // the deliberate "accept a repeat rather than skip the slot" fallback.
+  it("plans a fill-only lesson identically to a sentence-only lesson", () => {
+    const rng = () => 0.99;
+    const sentenceOnly = lesson("A1_01", [], [sentence("Good morning", "Gudde Moien")]);
+    const fillOnly = lesson("A1_01", [], [], [fill("I go [to] work", "Ech ginn [op] d'Aarbecht")]);
+
+    const sentenceQueue = planLessonMode([sentenceOnly], "A1_01", {}, rng).queue;
+    const fillQueue = planLessonMode([fillOnly], "A1_01", {}, rng).queue;
+
+    expect(fillQueue.length).toBe(sentenceQueue.length);
+    expect(fillQueue.every((s) => s.type === "fill-blank")).toBe(true);
+    expect(sentenceQueue.every((s) => s.type === "sentence-builder")).toBe(true);
   });
 });
 

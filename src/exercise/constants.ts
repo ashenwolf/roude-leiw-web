@@ -66,40 +66,39 @@ const LESSON_SLOTS_PER_BLOCK = 5;
  * probability scales with how word-heavy the current lesson's remaining backlog
  * is (`clamp(unmasteredWords / backlog, min, max)`; see
  * `lessonSlotTypeDistribution` in `modes/lesson.ts`). `min` preserves the
- * historical 20/80 balance so sentence practice never starves in a word-light
- * lesson; `max` keeps sentence-builder present in the most word-heavy one.
+ * historical 20/80 balance so phrase practice never starves in a word-light
+ * lesson; `max` keeps phrase practice present in the most word-heavy one.
  *
- * `buckets.wordMatch` / `buckets.sentenceLesson` both lead with
+ * `buckets.wordMatch` / `buckets.phraseLesson` both lead with
  * `not-yet-mastered` — current-lesson Elements below the unlock gate
  * (`correct < MASTERY_CORRECT_COUNT`). That covers never-seen Elements AND
  * stragglers shown many times but still missed, which would otherwise drop out
  * of every priority bucket and permanently cap the lesson below threshold.
  * Empty buckets re-roll (see `pickFromPool`).
  *
- * `fillShare` is the slice of NON-word-match slots given to fill-blank when the
- * current lesson actually declares `@fill` Elements. It is carved out of
- * sentence-builder's share, mirroring Fix Errors. A lesson with no fills keeps a
- * share of 0 and therefore plans byte-identically to before fills existed —
- * load-bearing, because every A1 lesson is fill-free and must not change.
+ * `buckets.wordMatch` / `buckets.phraseLesson` both lead with
+ * `not-yet-mastered` — current-lesson Elements below the unlock gate
+ * (`correct < MASTERY_CORRECT_COUNT`). That covers never-seen Elements AND
+ * stragglers shown many times but still missed, which would otherwise drop out
+ * of every priority bucket and permanently cap the lesson below threshold.
+ * Empty buckets re-roll (see `pickFromPool`).
+ *
+ * A **phrase** is one `@sentence` or one `@fill` — one slot type and one bucket
+ * table for both, so a lesson's fills get exposure in proportion to how many it
+ * declares.
  */
 export const LESSON = {
   slotsPerBlock: LESSON_SLOTS_PER_BLOCK,
   totalSlots: BLOCK_COUNT * LESSON_SLOTS_PER_BLOCK,
   wordMatchPairs: 5,
   wordMatchShare: { min: 0.2, max: 0.6 },
-  fillShare: 0.4,
   buckets: {
     wordMatch: [
       { name: "not-yet-mastered", upTo: 0.3 },
       { name: "current", upTo: 0.85 },
       { name: "previous", upTo: 1.0 },
     ],
-    sentenceLesson: [
-      { name: "not-yet-mastered", upTo: 0.3 },
-      { name: "current", upTo: 0.8 },
-      { name: "previous", upTo: 1.0 },
-    ],
-    fillLesson: [
+    phraseLesson: [
       { name: "not-yet-mastered", upTo: 0.3 },
       { name: "current", upTo: 0.8 },
       { name: "previous", upTo: 1.0 },
@@ -114,11 +113,9 @@ export const LESSON = {
   totalSlots: number;
   wordMatchPairs: number;
   wordMatchShare: { min: number; max: number };
-  fillShare: number;
   buckets: {
     wordMatch: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
-    sentenceLesson: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
-    fillLesson: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
+    phraseLesson: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
     direction: ReadonlyArray<Bucket<"en-lu" | "lu-en">>;
   };
 };

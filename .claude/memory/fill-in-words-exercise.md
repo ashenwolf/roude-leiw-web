@@ -196,14 +196,21 @@ source:
 
 ## The remaining gap
 
-**`planLessonMode` schedules fill Slots when the lesson declares them** (Sep 2026).
-It originally did not, and only Exam and Fix Errors did — which made a **course**
-lesson carrying `@fill` unpassable, since its fill Elements could never reach the
-gate. The planner now takes a `hasFills` flag: a fill-free lesson gets the
-unchanged two-bucket slot-type table (so all of A1 plans identically), and a lesson
-with fills gets a third bucket carved out of sentence-builder's share. The guard
-against regressing to the trap is `tests/src/exercise/modes/lesson.test.ts` >
-"fill reachability".
+**`planLessonMode` schedules fills as *phrases*** (Sep 2026). A `@sentence` and a
+`@fill` are the same Element to every stage that schedules one — one Slot, one
+graded decision, both directions summed by the gate — so they share a slot type,
+a bucket table, a repeat budget, and `pickPhrase`. The only per-kind dispatch is
+which Exercise the phrase becomes.
+
+A first attempt gave fills their own slot type, bucket table, and `fillShare`
+constant, gated on a `hasFills` flag. That was rejected as a pile of exceptions:
+it left fills out of the adaptive backlog count (over-weighting word-match in a
+fill-heavy lesson) and out of the repeat budget (letting one fill take every
+slot). Both defects were consequences of modelling one concept as two.
+
+Before either version, only Exam and Fix Errors scheduled fills at all, so a
+**course** lesson carrying `@fill` was unpassable — its fills could never reach
+the gate. Guard: `tests/src/exercise/modes/lesson.test.ts` > "fill reachability".
 
 Related: [[exam-track]], [[picture-description-theme]] (the frame library),
 [[mastery-and-unlock]] (the key family and validator trap). The mechanized bounds
