@@ -2,6 +2,23 @@
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Verbs"
 #   https://quizlet.com/_h2sudr
 # Comma- and slash-separated EN translations split into multiple atomic pairs.
+#
+# The file shipped as a bare infinitive list with no sentences, so it taught 22
+# dictionary forms with nothing to use them on. Sentences and @fill blocks added:
+# this is the last lesson before A1.2, and the conjugation it exists to review was
+# never actually drilled anywhere.
+#
+# Two rules the fills drill:
+#   - the 2nd/3rd person singular changes the ROOT of an irregular verb
+#     (goen -> du gees / hie geet; huelen -> du hëls / hie hëlt), so the distractors
+#     are the OTHER persons of the SAME verb
+#   - the five modal verbs take a BARE infinitive, clause-final, never `ze`
+# Every conjugated form used below was LOD-verified.
+#
+# Pre-existing defect, deliberately left alone: four LU sides appear twice with
+# different glosses (schwätzen to talk/to speak, wunnen to live/to reside, maachen
+# to make/to do, mussen must/have to). Each is a separate stat key that learners may
+# already have progress on, so re-glossing them would orphan that progress.
 
 @lesson A1.09 "Verbs Review"
 
@@ -30,3 +47,510 @@
 @word wëllen = to want
 @word sollen = should
 @word däerfen = to be allowed to
+
+@sentence
+@lu Ech schwätzen e bësse Lëtzebuergesch.
+@en I speak a little Luxembourgish.
+@distractor-en much
+@distractor-en work
+@distractor-lu vill
+@distractor-lu schaffen
+
+@sentence
+@lu Schwätzt du Englesch?
+@en Do you speak English?
+@distractor-en work
+@distractor-en where
+@distractor-lu schaffs
+@distractor-lu Wou
+
+@sentence
+@lu Hie schwätzt dräi Sproochen.
+@en He speaks three languages.
+@distractor-en two
+@distractor-en works
+@distractor-lu zwee
+@distractor-lu schafft
+
+@sentence
+@lu Ech hunn e Brudder.
+@en I have a brother.
+@distractor-en sister
+@distractor-en am
+@distractor-lu Schwëster
+@distractor-lu sinn
+
+@sentence
+@lu Hues du Kanner?
+@en Do you have children?
+@distractor-en are
+@distractor-en where
+@distractor-lu bass
+@distractor-lu Wou
+
+@sentence
+@lu Hien huet en Auto.
+@en He has a car.
+@distractor-en is
+@distractor-en house
+@distractor-lu ass
+@distractor-lu Haus
+
+@sentence
+@lu Ech sinn aus der Ukrain.
+@en I am from Ukraine.
+@distractor-en have
+@distractor-en in
+@distractor-lu hunn
+@distractor-lu an
+
+@sentence
+@lu Bass du midd?
+@en Are you tired?
+@distractor-en have
+@distractor-en where
+@distractor-lu hues
+@distractor-lu Wou
+
+@sentence
+@lu Wou wunns du?
+@en Where do you live?
+@distractor-en what
+@distractor-en work
+@distractor-lu Wat
+@distractor-lu schaffs
+
+@sentence
+@lu Ech wunnen zu Lëtzebuerg.
+@en I live in Luxembourg.
+@distractor-en work
+@distractor-en from
+@distractor-lu schaffen
+@distractor-lu aus
+
+@sentence
+@lu Hie wunnt an der Stad.
+@en He lives in the city.
+@distractor-en works
+@distractor-en village
+@distractor-lu schafft
+@distractor-lu Duerf
+
+@sentence
+@lu Wéi heeschs du?
+@en What are you called?
+@distractor-en where
+@distractor-en live
+@distractor-lu Wou
+@distractor-lu wunns
+
+@sentence
+@lu Ech heeschen Marie.
+@en I am called Marie.
+@distractor-en live
+@distractor-en have
+@distractor-lu wunnen
+@distractor-lu hunn
+
+@sentence
+@lu Ech bréngen de Kaffi.
+@en I bring the coffee.
+@distractor-en take
+@distractor-en water
+@distractor-lu huelen
+@distractor-lu Waasser
+
+@sentence
+@lu Ech spillen gär Foussball.
+@en I like playing football.
+@distractor-en work
+@distractor-en tennis
+@distractor-lu schaffen
+@distractor-lu Tennis
+
+@sentence
+@lu Meng Kanner spillen am Gaart.
+@en My children play in the garden.
+@distractor-en work
+@distractor-en house
+@distractor-lu schaffen
+@distractor-lu Haus
+
+@sentence
+@lu Ech schaffen an engem Büro.
+@en I work in an office.
+@distractor-en live
+@distractor-en shop
+@distractor-lu wunnen
+@distractor-lu Geschäft
+
+@sentence
+@lu Wat schaffs du?
+@en What do you do for work?
+@distractor-en where
+@distractor-en live
+@distractor-lu Wou
+@distractor-lu wunns
+
+@sentence
+@lu Ech maachen de Kaffi.
+@en I make the coffee.
+@distractor-en bring
+@distractor-en tea
+@distractor-lu bréngen
+@distractor-lu Téi
+
+@sentence
+@lu Wat méchs du haut?
+@en What are you doing today?
+@distractor-en where
+@distractor-en tomorrow
+@distractor-lu Wou
+@distractor-lu muer
+
+@sentence
+@lu Ech ginn an d'Stad.
+@en I go into the city.
+@distractor-en drive
+@distractor-en village
+@distractor-lu fueren
+@distractor-lu Duerf
+
+@sentence
+@lu Wou gees du?
+@en Where are you going?
+@distractor-en what
+@distractor-en drive
+@distractor-lu Wat
+@distractor-lu fiers
+
+@sentence
+@lu Hie geet an d'Schoul.
+@en He goes to school.
+@distractor-en drives
+@distractor-en work
+@distractor-lu fiert
+@distractor-lu Aarbecht
+
+@sentence
+@lu Ech fueren mam Auto.
+@en I drive by car.
+@distractor-en go
+@distractor-en train
+@distractor-lu ginn
+@distractor-lu Zuch
+
+@sentence
+@lu Fiers du mam Zuch?
+@en Do you go by train?
+@distractor-en walk
+@distractor-en car
+@distractor-lu gees
+@distractor-lu Auto
+
+@sentence
+@lu Ech huelen den Zuch op d'Aarbecht.
+@en I take the train to work.
+@distractor-en bring
+@distractor-en bus
+@distractor-lu bréngen
+@distractor-lu Bus
+
+@sentence
+@lu Ech muss haut schaffen.
+@en I have to work today.
+@distractor-en can
+@distractor-en tomorrow
+@distractor-lu kann
+@distractor-lu muer
+
+@sentence
+@lu Ech kann gutt kachen.
+@en I can cook well.
+@distractor-en must
+@distractor-en badly
+@distractor-lu muss
+@distractor-lu schlecht
+
+@sentence
+@lu Ech wëll en Kaffi.
+@en I want a coffee.
+@distractor-en must
+@distractor-en tea
+@distractor-lu muss
+@distractor-lu Téi
+
+@sentence
+@lu Wat wëlls du iessen?
+@en What do you want to eat?
+@distractor-en where
+@distractor-en drink
+@distractor-lu Wou
+@distractor-lu drénken
+
+@sentence
+@lu Däerf ech hei sinn?
+@en Am I allowed to be here?
+@distractor-en must
+@distractor-en there
+@distractor-lu muss
+@distractor-lu do
+
+@sentence
+@lu Ech ginn dir de Schlëssel.
+@en I give you the key.
+@distractor-en take
+@distractor-en book
+@distractor-lu huelen
+@distractor-lu Buch
+
+@sentence
+@lu Mir solle muer schaffen.
+@en We should work tomorrow.
+@distractor-en today
+@distractor-en play
+@distractor-lu haut
+@distractor-lu spillen
+
+@sentence
+@lu Hie kann net kommen.
+@en He cannot come.
+@distractor-en must
+@distractor-en go
+@distractor-lu muss
+@distractor-lu goen
+
+@sentence
+@lu Mir maachen dat muer.
+@en We do that tomorrow.
+@distractor-en today
+@distractor-en bring
+@distractor-lu haut
+@distractor-lu bréngen
+
+# --- @fill: the root-changing 2nd/3rd person singular -------------------------
+# Distractors are other persons of the SAME verb, so recognising the word is not
+# enough — the learner has to match the person.
+
+@fill
+@lu Wou [gees] du elo?
+@en Where are [you going] now?
+@distractor-lu ginn
+@distractor-lu geet
+@distractor-lu gitt
+@distractor-en goes
+@distractor-en went
+@distractor-en going
+
+@fill
+@lu Mäi Brudder [geet] muer an d'Schoul.
+@en My brother [goes] to school tomorrow.
+@distractor-lu ginn
+@distractor-lu gees
+@distractor-lu gitt
+@distractor-en go
+@distractor-en went
+@distractor-en going
+
+@fill
+@lu [Fiers] du mam Auto op d'Aarbecht?
+@en [Do you drive] to work by car?
+@distractor-lu fueren
+@distractor-lu fiert
+@distractor-lu fuert
+@distractor-en drives
+@distractor-en drove
+@distractor-en driving
+
+@fill
+@lu Meng Fra [fiert] mam Zuch an d'Stad.
+@en My wife [drives] to the city by train.
+@distractor-lu fueren
+@distractor-lu fiers
+@distractor-lu fuert
+@distractor-en drive
+@distractor-en drove
+@distractor-en driving
+
+@fill
+@lu [Hëls] du de Bus oder den Zuch?
+@en [Do you take] the bus or the train?
+@distractor-lu huelen
+@distractor-lu hëlt
+@distractor-lu huelt
+@distractor-en takes
+@distractor-en took
+@distractor-en taking
+
+@fill
+@lu Mäi Papp [hëlt] de Bus op d'Aarbecht.
+@en My dad [takes] the bus to work.
+@distractor-lu huelen
+@distractor-lu hëls
+@distractor-lu huelt
+@distractor-en take
+@distractor-en took
+@distractor-en taking
+
+@fill
+@lu [Hues] du eng Schwëster?
+@en [Do you have] a sister?
+@distractor-lu hunn
+@distractor-lu huet
+@distractor-lu hutt
+@distractor-en has
+@distractor-en had
+@distractor-en having
+
+@fill
+@lu Meng Schwëster [huet] zwee Kanner.
+@en My sister [has] two children.
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-lu hutt
+@distractor-en have
+@distractor-en had
+@distractor-en having
+
+@fill
+@lu [Bass] du aus Lëtzebuerg?
+@en [Are you] from Luxembourg?
+@distractor-lu sinn
+@distractor-lu ass
+@distractor-lu sidd
+@distractor-en is
+@distractor-en was
+@distractor-en being
+
+@fill
+@lu Mäi Kolleeg [ass] aus Portugal.
+@en My colleague [is] from Portugal.
+@distractor-lu sinn
+@distractor-lu bass
+@distractor-lu sidd
+@distractor-en are
+@distractor-en was
+@distractor-en being
+
+@fill
+@lu Wat [méchs] du muer?
+@en What [are you doing] tomorrow?
+@distractor-lu maachen
+@distractor-lu mécht
+@distractor-lu maacht
+@distractor-en does
+@distractor-en did
+@distractor-en done
+
+@fill
+@lu Meng Mamm [mécht] de Kaffi.
+@en My mother [makes] the coffee.
+@distractor-lu maachen
+@distractor-lu méchs
+@distractor-lu maacht
+@distractor-en make
+@distractor-en made
+@distractor-en making
+
+@fill
+@lu Wou [wunns] du zanter dräi Joer?
+@en Where have [you lived] for three years?
+@distractor-lu wunnen
+@distractor-lu wunnt
+@distractor-lu wunne
+@distractor-en lives
+@distractor-en lived
+@distractor-en living
+
+@fill
+@lu Mäi Noper [wunnt] an der Stad.
+@en My neighbour [lives] in the city.
+@distractor-lu wunnen
+@distractor-lu wunns
+@distractor-lu wunne
+@distractor-en live
+@distractor-en lived
+@distractor-en living
+
+@fill
+@lu Wéi [heeschs] du dann?
+@en So what [are you] called?
+@distractor-lu heeschen
+@distractor-lu heescht
+@distractor-lu heesche
+@distractor-en is
+@distractor-en was
+@distractor-en being
+
+# --- @fill: modal verbs take a bare infinitive, clause-final ------------------
+# `ze` is never used with these five, so a ze-infinitive is a real distractor.
+
+@fill
+@lu Ech [muss] haut spéit schaffen.
+@en I [must] work late today.
+@distractor-lu mussen
+@distractor-lu musst
+@distractor-lu misst
+@distractor-en musts
+@distractor-en musted
+@distractor-en musting
+
+@fill
+@lu [Kanns] du méi lues schwätzen, w.e.g.?
+@en [Can] you speak more slowly, please?
+@distractor-lu kënnen
+@distractor-lu kann
+@distractor-lu kënnt
+@distractor-en Cans
+@distractor-en Could
+@distractor-en Canning
+
+@fill
+@lu Meng Duechter [wëll] Piano spillen.
+@en My daughter [wants] to play the piano.
+@distractor-lu wëllen
+@distractor-lu wëlls
+@distractor-lu wëllt
+@distractor-en want
+@distractor-en wanted
+@distractor-en wanting
+
+@fill
+@lu Mir [solle] muer um sechs Auer opstoen.
+@en We [should] get up at six o'clock tomorrow.
+@distractor-lu soll
+@distractor-lu solls
+@distractor-lu sollt
+@distractor-en shoulds
+@distractor-en shoulded
+@distractor-en shoulding
+
+@fill
+@lu An dem Büro [däerf] ee net fëmmen.
+@en In the office one [is allowed] not to smoke.
+@distractor-lu däerfen
+@distractor-lu däerfs
+@distractor-lu däerft
+@distractor-en allow
+@distractor-en allowing
+@distractor-en allowed to
+
+@fill
+@lu Ech muss haut an d'Stad [goen].
+@en I have to [go] into the city today.
+@distractor-lu ginn
+@distractor-lu gees
+@distractor-lu ze goen
+@distractor-en goes
+@distractor-en going
+@distractor-en went
+
+@fill
+@lu Ech kann net gutt [kachen].
+@en I cannot [cook] well.
+@distractor-lu ze kachen
+@distractor-lu kacht
+@distractor-lu kachs
+@distractor-en cooks
+@distractor-en cooking
+@distractor-en cooked

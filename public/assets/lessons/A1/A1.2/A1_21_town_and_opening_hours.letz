@@ -304,8 +304,8 @@
 @distractor-en from
 
 @fill
-@lu D'Kanner spille [op] der Spillplaz.
-@en The children play [at] the playground.
+@lu Meng Kanner spillen haut [op] der Spillplaz.
+@en My children play [at] the playground today.
 @distractor-lu an
 @distractor-lu bei
 @distractor-lu um
@@ -314,8 +314,8 @@
 @distractor-en from
 
 @fill
-@lu Dir kaaft Timbere [bei] der Post.
-@en You buy stamps [at] the post office.
+@lu Mir kafen eis Timbere just [bei] der Post.
+@en We buy our stamps only [at] the post office.
 @distractor-lu an
 @distractor-lu op
 @distractor-lu um
@@ -324,8 +324,8 @@
 @distractor-en from
 
 @fill
-@lu Léiers du Lëtzebuergesch [an] der Schoul?
-@en Do you learn Luxembourgish [at] school?
+@lu Léiert Dir och Lëtzebuergesch [an] der Schoul?
+@en Do you also learn Luxembourgish [at] school?
 @distractor-lu op
 @distractor-lu bei
 @distractor-lu um
@@ -398,8 +398,8 @@
 @distractor-en free
 
 @fill
-@lu Ass de Supermarché sonndes [op]?
-@en Is the supermarket [open] on Sundays?
+@lu Ass de Supermarché haut sonndes [op]?
+@en Is the supermarket [open] this Sunday?
 @distractor-lu zou
 @distractor-lu do
 @distractor-lu fräi
@@ -476,8 +476,8 @@
 @distractor-en near the
 
 @fill
-@lu D'Brout [an der] Bäckerei ass ganz frësch.
-@en The bread [at the] bakery is very fresh.
+@lu D'Brout [an der] Bäckerei ass ëmmer frësch.
+@en The bread [at the] bakery is always fresh.
 @distractor-lu an d'
 @distractor-lu op der
 @distractor-lu bei der
@@ -494,3 +494,357 @@
 @distractor-en at a
 @distractor-en in the
 @distractor-en on the
+
+# --- Expansion: prepositions an/op/bei, contracted prepositions, opening hours ---
+
+# --- Opening hours: question-answer patterns ---
+
+@sentence
+@lu Wéini ass d'Apdikt op?
+@en When is the pharmacy open?
+@distractor-en closed
+@distractor-en where
+@distractor-lu zou
+@distractor-lu Wou
+
+@sentence
+@lu D'Apdikt ass vun hallwer néng bis Véierel op zwielef op.
+@en The pharmacy is open from half past eight until quarter to twelve.
+@distractor-en closed
+@distractor-en Saturday
+@distractor-lu zou
+@distractor-lu samsdes
+
+@sentence
+@lu Wéini mécht d'Apdikt op?
+@en When does the pharmacy open?
+@distractor-en close
+@distractor-en where
+@distractor-lu zou
+@distractor-lu Wou
+
+@sentence
+@lu Wéini mécht d'Apdikt zou?
+@en When does the pharmacy close?
+@distractor-en open
+@distractor-en where
+@distractor-lu op
+@distractor-lu Wou
+
+@sentence
+@lu De Coiffeur ass sonndes zou.
+@en The hairdresser is closed on Sundays.
+@distractor-en open
+@distractor-en Saturday
+@distractor-lu op
+@distractor-lu samsdes
+
+@sentence
+@lu Ass de Supermarché sonndes op?
+@en Is the supermarket open on Sundays?
+@distractor-en closed
+@distractor-en Saturday
+@distractor-lu zou
+@distractor-lu samsdes
+
+@sentence
+@lu De Supermarché ass sonndes vun hallwer zéng bis eng Auer op.
+@en The supermarket is open on Sundays from half past nine until one o'clock.
+@distractor-en closed
+@distractor-en Saturday
+@distractor-lu zou
+@distractor-lu samsdes
+
+# --- Prepositions an/op/bei — with movement vs static articles ---
+
+@sentence
+@lu Ech schaffen an enger Firma.
+@en I work at a company.
+@distractor-en bank
+@distractor-en school
+@distractor-lu Bank
+@distractor-lu Schoul
+
+@sentence
+@lu Mir kafen Uebst um Maart.
+@en We buy fruit at the market.
+@distractor-en bread
+@distractor-en supermarket
+@distractor-lu Brout
+@distractor-lu Supermarché
+
+@sentence
+@lu D'Kanner spillen op der Spillplaz.
+@en The children play at the playground.
+@distractor-en school
+@distractor-en forest
+@distractor-lu Schoul
+@distractor-lu Bësch
+
+@sentence
+@lu Dir kaaft Timberen op der Post.
+@en You buy stamps at the post office.
+@distractor-en bread
+@distractor-en market
+@distractor-lu Brout
+@distractor-lu Maart
+
+@sentence
+@lu Beim Dokter musse mir ëmmer laang waarden.
+@en At the doctor's we always have to wait a long time.
+@distractor-en short
+@distractor-en sometimes
+@distractor-lu kuerz
+@distractor-lu heiansdo
+
+@sentence
+@lu Léiers du Lëtzebuergesch op der Schoul?
+@en Do you learn Luxembourgish at school?
+@distractor-en office
+@distractor-en home
+@distractor-lu Büro
+@distractor-lu doheem
+
+@sentence
+@lu Haut den Owend iesse mir am Restaurant.
+@en Tonight we are eating at the restaurant.
+@distractor-en home
+@distractor-en cinema
+@distractor-lu doheem
+@distractor-lu Kino
+
+@sentence
+@lu Ech fueren an d'Vakanz.
+@en I am going on holiday.
+@distractor-en work
+@distractor-en school
+@distractor-lu Aarbecht
+@distractor-lu Schoul
+
+@sentence
+@lu Meng Fra schafft an engem Büro um Kierchbierg.
+@en My wife works in an office in Kirchberg.
+@distractor-en school
+@distractor-en home
+@distractor-lu Schoul
+@distractor-lu doheem
+
+@sentence
+@lu Ech gi muer zu Fouss op d'Aarbecht.
+@en Tomorrow I walk to work on foot.
+@distractor-en car
+@distractor-en bus
+@distractor-lu Auto
+@distractor-lu Bus
+
+@sentence
+@lu D'Brout an der Bäckerei ass ganz frësch.
+@en The bread at the bakery is very fresh.
+@distractor-en old
+@distractor-en cheap
+@distractor-lu al
+@distractor-lu bëlleg
+
+@sentence
+@lu Si kaaft hir Eeër just bei dem Bauer.
+@en She only buys her eggs from the farmer.
+@distractor-en baker
+@distractor-en market
+@distractor-lu Bäcker
+@distractor-lu Maart
+
+@sentence
+@lu Hatt joggt all Dag am Bësch.
+@en She jogs every day in the forest.
+@distractor-en park
+@distractor-en sometimes
+@distractor-lu Park
+@distractor-lu heiansdo
+
+# --- @fill: prepositions an/op/bei (choose the correct preposition) -----------
+
+@fill
+@lu Ech kafe Brout [an] der Bäckerei.
+@en I buy bread [at] the bakery.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en on
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Mäi Papp schafft [op] enger Bank.
+@en My dad works [at] a bank.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu De Bus fiert heiansdo [an] d'Duerf.
+@en The bus sometimes goes [to] the village.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu aus
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Si kaaft hir Eeër [bei] dem Bauer.
+@en She buys her eggs [from] the farmer.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu mat
+@distractor-en in
+@distractor-en at
+@distractor-en with
+
+@fill
+@lu D'Léierin schafft [op] der Universitéit.
+@en The teacher works [at] the university.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Hie waart [an] der Schlaang.
+@en He is waiting [in] the queue.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en at
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Mäi Papp geet [an] de Kino.
+@en My dad goes [to] the cinema.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu aus
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Mäi Brudder schafft [op] der Gare.
+@en My brother works [at] the train station.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en near
+@distractor-en with
+
+# --- @fill: contracted prepositions (am/beim/um/vum/virum/mam) ----------------
+
+@fill
+@lu De Manager schafft [am] Supermarché.
+@en The manager works [in] the supermarket.
+@distractor-lu beim
+@distractor-lu um
+@distractor-lu vum
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu De Marc joggt all Dag [am] Bësch.
+@en Marc jogs every day [in] the forest.
+@distractor-lu beim
+@distractor-lu um
+@distractor-lu vum
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu [Beim] Dokter musse mir laang waarden.
+@en [At] the doctor's we have to wait a long time.
+@distractor-lu Am
+@distractor-lu Um
+@distractor-lu Vum
+@distractor-en In
+@distractor-en From
+@distractor-en Near
+
+@fill
+@lu Ech iesse Mëtteg [am] Restaurant.
+@en I eat lunch [at] the restaurant.
+@distractor-lu beim
+@distractor-lu um
+@distractor-lu vum
+@distractor-en near
+@distractor-en from
+@distractor-en by
+
+@fill
+@lu D'Hochzäit ass [um] dräi Auer.
+@en The wedding is [at] three o'clock.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Ech sti [virum] Musée.
+@en I am standing [in front of] the museum.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en inside
+@distractor-en behind
+@distractor-en from
+
+# --- @fill: opening hours — um (at a specific time) --------------------------
+
+@fill
+@lu D'Apdikt mécht [um] aacht Auer op.
+@en The pharmacy opens [at] eight o'clock.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu D'Apdikt mécht [um] sechs Auer zou.
+@en The pharmacy closes [at] six o'clock.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+# --- @fill: vun...bis (from...until) and mam (by transport) -------------------
+
+@fill
+@lu De Coiffeur ass [vun] hallwer zéng bis fënnef Auer op.
+@en The hairdresser is open [from] half past nine until five o'clock.
+@distractor-lu um
+@distractor-lu am
+@distractor-lu beim
+@distractor-en at
+@distractor-en in
+@distractor-en near
+
+@fill
+@lu Ech fuere [mam] Bus an d'Stad.
+@en I travel [by] bus to the city.
+@distractor-lu vum
+@distractor-lu beim
+@distractor-lu um
+@distractor-en from
+@distractor-en at
+@distractor-en near
