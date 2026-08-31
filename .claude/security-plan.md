@@ -180,7 +180,7 @@ Note: PostHog covers exceptions and custom events. For raw request-level log tai
    - Dependabot version updates: **On** (this requires the config file Claude will add in B15)
 2. Repo → **Settings** → **Branches** → **Add branch ruleset** for `main`:
    - Require a pull request before merging
-   - Require status checks: select the GitHub Actions workflow (will appear after B14 is merged once)
+   - Require status checks: select the `check` job from the CI workflow (`.github/workflows/ci.yml`, B16 — appears in this list after the workflow has run once on `main`)
    - Require linear history
    - Restrict deletions
 3. Stop running `npm run deploy` from your laptop once B14 is live. The new flow: push to `main` → GitHub Actions deploys.
@@ -189,7 +189,7 @@ Note: PostHog covers exceptions and custom events. For raw request-level log tai
 
 - [ ] **B14. GitHub Actions deploy workflow.** New `.github/workflows/deploy.yml` running on push to `main`: install → typecheck → test → build → `wrangler deploy` using `CLOUDFLARE_API_TOKEN`. Gated on A7.
 - [x] **B15. Dependabot config.** Done — `.github/dependabot.yml`, weekly npm + github-actions, minor/patch grouped. Active once A8 is enabled in repo settings.
-- [x] **B16. CI checks workflow.** Done — `.github/workflows/ci.yml`: lint, typecheck, test, `npm audit --omit=dev --audit-level=high`. **Note: existing repo has 8 pre-existing lint errors** (`src/exercise/batch-planner.ts`, `src/lib/multimethod.ts`, `tests/src/exercise/batch-planner.test.ts`) that will fail CI on the first run — fix or temporarily relax the lint step before requiring the check in branch protection.
+- [x] **B16. CI checks workflow.** Done — `.github/workflows/ci.yml` on push-to-`main` and every PR: `npm ci` → `npx vitest run` → `npm run lint` → `npx tsc -b` → `npx vite build`, plus an advisory `npm audit --omit=dev --audit-level=high` (`continue-on-error` — the audit endpoint is a third-party service that flakes independently of this repo). Split into named steps rather than one `npm run build` so the run summary names the failing stage. No secrets needed: `src/main.tsx` skips `posthog.init` when `VITE_PUBLIC_POSTHOG_KEY` is absent. Lint, typecheck, and all tests are green as of the workflow landing, so it can be required in branch protection (A8) immediately.
 
 ---
 

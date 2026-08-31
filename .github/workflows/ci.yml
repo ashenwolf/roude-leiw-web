@@ -1,0 +1,52 @@
+# Runs the same gate `npm run build` runs locally, so a push can't land what a local
+# build would have rejected. `npm run build` is deliberately NOT reused as a single step:
+# split steps name the failing stage in the run summary instead of one opaque red X.
+#
+# Node 22 (LTS) matches README's stated minimum; Vite 7 requires ^20.19 || >=22.12.
+#
+# No secrets are needed. `VITE_PUBLIC_POSTHOG_KEY` is absent here on purpose — `src/main.tsx`
+# skips `posthog.init` when it's unset, so the bundle builds without analytics.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test
+        run: npx vitest run
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc -b
+
+      - name: Build
+        run: npx vite build
+
+      # Advisory: the npm audit endpoint is a third-party service and flakes independently
+      # of this repo's health, so a registry outage must not block a merge.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+        continue-on-error: true
