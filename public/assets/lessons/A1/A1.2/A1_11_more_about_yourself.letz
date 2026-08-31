@@ -3,6 +3,10 @@
 # Gender markers (m)/(f)/(n) stripped; (formal)/(informal) qualifiers stripped.
 # Words already taught in A1.01-A1.09 (al, d'Stad, kënnen, wunnen, fueren,
 # schaffen, schwätzen) are reused in sentences below but not re-declared here.
+# Fills added: language proficiency levels (fléissend/relativ gutt/e bëssen/keen),
+# prepositions for countries and cities (zu/an/an der), keng/kee negation,
+# mee (but) conjunction, and zanter + time expressions.
+# Mined from deck grammar tables and exercises p.5-9, p.12-15.
 
 @lesson A1.11 "More About Yourself"
 
@@ -239,3 +243,195 @@
 @distractor-en Belgium
 @distractor-lu geschwënn
 @distractor-lu Belsch
+
+@sentence
+@lu Hatt schwätzt fléissend Franséisch a keen Englesch.
+@en She speaks French fluently and no English.
+@distractor-en German
+@distractor-en well
+@distractor-lu Däitsch
+@distractor-lu gutt
+
+@sentence
+@lu D'Monika wunnt an Däitschland, zu München.
+@en Monika lives in Germany, in Munich.
+@distractor-en France
+@distractor-en Luxembourg
+@distractor-lu Frankräich
+@distractor-lu Lëtzebuerg
+
+@sentence
+@lu De Steve schafft zu London.
+@en Steve works in London.
+@distractor-en Germany
+@distractor-en Berlin
+@distractor-lu Däitschland
+@distractor-lu Berlin
+
+# --- @fill: language proficiency levels ---------------------------------------
+# The deck's four-step scale: fléissend / relativ gutt / e bëssen / keen.
+# Distractors are the other levels — the four-way confusion.
+
+@fill
+@lu De Claudio schwätzt [fléissend] Italienesch.
+@en Claudio speaks Italian [fluently].
+@distractor-lu relativ gutt
+@distractor-lu e bëssen
+@distractor-lu keen
+@distractor-en relatively well
+@distractor-en a little
+@distractor-en no
+
+@fill
+@lu Hatt schwätzt [relativ gutt] Lëtzebuergesch.
+@en She speaks Luxembourgish [relatively well].
+@distractor-lu fléissend
+@distractor-lu e bëssen
+@distractor-lu keen
+@distractor-en fluently
+@distractor-en a little
+@distractor-en no
+
+@fill
+@lu Hatt schwätzt [e bëssen] Lëtzebuergesch.
+@en She speaks [a little] Luxembourgish.
+@distractor-lu fléissend
+@distractor-lu relativ gutt
+@distractor-lu keen
+@distractor-en fluently
+@distractor-en relatively well
+@distractor-en no
+
+@fill
+@lu Ech schwätze [keen] Portugisesch.
+@en I speak [no] Portuguese.
+@distractor-lu fléissend
+@distractor-lu relativ gutt
+@distractor-lu e bëssen
+@distractor-en fluently
+@distractor-en relatively well
+@distractor-en a little
+
+# --- @fill: prepositions for countries and cities -----------------------------
+# zu for Luxembourg and most towns; an for most countries;
+# an der for countries with article (Belsch, Schwäiz). The three-way confusion.
+
+@fill
+@lu Hatt wunnt [zu] Lëtzebuerg.
+@en She lives [in] Luxembourg.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu aus
+@distractor-en at
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu D'Annette wunnt [zu] Clierf.
+@en Annette lives [in] Clervaux.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu aus
+@distractor-en at
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu Hie wunnt [an] Däitschland.
+@en He lives [in] Germany.
+@distractor-lu zu
+@distractor-lu op
+@distractor-lu aus
+@distractor-en at
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu Mir wunne [an der] Belsch.
+@en We live [in] Belgium.
+@distractor-lu zu der
+@distractor-lu op der
+@distractor-lu aus der
+@distractor-en at the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Hatt fuert [an d'] Belsch.
+@en She is driving [to] Belgium.
+@distractor-lu an der
+@distractor-lu op d'
+@distractor-lu aus der
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+# --- @fill: keng / kee negation -----------------------------------------------
+# The gendered negative article: keen (masculine), keng (feminine/plural).
+# Distractors swap the gender form.
+
+@fill
+@lu Hatt huet [keng] Geschwëster.
+@en She has [no] siblings.
+@distractor-lu keen
+@distractor-lu net
+@distractor-lu kee
+@distractor-en not
+@distractor-en any
+@distractor-en some
+
+@fill
+@lu Hie schwätzt [keen] Franséisch.
+@en He speaks [no] French.
+@distractor-lu keng
+@distractor-lu net
+@distractor-lu kee
+@distractor-en not
+@distractor-en any
+@distractor-en some
+
+# --- @fill: mee (but) — joining contrasting clauses --------------------------
+# Coordinating conjunction, distinct from subordinating "well" / "wann".
+
+@fill
+@lu Ech si jonk, [mee] ech schaffe schonn.
+@en I am young, [but] I already work.
+@distractor-lu an
+@distractor-lu oder
+@distractor-lu well
+@distractor-en and
+@distractor-en or
+@distractor-en because
+
+@fill
+@lu Hie schwätzt Englesch, [mee] keen Däitsch.
+@en He speaks English, [but] no German.
+@distractor-lu an
+@distractor-lu oder
+@distractor-lu well
+@distractor-en and
+@distractor-en or
+@distractor-en because
+
+# --- @fill: zanter + time expressions ----------------------------------------
+# "since / for (duration)" — the lesson already has the word and a sentence.
+
+@fill
+@lu Ech wunne [zanter] fënnef Joer zu Lëtzebuerg.
+@en I have been living [for] five years in Luxembourg.
+@distractor-lu bis
+@distractor-lu vun
+@distractor-lu säit
+@distractor-en until
+@distractor-en from
+@distractor-en at
+
+@fill
+@lu Hatt schafft [zanter] dräi Joer als Doktesch.
+@en She has been working [for] three years as a doctor.
+@distractor-lu bis
+@distractor-lu vun
+@distractor-lu säit
+@distractor-en until
+@distractor-en from
+@distractor-en at

@@ -3,6 +3,10 @@
 # (m)/(f)/(n)/(pl) markers stripped; "the" dropped from English glosses to match
 # this course's established style. Distractor tokens are sourced from other
 # entries within this same lesson.
+# Fills added: shop prepositions (beim/an der/op dem/am), mäi vs meng possessives,
+# kascht/kaschten verb agreement, payment methods, copula sinn/ass, ordering
+# patterns, oder/an connectors. Six sentences mined from the deck's Part 2
+# (possessive+shop pattern, bakery narrative).
 
 @lesson A1.14 "Grocery Shopping"
 
@@ -421,3 +425,262 @@
 @distractor-en fresh
 @distractor-lu bëlleg
 @distractor-lu frësch
+
+# --- Sentences mined from deck Part 2: possessive+shop, bakery narrative ---
+
+@sentence
+@lu Ech kafe mäi Fleesch beim Metzler.
+@en I buy my meat at the butcher's.
+@distractor-en baker
+@distractor-en market
+@distractor-lu Bäcker
+@distractor-lu Maart
+
+@sentence
+@lu Ech kafe meng Taarten bei dem Bäcker.
+@en I buy my tarts at the baker's.
+@distractor-en butcher
+@distractor-en market
+@distractor-lu Metzler
+@distractor-lu Maart
+
+@sentence
+@lu Ech kafe meng Zeitung op dem Maart.
+@en I buy my newspaper at the market.
+@distractor-en store
+@distractor-en bakery
+@distractor-lu Geschäft
+@distractor-lu Bäckerei
+
+@sentence
+@lu Ech kafe mäi Wäin an dem Supermarché.
+@en I buy my wine at the supermarket.
+@distractor-en market
+@distractor-en bakery
+@distractor-lu Maart
+@distractor-lu Bäckerei
+
+@sentence
+@lu D'Madame keeft sechs Bréidercher.
+@en The lady buys six bread rolls.
+@distractor-en croissants
+@distractor-en tarts
+@distractor-lu Croissanten
+@distractor-lu Taarten
+
+@sentence
+@lu Si keeft Mëtschen, Brout, e Kuch an eng Taart.
+@en She buys Danish pastries, bread, a cake and a tart.
+@distractor-en croissant
+@distractor-en milk
+@distractor-lu Croissant
+@distractor-lu Mëllech
+
+# --- @fill: shop prepositions (beim / an der / op dem / am) -----------------
+# The deck teaches where you shop with contracted dative prepositions.
+# Distractors are sibling shop-prepositions — the confusion is which
+# shop takes which form (person → bei, enclosed → an, open → op).
+
+@fill
+@lu Hie keeft Rëndsfleesch [beim] Metzler.
+@en He buys beef [at the] butcher's.
+@distractor-lu an der
+@distractor-lu op dem
+@distractor-lu am
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Ech kafe mäi Brout [an der] Bäckerei.
+@en I buy my bread [at the] bakery.
+@distractor-lu beim
+@distractor-lu op dem
+@distractor-lu am
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Hatt keeft Zalot [op dem] Maart.
+@en She buys salad [at the] market.
+@distractor-lu beim
+@distractor-lu an der
+@distractor-lu am
+@distractor-en in the
+@distractor-en from the
+@distractor-en by the
+
+@fill
+@lu Mir kafe Mëllech [am] Supermarché.
+@en We buy milk [at the] supermarket.
+@distractor-lu beim
+@distractor-lu an der
+@distractor-lu op dem
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+# --- @fill: mäi vs meng possessives ------------------------------------------
+# mäi + m/n singular, meng + f singular and all plurals. Distractors
+# are the other possessive form and deng/seng for a three-way contrast.
+
+@fill
+@lu Ech kafe [mäi] Kéis um Maart.
+@en I buy [my] cheese at the market.
+@distractor-lu meng
+@distractor-lu deng
+@distractor-lu seng
+@distractor-en your
+@distractor-en his
+@distractor-en her
+
+@fill
+@lu Ech kafe [meng] Zeitung bei dem Bäcker.
+@en I buy [my] newspaper at the baker's.
+@distractor-lu mäi
+@distractor-lu deng
+@distractor-lu seng
+@distractor-en your
+@distractor-en his
+@distractor-en her
+
+@fill
+@lu Wou ass [mäi] Brout?
+@en Where is [my] bread?
+@distractor-lu meng
+@distractor-lu deng
+@distractor-lu seng
+@distractor-en your
+@distractor-en his
+@distractor-en her
+
+# --- @fill: kascht vs kaschten -----------------------------------------------
+# Singular kascht vs. plural kaschten — the price-question verb agreement.
+# Distractors are the wrong number form plus kritt/hëlt.
+
+@fill
+@lu Dat Brout [kascht] dräi Euro.
+@en That bread [costs] three euros.
+@distractor-lu kaschten
+@distractor-lu kritt
+@distractor-lu hëlt
+@distractor-en cost
+@distractor-en gets
+@distractor-en takes
+
+@fill
+@lu Déi Drauwe [kaschten] véier Euro.
+@en Those grapes [cost] four euros.
+@distractor-lu kascht
+@distractor-lu kritt
+@distractor-lu hëlt
+@distractor-en costs
+@distractor-en gets
+@distractor-en takes
+
+# --- @fill: payment method (boer vs mat der Kaart) ---------------------------
+# The checkout dialogue drills the two payment choices.
+# Distractors are the other payment form plus plausible wrong phrases.
+
+@fill
+@lu Ech bezuele [boer], wgl.
+@en I pay [cash], please.
+@distractor-lu mat der Kaart
+@distractor-lu mat Scheck
+@distractor-lu op Rechnung
+@distractor-en by card
+@distractor-en by cheque
+@distractor-en on credit
+
+@fill
+@lu Bezuelt Dir [mat der Kaart] oder boer?
+@en Do you pay [by card] or cash?
+@distractor-lu mat Scheck
+@distractor-lu op Rechnung
+@distractor-lu um Internet
+@distractor-en by cheque
+@distractor-en on credit
+@distractor-en online
+
+# --- @fill: copula sinn vs ass -----------------------------------------------
+# Plural subjects take sinn, singular takes ass — the quality questions
+# the deck drills. Distractors are the wrong number form.
+
+@fill
+@lu [Sinn] d'Drauwe frësch?
+@en [Are] the grapes fresh?
+@distractor-lu Ass
+@distractor-lu Huet
+@distractor-lu Gëtt
+@distractor-en Is
+@distractor-en Has
+@distractor-en Does
+
+@fill
+@lu [Ass] de Sak Grompere schwéier?
+@en [Is] the sack of potatoes heavy?
+@distractor-lu Sinn
+@distractor-lu Huet
+@distractor-lu Gëtt
+@distractor-en Are
+@distractor-en Has
+@distractor-en Does
+
+# --- @fill: ordering patterns (hätt gär / huelen / gitt mir) ----------------
+# The deck teaches four client ordering frames. Distractors are the
+# other ordering verbs — the confusion is which polite frame to use.
+
+@fill
+@lu Ech [hätt gär] e Kilo Tomaten, wgl.
+@en I [would like] a kilo of tomatoes, please.
+@distractor-lu kréie gär
+@distractor-lu brauche just
+@distractor-lu siche nach
+@distractor-en want to get
+@distractor-en just need
+@distractor-en am looking for
+
+@fill
+@lu [Gitt] mir dräi Orangë, wgl.!
+@en [Give] me three oranges, please!
+@distractor-lu Schéckt
+@distractor-lu Bréngt
+@distractor-lu Weist
+@distractor-en Send
+@distractor-en Bring
+@distractor-en Show
+
+@fill
+@lu Ech [huelen] och e Pak Miel, wgl.
+@en I'll [take] also a pack of flour, please.
+@distractor-lu kréien
+@distractor-lu brauchen
+@distractor-lu sichen
+@distractor-en get
+@distractor-en need
+@distractor-en find
+
+# --- @fill: oder vs an connectors --------------------------------------------
+# The quality questions and shopping lists use oder (or) vs an (and).
+# Distractors are sibling connectors — mee (but), well (because).
+
+@fill
+@lu Sinn d'Äppel séiss [oder] sauer?
+@en Are the apples sweet [or] sour?
+@distractor-lu an
+@distractor-lu mee
+@distractor-lu well
+@distractor-en and
+@distractor-en but
+@distractor-en because
+
+@fill
+@lu Si keeft Brout, e Kuch [an] eng Taart.
+@en She buys bread, a cake [and] a tart.
+@distractor-lu oder
+@distractor-lu mee
+@distractor-lu well
+@distractor-en or
+@distractor-en but
+@distractor-en because

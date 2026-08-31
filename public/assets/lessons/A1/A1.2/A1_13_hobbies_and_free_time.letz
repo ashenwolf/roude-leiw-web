@@ -5,6 +5,11 @@
 # Luxembourgish form. Time-telling/weekday/frequency vocabulary is included
 # because the deck teaches it specifically to let learners say when/how often
 # they do their hobbies.
+# Fills added: 3rd-person verb forms (baakt/liest/fiert/mécht), gär liking
+# scale, frequency adverbs (ëmmer/seelen/dräi Mol/all Dag), separable verbs
+# (op-stoen, schwamme goen), prepositions of time (um/vun/nom/zu), and
+# inversion (fronted adverb → verb-subject swap). Part 2 deck mined for new
+# sentences (gär patterns, frequency adverbs, inversion examples).
 
 @lesson A1.13 "Hobbies & Free Time"
 
@@ -322,3 +327,265 @@
 @distractor-en swim
 @distractor-lu lafen
 @distractor-lu schwammen
+
+# --- Sentences mined from Part 2: gär patterns, frequency, inversion ---
+
+@sentence
+@lu Ech kache gär.
+@en I like cooking.
+@distractor-en baking
+@distractor-en singing
+@distractor-lu baken
+@distractor-lu sangen
+
+@sentence
+@lu Ech fuere gär Vëlo.
+@en I like riding the bike.
+@distractor-en swimming
+@distractor-en running
+@distractor-lu schwammen
+@distractor-lu lafen
+
+@sentence
+@lu Wat méchs du gär?
+@en What do you like to do?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Ech ginn dacks lafen.
+@en I often go running.
+@distractor-en rarely
+@distractor-en never
+@distractor-lu seelen
+@distractor-lu ni
+
+@sentence
+@lu Ech lafen dräi Mol d'Woch.
+@en I run three times a week.
+@distractor-en month
+@distractor-en year
+@distractor-lu Mount
+@distractor-lu Joer
+
+@sentence
+@lu Ech ginn heiansdo schwammen.
+@en I sometimes go swimming.
+@distractor-en always
+@distractor-en never
+@distractor-lu ëmmer
+@distractor-lu ni
+
+# --- @fill: 3rd-person verb forms (root-changing) ----------------------------
+# The deck's Part 2 drills 3rd-person singular with De Pol as subject. The
+# root-changing forms (baakt, liest, fiert, mécht) are the target; distractors
+# are wrong persons of the same verb.
+
+@fill
+@lu Mäi Partner [baakt] gär Kuchen.
+@en My partner likes [baking] cakes.
+@distractor-lu baken
+@distractor-lu bake
+@distractor-lu gebacken
+@distractor-en cooking
+@distractor-en drawing
+@distractor-en singing
+
+@fill
+@lu Mäi Partner [liest] gär Bicher.
+@en My partner likes [reading] books.
+@distractor-lu liesen
+@distractor-lu lies
+@distractor-lu gelies
+@distractor-en cooking
+@distractor-en singing
+@distractor-en swimming
+
+@fill
+@lu Mäi Partner [fiert] ganz gär Vëlo.
+@en My partner really likes [riding] the bike.
+@distractor-lu fueren
+@distractor-lu fuere
+@distractor-lu gefuer
+@distractor-en swimming
+@distractor-en running
+@distractor-en cooking
+
+@fill
+@lu Mäi Partner [mécht] ganz gär Fotoen.
+@en My partner really likes [taking] photos.
+@distractor-lu maachen
+@distractor-lu maache
+@distractor-lu gemaach
+@distractor-en collecting
+@distractor-en baking
+@distractor-en singing
+
+# --- @fill: gär liking scale --------------------------------------------------
+# gär / net gär / guer net gär / ganz gär — the four-step scale from Part 2.
+# Distractors are the other points on the scale.
+
+@fill
+@lu Ech mole [gär] mat menge Kanner.
+@en I [like] drawing with my children.
+@distractor-lu net gär
+@distractor-lu guer net gär
+@distractor-lu seelen
+@distractor-en don't like
+@distractor-en really don't like
+@distractor-en rarely like
+
+@fill
+@lu Ech schwamme [net gär] moies.
+@en I [don't like] swimming in the morning.
+@distractor-lu gär
+@distractor-lu ganz gär
+@distractor-lu ëmmer
+@distractor-en like
+@distractor-en really like
+@distractor-en always like
+
+@fill
+@lu Mäi Partner sammelt [guer net gär] Timberen.
+@en My partner [really doesn't like] collecting stamps.
+@distractor-lu gär
+@distractor-lu ganz gär
+@distractor-lu net gär
+@distractor-en likes
+@distractor-en really likes
+@distractor-en doesn't like
+
+@fill
+@lu Ech fuere [ganz gär] Vëlo.
+@en I [really like] riding the bike.
+@distractor-lu net gär
+@distractor-lu guer net gär
+@distractor-lu seelen
+@distractor-en don't like
+@distractor-en really don't like
+@distractor-en rarely like
+
+# --- @fill: frequency adverbs -------------------------------------------------
+# ëmmer / seelen plus the "X Mol d'Woch" and "all Dag" patterns from the deck.
+# Distractors are other frequency adverbs to force the learner to read meaning.
+
+@fill
+@lu Ech lauschtere [ëmmer] Musek.
+@en I [always] listen to music.
+@distractor-lu heiansdo
+@distractor-lu seelen
+@distractor-lu ni
+@distractor-en sometimes
+@distractor-en rarely
+@distractor-en never
+
+@fill
+@lu Ech kache [seelen] de Weekend.
+@en I [rarely] cook at the weekend.
+@distractor-lu dacks
+@distractor-lu ëmmer
+@distractor-lu heiansdo
+@distractor-en often
+@distractor-en always
+@distractor-en sometimes
+
+@fill
+@lu Ech gi [dräi Mol] d'Woch lafen.
+@en I go running [three times] a week.
+@distractor-lu ee Mol
+@distractor-lu zwee Mol
+@distractor-lu all Dag
+@distractor-en once
+@distractor-en twice
+@distractor-en every day
+
+@fill
+@lu Ech gi [all Dag] schwammen.
+@en I go swimming [every day].
+@distractor-lu ee Mol d'Woch
+@distractor-lu heiansdo
+@distractor-lu seelen
+@distractor-en once a week
+@distractor-en sometimes
+@distractor-en rarely
+
+# --- @fill: separable verbs ---------------------------------------------------
+# opstoen (stinn … op) and the goen + infinitive pattern (schwamme goen,
+# spadséiere goen) where the non-conjugated verb goes to the end. The deck
+# explicitly teaches these as separable-verb-like constructions.
+
+@fill
+@lu De Samschdeg stinn ech um zéng Auer [op].
+@en On Saturday I get [up] at ten o'clock.
+@distractor-lu aus
+@distractor-lu un
+@distractor-lu mat
+@distractor-en out
+@distractor-en on
+@distractor-en off
+
+@fill
+@lu De Weekend gi meng Kanner [spadséieren].
+@en At the weekend my children go for a [walk].
+@distractor-lu schwammen
+@distractor-lu lafen
+@distractor-lu sangen
+@distractor-en swim
+@distractor-en run
+@distractor-en sing
+
+@fill
+@lu Ech gi freides owes [schwammen].
+@en I go [swimming] on Friday evenings.
+@distractor-lu lafen
+@distractor-lu spadséieren
+@distractor-lu kachen
+@distractor-en running
+@distractor-en walking
+@distractor-en cooking
+
+# --- @fill: prepositions of time -----------------------------------------------
+# um (at a clock time), vun (from), nom (after, contracted), zu Mëtteg (at noon).
+# Distractors are other time prepositions to test which one fits.
+
+@fill
+@lu Ech spille [um] zéng Auer Piano.
+@en I play the piano [at] ten o'clock.
+@distractor-lu vun
+@distractor-lu nom
+@distractor-lu bis
+@distractor-en from
+@distractor-en after
+@distractor-en until
+
+@fill
+@lu Ech gi freides [vun] siwen bis aacht Auer lafen.
+@en I go running on Fridays [from] seven to eight o'clock.
+@distractor-lu um
+@distractor-lu nom
+@distractor-lu zu
+@distractor-en at
+@distractor-en after
+@distractor-en to
+
+@fill
+@lu [Nom] Mëttegiesse ginn ech spadséieren.
+@en [After] lunch I go for a walk.
+@distractor-lu Um
+@distractor-lu Vun
+@distractor-lu Zu
+@distractor-en At
+@distractor-en From
+@distractor-en To
+
+@fill
+@lu Ech gi [zu] Mëtteg a mäi Liiblingsrestaurant.
+@en I go to my favourite restaurant [at] noon.
+@distractor-lu um
+@distractor-lu vun
+@distractor-lu nom
+@distractor-en from
+@distractor-en after
+@distractor-en by

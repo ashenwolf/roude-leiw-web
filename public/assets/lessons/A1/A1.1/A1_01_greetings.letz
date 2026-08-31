@@ -389,8 +389,8 @@
 # forcing discrimination between morning/afternoon/evening.
 
 @fill
-@lu [Gudde Moien], wëllt Dir e Kaffi drénken?
-@en [Good morning], would you like to drink a coffee?
+@lu [Gudde Moien], wëllt Dir e Kaffi drénken? Bis den Owend!
+@en [Good morning], would you like to drink a coffee? See you in the evening!
 @distractor-lu Gudde Mëtteg
 @distractor-lu Gudden Owend
 @distractor-lu Salut
@@ -409,8 +409,8 @@
 @distractor-en Hi
 
 @fill
-@lu [Gudden Owend], wëllt Dir e Kaffi?
-@en [Good evening], do you want a coffee?
+@lu [Gudden Owend], wëllt Dir e Kaffi? Gutt Nuecht!
+@en [Good evening], do you want a coffee? Good night!
 @distractor-lu Gudde Moien
 @distractor-lu Gudde Mëtteg
 @distractor-lu Bonjour
@@ -423,8 +423,8 @@
 # other farewell time words from this lesson.
 
 @fill
-@lu [Bis muer], ech ginn heem.
-@en [See you tomorrow], I'm going home.
+@lu [Bis muer], ech ginn heem. Gutt Nuecht!
+@en [See you tomorrow], I'm going home. Good night!
 @distractor-lu Bis geschwënn
 @distractor-lu Bis den Owend
 @distractor-lu Bis herno
@@ -433,8 +433,8 @@
 @distractor-en See you later
 
 @fill
-@lu [Bis geschwënn], ech kommen erëm.
-@en [See you soon], I'm coming back.
+@lu [Bis geschwënn], ech kommen erëm haut nach.
+@en [See you soon], I'm coming back again today.
 @distractor-lu Bis muer
 @distractor-lu Bis den Owend
 @distractor-lu Bis dann

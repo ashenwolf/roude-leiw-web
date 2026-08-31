@@ -3,6 +3,9 @@
 # (m)/(f)/(n)/(pl) markers stripped; kept only the article. Synonym pairs in the
 # deck (Schlofkummer/Schlofzëmmer, d'Couche/de Canapé, Këssen/Pillem,
 # däischter/donkel) are taught once, using the form that appears in a sentence.
+# Fills added: 18 — locative prepositions with rooms/furniture (10), negation
+# kee/keng for rooms (4), separable verbs opmaachen/zoumaachen (4). Mined from
+# the deck's "Mäin Haus" fill-in exercise (p13/p16) and picture-labelled rooms.
 
 @lesson A1.18 "Home & Rooms"
 
@@ -534,3 +537,222 @@
 @distractor-en garden
 @distractor-lu Haus
 @distractor-lu Gaart
+
+@sentence
+@lu Wéi gesäit deng Wunneng aus?
+@en What does your home look like?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu De Buedem ass hëlzen a propper.
+@en The floor is wooden and clean.
+@distractor-en dirty
+@distractor-en metallic
+@distractor-lu knaschteg
+@distractor-lu metallen
+
+@sentence
+@lu D'Wunneng huet eng oppe Kichen an e groussen Iessdësch.
+@en The home has an open kitchen and a big dining table.
+@distractor-en small
+@distractor-en cellar
+@distractor-lu kleng
+@distractor-lu Keller
+
+# --- @fill: locative prepositions with rooms/furniture ------------------------
+# The centrepiece: am/an der/op dem/ënner dem/niewent dem — room and furniture
+# frames specific to this lesson's vocabulary. A1_08 drills the same prepositions
+# with generic places; these use home/furniture nouns so the two don't overlap.
+# Distractors are other locative preps from the same set.
+
+@fill
+@lu De Frigo steet [an der] Kichen.
+@en The fridge is [in the] kitchen.
+@distractor-lu am
+@distractor-lu op der
+@distractor-lu niewent der
+@distractor-en at the
+@distractor-en on the
+@distractor-en next to the
+
+@fill
+@lu De Canapé steet [am] Living.
+@en The couch is [in the] living room.
+@distractor-lu an der
+@distractor-lu op dem
+@distractor-lu ënner dem
+@distractor-en on the
+@distractor-en under the
+@distractor-en next to the
+
+@fill
+@lu D'Wäschmaschinn ass [an der] Garage.
+@en The washing machine is [in the] garage.
+@distractor-lu am
+@distractor-lu op der
+@distractor-lu ënner der
+@distractor-en at the
+@distractor-en on the
+@distractor-en under the
+
+@fill
+@lu D'Dusch ass [am] Buedzëmmer op der lénker Säit.
+@en The shower is [in the] bathroom on the left side.
+@distractor-lu an der
+@distractor-lu op dem
+@distractor-lu ënner dem
+@distractor-en on the
+@distractor-en at the
+@distractor-en next to the
+
+@fill
+@lu D'Fotell steet [niewent] dem Canapé.
+@en The armchair is [next to] the couch.
+@distractor-lu hannert
+@distractor-lu ënner
+@distractor-lu virun
+@distractor-en behind
+@distractor-en under
+@distractor-en in front of
+
+@fill
+@lu D'Këssen läit [op dem] Canapé.
+@en The pillow is [on the] couch.
+@distractor-lu ënner dem
+@distractor-lu am
+@distractor-lu niewent dem
+@distractor-en under the
+@distractor-en in the
+@distractor-en next to the
+
+@fill
+@lu De Kaffisdësch steet [virun] dem Canapé.
+@en The coffee table is [in front of] the couch.
+@distractor-lu hannert
+@distractor-lu niewent
+@distractor-lu ënner
+@distractor-en behind
+@distractor-en next to
+@distractor-en under
+
+@fill
+@lu D'Buedbidden ass [am] Buedzëmmer.
+@en The bathtub is [in the] bathroom.
+@distractor-lu an der
+@distractor-lu op dem
+@distractor-lu niewent dem
+@distractor-en on the
+@distractor-en at the
+@distractor-en next to the
+
+@fill
+@lu Den Teppech läit [op dem] Buedem.
+@en The carpet is [on the] floor.
+@distractor-lu ënner dem
+@distractor-lu am
+@distractor-lu niewent dem
+@distractor-en under the
+@distractor-en in the
+@distractor-en next to the
+
+@fill
+@lu D'Steeluucht steet [hannert] der Fotell.
+@en The floor lamp is [behind] the armchair.
+@distractor-lu virun
+@distractor-lu niewent
+@distractor-lu ënner
+@distractor-en in front of
+@distractor-en next to
+@distractor-en under
+
+# --- @fill: negation kee/keng for rooms ---------------------------------------
+# The deck's fill-in exercise drills "keen Iesszëmmer / kee Keller / keng Terrass".
+# kee = masculine before consonant, keen = masculine before vowel, keng = feminine/
+# plural. Distractors swap the gender form so the learner must match the noun.
+
+@fill
+@lu Dat Haus huet [kee] Keller.
+@en That house has [no] cellar.
+@distractor-lu keng
+@distractor-lu keen
+@distractor-lu eng
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu D'Appartement huet [keen] Iesszëmmer.
+@en The flat has [no] dining room.
+@distractor-lu keng
+@distractor-lu kee
+@distractor-lu eng
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu D'Wunneng huet [keng] Terrass.
+@en The home has [no] terrace.
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu eng
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Dat Haus huet [keng] Piscine.
+@en That house has [no] swimming pool.
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu eng
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+# --- @fill: separable verbs opmaachen/zoumaachen -----------------------------
+# Both are taught as @word in this lesson. The prefix goes to the end in a main
+# clause. Distractors swap the two prefixes so the learner picks open vs close.
+
+@fill
+@lu Maach d'Fënster [op], et ass waarm!
+@en [Open] the window, it is warm!
+@distractor-lu zou
+@distractor-lu aus
+@distractor-lu un
+@distractor-en Close
+@distractor-en Turn off
+@distractor-en Turn on
+
+@fill
+@lu Maach d'Dier [zou], et ass kal!
+@en [Close] the door, it is cold!
+@distractor-lu op
+@distractor-lu aus
+@distractor-lu un
+@distractor-en Open
+@distractor-en Turn off
+@distractor-en Turn on
+
+@fill
+@lu Ech maache moies d'Fënsteren am Schlofzëmmer [op].
+@en In the morning I [open] the windows in the bedroom.
+@distractor-lu zou
+@distractor-lu aus
+@distractor-lu un
+@distractor-en close
+@distractor-en turn off
+@distractor-en turn on
+
+@fill
+@lu Owes maache mir d'Garage [zou].
+@en In the evening we [close] the garage.
+@distractor-lu op
+@distractor-lu aus
+@distractor-lu un
+@distractor-en open
+@distractor-en turn off
+@distractor-en turn on

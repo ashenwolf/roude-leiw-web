@@ -5,6 +5,10 @@
 # (m)/(f)/(n)/(pl) markers stripped; (formal)/(informal) qualifiers stripped.
 # "regelméisseg" and "Bensin" corrected to LOD's "reegelméisseg"/"Bensinn".
 # Distractor tokens are sourced from other entries within this same lesson where possible.
+# Fills added: 18 — separable-verb prefix placement (8), prepositions/contracted
+# forms (5), verb conjugation (3), adverbs of time (2). Mined from Deel 2:
+# separable-verb grammar section, "Wéi gitt Dir schaffen?" dialogue,
+# "Wou schafft ...?" profession-workplace exercise, working-hours expressions.
 
 @lesson A1.17 "Daily Work Routine"
 
@@ -57,6 +61,7 @@
 @word séier = quick
 @word futti = broken
 @word reegelméisseg = regular
+@word gewéinlech = usually
 @word ausserdeem = besides
 
 # --- Other nouns ---
@@ -352,3 +357,254 @@
 @distractor-en stop
 @distractor-lu ëmmer
 @distractor-lu halen
+
+# --- Sentences mined from Deel 2: workplace prepositions, working hours ---
+
+@sentence
+@lu De Bäcker schafft an der Bäckerei.
+@en The baker works at the bakery.
+@distractor-en church
+@distractor-en court
+@distractor-lu Kierch
+@distractor-lu Geriicht
+
+@sentence
+@lu D'Léierin schafft an der Schoul.
+@en The teacher works at the school.
+@distractor-en church
+@distractor-en hospital
+@distractor-lu Kierch
+@distractor-lu Spidol
+
+@sentence
+@lu De Paschtouer schafft an der Kierch.
+@en The priest works at the church.
+@distractor-en hospital
+@distractor-en school
+@distractor-lu Spidol
+@distractor-lu Schoul
+
+@sentence
+@lu D'Mëttespaus dauert eng Stonn.
+@en The lunch break lasts one hour.
+@distractor-en two
+@distractor-en half
+@distractor-lu zwou
+@distractor-lu hallef
+
+@sentence
+@lu Wéi gitt Dir schaffen?
+@en How do you go to work?
+@distractor-en where
+@distractor-en when
+@distractor-lu Wou
+@distractor-lu Wéini
+
+@sentence
+@lu Gewéinlech fueren ech mam Auto schaffen.
+@en I usually go to work by car.
+@distractor-en bus
+@distractor-en always
+@distractor-lu Bus
+@distractor-lu ëmmer
+
+# --- @fill: separable verbs — prefix placement --------------------------------
+# Separable verbs are the centrepiece of Deel 2's grammar: the prefix goes to the
+# END of the clause. Each fill drills placing the correct prefix. Distractors are
+# other separable prefixes from this lesson to force discrimination.
+
+@fill
+@lu Mäi Brudder steet all Dag um siwen Auer [op].
+@en My brother [gets] up at seven o'clock every day.
+@distractor-lu un
+@distractor-lu fort
+@distractor-lu heem
+@distractor-en starts
+@distractor-en leaves
+@distractor-en comes
+
+@fill
+@lu Da fänke mir mat der Aarbecht [un].
+@en Then we [start] work.
+@distractor-lu op
+@distractor-lu fort
+@distractor-lu heem
+@distractor-en stop
+@distractor-en leave
+@distractor-en finish
+
+@fill
+@lu Si hält um véier Auer [op] mat schaffen.
+@en She [stops] working at four o'clock.
+@distractor-lu un
+@distractor-lu fort
+@distractor-lu heem
+@distractor-en starts
+@distractor-en leaves
+@distractor-en arrives
+
+@fill
+@lu Duerno fuere mir vun doheem [fort].
+@en Afterwards we [leave] from home.
+@distractor-lu op
+@distractor-lu un
+@distractor-lu heem
+@distractor-en stop
+@distractor-en start
+@distractor-en arrive
+
+@fill
+@lu Um fënnef Auer fueren ech [heem].
+@en At five o'clock I [drive] home.
+@distractor-lu fort
+@distractor-lu op
+@distractor-lu un
+@distractor-en leave
+@distractor-en stop
+@distractor-en start
+
+@fill
+@lu Mir komme géint siwe bei der Aarbecht [un].
+@en We [arrive] at work around seven.
+@distractor-lu op
+@distractor-lu fort
+@distractor-lu heem
+@distractor-en stop
+@distractor-en leave
+@distractor-en drive
+
+# --- @fill: separable verbs — stem conjugation --------------------------------
+# 3rd person singular of ufänken/ophalen changes the stem vowel. Distractors are
+# the wrong person's form of the same verb.
+
+@fill
+@lu Hie [fänkt] um aacht Auer mat der Aarbecht un.
+@en He [starts] work at eight o'clock.
+@distractor-lu fänken
+@distractor-lu fänke
+@distractor-lu fänks
+@distractor-en start
+@distractor-en started
+@distractor-en starting
+
+@fill
+@lu Du [häls] um véier Auer op mat schaffen.
+@en You [stop] working at four o'clock.
+@distractor-lu halen
+@distractor-lu hält
+@distractor-lu halt
+@distractor-en stops
+@distractor-en stopped
+@distractor-en stopping
+
+# --- @fill: prepositions and contracted forms ---------------------------------
+# Transport-to-work uses contracted prepositions (mam, um) and directional `op`.
+# Distractors are other prepositions from the same semantic field.
+
+@fill
+@lu Si fiert [mam] Zuch op d'Aarbecht.
+@en She goes to work [by] train.
+@distractor-lu mat
+@distractor-lu am
+@distractor-lu zum
+@distractor-en with
+@distractor-en at
+@distractor-en to
+
+@fill
+@lu Ech fänke [um] aacht Auer u mat schaffen.
+@en I start working [at] eight o'clock.
+@distractor-lu am
+@distractor-lu vum
+@distractor-lu beim
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Mir schaffe [vun] aacht Auer moies bis fënnef Auer nomëttes.
+@en We work [from] eight in the morning until five in the afternoon.
+@distractor-lu mat
+@distractor-lu um
+@distractor-lu bei
+@distractor-en with
+@distractor-en at
+@distractor-en near
+
+@fill
+@lu De Patissier fiert [mam] Vëlo op d'Aarbecht.
+@en The pastry chef rides [by] bike to work.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu zum
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu D'Caissière schafft [am] Supermarché.
+@en The cashier works [at] the supermarket.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en on
+@distractor-en near
+@distractor-en with
+
+# --- @fill: verb conjugation --------------------------------------------------
+# 3rd person root-changing forms, drilled in profession-workplace context.
+# Distractors are wrong persons of the same verb.
+
+@fill
+@lu D'Infirmière [schafft] am Spidol.
+@en The nurse [works] at the hospital.
+@distractor-lu schaffen
+@distractor-lu schaffs
+@distractor-lu geschafft
+@distractor-en work
+@distractor-en worked
+@distractor-en working
+
+@fill
+@lu Mäi Brudder [fiert] mam Auto op d'Aarbecht.
+@en My brother [drives] to work by car.
+@distractor-lu fueren
+@distractor-lu fiers
+@distractor-lu gefuer
+@distractor-en drive
+@distractor-en drove
+@distractor-en driving
+
+@fill
+@lu D'Mëttespaus [dauert] gewéinlech eng Stonn.
+@en The lunch break usually [lasts] one hour.
+@distractor-lu daueren
+@distractor-lu dauers
+@distractor-lu gedauert
+@distractor-en last
+@distractor-en lasted
+@distractor-en lasting
+
+# --- @fill: adverbs of time ---------------------------------------------------
+# Frequency adverbs from the deck's time-expression section. Distractors are
+# other frequency adverbs taught in this lesson or its prerequisites.
+
+@fill
+@lu [Normalerweis] stinn ech fréi op.
+@en I [normally] get up early.
+@distractor-lu Gewéinlech
+@distractor-lu Heiansdo
+@distractor-lu Ëmmer
+@distractor-en Usually
+@distractor-en Sometimes
+@distractor-en Always
+
+@fill
+@lu Ech fänke [gewéinlech] um aacht Auer u mat schaffen.
+@en I [usually] start working at eight o'clock.
+@distractor-lu normalerweis
+@distractor-lu heiansdo
+@distractor-lu ëmmer
+@distractor-en normally
+@distractor-en sometimes
+@distractor-en always

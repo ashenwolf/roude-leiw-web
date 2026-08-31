@@ -9,6 +9,11 @@
 #   schwaarz, riicht, kuerz, laang, jonk, bestuet, d'Hoer, d'Kand/Kanner,
 #   de Papp, d'Mamm, de Brudder, d'Schwëster, de Jong, d'Meedchen/Meedercher,
 #   den Enkel, d'Duechter, d'Bomi.
+# Fills added: 20 fills drilling negation (net / kee / keen / keng — the gender/number
+#   contrast), possessive pronouns (mäi/meng/däi/deng), and predicative appearance
+#   adjectives. Sentences added from Part 2: negation Q&A pairs, Beschreif d'Leit
+#   descriptions (Jhemp, Madamm Peters, Néckel, Tunn). Word "muskuléis" added for
+#   new sentence usage.
 
 @lesson A1.12 "Family & Appearance"
 
@@ -66,6 +71,7 @@
 @word dënn = thin, skinny
 @word kal = cold
 @word sportlech = sporty
+@word muskuléis = muscular
 @word schwéier = difficult, heavy
 
 # --- Life status & accessories ---
@@ -363,3 +369,300 @@
 @distractor-en married
 @distractor-lu A
 @distractor-lu bestuet
+
+# --- Part 2: negation Q&A and appearance descriptions ---
+
+@sentence
+@lu Ech drénken net.
+@en I don't drink.
+@distractor-en eat
+@distractor-en smoke
+@distractor-lu iessen
+@distractor-lu fëmmen
+
+@sentence
+@lu Ech iesse kee Fleesch.
+@en I don't eat meat.
+@distractor-en fish
+@distractor-en drink
+@distractor-lu Fësch
+@distractor-lu drénken
+
+@sentence
+@lu Dat ass net meng Fra, dat ass meng Schwëster!
+@en That is not my wife, that is my sister!
+@distractor-en brother
+@distractor-en mother
+@distractor-lu Brudder
+@distractor-lu Mamm
+
+@sentence
+@lu Ass dat do däi Mann?
+@en Is that your husband over there?
+@distractor-en brother
+@distractor-en father
+@distractor-lu Brudder
+@distractor-lu Papp
+
+@sentence
+@lu Nee, dat ass net mäi Mann.
+@en No, that is not my husband.
+@distractor-en wife
+@distractor-en father
+@distractor-lu Fra
+@distractor-lu Papp
+
+@sentence
+@lu Hien ass kleng an déck.
+@en He is short and fat.
+@distractor-en tall
+@distractor-en thin
+@distractor-lu grouss
+@distractor-lu dënn
+
+@sentence
+@lu Si ass ganz kleng an dënn.
+@en She is very small and thin.
+@distractor-en tall
+@distractor-en fat
+@distractor-lu grouss
+@distractor-lu déck
+
+@sentence
+@lu Si huet riicht, gro Hoer.
+@en She has straight, grey hair.
+@distractor-en curly
+@distractor-en black
+@distractor-lu gekrauselt
+@distractor-lu schwaarz
+
+@sentence
+@lu Hien ass grouss an huet muskuléis Äerm.
+@en He is tall and has muscular arms.
+@distractor-en short
+@distractor-en thin
+@distractor-lu kleng
+@distractor-lu dënn
+
+@sentence
+@lu Hien huet eng Glatz.
+@en He has a bald head.
+@distractor-en glasses
+@distractor-en piercing
+@distractor-lu Brëll
+@distractor-lu Piercing
+
+# --- @fill: negation — net / kee / keen / keng --------------------------------
+# Centrepiece drill: kee(n) for masc/neut singular, keng for fem singular + all
+# plurals, net for verbs/adjectives/names/possessives/definite articles. The
+# distractors are always the competing negation forms.
+
+@fill
+@lu Hatt ass [net] bestuet.
+@en She is [not] married.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never
+
+@fill
+@lu Ech hu [kee] Jong.
+@en I don't have a [son].
+@distractor-lu keng
+@distractor-lu net
+@distractor-lu keen
+@distractor-en daughter
+@distractor-en brother
+@distractor-en sister
+
+@fill
+@lu Ech hu [keng] Fra.
+@en I don't have a [wife].
+@distractor-lu kee
+@distractor-lu net
+@distractor-lu keen
+@distractor-en husband
+@distractor-en sister
+@distractor-en mother
+
+@fill
+@lu Ech hu [keng] Geschwëster.
+@en I don't have [siblings].
+@distractor-lu kee
+@distractor-lu net
+@distractor-lu keen
+@distractor-en children
+@distractor-en parents
+@distractor-en cousins
+
+@fill
+@lu Dat ass [net] meng Schwëster.
+@en That is [not] my sister.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never
+
+@fill
+@lu Hie kënnt [net] vu Lëtzebuerg.
+@en He does [not] come from Luxembourg.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never
+
+@fill
+@lu Ech hu [kee] Meedchen.
+@en I don't have a [daughter].
+@distractor-lu keng
+@distractor-lu net
+@distractor-lu keen
+@distractor-en son
+@distractor-en wife
+@distractor-en sister
+
+@fill
+@lu Hien ass [net] leedeg.
+@en He is [not] single.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never
+
+@fill
+@lu Dat ass [net] mäi Brudder.
+@en That is [not] my brother.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never
+
+@fill
+@lu Ech hu [keen] Haus an der Stad.
+@en I don't have a [house] in the city.
+@distractor-lu keng
+@distractor-lu net
+@distractor-lu kee
+@distractor-en garden
+@distractor-en car
+@distractor-en apartment
+
+@fill
+@lu Hien huet [keng] Hoer.
+@en He has [no] hair.
+@distractor-lu kee
+@distractor-lu net
+@distractor-lu keen
+@distractor-en not
+@distractor-en none
+@distractor-en never
+
+# --- @fill: possessive pronouns — mäi/meng/däi/deng --------------------------
+# Gender/number agreement: mäi(n) before masc/neut singular, meng before fem
+# singular + plural. Same pattern for däi(n)/deng. Distractors are the wrong
+# gender form of the same person.
+
+@fill
+@lu [Mäi] Papp ass grouss an dënn.
+@en [My] father is tall and thin.
+@distractor-lu Meng
+@distractor-lu Däi
+@distractor-lu Deng
+@distractor-en Your
+@distractor-en His
+@distractor-en Her
+
+@fill
+@lu [Meng] Mamm huet kuerz Hoer.
+@en [My] mother has short hair.
+@distractor-lu Mäi
+@distractor-lu Däi
+@distractor-lu Deng
+@distractor-en Your
+@distractor-en His
+@distractor-en Her
+
+@fill
+@lu Ass dat [deng] Schwëster?
+@en Is that [your] sister?
+@distractor-lu däi
+@distractor-lu mäi
+@distractor-lu meng
+@distractor-en my
+@distractor-en his
+@distractor-en her
+
+@fill
+@lu [Däi] Brudder ass ganz sportlech.
+@en [Your] brother is very sporty.
+@distractor-lu Deng
+@distractor-lu Mäi
+@distractor-lu Meng
+@distractor-en My
+@distractor-en His
+@distractor-en Her
+
+# --- @fill: predicative appearance adjectives ---------------------------------
+# The appearance descriptions from Part 2 (Beschreif d'Leit) drilled as
+# fill-in-the-blank. Distractors are the opposite adjective or a close
+# confusable from the same semantic field.
+
+@fill
+@lu De Jhemp ass [kleng] an déck.
+@en Jhemp is [short] and fat.
+@distractor-lu grouss
+@distractor-lu dënn
+@distractor-lu jonk
+@distractor-en tall
+@distractor-en thin
+@distractor-en young
+
+@fill
+@lu Hien ass [al] a ganz déck.
+@en He is [old] and very fat.
+@distractor-lu jonk
+@distractor-lu grouss
+@distractor-lu kleng
+@distractor-en young
+@distractor-en tall
+@distractor-en small
+
+@fill
+@lu Hien ass jonk a ganz [sportlech].
+@en He is young and very [sporty].
+@distractor-lu déck
+@distractor-lu dënn
+@distractor-lu kleng
+@distractor-en fat
+@distractor-en thin
+@distractor-en small
+
+@fill
+@lu Den Néckel ass [grouss] a muskuléis.
+@en Néckel is [tall] and muscular.
+@distractor-lu kleng
+@distractor-lu dënn
+@distractor-lu déck
+@distractor-en short
+@distractor-en thin
+@distractor-en fat
+
+@fill
+@lu Hien ass [net] dënn, hien ass déck.
+@en He is [not] thin, he is fat.
+@distractor-lu kee
+@distractor-lu keng
+@distractor-lu keen
+@distractor-en no
+@distractor-en none
+@distractor-en never

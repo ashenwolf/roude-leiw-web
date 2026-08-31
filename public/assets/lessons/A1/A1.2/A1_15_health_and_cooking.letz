@@ -5,6 +5,10 @@
 # this course's established style. Distractor tokens are sourced from other
 # entries within this same lesson (or, where noted in the report, an earlier
 # A1.2 lesson's vocabulary).
+# Fills added: 18 @fill blocks drilling body-part articles (gender in the
+# "eppes wéi hunn" pattern), broden conjugation (stem-vowel change),
+# prepositions (ouni/géint/mat/fir), negation (kee/keng), and the separable
+# verb ophalen. Material mined from Part 2's grammar tables and exercises.
 
 @lesson A1.15 "Health & Cooking"
 
@@ -113,6 +117,17 @@
 @word den Computer = computer
 @word d'Aarbecht = work
 @word haart = loud
+
+# --- Pain compounds (Part 2 grammar: "eppes wéi hunn" pattern) ---
+@word de Kappwéi = the headache
+@word den Halswéi = the sore throat
+@word de Bauchwéi = the stomach ache
+@word de Réckwéi = the backache
+@word d'Zännwéi = the toothache
+
+# --- Ordinal adverbs (Part 2 grammar) ---
+@word fir d'zweet = second, secondly
+@word fir d'drëtt = third, thirdly
 
 # --- Fixed phrases ---
 @word net gutt = not good
@@ -462,3 +477,236 @@
 @distractor-en sick note
 @distractor-lu Rezept
 @distractor-lu Krankeschäin
+
+@sentence
+@lu De Bifdeck am Ueleg broden.
+@en Fry the steak in oil.
+@distractor-en to peel
+@distractor-en to grate
+@distractor-lu schielen
+@distractor-lu rappen
+
+@sentence
+@lu D'Eeër mam Miel mëschen.
+@en Mix the eggs with the flour.
+@distractor-en to peel
+@distractor-en to crush
+@distractor-lu schielen
+@distractor-lu zerstoussen
+
+@sentence
+@lu Pefferkären zerstoussen.
+@en Crush peppercorns.
+@distractor-en to grate
+@distractor-en to pour
+@distractor-lu rappen
+@distractor-lu schëdden
+
+@sentence
+@lu Fir d'éischt d'Grompere schielen, fir d'zweet de Miel derbäimaachen.
+@en First peel the potatoes, second add the flour.
+@distractor-en to fry
+@distractor-en to mix
+@distractor-lu broden
+@distractor-lu mëschen
+
+@sentence
+@lu Ech hu Kappwéi an Halswéi.
+@en I have a headache and a sore throat.
+@distractor-en backache
+@distractor-en toothache
+@distractor-lu Réckwéi
+@distractor-lu Zännwéi
+
+# --- @fill: body-part articles in the "eppes wéi hunn" pattern ----------------
+# The lesson's signature structure. The article encodes the noun's gender — the
+# distractors are competing articles for the SAME body part, so the learner must
+# recall masculine (de/den) vs. neuter (d') vs. feminine (d').
+
+@fill
+@lu Hatt huet [de] Kapp wéi.
+@en She has a [headache].
+@distractor-lu d'
+@distractor-lu den
+@distractor-lu eng
+@distractor-en sore throat
+@distractor-en stomach ache
+@distractor-en backache
+
+@fill
+@lu Hie huet [de] Bauch wéi.
+@en He has a [stomach ache].
+@distractor-lu d'
+@distractor-lu den
+@distractor-lu eng
+@distractor-en headache
+@distractor-en sore throat
+@distractor-en backache
+
+@fill
+@lu Hie huet [den] Hals wéi.
+@en He has a [sore throat].
+@distractor-lu de
+@distractor-lu d'
+@distractor-lu eng
+@distractor-en headache
+@distractor-en stomach ache
+@distractor-en backache
+
+@fill
+@lu Si huet [de] Réck wéi.
+@en She has a [backache].
+@distractor-lu d'
+@distractor-lu den
+@distractor-lu eng
+@distractor-en headache
+@distractor-en toothache
+@distractor-en sore throat
+
+@fill
+@lu Hatt huet [d'] Ouere wéi.
+@en Her [ears] hurt.
+@distractor-lu de
+@distractor-lu den
+@distractor-lu eng
+@distractor-en throat
+@distractor-en back
+@distractor-en stomach
+
+@fill
+@lu Hie huet [de] Knéi wéi.
+@en His [knee] hurts.
+@distractor-lu d'
+@distractor-lu den
+@distractor-lu eng
+@distractor-en foot
+@distractor-en arm
+@distractor-en ear
+
+# --- @fill: broden conjugation (stem-vowel change) ----------------------------
+# The irregular verb "broden" changes its stem vowel in du/hien/dir forms.
+# Distractors are wrong persons of the same verb.
+
+@fill
+@lu Du [bréits] de Bifdeck an der Pan.
+@en You [fry] the steak in the pan.
+@distractor-lu broden
+@distractor-lu bréit
+@distractor-lu brot
+@distractor-en fries
+@distractor-en fried
+@distractor-en frying
+
+@fill
+@lu Hie [bréit] d'Gromperekichelcher am Ueleg.
+@en He [fries] the potato fritters in oil.
+@distractor-lu broden
+@distractor-lu bréits
+@distractor-lu brot
+@distractor-en fry
+@distractor-en fried
+@distractor-en frying
+
+@fill
+@lu Dir [brot] d'Kichelcher op béide Säiten.
+@en You [fry] the fritters on both sides.
+@distractor-lu broden
+@distractor-lu bréit
+@distractor-lu bréits
+@distractor-en fries
+@distractor-en fried
+@distractor-en frying
+
+# --- @fill: prepositions (ouni / géint / mat / fir) ---------------------------
+# High-frequency prepositions from the lesson: "ouni" (without), "géint"
+# (against), "mat" (with), "fir" (for). Distractors are the other prepositions
+# from this same set.
+
+@fill
+@lu Da kacht [ouni] Salz!
+@en Then cook [without] salt!
+@distractor-lu géint
+@distractor-lu mat
+@distractor-lu fir
+@distractor-en against
+@distractor-en with
+@distractor-en for
+
+@fill
+@lu Huelt eppes [géint] d'Féiwer.
+@en Take something [against] the fever.
+@distractor-lu ouni
+@distractor-lu mat
+@distractor-lu fir
+@distractor-en without
+@distractor-en with
+@distractor-en for
+
+@fill
+@lu [Mat] Salz a Peffer ofschmaachen.
+@en Season [with] salt and pepper.
+@distractor-lu ouni
+@distractor-lu géint
+@distractor-lu fir
+@distractor-en without
+@distractor-en against
+@distractor-en for
+
+@fill
+@lu Ech brauch e Rezept [fir] d'Medikamenter.
+@en I need a prescription [for] the medications.
+@distractor-lu ouni
+@distractor-lu géint
+@distractor-lu mat
+@distractor-en without
+@distractor-en against
+@distractor-en with
+
+# --- @fill: negation (kee / keng) ---------------------------------------------
+# "kee" for masculine/neuter nouns, "keng" for feminine/plural. The doctor's
+# advice pattern "Dann iesst kee X méi!" vs "Da lauschtert keng Y!" drills
+# gender-dependent negation.
+
+@fill
+@lu Hie soll [kee] Schockela méi iessen!
+@en He should stop eating [chocolate]!
+@distractor-lu keng
+@distractor-lu keen
+@distractor-lu net
+@distractor-en music
+@distractor-en football
+@distractor-en onions
+
+@fill
+@lu Si soll [keng] haart Musek méi lauschteren!
+@en She should stop listening to loud [music]!
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu net
+@distractor-en chocolate
+@distractor-en football
+@distractor-en onions
+
+@fill
+@lu Hie soll [kee] Fussball méi spillen!
+@en He should stop playing [football]!
+@distractor-lu keng
+@distractor-lu keen
+@distractor-lu net
+@distractor-en chocolate
+@distractor-en music
+@distractor-en onions
+
+# --- @fill: separable verb "ophalen" (halt op = to stop) ----------------------
+# The prefix "op" goes to the end in main clauses. Distractors are other
+# separable prefixes from the lesson's vocabulary.
+
+@fill
+@lu Da [halt] op mat Fëmmen!
+@en Then [stop] smoking right now!
+@distractor-lu hält
+@distractor-lu halen
+@distractor-lu ophalen
+@distractor-en stops
+@distractor-en stopped
+@distractor-en stopping

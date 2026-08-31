@@ -4,6 +4,9 @@
 # Matching exercises ("Kombinéiert", "Wat maache si?", "Op eng Annonce reagéieren")
 # resolved to their answer-key order and reproduced as completed sentences.
 # "Receptionist"/"Receptionistin" corrected to LOD-verified "Receptionnist"/"Receptionnistin".
+# Fills added: 18 @fill blocks drilling workplace prepositions (an/op/bei),
+# the "als" pattern, verb conjugation (verkafen, schneiden), "well" + verb-final,
+# and "vu Beruff". 4 new sentences mined from the homework dialogues (Part 2).
 
 @lesson A1.16 "Jobs & Workplaces"
 
@@ -460,3 +463,241 @@
 @distractor-en book
 @distractor-lu Sonndeg
 @distractor-lu Buch
+
+# --- Homework dialogues (mined from Part 2 of the deck) ---
+
+@sentence
+@lu Mir gefält meng Aarbecht.
+@en I like my job.
+@distractor-en house
+@distractor-en when
+@distractor-lu Haus
+@distractor-lu Wéini
+
+@sentence
+@lu Ech schaffe gär mat Leit.
+@en I like working with people.
+@distractor-en Tuesday
+@distractor-en window
+@distractor-lu Dënschdeg
+@distractor-lu Fënster
+
+@sentence
+@lu Dat ass gutt. Wéini kënnt Dir op en Entretien?
+@en That is good. When can you come for an interview?
+@distractor-en where
+@distractor-en book
+@distractor-lu Wou
+@distractor-lu Buch
+
+@sentence
+@lu Ech schaffe bei engem Coiffer.
+@en I work at a hairdresser's.
+@distractor-en Thursday
+@distractor-en window
+@distractor-lu Donneschdeg
+@distractor-lu Fënster
+
+# --- @fill: workplace prepositions an / op / bei --------------------------------
+# This lesson's preposition drill: an = enclosed workplaces / industries,
+# op = institutions / open places, bei = company names / persons.
+# A1_05 already owns the basic op der Post / bei enger Bank set — these fills
+# use A1.16's own workplace vocabulary instead. Distractors are the other two
+# prepositions from the same three-way set.
+
+@fill
+@lu De Kach schafft [an] engem Restaurant.
+@en The chef works [in] a restaurant.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en at
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu D'Fotografin schafft [an] engem Studio.
+@en The photographer works [in] a studio.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en at
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu De Student studéiert [op] der Universitéit.
+@en The student studies [at] the university.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Hie schafft [op] engem Büro.
+@en He works [at] an office.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu De Sekretär schafft [bei] engem Zänndokter.
+@en The secretary works [at] a dentist's.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu mat
+@distractor-en in
+@distractor-en on
+@distractor-en with
+
+@fill
+@lu Si schafft [bei] der BIL.
+@en She works [at] the BIL.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu mat
+@distractor-en in
+@distractor-en on
+@distractor-en with
+
+# --- @fill: "als" for professions -----------------------------------------------
+# The "schaffen als X" construction is the lesson's core pattern. Distractor "vu"
+# tempts confusion with the parallel "X vu Beruff" frame; "mat" and "bei" are
+# the other taught prepositions.
+
+@fill
+@lu Meng Mamm schafft [als] Doktesch an enger Praxis.
+@en My mother works [as] a doctor at a practice.
+@distractor-lu vu
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en from
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Hie schafft [als] Verkeefer an engem Supermarché.
+@en He works [as] a salesman in a supermarket.
+@distractor-lu vu
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en from
+@distractor-en near
+@distractor-en with
+
+@fill
+@lu Meng Schwëster schafft [als] Sekretärin op enger Bank.
+@en My sister works [as] a secretary at a bank.
+@distractor-lu vu
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en from
+@distractor-en near
+@distractor-en with
+
+# --- @fill: verb conjugation — verkafen, schneiden ------------------------------
+# Root-changing 2nd/3rd person singular: verkafen → verkeefs/verkeeft,
+# schneiden → schneits/schneit. Distractors are wrong persons of the same verb.
+
+@fill
+@lu De Verkeefer [verkeeft] Wueren am Buttek.
+@en The salesman [sells] goods at the shop.
+@distractor-lu verkafen
+@distractor-lu verkeefs
+@distractor-lu verkaf
+@distractor-en sell
+@distractor-en sold
+@distractor-en selling
+
+@fill
+@lu Du [verkeefs] Bicher an der Librairie.
+@en You [sell] books at the bookstore.
+@distractor-lu verkeeft
+@distractor-lu verkafen
+@distractor-lu verkaf
+@distractor-en sells
+@distractor-en sold
+@distractor-en selling
+
+@fill
+@lu De Coiffeur [schneit] Hoer am Salon.
+@en The hairdresser [cuts] hair at the salon.
+@distractor-lu schneiden
+@distractor-lu schneits
+@distractor-lu geschnidden
+@distractor-en cut
+@distractor-en cutting
+@distractor-en snipped
+
+@fill
+@lu Du [schneits] Brout an der Kichen.
+@en You [cut] bread in the kitchen.
+@distractor-lu schneit
+@distractor-lu schneiden
+@distractor-lu geschnidden
+@distractor-en cuts
+@distractor-en cutting
+@distractor-en sliced
+
+# --- @fill: "well" conjunction — verb goes to end -------------------------------
+# The transcription (page 14) explicitly teaches "well" + verb-final word order.
+# A comma before the blank satisfies the Eifeler-Regel adjacency rule.
+
+@fill
+@lu Si schafft vun doheem, [well] si Onlinecoursen gëtt.
+@en She works from home [because] she gives online courses.
+@distractor-lu wann
+@distractor-lu obwuel
+@distractor-lu datt
+@distractor-en although
+@distractor-en when
+@distractor-en that
+
+@fill
+@lu Hie fiert mam Bus, [well] hie keen Auto huet.
+@en He takes the bus [because] he has no car.
+@distractor-lu wann
+@distractor-lu obwuel
+@distractor-lu datt
+@distractor-en although
+@distractor-en when
+@distractor-en that
+
+@fill
+@lu Ech ruffen un, [well] d'Plaz nach fräi ass.
+@en I am calling [because] the position is still available.
+@distractor-lu wann
+@distractor-lu obwuel
+@distractor-lu datt
+@distractor-en although
+@distractor-en when
+@distractor-en that
+
+# --- @fill: "vu Beruff" pattern -------------------------------------------------
+# The lesson's main question frame: "Wat bass du vu Beruff?" / "Ech sinn X vu
+# Beruff." Distractors are other taught prepositions that could tempt confusion.
+
+@fill
+@lu Hien ass Architekt [vu] Beruff.
+@en He is an architect [by] profession.
+@distractor-lu als
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en as
+@distractor-en at
+@distractor-en with
+
+@fill
+@lu Si ass Coiffeuse [vu] Beruff.
+@en She is a hairdresser [by] profession.
+@distractor-lu als
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en as
+@distractor-en at
+@distractor-en with

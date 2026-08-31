@@ -25,7 +25,6 @@
 @word Mech och = Me too
 
 # --- Small words ---
-@word nee = no
 @word net = not
 @word och = too
 @word oder = or
@@ -222,3 +221,357 @@
 @distractor-en old
 @distractor-lu bestuet
 @distractor-lu al
+
+# --- Expansion: kommen/wunnen conjugation, aus vs vu, age idioms, civil status ---
+
+# --- Nouns: civil status (new) ---
+@word de Wittmann = the widower
+@word d'Wittfra = the widow
+
+# --- Introducing yourself ---
+
+@sentence
+@lu Et freet mech dech kennen ze léieren!
+@en I am pleased to meet you!
+@distractor-en live
+@distractor-en come
+@distractor-lu wunnen
+@distractor-lu kommen
+
+@sentence
+@lu Ech sinn den Ashwin.
+@en I am Ashwin.
+@distractor-en old
+@distractor-en married
+@distractor-lu al
+@distractor-lu bestuet
+
+@sentence
+@lu Mäin Numm ass Alex Meier.
+@en My name is Alex Meier.
+@distractor-en old
+@distractor-en come
+@distractor-lu al
+@distractor-lu kommen
+
+@sentence
+@lu Bis dann!
+@en See you then!
+@distractor-en well
+@distractor-en old
+@distractor-lu gutt
+@distractor-lu al
+
+# --- Where are you from? (aus vs vu, kommen conjugation) ---
+
+@sentence
+@lu Vu wou kënns du?
+@en Where are you from?
+@distractor-en live
+@distractor-en late
+@distractor-lu wunnen
+@distractor-lu spéit
+
+@sentence
+@lu D'Mélissa kënnt vu Lëtzebuerg.
+@en Mélissa comes from Luxembourg.
+@distractor-en Belgium
+@distractor-en France
+@distractor-lu Belsch
+@distractor-lu Frankräich
+
+@sentence
+@lu De Jean kënnt aus Frankräich.
+@en Jean comes from France.
+@distractor-en Belgium
+@distractor-en Luxembourg
+@distractor-lu Belsch
+@distractor-lu Lëtzebuerg
+
+@sentence
+@lu De Vincent kënnt aus der Belsch.
+@en Vincent comes from Belgium.
+@distractor-en France
+@distractor-en Luxembourg
+@distractor-lu Frankräich
+@distractor-lu Lëtzebuerg
+
+@sentence
+@lu Mir kommen net gär ze spéit an d'Schoul.
+@en We don't like coming too late to school.
+@distractor-en always
+@distractor-en tomorrow
+@distractor-lu ëmmer
+@distractor-lu muer
+
+@sentence
+@lu Waart, ech kommen direkt!
+@en Wait, I'm coming right away!
+@distractor-en late
+@distractor-en tomorrow
+@distractor-lu spéit
+@distractor-lu muer
+
+# --- wunnen conjugation ---
+
+@sentence
+@lu D'Madame Schmit wunnt an Däitschland.
+@en Mrs. Schmit lives in Germany.
+@distractor-en France
+@distractor-en Belgium
+@distractor-lu Frankräich
+@distractor-lu Belsch
+
+@sentence
+@lu Mir wunnen an engem Appartement.
+@en We live in an apartment.
+@distractor-en house
+@distractor-en old
+@distractor-lu Haus
+@distractor-lu al
+
+@sentence
+@lu Hatt wunnt bei sengen Elteren.
+@en She lives with her parents.
+@distractor-en alone
+@distractor-en married
+@distractor-lu eleng
+@distractor-lu bestuet
+
+@sentence
+@lu Wunnt hien och zu Stengefort?
+@en Does he also live in Steinfort?
+@distractor-en France
+@distractor-en come
+@distractor-lu Frankräich
+@distractor-lu kommen
+
+# --- Age idioms ---
+
+@sentence
+@lu Ech si fënnefandrësseg Joer al.
+@en I am thirty-five years old.
+@distractor-en married
+@distractor-en divorced
+@distractor-lu bestuet
+@distractor-lu gescheet
+
+@sentence
+@lu Ech hu fënnefandrësseg Joer.
+@en I have thirty-five years.
+@distractor-en married
+@distractor-en divorced
+@distractor-lu bestuet
+@distractor-lu gescheet
+
+# --- Civil status (additional) ---
+
+@sentence
+@lu Si si verloobt.
+@en They are engaged.
+@distractor-en married
+@distractor-en divorced
+@distractor-lu bestuet
+@distractor-lu gescheet
+
+@sentence
+@lu Hien ass Wittmann.
+@en He is a widower.
+@distractor-en married
+@distractor-en divorced
+@distractor-lu bestuet
+@distractor-lu gescheet
+
+@sentence
+@lu Si ass Wittfra.
+@en She is a widow.
+@distractor-en married
+@distractor-en engaged
+@distractor-lu bestuet
+@distractor-lu verloobt
+
+@sentence
+@lu Ech si bestuet. Meng Fra heescht Maria.
+@en I am married. My wife is called Maria.
+@distractor-en divorced
+@distractor-en engaged
+@distractor-lu gescheet
+@distractor-lu verloobt
+
+# --- @fill: aus vs vu (prepositions for origin) --------------------------------
+
+@fill
+@lu De François kënnt [aus] Frankräich.
+@en François comes [from] France.
+@distractor-lu vu
+@distractor-lu an
+@distractor-lu bei
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+@fill
+@lu D'Marie kënnt [vu] Paräis.
+@en Marie comes [from] Paris.
+@distractor-lu aus
+@distractor-lu an
+@distractor-lu bei
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+@fill
+@lu Dat ass de Vincent. Hie kënnt [aus] der Belsch.
+@en That is Vincent. He comes [from] Belgium.
+@distractor-lu vu
+@distractor-lu an
+@distractor-lu bei
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+@fill
+@lu Mäi Kolleeg kënnt [vu] Lëtzebuerg.
+@en My colleague comes [from] Luxembourg.
+@distractor-lu aus
+@distractor-lu an
+@distractor-lu bei
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+@fill
+@lu A [vu] wou kënns du?
+@en And where are you [from]?
+@distractor-lu aus
+@distractor-lu an
+@distractor-lu bei
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+# --- @fill: kommen conjugation (irregular stem change) --------------------------
+
+@fill
+@lu [Kënns] du vu Bréissel?
+@en Do you [come] from Brussels?
+@distractor-lu Kënnt
+@distractor-lu Kommen
+@distractor-lu Kommt
+@distractor-en comes
+@distractor-en came
+@distractor-en coming
+
+@fill
+@lu De Leonardo [kënnt] aus der Belsch.
+@en Leonardo [comes] from Belgium.
+@distractor-lu kënns
+@distractor-lu kommen
+@distractor-lu kommt
+@distractor-en come
+@distractor-en came
+@distractor-en coming
+
+@fill
+@lu Du [kënns] ëmmer ze spéit!
+@en You always [come] too late!
+@distractor-lu kënnt
+@distractor-lu kommen
+@distractor-lu kommt
+@distractor-en comes
+@distractor-en came
+@distractor-en coming
+
+@fill
+@lu Ech [kommen] muer bei dech iessen.
+@en I [come] to your place tomorrow to eat.
+@distractor-lu kënns
+@distractor-lu kënnt
+@distractor-lu kommt
+@distractor-en comes
+@distractor-en came
+@distractor-en coming
+
+@fill
+@lu [Kommt] Dir muer an de Lëtzebuergeschcours?
+@en Are you [coming] to the Luxembourgish course tomorrow?
+@distractor-lu Kommen
+@distractor-lu Kënns
+@distractor-lu Kënnt
+@distractor-en comes
+@distractor-en came
+@distractor-en come
+
+# --- @fill: wunnen conjugation --------------------------------------------------
+
+@fill
+@lu D'Madame Meier [wunnt] zu Stengefort.
+@en Mrs. Meier [lives] in Steinfort.
+@distractor-lu wunnen
+@distractor-lu wunns
+@distractor-lu gewunnt
+@distractor-en live
+@distractor-en lived
+@distractor-en living
+
+@fill
+@lu Wou [wunns] du elo?
+@en Where do you [live] now?
+@distractor-lu wunnt
+@distractor-lu wunnen
+@distractor-lu gewunnt
+@distractor-en lives
+@distractor-en lived
+@distractor-en living
+
+@fill
+@lu Si [wunnen] net méi an der Rue des Romains.
+@en They don't [live] on Rue des Romains anymore.
+@distractor-lu wunnt
+@distractor-lu wunns
+@distractor-lu gewunnt
+@distractor-en lives
+@distractor-en lived
+@distractor-en living
+
+# --- @fill: civil status --------------------------------------------------------
+
+@fill
+@lu D'Lisa a de Marc si [bestuet].
+@en Lisa and Marc are [married].
+@distractor-lu gescheet
+@distractor-lu getrennt
+@distractor-lu verloobt
+@distractor-en divorced
+@distractor-en separated
+@distractor-en engaged
+
+@fill
+@lu Den Tom ass dem Elise säin Exmann, si si [gescheet].
+@en Tom is Elise's ex-husband, they are [divorced].
+@distractor-lu bestuet
+@distractor-lu getrennt
+@distractor-lu verloobt
+@distractor-en married
+@distractor-en separated
+@distractor-en engaged
+
+@fill
+@lu Si wunnen net méi zesummen, si si [getrennt].
+@en They don't live together anymore, they are [separated].
+@distractor-lu bestuet
+@distractor-lu gescheet
+@distractor-lu verloobt
+@distractor-en married
+@distractor-en divorced
+@distractor-en engaged
+
+@fill
+@lu Den Emile ass léiwer [Jonggesell].
+@en Emile prefers to be a [bachelor].
+@distractor-lu bestuet
+@distractor-lu gescheet
+@distractor-lu Wittmann
+@distractor-en married
+@distractor-en divorced
+@distractor-en widower

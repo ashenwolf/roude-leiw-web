@@ -3,6 +3,9 @@
 # (m)/(f)/(n)/(pl) gender markers stripped; nouns re-cased to the definite article,
 # gender confirmed via LOD lookup. Distractor tokens are sourced from other entries
 # within this same lesson, or from common A1 vocabulary already taught earlier.
+# Fills added: prepositions an/op/bei, opening-hours frames (vun...bis, um, op/zou),
+# contracted prepositions (am/beim/um/mam/virum), and movement-vs-static article choice.
+# Mined from deck exercises p.9–10 and opening-hours Q&A.
 
 @lesson A1.21 "Town & Opening Hours"
 
@@ -229,3 +232,265 @@
 @distractor-en cinema
 @distractor-lu Musée
 @distractor-lu Kino
+
+@sentence
+@lu De Coiffeur ass sonndes zou.
+@en The hairdresser is closed on Sundays.
+@distractor-en open
+@distractor-en Saturday
+@distractor-lu op
+@distractor-lu samsdes
+
+@sentence
+@lu D'Apdikt ass vu hallwer néng bis Véierel op zwielef op.
+@en The pharmacy is open from half past eight until quarter past twelve.
+@distractor-en closed
+@distractor-en afternoon
+@distractor-lu zou
+@distractor-lu nomëttes
+
+@sentence
+@lu De Supermarché ass sonndes vu hallwer zéng bis eng Auer op.
+@en The supermarket is open on Sundays from half past nine to one o'clock.
+@distractor-en closed
+@distractor-en Saturday
+@distractor-lu zou
+@distractor-lu samsdes
+
+@sentence
+@lu Wéini mécht d'Apdikt op?
+@en When does the pharmacy open?
+@distractor-en close
+@distractor-en where
+@distractor-lu zou
+@distractor-lu Wou
+
+@sentence
+@lu D'Apdikt mécht um hallwer néng op.
+@en The pharmacy opens at half past eight.
+@distractor-en closes
+@distractor-en nine
+@distractor-lu zou
+@distractor-lu néng
+
+@sentence
+@lu Wéini mécht d'Apdikt zou?
+@en When does the pharmacy close?
+@distractor-en open
+@distractor-en where
+@distractor-lu op
+@distractor-lu Wou
+
+@sentence
+@lu Mir kafen Uebst op dem Maart.
+@en We buy fruit at the market.
+@distractor-en forest
+@distractor-en cinema
+@distractor-lu Bësch
+@distractor-lu Kino
+
+# --- @fill: prepositions an / op / bei ----------------------------------------
+# The deck's core grammar: spatial an (closed places), op (open/institutional),
+# bei (people/companies). Distractors are the other two — the three-way confusion.
+
+@fill
+@lu Ech schaffe [bei] dem Dokter Schmit.
+@en I work [at] Doctor Schmit's.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu um
+@distractor-en in
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu D'Kanner spille [op] der Spillplaz.
+@en The children play [at] the playground.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu um
+@distractor-en in
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Dir kaaft Timbere [bei] der Post.
+@en You buy stamps [at] the post office.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu um
+@distractor-en in
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu Léiers du Lëtzebuergesch [an] der Schoul?
+@en Do you learn Luxembourgish [at] school?
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu um
+@distractor-en on
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Haut iesse mir [am] Restaurant.
+@en Today we eat [at the] restaurant.
+@distractor-lu beim
+@distractor-lu um
+@distractor-lu op dem
+@distractor-en by the
+@distractor-en on the
+@distractor-en in front of the
+
+@fill
+@lu D'Sophie geet heiansdo [an] de Park spadséieren.
+@en Sophie sometimes goes for a walk [in] the park.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu virum
+@distractor-en at
+@distractor-en near
+@distractor-en behind
+
+# --- @fill: opening hours — vun … bis, um, op/zou ----------------------------
+# The lesson's opening-hours register: time prepositions (vun, bis, um) and the
+# op/zou state. Distractors swap the other time preposition or state word.
+
+@fill
+@lu D'Apdikt ass [vun] hallwer néng bis zwielef op.
+@en The pharmacy is open [from] half past eight until twelve.
+@distractor-lu bis
+@distractor-lu um
+@distractor-lu op
+@distractor-en until
+@distractor-en at
+@distractor-en on
+
+@fill
+@lu De Supermarché mécht [um] aacht Auer op.
+@en The supermarket opens [at] eight o'clock.
+@distractor-lu vun
+@distractor-lu bis
+@distractor-lu am
+@distractor-en from
+@distractor-en until
+@distractor-en in
+
+@fill
+@lu De Coiffeur ass samsdes [bis] fënnef Auer op.
+@en The hairdresser is open on Saturdays [until] five o'clock.
+@distractor-lu vun
+@distractor-lu um
+@distractor-lu am
+@distractor-en from
+@distractor-en at
+@distractor-en in
+
+@fill
+@lu De Musée ass sonndes moies [zou].
+@en The museum is [closed] on Sunday mornings.
+@distractor-lu op
+@distractor-lu do
+@distractor-lu fräi
+@distractor-en open
+@distractor-en here
+@distractor-en free
+
+@fill
+@lu Ass de Supermarché sonndes [op]?
+@en Is the supermarket [open] on Sundays?
+@distractor-lu zou
+@distractor-lu do
+@distractor-lu fräi
+@distractor-en closed
+@distractor-en here
+@distractor-en free
+
+# --- @fill: contracted prepositions -------------------------------------------
+# The deck explicitly teaches mat+dem=mam, bei+dem=beim, an+dem=am, op+dem=um,
+# vun+dem=vum, virun+dem=virum. Distractors are the other contractions.
+
+@fill
+@lu Ech schaffe [beim] Dokter Schmit an der Stad.
+@en I work [at the] Doctor Schmit's in the city.
+@distractor-lu am
+@distractor-lu um
+@distractor-lu vum
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Ech brauch 25 Minutte [vum] Kierchbierg bis heem.
+@en I need 25 minutes [from] Kirchberg to home.
+@distractor-lu beim
+@distractor-lu am
+@distractor-lu um
+@distractor-en at the
+@distractor-en in the
+@distractor-en on the
+
+@fill
+@lu Mir kaafe Geméis [op dem] Baueremaart.
+@en We buy vegetables [at the] farmer's market.
+@distractor-lu an dem
+@distractor-lu bei dem
+@distractor-lu vum
+@distractor-en in the
+@distractor-en near the
+@distractor-en from the
+
+@fill
+@lu Hie steet [virum] Musée.
+@en He is standing [in front of the] museum.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu um
+@distractor-en in the
+@distractor-en at the
+@distractor-en on the
+
+# --- @fill: movement vs static (dative) articles -----------------------------
+# The deck's second grammar point: changing prepositions take normal articles
+# for movement, dative articles for position. Distractors swap the case.
+
+@fill
+@lu Hie geet [an de] Supermarché akafen.
+@en He goes shopping [at the] supermarket.
+@distractor-lu an dem
+@distractor-lu op de
+@distractor-lu bei dem
+@distractor-en in a
+@distractor-en to a
+@distractor-en near the
+
+@fill
+@lu Meng Mamm ass [an der] Klinick.
+@en My mother is [at the] clinic.
+@distractor-lu an d'
+@distractor-lu op der
+@distractor-lu bei der
+@distractor-en to the
+@distractor-en on the
+@distractor-en near the
+
+@fill
+@lu D'Brout [an der] Bäckerei ass ganz frësch.
+@en The bread [at the] bakery is very fresh.
+@distractor-lu an d'
+@distractor-lu op der
+@distractor-lu bei der
+@distractor-en in a
+@distractor-en to the
+@distractor-en from the
+
+@fill
+@lu Ech kafe meng Eeër just [bei dem] Bauer.
+@en I buy my eggs only [from the] farmer.
+@distractor-lu bei de
+@distractor-lu an dem
+@distractor-lu op dem
+@distractor-en at a
+@distractor-en in the
+@distractor-en on the

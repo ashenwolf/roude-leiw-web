@@ -5,6 +5,10 @@
 # (m)/(f)/(n)/(pl) gender/number markers stripped; genders confirmed via lod.lu.
 # "italienesch" corrected to "italieenesch" per lod.lu suggestion.
 # "Busstatioun" (not a real LOD entry) replaced with "Busarrêt" (bus stop).
+# Fills added: 18 — contracted prepositions (vum/um/fir op), separable verbs
+# (kënnt…un, fiert…fort), modal+infinitive errand frames, payment vocabulary,
+# errand-place prepositions. Mined from the deck's dialogue exercises (Iwwersetzt!).
+# New sentences: 4 — from Part 2 dialogue exercises (Iwwersetzt!).
 
 @lesson A1.20 "Errands & Places"
 
@@ -419,3 +423,238 @@
 @distractor-en ticket
 @distractor-lu boer
 @distractor-lu Billjee
+
+# --- From the deck's dialogue exercises (Iwwersetzt!) ---
+
+@sentence
+@lu Äddi an eng gutt Rees!
+@en Goodbye and have a good trip!
+@distractor-en evening
+@distractor-en ticket
+@distractor-lu Owend
+@distractor-lu Billjee
+
+@sentence
+@lu Gitt Ären Pin Code an, w.e.g.
+@en Enter your PIN code, please.
+@distractor-en ticket
+@distractor-en platform
+@distractor-lu Billjee
+@distractor-lu Quai
+
+@sentence
+@lu Zweet Klass kascht 65 Euro pro Persoun.
+@en Second class costs 65 euros per person.
+@distractor-en first
+@distractor-en free
+@distractor-lu éischt
+@distractor-lu fräi
+
+@sentence
+@lu Dat geet!
+@en That works!
+@distractor-en costs
+@distractor-en arrives
+@distractor-lu kascht
+@distractor-lu kënnt
+
+# --- @fill: contracted prepositions (vum / um / fir op) -----------------------
+# The lesson's train-station vocabulary uses contracted dative forms heavily.
+# Distractors are other contracted prepositions the learner might confuse.
+
+@fill
+@lu D'Arrivée [vum] Zuch ass um Quai fënnef.
+@en The arrival [of the] train is on platform five.
+@distractor-lu um
+@distractor-lu am
+@distractor-lu beim
+@distractor-en at the
+@distractor-en in the
+@distractor-en by the
+
+@fill
+@lu De Billjee ass [fir] op Frankfurt.
+@en The ticket is [for] Frankfurt.
+@distractor-lu vum
+@distractor-lu beim
+@distractor-lu mat
+@distractor-en from
+@distractor-en by
+@distractor-en with
+
+@fill
+@lu Mir fuere muer [um] Quai dräi fort.
+@en We leave tomorrow [from] platform three.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en at the
+@distractor-en by the
+@distractor-en of the
+
+@fill
+@lu Ech siche mäi Kand [beim] Dokter.
+@en I'm picking up my child [at the] doctor's.
+@distractor-lu vum
+@distractor-lu am
+@distractor-lu um
+@distractor-en from the
+@distractor-en in the
+@distractor-en on the
+
+# --- @fill: separable verbs (kënnt…un / fiert…fort) --------------------------
+# The deck explicitly teaches fortfueren and ukommen as separable verbs.
+# The prefix goes to the end — distractors are wrong prefixes from the lesson.
+
+@fill
+@lu De Zuch kënnt [un] dësem Quai.
+@en The train arrives [at] this platform.
+@distractor-lu fort
+@distractor-lu op
+@distractor-lu aus
+@distractor-en from
+@distractor-en on
+@distractor-en out
+
+@fill
+@lu Wéini kënnt Ären Zuch [un]?
+@en When does your train [arrive]?
+@distractor-lu fort
+@distractor-lu op
+@distractor-lu aus
+@distractor-en leave
+@distractor-en stop
+@distractor-en depart
+
+@fill
+@lu De Zuch fiert [fort] um siwe Auer.
+@en The train [leaves] at seven o'clock.
+@distractor-lu un
+@distractor-lu op
+@distractor-lu aus
+@distractor-en arrives
+@distractor-en stops
+@distractor-en returns
+
+@fill
+@lu Wou fiert de Zuch [fort]?
+@en Where does the train [leave] from?
+@distractor-lu un
+@distractor-lu op
+@distractor-lu aus
+@distractor-en arrive
+@distractor-en stop
+@distractor-en return
+
+# --- @fill: modal + infinitive (errand frames) --------------------------------
+# The deck's dialogue revolves around muss/wëll/kann + bare infinitive.
+# Distractors are other modals — the learner must pick the right intent.
+
+@fill
+@lu Ech [muss] nach Classeuren an der Papeterie kafen.
+@en I still [have to] buy folders at the stationer's.
+@distractor-lu wëll
+@distractor-lu kann
+@distractor-lu soll
+@distractor-en want to
+@distractor-en can
+@distractor-en should
+
+@fill
+@lu [Wëllt] Dir Är Sëtzplaz am Viraus reservéieren?
+@en [Would] you like to reserve your seat in advance?
+@distractor-lu Musst
+@distractor-lu Sollt
+@distractor-lu Kënnt
+@distractor-en Must
+@distractor-en Should
+@distractor-en Can
+
+@fill
+@lu Ech [kann] Iech hëllefen.
+@en I [can] help you.
+@distractor-lu muss
+@distractor-lu wëll
+@distractor-lu soll
+@distractor-en must
+@distractor-en want
+@distractor-en should
+
+@fill
+@lu Ech [muss] mäi Schwoer op d'Gare sichen.
+@en I [have to] pick up my brother-in-law from the station.
+@distractor-lu wëll
+@distractor-lu soll
+@distractor-lu kann
+@distractor-en want to
+@distractor-en should
+@distractor-en can
+
+# --- @fill: payment vocabulary (mat der Kaart / boer) -------------------------
+# A1_14 owns "Bezuelt Dir boer oder mat der Kaart?" — these fills paraphrase
+# from the client's side of the dialogue to avoid duplication.
+
+@fill
+@lu Ech bezuele [boer], net mat der Kaart.
+@en I'm paying [cash], not by card.
+@distractor-lu fräi
+@distractor-lu direkt
+@distractor-lu gär
+@distractor-en free
+@distractor-en directly
+@distractor-en gladly
+
+@fill
+@lu Ech bezuele [mat] der Kaart, w.e.g.
+@en I'm paying [by] card, please.
+@distractor-lu ouni
+@distractor-lu fir
+@distractor-lu vun
+@distractor-en without
+@distractor-en for
+@distractor-en from
+
+# --- @fill: errand-place prepositions -----------------------------------------
+# A1_08 drills generic locative prepositions with generic places (Kierch, Bréck).
+# These fills use the same prepositions but with errand-specific places from this
+# lesson (Gare, Crèche, Parfümerie) to reinforce them in context.
+
+@fill
+@lu D'Parfümerie ass [tëschent] der Apdikt an dem Kleederbuttek.
+@en The perfume shop is [between] the pharmacy and the clothes store.
+@distractor-lu niewent
+@distractor-lu hannert
+@distractor-lu virun
+@distractor-en next to
+@distractor-en behind
+@distractor-en in front of
+
+@fill
+@lu De Busarrêt ass [vis-à-vis] vum Restaurant.
+@en The bus stop is [opposite] the restaurant.
+@distractor-lu niewent
+@distractor-lu hannert
+@distractor-lu no bei
+@distractor-en next to
+@distractor-en behind
+@distractor-en close to
+
+@fill
+@lu D'Crèche ass [no bei] der Apdikt.
+@en The nursery is [close to] the pharmacy.
+@distractor-lu vis-à-vis
+@distractor-lu hannert
+@distractor-lu niewent
+@distractor-en opposite
+@distractor-en behind
+@distractor-en next to
+
+@fill
+@lu De Kiosk ass [hannert] der Gare.
+@en The kiosk is [behind] the station.
+@distractor-lu virun
+@distractor-lu niewent
+@distractor-lu tëschent
+@distractor-en in front of
+@distractor-en next to
+@distractor-en between

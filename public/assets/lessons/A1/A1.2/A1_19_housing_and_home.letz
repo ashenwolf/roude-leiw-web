@@ -2,6 +2,11 @@
 # Source: PDF slide deck "L10 a1convlotsmanmeli.pdf" (A1 Conversation course, Lesson 10)
 # (m)/(f)/(n) gender markers stripped; plural nouns taught only where a sentence
 # actually uses them; verb conjugation tables reduced to the infinitive.
+# Fills added: 18 @fill blocks drilling adjective inflection in dative (masculine/
+# neuter -en vs. feminine -er — competing endings as distractors), gendered inanimate
+# pronouns (en/se/et chosen by noun gender), prepositions (an/zu/vun/no bei),
+# connectors (mä/mee/well), and ordinals (éischte/zweete). Sentences added from
+# Part 2 descriptive passages (house listing, neighbourhood description).
 
 @lesson A1.19 "Housing & Home"
 
@@ -26,7 +31,6 @@
 # --- Descriptive adjectives ---
 @word interessant = interesting
 @word sympathesch = likeable
-@word franséisch = French
 @word kannerfrëndlech = child-friendly
 @word fein = nice
 @word aneres = other, else
@@ -518,3 +522,248 @@
 @distractor-en quiet
 @distractor-lu éischt
 @distractor-lu roueg
+
+# --- New sentences from Part 2 descriptive passages ---
+
+@sentence
+@lu D'Haus ass modern an hell, mä et ass och deier.
+@en The house is modern and bright, but it is also expensive.
+@distractor-en dark
+@distractor-en cheap
+@distractor-lu däischter
+@distractor-lu bëlleg
+
+@sentence
+@lu D'Géigend ass roueg a se ass schéin.
+@en The neighbourhood is quiet and it is beautiful.
+@distractor-en loud
+@distractor-en dirty
+@distractor-lu haart
+@distractor-lu knaschteg
+
+@sentence
+@lu D'Appartement ass zu Iechternach an ass ze verkafen.
+@en The flat is in Echternach and is for sale.
+@distractor-en village
+@distractor-en cheap
+@distractor-lu Duerf
+@distractor-lu bëlleg
+
+@sentence
+@lu Leider gëtt et kee Balcon, kee Gaart a keng Terrass.
+@en Unfortunately there is no balcony, no garden and no terrace.
+@distractor-en cellar
+@distractor-en elevator
+@distractor-lu Keller
+@distractor-lu Lift
+
+@sentence
+@lu D'Appartement ass relativ deier.
+@en The apartment is rather expensive.
+@distractor-en cheap
+@distractor-en small
+@distractor-lu bëlleg
+@distractor-lu kleng
+
+# --- @fill: adjective inflection in dative ------------------------------------
+# The lesson's signature grammar: dative adjective ending depends on the noun's
+# gender — masculine/neuter get -en, feminine gets -er. Distractors are the
+# competing inflections of the SAME adjective, forcing the learner to pick the
+# right gender-agreement ending.
+
+@fill
+@lu Hie wunnt niewent enger [franséischer] Famill.
+@en He lives next to a [French] family.
+@distractor-lu franséischen
+@distractor-lu franséischt
+@distractor-lu franséisch
+@distractor-en friendly
+@distractor-en small
+@distractor-en big
+
+@fill
+@lu Si ass mat engem [sympatheschen] Noper bestuet.
+@en She is married to a [likeable] neighbour.
+@distractor-lu sympathescher
+@distractor-lu sympathescht
+@distractor-lu sympathesch
+@distractor-en French
+@distractor-en friendly
+@distractor-en quiet
+
+@fill
+@lu D'Haus läit an enger [kannerfrëndlecher] Géigend.
+@en The house is in a [child-friendly] neighbourhood.
+@distractor-lu kannerfrëndlechen
+@distractor-lu kannerfrëndlecht
+@distractor-lu kannerfrëndlech
+@distractor-en quiet
+@distractor-en interesting
+@distractor-en French
+
+@fill
+@lu Mir wunne mat enger [feiner] Famill zesummen.
+@en We live together with a [nice] family.
+@distractor-lu feinen
+@distractor-lu feint
+@distractor-lu fein
+@distractor-en big
+@distractor-en quiet
+@distractor-en small
+
+@fill
+@lu Ech wunnen an engem [interessanten] Duerf.
+@en I live in an [interesting] village.
+@distractor-lu interessanter
+@distractor-lu interessant
+@distractor-lu interessantem
+@distractor-en quiet
+@distractor-en French
+@distractor-en small
+
+# --- @fill: gendered inanimate pronouns (en / se / et) ------------------------
+# Luxembourgish uses en (masculine), se (feminine), or et (neuter) for "it"
+# depending on the noun's gender. Distractors are the other two pronoun forms.
+
+@fill
+@lu De Späicher ass grouss, mä [en] ass däischter.
+@en The attic is large, but [it] is dark.
+@distractor-lu se
+@distractor-lu et
+@distractor-lu si
+@distractor-en she
+@distractor-en he
+@distractor-en they
+
+@fill
+@lu D'Garage ass grouss, mä [se] ass däischter.
+@en The garage is large, but [it] is dark.
+@distractor-lu en
+@distractor-lu et
+@distractor-lu si
+@distractor-en he
+@distractor-en she
+@distractor-en they
+
+@fill
+@lu D'Zëmmer ass hell, mee [et] ass e bësse kleng.
+@en The room is bright, but [it] is a bit small.
+@distractor-lu en
+@distractor-lu se
+@distractor-lu si
+@distractor-en he
+@distractor-en she
+@distractor-en they
+
+# --- @fill: connectors (mä / mee / well) --------------------------------------
+# The lesson contrasts advantages vs. disadvantages with `mä`/`mee` (but) and
+# gives reasons with `well` (because). Distractors are the other connectors
+# from this semantic field.
+
+@fill
+@lu D'Wunneng ass grouss, [mä] se ass deier.
+@en The flat is large, [but] it is expensive.
+@distractor-lu well
+@distractor-lu an
+@distractor-lu oder
+@distractor-en because
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu D'Duerf ass roueg, [mee] et ass ze wäit vun der Stad.
+@en The village is quiet, [but] it is too far from the city.
+@distractor-lu well
+@distractor-lu an
+@distractor-lu oder
+@distractor-en because
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Mir gefält d'Géigend, [well] se kannerfrëndlech ass.
+@en I like the neighbourhood [because] it is child-friendly.
+@distractor-lu mä
+@distractor-lu mee
+@distractor-lu oder
+@distractor-en but
+@distractor-en and
+@distractor-en or
+
+# --- @fill: prepositions of place ---------------------------------------------
+# Housing vocabulary uses `zu` (in + city name), `an` (in + common noun),
+# `vun` (from), `no bei` (close to). Distractors are competing prepositions.
+
+@fill
+@lu Mir gefält d'Duerf, well et [an] enger roueger Géigend läit.
+@en I like the village because it lies [in] a quiet neighbourhood.
+@distractor-lu zu
+@distractor-lu bei
+@distractor-lu vun
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu D'Famill wunnt [an] engem klengen Duerf.
+@en The family lives [in] a small village.
+@distractor-lu zu
+@distractor-lu bei
+@distractor-lu op
+@distractor-en at
+@distractor-en near
+@distractor-en on
+
+@fill
+@lu Mäi Noper wunnt [zu] Bartreng.
+@en My neighbour lives [in] Bertrange.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu vun
+@distractor-en at
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu D'Parkplaz ass baussen, awer [no] beim Haus.
+@en The parking space is outside, but [close] to the house.
+@distractor-lu wäit
+@distractor-lu just
+@distractor-lu ganz
+@distractor-en far
+@distractor-en only
+@distractor-en very
+
+@fill
+@lu D'Spillplaz ass wäit [vun] eisem Haus.
+@en The playground is far [from] our house.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu zu
+@distractor-en in
+@distractor-en near
+@distractor-en at
+
+# --- @fill: ordinals (éischte / zweete) ---------------------------------------
+# The lesson teaches floor numbers with ordinals. Distractors are the other
+# ordinal from this lesson.
+
+@fill
+@lu D'Schlofzëmmere si [um] éischte Stack.
+@en The bedrooms are [on] the first floor.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu vum
+@distractor-en in
+@distractor-en at
+@distractor-en from
+
+@fill
+@lu D'Wunneng läit um [éischte] Stack.
+@en The flat is on the [first] floor.
+@distractor-lu zweete
+@distractor-lu drëtte
+@distractor-lu véierte
+@distractor-en second
+@distractor-en third
+@distractor-en fourth
