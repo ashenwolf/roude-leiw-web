@@ -1,0 +1,14 @@
+id = "letz"
+name = "Letz"
+description = "Syntax highlighting for .letz Luxembourgish lesson files (Roude Léiw)"
+version = "1.0.0"
+schema_version = 1
+authors = ["Roude Léiw"]
+repository = "https://github.com/ashenwolf/roude-leiw-web"
+
+# Zed builds the grammar from this pinned rev, NOT the working tree.
+# file:// keeps it local-only; see README for the regenerate + re-pin recipe.
+[grammars.letz]
+repository = "file:///Users/gulenoks/Personal/roude-leiw-web"
+rev = "c8a10fe43d381518ab2ffa6db0761b1b303098aa"
+path = "zed-letz/grammar"
