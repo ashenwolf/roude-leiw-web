@@ -1,0 +1,638 @@
+# A2/A2.1/A2_03_polite_requests_and_wishes.letz
+# Source: PDF slide decks "L2 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 2, second half).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD.
+# Grammar focus: the two polite registers the deck contrasts explicitly —
+#   hätt- + gär = "I would like (to HAVE)"  -> an OBJECT follows
+#   géif- + gär = "I would like (to DO)"    -> an ACTION (infinitive) follows
+# plus the five modal verbs, which take a bare infinitive (never `ze`).
+# Split from A2.02 so neither lesson exceeds the ~40-60 Element sizing target.
+
+@lesson A2.03 "Polite Requests & Wishes"
+
+# --- Modal verbs ---
+@word mussen = must
+@word kënnen = can
+@word wëllen = to want
+@word sollen = should
+@word däerfen = to be allowed to
+
+# --- Bakery & shopping words used in the requests ---
+@word de Kuch = the cake
+@word d'Taart = the tart
+@word d'Quetschentaart = the plum tart
+@word d'Bréitchen = the bread roll
+@word de Croissant = the croissant
+@word d'Noss = the nut
+@word d'Nëss = the nuts
+@word d'Knäckebrout = the crispbread
+@word d'Bauerebrout = the farmer's bread
+@word eng Dosen = a dozen
+
+# --- Verbs & expressions ---
+@word wënschen = to wish
+@word ofhuelen = to lose weight
+@word fëmmen = to smoke
+@word bezuelen = to pay
+@word probéieren = to try
+@word d'Kreditkaart = the credit card
+@word de Comptoir = the counter
+@word d'Séisses = the sweets
+
+@sentence
+@lu Ech hätt gär eng Taass Kaffi.
+@en I would like a cup of coffee.
+@distractor-en cake
+@distractor-en pay
+@distractor-lu Kuch
+@distractor-lu bezuelen
+
+@sentence
+@lu Ech hätt gär véier Bréidercher.
+@en I would like four bread rolls.
+@distractor-en croissants
+@distractor-en dozen
+@distractor-lu Croissanten
+@distractor-lu Dosen
+
+@sentence
+@lu Mir hätte gär eng Menüskaart, w.e.g.
+@en We would like a menu card, please.
+@distractor-en bill
+@distractor-en wine
+@distractor-lu Rechnung
+@distractor-lu Wäin
+
+@sentence
+@lu Ech géif gär den neien Italiener probéieren.
+@en I would like to try the new Italian restaurant.
+@distractor-en pay
+@distractor-en old
+@distractor-lu bezuelen
+@distractor-lu ale
+
+@sentence
+@lu Ech géif gär mat der Kreditkaart bezuelen.
+@en I would like to pay by credit card.
+@distractor-en try
+@distractor-en cash
+@distractor-lu probéieren
+@distractor-lu Boergeld
+
+@sentence
+@lu Géifs du gär eng Pizza deelen?
+@en Would you like to share a pizza?
+@distractor-en pay
+@distractor-en cake
+@distractor-lu bezuelen
+@distractor-lu Kuch
+
+@sentence
+@lu Géifs du gär eppes drénke goen?
+@en Would you like to go for a drink?
+@distractor-en eat
+@distractor-en pay
+@distractor-lu iessen
+@distractor-lu bezuelen
+
+@sentence
+@lu Entschëllegt, ech hätt gär d'Rechnung, w.e.g.
+@en Excuse me, I would like the bill, please.
+@distractor-en menu
+@distractor-en cake
+@distractor-lu Menüskaart
+@distractor-lu Kuch
+
+@sentence
+@lu Kënnt Dir mir d'Wäikaart ginn?
+@en Can you give me the wine list?
+@distractor-en bill
+@distractor-en take
+@distractor-lu Rechnung
+@distractor-lu huelen
+
+@sentence
+@lu Kann ech mat der Kreditkaart bezuelen?
+@en Can I pay by credit card?
+@distractor-en try
+@distractor-en share
+@distractor-lu probéieren
+@distractor-lu deelen
+
+@sentence
+@lu Ech muss ofhuelen.
+@en I have to lose weight.
+@distractor-en smoke
+@distractor-en pay
+@distractor-lu fëmmen
+@distractor-lu bezuelen
+
+@sentence
+@lu Däerfe mir op der Terrass fëmmen?
+@en Are we allowed to smoke on the terrace?
+@distractor-en pay
+@distractor-en eat
+@distractor-lu bezuelen
+@distractor-lu iessen
+
+@sentence
+@lu Ech däerf net esou vill Séisses iessen.
+@en I am not allowed to eat so many sweets.
+@distractor-en cake
+@distractor-en drink
+@distractor-lu Kuch
+@distractor-lu drénken
+
+@sentence
+@lu Solle mir mam Auto oder mam Bus fueren?
+@en Should we go by car or by bus?
+@distractor-en train
+@distractor-en walk
+@distractor-lu Zuch
+@distractor-lu trëppelen
+
+@sentence
+@lu Kann ech en Dësch fir zwou Persoune reservéieren?
+@en Can I reserve a table for two people?
+@distractor-en three
+@distractor-en pay
+@distractor-lu dräi
+@distractor-lu bezuelen
+
+@sentence
+@lu Wat wëlls du drénken?
+@en What do you want to drink?
+@distractor-en eat
+@distractor-en pay
+@distractor-lu iessen
+@distractor-lu bezuelen
+
+@sentence
+@lu Kanns du kuerz waarden?
+@en Can you wait a moment?
+@distractor-en pay
+@distractor-en smoke
+@distractor-lu bezuelen
+@distractor-lu fëmmen
+
+@sentence
+@lu Ech muss Zigarette kafe goen.
+@en I have to go and buy cigarettes.
+@distractor-en cake
+@distractor-en pay
+@distractor-lu Kuch
+@distractor-lu bezuelen
+
+@sentence
+@lu Gitt riicht aus, laanscht de Comptoir.
+@en Go straight ahead, past the counter.
+@distractor-en left
+@distractor-en table
+@distractor-lu lénks
+@distractor-lu Dësch
+
+@sentence
+@lu Ech hätt gär eng Quetschentaart.
+@en I would like a plum tart.
+@distractor-en cake
+@distractor-en nuts
+@distractor-lu Kuch
+@distractor-lu Nëss
+
+@sentence
+@lu Ech géif gär eng Dosen Croissanten kafen.
+@en I would like to buy a dozen croissants.
+@distractor-en sell
+@distractor-en rolls
+@distractor-lu verkafen
+@distractor-lu Bréidercher
+
+@sentence
+@lu Mir géife gär mat der Kaart bezuelen.
+@en We would like to pay with the card.
+@distractor-en try
+@distractor-en cash
+@distractor-lu probéieren
+@distractor-lu Boergeld
+
+
+# --- Conditional forms: hätt- + gär takes an object; géif- + gär takes an infinitive ---
+
+@sentence
+@lu Du häss gär e Croissant.
+@en You would like a croissant.
+@distractor-en tart
+@distractor-en dozen
+@distractor-lu Taart
+@distractor-lu Dosen
+
+@sentence
+@lu Haut hätt hien gär e Kuch.
+@en Today he would like a cake.
+@distractor-en tart
+@distractor-en bread
+@distractor-lu Taart
+@distractor-lu Brout
+
+@sentence
+@lu Mir hätten gär zwou Taarten.
+@en We would like two tarts.
+@distractor-en cakes
+@distractor-en croissants
+@distractor-lu Kuchen
+@distractor-lu Croissanten
+
+@sentence
+@lu Hätt Dir gär e Bréitchen?
+@en Would you like a bread roll?
+@distractor-en cake
+@distractor-en dozen
+@distractor-lu Kuch
+@distractor-lu Dosen
+
+@sentence
+@lu Si hätten gär eng Dosen Croissanten.
+@en They would like a dozen croissants.
+@distractor-en tarts
+@distractor-en rolls
+@distractor-lu Taarten
+@distractor-lu Bréidercher
+
+@sentence
+@lu Ech géif gär matgoen.
+@en I would like to come along.
+@distractor-en wait
+@distractor-en smoke
+@distractor-lu waarden
+@distractor-lu fëmmen
+
+@sentence
+@lu Du géifs gär eng Quetschentaart kafen.
+@en You would like to buy a plum tart.
+@distractor-en share
+@distractor-en pay
+@distractor-lu deelen
+@distractor-lu bezuelen
+
+@sentence
+@lu Muer géif hien gär de Kuch deelen.
+@en Tomorrow he would like to share the cake.
+@distractor-en buy
+@distractor-en eat
+@distractor-lu kafen
+@distractor-lu iessen
+
+@sentence
+@lu Mir géife gär méi gesond iessen.
+@en We would like to eat more healthily.
+@distractor-en smoke
+@distractor-en pay
+@distractor-lu fëmmen
+@distractor-lu bezuelen
+
+@sentence
+@lu Géift Dir gär e Croissant probéieren?
+@en Would you like to try a croissant?
+@distractor-en buy
+@distractor-en share
+@distractor-lu kafen
+@distractor-lu deelen
+
+@sentence
+@lu Si géife gär fréi goen.
+@en They would like to leave early.
+@distractor-en wait
+@distractor-en smoke
+@distractor-lu waarden
+@distractor-lu fëmmen
+
+# --- Modal verbs: modal + bare infinitive, never `ze` ---
+
+@sentence
+@lu Ech muss muer schaffen.
+@en I have to work tomorrow.
+@distractor-en rest
+@distractor-en smoke
+@distractor-lu raschten
+@distractor-lu fëmmen
+
+@sentence
+@lu Du kanns elo e Kuch kafen.
+@en You can buy a cake now.
+@distractor-en share
+@distractor-en pay
+@distractor-lu deelen
+@distractor-lu bezuelen
+
+@sentence
+@lu Haut wëll hien e Croissant huelen.
+@en Today he wants to take a croissant.
+@distractor-en buy
+@distractor-en share
+@distractor-lu kafen
+@distractor-lu deelen
+
+@sentence
+@lu Mir sollen nom Iessen goen.
+@en We should leave after eating.
+@distractor-en wait
+@distractor-en pay
+@distractor-lu waarden
+@distractor-lu bezuelen
+
+@sentence
+@lu Dir däerft hei fëmmen.
+@en You are allowed to smoke here.
+@distractor-en eat
+@distractor-en pay
+@distractor-lu iessen
+@distractor-lu bezuelen
+
+@sentence
+@lu Si mussen dobausse waarden.
+@en They have to wait outside.
+@distractor-en leave
+@distractor-en smoke
+@distractor-lu goen
+@distractor-lu fëmmen
+
+@sentence
+@lu Kann ech matgoen?
+@en Can I come along?
+@distractor-en wait
+@distractor-en smoke
+@distractor-lu waarden
+@distractor-lu fëmmen
+
+@sentence
+@lu Wëlls du e Bréitchen deelen?
+@en Do you want to share a bread roll?
+@distractor-en buy
+@distractor-en eat
+@distractor-lu kafen
+@distractor-lu iessen
+
+@sentence
+@lu Solle mir e Kuch deelen?
+@en Should we share a cake?
+@distractor-en buy
+@distractor-en pay
+@distractor-lu kafen
+@distractor-lu bezuelen
+
+@sentence
+@lu Däerfe mir hei bezuelen?
+@en Are we allowed to pay here?
+@distractor-en smoke
+@distractor-en wait
+@distractor-lu fëmmen
+@distractor-lu waarden
+
+@sentence
+@lu Muss du haut schaffen?
+@en Do you have to work today?
+@distractor-en wait
+@distractor-en smoke
+@distractor-lu waarden
+@distractor-lu fëmmen
+
+@sentence
+@lu Kënnt Dir muer kommen?
+@en Can you come tomorrow?
+@distractor-en wait
+@distractor-en leave
+@distractor-lu waarden
+@distractor-lu goen
+
+@sentence
+@lu Wëllt Dir matgoen?
+@en Do you want to come along?
+@distractor-en pay
+@distractor-en smoke
+@distractor-lu bezuelen
+@distractor-lu fëmmen
+
+@sentence
+@lu Däerfs du d'Taart probéieren?
+@en Are you allowed to try the tart?
+@distractor-en share
+@distractor-en buy
+@distractor-lu deelen
+@distractor-lu kafen
+
+@sentence
+@lu Kanns du op eis waarden?
+@en Can you wait for us?
+@distractor-en leave
+@distractor-en smoke
+@distractor-lu goen
+@distractor-lu fëmmen
+
+# --- @fill: hätt- + gär ------------------------------------------------------
+# Each Luxembourgish distractor is a wrong person of the same conditional auxiliary.
+
+@fill
+@lu Ech [hätt] gär e Bréitchen.
+@en I [would like] a bread roll.
+@distractor-lu häss
+@distractor-lu hätte
+@distractor-lu hätten
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+@fill
+@lu Du [häss] gär eng Taart.
+@en You [would like] a tart.
+@distractor-lu hätt
+@distractor-lu hätte
+@distractor-lu hätten
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+@fill
+@lu Haut [hätt] hien gär e Croissant.
+@en Today he [would like] a croissant.
+@distractor-lu häss
+@distractor-lu hätte
+@distractor-lu hätten
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+@fill
+@lu Mir [hätte] gär dräi Kuchen.
+@en We [would like] three cakes.
+@distractor-lu hätt
+@distractor-lu häss
+@distractor-lu hätten
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+@fill
+@lu Dir [hätt] gär zwou Taarten.
+@en You [would like] two tarts.
+@distractor-lu häss
+@distractor-lu hätte
+@distractor-lu hätten
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+@fill
+@lu Si [hätten] gär Bréidercher.
+@en They [would like] bread rolls.
+@distractor-lu hätt
+@distractor-lu häss
+@distractor-lu hätte
+@distractor-en will like
+@distractor-en liked
+@distractor-en would prefer
+
+# --- @fill: géif- + gär ------------------------------------------------------
+# The action is an infinitive; wrong-person forms of géif are the LU distractors.
+
+@fill
+@lu Ech [géif] muer gär matgoen.
+@en I [would like to] come along tomorrow.
+@distractor-lu géifs
+@distractor-lu géift
+@distractor-lu géife
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+@fill
+@lu Du [géifs] gär e Kuch kafen.
+@en You [would like to] buy a cake.
+@distractor-lu géif
+@distractor-lu géift
+@distractor-lu géife
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+@fill
+@lu Haut [géif] hien gär eng Taart deelen.
+@en Today he [would like to] share a tart.
+@distractor-lu géifs
+@distractor-lu géift
+@distractor-lu géife
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+@fill
+@lu Mir [géife] gär Brout kafen.
+@en We [would like to] buy bread.
+@distractor-lu géif
+@distractor-lu géifs
+@distractor-lu géift
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+@fill
+@lu Dir [géift] gär e Croissant probéieren.
+@en You [would like to] try a croissant.
+@distractor-lu géif
+@distractor-lu géifs
+@distractor-lu géife
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+@fill
+@lu Si [géife] gär matgoen.
+@en They [would like to] come along.
+@distractor-lu géif
+@distractor-lu géifs
+@distractor-lu géift
+@distractor-en will
+@distractor-en liked to
+@distractor-en likes to
+
+# --- @fill: modal verb + bare infinitive ------------------------------------
+# The second verb is always a bare infinitive — modal verbs never take `ze`.
+
+@fill
+@lu Ech [muss] elo goen.
+@en I [have to] leave now.
+@distractor-lu musst
+@distractor-lu mussen
+@distractor-lu soll
+@distractor-en can
+@distractor-en want to
+@distractor-en should
+
+@fill
+@lu Du [kanns] e Croissant huelen.
+@en You [can] take a croissant.
+@distractor-lu kann
+@distractor-lu kënnt
+@distractor-lu kënnen
+@distractor-en have to
+@distractor-en should
+@distractor-en are allowed to
+
+@fill
+@lu Haut [wëll] hien fëmmen.
+@en Today he [wants to] smoke.
+@distractor-lu wëlls
+@distractor-lu wëllt
+@distractor-lu wëllen
+@distractor-en has to
+@distractor-en can
+@distractor-en should
+
+@fill
+@lu Mir [sollen] méi gesond iessen.
+@en We [should] eat more healthily.
+@distractor-lu soll
+@distractor-lu solls
+@distractor-lu sollt
+@distractor-en have to
+@distractor-en can
+@distractor-en want to
+
+@fill
+@lu Dir [däerft] hei waarden.
+@en You [are allowed to] wait here.
+@distractor-lu däerf
+@distractor-lu däerfs
+@distractor-lu däerfen
+@distractor-en have to
+@distractor-en can
+@distractor-en should
+
+@fill
+@lu Si [mussen] fréi goen.
+@en They [have to] leave early.
+@distractor-lu muss
+@distractor-lu musst
+@distractor-lu sollt
+@distractor-en can
+@distractor-en want to
+@distractor-en should
+
+@fill
+@lu Kanns du [matgoen]?
+@en Can you [come along]?
+@distractor-lu goen
+@distractor-lu waarden
+@distractor-lu deelen
+@distractor-en wait
+@distractor-en pay
+@distractor-en share
+
+@fill
+@lu Sollt Dir elo [bezuelen]?
+@en Should you [pay] now?
+@distractor-lu fëmmen
+@distractor-lu waarden
+@distractor-lu goen
+@distractor-en smoke
+@distractor-en wait
+@distractor-en leave

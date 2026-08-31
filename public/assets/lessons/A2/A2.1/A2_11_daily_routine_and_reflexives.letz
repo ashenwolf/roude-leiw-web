@@ -1,0 +1,629 @@
+# A2/A2.1/A2_11_daily_routine_and_reflexives.letz
+# Source: PDF slide decks "L9 (Part 1) a21lotsmanmeli.pdf" and
+# "L9 (Deel 2) a21lotsmanmeli.pdf" (A2.11 Daily Routine & Reflexives).
+# Lemmas and noun gender were verified with LOD. A1 routine vocabulary is not
+# repeated as new Elements; it returns only in sentence and fill contexts.
+# Grammar focus: subject-matched reflexive pronouns; time prepositions versus
+# adverbs; separable verbs in main clauses; frequency adverbs and inversion.
+
+@lesson A2.11 "Daily Routine & Reflexives"
+
+# --- Reflexive routines ---
+@word d'Gewunnecht = the habit
+@word de Wecker = the alarm clock
+@word opstoen = to get up
+@word sech wäschen = to wash oneself
+@word sech undoen = to get dressed
+@word sech kämmen = to comb one's hair
+@word sech raséieren = to shave
+@word sech schminken = to put on make-up
+@word sech verspéiden = to be late
+@word sech këmmeren ëm = to take care of
+@word sech trennen vun = to separate from
+@word sech verléiwen an = to fall in love with
+@word sech gutt verstoen mat = to get on well with
+
+# --- Reflexive pronouns agree with the subject ---
+@sentence
+@lu Ech wäsche mech moies.
+@en I wash myself in the morning.
+@distractor-en yourself
+@distractor-en evening
+@distractor-lu dech
+@distractor-lu owes
+
+@sentence
+@lu Du wäsch dech owes.
+@en You wash yourself in the evening.
+@distractor-en myself
+@distractor-en morning
+@distractor-lu mech
+@distractor-lu moies
+
+@sentence
+@lu Hie kämmt sech virum Spigel.
+@en He combs his hair in front of the mirror.
+@distractor-en washes
+@distractor-en evening
+@distractor-lu wäscht
+@distractor-lu owes
+
+@sentence
+@lu Mir treffen eis nom Cours.
+@en We meet after class.
+@distractor-en work
+@distractor-en before
+@distractor-lu Aarbecht
+@distractor-lu virun
+
+@sentence
+@lu Dir verspéit iech oft.
+@en You are often late.
+@distractor-en never
+@distractor-en early
+@distractor-lu ni
+@distractor-lu fréi
+
+@sentence
+@lu Si schminke sech moies.
+@en They put on make-up in the morning.
+@distractor-en shave
+@distractor-en evening
+@distractor-lu raséieren
+@distractor-lu owes
+
+@sentence
+@lu Ech raséiere mech virum Schlofegoen.
+@en I shave before going to sleep.
+@distractor-en after
+@distractor-en wash
+@distractor-lu no
+@distractor-lu wäschen
+
+@sentence
+@lu Du këmmers dech ëm d'Kanner.
+@en You take care of the children.
+@distractor-en meet
+@distractor-en parents
+@distractor-lu treffs
+@distractor-lu Elteren
+
+@sentence
+@lu Hie trennt sech vu senger Fra.
+@en He separates from his wife.
+@distractor-en loves
+@distractor-en mother
+@distractor-lu verléift
+@distractor-lu Mamm
+
+@sentence
+@lu Mir verstinn eis gutt.
+@en We get on well.
+@distractor-en badly
+@distractor-en late
+@distractor-lu schlecht
+@distractor-lu spéit
+
+@sentence
+@lu Dir verléift iech séier.
+@en You fall in love quickly.
+@distractor-en slowly
+@distractor-en separate
+@distractor-lu lues
+@distractor-lu trennt
+
+@sentence
+@lu Si bestueden sech am Summer.
+@en They get married in the summer.
+@distractor-en meet
+@distractor-en winter
+@distractor-lu treffen
+@distractor-lu Wanter
+
+# --- Separable verbs: prefix at the end of a main clause ---
+@sentence
+@lu Ech stinn um siwen Auer op.
+@en I get up at seven o'clock.
+@distractor-en sleep
+@distractor-en eight
+@distractor-lu schlofen
+@distractor-lu aacht
+
+@sentence
+@lu Du stees moies dacks op.
+@en You often get up in the morning.
+@distractor-en never
+@distractor-en evening
+@distractor-lu ni
+@distractor-lu owes
+
+@sentence
+@lu Hie steet normalerweis fréi op.
+@en He normally gets up early.
+@distractor-en late
+@distractor-en rarely
+@distractor-lu spéit
+@distractor-lu seelen
+
+@sentence
+@lu Mir stinn samschdes spéit op.
+@en We get up late on Saturdays.
+@distractor-en early
+@distractor-en Sundays
+@distractor-lu fréi
+@distractor-lu sonndes
+
+@sentence
+@lu Dir stitt sonndes ni fréi op.
+@en You never get up early on Sundays.
+@distractor-en always
+@distractor-en Saturdays
+@distractor-lu ëmmer
+@distractor-lu samschdes
+
+@sentence
+@lu Si stinn all Dag um sechs Auer op.
+@en They get up at six o'clock every day.
+@distractor-en seven
+@distractor-en evening
+@distractor-lu siwen
+@distractor-lu owes
+
+@sentence
+@lu Ech doen mech séier un.
+@en I get dressed quickly.
+@distractor-en slowly
+@distractor-en shave
+@distractor-lu lues
+@distractor-lu raséieren
+
+@sentence
+@lu Du dees dech ëmmer un.
+@en You always get dressed.
+@distractor-en never
+@distractor-en wash
+@distractor-lu ni
+@distractor-lu wäschen
+
+@sentence
+@lu Hie deet sech nom Duschen un.
+@en He gets dressed after showering.
+@distractor-en before
+@distractor-en sleeping
+@distractor-lu virum
+@distractor-lu Schlofegoen
+
+@sentence
+@lu Mir dinn eis virum Concert un.
+@en We get dressed before the concert.
+@distractor-en after
+@distractor-en cinema
+@distractor-lu no
+@distractor-lu Kino
+
+@sentence
+@lu Dir ditt iech ni séier un.
+@en You never get dressed quickly.
+@distractor-en always
+@distractor-en slowly
+@distractor-lu ëmmer
+@distractor-lu lues
+
+@sentence
+@lu Si dinn sech nom Kaffi un.
+@en They get dressed after breakfast.
+@distractor-en before
+@distractor-en lunch
+@distractor-lu virum
+@distractor-lu Mëttegiessen
+
+# --- Time prepositions and adverbs ---
+@sentence
+@lu Nom Opstoen wäschen ech mech.
+@en After getting up, I wash myself.
+@distractor-en before
+@distractor-en shave
+@distractor-lu virum
+@distractor-lu raséieren
+
+@sentence
+@lu No der Aarbecht treffen ech mech mat Frënn.
+@en After work, I meet friends.
+@distractor-en before
+@distractor-en family
+@distractor-lu virun
+@distractor-lu Famill
+
+@sentence
+@lu Virun der Aarbecht kämmen ech mech.
+@en Before work, I comb my hair.
+@distractor-en after
+@distractor-en shave
+@distractor-lu no
+@distractor-lu raséieren
+
+@sentence
+@lu Virum Schlofegoen liesen ech e Buch.
+@en Before going to sleep, I read a book.
+@distractor-en after
+@distractor-en television
+@distractor-lu no
+@distractor-lu Tëlee
+
+@sentence
+@lu Duerno dinn ech mech un.
+@en Afterwards I get dressed.
+@distractor-en before
+@distractor-en wash
+@distractor-lu virdrun
+@distractor-lu wäschen
+
+@sentence
+@lu Virdrun drénken ech Kaffi.
+@en Before that, I drink coffee.
+@distractor-en afterwards
+@distractor-en dinner
+@distractor-lu duerno
+@distractor-lu Owesiessen
+
+@sentence
+@lu Um zwielef Auer maache mir eng Mëttespaus.
+@en At twelve o'clock we take a lunch break.
+@distractor-en seven
+@distractor-en breakfast
+@distractor-lu siwen
+@distractor-lu Kaffi
+
+@sentence
+@lu Ech kommen um fënnef Auer heem.
+@en I come home at five o'clock.
+@distractor-en six
+@distractor-en work
+@distractor-lu sechs
+@distractor-lu Aarbecht
+
+# --- Frequency adverbs and inversion ---
+@sentence
+@lu Ëmmer moies wäschen ech mech.
+@en Every morning I wash myself.
+@distractor-en never
+@distractor-en evening
+@distractor-lu ni
+@distractor-lu owes
+
+@sentence
+@lu Normalerweis stinn ech um siwen Auer op.
+@en Normally I get up at seven o'clock.
+@distractor-en rarely
+@distractor-en eight
+@distractor-lu seelen
+@distractor-lu aacht
+
+@sentence
+@lu Meeschtens treffen mir eis no der Aarbecht.
+@en Mostly we meet after work.
+@distractor-en before
+@distractor-en family
+@distractor-lu virun
+@distractor-lu Famill
+
+@sentence
+@lu Oft verspéit hien sech moies.
+@en He is often late in the morning.
+@distractor-en never
+@distractor-en evening
+@distractor-lu ni
+@distractor-lu owes
+
+@sentence
+@lu Heiansdo kämmt si sech owes.
+@en Sometimes she combs her hair in the evening.
+@distractor-en always
+@distractor-en morning
+@distractor-lu ëmmer
+@distractor-lu moies
+
+@sentence
+@lu Seelen raséiere mir eis virum Schlofegoen.
+@en We rarely shave before going to sleep.
+@distractor-en always
+@distractor-en after
+@distractor-lu ëmmer
+@distractor-lu no
+
+@sentence
+@lu Ni verspéide mir eis virum Concert.
+@en We are never late before the concert.
+@distractor-en often
+@distractor-en cinema
+@distractor-lu oft
+@distractor-lu Kino
+
+@sentence
+@lu Gewéinlech kucke si owes Tëlee.
+@en They usually watch television in the evening.
+@distractor-en never
+@distractor-en morning
+@distractor-lu ni
+@distractor-lu moies
+
+# --- Direct and indirect object pronouns ---
+@sentence
+@lu Ech maachen dir eng Schmier.
+@en I make you a slice of bread.
+@distractor-en me
+@distractor-en coffee
+@distractor-lu mech
+@distractor-lu Kaffi
+
+@sentence
+@lu Mir gesinn dech no der Aarbecht.
+@en We see you after work.
+@distractor-en them
+@distractor-en before
+@distractor-lu si
+@distractor-lu virun
+
+@sentence
+@lu Hien gesäit eis virum Concert.
+@en He sees us before the concert.
+@distractor-en you
+@distractor-en after
+@distractor-lu iech
+@distractor-lu no
+
+@sentence
+@lu Dir hutt mech moies gesinn.
+@en You saw me in the morning.
+@distractor-en them
+@distractor-en evening
+@distractor-lu si
+@distractor-lu owes
+
+@sentence
+@lu Si gesinn hien duerno.
+@en They see him afterwards.
+@distractor-en her
+@distractor-en before
+@distractor-lu hatt
+@distractor-lu virdrun
+
+# --- @fill: reflexive pronouns -----------------------------------------------
+# Wrong-person reflexives are deliberate distractors: the pronoun must agree
+# with the subject, not merely look like a familiar reflexive form.
+
+@fill
+@lu Ech wäsche [mech] virum Kaffi.
+@en I wash [myself] before breakfast.
+@distractor-lu dech
+@distractor-lu sech
+@distractor-lu eis
+@distractor-en yourself
+@distractor-en himself
+@distractor-en ourselves
+
+@fill
+@lu Du käms [dech] virum Spigel.
+@en You comb [yourself] in front of the mirror.
+@distractor-lu mech
+@distractor-lu sech
+@distractor-lu iech
+@distractor-en myself
+@distractor-en herself
+@distractor-en ourselves
+
+@fill
+@lu Hie raséiert [sech] owes.
+@en He shaves [himself] in the evening.
+@distractor-lu mech
+@distractor-lu dech
+@distractor-lu eis
+@distractor-en myself
+@distractor-en yourself
+@distractor-en ourselves
+
+@fill
+@lu Ech a meng Schwëster hu [eis] nom Cours getraff.
+@en My sister and I met [each other] after class.
+@distractor-lu mech
+@distractor-lu dech
+@distractor-lu sech
+@distractor-en myself
+@distractor-en yourself
+@distractor-en himself
+
+@fill
+@lu Dir verspéit [iech] all Mueren.
+@en You are late [yourselves] every morning.
+@distractor-lu mech
+@distractor-lu dech
+@distractor-lu sech
+@distractor-en myself
+@distractor-en himself
+@distractor-en ourselves
+
+@fill
+@lu Hatt schminkt [sech] moies.
+@en She puts on make-up [herself] in the morning.
+@distractor-lu mech
+@distractor-lu dech
+@distractor-lu iech
+@distractor-en myself
+@distractor-en yourself
+@distractor-en ourselves
+
+# --- @fill: time prepositions and adverbs -----------------------------------
+
+@fill
+@lu Ech drénke Kaffi [um] siwen Auer.
+@en I drink coffee [at] seven o'clock.
+@distractor-lu no
+@distractor-lu virun
+@distractor-lu bei
+@distractor-en after
+@distractor-en before
+@distractor-en near
+
+@fill
+@lu Ech kämmen mech [nom] Opstoen.
+@en I comb my hair [after] getting up.
+@distractor-lu virum
+@distractor-lu no
+@distractor-lu duerno
+@distractor-en before
+@distractor-en during
+@distractor-en since
+
+@fill
+@lu Mir treffen eis [no] der Aarbecht.
+@en We meet [after] work.
+@distractor-lu virun
+@distractor-lu um
+@distractor-lu bei
+@distractor-en before
+@distractor-en at
+@distractor-en near
+
+@fill
+@lu Du wäsch dech [virun] der Aarbecht.
+@en You wash yourself [before] work.
+@distractor-lu no
+@distractor-lu nom
+@distractor-lu um
+@distractor-en after
+@distractor-en at
+@distractor-en near
+
+@fill
+@lu Hie liest [virum] Schlofegoen.
+@en He reads [before] going to sleep.
+@distractor-lu nom
+@distractor-lu no
+@distractor-lu duerno
+@distractor-en after
+@distractor-en during
+@distractor-en since
+
+@fill
+@lu Ech drénke Kaffi. [Duerno] doen ech mech un.
+@en I drink coffee. [Afterwards] I get dressed.
+@distractor-lu Virdrun
+@distractor-lu Nom
+@distractor-lu Virum
+@distractor-en Before
+@distractor-en During
+@distractor-en Since
+
+@fill
+@lu Ech gi schaffen. [Virdrun] drénken ech Kaffi.
+@en I go to work. [Before that] I drink coffee.
+@distractor-lu Duerno
+@distractor-lu Nom
+@distractor-lu Virum
+@distractor-en Afterwards
+@distractor-en After
+@distractor-en During
+
+# --- @fill: separable-verb prefixes -----------------------------------------
+
+@fill
+@lu Ech stinn moies séier [op].
+@en I get [up] quickly in the morning.
+@distractor-lu un
+@distractor-lu aus
+@distractor-lu fort
+@distractor-en on
+@distractor-en off
+@distractor-en out
+
+@fill
+@lu Du dees dech séier [un].
+@en You get dressed [quickly].
+@distractor-lu op
+@distractor-lu aus
+@distractor-lu fort
+@distractor-en slowly
+@distractor-en late
+@distractor-en never
+
+@fill
+@lu Hie steet ëm sechs Auer [op].
+@en He gets [up] at six o'clock.
+@distractor-lu un
+@distractor-lu aus
+@distractor-lu fort
+@distractor-en on
+@distractor-en off
+@distractor-en out
+
+# --- @fill: frequency adverbs and inversion ---------------------------------
+
+@fill
+@lu [Ëmmer] wäschen ech mech nom Sport.
+@en [Always] after sport, I wash myself.
+@distractor-lu Ni
+@distractor-lu Seelen
+@distractor-lu Heiansdo
+@distractor-en Never
+@distractor-en Rarely
+@distractor-en Sometimes
+
+@fill
+@lu [Normalerweis] stinn ech um hallwer siwen op.
+@en [Normally] I get up at half past six.
+@distractor-lu Ni
+@distractor-lu Seelen
+@distractor-lu Heiansdo
+@distractor-en Never
+@distractor-en Rarely
+@distractor-en Sometimes
+
+@fill
+@lu [Meeschtens] treffen mir eis an der Stad.
+@en [Mostly] we meet in the city.
+@distractor-lu Ni
+@distractor-lu Seelen
+@distractor-lu Heiansdo
+@distractor-en Never
+@distractor-en Rarely
+@distractor-en Sometimes
+
+@fill
+@lu [Oft] verspéit hien sech owes.
+@en He is [often] late in the evening.
+@distractor-lu Ni
+@distractor-lu Seelen
+@distractor-lu Heiansdo
+@distractor-en never
+@distractor-en rarely
+@distractor-en sometimes
+
+@fill
+@lu [Heiansdo] kämmt si sech moies.
+@en [Sometimes] she combs her hair in the morning.
+@distractor-lu Ëmmer
+@distractor-lu Ni
+@distractor-lu Seelen
+@distractor-en Always
+@distractor-en Never
+@distractor-en Rarely
+
+@fill
+@lu [Seelen] raséiere mir eis samsdes.
+@en [Rarely] we shave on Saturdays.
+@distractor-lu Ëmmer
+@distractor-lu Ni
+@distractor-lu Oft
+@distractor-en Always
+@distractor-en Never
+@distractor-en Often
+
+@fill
+@lu [Ni] verspéit dir iech.
+@en [Never] are you late.
+@distractor-lu Ëmmer
+@distractor-lu Oft
+@distractor-lu Heiansdo
+@distractor-en Always
+@distractor-en Often
+@distractor-en Sometimes

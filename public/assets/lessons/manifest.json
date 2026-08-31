@@ -37,6 +37,29 @@
           ]
         }
       ]
+    },
+    {
+      "id": "A2",
+      "sections": [
+        {
+          "id": "A2.1",
+          "title": "Conversation",
+          "lessons": [
+            { "id": "A2.01", "file": "A2.1/A2_01_revision_and_word_order.letz", "title": "Revision & Word Order" },
+            { "id": "A2.02", "file": "A2.1/A2_02_restaurant_and_ordering.letz", "title": "Restaurant & Ordering" },
+            { "id": "A2.03", "file": "A2.1/A2_03_polite_requests_and_wishes.letz", "title": "Polite Requests & Wishes" },
+            { "id": "A2.04", "file": "A2.1/A2_04_bank_and_money.letz", "title": "Bank & Money" },
+            { "id": "A2.05", "file": "A2.1/A2_05_post_office_and_places.letz", "title": "Post Office & Places" },
+            { "id": "A2.06", "file": "A2.1/A2_06_train_travel.letz", "title": "Train Travel" },
+            { "id": "A2.07", "file": "A2.1/A2_07_clothes_shopping.letz", "title": "Clothes Shopping" },
+            { "id": "A2.08", "file": "A2.1/A2_08_character_and_comparison.letz", "title": "Character & Comparison" },
+            { "id": "A2.09", "file": "A2.1/A2_09_home_and_furniture.letz", "title": "Home & Furniture" },
+            { "id": "A2.10", "file": "A2.1/A2_10_housing_and_housework.letz", "title": "Housing & Housework" },
+            { "id": "A2.11", "file": "A2.1/A2_11_daily_routine_and_reflexives.letz", "title": "Daily Routine & Reflexives" },
+            { "id": "A2.12", "file": "A2.1/A2_12_past_tense.letz", "title": "Past Tense" }
+          ]
+        }
+      ]
     }
   ]
 }

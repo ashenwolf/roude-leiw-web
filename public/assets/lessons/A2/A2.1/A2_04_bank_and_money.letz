@@ -1,0 +1,572 @@
+# A2/A2.1/A2_04_bank_and_money.letz
+# Source: PDF slide decks "L3 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 3).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD. Source spellings corrected against the dictionary:
+# "Zervéit" -> Zerwéit, "Währung" -> Wärung.
+# Split from A2.05 (post office) so neither lesson exceeds the sizing target.
+# Grammar focus: banking-register prepositions (vu mengem Kont, op de Kont, mat
+# der Kaart, bei eis), kee(n)/keng by noun gender, and géif/hätt gär for polite
+# requests.
+
+@lesson A2.04 "Bank & Money"
+
+# --- Accounts ---
+@word de Kont = the bank account
+@word de Spuerkont = the savings account
+@word de Prêt = the loan
+@word d'Kreditkaart = the credit card
+
+# --- Cash ---
+@word d'Mënz = the coin
+@word d'Mënzen = the coins
+@word de Schäin = the bank note
+@word d'Schäiner = the bank notes
+@word d'Boergeld = the cash
+@word d'Wärung = the currency
+
+# --- Paperwork ---
+@word d'Demande = the application
+@word d'Ënnerschrëft = the signature
+@word de Reçu = the receipt
+@word d'Quittung = the till receipt
+@word d'Fraisen = the fees
+
+# --- Verbs ---
+@word ophiewen = to withdraw
+@word iwwerweisen = to transfer
+@word opmaachen = to open
+@word zoumaachen = to close
+@word ausfëllen = to fill in
+@word ënnerschreiwen = to sign
+@word ausginn = to spend
+@word ausléinen = to borrow
+@word klauen = to steal
+@word schenken = to give as a gift
+@word sech gedëllegen = to be patient
+
+# --- Big numbers & quantities ---
+@word honnert = hundred
+@word dausend = thousand
+@word eng hallef Millioun = half a million
+@word am Duerchschnëtt = on average
+@word ongeféier = approximately
+
+# --- At the bank ---
+@sentence
+@lu Ech géif gär e Kont opmaachen.
+@en I would like to open an account.
+@distractor-en close
+@distractor-en loan
+@distractor-lu zoumaachen
+@distractor-lu Prêt
+
+@sentence
+@lu Ech hätt gär e Compte Courant.
+@en I would like a current account.
+@distractor-en loan
+@distractor-en receipt
+@distractor-lu Prêt
+@distractor-lu Reçu
+
+@sentence
+@lu Ech brauch Ären Numm an eng Ënnerschrëft.
+@en I need your name and a signature.
+@distractor-en receipt
+@distractor-en fees
+@distractor-lu Reçu
+@distractor-lu Fraisen
+
+@sentence
+@lu Ech fëllen d'Demande kuerz aus.
+@en I will fill in the application quickly.
+@distractor-en sign
+@distractor-en receipt
+@distractor-lu ënnerschreiwen
+@distractor-lu Reçu
+
+@sentence
+@lu Wou soll ech ënnerschreiwen?
+@en Where should I sign?
+@distractor-en pay
+@distractor-en when
+@distractor-lu bezuelen
+@distractor-lu Wéini
+
+@sentence
+@lu Ech géif gär fënnefhonnert Euro vu mengem Kont ophiewen.
+@en I would like to withdraw five hundred euros from my account.
+@distractor-en transfer
+@distractor-en loan
+@distractor-lu iwwerweisen
+@distractor-lu Prêt
+
+@sentence
+@lu Ech géif gär Suen op mäi Kont setzen.
+@en I would like to put money into my account.
+@distractor-en withdraw
+@distractor-en spend
+@distractor-lu ophiewen
+@distractor-lu ausginn
+
+@sentence
+@lu Ech géif gär e Prêt maachen.
+@en I would like to take out a loan.
+@distractor-en account
+@distractor-en close
+@distractor-lu Kont
+@distractor-lu zoumaachen
+
+@sentence
+@lu Hei ass de Reçu.
+@en Here is the receipt.
+@distractor-en signature
+@distractor-en fees
+@distractor-lu Ënnerschrëft
+@distractor-lu Fraisen
+
+@sentence
+@lu Ech hu just e Schäin. Hutt Dir Mënz?
+@en I only have a bank note. Do you have change?
+@distractor-en cash
+@distractor-en receipt
+@distractor-lu Boergeld
+@distractor-lu Reçu
+
+@sentence
+@lu Ech hu kee Boergeld bei mir.
+@en I have no cash with me.
+@distractor-en coins
+@distractor-en account
+@distractor-lu Mënzen
+@distractor-lu Kont
+
+@sentence
+@lu Kann ech mat der Kaart bezuelen?
+@en Can I pay with the card?
+@distractor-en withdraw
+@distractor-en cash
+@distractor-lu ophiewen
+@distractor-lu Boergeld
+
+@sentence
+@lu D'Bank gëtt eis leider kee Prêt.
+@en The bank unfortunately gives us no loan.
+@distractor-en account
+@distractor-en receipt
+@distractor-lu Kont
+@distractor-lu Reçu
+
+@sentence
+@lu Ech muss dréngend Geld ophiewen.
+@en I urgently have to withdraw money.
+@distractor-en spend
+@distractor-en transfer
+@distractor-lu ausginn
+@distractor-lu iwwerweisen
+
+@sentence
+@lu D'Appartement kascht fënnefhonnertdausend Euro.
+@en The apartment costs five hundred thousand euros.
+@distractor-en hundred
+@distractor-en cheap
+@distractor-lu honnert
+@distractor-lu bëlleg
+
+@sentence
+@lu Lëtzebuerg huet ongeféier sechshonnertdausend Awunner.
+@en Luxembourg has approximately six hundred thousand inhabitants.
+@distractor-en exactly
+@distractor-en thousand
+@distractor-lu genee
+@distractor-lu dausend
+
+@sentence
+@lu Am Duerchschnëtt kaschten d'Appartementer méi wéi eng hallef Millioun Euro.
+@en On average the apartments cost more than half a million euros.
+@distractor-en less
+@distractor-en hundred
+@distractor-lu manner
+@distractor-lu honnert
+
+@sentence
+@lu Wéi vill ass een Euro an ärer Wärung?
+@en How much is one euro in your currency?
+@distractor-en account
+@distractor-en cash
+@distractor-lu Kont
+@distractor-lu Boergeld
+
+@sentence
+@lu Wien huet meng Suen geklaut?
+@en Who stole my money?
+@distractor-en gave
+@distractor-en spent
+@distractor-lu geschenkt
+@distractor-lu ausgi
+
+@sentence
+@lu Gedëllegt Iech ee klenge Moment.
+@en Be patient for a small moment.
+@distractor-en big
+@distractor-en sign
+@distractor-lu groussen
+@distractor-lu ënnerschreiwen
+
+@sentence
+@lu Ech hunn dausend Euro an der Lotterie gewonnen.
+@en I won a thousand euros in the lottery.
+@distractor-en lost
+@distractor-en hundred
+@distractor-lu verluer
+@distractor-lu honnert
+
+@sentence
+@lu E Stot gëtt aacht Prozent fir Liewensmëttel aus.
+@en A household spends eight percent on groceries.
+@distractor-en earns
+@distractor-en borrows
+@distractor-lu verdéngt
+@distractor-lu léint
+
+@sentence
+@lu Sidd Dir scho Client bei eis?
+@en Are you already a customer with us?
+@distractor-en employee
+@distractor-en receipt
+@distractor-lu Employé
+@distractor-lu Reçu
+
+@sentence
+@lu Nee, ech si nach kee Client bei dëser Bank.
+@en No, I am not yet a customer at this bank.
+@distractor-en employee
+@distractor-en cash
+@distractor-lu Employé
+@distractor-lu Boergeld
+
+@sentence
+@lu Dir braucht Är Identitéitskaart fir e Kont opzemaachen.
+@en You need your identity card to open an account.
+@distractor-en signature
+@distractor-en loan
+@distractor-lu Ënnerschrëft
+@distractor-lu Prêt
+
+@sentence
+@lu Gëift Dir gär Suen op de Kont setzen?
+@en Would you like to put money into the account?
+@distractor-en withdraw
+@distractor-en borrow
+@distractor-lu ophiewen
+@distractor-lu ausléinen
+
+@sentence
+@lu D'Bankkaart kritt Dir heemgeschéckt.
+@en The bank card will be sent to your home.
+@distractor-en receipt
+@distractor-en cash
+@distractor-lu Reçu
+@distractor-lu Boergeld
+
+@sentence
+@lu Ech wëll Suen op mäi Spuerkont iwwerweisen.
+@en I want to transfer money into my savings account.
+@distractor-en withdraw
+@distractor-en spend
+@distractor-lu ophiewen
+@distractor-lu ausginn
+
+@sentence
+@lu Kann ech mäi Kont zoumaachen?
+@en Can I close my account?
+@distractor-en open
+@distractor-en transfer
+@distractor-lu opmaachen
+@distractor-lu iwwerweisen
+
+@sentence
+@lu Fir dëse Kont bezuelen ech keng Fraisen.
+@en I pay no fees for this account.
+@distractor-en cash
+@distractor-en coins
+@distractor-lu Boergeld
+@distractor-lu Mënzen
+
+# --- Negative indefinite article: kee(n) / keng ---
+@sentence
+@lu Ech hu keng Kreditkaart bei mir.
+@en I have no credit card with me.
+@distractor-en cash
+@distractor-en receipt
+@distractor-lu Boergeld
+@distractor-lu Reçu
+
+@sentence
+@lu Mir hu keng Sue méi op eisem Kont.
+@en We have no money left in our account.
+@distractor-en loan
+@distractor-en coins
+@distractor-lu Prêt
+@distractor-lu Mënzen
+
+@sentence
+@lu Ech hu kee Reçu no der Bezuelung kritt.
+@en I received no receipt after the payment.
+@distractor-en signature
+@distractor-en bank note
+@distractor-lu Ënnerschrëft
+@distractor-lu Schäin
+
+@sentence
+@lu D'Bank gëtt kee Prêt ouni Demande.
+@en The bank gives no loan without an application.
+@distractor-en account
+@distractor-en currency
+@distractor-lu Kont
+@distractor-lu Wärung
+
+@sentence
+@lu Ech muss déi Demande nach ënnerschreiwen.
+@en I still have to sign the application.
+@distractor-en fill in
+@distractor-en close
+@distractor-lu ausfëllen
+@distractor-lu zoumaachen
+
+@sentence
+@lu Den Employé kontrolléiert meng Ënnerschrëft.
+@en The employee checks my signature.
+@distractor-en receipt
+@distractor-en currency
+@distractor-lu Reçu
+@distractor-lu Wärung
+
+@sentence
+@lu De Reçu weist d'Fraisen.
+@en The receipt shows the fees.
+@distractor-en signature
+@distractor-en loan
+@distractor-lu Ënnerschrëft
+@distractor-lu Prêt
+
+@sentence
+@lu Ech géif gär e Spuerkont opmaachen.
+@en I would like to open a savings account.
+@distractor-en close
+@distractor-en borrow
+@distractor-lu zoumaachen
+@distractor-lu ausléinen
+
+@sentence
+@lu Ech hätt gär e Kont ouni Fraisen.
+@en I would like an account without fees.
+@distractor-en cash
+@distractor-en receipt
+@distractor-lu Boergeld
+@distractor-lu Reçu
+
+@sentence
+@lu Eng hallef Millioun Euro ass ganz vill Geld.
+@en Half a million euros is a lot of money.
+@distractor-en little
+@distractor-en hundred
+@distractor-lu wéineg
+@distractor-lu honnert
+
+# --- @fill: banking-register prepositions -----------------------------------
+
+@fill
+@lu Mäi Loun kënnt [op] de Kont.
+@en My salary arrives [in] the account.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en on
+@distractor-en from
+@distractor-en with
+
+@fill
+@lu Ech hiewen Sue [vu] mengem Kont op.
+@en I withdraw money [from] my account.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en in
+@distractor-en with
+@distractor-en at
+
+@fill
+@lu Mäi Brudder bezilt [mat] der Kaart.
+@en My brother pays [with] the card.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en on
+@distractor-en from
+@distractor-en at
+
+@fill
+@lu Meng Schwëster ass schonn Client [bei] eis.
+@en My sister is already a customer [with] us.
+@distractor-lu op
+@distractor-lu mat
+@distractor-lu vu
+@distractor-en on
+@distractor-en from
+@distractor-en at
+
+@fill
+@lu D'Bank setzt haut honnert Euro [op] de Kont.
+@en The bank puts one hundred euros [into] the account today.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en on
+@distractor-en from
+@distractor-en with
+
+@fill
+@lu Ech bezuelen ëmmer [mat] der Kreditkaart.
+@en I always pay [with] the credit card.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en on
+@distractor-en from
+@distractor-en at
+
+# --- @fill: kee(n) / keng by noun gender and number -------------------------
+
+@fill
+@lu Ech brauch [kee] Prêt bei där Bank.
+@en I need [no] loan from that bank.
+@distractor-lu keng
+@distractor-lu keen
+@distractor-lu eng
+@distractor-en a
+@distractor-en some
+@distractor-en every
+
+@fill
+@lu Mäi Frënd huet [kee] Boergeld dobäi.
+@en My friend has [no] cash with him.
+@distractor-lu keng
+@distractor-lu keen
+@distractor-lu vill
+@distractor-en some
+@distractor-en every
+@distractor-en much
+
+@fill
+@lu Hei si [keng] Fraisen fir dech.
+@en There are [no] fees for you here.
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu vill
+@distractor-en some
+@distractor-en every
+@distractor-en much
+
+@fill
+@lu Dës Bank huet [keng] Kreditkaart fir mech.
+@en This bank has [no] credit card for me.
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu eng
+@distractor-en a
+@distractor-en some
+@distractor-en every
+
+@fill
+@lu Haut si [keng] Sue um Kont.
+@en Today there is [no] money in the account.
+@distractor-lu kee
+@distractor-lu keen
+@distractor-lu vill
+@distractor-en some
+@distractor-en every
+@distractor-en much
+
+# --- @fill: polite banking requests ------------------------------------------
+
+@fill
+@lu Ech [géif] gär e neie Kont opmaachen.
+@en I [would] like to open a new account.
+@distractor-lu hätt
+@distractor-lu wëll
+@distractor-lu soll
+@distractor-en will
+@distractor-en did
+@distractor-en must
+
+@fill
+@lu Meng Mamm [hätt] gär e Spuerkont.
+@en My mother [would like] a savings account.
+@distractor-lu géif
+@distractor-lu wëll
+@distractor-lu hat
+@distractor-en will like
+@distractor-en liked
+@distractor-en would need
+
+@fill
+@lu Wéi vill Sue [géift] Dir gär ophiewen?
+@en How much money [would] you like to withdraw?
+@distractor-lu géif
+@distractor-lu hätt
+@distractor-lu wëllt
+@distractor-en will
+@distractor-en did
+@distractor-en must
+
+@fill
+@lu Ech [hätt] gär e Reçu, wann ech gelift.
+@en I [would like] a receipt, please.
+@distractor-lu géif
+@distractor-lu wëll
+@distractor-lu hat
+@distractor-en will like
+@distractor-en liked
+@distractor-en would need
+
+# --- @fill: amounts and spending ---------------------------------------------
+
+@fill
+@lu D'Wunneng kascht [fënnefhonnertdausend] Euro.
+@en The flat costs [five hundred thousand] euros.
+@distractor-lu fënnefhonnert
+@distractor-lu dausend
+@distractor-lu eng hallef Millioun
+@distractor-en hundred
+@distractor-en thousand
+@distractor-en half a million
+
+@fill
+@lu Zu Lëtzebuerg gëtt et [ongeféier] sechshonnertdausend Awunner.
+@en There are [approximately] six hundred thousand inhabitants in Luxembourg.
+@distractor-lu genee
+@distractor-lu ëmmer
+@distractor-lu dacks
+@distractor-en exactly
+@distractor-en never
+@distractor-en often
+
+@fill
+@lu Am Duerchschnëtt gëtt e Stot Sue [fir] Liewensmëttel aus.
+@en A typical household spends money [on] groceries.
+@distractor-lu mat
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en with
+@distractor-en at
+@distractor-en from
+
+@fill
+@lu Eng hallef Millioun ass [méi] wéi honnertdausend.
+@en Half a million is [more] than one hundred thousand.
+@distractor-lu manner
+@distractor-lu genee
+@distractor-lu bal
+@distractor-en less
+@distractor-en exactly
+@distractor-en almost

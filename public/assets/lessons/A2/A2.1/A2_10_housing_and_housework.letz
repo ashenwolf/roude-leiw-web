@@ -1,0 +1,635 @@
+# Source: L08.md (A2.1 Conversatioun, Lektioun 8: invitations, estate agents,
+# and household chores). New vocabulary was checked against LOD; the source's
+# non-lemma compounds and plural-only terms are retained where appropriate.
+# The handout gives both d'Chargen and d'Chargë; this lesson consistently uses
+# d'Chargen. A1 vocabulary is reinforced through sentences, not re-taught as words.
+# Grammar focus: subordinate conjunctions (well, datt, obwuel, wann) send the
+# conjugated verb to the end; demonstratives agree with noun gender and number.
+
+@lesson A2.10 "Housing & Housework"
+
+# --- Housing and estate agents ---
+@word de Haushalt = the household
+@word d'Immobilie = the property
+@word d'Chargen = the running costs
+@word d'Gäschtentoilette = the guest toilet
+@word d'Residence = the apartment block
+@word d'Agence Immobilière = the estate agency
+@word op Wunnengssich sinn = to be looking for a place to live
+
+# --- Household chores ---
+@word de Botzplang = the cleaning schedule
+@word d'Botzgeschier = the cleaning equipment
+@word de Staubsauger = the vacuum cleaner
+@word d'Streckbriet = the ironing board
+@word d'Streckeisen = the iron
+@word de Stot = the housework
+
+@sentence
+@lu Ech sinn op Wunnengssich.
+@en I am looking for a place to live.
+@distractor-en working
+@distractor-en visiting
+@distractor-lu schaffen
+@distractor-lu besichen
+
+@sentence
+@lu Hues du déi Annonce gelies?
+@en Have you read that advertisement?
+@distractor-en letter
+@distractor-en price
+@distractor-lu Bréif
+@distractor-lu Präis
+
+@sentence
+@lu D'Appartement ass zu Iechternach.
+@en The apartment is in Echternach.
+@distractor-en Luxembourg
+@distractor-en city
+@distractor-lu Lëtzebuerg
+@distractor-lu Stad
+
+@sentence
+@lu Op wéi engem Stack läit d'Appartement?
+@en On which floor is the apartment?
+@distractor-en price
+@distractor-en garden
+@distractor-lu Präis
+@distractor-lu Gaart
+
+@sentence
+@lu Et ass um Rez-de-chaussée.
+@en It is on the ground floor.
+@distractor-en attic
+@distractor-en cellar
+@distractor-lu Späicher
+@distractor-lu Keller
+
+@sentence
+@lu Wéi vill kascht d'Appartement?
+@en How much does the apartment cost?
+@distractor-en where
+@distractor-en rent
+@distractor-lu Wou
+@distractor-lu Loyer
+
+@sentence
+@lu Ass de Loyer mat oder ouni Chargen?
+@en Is the rent with or without running costs?
+@distractor-en price
+@distractor-en garden
+@distractor-lu Präis
+@distractor-lu Gaart
+
+@sentence
+@lu D'Kichen ass voll equipéiert.
+@en The kitchen is fully equipped.
+@distractor-en separate
+@distractor-en quiet
+@distractor-lu separat
+@distractor-lu roueg
+
+@sentence
+@lu Et gëtt e Keller an eng Parkplaz.
+@en There is a cellar and a parking space.
+@distractor-en garden
+@distractor-en price
+@distractor-lu Gaart
+@distractor-lu Präis
+
+@sentence
+@lu Hausdéieren si leider verbueden.
+@en Pets are unfortunately forbidden.
+@distractor-en welcome
+@distractor-en cheap
+@distractor-lu erlaabt
+@distractor-lu gënschteg
+
+@sentence
+@lu Mir plënneren an eng méi grouss Wunneng.
+@en We are moving into a bigger apartment.
+@distractor-en stay
+@distractor-en smaller
+@distractor-lu bleiwen
+@distractor-lu kleng
+
+@sentence
+@lu Mir brauchen op d'mannst dräi Schlofzëmmeren.
+@en We need at least three bedrooms.
+@distractor-en two
+@distractor-en kitchen
+@distractor-lu zwee
+@distractor-lu Kichen
+
+@sentence
+@lu D'Gäschtentoilette ass separat.
+@en The guest toilet is separate.
+@distractor-en underground
+@distractor-en expensive
+@distractor-lu ënnerierdesch
+@distractor-lu deier
+
+@sentence
+@lu D'Residence huet eng ënnerierdesch Parkplaz.
+@en The apartment block has an underground parking space.
+@distractor-en garden
+@distractor-en key
+@distractor-lu Gaart
+@distractor-lu Schlëssel
+
+# --- Demonstratives: noun gender and number choose the form ---
+
+@sentence
+@lu Dës Wunneng ass ganz roueg.
+@en This apartment is very quiet.
+@distractor-en that
+@distractor-en expensive
+@distractor-lu Déi
+@distractor-lu deier
+
+@sentence
+@lu Déi Wunneng huet kee Gaart.
+@en That apartment has no garden.
+@distractor-en this
+@distractor-en cellar
+@distractor-lu Dës
+@distractor-lu Keller
+
+@sentence
+@lu Dëse Präis ass ze héich.
+@en This price is too high.
+@distractor-en those
+@distractor-en low
+@distractor-lu Déi
+@distractor-lu niddreg
+
+@sentence
+@lu Dee Staubsauger ass schrecklech haart.
+@en That vacuum cleaner is terribly loud.
+@distractor-en this
+@distractor-en quiet
+@distractor-lu Dëse
+@distractor-lu roueg
+
+@sentence
+@lu Dëst Appartement huet zwee Schlofzëmmeren.
+@en This apartment has two bedrooms.
+@distractor-en that
+@distractor-en kitchen
+@distractor-lu Dat
+@distractor-lu Kichen
+
+@sentence
+@lu Dat Haus huet eng Terrass.
+@en That house has a terrace.
+@distractor-en this
+@distractor-en cellar
+@distractor-lu Dëst
+@distractor-lu Keller
+
+@sentence
+@lu Dës Kichen ass fonkelnei.
+@en This kitchen is brand new.
+@distractor-en that
+@distractor-en old
+@distractor-lu Déi
+@distractor-lu al
+
+@sentence
+@lu Déi Agence Immobilière huet gutt Offeren.
+@en That estate agency has good offers.
+@distractor-en this
+@distractor-en prices
+@distractor-lu Dës
+@distractor-lu Präisser
+
+# --- Main and dependent clauses: the finite verb closes the dependent clause ---
+
+@sentence
+@lu Meng Wunneng ass perfekt, well se grouss ass.
+@en My apartment is perfect because it is large.
+@distractor-en small
+@distractor-en house
+@distractor-lu kleng
+@distractor-lu Haus
+
+@sentence
+@lu D'Chargen sinn niddreg, well d'Haus energieeffizient ass.
+@en The running costs are low because the house is energy efficient.
+@distractor-en high
+@distractor-en garden
+@distractor-lu héich
+@distractor-lu Gaart
+
+@sentence
+@lu An der Annonce steet, datt et eng Parkplaz gëtt.
+@en The advertisement says that there is a parking space.
+@distractor-en cellar
+@distractor-en garden
+@distractor-lu Keller
+@distractor-lu Gaart
+
+@sentence
+@lu Ech maachen de Stot, obwuel et langweileg ass.
+@en I do the housework although it is boring.
+@distractor-en exciting
+@distractor-en garden
+@distractor-lu spannend
+@distractor-lu Gaart
+
+@sentence
+@lu Mir musse plënneren, wann eise Propriétär d'Haus verkeeft.
+@en We have to move if our landlord sells the house.
+@distractor-en buys
+@distractor-en garden
+@distractor-lu keeft
+@distractor-lu Gaart
+
+@sentence
+@lu Wann ech Zäit hunn, maachen ech d'Wäsch.
+@en When I have time, I do the laundry.
+@distractor-en dishes
+@distractor-en garden
+@distractor-lu Spull
+@distractor-lu Gaart
+
+@sentence
+@lu Obwuel d'Kichen kleng ass, ass si hell.
+@en Although the kitchen is small, it is bright.
+@distractor-en dark
+@distractor-en garden
+@distractor-lu donkel
+@distractor-lu Gaart
+
+@sentence
+@lu Well d'Appartement roueg ass, interesséiert et mech.
+@en Because the apartment is quiet, I am interested in it.
+@distractor-en noisy
+@distractor-en garden
+@distractor-lu haart
+@distractor-lu Gaart
+
+@sentence
+@lu Ech weess, datt de Keller dréchen ass.
+@en I know that the cellar is dry.
+@distractor-en wet
+@distractor-en attic
+@distractor-lu naass
+@distractor-lu Späicher
+
+@sentence
+@lu Wann d'Wäschmaschinn futti ass, wäsche mir bei menger Mamm.
+@en When the washing machine is broken, we wash at my mother's place.
+@distractor-en father
+@distractor-en dry
+@distractor-lu Papp
+@distractor-lu dréchen
+
+# --- Chores and a shared cleaning plan ---
+
+@sentence
+@lu Bei mir doheem decke meng Kanner den Dësch.
+@en At my home my children set the table.
+@distractor-en garden
+@distractor-en vacuum
+@distractor-lu Gaart
+@distractor-lu staubsaugen
+
+@sentence
+@lu Mäi Mann spullt d'Geschier.
+@en My husband does the dishes.
+@distractor-en laundry
+@distractor-en garden
+@distractor-lu Wäsch
+@distractor-lu Gaart
+
+@sentence
+@lu Hie streckt seng Hiemer selwer.
+@en He irons his shirts himself.
+@distractor-en washes
+@distractor-en garden
+@distractor-lu wäscht
+@distractor-lu Gaart
+
+@sentence
+@lu All zweeten Dag mécht hien d'Dreckskëscht eidel.
+@en Every other day he empties the bin.
+@distractor-en table
+@distractor-en kitchen
+@distractor-lu Dësch
+@distractor-lu Kichen
+
+@sentence
+@lu No dem Staubsaugen botzen ech de Buedem am Gank naass.
+@en After vacuuming I clean the floor in the hallway with a wet cloth.
+@distractor-en cellar
+@distractor-en dry
+@distractor-lu Keller
+@distractor-lu dréchen
+
+@sentence
+@lu Mir stëbsen d'Stuff all Samschdeg.
+@en We dust the living room every Saturday.
+@distractor-en kitchen
+@distractor-en Sunday
+@distractor-lu Kichen
+@distractor-lu Sonndeg
+
+@sentence
+@lu Ech raumen d'Spullmaschinn aus.
+@en I empty the dishwasher.
+@distractor-en vacuum
+@distractor-en cellar
+@distractor-lu staubsaugen
+@distractor-lu Keller
+
+@sentence
+@lu Mir deelen eis de Stot.
+@en We share the housework.
+@distractor-en garden
+@distractor-en price
+@distractor-lu Gaart
+@distractor-lu Präis
+
+@sentence
+@lu De Botzplang ass an der Kichen.
+@en The cleaning schedule is in the kitchen.
+@distractor-en cellar
+@distractor-en garden
+@distractor-lu Keller
+@distractor-lu Gaart
+
+@sentence
+@lu D'Botzgeschier ass am Keller.
+@en The cleaning equipment is in the cellar.
+@distractor-en kitchen
+@distractor-en price
+@distractor-lu Kichen
+@distractor-lu Präis
+
+@sentence
+@lu De Staubsauger steet bei der Wäschmaschinn.
+@en The vacuum cleaner is by the washing machine.
+@distractor-en table
+@distractor-en garden
+@distractor-lu Dësch
+@distractor-lu Gaart
+
+@sentence
+@lu D'Streckbriet steet nieft dem Schaf.
+@en The ironing board is next to the cupboard.
+@distractor-en under
+@distractor-en garden
+@distractor-lu ënner
+@distractor-lu Gaart
+
+@sentence
+@lu D'Streckeisen ass futti.
+@en The iron is broken.
+@distractor-en new
+@distractor-en quiet
+@distractor-lu nei
+@distractor-lu roueg
+
+@sentence
+@lu Ech strecken ni gär.
+@en I never like ironing.
+@distractor-en vacuuming
+@distractor-en always
+@distractor-lu staubsaugen
+@distractor-lu ëmmer
+
+@sentence
+@lu Mir maachen d'Bett moies.
+@en We make the bed in the morning.
+@distractor-en table
+@distractor-en evening
+@distractor-lu Dësch
+@distractor-lu owes
+
+@sentence
+@lu De Recycling muss all Woch eraus.
+@en The recycling has to go out every week.
+@distractor-en laundry
+@distractor-en garden
+@distractor-lu Wäsch
+@distractor-lu Gaart
+
+# --- @fill: housing prepositions ---------------------------------------------
+# The fixed noun phrase makes every preposition tile uniquely grammatical.
+
+@fill
+@lu D'Botzgeschier ass [am] Schaf hannen.
+@en The cleaning equipment is [in] the cupboard at the back.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu ënner
+@distractor-en on
+@distractor-en by
+@distractor-en under
+
+@fill
+@lu De Staubsauger steet [bei] der Wäschmaschinn am Keller.
+@en The vacuum cleaner stands [by] the washing machine in the cellar.
+@distractor-lu am
+@distractor-lu op
+@distractor-lu ënner
+@distractor-en in
+@distractor-en on
+@distractor-en under
+
+@fill
+@lu D'Appartement läit [op] dem zweete Stack.
+@en The apartment is [on] the second floor.
+@distractor-lu am
+@distractor-lu bei
+@distractor-lu ënner
+@distractor-en in
+@distractor-en by
+@distractor-en under
+
+@fill
+@lu De Loyer ass [ouni] Chargen.
+@en The rent is [without] running costs.
+@distractor-lu mat
+@distractor-lu bei
+@distractor-lu op
+@distractor-en with
+@distractor-en by
+@distractor-en on
+
+@fill
+@lu D'Wunneng ass [mat] Chargen méi deier.
+@en The apartment is [with] running costs more expensive.
+@distractor-lu ouni
+@distractor-lu bei
+@distractor-lu op
+@distractor-en without
+@distractor-en by
+@distractor-en on
+
+@fill
+@lu [Op d'mannst] brauche mir dräi Schlofzëmmeren.
+@en [At least] we need three bedrooms.
+@distractor-lu Ouni
+@distractor-lu Bei
+@distractor-lu Ënner
+@distractor-en Without
+@distractor-en By
+@distractor-en Under
+
+# --- @fill: conjunctions put the finite verb last ---------------------------
+# A comma before the blank keeps the Eifeler-Regel frame independent of its tile.
+
+@fill
+@lu Ech huelen d'Wunneng, [well] se e Keller huet.
+@en I choose the apartment [because] it has a cellar.
+@distractor-lu datt
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en that
+@distractor-en although
+@distractor-en if
+
+@fill
+@lu D'Agence seet, [datt] d'Wunneng fräi ass.
+@en The agency says [that] the apartment is available.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en because
+@distractor-en although
+@distractor-en if
+
+@fill
+@lu D'Wunneng ass kleng, [obwuel] se dräi Schlofzëmmeren huet.
+@en The apartment is small [although] it has three bedrooms.
+@distractor-lu well
+@distractor-lu datt
+@distractor-lu wann
+@distractor-en because
+@distractor-en that
+@distractor-en if
+
+@fill
+@lu [Wann] de Präis passt, kafe mir d'Haus.
+@en [If] the price is right, we buy the house.
+@distractor-lu Well
+@distractor-lu Datt
+@distractor-lu Obwuel
+@distractor-en Because
+@distractor-en That
+@distractor-en Although
+
+@fill
+@lu Mir botzen haut, [well] muer Gäscht kommen.
+@en We clean today [because] guests arrive tomorrow.
+@distractor-lu datt
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en that
+@distractor-en although
+@distractor-en if
+
+@fill
+@lu Ech weess, [datt] de Staubsauger am Keller steet.
+@en I know [that] the vacuum cleaner is in the cellar.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en because
+@distractor-en although
+@distractor-en if
+
+@fill
+@lu Mir plënneren, [wann] de Propriétär d'Haus verkeeft.
+@en We move [if] the landlord sells the house.
+@distractor-lu well
+@distractor-lu datt
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en that
+@distractor-en although
+
+@fill
+@lu D'Kichen ass al, [obwuel] se fonkelnei ausgesäit.
+@en The kitchen is old [although] it looks brand new.
+@distractor-lu well
+@distractor-lu datt
+@distractor-lu wann
+@distractor-en because
+@distractor-en that
+@distractor-en if
+
+# --- @fill: demonstratives agree with the noun ------------------------------
+# Wrong-gender and wrong-number forms are deliberate distractors.
+
+@fill
+@lu [Dëst] Haus huet e Keller.
+@en [This] house has a cellar.
+@distractor-lu Dat
+@distractor-lu Dëse
+@distractor-lu Dës
+@distractor-en That
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu [Dat] Appartement läit um Rez-de-chaussée.
+@en [That] apartment is on the ground floor.
+@distractor-lu Dëst
+@distractor-lu Dee
+@distractor-lu Dës
+@distractor-en This
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu Leider ass [Dëse] Präis ze héich.
+@en Unfortunately, [this] price is too high.
+@distractor-lu Dës
+@distractor-lu Dëst
+@distractor-lu Deen
+@distractor-en That
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu [Dee] Staubsauger mécht ze vill Kaméidi.
+@en [That] vacuum cleaner makes too much noise.
+@distractor-lu Dëse
+@distractor-lu Dës
+@distractor-lu Dat
+@distractor-en This
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu Am Haus ass [Dës] Kichen voll equipéiert.
+@en In the house, [this] kitchen is fully equipped.
+@distractor-lu Déi
+@distractor-lu Dëst
+@distractor-lu Dëse
+@distractor-en That
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu An dësem Haus ass [Déi] Gäschtentoilette separat.
+@en In this house, [that] guest toilet is separate.
+@distractor-lu Dës
+@distractor-lu Dëst
+@distractor-lu Dat
+@distractor-en This
+@distractor-en These
+@distractor-en Those
+
+@fill
+@lu [Dës] Appartementer si fonkelnei.
+@en [These] apartments are brand new.
+@distractor-lu Dëse
+@distractor-lu Dëst
+@distractor-lu Deen
+@distractor-en This
+@distractor-en That
+@distractor-en Those

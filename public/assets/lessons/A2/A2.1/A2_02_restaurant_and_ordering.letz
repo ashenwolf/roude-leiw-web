@@ -1,0 +1,600 @@
+# A2/A2.1/A2_02_restaurant_and_ordering.letz
+# Source: PDF slide decks "L2 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 2).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD (gender -> article; glosses cross-checked).
+# Split from the deck's second half (A2.03) to keep each lesson near 40-60 Elements:
+# this file is the restaurant scene and its vocabulary, A2.03 is the polite/conditional
+# register (hätt/géif) built on top of it.
+# Grammar focus: restaurant prepositions and modal verbs with a bare infinitive;
+# `well` sends the finite verb to the end of its clause.
+
+@lesson A2.02 "Restaurant & Ordering"
+
+# --- Menu & courses ---
+@word den Aperitif = the aperitif
+@word d'Menüskaart = the menu card
+@word d'Wäikaart = the wine list
+@word d'Entrée = the starter
+@word den Haaptplat = the main course
+@word den Dagesmenü = the daily menu
+@word den Dessert = the dessert
+@word d'Rechnung = the bill
+
+# --- Food & drink ---
+@word d'Zopp = the soup
+@word d'Zalot = the salad
+@word de Bifdeck = the steak
+@word de Räis = the rice
+@word d'Fritten = the chips
+@word de Poulet = the chicken
+@word de Béier = the beer
+@word d'Gedrénks = the beverage
+
+# --- Cutlery ---
+@word d'Forschett = the fork
+@word d'Messer = the knife
+@word de Läffel = the spoon
+@word d'Zerwéit = the napkin
+
+# --- Describing the food ---
+@word bluddeg = rare
+@word gutt duerch = well done
+@word zéi = tough
+@word versalzt = too salty
+
+# --- Verbs & expressions ---
+@word brauchen = to need
+@word wielen = to choose
+@word schmaachen = to taste
+@word deelen = to share
+@word w.e.g. = please
+
+@sentence
+@lu Hutt Dir reservéiert?
+@en Have you reserved?
+@distractor-en chosen
+@distractor-en bill
+@distractor-lu gewielt
+@distractor-lu Rechnung
+
+@sentence
+@lu Wëllt Dir en Aperitif?
+@en Do you want an aperitif?
+@distractor-en dessert
+@distractor-en bill
+@distractor-lu Dessert
+@distractor-lu Rechnung
+
+@sentence
+@lu Hutt Dir scho gewielt?
+@en Have you already chosen?
+@distractor-en reserved
+@distractor-en tasted
+@distractor-lu reservéiert
+@distractor-lu geschmaacht
+
+@sentence
+@lu Ech kréien eng Zopp als Entrée.
+@en I get a soup as a starter.
+@distractor-en salad
+@distractor-en dessert
+@distractor-lu Zalot
+@distractor-lu Dessert
+
+@sentence
+@lu Wëllt Dir Räis oder Fritten?
+@en Would you like rice or chips?
+@distractor-en soup
+@distractor-en salad
+@distractor-lu Zopp
+@distractor-lu Zalot
+
+@sentence
+@lu Ech huele Fritten, w.e.g.
+@en I take chips, please.
+@distractor-en rice
+@distractor-en beer
+@distractor-lu Räis
+@distractor-lu Béier
+
+@sentence
+@lu Wéi wëllt Dir Äre Bifdeck?
+@en How do you want your steak?
+@distractor-en soup
+@distractor-en chicken
+@distractor-lu Zopp
+@distractor-lu Poulet
+
+@sentence
+@lu Bluddeg, w.e.g.
+@en Rare, please.
+@distractor-en tough
+@distractor-en salty
+@distractor-lu zéi
+@distractor-lu versalzt
+
+@sentence
+@lu Wat wëllt Dir beim Iessen drénken?
+@en What would you like to drink with the meal?
+@distractor-en eat
+@distractor-en choose
+@distractor-lu iessen
+@distractor-lu wielen
+
+@sentence
+@lu Huet et geschmaacht?
+@en Did it taste good?
+@distractor-en chosen
+@distractor-en reserved
+@distractor-lu gewielt
+@distractor-lu reservéiert
+
+@sentence
+@lu Mir brauchen nach e bëssen Zäit.
+@en We need a bit more time.
+@distractor-en money
+@distractor-en bill
+@distractor-lu Suen
+@distractor-lu Rechnung
+
+@sentence
+@lu D'Fleesch war leider kal.
+@en The meat was unfortunately cold.
+@distractor-en warm
+@distractor-en salty
+@distractor-lu waarm
+@distractor-lu versalzt
+
+@sentence
+@lu D'Zopp war versalzt.
+@en The soup was too salty.
+@distractor-en salad
+@distractor-en cold
+@distractor-lu Zalot
+@distractor-lu kal
+
+@sentence
+@lu D'Fleesch war zéi.
+@en The meat was tough.
+@distractor-en soft
+@distractor-en cold
+@distractor-lu mëll
+@distractor-lu kal
+
+@sentence
+@lu Kann ech eng Zerwéit kréien, w.e.g.?
+@en Can I get a napkin, please?
+@distractor-en fork
+@distractor-en spoon
+@distractor-lu Forschett
+@distractor-lu Läffel
+
+@sentence
+@lu Du solls net mam Messer spillen.
+@en You should not play with the knife.
+@distractor-en fork
+@distractor-en eat
+@distractor-lu Forschett
+@distractor-lu iessen
+
+@sentence
+@lu Mäi Mann kann net gutt kachen.
+@en My husband cannot cook well.
+@distractor-en badly
+@distractor-en eat
+@distractor-lu schlecht
+@distractor-lu iessen
+
+@sentence
+@lu Mir iessen am Restaurant, well mäi Mann net kache kann.
+@en We eat in the restaurant because my husband cannot cook.
+@distractor-en although
+@distractor-en home
+@distractor-lu obwuel
+@distractor-lu doheem
+
+@sentence
+@lu Solle mir eppes iesse goen?
+@en Should we go and eat something?
+@distractor-en drink
+@distractor-en cook
+@distractor-lu drénken
+@distractor-lu kachen
+
+@sentence
+@lu Däerf ech deng Pizza probéieren?
+@en May I try your pizza?
+@distractor-en share
+@distractor-en soup
+@distractor-lu deelen
+@distractor-lu Zopp
+
+@sentence
+@lu Bréngt eis d'Rechnung, w.e.g.
+@en Bring us the bill, please.
+@distractor-en menu
+@distractor-en dessert
+@distractor-lu Menüskaart
+@distractor-lu Dessert
+
+@sentence
+@lu Kënnt Dir d'Wäikaart bréngen, w.e.g.?
+@en Can you bring the wine list, please?
+@distractor-en bill
+@distractor-en beer
+@distractor-lu Rechnung
+@distractor-lu Béier
+
+# --- Restaurant scene: reservation, ordering, and paying ---
+
+@sentence
+@lu Jo, mir hunn en Dësch op den Numm Wagener reservéiert.
+@en Yes, we reserved a table under the name Wagener.
+@distractor-en bill
+@distractor-en dessert
+@distractor-lu Rechnung
+@distractor-lu Dessert
+
+@sentence
+@lu Hei sinn d'Menüskaarten.
+@en Here are the menu cards.
+@distractor-en wine
+@distractor-en bill
+@distractor-lu Wäikaarten
+@distractor-lu Rechnungen
+
+@sentence
+@lu Ech bestellen de Poulet als Haaptplat.
+@en I order chicken as a main course.
+@distractor-en starter
+@distractor-en soup
+@distractor-lu Entrée
+@distractor-lu Zopp
+
+@sentence
+@lu Ech huelen eng Zalot mat Geessekéis.
+@en I take a salad with goat cheese.
+@distractor-en chicken
+@distractor-en rice
+@distractor-lu Poulet
+@distractor-lu Räis
+
+@sentence
+@lu Ass Weess an der Zopp?
+@en Is there wheat in the soup?
+@distractor-en salad
+@distractor-en meat
+@distractor-lu Zalot
+@distractor-lu Fleesch
+
+@sentence
+@lu Ech sinn allergesch op Gluten.
+@en I am allergic to gluten.
+@distractor-en hungry
+@distractor-en thirsty
+@distractor-lu hongereg
+@distractor-lu duuschtereg
+
+@sentence
+@lu De Serveur bréngt d'Gedrénks direkt.
+@en The waiter brings the beverages straight away.
+@distractor-en chooses
+@distractor-en pays
+@distractor-lu wielt
+@distractor-lu bezilt
+
+@sentence
+@lu Wou ass d'Toilette, w.e.g.?
+@en Where is the toilet, please?
+@distractor-en menu
+@distractor-en counter
+@distractor-lu Menüskaart
+@distractor-lu Comptoir
+
+@sentence
+@lu Gitt riichtaus laanscht de Comptoir.
+@en Go straight ahead past the counter.
+@distractor-en left
+@distractor-en sit
+@distractor-lu lénks
+@distractor-lu sëtzen
+
+@sentence
+@lu Mir deelen en Dessert.
+@en We share a dessert.
+@distractor-en starter
+@distractor-en bill
+@distractor-lu Entrée
+@distractor-lu Rechnung
+
+@sentence
+@lu Ech huelen keen Dessert.
+@en I do not take a dessert.
+@distractor-en soup
+@distractor-en wine
+@distractor-lu Zopp
+@distractor-lu Wäin
+
+@sentence
+@lu Mir bezuele mat der Kaart.
+@en We pay by card.
+@distractor-en cash
+@distractor-en dessert
+@distractor-lu Suen
+@distractor-lu Dessert
+
+# --- Modal verbs: bare infinitive, never `ze` ---
+
+@sentence
+@lu Ech wëll den neien Italieener probéieren.
+@en I want to try the new Italian restaurant.
+@distractor-en waiter
+@distractor-en salad
+@distractor-lu Serveur
+@distractor-lu Zalot
+
+@sentence
+@lu Wëlls du matgoen?
+@en Do you want to come along?
+@distractor-en wait
+@distractor-en pay
+@distractor-lu waarden
+@distractor-lu bezuelen
+
+@sentence
+@lu Mir mussen elo bestellen.
+@en We have to order now.
+@distractor-en choose
+@distractor-en wait
+@distractor-lu wielen
+@distractor-lu waarden
+
+@sentence
+@lu Kanns du kuerz waarden?
+@en Can you wait a moment?
+@distractor-en eat
+@distractor-en choose
+@distractor-lu iessen
+@distractor-lu wielen
+
+@sentence
+@lu Mir sollen de Serveur ruffen.
+@en We should call the waiter.
+@distractor-en pay
+@distractor-en smoke
+@distractor-lu bezuelen
+@distractor-lu fëmmen
+
+@sentence
+@lu Ech däerf net esou vill Séisses iessen.
+@en I may not eat so many sweets.
+@distractor-en drink
+@distractor-en cook
+@distractor-lu drénken
+@distractor-lu kachen
+
+@sentence
+@lu Däerfe mir op der Terrass fëmmen?
+@en May we smoke on the terrace?
+@distractor-en pay
+@distractor-en wait
+@distractor-lu bezuelen
+@distractor-lu waarden
+
+@sentence
+@lu Ech drénke Waasser, well ech duerno nach fuere muss.
+@en I drink water because I still have to drive afterwards.
+@distractor-en beer
+@distractor-en wine
+@distractor-lu Béier
+@distractor-lu Wäin
+
+# --- @fill: restaurant prepositions -----------------------------------------
+# The frames vary the restaurant scene so they do not duplicate sentence-builder
+# items. Prepositions remain the only viable tile in their fixed phrase.
+
+@fill
+@lu Ech bestellen eng Zalot [als] Entrée.
+@en I order a salad [as] a starter.
+@distractor-lu mat
+@distractor-lu ouni
+@distractor-lu beim
+@distractor-en with
+@distractor-en without
+@distractor-en during
+
+@fill
+@lu Mir drénke Waasser [beim] Iessen.
+@en We drink water [during] the meal.
+@distractor-lu virun
+@distractor-lu no
+@distractor-lu ouni
+@distractor-en before
+@distractor-en after
+@distractor-en without
+
+@fill
+@lu De Bifdeck kënnt [mat] Fritten.
+@en The steak comes [with] chips.
+@distractor-lu ouni
+@distractor-lu bei
+@distractor-lu op
+@distractor-en without
+@distractor-en near
+@distractor-en on
+
+@fill
+@lu Ech huelen d'Zopp [ouni] Brout.
+@en I take the soup [without] bread.
+@distractor-lu mat
+@distractor-lu bei
+@distractor-lu no
+@distractor-en with
+@distractor-en during
+@distractor-en after
+
+@fill
+@lu Mir gi [op] der Terrass iessen.
+@en We go to eat [on] the terrace.
+@distractor-lu bei
+@distractor-lu virun
+@distractor-lu ënner
+@distractor-en near
+@distractor-en before
+@distractor-en under
+
+@fill
+@lu Hutt Dir en Dësch [fir] véier Persounen?
+@en Do you have a table [for] four people?
+@distractor-lu mat
+@distractor-lu ouni
+@distractor-lu bei
+@distractor-en with
+@distractor-en without
+@distractor-en near
+
+@fill
+@lu Ech reservéieren en Dësch [op] den Numm Wagener.
+@en I reserve a table [under] the name Wagener.
+@distractor-lu bei
+@distractor-lu mat
+@distractor-lu ouni
+@distractor-en near
+@distractor-en with
+@distractor-en without
+
+@fill
+@lu De Serveur steet [beim] Comptoir.
+@en The waiter stands [at] the counter.
+@distractor-lu virun
+@distractor-lu ënner
+@distractor-lu hannert
+@distractor-en before
+@distractor-en under
+@distractor-en behind
+
+@fill
+@lu Mäi Brudder ass allergesch [op] Gluten.
+@en My brother is allergic [to] gluten.
+@distractor-lu mat
+@distractor-lu ouni
+@distractor-lu bei
+@distractor-en with
+@distractor-en without
+@distractor-en near
+
+@fill
+@lu De Poulet kënnt [aus] dem Uewen.
+@en The chicken comes [from] the oven.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu mat
+@distractor-en on
+@distractor-en near
+@distractor-en with
+
+# --- @fill: `well` clauses and modal verbs ----------------------------------
+# Each modal takes its bare infinitive. Distractors are wrong persons of that
+# same modal, so the learner must choose the form that agrees with the subject.
+
+@fill
+@lu Ech drénke Waasser, well ech muer fuere [muss].
+@en I drink water because I [have] to drive tomorrow.
+@distractor-lu musst
+@distractor-lu mussen
+@distractor-lu musse
+@distractor-en has
+@distractor-en had
+@distractor-en having
+
+@fill
+@lu Dir [kënnt] d'Rechnung elo bezuelen.
+@en You [can] pay the bill now.
+@distractor-lu kann
+@distractor-lu kanns
+@distractor-lu kënnen
+@distractor-en could
+@distractor-en cannot
+@distractor-en will
+
+@fill
+@lu Du [wëlls] kee Béier drénken.
+@en You [want] no beer to drink.
+@distractor-lu wëll
+@distractor-lu wëllt
+@distractor-lu wëllen
+@distractor-en wants
+@distractor-en wanted
+@distractor-en wanting
+
+@fill
+@lu Mir [sollen] haut de Serveur ruffen.
+@en We [should] call the waiter today.
+@distractor-lu soll
+@distractor-lu solls
+@distractor-lu sollt
+@distractor-en must
+@distractor-en may
+@distractor-en can
+
+@fill
+@lu Ech [däerf] hei net fëmmen.
+@en I [may] not smoke here.
+@distractor-lu däerfs
+@distractor-lu däerft
+@distractor-lu däerfen
+@distractor-en must
+@distractor-en can
+@distractor-en should
+
+# --- @fill: connectors and verb-last clauses --------------------------------
+
+@fill
+@lu D'Zopp ass gutt, [mee] d'Fritten si kal.
+@en The soup is good, [but] the chips are cold.
+@distractor-lu an
+@distractor-lu oder
+@distractor-lu well
+@distractor-en and
+@distractor-en or
+@distractor-en because
+
+@fill
+@lu Ech weess net, [ob] de Restaurant op ass.
+@en I do not know [whether] the restaurant is open.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en because
+@distractor-en although
+@distractor-en when
+
+@fill
+@lu [Wann] de Serveur kënnt, bestelle mir.
+@en [When] the waiter comes, we order.
+@distractor-lu Well
+@distractor-lu Obwuel
+@distractor-lu Ob
+@distractor-en Because
+@distractor-en Although
+@distractor-en Whether
+
+@fill
+@lu Wëllt Dir eng Zopp [oder] eng Zalot?
+@en Do you want a soup [or] a salad?
+@distractor-lu an
+@distractor-lu mee
+@distractor-lu well
+@distractor-en and
+@distractor-en but
+@distractor-en because
+
+@fill
+@lu Mir huelen den Dagesmenü, [well] en bëlleg ass.
+@en We take the daily menu [because] it is cheap.
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-lu ob
+@distractor-en although
+@distractor-en when
+@distractor-en whether

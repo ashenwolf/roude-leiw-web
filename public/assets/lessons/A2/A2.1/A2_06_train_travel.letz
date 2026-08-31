@@ -1,0 +1,558 @@
+# A2/A2.1/A2_06_train_travel.letz
+# Source: PDF slide decks "L4 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 4:
+# Gespréicher op der Gare an am Kleedergeschäft féiere kënnen).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD.
+# Split from A2.07 (the clothes-shop half of the same deck) to keep both near the
+# 40-60 Element sizing target.
+# The deck's separable verbs are taught as infinitives; their split forms
+# (`Ech klammen an`) appear in the sentences.
+# Grammar focus: travel-register prepositions and contracted forms; separable-verb
+# prefixes in main clauses; root-changing second- and third-person singular forms.
+
+@lesson A2.06 "Train Travel"
+
+# --- Tickets & station ---
+@word de Billjee = the ticket
+@word d'Billjeeën = the tickets
+@word d'Gare = the railway station
+@word de Quai = the platform
+@word den Départ = the departure
+@word d'Arrivée = the arrival
+@word d'Reservatioun = the reservation
+@word de Spezialtarif = the special fare
+@word de Virdeel = the advantage
+@word d'Virdeeler = the advantages
+
+# --- Verbs of travel ---
+@word fortfueren = to depart by vehicle
+@word ukommen = to arrive
+@word ëmklammen = to change trains
+@word eraklammen = to board
+@word erausklammen = to get off
+@word fortfléien = to depart by plane
+@word reservéieren = to reserve
+@word kaschten = to cost
+@word widderhuelen = to repeat
+
+# --- Describing the journey ---
+@word immens = extremely
+@word voll = full
+@word pünktlech = punctually
+@word natierlech = of course
+@word Lount dat sech? = Is it worth it?
+
+@sentence
+@lu Wéi vill kascht e Billjee fir op Budapest?
+@en How much does a ticket to Budapest cost?
+@distractor-en platform
+@distractor-en reservation
+@distractor-lu Quai
+@distractor-lu Reservatioun
+
+@sentence
+@lu Gëtt et e Spezialtarif?
+@en Is there a special fare?
+@distractor-en advantage
+@distractor-en platform
+@distractor-lu Virdeel
+@distractor-lu Quai
+
+@sentence
+@lu Um wéi vill Auer fiert den Zuch fort?
+@en At what time does the train depart?
+@distractor-en arrives
+@distractor-en platform
+@distractor-lu ukënnt
+@distractor-lu Quai
+
+@sentence
+@lu Den Départ ass um siwen Auer.
+@en The departure is at seven o'clock.
+@distractor-en arrival
+@distractor-en eight
+@distractor-lu Arrivée
+@distractor-lu aacht
+
+@sentence
+@lu Op wéi engem Quai fiert den Zuch fort?
+@en From which platform does the train depart?
+@distractor-en station
+@distractor-en arrives
+@distractor-lu Gare
+@distractor-lu ukënnt
+
+@sentence
+@lu Den Zuch kënnt um eng Auer un.
+@en The train arrives at one o'clock.
+@distractor-en departs
+@distractor-en two
+@distractor-lu fortfiert
+@distractor-lu zwou
+
+@sentence
+@lu D'Arrivée zu Budapest ass owes.
+@en The arrival in Budapest is in the evening.
+@distractor-en departure
+@distractor-en morning
+@distractor-lu Départ
+@distractor-lu moies
+
+@sentence
+@lu Wéi oft muss ech ëmklammen?
+@en How often do I have to change trains?
+@distractor-en board
+@distractor-en platform
+@distractor-lu eraklammen
+@distractor-lu Quai
+
+@sentence
+@lu Dir musst zu Bréissel ëmklammen.
+@en You have to change trains in Brussels.
+@distractor-en board
+@distractor-en station
+@distractor-lu eraklammen
+@distractor-lu Gare
+
+@sentence
+@lu Den Zuch ass haut immens voll.
+@en The train is extremely full today.
+@distractor-en empty
+@distractor-en tomorrow
+@distractor-lu eidel
+@distractor-lu muer
+
+@sentence
+@lu Ech muss an de Waggon eraklammen.
+@en I have to board the carriage.
+@distractor-en get off
+@distractor-en platform
+@distractor-lu erausklammen
+@distractor-lu Quai
+
+@sentence
+@lu Dir musst op der nächster Statioun erausklammen.
+@en You have to get off at the next station.
+@distractor-en board
+@distractor-en first
+@distractor-lu eraklammen
+@distractor-lu éischter
+
+@sentence
+@lu De Fliger flitt pünktlech fort.
+@en The plane departs punctually.
+@distractor-en train
+@distractor-en late
+@distractor-lu Zuch
+@distractor-lu spéit
+
+@sentence
+@lu Kënnt Dir dat widderhuelen, w.e.g.?
+@en Can you repeat that, please?
+@distractor-en reserve
+@distractor-en ticket
+@distractor-lu reservéieren
+@distractor-lu Billjee
+
+@sentence
+@lu Ech géif gär eng Reservatioun maachen.
+@en I would like to make a reservation.
+@distractor-en repeat
+@distractor-en platform
+@distractor-lu widderhuelen
+@distractor-lu Quai
+
+@sentence
+@lu Den Zuch fiert op Lëtzebuerg.
+@en The train goes to Luxembourg.
+@distractor-en arrives
+@distractor-en station
+@distractor-lu kënnt
+@distractor-lu Gare
+
+@sentence
+@lu Wéi een Dag fiert den Zuch fort?
+@en On which day does the train depart?
+@distractor-en arrives
+@distractor-en hour
+@distractor-lu ukënnt
+@distractor-lu Auer
+
+@sentence
+@lu Déi éischt Klass kascht méi wéi déi zweet Klass.
+@en The first class costs more than the second class.
+@distractor-en less
+@distractor-en third
+@distractor-lu manner
+@distractor-lu drëtt
+
+@sentence
+@lu Ech stinn all Dag um siwen Auer op.
+@en I get up at seven o'clock every day.
+@distractor-en eight
+@distractor-en evening
+@distractor-lu aacht
+@distractor-lu owes
+
+@sentence
+@lu Wéini stees du op?
+@en When do you get up?
+@distractor-en where
+@distractor-en board
+@distractor-lu Wou
+@distractor-lu klamms
+
+@sentence
+@lu Ech fuere muer mam Zuch fort.
+@en I depart by train tomorrow.
+@distractor-en today
+@distractor-en bus
+@distractor-lu haut
+@distractor-lu Bus
+
+@sentence
+@lu Dat hänkt dovun of.
+@en That depends.
+@distractor-en costs
+@distractor-en arrives
+@distractor-lu kascht
+@distractor-lu kënnt
+
+
+# --- Timetables & connections ---
+@sentence
+@lu Den Départ vum Zuch ass op dem Quai dräi A.
+@en The train's departure is from platform three A.
+@distractor-en arrival
+@distractor-en four
+@distractor-lu Arrivée
+@distractor-lu véier
+
+@sentence
+@lu An um wéi vill Auer kënnt den Zuch un?
+@en And at what time does the train arrive?
+@distractor-en departs
+@distractor-en platform
+@distractor-lu fortfiert
+@distractor-lu Quai
+
+@sentence
+@lu D'Arrivée zu Budapest ass owes um eenanzwanzeg Auer zwanzeg.
+@en The arrival in Budapest is at twenty past nine in the evening.
+@distractor-en departure
+@distractor-en morning
+@distractor-lu Départ
+@distractor-lu moies
+
+@sentence
+@lu Dir musst zwee Mol ëmklammen, ee Mol zu Frankfurt an ee Mol zu Wien.
+@en You have to change trains twice, once in Frankfurt and once in Vienna.
+@distractor-en board
+@distractor-en station
+@distractor-lu eraklammen
+@distractor-lu Gare
+
+@sentence
+@lu Den Zuch fiert den éischten August fort.
+@en The train departs on the first of August.
+@distractor-en arrives
+@distractor-en September
+@distractor-lu kënnt
+@distractor-lu September
+
+@sentence
+@lu Den Zuch kënnt um uechtzéng Auer drësseg un.
+@en The train arrives at half past six.
+@distractor-en departs
+@distractor-en seven
+@distractor-lu fortfiert
+@distractor-lu siwen
+
+@sentence
+@lu Wéi vill kascht den Ticket?
+@en How much does the ticket cost?
+@distractor-en platform
+@distractor-en reservation
+@distractor-lu Quai
+@distractor-lu Reservatioun
+
+@sentence
+@lu Den Ticket kascht eenanzwanzeg Euro.
+@en The ticket costs twenty-one euros.
+@distractor-en departure
+@distractor-en twenty-two
+@distractor-lu Départ
+@distractor-lu zweeanzwanzeg
+
+@sentence
+@lu Sidd Dir Student oder hutt Dir eng BahnCard?
+@en Are you a student or do you have a BahnCard?
+@distractor-en ticket
+@distractor-en reservation
+@distractor-lu Billjee
+@distractor-lu Reservatioun
+
+@sentence
+@lu Wou fiert den Zuch?
+@en Where does the train go?
+@distractor-en when
+@distractor-en arrives
+@distractor-lu Wéini
+@distractor-lu kënnt
+
+# --- Separable verbs in main clauses ---
+@sentence
+@lu Du fiers muer mam Zuch fort.
+@en You depart by train tomorrow.
+@distractor-en today
+@distractor-en bus
+@distractor-lu haut
+@distractor-lu Bus
+
+@sentence
+@lu Hie fiert um siwen Auer fort.
+@en He departs at seven o'clock.
+@distractor-en arrives
+@distractor-en eight
+@distractor-lu kënnt
+@distractor-lu aacht
+
+@sentence
+@lu Du kënns um Quai dräi un.
+@en You arrive at platform three.
+@distractor-en depart
+@distractor-en four
+@distractor-lu fiert
+@distractor-lu véier
+
+@sentence
+@lu Si kënnt owes zu Budapest un.
+@en She arrives in Budapest in the evening.
+@distractor-en departs
+@distractor-en morning
+@distractor-lu fiert
+@distractor-lu moies
+
+@sentence
+@lu Du klamms zu Bréissel ëm.
+@en You change trains in Brussels.
+@distractor-en board
+@distractor-en Vienna
+@distractor-lu erausklamms
+@distractor-lu Wien
+
+@sentence
+@lu Hie klëmmt zu Wien ëm.
+@en He changes trains in Vienna.
+@distractor-en gets off
+@distractor-en Brussels
+@distractor-lu eraklëmmt
+@distractor-lu Bréissel
+
+@sentence
+@lu Mir klammen an de Waggon an.
+@en We board the carriage.
+@distractor-en get off
+@distractor-en platform
+@distractor-lu eraklammen
+@distractor-lu Quai
+
+@sentence
+@lu Si klammen op der Gare aus.
+@en They get off at the station.
+@distractor-en board
+@distractor-en train
+@distractor-lu erausklammen
+@distractor-lu Zuch
+
+# --- @fill: prepositions in the travel register ------------------------------
+# The blanks keep the location or time phrase intact so the preposition alone is
+# the grammar decision; contracted forms are also drilled as single tiles.
+
+@fill
+@lu Mäi Zuch fiert [op dem] Quai dräi fort.
+@en My train departs [from] platform three.
+@distractor-lu um
+@distractor-lu zu
+@distractor-lu mam
+@distractor-en at
+@distractor-en in
+@distractor-en with
+
+@fill
+@lu Mir treffen eis [um] hallwer aacht op der Gare.
+@en We meet outside the station [at] half past seven.
+@distractor-lu op
+@distractor-lu zu
+@distractor-lu mam
+@distractor-en on
+@distractor-en in
+@distractor-en with
+
+@fill
+@lu Mäin Noper klëmmt [zu] Bréissel ëm.
+@en My neighbour changes trains [in] Brussels.
+@distractor-lu op
+@distractor-lu um
+@distractor-lu mam
+@distractor-en at
+@distractor-en on
+@distractor-en with
+
+@fill
+@lu Haut klammen si [op der] nächster Statioun aus.
+@en Today they get off [at the] next station.
+@distractor-lu an der
+@distractor-lu zu der
+@distractor-lu bei der
+@distractor-en in the
+@distractor-en from the
+@distractor-en near the
+
+@fill
+@lu Muer fuere mir [mam] Zuch op Lëtzebuerg.
+@en Tomorrow we travel to Luxembourg [by] train.
+@distractor-lu um
+@distractor-lu op dem
+@distractor-lu zu
+@distractor-en at
+@distractor-en on
+@distractor-en in
+
+@fill
+@lu De Billjee ass [fir] op Budapest.
+@en The ticket is [to] Budapest.
+@distractor-lu zu
+@distractor-lu op
+@distractor-lu mam
+@distractor-en from
+@distractor-en at
+@distractor-en with
+
+# --- @fill: separable-verb prefixes ------------------------------------------
+# Every Luxembourgish distractor is another prefix from this lesson, making the
+# clause-final slot—not the verb stem—the deliberate learning target.
+
+@fill
+@lu Den Expresszuch fiert um néng Auer [fort].
+@en The express train [departs] at nine o'clock.
+@distractor-lu un
+@distractor-lu ëm
+@distractor-lu op
+@distractor-en arrives
+@distractor-en boards
+@distractor-en gets up
+
+@fill
+@lu Mäi Zuch kënnt spéit [un].
+@en My train [arrives] late.
+@distractor-lu fort
+@distractor-lu aus
+@distractor-lu op
+@distractor-en departs
+@distractor-en gets off
+@distractor-en gets up
+
+@fill
+@lu Hie klëmmt zu Frankfurt [ëm].
+@en He [changes] trains in Frankfurt.
+@distractor-lu fort
+@distractor-lu un
+@distractor-lu aus
+@distractor-en departs
+@distractor-en arrives
+@distractor-en gets off
+
+@fill
+@lu An de Waggon klamme mir [a].
+@en We [board] a carriage together.
+@distractor-lu fort
+@distractor-lu un
+@distractor-lu aus
+@distractor-en depart
+@distractor-en arrive
+@distractor-en get off
+
+@fill
+@lu D'Passagéier klammen op der Gare [aus].
+@en The passengers [get off] at the station.
+@distractor-lu fort
+@distractor-lu un
+@distractor-lu a
+@distractor-en depart
+@distractor-en arrive
+@distractor-en board
+
+@fill
+@lu Du stees moies fréi [op].
+@en You [get up] early in the morning.
+@distractor-lu fort
+@distractor-lu un
+@distractor-lu aus
+@distractor-en depart
+@distractor-en arrive
+@distractor-en get off
+
+# --- @fill: root-changing singular forms -------------------------------------
+# The wrong-person forms are the distractors: fiers/fiert, kënns/kënnt, and
+# stees/steet are learned as a contrast rather than as isolated conjugation rows.
+
+@fill
+@lu Du [fiers] e Samschdeg mam Zuch fort.
+@en You [depart] by train on Saturday.
+@distractor-lu fiert
+@distractor-lu fueren
+@distractor-lu gefuer
+@distractor-en departs
+@distractor-en departed
+@distractor-en departing
+
+@fill
+@lu Um siwen Auer [fiert] hien fort.
+@en At seven o'clock he [departs].
+@distractor-lu fiers
+@distractor-lu fueren
+@distractor-lu gefuer
+@distractor-en depart
+@distractor-en departed
+@distractor-en departing
+
+@fill
+@lu Du [kënns] um siwen Auer un.
+@en You [arrive] at seven o'clock.
+@distractor-lu kënnt
+@distractor-lu kommen
+@distractor-lu komm
+@distractor-en arrives
+@distractor-en arrived
+@distractor-en arriving
+
+@fill
+@lu Den Zuch [kënnt] um siwen Auer un.
+@en The train [arrives] at seven o'clock.
+@distractor-lu kënns
+@distractor-lu kommen
+@distractor-lu komm
+@distractor-en arrive
+@distractor-en arrived
+@distractor-en arriving
+
+@fill
+@lu Du [stees] all Dag um sechs Auer op.
+@en You [get up] at six o'clock every day.
+@distractor-lu steet
+@distractor-lu stinn
+@distractor-lu opgestan
+@distractor-en gets up
+@distractor-en got up
+@distractor-en getting up
+
+@fill
+@lu Hie [steet] um sechs Auer op.
+@en He [gets up] at six o'clock.
+@distractor-lu stees
+@distractor-lu stinn
+@distractor-lu opgestan
+@distractor-en get up
+@distractor-en got up
+@distractor-en getting up

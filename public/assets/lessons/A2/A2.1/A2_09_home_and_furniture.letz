@@ -1,0 +1,597 @@
+# A2/A2.1/A2_09_home_and_furniture.letz
+# Source: L07.md (A2.1 Conversatioun, Lektioun 7: säin Doheem beschreiwen).
+# All vocabulary lemmas were verified against LOD; the source's “Zännbüscht” was
+# standardized to LOD's “Zännbiischt”. A1 vocabulary is deliberately not repeated
+# as new Elements; it returns in the sentences as support for the new home words.
+# Grammar focus: all fourteen changing prepositions take dative articles with a
+# static verb and accusative articles with a movement verb. The fills isolate both
+# the preposition and its article, and distinguish hänken / stoen / leien by use.
+
+@lesson A2.09 "Home & Furniture"
+
+# --- Rooms and furniture ---
+@word d'Fotell = the armchair
+@word d'Kachmaschinn = the cooker
+@word d'Handduch = the hand towel
+@word d'Buedduch = the bath towel
+@word d'Bild = the picture
+@word den Nuetsdësch = the bedside table
+@word d'Zännbiischt = the toothbrush
+@word d'Kachplack = the hob
+@word d'Kaffismaschinn = the coffee machine
+@word d'Kaffismillen = the coffee grinder
+@word den Uewen = the oven
+@word d'Steeluucht = the floor lamp
+@word de Salonsdësch = the coffee table
+@word de Kicheschaf = the kitchen cupboard
+@word de Kleederschaf = the wardrobe
+
+@sentence
+@lu Ech wunnen an engem Appartement zu Miersch.
+@en I live in an apartment in Mersch.
+@distractor-en house
+@distractor-en work
+@distractor-lu Haus
+@distractor-lu schaffen
+
+@sentence
+@lu Meng Wunneng huet eng Kichen, eng Stuff an e Schlofzëmmer.
+@en My apartment has a kitchen, a living room, and a bedroom.
+@distractor-en bathroom
+@distractor-en garden
+@distractor-lu Buedzëmmer
+@distractor-lu Gaart
+
+@sentence
+@lu An der Kichen steet eng Kachmaschinn.
+@en There is a cooker in the kitchen.
+@distractor-en fridge
+@distractor-en bathroom
+@distractor-lu Frigo
+@distractor-lu Buedzëmmer
+
+@sentence
+@lu Op der Kachplack steet en Dëppen.
+@en A pot stands on the hob.
+@distractor-en plate
+@distractor-en chair
+@distractor-lu Teller
+@distractor-lu Stull
+
+@sentence
+@lu D'Kaffismaschinn steet nieft dem Frigo.
+@en The coffee machine stands next to the fridge.
+@distractor-en oven
+@distractor-en dishwasher
+@distractor-lu Uewen
+@distractor-lu Spullmaschinn
+
+@sentence
+@lu D'Kaffismillen steet niewent der Kaffismaschinn.
+@en The coffee grinder stands beside the coffee machine.
+@distractor-en cooker
+@distractor-en mirror
+@distractor-lu Kachmaschinn
+@distractor-lu Spigel
+
+@sentence
+@lu Nieft dem Bett steet en Nuetsdësch.
+@en A bedside table stands beside the bed.
+@distractor-en wardrobe
+@distractor-en carpet
+@distractor-lu Kleederschaf
+@distractor-lu Teppech
+
+@sentence
+@lu Meng Zännbiischt läit am Becher.
+@en My toothbrush lies in the cup.
+@distractor-en glass
+@distractor-en towel
+@distractor-lu Glas
+@distractor-lu Handduch
+
+@sentence
+@lu D'Buedduch hänkt un der Dier.
+@en The bath towel hangs on the door.
+@distractor-en wall
+@distractor-en floor
+@distractor-lu Mauer
+@distractor-lu Buedem
+
+@sentence
+@lu Eng Steeluucht steet bei der Fotell.
+@en A floor lamp stands near the armchair.
+@distractor-en sofa
+@distractor-en window
+@distractor-lu Canapé
+@distractor-lu Fënster
+
+@sentence
+@lu Deng Kleeder leien am Kleederschaf.
+@en Your clothes lie in the wardrobe.
+@distractor-en bed
+@distractor-en kitchen
+@distractor-lu Bett
+@distractor-lu Kichen
+
+@sentence
+@lu Mäi Salonsdësch steet virum Canapé.
+@en My coffee table stands in front of the sofa.
+@distractor-en behind
+@distractor-en armchair
+@distractor-lu hannert
+@distractor-lu Fotell
+
+@sentence
+@lu D'Spullmaschinn ass an der Kichen.
+@en The dishwasher is in the kitchen.
+@distractor-en bedroom
+@distractor-en garage
+@distractor-lu Schlofzëmmer
+@distractor-lu Garage
+
+@sentence
+@lu Den Uewen ass nieft der Kachplack.
+@en The oven is next to the hob.
+@distractor-en fridge
+@distractor-en coffee
+@distractor-lu Frigo
+@distractor-lu Kaffi
+
+@sentence
+@lu De Kicheschaf steet bei der Mauer.
+@en The kitchen cupboard stands by the wall.
+@distractor-en door
+@distractor-en bathroom
+@distractor-lu Dier
+@distractor-lu Buedzëmmer
+
+@sentence
+@lu E Bild hänkt iwwert dem Salonsdësch.
+@en A picture hangs above the coffee table.
+@distractor-en under
+@distractor-en mirror
+@distractor-lu ënnert
+@distractor-lu Spigel
+
+# --- Changing prepositions: static location versus directed movement ---
+
+@sentence
+@lu D'Bicher leien am Kicheschaf.
+@en The books lie in the kitchen cupboard.
+@distractor-en wardrobe
+@distractor-en stand
+@distractor-lu Kleederschaf
+@distractor-lu stinn
+
+@sentence
+@lu Ech leeën d'Bicher an de Kicheschaf.
+@en I put the books into the kitchen cupboard.
+@distractor-en take
+@distractor-en wardrobe
+@distractor-lu huelen
+@distractor-lu Kleederschaf
+
+@sentence
+@lu D'Glas steet um Salonsdësch.
+@en The glass stands on the coffee table.
+@distractor-en under
+@distractor-en cup
+@distractor-lu ënnert
+@distractor-lu Becher
+
+@sentence
+@lu Ech stellen d'Glas op de Salonsdësch.
+@en I put the glass onto the coffee table.
+@distractor-en take
+@distractor-en floor
+@distractor-lu huelen
+@distractor-lu Buedem
+
+@sentence
+@lu De Stull steet bei der Fënster.
+@en The chair stands by the window.
+@distractor-en door
+@distractor-en lies
+@distractor-lu Dier
+@distractor-lu läit
+
+@sentence
+@lu Ech stellen de Stull bei d'Fënster.
+@en I put the chair by the window.
+@distractor-en take
+@distractor-en door
+@distractor-lu huelen
+@distractor-lu Dier
+
+@sentence
+@lu De Frigo steet niewent dem Uewen.
+@en The fridge stands beside the oven.
+@distractor-en cooker
+@distractor-en behind
+@distractor-lu Kachmaschinn
+@distractor-lu hannert
+
+@sentence
+@lu Ech stellen de Frigo niewent den Uewen.
+@en I put the fridge next to the oven.
+@distractor-en take
+@distractor-en cooker
+@distractor-lu huelen
+@distractor-lu Kachmaschinn
+
+@sentence
+@lu Den Teppech läit virum Canapé.
+@en The carpet lies in front of the sofa.
+@distractor-en behind
+@distractor-en armchair
+@distractor-lu hannert
+@distractor-lu Fotell
+
+@sentence
+@lu Ech leeën den Teppech virun de Canapé.
+@en I put the carpet in front of the sofa.
+@distractor-en take
+@distractor-en behind
+@distractor-lu huelen
+@distractor-lu hannert
+
+@sentence
+@lu De Schaf steet hannert der Dier.
+@en The cupboard stands behind the door.
+@distractor-en in front of
+@distractor-en sofa
+@distractor-lu virun
+@distractor-lu Canapé
+
+@sentence
+@lu Ech stellen de Schaf hannert d'Dier.
+@en I put the cupboard behind the door.
+@distractor-en take
+@distractor-en in front of
+@distractor-lu huelen
+@distractor-lu virun
+
+@sentence
+@lu D'Kaz schléift ënnert dem Bett.
+@en The cat sleeps under the bed.
+@distractor-en on
+@distractor-en dog
+@distractor-lu op
+@distractor-lu Hond
+
+@sentence
+@lu Ech setzen d'Kaz ënnert d'Bett.
+@en I put the cat under the bed.
+@distractor-en take
+@distractor-en on
+@distractor-lu huelen
+@distractor-lu op
+
+@sentence
+@lu D'Luucht hänkt iwwert dem Dësch.
+@en The light hangs above the table.
+@distractor-en under
+@distractor-en mirror
+@distractor-lu ënnert
+@distractor-lu Spigel
+
+@sentence
+@lu Ech hänken d'Luucht iwwert den Dësch.
+@en I hang the light above the table.
+@distractor-en take
+@distractor-en under
+@distractor-lu huelen
+@distractor-lu ënnert
+
+@sentence
+@lu De Canapé steet laanscht der Mauer.
+@en The sofa stands along the wall.
+@distractor-en opposite
+@distractor-en armchair
+@distractor-lu widdert
+@distractor-lu Fotell
+
+@sentence
+@lu Ech stellen de Canapé laanscht d'Mauer.
+@en I put the sofa along the wall.
+@distractor-en take
+@distractor-en opposite
+@distractor-lu huelen
+@distractor-lu widdert
+
+@sentence
+@lu D'Kachplack steet un der Mauer.
+@en The hob stands against the wall.
+@distractor-en under
+@distractor-en oven
+@distractor-lu ënnert
+@distractor-lu Uewen
+
+@sentence
+@lu Ech stellen d'Kachplack un d'Mauer.
+@en I put the hob against the wall.
+@distractor-en take
+@distractor-en under
+@distractor-lu huelen
+@distractor-lu ënnert
+
+@sentence
+@lu De Stull steet widdert der Mauer.
+@en The chair stands opposite the wall.
+@distractor-en beside
+@distractor-en window
+@distractor-lu niewent
+@distractor-lu Fënster
+
+@sentence
+@lu Ech stellen de Stull widdert d'Mauer.
+@en I put the chair opposite the wall.
+@distractor-en take
+@distractor-en beside
+@distractor-lu huelen
+@distractor-lu niewent
+
+@sentence
+@lu D'Kommod steet tëschent dem Bett an der Dier.
+@en The chest of drawers stands between the bed and the door.
+@distractor-en behind
+@distractor-en wardrobe
+@distractor-lu hannert
+@distractor-lu Kleederschaf
+
+@sentence
+@lu Ech stellen d'Kommod tëschent d'Bett an d'Dier.
+@en I put the chest of drawers between the bed and the door.
+@distractor-en take
+@distractor-en behind
+@distractor-lu huelen
+@distractor-lu hannert
+
+@sentence
+@lu D'Kanner sinn bannent dem Haus.
+@en The children are inside the house.
+@distractor-en outside
+@distractor-en garden
+@distractor-lu baussent
+@distractor-lu Gaart
+
+@sentence
+@lu D'Kanner ginn bannent d'Haus.
+@en The children go into the house.
+@distractor-en leave
+@distractor-en outside
+@distractor-lu fortgoen
+@distractor-lu baussent
+
+@sentence
+@lu De Mupp schléift baussent der Garage.
+@en The dog sleeps outside the garage.
+@distractor-en inside
+@distractor-en cat
+@distractor-lu bannent
+@distractor-lu Kaz
+
+@sentence
+@lu De Mupp leeft baussent d'Garage.
+@en The dog runs outside the garage.
+@distractor-en sleeps
+@distractor-en inside
+@distractor-lu schléift
+@distractor-lu bannent
+
+# --- @fill: articles reveal static dative and movement accusative -------------
+# The paired frames keep the noun and changing preposition visible, so the article
+# alone must signal the case. Three distractors per direction leave a safe margin.
+
+@fill
+@lu D'Fotell steet op [der] Terrass.
+@en [The armchair] stands on the terrace.
+@distractor-lu d'
+@distractor-lu dem
+@distractor-lu den
+@distractor-en A sofa
+@distractor-en The table
+@distractor-en The mirror
+
+@fill
+@lu Ech stellen d'Fotell op [d'] Terrass.
+@en I put the armchair onto [the terrace].
+@distractor-lu der
+@distractor-lu dem
+@distractor-lu den
+@distractor-en the balcony
+@distractor-en the kitchen
+@distractor-en the garden
+
+@fill
+@lu D'Kaffismaschinn steet op [dem] Kicheschaf.
+@en The coffee machine [stands] on the kitchen cupboard.
+@distractor-lu der
+@distractor-lu den
+@distractor-lu de
+@distractor-en hangs
+@distractor-en lies
+@distractor-en runs
+
+@fill
+@lu Ech stellen d'Kaffismaschinn op [de] Kicheschaf.
+@en I put the coffee machine onto [the kitchen cupboard].
+@distractor-lu dem
+@distractor-lu den
+@distractor-lu der
+@distractor-en the wardrobe
+@distractor-en the balcony
+@distractor-en the garage
+
+@fill
+@lu D'Bild hänkt iwwert [dem] Bicherregal.
+@en The picture [hangs] above the bookcase.
+@distractor-lu der
+@distractor-lu den
+@distractor-lu d'
+@distractor-en stands
+@distractor-en lies
+@distractor-en runs
+
+@fill
+@lu Ech hänken d'Bild iwwert [d'] Bicherregal.
+@en I hang the picture above [the bookcase].
+@distractor-lu dem
+@distractor-lu den
+@distractor-lu der
+@distractor-en the wardrobe
+@distractor-en the fridge
+@distractor-en the garage
+
+@fill
+@lu D'Fotoen hänken iwwert [den] Dëscher.
+@en The pictures [hang] above the tables.
+@distractor-lu der
+@distractor-lu dem
+@distractor-lu d'
+@distractor-en stand
+@distractor-en lie
+@distractor-en run
+
+@fill
+@lu Ech hänken d'Fotoen iwwert [d'] Dëscher.
+@en I hang the pictures above [the tables].
+@distractor-lu den
+@distractor-lu dem
+@distractor-lu der
+@distractor-en the walls
+@distractor-en the chairs
+@distractor-en the windows
+
+@fill
+@lu De Mupp schléift op [engem] Teppech.
+@en The dog sleeps on [a carpet].
+@distractor-lu en
+@distractor-lu enger
+@distractor-lu eng
+@distractor-en a bed
+@distractor-en a chair
+@distractor-en a table
+
+@fill
+@lu Ech setzen de Mupp op [en] Teppech.
+@en I put the dog on [a carpet].
+@distractor-lu engem
+@distractor-lu enger
+@distractor-lu eng
+@distractor-en a bed
+@distractor-en a chair
+@distractor-en a table
+
+@fill
+@lu Eng Planz steet op [enger] Kommod.
+@en [A plant] stands on the chest of drawers.
+@distractor-lu eng
+@distractor-lu engem
+@distractor-lu en
+@distractor-en The
+@distractor-en Some
+@distractor-en No
+
+@fill
+@lu Ech stellen d'Planz op [eng] Kommod.
+@en I put the plant on [a chest of drawers].
+@distractor-lu enger
+@distractor-lu engem
+@distractor-lu en
+@distractor-en a shelf
+@distractor-en a wardrobe
+@distractor-en a balcony
+
+@fill
+@lu D'Bett steet bannent [engem] Kannerzëmmer.
+@en The bed stands inside [a child's room].
+@distractor-lu e
+@distractor-lu enger
+@distractor-lu en
+@distractor-en a bathroom
+@distractor-en a kitchen
+@distractor-en a garage
+
+@fill
+@lu Ech stellen d'Bett bannent [e] Kannerzëmmer.
+@en I put the bed inside [a child's room].
+@distractor-lu engem
+@distractor-lu enger
+@distractor-lu en
+@distractor-en a bathroom
+@distractor-en a kitchen
+@distractor-en a garage
+
+# --- @fill: preposition choice, then the three position verbs ----------------
+
+@fill
+@lu D'Bild hänkt [un] der Mauer.
+@en The picture hangs [on] the wall.
+@distractor-lu op
+@distractor-lu ënnert
+@distractor-lu hannert
+@distractor-en under
+@distractor-en behind
+@distractor-en beside
+
+@fill
+@lu Ech hänken d'Bild [un] d'Mauer.
+@en I hang the picture [on] the wall.
+@distractor-lu op
+@distractor-lu ënnert
+@distractor-lu hannert
+@distractor-en under
+@distractor-en behind
+@distractor-en beside
+
+@fill
+@lu De Salonsdësch steet [tëschent] der Fotell an dem Canapé.
+@en The coffee table stands [between] the armchair and the sofa.
+@distractor-lu virun
+@distractor-lu hannert
+@distractor-lu niewent
+@distractor-en in front of
+@distractor-en behind
+@distractor-en beside
+
+@fill
+@lu Ech stellen de Salonsdësch [tëschent] d'Fotell an de Canapé.
+@en I put the coffee table [between] the armchair and the sofa.
+@distractor-lu virun
+@distractor-lu hannert
+@distractor-lu niewent
+@distractor-en in front of
+@distractor-en behind
+@distractor-en beside
+
+@fill
+@lu D'Foto [hänkt] nieft dem Spigel.
+@en The photo [hangs] beside the mirror.
+@distractor-lu steet
+@distractor-lu läit
+@distractor-lu leeft
+@distractor-en stands
+@distractor-en lies
+@distractor-en runs
+
+@fill
+@lu Den Dësch [steet] bei der Fënster.
+@en The table [stands] by the window.
+@distractor-lu hänkt
+@distractor-lu läit
+@distractor-lu leeft
+@distractor-en hangs
+@distractor-en lies
+@distractor-en runs
+
+@fill
+@lu Den Teppech [läit] virun der Dier.
+@en The carpet [lies] in front of the door.
+@distractor-lu hänkt
+@distractor-lu steet
+@distractor-lu leeft
+@distractor-en hangs
+@distractor-en stands
+@distractor-en runs

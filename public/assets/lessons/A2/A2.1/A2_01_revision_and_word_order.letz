@@ -1,0 +1,693 @@
+# A2/A2.1/A2_01_revision_and_word_order.letz
+# Source: PDF slide deck "L1 a21lotsmanmeli.pdf" (A2.1 Conversatioun, Lektioun 1: eng Revisioun).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD (gender -> article; glosses cross-checked).
+# The deck is explicitly a revision lesson, so words already taught in A1 are NOT
+# repeated here as new Elements — only genuinely new vocabulary is listed, and the
+# revision itself happens through the sentences.
+# Grammar focus: inversion (an adverbial in first position moves the finite verb
+# before its subject) — the harder half of A1's word order, drilled in both directions.
+
+@lesson A2.01 "Revision & Word Order"
+
+# --- Personal information ---
+@word d'Mammesprooch = the mother tongue
+@word de Zivilstand = the marital status
+@word d'Aarbechtsplaz = the workplace
+@word d'Hausdéier = the pet
+@word d'Hausdéieren = the pets
+
+# --- Free time ---
+@word spadséieren = to go for a walk
+@word de Tennisterrain = the tennis court
+@word de Squash = squash
+
+# --- Verbs ---
+@word studéieren = to study
+@word raschten = to rest
+
+# --- Frequency & sequence ---
+@word meeschtens = mostly
+@word reegelméisseg = regularly
+@word duerno = afterwards
+
+@sentence
+@lu Wat ass deng Mammesprooch?
+@en What is your mother tongue?
+@distractor-en profession
+@distractor-en where
+@distractor-lu Beruff
+@distractor-lu Wou
+
+@sentence
+@lu Meng Mammesprooch ass Ukrainesch.
+@en My mother tongue is Ukrainian.
+@distractor-en English
+@distractor-en profession
+@distractor-lu Englesch
+@distractor-lu Beruff
+
+@sentence
+@lu Wat ass däin Zivilstand?
+@en What is your marital status?
+@distractor-en age
+@distractor-en name
+@distractor-lu Alter
+@distractor-lu Numm
+
+@sentence
+@lu Ech schwätze fléissend Englesch an e bësse Lëtzebuergesch.
+@en I speak fluent English and a little Luxembourgish.
+@distractor-en German
+@distractor-en badly
+@distractor-lu Däitsch
+@distractor-lu schlecht
+
+@sentence
+@lu Hues du Hausdéieren?
+@en Do you have pets?
+@distractor-en children
+@distractor-en where
+@distractor-lu Kanner
+@distractor-lu Wou
+
+@sentence
+@lu Ech studéieren op der Universitéit.
+@en I study at the university.
+@distractor-en work
+@distractor-en school
+@distractor-lu schaffen
+@distractor-lu Schoul
+
+@sentence
+@lu Ech ginn gär mat mengem Mupp spadséieren.
+@en I like going for a walk with my dog.
+@distractor-en cat
+@distractor-en swimming
+@distractor-lu Kaz
+@distractor-lu schwammen
+
+@sentence
+@lu No bei der Aarbecht ass en Tennisterrain.
+@en Close to work there is a tennis court.
+@distractor-en cinema
+@distractor-en garden
+@distractor-lu Kino
+@distractor-lu Gaart
+
+@sentence
+@lu Ech spille gär Squash um Computer.
+@en I like playing squash on the computer.
+@distractor-en piano
+@distractor-en cook
+@distractor-lu Piano
+@distractor-lu kachen
+
+@sentence
+@lu Ech kachen net gär.
+@en I do not like cooking.
+@distractor-en read
+@distractor-en gladly
+@distractor-lu liesen
+@distractor-lu gär
+
+@sentence
+@lu Ech muss no der Aarbecht raschten.
+@en I have to rest after work.
+@distractor-en before
+@distractor-en work
+@distractor-lu virun
+@distractor-lu schaffen
+
+@sentence
+@lu Ech kucken um aacht Auer Tëlee.
+@en I watch TV at eight o'clock.
+@distractor-en nine
+@distractor-en read
+@distractor-lu néng
+@distractor-lu liesen
+
+@sentence
+@lu Um aacht Auer kucken ech Tëlee.
+@en At eight o'clock I watch TV.
+@distractor-en nine
+@distractor-en cinema
+@distractor-lu néng
+@distractor-lu Kino
+
+@sentence
+@lu Ech bleiwen e Freideg den Owend doheem.
+@en I stay at home on Friday evening.
+@distractor-en Saturday
+@distractor-en morning
+@distractor-lu Samschdeg
+@distractor-lu Moien
+
+@sentence
+@lu E Freideg den Owend bleiwen ech doheem.
+@en On Friday evening I stay at home.
+@distractor-en Sunday
+@distractor-en city
+@distractor-lu Sonndeg
+@distractor-lu Stad
+
+@sentence
+@lu No der Aarbecht ginn ech Tennis spillen.
+@en After work I go to play tennis.
+@distractor-en before
+@distractor-en swimming
+@distractor-lu virun
+@distractor-lu schwammen
+
+@sentence
+@lu Muer den Owend geet mäi Mann an de Fitness.
+@en Tomorrow evening my husband goes to the gym.
+@distractor-en today
+@distractor-en cinema
+@distractor-lu haut
+@distractor-lu Kino
+
+@sentence
+@lu De Weekend ginn ech eraus.
+@en At the weekend I go out.
+@distractor-en stay
+@distractor-en home
+@distractor-lu bleiwen
+@distractor-lu doheem
+
+@sentence
+@lu Ech ginn zu Mëtteg normalerweis an d'Kantinn iessen.
+@en At midday I normally go to eat in the canteen.
+@distractor-en evening
+@distractor-en never
+@distractor-lu owes
+@distractor-lu ni
+
+@sentence
+@lu Ech ginn meeschtens mëttwochs a freides lafen.
+@en I mostly go running on Wednesdays and Fridays.
+@distractor-en never
+@distractor-en swimming
+@distractor-lu ni
+@distractor-lu schwammen
+
+@sentence
+@lu Mir fuere reegelméisseg mam Zuch an d'Stad.
+@en We regularly go to the city by train.
+@distractor-en bus
+@distractor-en rarely
+@distractor-lu Bus
+@distractor-lu seelen
+
+@sentence
+@lu Ech schaffen a duerno ginn ech an de Fitness.
+@en I work and afterwards I go to the gym.
+@distractor-en before
+@distractor-en home
+@distractor-lu virun
+@distractor-lu doheem
+
+@sentence
+@lu Heiansdo ass et kal am Stall vum Bauer.
+@en Sometimes it is cold in the farmer's stable.
+@distractor-en warm
+@distractor-en always
+@distractor-lu waarm
+@distractor-lu ëmmer
+
+@sentence
+@lu D'Bild ass un der Mauer.
+@en The picture is on the wall.
+@distractor-en under
+@distractor-en table
+@distractor-lu ënner
+@distractor-lu Dësch
+
+# --- Inversion drilled in both directions: neutral order, then adverbial-first ---
+
+@sentence
+@lu Ech ginn no der Aarbecht schwammen.
+@en I go swimming after work.
+@distractor-en before
+@distractor-en running
+@distractor-lu virun
+@distractor-lu lafen
+
+@sentence
+@lu Ech maache mëttwochs a freides Sport.
+@en I do sport on Wednesdays and Fridays.
+@distractor-en Mondays
+@distractor-en never
+@distractor-lu méindes
+@distractor-lu ni
+
+@sentence
+@lu Freides ginn ech ganz seelen eraus.
+@en On Fridays I very rarely go out.
+@distractor-en often
+@distractor-en Sundays
+@distractor-lu oft
+@distractor-lu sonndes
+
+@sentence
+@lu Méindes moies stinn ech fréi op.
+@en On Monday mornings I get up early.
+@distractor-en late
+@distractor-en evenings
+@distractor-lu spéit
+@distractor-lu owes
+
+@sentence
+@lu Sonndes moies stinn ech eréischt um zéng Auer op.
+@en On Sunday mornings I do not get up until ten o'clock.
+@distractor-en eight
+@distractor-en evenings
+@distractor-lu aacht
+@distractor-lu owes
+
+@sentence
+@lu Meng Fra an ech bleiwe freides meeschtens doheem.
+@en My wife and I mostly stay at home on Fridays.
+@distractor-en rarely
+@distractor-en city
+@distractor-lu seelen
+@distractor-lu Stad
+
+@sentence
+@lu Normalerweis ginn ech samsdes moies an den Aqua-Gym.
+@en Normally I go to aqua gym on Saturday mornings.
+@distractor-en rarely
+@distractor-en evenings
+@distractor-lu seelen
+@distractor-lu owes
+
+@sentence
+@lu Mäi beschte Kolleeg wëll e Marathon lafen.
+@en My best friend wants to run a marathon.
+@distractor-en swim
+@distractor-en sister
+@distractor-lu schwammen
+@distractor-lu Schwëster
+
+@sentence
+@lu D'nächst Joer wëll mäi Kolleeg e Marathon lafen.
+@en Next year my colleague wants to run a marathon.
+@distractor-en last
+@distractor-en swim
+@distractor-lu lescht
+@distractor-lu schwammen
+
+# --- Connecting words: `an`/`mee` do not invert, but a following adverb does ---
+
+@sentence
+@lu Ech gi moies akafen an ech ginn an de Fitness.
+@en I go shopping in the morning and I go to the gym.
+@distractor-en evening
+@distractor-en stay
+@distractor-lu owes
+@distractor-lu bleiwen
+
+@sentence
+@lu Ech gi moies akafen an dono ginn ech an de Fitness.
+@en I go shopping in the morning and afterwards I go to the gym.
+@distractor-en before
+@distractor-en evening
+@distractor-lu virdrun
+@distractor-lu owes
+
+@sentence
+@lu Ech ginn oft an de Kino, mee heiansdo kucken ech e Film doheem.
+@en I often go to the cinema, but sometimes I watch a film at home.
+@distractor-en never
+@distractor-en city
+@distractor-lu ni
+@distractor-lu Stad
+
+# --- Personal information, question and answer paired ---
+
+@sentence
+@lu Wéi vill Sprooche schwätzt du?
+@en How many languages do you speak?
+@distractor-en where
+@distractor-en work
+@distractor-lu Wou
+@distractor-lu schaffs
+
+@sentence
+@lu Wat ass deng Aarbechtsplaz?
+@en What is your workplace?
+@distractor-en name
+@distractor-en age
+@distractor-lu Numm
+@distractor-lu Alter
+
+@sentence
+@lu Meng Aarbechtsplaz ass an der Stad.
+@en My workplace is in the city.
+@distractor-en forest
+@distractor-en garden
+@distractor-lu Bësch
+@distractor-lu Gaart
+
+@sentence
+@lu Wunns du an der Stad?
+@en Do you live in the city?
+@distractor-en work
+@distractor-en where
+@distractor-lu schaffs
+@distractor-lu Wou
+
+@sentence
+@lu Ech wunnen zu Sandweiler.
+@en I live in Sandweiler.
+@distractor-en work
+@distractor-en city
+@distractor-lu schaffen
+@distractor-lu Stad
+
+@sentence
+@lu Ech sinn Informatiker vu Beruff.
+@en I am an IT specialist by profession.
+@distractor-en manager
+@distractor-en name
+@distractor-lu Manager
+@distractor-lu Numm
+
+@sentence
+@lu Ech si Managerin vu Beruff.
+@en I am a manager by profession.
+@distractor-en nurse
+@distractor-en workplace
+@distractor-lu Infirmière
+@distractor-lu Aarbechtsplaz
+
+@sentence
+@lu Vu wou kënns du?
+@en Where do you come from?
+@distractor-en live
+@distractor-en what
+@distractor-lu wunns
+@distractor-lu Wat
+
+@sentence
+@lu Ech kommen aus der Ukrain.
+@en I come from Ukraine.
+@distractor-en Spain
+@distractor-en live
+@distractor-lu Spuenien
+@distractor-lu wunnen
+
+@sentence
+@lu Ech hunn e Mupp an eng Kaz.
+@en I have a dog and a cat.
+@distractor-en child
+@distractor-en pets
+@distractor-lu Kand
+@distractor-lu Hausdéieren
+
+@sentence
+@lu Ech si mam Marie bestuet.
+@en I am married to Marie.
+@distractor-en divorced
+@distractor-en sister
+@distractor-lu gescheet
+@distractor-lu Schwëster
+
+# --- Free time ---
+
+@sentence
+@lu Meng Hobbyen si liesen a spadséieren.
+@en My hobbies are reading and going for walks.
+@distractor-en cooking
+@distractor-en work
+@distractor-lu kachen
+@distractor-lu Aarbecht
+
+@sentence
+@lu Ech spille gär Piano.
+@en I like playing the piano.
+@distractor-en cook
+@distractor-en badly
+@distractor-lu kachen
+@distractor-lu schlecht
+
+@sentence
+@lu Ech fueren net gär Vëlo.
+@en I do not like riding a bicycle.
+@distractor-en swim
+@distractor-en gladly
+@distractor-lu schwammen
+@distractor-lu gär
+
+@sentence
+@lu Et hëlt ze vill Zäit.
+@en It takes too much time.
+@distractor-en little
+@distractor-en money
+@distractor-lu wéineg
+@distractor-lu Suen
+
+@sentence
+@lu Ech ginn no der Aarbecht raschten.
+@en I go and rest after work.
+@distractor-en before
+@distractor-en study
+@distractor-lu virun
+@distractor-lu studéieren
+
+@sentence
+@lu Ech studéieren zanter dräi Joer.
+@en I have been studying for three years.
+@distractor-en work
+@distractor-en five
+@distractor-lu schaffen
+@distractor-lu fënnef
+
+@sentence
+@lu D'Tëlee ass tëschent der Couche an dem Kamäin.
+@en The TV is between the sofa and the fireplace.
+@distractor-en under
+@distractor-en wall
+@distractor-lu ënner
+@distractor-lu Mauer
+
+# --- @fill: prepositions of place and time -----------------------------------
+# The frame keeps the determiner, so only the preposition is in play and the
+# correct frame text never depends on which tile is placed.
+
+@fill
+@lu Ech kucken Tëlee [um] aacht Auer owes.
+@en In the evening I watch TV [at] eight o'clock.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu bei
+@distractor-en in
+@distractor-en on
+@distractor-en to
+
+@fill
+@lu Ech ginn ëmmer [no] der Aarbecht schwammen.
+@en I always go swimming [after] work.
+@distractor-lu virun
+@distractor-lu tëschent
+@distractor-lu ënner
+@distractor-en before
+@distractor-en between
+@distractor-en under
+
+@fill
+@lu Dat Bild hänkt [un] der Mauer.
+@en That picture hangs [on] the wall.
+@distractor-lu ënner
+@distractor-lu iwwert
+@distractor-lu hannert
+@distractor-en under
+@distractor-en above
+@distractor-en behind
+
+@fill
+@lu Meng Famill wunnt [zu] Sandweiler.
+@en My family lives [in] Sandweiler.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en to
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Meng Fra kënnt [aus] der Ukrain.
+@en My wife comes [from] Ukraine.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu bei
+@distractor-en in
+@distractor-en to
+@distractor-en near
+
+@fill
+@lu Ech spadséiere gär [mat] mengem Mupp.
+@en I like walking [with] my dog.
+@distractor-lu ouni
+@distractor-lu fir
+@distractor-lu vu
+@distractor-en without
+@distractor-en for
+@distractor-en from
+
+@fill
+@lu Mir fueren all Dag [mam] Zuch an d'Stad.
+@en We travel to the city [by] train every day.
+@distractor-lu ouni
+@distractor-lu fir
+@distractor-lu bei
+@distractor-en without
+@distractor-en for
+@distractor-en near
+
+@fill
+@lu Den Tennisterrain ass [no] bei der Aarbecht.
+@en The tennis court is [close] to work.
+@distractor-lu wäit
+@distractor-lu ouni
+@distractor-lu hannert
+@distractor-en far
+@distractor-en without
+@distractor-en behind
+
+# --- @fill: conjunctions -----------------------------------------------------
+# A comma before the blank also satisfies the Eifeler-Regel adjacency rule.
+
+@fill
+@lu Ech bleiwen doheem, [well] ech midd sinn.
+@en I stay at home [because] I am tired.
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-lu ob
+@distractor-en although
+@distractor-en whether
+@distractor-en until
+
+@fill
+@lu Ech ginn an de Fitness, [obwuel] ech midd sinn.
+@en I go to the gym [although] I am tired.
+@distractor-lu well
+@distractor-lu wann
+@distractor-lu ob
+@distractor-en because
+@distractor-en if
+@distractor-en whether
+
+@fill
+@lu [Wann] ech Zäit hunn, ginn ech akafen.
+@en [When] I have time, I go shopping.
+@distractor-lu Well
+@distractor-lu Obwuel
+@distractor-lu Ob
+@distractor-en Because
+@distractor-en Although
+@distractor-en Whether
+
+@fill
+@lu Ech weess net, [ob] ech muer kommen.
+@en I do not know [whether] I am coming tomorrow.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-en because
+@distractor-en although
+@distractor-en when
+
+@fill
+@lu Ech spillen gär Piano [an] ech schwammen och gär.
+@en I like playing the piano [and] I also like swimming.
+@distractor-lu mee
+@distractor-lu oder
+@distractor-lu well
+@distractor-en but
+@distractor-en or
+@distractor-en because
+
+@fill
+@lu Ech kachen net gär, [mee] ech baken gär.
+@en I do not like cooking, [but] I like baking.
+@distractor-lu an
+@distractor-lu oder
+@distractor-lu well
+@distractor-en and
+@distractor-en or
+@distractor-en because
+
+# --- @fill: verb forms -------------------------------------------------------
+# The root-changing 2nd/3rd person singular is the deck's grammar focus, so the
+# distractors are the wrong persons of the same verb.
+
+@fill
+@lu Wéi vill Sprooche [schwätzt] dir zesummen?
+@en How many languages do you [speak] altogether?
+@distractor-lu schwätzen
+@distractor-lu schwätze
+@distractor-lu geschwat
+@distractor-en speaks
+@distractor-en spoke
+@distractor-en speaking
+
+@fill
+@lu Wou [wunns] du?
+@en Where do you [live]?
+@distractor-lu wunnen
+@distractor-lu wunnt
+@distractor-lu gewunnt
+@distractor-en lives
+@distractor-en lived
+@distractor-en living
+
+@fill
+@lu Hie [kënnt] muer den Owend.
+@en He [comes] tomorrow evening.
+@distractor-lu kommen
+@distractor-lu kënns
+@distractor-lu komm
+@distractor-en come
+@distractor-en came
+@distractor-en coming
+
+@fill
+@lu Du [gees] samsdes an de Kino.
+@en You [go] to the cinema on Saturdays.
+@distractor-lu ginn
+@distractor-lu geet
+@distractor-lu gaang
+@distractor-en goes
+@distractor-en went
+@distractor-en going
+
+@fill
+@lu Mäi Papp [hëlt] den Zuch op d'Aarbecht.
+@en My dad [takes] the train to work.
+@distractor-lu huelen
+@distractor-lu hëls
+@distractor-lu geholl
+@distractor-en take
+@distractor-en took
+@distractor-en taking
+
+@fill
+@lu Wat [méchs] du samsdes?
+@en What [do] you plan on Saturdays?
+@distractor-lu maachen
+@distractor-lu mécht
+@distractor-lu gemaach
+@distractor-en does
+@distractor-en did
+@distractor-en doing
+
+@fill
+@lu Du [stees] all Dag fréi op.
+@en You [get] up early every day.
+@distractor-lu stinn
+@distractor-lu steet
+@distractor-lu opgestan
+@distractor-en gets
+@distractor-en got
+@distractor-en getting

@@ -1,0 +1,584 @@
+# A2/A2.1/A2_05_post_office_and_places.letz
+# Source: PDF slide decks "L3 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 3, second half).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD.
+# Grammar focus, both from this deck:
+#   - kee(n)/keng, the negative indefinite article (m/n kee(n), f/pl keng)
+#   - en / se / et, the three pronouns for inanimate objects, chosen by noun gender
+#   - movement vs position with countries: `an d'Belsch` (to) vs `an der Belsch` (in)
+
+@lesson A2.05 "Post Office & Places"
+
+# --- Post office ---
+@word de Timber = the stamp
+@word d'Timberen = the stamps
+@word den Bréif = the letter
+@word d'Bréiwer = the letters
+@word de Pak = the parcel
+@word d'Päck = the parcels
+@word d'Enveloppe = the envelope
+@word d'Bréifboîte = the letter box
+@word de Recommandé = the registered letter
+@word de Waardesall = the waiting room
+@word d'Mëttespaus = the lunch break
+
+# --- Verbs ---
+@word schécken = to send
+@word verschécken = to send off
+@word geheien = to throw
+@word weien = to weigh
+@word sech umellen = to register
+@word plënneren = to move house
+
+# --- Describing ---
+@word ze schwéier = too heavy
+@word ze grouss = too big
+@word ze deier = too expensive
+@word däischter = dark
+@word dréngend = urgent
+
+# --- Negation ---
+@word kee = no (masculine)
+@word keng = no (feminine)
+
+# --- Placement verbs ---
+@word sëtzen = to sit
+@word setzen = to put in a sitting position
+@word stellen = to put in a standing position
+@word leeën = to lay down
+
+@sentence
+@lu Ech hätt gär en Timber.
+@en I would like a stamp.
+@distractor-en parcel
+@distractor-en envelope
+@distractor-lu Pak
+@distractor-lu Enveloppe
+
+@sentence
+@lu Ech géif gär e Bréif a Schweden schécken.
+@en I would like to send a letter to Sweden.
+@distractor-en parcel
+@distractor-en stamp
+@distractor-lu Pak
+@distractor-lu Timber
+
+@sentence
+@lu Ech wëll e Pak an Däitschland schécken.
+@en I want to send a parcel to Germany.
+@distractor-en letter
+@distractor-en stamp
+@distractor-lu Bréif
+@distractor-lu Timber
+
+@sentence
+@lu Wéi vill weit de Pak?
+@en How much does the parcel weigh?
+@distractor-en costs
+@distractor-en letter
+@distractor-lu kascht
+@distractor-lu Bréif
+
+@sentence
+@lu Ech hoffen, en ass net ze schwéier.
+@en I hope it is not too heavy.
+@distractor-en expensive
+@distractor-en light
+@distractor-lu deier
+@distractor-lu liicht
+
+@sentence
+@lu Et deet mir leed, de Pak ass ze grouss.
+@en I am sorry, the parcel is too big.
+@distractor-en small
+@distractor-en heavy
+@distractor-lu kleng
+@distractor-lu schwéier
+
+@sentence
+@lu Wëllt Dir de Bréif als Recommandé verschécken?
+@en Do you want to send the letter as registered mail?
+@distractor-en parcel
+@distractor-en stamp
+@distractor-lu Pak
+@distractor-lu Timber
+
+@sentence
+@lu Wou ass déi nächst Bréifboîte?
+@en Where is the nearest letter box?
+@distractor-en stamp
+@distractor-en when
+@distractor-lu Timber
+@distractor-lu Wéini
+
+@sentence
+@lu Ech muss dëse Bréif ageheien.
+@en I have to post this letter.
+@distractor-en parcel
+@distractor-en weigh
+@distractor-lu Pak
+@distractor-lu weien
+
+@sentence
+@lu Ech muss op d'Post goen.
+@en I have to go to the post office.
+@distractor-en bank
+@distractor-en letter
+@distractor-lu Bank
+@distractor-lu Bréif
+
+@sentence
+@lu Ech brauch en Timber, fir dëse Bréif ze schécken.
+@en I need a stamp in order to send this letter.
+@distractor-en parcel
+@distractor-en envelope
+@distractor-lu Pak
+@distractor-lu Enveloppe
+
+@sentence
+@lu Ech hätt gär zéng Timberen. Wéi vill kaschte se?
+@en I would like ten stamps. How much do they cost?
+@distractor-en weigh
+@distractor-en five
+@distractor-lu weien
+@distractor-lu fënnef
+
+@sentence
+@lu Gëtt et hei eng Post?
+@en Is there a post office here?
+@distractor-en bank
+@distractor-en stamp
+@distractor-lu Bank
+@distractor-lu Timber
+
+@sentence
+@lu Ech sichen d'Post. Kënnt Dir mir soen, wou se ass?
+@en I am looking for the post office. Can you tell me where it is?
+@distractor-en bank
+@distractor-en stamp
+@distractor-lu Bank
+@distractor-lu Timber
+
+@sentence
+@lu De Keller ass grouss, mä en ass däischter.
+@en The cellar is big, but it is dark.
+@distractor-en bright
+@distractor-en kitchen
+@distractor-lu hell
+@distractor-lu Kichen
+
+@sentence
+@lu D'Kichen ass modern, mä se ass deier.
+@en The kitchen is modern, but it is expensive.
+@distractor-en cheap
+@distractor-en cellar
+@distractor-lu bëlleg
+@distractor-lu Keller
+
+@sentence
+@lu D'Haus ass schéin, mee et ass e bëssen kleng.
+@en The house is beautiful, but it is a bit small.
+@distractor-en big
+@distractor-en kitchen
+@distractor-lu grouss
+@distractor-lu Kichen
+
+@sentence
+@lu De Bréifdréier sicht d'Haus, mee hie fënnt et net.
+@en The postman is looking for the house, but he does not find it.
+@distractor-en parcel
+@distractor-en sends
+@distractor-lu Pak
+@distractor-lu schéckt
+
+@sentence
+@lu Ech fueren an d'Belsch.
+@en I am travelling to Belgium.
+@distractor-en Germany
+@distractor-en live
+@distractor-lu Däitschland
+@distractor-lu wunnen
+
+@sentence
+@lu Ech sinn an der Belsch.
+@en I am in Belgium.
+@distractor-en Germany
+@distractor-en travel
+@distractor-lu Däitschland
+@distractor-lu fueren
+
+@sentence
+@lu Ech wunnen an Däitschland.
+@en I live in Germany.
+@distractor-en Belgium
+@distractor-en travel
+@distractor-lu Belsch
+@distractor-lu fueren
+
+@sentence
+@lu Ech si virun dräi Joer geplënnert.
+@en I moved house three years ago.
+@distractor-en registered
+@distractor-en five
+@distractor-lu ugemellt
+@distractor-lu fënnef
+
+@sentence
+@lu Ech muss mech an der Gemeng umellen.
+@en I have to register at the commune.
+@distractor-en move
+@distractor-en post
+@distractor-lu plënneren
+@distractor-lu Post
+
+
+# --- Countries and cities: movement versus position ---
+
+@sentence
+@lu Ech schécken de Pak an d'Belsch.
+@en I am sending the parcel to Belgium.
+@distractor-en Sweden
+@distractor-en letter
+@distractor-lu Schweden
+@distractor-lu Bréif
+
+@sentence
+@lu De Pak ass an der Belsch.
+@en The parcel is in Belgium.
+@distractor-en Sweden
+@distractor-en stamp
+@distractor-lu Schweden
+@distractor-lu Timber
+
+@sentence
+@lu Mir fueren a Schweden.
+@en We are travelling to Sweden.
+@distractor-en Belgium
+@distractor-en live
+@distractor-lu Belsch
+@distractor-lu wunnen
+
+@sentence
+@lu Mir sinn a Schweden.
+@en We are in Sweden.
+@distractor-en Germany
+@distractor-en travelling
+@distractor-lu Däitschland
+@distractor-lu fueren
+
+@sentence
+@lu Ech wëll eng Enveloppe an Amerika schécken.
+@en I want to send an envelope to America.
+@distractor-en Belgium
+@distractor-en parcel
+@distractor-lu Belsch
+@distractor-lu Pak
+
+@sentence
+@lu De Bréif ass an Amerika.
+@en The letter is in America.
+@distractor-en Sweden
+@distractor-en stamp
+@distractor-lu Schweden
+@distractor-lu Timber
+
+@sentence
+@lu Ech schécken e Bréif op Paräis.
+@en I am sending a letter to Paris.
+@distractor-en parcel
+@distractor-en Belgium
+@distractor-lu Pak
+@distractor-lu Belsch
+
+@sentence
+@lu Den Zuch fiert op Lëtzebuerg.
+@en The train is going to Luxembourg.
+@distractor-en post office
+@distractor-en Belgium
+@distractor-lu Post
+@distractor-lu Belsch
+
+# --- Inanimate pronouns: m en, f/pl se, n et ---
+
+@sentence
+@lu D'Enveloppe ass kleng, mä se ass wichteg.
+@en The envelope is small, but it is important.
+@distractor-en parcel
+@distractor-en heavy
+@distractor-lu Pak
+@distractor-lu schwéier
+
+@sentence
+@lu De Pak ass schwéier, mä en ass net ze grouss.
+@en The parcel is heavy, but it is not too big.
+@distractor-en letter
+@distractor-en light
+@distractor-lu Bréif
+@distractor-lu liicht
+
+@sentence
+@lu D'Bréifboîte ass no bei der Post, mä se ass voll.
+@en The letter box is near the post office, but it is full.
+@distractor-en bank
+@distractor-en empty
+@distractor-lu Bank
+@distractor-lu eidel
+
+@sentence
+@lu D'Päck sinn am Waardesall. Ech gesinn se.
+@en The parcels are in the waiting room. I see them.
+@distractor-en letters
+@distractor-en stamps
+@distractor-lu Bréiwer
+@distractor-lu Timberen
+
+# --- kee(n) / keng by gender and number ---
+
+@sentence
+@lu Ech hu keng Enveloppe bei mir.
+@en I have no envelope with me.
+@distractor-en parcel
+@distractor-en stamp
+@distractor-lu Pak
+@distractor-lu Timber
+
+@sentence
+@lu Mir hu kee Pak fir Iech.
+@en We have no parcel for you.
+@distractor-en letter
+@distractor-en stamp
+@distractor-lu Bréif
+@distractor-lu Timber
+
+@sentence
+@lu Mir hunn keng Timberen méi.
+@en We have no stamps left.
+@distractor-en parcels
+@distractor-en envelopes
+@distractor-lu Päck
+@distractor-lu Enveloppen
+
+@sentence
+@lu Ech hu kee Bréif fir Iech.
+@en I have no letter for you.
+@distractor-en parcel
+@distractor-en envelope
+@distractor-lu Pak
+@distractor-lu Enveloppe
+
+@sentence
+@lu Keng Suergen, ech fannen d'Post.
+@en No worries, I will find the post office.
+@distractor-en bank
+@distractor-en letter
+@distractor-lu Bank
+@distractor-lu Bréif
+
+# --- @fill: country and city prepositions -----------------------------------
+# The country article stays inside the movement/position tile: a standalone
+# `der` directly after `an` would violate the Eifeler-Regel blank constraint.
+
+@fill
+@lu Muer fueren ech [an d']Belsch.
+@en Tomorrow I am travelling [to] Belgium.
+@distractor-lu an der
+@distractor-lu aus der
+@distractor-lu op d'
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Haut sinn ech [an der] Belsch.
+@en Today I am [in] Belgium.
+@distractor-lu an d'
+@distractor-lu aus der
+@distractor-lu op der
+@distractor-en to
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Ech schécken de Pak [a] Schweden.
+@en I am sending the parcel [to] Sweden.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu aus
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu De Pak ass [a] Schweden.
+@en The parcel is [in] Sweden.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu aus
+@distractor-en to
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu D'Enveloppe geet [an] Amerika.
+@en The envelope is going [to] America.
+@distractor-lu a
+@distractor-lu op
+@distractor-lu aus
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu D'Sandra ass [an] Amerika.
+@en Sandra is [in] America.
+@distractor-lu a
+@distractor-lu op
+@distractor-lu aus
+@distractor-en to
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Muer fiert den Zuch [op] Lëtzebuerg.
+@en Tomorrow the train is going [to] Luxembourg.
+@distractor-lu an
+@distractor-lu a
+@distractor-lu aus
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu Ech schécken de Pak [op] Paräis.
+@en I am sending the parcel [to] Paris.
+@distractor-lu an
+@distractor-lu a
+@distractor-lu aus
+@distractor-en in
+@distractor-en from
+@distractor-en near
+
+@fill
+@lu D'Sandra kënnt [aus der] Belsch.
+@en Sandra comes [from] Belgium.
+@distractor-lu an d'
+@distractor-lu an der
+@distractor-lu op d'
+@distractor-en to
+@distractor-en in
+@distractor-en near
+
+# --- @fill: inanimate pronouns ----------------------------------------------
+# Wrong-gender pronouns are the LU distractors in every block.
+
+@fill
+@lu De Pak ass schwéier, [en] ass net ze grouss.
+@en The parcel is heavy, [it] is not too big.
+@distractor-lu se
+@distractor-lu et
+@distractor-lu si
+@distractor-en he
+@distractor-en she
+@distractor-en they
+
+@fill
+@lu D'Enveloppe ass kleng, [se] passt an d'Bréifboîte.
+@en The envelope is small, [it] fits in the letter box.
+@distractor-lu en
+@distractor-lu et
+@distractor-lu si
+@distractor-en he
+@distractor-en she
+@distractor-en they
+
+@fill
+@lu D'Haus ass modern, [et] ass no bei der Post.
+@en The house is modern, [it] is near the post office.
+@distractor-lu en
+@distractor-lu se
+@distractor-lu si
+@distractor-en he
+@distractor-en she
+@distractor-en they
+
+@fill
+@lu D'Päck sinn do, [se] sinn am Waardesall.
+@en The parcels are there, [they] are in the waiting room.
+@distractor-lu en
+@distractor-lu et
+@distractor-lu si
+@distractor-en it
+@distractor-en he
+@distractor-en she
+
+# --- @fill: kee(n) / keng ----------------------------------------------------
+
+@fill
+@lu Ech hu [kee] Pak fir Iech.
+@en I have [no] parcel for you.
+@distractor-lu keng
+@distractor-lu eng
+@distractor-lu de
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Ech hu [keng] Enveloppe haut dobäi.
+@en I have [no] envelope with me today.
+@distractor-lu kee
+@distractor-lu eng
+@distractor-lu d'
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Leider hu mir [keng] Timberen méi.
+@en Unfortunately we have [no] stamps left.
+@distractor-lu kee
+@distractor-lu eng
+@distractor-lu d'
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Haut hu ech [kee] Bréif fir Iech.
+@en Today I have [no] letter for you.
+@distractor-lu keng
+@distractor-lu en
+@distractor-lu den
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Hei fannen ech [keng] Bréifboîte.
+@en I find [no] letter box here.
+@distractor-lu kee
+@distractor-lu eng
+@distractor-lu d'
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu Hei ass [kee] Haus.
+@en There is [no] house here.
+@distractor-lu keng
+@distractor-lu e
+@distractor-lu d'
+@distractor-en a
+@distractor-en the
+@distractor-en some
+
+@fill
+@lu [Keng] Päck sinn am Waardesall.
+@en [No] parcels are in the waiting room.
+@distractor-lu Kee
+@distractor-lu Eng
+@distractor-lu D'
+@distractor-en Some
+@distractor-en The
+@distractor-en A

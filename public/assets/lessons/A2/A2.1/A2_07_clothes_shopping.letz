@@ -1,0 +1,564 @@
+# A2/A2.1/A2_07_clothes_shopping.letz
+# Source: PDF slide decks "L4 (Part 1)/(Part 2) a21convlotsmanmeli.pdf" (A2.1, Lektioun 4, second half).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma verified against LOD (gender -> article).
+# Grammar focus: adjective endings before a noun, which the deck states as a rule —
+#   masculine -> -en   (e gréngen T-Shirt)
+#   neuter    -> -t    (e wäisst Hiem)
+#   feminine and plural -> no ending (eng blo Mutz)
+# Only feminine/plural attributive adjectives are used inside @sentence blocks, since
+# those are uninflected and stay assemblable from taught tiles.
+
+@lesson A2.07 "Clothes Shopping"
+
+# --- Clothes ---
+@word d'Blus = the blouse
+@word d'Box = the trousers
+@word d'Jupe = the skirt
+@word de Rack = the dress
+@word de Mantel = the coat
+@word d'Jackett = the jacket
+@word d'Hiem = the shirt
+@word de Kostüm = the men's suit
+@word den Tailleur = the women's suit
+@word de Sweatshirt = the sweatshirt
+@word den Tricot = the jersey
+
+# --- Shoes & accessories ---
+@word de Schong = the shoe
+@word d'Schong = the shoes
+@word d'Sandal = the sandal
+@word d'Sandalen = the sandals
+@word de Stiwwel = the boot
+@word d'Stiwwelen = the boots
+@word d'Schlapp = the slipper
+@word d'Turnschlappen = the trainers
+@word d'Mutz = the woollen hat
+@word d'Kap = the cap
+@word d'Händsch = the glove
+@word d'Posch = the handbag
+
+# --- Fit & size ---
+@word enk = tight
+@word weit = loose
+@word d'Gréisst = the size
+@word d'Kabinn = the fitting room
+@word bëlleg = cheap
+
+# --- Verbs ---
+@word sech undoen = to get dressed
+@word unhunn = to be wearing
+@word undoen = to put on
+@word passen = to fit
+@word goen = to suit
+@word ausprobéieren = to try out
+@word de Kleederbuttek = the clothes shop
+
+@sentence
+@lu Kann ech Iech hëllefen?
+@en Can I help you?
+@distractor-en fit
+@distractor-en shop
+@distractor-lu passen
+@distractor-lu Buttek
+
+@sentence
+@lu Ech brauch e Rack.
+@en I need a dress.
+@distractor-en coat
+@distractor-en shirt
+@distractor-lu Mantel
+@distractor-lu Hiem
+
+@sentence
+@lu Hutt Dir dee Rack och am Rouden?
+@en Do you have that dress in red as well?
+@distractor-en blue
+@distractor-en coat
+@distractor-lu Bloen
+@distractor-lu Mantel
+
+@sentence
+@lu Rout geet mir net.
+@en Red does not suit me.
+@distractor-en blue
+@distractor-en fits
+@distractor-lu blo
+@distractor-lu passt
+
+@sentence
+@lu A wéi vill kascht en?
+@en And how much does it cost?
+@distractor-en fits
+@distractor-en size
+@distractor-lu passt
+@distractor-lu Gréisst
+
+@sentence
+@lu Dat ass mir ze deier.
+@en That is too expensive for me.
+@distractor-en cheap
+@distractor-en tight
+@distractor-lu bëlleg
+@distractor-lu enk
+
+@sentence
+@lu Mir hunn och bëlleg Räck.
+@en We also have cheap dresses.
+@distractor-en expensive
+@distractor-en coats
+@distractor-lu deier
+@distractor-lu Mäntel
+
+@sentence
+@lu Wéi eng Gréisst ass dat?
+@en Which size is that?
+@distractor-en colour
+@distractor-en price
+@distractor-lu Faarf
+@distractor-lu Präis
+
+@sentence
+@lu Dat ass mir ze enk.
+@en That is too tight for me.
+@distractor-en loose
+@distractor-en expensive
+@distractor-lu weit
+@distractor-lu deier
+
+@sentence
+@lu Wou kann ech en ausprobéieren?
+@en Where can I try it on?
+@distractor-en when
+@distractor-en buy
+@distractor-lu Wéini
+@distractor-lu kafen
+
+@sentence
+@lu Dohanne sinn d'Kabinnen.
+@en The fitting rooms are over there.
+@distractor-en shoes
+@distractor-en shop
+@distractor-lu Schong
+@distractor-lu Buttek
+
+@sentence
+@lu Passt de Mantel?
+@en Does the coat fit?
+@distractor-en suits
+@distractor-en shirt
+@distractor-lu geet
+@distractor-lu Hiem
+
+@sentence
+@lu Wëllt dir soss nach eppes kafen?
+@en Do you want to buy anything else?
+@distractor-en try
+@distractor-en size
+@distractor-lu probéieren
+@distractor-lu Gréisst
+
+@sentence
+@lu De Mantel ass ze deier.
+@en The coat is too expensive.
+@distractor-en cheap
+@distractor-en jacket
+@distractor-lu bëlleg
+@distractor-lu Jackett
+
+@sentence
+@lu D'Box ass ze laang.
+@en The trousers are too long.
+@distractor-en short
+@distractor-en skirt
+@distractor-lu kuerz
+@distractor-lu Jupe
+
+@sentence
+@lu De Sweatshirt ass ze kuerz.
+@en The sweatshirt is too short.
+@distractor-en long
+@distractor-en shirt
+@distractor-lu laang
+@distractor-lu Hiem
+
+@sentence
+@lu D'Mutz ass ze grouss.
+@en The woollen hat is too big.
+@distractor-en small
+@distractor-en cap
+@distractor-lu kleng
+@distractor-lu Kap
+
+@sentence
+@lu D'Schong sinn ze grouss.
+@en The shoes are too big.
+@distractor-en small
+@distractor-en boots
+@distractor-lu kleng
+@distractor-lu Stiwwelen
+
+@sentence
+@lu D'Sandale sinn ze kleng.
+@en The sandals are too small.
+@distractor-en big
+@distractor-en slippers
+@distractor-lu grouss
+@distractor-lu Schlappen
+
+@sentence
+@lu D'Jupe ass ze kuerz.
+@en The skirt is too short.
+@distractor-en long
+@distractor-en dress
+@distractor-lu laang
+@distractor-lu Rack
+
+@sentence
+@lu Ech doe mech un.
+@en I get dressed.
+@distractor-en wash
+@distractor-en shirt
+@distractor-lu wäschen
+@distractor-lu Hiem
+
+@sentence
+@lu Si huet eng blo Jupe un.
+@en She is wearing a blue skirt.
+@distractor-en red
+@distractor-en blouse
+@distractor-lu rout
+@distractor-lu Blus
+
+@sentence
+@lu Si huet blo Sandalen un.
+@en She is wearing blue sandals.
+@distractor-en red
+@distractor-en boots
+@distractor-lu rout
+@distractor-lu Stiwwelen
+
+@sentence
+@lu Hien huet keng Schong un.
+@en He is not wearing any shoes.
+@distractor-en gloves
+@distractor-en coat
+@distractor-lu Händschen
+@distractor-lu Mantel
+
+@sentence
+@lu Hien huet seng Hänn an der Täsch.
+@en He has his hands in his pocket.
+@distractor-en handbag
+@distractor-en gloves
+@distractor-lu Posch
+@distractor-lu Händschen
+
+
+# --- Clothes-shop dialogue and description ---
+
+@sentence
+@lu Kommt mat mir, wann ech gelift.
+@en Please come with me.
+@distractor-en wait
+@distractor-en there
+@distractor-lu waart
+@distractor-lu dohannen
+
+@sentence
+@lu Hei hänken d'Räck.
+@en The dresses are hanging here.
+@distractor-en coats
+@distractor-en shoes
+@distractor-lu Mäntel
+@distractor-lu Schong
+
+@sentence
+@lu Ech sichen eng blo Mutz.
+@en I am looking for a blue hat.
+@distractor-en red
+@distractor-en cap
+@distractor-lu rout
+@distractor-lu Kap
+
+@sentence
+@lu Mir hunn brong Stiwwelen.
+@en We have brown boots.
+@distractor-en black
+@distractor-en shoes
+@distractor-lu schwaarz
+@distractor-lu Schong
+
+@sentence
+@lu Si dréit eng rout Jackett.
+@en She is wearing a red jacket.
+@distractor-en blue
+@distractor-en blouse
+@distractor-lu blo
+@distractor-lu Blus
+
+@sentence
+@lu D'Fra huet giel Sandalen un.
+@en The woman is wearing yellow sandals.
+@distractor-en red
+@distractor-en boots
+@distractor-lu rout
+@distractor-lu Stiwwelen
+
+@sentence
+@lu De Kleederbuttek huet bëlleg Blusen.
+@en The clothes shop has cheap blouses.
+@distractor-en expensive
+@distractor-en dresses
+@distractor-lu deier
+@distractor-lu Räck
+
+@sentence
+@lu Kann ech déi gro Posch gesinn?
+@en Can I see the grey handbag?
+@distractor-en blue
+@distractor-en gloves
+@distractor-lu blo
+@distractor-lu Händschen
+
+@sentence
+@lu Dir kënnt déi blo Jupe an der Kabinn undoen.
+@en You can put on the blue skirt in the fitting room.
+@distractor-en red
+@distractor-en blouse
+@distractor-lu rout
+@distractor-lu Blus
+
+@sentence
+@lu De Verkeefer bréngt d'Schong.
+@en The shop assistant brings the shoes.
+@distractor-en customer
+@distractor-en coat
+@distractor-lu Client
+@distractor-lu Mantel
+
+@sentence
+@lu Är Jackett hänkt do.
+@en Your jacket is hanging there.
+@distractor-en coat
+@distractor-en skirt
+@distractor-lu Mantel
+@distractor-lu Jupe
+
+@sentence
+@lu D'Fra dréit eng schwaarz Blus.
+@en The woman is wearing a black blouse.
+@distractor-en brown
+@distractor-en skirt
+@distractor-lu brong
+@distractor-lu Jupe
+
+@sentence
+@lu Si huet hir Äerm hannert dem Réck.
+@en She has her arms behind her back.
+@distractor-en hands
+@distractor-en pocket
+@distractor-lu Hänn
+@distractor-lu Täsch
+
+@sentence
+@lu Mir hunn déi kleng Gréissten och.
+@en We also have the small sizes.
+@distractor-en large
+@distractor-en trousers
+@distractor-lu grouss
+@distractor-lu Box
+
+@sentence
+@lu Dës bëlleg Räck passen gutt.
+@en These cheap dresses fit well.
+@distractor-en expensive
+@distractor-en shoes
+@distractor-lu deier
+@distractor-lu Schong
+
+# --- @fill: adjective agreement ---------------------------------------------
+# The fixed noun and article make the gender-dependent ending the only correct
+# Luxembourgish tile. Distractors are the other inflections of that adjective.
+
+@fill
+@lu De Verkeefer weist e [gréngen] T-Shirt.
+@en The shop assistant shows a [green] T-shirt.
+@distractor-lu gréng
+@distractor-lu gréngt
+@distractor-lu grénger
+@distractor-en blue
+@distractor-en red
+@distractor-en white
+
+@fill
+@lu Ech gesinn e [bloen] T-Shirt.
+@en I see a [blue] T-shirt.
+@distractor-lu blo
+@distractor-lu blot
+@distractor-lu bloer
+@distractor-en green
+@distractor-en red
+@distractor-en white
+
+@fill
+@lu Hie keeft e [gielen] Mantel.
+@en He buys a [yellow] coat.
+@distractor-lu giel
+@distractor-lu gielt
+@distractor-lu gieler
+@distractor-en blue
+@distractor-en green
+@distractor-en white
+
+@fill
+@lu Ech probéieren e [wäisst] Hiem.
+@en I try on a [white] shirt.
+@distractor-lu wäiss
+@distractor-lu wäissen
+@distractor-lu wäisser
+@distractor-en blue
+@distractor-en green
+@distractor-en red
+
+@fill
+@lu De Client keeft e [blot] Hiem.
+@en The customer buys a [blue] shirt.
+@distractor-lu blo
+@distractor-lu bloen
+@distractor-lu bloer
+@distractor-en green
+@distractor-en red
+@distractor-en white
+
+@fill
+@lu Si sicht eng [blo] Mutz.
+@en She is looking for a [blue] hat.
+@distractor-lu bloen
+@distractor-lu blot
+@distractor-lu bloer
+@distractor-en green
+@distractor-en red
+@distractor-en white
+
+@fill
+@lu D'Clientin hëlt eng [gro] Jackett.
+@en The customer takes a [grey] jacket.
+@distractor-lu groen
+@distractor-lu grot
+@distractor-lu groer
+@distractor-en blue
+@distractor-en green
+@distractor-en white
+
+@fill
+@lu De Buttek verkeeft [brong] Stiwwelen.
+@en The shop sells [brown] boots.
+@distractor-lu brongen
+@distractor-lu brongt
+@distractor-lu bronger
+@distractor-en black
+@distractor-en blue
+@distractor-en red
+
+@fill
+@lu Si huet hir Hänn an der [gieler] Posch.
+@en She has her hands in the [yellow] handbag.
+@distractor-lu giel
+@distractor-lu gielen
+@distractor-lu gielt
+@distractor-en blue
+@distractor-en red
+@distractor-en green
+
+@fill
+@lu Hien ass mat dem [gréngen] T-Shirt do.
+@en He is there with the [green] T-shirt.
+@distractor-lu gréng
+@distractor-lu gréngt
+@distractor-lu grénger
+@distractor-en blue
+@distractor-en red
+@distractor-en white
+
+@fill
+@lu Si geet mat engem [wäissen] Hiem eraus.
+@en She goes out with a [white] shirt.
+@distractor-lu wäiss
+@distractor-lu wäisst
+@distractor-lu wäisser
+@distractor-en blue
+@distractor-en green
+@distractor-en red
+
+@fill
+@lu D'Kanner spille mat [brongen] Stiwwelen.
+@en The children play with [brown] boots.
+@distractor-lu brong
+@distractor-lu brongt
+@distractor-lu bronger
+@distractor-en black
+@distractor-en blue
+@distractor-en red
+
+# --- @fill: clothes-shop prepositions ---------------------------------------
+
+@fill
+@lu De Rack ass [am] Rouden.
+@en The dress is [in] red.
+@distractor-lu op dem
+@distractor-lu bei dem
+@distractor-lu aus dem
+@distractor-en on
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu [An] der Täsch huet d'Fra hir Hänn.
+@en The woman has her hands [in] her pocket.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu hannert
+@distractor-en on
+@distractor-en near
+@distractor-en behind
+
+@fill
+@lu D'Fra hält d'Äerm [hannert] dem Réck.
+@en The woman holds her arms [behind] her back.
+@distractor-lu an
+@distractor-lu op
+@distractor-lu bei
+@distractor-en in
+@distractor-en on
+@distractor-en near
+
+@fill
+@lu Stiech däin Hiem [an] d'Box!
+@en Tuck your shirt [into] your trousers!
+@distractor-lu op
+@distractor-lu ënner
+@distractor-lu hannert
+@distractor-en on
+@distractor-en under
+@distractor-en behind
+
+@fill
+@lu Ech probéieren d'Schong [an] der Kabinn.
+@en I try on the shoes [in] the fitting room.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu hannert
+@distractor-en on
+@distractor-en near
+@distractor-en behind
+
+@fill
+@lu De Verkeefer kënnt [mat] enger bloer Posch.
+@en The shop assistant comes [with] a blue handbag.
+@distractor-lu ouni
+@distractor-lu virun
+@distractor-lu hannert
+@distractor-en without
+@distractor-en before
+@distractor-en behind

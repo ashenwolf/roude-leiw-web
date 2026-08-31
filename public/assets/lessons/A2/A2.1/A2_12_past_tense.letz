@@ -1,0 +1,635 @@
+# A2/A2.1/A2_12_past_tense.letz
+# Source: PDF slide decks "L10 (Deel 1)/(Deel 2) a21lotsmanmeli.pdf" (A2.1, Lektioun 10).
+# Slide text was baked into the raster; transcribed from rendered pages, then every
+# lemma and participle verified against LOD.
+# Grammar focus — this is the past-tense lesson:
+#   - the passé composé = auxiliary + past participle, participle at the very END
+#   - `hunn` for most verbs; `sinn` for verbs of MOVEMENT or CHANGE OF STATE,
+#     plus the explicitly static `sinn` and `bleiwen`. Choosing the auxiliary is
+#     the single highest-value habit here, so most fills blank it.
+#   - inversion keeps the auxiliary in second position (Gëschter hunn ech ...)
+#   - a subordinate clause sends the auxiliary to the end, AFTER the participle
+#   - ongoing facts take the PRESENT in Luxembourgish, not the past
+#     (`Ech wunnen zanter dräi Joer ...`) — a real interference error for English
+#     and German speakers, so it is drilled explicitly.
+# The deck also teaches the progressive `ech sinn am gaang ze ...`.
+
+@lesson A2.12 "Past Tense"
+
+# --- Talking about the past ---
+@word d'Vergaangenheet = the past
+@word gëschter = yesterday
+@word virgëschter = the day before yesterday
+@word hënt = last night
+@word virdrun = before that
+@word gläichzäiteg = at the same time
+@word kuerz drop = shortly afterwards
+@word reegelméisseg = regularly
+@word nëmmen = only
+
+# --- Nouns from the deck ---
+@word d'Reunioun = the meeting
+@word d'Ausbildung = the training
+@word d'Nuechtiessen = the evening meal
+@word d'Mëttespaus = the lunch break
+
+# --- Verbs & expressions ---
+@word gebuer sinn = to be born
+@word ufänken = to start
+@word pendelen = to commute
+@word iwwernuechten = to stay overnight
+
+# --- Past participles taking `hunn` ---
+@word geschafft = worked
+@word gesot = said
+@word gemaach = done
+@word geholl = taken
+@word gelies = read
+@word giess = eaten
+@word gedronk = drunk
+@word geschlof = slept
+@word gehat = had
+@word bruecht = brought
+@word geduecht = thought
+@word gefrot = asked
+@word kaaft = bought
+@word bezuelt = paid
+@word geschriwwen = written
+@word telefonéiert = telephoned
+@word invitéiert = invited
+
+# --- Past participles taking `sinn` ---
+@word gefuer = driven
+@word komm = arrived
+@word gaangen = gone
+@word gelaf = run
+@word geflunn = flown
+@word geschwomm = swum
+@word gefall = fallen
+@word opgestan = got up
+@word gewiescht = been
+@word bliwwen = stayed
+@word geplënnert = moved house
+
+@sentence
+@lu Wat hues du leschte Weekend gemaach?
+@en What did you do last weekend?
+@distractor-en next
+@distractor-en said
+@distractor-lu nächste
+@distractor-lu gesot
+
+@sentence
+@lu Ech hu gëschter bis siwen Auer geschafft.
+@en I worked until seven o'clock yesterday.
+@distractor-en tomorrow
+@distractor-en slept
+@distractor-lu muer
+@distractor-lu geschlof
+
+@sentence
+@lu Gëschter hunn ech bis siwen Auer geschafft.
+@en Yesterday I worked until seven o'clock.
+@distractor-en tomorrow
+@distractor-en eight
+@distractor-lu muer
+@distractor-lu aacht
+
+@sentence
+@lu Mir sinn d'lescht Joer an d'Vakanz gefuer.
+@en We went on holiday last year.
+@distractor-en next
+@distractor-en stayed
+@distractor-lu nächst
+@distractor-lu bliwwen
+
+@sentence
+@lu Hien ass ze spéit an de Cours komm.
+@en He came too late to the class.
+@distractor-en early
+@distractor-en gone
+@distractor-lu fréi
+@distractor-lu gaangen
+
+@sentence
+@lu Ech sinn haut ze spéit op d'Aarbecht komm.
+@en I came to work too late today.
+@distractor-en yesterday
+@distractor-en early
+@distractor-lu gëschter
+@distractor-lu fréi
+
+@sentence
+@lu Ech si virun dräi Joer op Lëtzebuerg geplënnert.
+@en I moved to Luxembourg three years ago.
+@distractor-en five
+@distractor-en worked
+@distractor-lu fënnef
+@distractor-lu geschafft
+
+@sentence
+@lu Wat hutt dir gëschter giess?
+@en What did you eat yesterday?
+@distractor-en drunk
+@distractor-en tomorrow
+@distractor-lu gedronk
+@distractor-lu muer
+
+@sentence
+@lu Ech hu gëschter Fësch giess.
+@en I ate fish yesterday.
+@distractor-en drunk
+@distractor-en meat
+@distractor-lu gedronk
+@distractor-lu Fleesch
+
+@sentence
+@lu Wéini sidd dir op Lëtzebuerg komm?
+@en When did you come to Luxembourg?
+@distractor-en where
+@distractor-en gone
+@distractor-lu Wou
+@distractor-lu gaangen
+
+@sentence
+@lu Mir si viru fënnef Joer op Lëtzebuerg komm.
+@en We came to Luxembourg five years ago.
+@distractor-en three
+@distractor-en stayed
+@distractor-lu dräi
+@distractor-lu bliwwen
+
+@sentence
+@lu Wou hutt dir virdrun gewunnt?
+@en Where did you live before that?
+@distractor-en when
+@distractor-en worked
+@distractor-lu Wéini
+@distractor-lu geschafft
+
+@sentence
+@lu Wou hutt dir studéiert?
+@en Where did you study?
+@distractor-en when
+@distractor-en worked
+@distractor-lu Wéini
+@distractor-lu geschafft
+
+@sentence
+@lu Wou sidd dir gebuer?
+@en Where were you born?
+@distractor-en when
+@distractor-en lived
+@distractor-lu Wéini
+@distractor-lu gewunnt
+
+@sentence
+@lu Wéini hutt dir iech bestuet?
+@en When did you get married?
+@distractor-en where
+@distractor-en moved
+@distractor-lu Wou
+@distractor-lu geplënnert
+
+@sentence
+@lu Ech sinn doheem bliwwen.
+@en I stayed at home.
+@distractor-en gone
+@distractor-en city
+@distractor-lu gaangen
+@distractor-lu Stad
+
+@sentence
+@lu Ech hunn eisen Auto gewäsch.
+@en I washed our car.
+@distractor-en bought
+@distractor-en paid
+@distractor-lu kaaft
+@distractor-lu bezuelt
+
+@sentence
+@lu Meng Fra huet hir Kleeder gestreckt.
+@en My wife ironed her clothes.
+@distractor-en washed
+@distractor-en bought
+@distractor-lu gewäsch
+@distractor-lu kaaft
+
+@sentence
+@lu Eis Frënn hunn eis op en Iessen invitéiert.
+@en Our friends invited us for a meal.
+@distractor-en telephoned
+@distractor-en asked
+@distractor-lu telefonéiert
+@distractor-lu gefrot
+
+@sentence
+@lu Mir si nach erausgaang.
+@en We also went out.
+@distractor-en stayed
+@distractor-en home
+@distractor-lu bliwwen
+@distractor-lu doheem
+
+@sentence
+@lu Mir sinn eréischt um véier Auer schlofe gaang.
+@en We only went to sleep at four o'clock.
+@distractor-en got up
+@distractor-en two
+@distractor-lu opgestan
+@distractor-lu zwou
+
+@sentence
+@lu Hues du Mëllech kaaft?
+@en Did you buy milk?
+@distractor-en paid
+@distractor-en bread
+@distractor-lu bezuelt
+@distractor-lu Brout
+
+@sentence
+@lu Hues du mech haut de Moien ugeruff?
+@en Did you call me this morning?
+@distractor-en asked
+@distractor-en evening
+@distractor-lu gefrot
+@distractor-lu Owend
+
+@sentence
+@lu Ech war an England bei menger Schwëster.
+@en I was in England at my sister's.
+@distractor-en brother
+@distractor-en Germany
+@distractor-lu Brudder
+@distractor-lu Däitschland
+
+@sentence
+@lu Ech wunnen zanter dräi Joer zu Lëtzebuerg.
+@en I have been living in Luxembourg for three years.
+@distractor-en five
+@distractor-en worked
+@distractor-lu fënnef
+@distractor-lu geschafft
+
+@sentence
+@lu Ech léieren zanter engem Joer Lëtzebuergesch.
+@en I have been learning Luxembourgish for a year.
+@distractor-en three
+@distractor-en taught
+@distractor-lu dräi
+@distractor-lu geléiert
+
+@sentence
+@lu Ech hunn eng Reunioun mat mengem Chef gehat.
+@en I had a meeting with my boss.
+@distractor-en training
+@distractor-en colleague
+@distractor-lu Ausbildung
+@distractor-lu Kolleeg
+
+@sentence
+@lu Ech pendelen all Dag op d'Aarbecht.
+@en I commute to work every day.
+@distractor-en week
+@distractor-en home
+@distractor-lu Woch
+@distractor-lu doheem
+
+@sentence
+@lu Ech sinn am gaang ze iessen.
+@en I am eating.
+@distractor-en reading
+@distractor-en sleeping
+@distractor-lu liesen
+@distractor-lu schlofen
+
+@sentence
+@lu Ech sinn am gaang ze liesen.
+@en I am reading.
+@distractor-en eating
+@distractor-en writing
+@distractor-lu iessen
+@distractor-lu schreiwen
+
+@sentence
+@lu Hie huet mir e Bréif geschriwwen.
+@en He wrote me a letter.
+@distractor-en read
+@distractor-en telephoned
+@distractor-lu gelies
+@distractor-lu telefonéiert
+
+@sentence
+@lu Ech hunn d'Rechnung bezuelt.
+@en I paid the bill.
+@distractor-en bought
+@distractor-en brought
+@distractor-lu kaaft
+@distractor-lu bruecht
+
+@sentence
+@lu Ech hunn eng Fläsch Wäin bruecht.
+@en I brought a bottle of wine.
+@distractor-en bought
+@distractor-en drunk
+@distractor-lu kaaft
+@distractor-lu gedronk
+
+@sentence
+@lu Wéi vill Kaffi hues du gedronk?
+@en How much coffee did you drink?
+@distractor-en eaten
+@distractor-en bought
+@distractor-lu giess
+@distractor-lu kaaft
+
+@sentence
+@lu Ech hu gutt geschlof.
+@en I slept well.
+@distractor-en badly
+@distractor-en eaten
+@distractor-lu schlecht
+@distractor-lu giess
+
+@sentence
+@lu Hatt ass mam Fliger geflunn.
+@en She flew by plane.
+@distractor-en train
+@distractor-en driven
+@distractor-lu Zuch
+@distractor-lu gefuer
+
+@sentence
+@lu Mäi Brudder ass an de Bësch gelaf.
+@en My brother ran into the forest.
+@distractor-en garden
+@distractor-en swum
+@distractor-lu Gaart
+@distractor-lu geschwomm
+
+@sentence
+@lu Ech hunn haut de Moien telefonéiert.
+@en I telephoned this morning.
+@distractor-en asked
+@distractor-en evening
+@distractor-lu gefrot
+@distractor-lu Owend
+
+@sentence
+@lu Ech hu virun engem Joer ugefaang, Lëtzebuergesch ze léieren.
+@en I started learning Luxembourgish a year ago.
+@distractor-en stopped
+@distractor-en three
+@distractor-lu opgehalen
+@distractor-lu dräi
+
+@sentence
+@lu Meng Ausbildung war ganz interessant.
+@en My training was very interesting.
+@distractor-en boring
+@distractor-en meeting
+@distractor-lu langweileg
+@distractor-lu Reunioun
+
+# --- @fill: choosing the auxiliary -------------------------------------------
+# `sinn` for movement and change of state (plus sinn/bleiwen); `hunn` otherwise.
+# This is the lesson's highest-value habit, so it gets the most fills.
+
+@fill
+@lu Mäi Kolleeg [huet] gëschter bis aacht Auer geschafft.
+@en My colleague [worked] until eight o'clock yesterday.
+@distractor-lu ass
+@distractor-lu sinn
+@distractor-lu hunn
+@distractor-en was
+@distractor-en were
+@distractor-en is
+
+@fill
+@lu Meng Elteren hunn d'Vakanz [a] Spuenien verbruecht.
+@en My parents spent the holiday [in] Spain.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu vu
+@distractor-en to
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Meng Schwëster [ass] ze spéit an d'Schoul komm.
+@en My sister [came] too late to school.
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-lu sinn
+@distractor-en had
+@distractor-en has
+@distractor-en have
+
+@fill
+@lu Mäi Papp [ass] de ganzen Dag doheem bliwwen.
+@en My dad [stayed] at home the whole day.
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+@fill
+@lu Meng Mamm [huet] meng Hiemer gestreckt.
+@en My mother [ironed] my shirts.
+@distractor-lu ass
+@distractor-lu hunn
+@distractor-lu sinn
+@distractor-en was
+@distractor-en were
+@distractor-en is
+
+@fill
+@lu D'Marie [ass] op Portugal geflunn.
+@en Marie [flew] to Portugal.
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-en had
+@distractor-en has
+@distractor-en have
+
+@fill
+@lu Du [hues] Mëllech kaaft.
+@en You [bought] milk.
+@distractor-lu bass
+@distractor-lu huet
+@distractor-lu sinn
+@distractor-en were
+@distractor-en was
+@distractor-en are
+
+@fill
+@lu Dir [sidd] ze spéit komm.
+@en You [came] too late.
+@distractor-lu hutt
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+@fill
+@lu Meng Famill [ass] virun zéng Joer op Lëtzebuerg geplënnert.
+@en My family [moved] to Luxembourg ten years ago.
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+@fill
+@lu Ech [sinn] zu Kiew gebuer.
+@en I [was] born in Kiev.
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-lu huet
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+# --- @fill: the participle at the end -----------------------------------------
+
+@fill
+@lu Meng Frënn hunn e gudde Wäi [bruecht].
+@en My friends [brought] a good wine.
+@distractor-lu bréngen
+@distractor-lu bréngt
+@distractor-lu brénge
+@distractor-en bring
+@distractor-en brings
+@distractor-en bringing
+
+@fill
+@lu Wéi vill Waasser hues du [gedronk]?
+@en How much water did you [drink]?
+@distractor-lu drénken
+@distractor-lu drénks
+@distractor-lu drénkt
+@distractor-en drinks
+@distractor-en drank
+@distractor-en drinking
+
+@fill
+@lu Mir hunn de Film [gekuckt].
+@en We [watched] the film.
+@distractor-lu kucken
+@distractor-lu kuckt
+@distractor-lu kucks
+@distractor-en watch
+@distractor-en watches
+@distractor-en watching
+
+@fill
+@lu Meng Bomi huet mir e Bréif [geschriwwen].
+@en My grandma [wrote] me a letter.
+@distractor-lu schreiwen
+@distractor-lu schreift
+@distractor-lu schreifs
+@distractor-en writes
+@distractor-en write
+@distractor-en writing
+
+@fill
+@lu Meng Kanner hu gutt [geschlof].
+@en My children [slept] well.
+@distractor-lu schlofen
+@distractor-lu schléift
+@distractor-lu schléifs
+@distractor-en sleeps
+@distractor-en sleep
+@distractor-en sleeping
+
+# --- @fill: subordinate clause sends the auxiliary to the very end ------------
+
+@fill
+@lu Ech war am Restaurant, well ech laang geschafft [hunn].
+@en I was in the restaurant because I [worked] long.
+@distractor-lu sinn
+@distractor-lu hues
+@distractor-lu bass
+@distractor-en was
+@distractor-en were
+@distractor-en am
+
+@fill
+@lu So dem Chef net, datt ech ze spéit komm [sinn].
+@en Do not tell the boss that I [came] too late.
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-lu bass
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+@fill
+@lu Hunn ech dir gesot, datt ech geplënnert [sinn]?
+@en Did I tell you that I [moved] house?
+@distractor-lu hunn
+@distractor-lu hues
+@distractor-lu huet
+@distractor-en had
+@distractor-en have
+@distractor-en has
+
+# --- @fill: past-time expressions --------------------------------------------
+
+@fill
+@lu Mäi Brudder huet [gëschter] Fësch giess.
+@en My brother ate fish [yesterday].
+@distractor-lu muer
+@distractor-lu haut
+@distractor-lu iwwermuer
+@distractor-en tomorrow
+@distractor-en today
+@distractor-en soon
+
+@fill
+@lu Meng Elteren si [viru] zéng Joer op Lëtzebuerg komm.
+@en My parents came to Luxembourg ten years [ago].
+@distractor-lu no
+@distractor-lu zanter
+@distractor-lu bis
+@distractor-en after
+@distractor-en since
+@distractor-en until
+
+@fill
+@lu Wou huet hatt [virdrun] gewunnt?
+@en Where did she live [before that]?
+@distractor-lu duerno
+@distractor-lu haut
+@distractor-lu muer
+@distractor-en afterwards
+@distractor-en today
+@distractor-en tomorrow
+
+# --- @fill: ongoing facts take the PRESENT, not the past ---------------------
+# An English/German interference error the deck calls out explicitly.
+
+@fill
+@lu Meng Famill [wunnt] zanter zéng Joer zu Lëtzebuerg.
+@en My family has been [living] in Luxembourg for ten years.
+@distractor-lu gewunnt
+@distractor-lu wunnen
+@distractor-lu wunns
+@distractor-en lived
+@distractor-en lives
+@distractor-en live
+
+@fill
+@lu Mäi Papp [léiert] zanter zwee Joer Lëtzebuergesch.
+@en My dad has been [learning] Luxembourgish for two years.
+@distractor-lu geléiert
+@distractor-lu léieren
+@distractor-lu léiers
+@distractor-en learned
+@distractor-en learns
+@distractor-en learn

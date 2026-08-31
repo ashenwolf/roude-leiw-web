@@ -1,0 +1,515 @@
+# A2/A2.1/A2_08_character_and_comparison.letz
+# Source: PDF slide decks "L6 (Part 1) a21convlotsmanmeli.pdf" + "L6 (Part 2) a21lotsmanmeli.pdf"
+# (A2.1, Lektioun 6). Slide text was baked into the raster; transcribed from rendered
+# pages, then every lemma verified against LOD.
+# Grammar focus (all three from this deck):
+#   - relative pronouns dee(n) m / déi f+pl / dat n, which send the verb to the end
+#   - possessive pronouns, whose form depends on the gender of the POSSESSED noun
+#     (mäi Brudder m / meng Schwëster f / mäi Kand n)
+#   - the comparative: méi + adjective + wéi, with gutt -> besser as the exception
+# ⚠️ The source handout writes "diskussiounsfreedeg"; LOD returns found: 0 and
+# suggests "diskussiounsbereet". Kept the handout form out of the @word list and
+# used the LOD-verified adjectives instead, so nothing unverifiable is taught.
+
+@lesson A2.08 "Character & Comparison"
+
+# --- Character traits ---
+@word de Charakter = the character
+@word éiergäizeg = ambitious
+@word oppen = open-minded
+@word arrogant = arrogant
+@word gedëlleg = patient
+@word ausgeglach = balanced
+@word jalous = jealous
+@word gescheit = clever
+@word domm = stupid
+@word liddereg = lazy
+@word kannereg = childish
+@word guttmiddeg = good-natured
+@word langweileg = boring
+@word komplizéiert = complicated
+@word sympathesch = likeable
+@word seriö = serious
+@word flott = nice
+@word rosen = angry
+@word traureg = sad
+@word déierefrëndlech = animal-friendly
+
+# --- Appearance ---
+@word d'Glatz = the bald head
+@word d'Krausel = the curl
+@word fierwen = to dye
+@word gefierft = dyed
+@word d'Bezéiung = the relationship
+
+# --- Comparison ---
+@word méi = more
+@word besser = better
+@word am beschten = the best
+@word staark = strong
+@word schwaach = weak
+
+@sentence
+@lu Wéi ass säin Charakter?
+@en What is his character like?
+@distractor-en name
+@distractor-en where
+@distractor-lu Numm
+@distractor-lu Wou
+
+@sentence
+@lu Verkeefer musse frëndlech sinn.
+@en Salespeople have to be friendly.
+@distractor-en arrogant
+@distractor-en lazy
+@distractor-lu arrogant
+@distractor-lu liddereg
+
+@sentence
+@lu Ech sinn eng éiergäizeg Persoun.
+@en I am an ambitious person.
+@distractor-en lazy
+@distractor-en boring
+@distractor-lu liddereg
+@distractor-lu langweileg
+
+@sentence
+@lu Meng Fra ass eng oppen Persoun.
+@en My wife is an open-minded person.
+@distractor-en arrogant
+@distractor-en complicated
+@distractor-lu arrogant
+@distractor-lu komplizéiert
+
+@sentence
+@lu Hie gesäit rosen aus.
+@en He looks angry.
+@distractor-en sad
+@distractor-en tired
+@distractor-lu traureg
+@distractor-lu midd
+
+@sentence
+@lu Ass eppes geschitt?
+@en Did something happen?
+@distractor-en nothing
+@distractor-en who
+@distractor-lu näischt
+@distractor-lu Wien
+
+@sentence
+@lu Ech sinn absolut net liddereg.
+@en I am absolutely not lazy.
+@distractor-en ambitious
+@distractor-en sad
+@distractor-lu éiergäizeg
+@distractor-lu traureg
+
+@sentence
+@lu Hien ass sou kannereg.
+@en He is so childish.
+@distractor-en clever
+@distractor-en patient
+@distractor-lu gescheit
+@distractor-lu gedëlleg
+
+@sentence
+@lu Hie gesäit mam Brëll gescheit aus.
+@en He looks clever with the glasses.
+@distractor-en stupid
+@distractor-en sad
+@distractor-lu domm
+@distractor-lu traureg
+
+@sentence
+@lu Gëss du séier jalous?
+@en Do you get jealous quickly?
+@distractor-en angry
+@distractor-en patient
+@distractor-lu rosen
+@distractor-lu gedëlleg
+
+@sentence
+@lu Meng Schwëster ass ganz ausgeglach.
+@en My sister is very balanced.
+@distractor-en complicated
+@distractor-en jealous
+@distractor-lu komplizéiert
+@distractor-lu jalous
+
+@sentence
+@lu Meng Mamm ass ganz déierefrëndlech.
+@en My mother is very animal-friendly.
+@distractor-en arrogant
+@distractor-en lazy
+@distractor-lu arrogant
+@distractor-lu liddereg
+
+@sentence
+@lu Mäi Chef ass frëndlech a gedëlleg.
+@en My boss is friendly and patient.
+@distractor-en arrogant
+@distractor-en boring
+@distractor-lu arrogant
+@distractor-lu langweileg
+
+@sentence
+@lu Wéi heescht déi nei Cheffin?
+@en What is the new boss called?
+@distractor-en old
+@distractor-en where
+@distractor-lu al
+@distractor-lu Wou
+
+@sentence
+@lu Kenns du schonn déi nei Noperen?
+@en Do you already know the new neighbours?
+@distractor-en old
+@distractor-en when
+@distractor-lu al
+@distractor-lu Wéini
+
+@sentence
+@lu Déi éischt Klass ass komplett voll.
+@en The first class is completely full.
+@distractor-en empty
+@distractor-en second
+@distractor-lu eidel
+@distractor-lu zweet
+
+@sentence
+@lu Meng Frëndin huet hir Hoer gefierft.
+@en My girlfriend dyed her hair.
+@distractor-en cut
+@distractor-en curl
+@distractor-lu geschnidden
+@distractor-lu Krausel
+
+@sentence
+@lu Mäi Brudder huet eng Glatz.
+@en My brother has a bald head.
+@distractor-en glasses
+@distractor-en curl
+@distractor-lu Brëll
+@distractor-lu Krausel
+
+@sentence
+@lu Ech si méi seriö wéi mäi Partner.
+@en I am more serious than my partner.
+@distractor-en less
+@distractor-en childish
+@distractor-lu manner
+@distractor-lu kannereg
+
+@sentence
+@lu Mäi Partner ass méi kannereg wéi ech.
+@en My partner is more childish than me.
+@distractor-en serious
+@distractor-en less
+@distractor-lu seriö
+@distractor-lu manner
+
+@sentence
+@lu En Hond ass méi gescheit wéi eng Kaz.
+@en A dog is more clever than a cat.
+@distractor-en stupid
+@distractor-en less
+@distractor-lu domm
+@distractor-lu manner
+
+@sentence
+@lu Dat lescht Joer war méi kal wéi dëst Joer.
+@en Last year was colder than this year.
+@distractor-en warm
+@distractor-en next
+@distractor-lu waarm
+@distractor-lu nächst
+
+@sentence
+@lu Mäi Brudder ass méi staark wéi ech.
+@en My brother is stronger than me.
+@distractor-en weak
+@distractor-en less
+@distractor-lu schwaach
+@distractor-lu manner
+
+@sentence
+@lu Dëse Kaffi ass besser wéi deen aneren.
+@en This coffee is better than the other one.
+@distractor-en worse
+@distractor-en more
+@distractor-lu schlechter
+@distractor-lu méi
+
+@sentence
+@lu Meng Bezéiung mat mengem Brudder ass gutt.
+@en My relationship with my brother is good.
+@distractor-en bad
+@distractor-en sister
+@distractor-lu schlecht
+@distractor-lu Schwëster
+
+@sentence
+@lu Hatt schwätzt gär iwwer komplizéiert Themen.
+@en She likes talking about complicated topics.
+@distractor-en boring
+@distractor-en never
+@distractor-lu langweileg
+@distractor-lu ni
+
+@sentence
+@lu Wann ech midd sinn, sinn ech liddereg.
+@en When I am tired, I am lazy.
+@distractor-en strong
+@distractor-en ambitious
+@distractor-lu staark
+@distractor-lu éiergäizeg
+
+@sentence
+@lu Ech fannen dëse Film langweileg.
+@en I find this film boring.
+@distractor-en nice
+@distractor-en clever
+@distractor-lu flott
+@distractor-lu gescheit
+
+@sentence
+@lu Meng Noperen si ganz flott.
+@en My neighbours are very nice.
+@distractor-en arrogant
+@distractor-en boring
+@distractor-lu arrogant
+@distractor-lu langweileg
+
+@sentence
+@lu Firwat bass du traureg?
+@en Why are you sad?
+@distractor-en angry
+@distractor-en where
+@distractor-lu rosen
+@distractor-lu Wou
+
+# --- @fill: relative pronouns ------------------------------------------------
+# Chosen by the gender of the noun they refer back to, and they send the verb to
+# the end of the clause. The wrong-gender pronoun is the distractor.
+
+@fill
+@lu Dat ass de Mann, [deen] ech gutt kennen.
+@en That is the man [whom] I know well.
+@distractor-lu déi
+@distractor-lu dat
+@distractor-lu wien
+@distractor-en which
+@distractor-en whose
+@distractor-en what
+
+@fill
+@lu Dat ass d'Fra, [déi] ëmmer frëndlech ass.
+@en That is the woman [who] is always friendly.
+@distractor-lu deen
+@distractor-lu dat
+@distractor-lu wien
+@distractor-en whom
+@distractor-en whose
+@distractor-en what
+
+@fill
+@lu E Kand, [dat] gär schwammt, ass gesond.
+@en A child [which] likes swimming is healthy.
+@distractor-lu deen
+@distractor-lu déi
+@distractor-lu wien
+@distractor-en who
+@distractor-en whose
+@distractor-en what
+
+@fill
+@lu Ech sichen e Partner, [deen] net jalous gëtt.
+@en I am looking for a partner [who] does not get jealous.
+@distractor-lu déi
+@distractor-lu dat
+@distractor-lu wien
+@distractor-en whose
+@distractor-en which
+@distractor-en what
+
+@fill
+@lu Si toleréiert Leit, [déi] sech arrogant behuelen.
+@en She tolerates people [who] behave arrogantly.
+@distractor-lu deen
+@distractor-lu dat
+@distractor-lu wien
+@distractor-en whose
+@distractor-en whom
+@distractor-en what
+
+# --- @fill: possessive pronouns ----------------------------------------------
+# The form depends on the gender of the POSSESSED noun, not the owner:
+# mäi Brudder (m) / meng Schwëster (f) / mäi Kand (n) / meng Kanner (pl).
+
+@fill
+@lu [Mäi] Brudder ass ganz éiergäizeg.
+@en [My] brother is very ambitious.
+@distractor-lu Meng
+@distractor-lu Mäin
+@distractor-lu Eis
+@distractor-en Our
+@distractor-en Your
+@distractor-en Their
+
+@fill
+@lu [Meng] Schwëster ass ganz sympathesch.
+@en [My] sister is very likeable.
+@distractor-lu Mäi
+@distractor-lu Mäin
+@distractor-lu Eis
+@distractor-en Our
+@distractor-en Your
+@distractor-en Their
+
+@fill
+@lu Ass dat [hire] Frënd?
+@en Is that [her] friend?
+@distractor-lu hir
+@distractor-lu hiert
+@distractor-lu eise
+@distractor-en our
+@distractor-en your
+@distractor-en their
+
+@fill
+@lu Wéi ass [Ären] Numm?
+@en What is [your] name?
+@distractor-lu Är
+@distractor-lu Äert
+@distractor-lu Eise
+@distractor-en our
+@distractor-en her
+@distractor-en their
+
+@fill
+@lu [Eise] Hond huet Kanner gär.
+@en [Our] dog likes children.
+@distractor-lu Eis
+@distractor-lu Eist
+@distractor-lu Hir
+@distractor-en Her
+@distractor-en Your
+@distractor-en Their
+
+@fill
+@lu [Säi] Papp ass ganz gedëlleg.
+@en [His] dad is very patient.
+@distractor-lu Seng
+@distractor-lu Säin
+@distractor-lu Hir
+@distractor-en Her
+@distractor-en Our
+@distractor-en Their
+
+# --- @fill: the comparative --------------------------------------------------
+# méi + adjective + wéi. `gutt` is irregular: besser, never "méi gutt".
+
+@fill
+@lu Meng Schwëster ass [méi] gedëlleg wéi ech.
+@en My sister is [more] patient than me.
+@distractor-lu manner
+@distractor-lu ganz
+@distractor-lu esou
+@distractor-en less
+@distractor-en very
+@distractor-en as
+
+@fill
+@lu E Mupp ass méi flott [wéi] eng Kaz.
+@en A dog is nicer [than] a cat.
+@distractor-lu wann
+@distractor-lu well
+@distractor-lu an
+@distractor-en when
+@distractor-en because
+@distractor-en and
+
+@fill
+@lu Dëse Téi ass [besser] wéi deen aneren.
+@en This tea is [better] than the other one.
+@distractor-lu gutt
+@distractor-lu gudden
+@distractor-lu schlecht
+@distractor-en good
+@distractor-en best
+@distractor-en bad
+
+@fill
+@lu Dat ass [am] beschten fir meng Gesondheet.
+@en That is [the] best for my health.
+@distractor-lu méi
+@distractor-lu manner
+@distractor-lu wéi
+@distractor-en more
+@distractor-en less
+@distractor-en than
+
+# --- @fill: conjunctions with the verb at the end -----------------------------
+
+@fill
+@lu Ech maache Sport, [obwuel] ech midd sinn.
+@en I do sport [although] I am tired.
+@distractor-lu well
+@distractor-lu wann
+@distractor-lu ob
+@distractor-en because
+@distractor-en if
+@distractor-en whether
+
+@fill
+@lu Hatt ass frou, [well] hatt eng gutt Bezéiung huet.
+@en She is happy [because] she has a good relationship.
+@distractor-lu obwuel
+@distractor-lu wann
+@distractor-lu ob
+@distractor-en although
+@distractor-en if
+@distractor-en whether
+
+@fill
+@lu Ech denken, [datt] mäi Chef gedëlleg ass.
+@en I think [that] my boss is patient.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-lu ob
+@distractor-en because
+@distractor-en although
+@distractor-en whether
+
+# --- @fill: verb forms --------------------------------------------------------
+
+@fill
+@lu Mäi Brudder [gesäit] midd aus.
+@en My brother [looks] tired.
+@distractor-lu gesinn
+@distractor-lu gesäis
+@distractor-lu gesouch
+@distractor-en look
+@distractor-en looked
+@distractor-en looking
+
+@fill
+@lu Wéi [heescht] däi neie Noper?
+@en What [is] your new neighbour called?
+@distractor-lu heeschen
+@distractor-lu heeschs
+@distractor-lu geheescht
+@distractor-en are
+@distractor-en was
+@distractor-en being
+
+@fill
+@lu [Gëss] du dacks rosen?
+@en [Do] you often get angry?
+@distractor-lu Ginn
+@distractor-lu Gëtt
+@distractor-lu Gi
+@distractor-en Does
+@distractor-en Did
+@distractor-en Doing
