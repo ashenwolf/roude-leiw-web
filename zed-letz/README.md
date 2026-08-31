@@ -20,10 +20,17 @@ zed-letz/
 
 ## Install (dev extension)
 
-1. In Zed: `cmd-shift-p` → **zed: install dev extension** → select this
-   `zed-letz/` directory.
-2. Open any `.letz` file. First install compiles the grammar to WASM
-   (Zed downloads wasi-sdk automatically; needs a Rust toolchain via rustup).
+1. Open Zed and press `cmd-shift-p`.
+2. Type **install dev extension**, hit Enter (command: `zed: install dev extension`).
+3. In the file picker, select this `zed-letz/` directory
+   (`~/Personal/roude-leiw-web/zed-letz`).
+4. Wait ~30 s — the first install compiles the grammar to WASM. Zed downloads
+   wasi-sdk automatically; a Rust toolchain via rustup must already be present.
+5. Open any `.letz` file — highlighting should be live.
+
+Troubleshooting: if colors don't show, `cmd-shift-p` → **zed: open log** and look
+for grammar build errors. The Extensions page (`cmd-shift-x`) should list "Letz"
+marked as a dev extension.
 
 ## Updating the grammar
 
