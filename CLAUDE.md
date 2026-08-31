@@ -51,7 +51,7 @@ Canonical terms for the exercise/session system — use these in code, comments,
 
 ## Project Structure
 
-Top level: `src/{context,page,exam,exercise,persistence,lib,ui}/`, `worker/{handlers,lib}/`, `public/assets/{lessons,exam}/`. **Full annotated file tree:** [`.claude/reference/project-structure.md`](.claude/reference/project-structure.md) — read it before navigating an unfamiliar directory rather than globbing blind.
+Top level: `src/{context,page,exam,exercise,persistence,lib,ui}/`, `worker/{handlers,lib}/`, `public/assets/{lessons,exam}/`. **The conventions that decide where a file goes** — the per-directory rules, the four-file shape of an exercise, and the handful of files whose location is load-bearing — are in [`.claude/reference/project-structure.md`](.claude/reference/project-structure.md). Read it before adding a file or navigating an unfamiliar directory; glob for current contents rather than expecting a file list there.
 
 ## Architecture
 

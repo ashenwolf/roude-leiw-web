@@ -11,6 +11,6 @@
 | [persistence.md](persistence.md) | add a KV key, change a stored shape, alter merge semantics, or add a client-side store |
 | [security.md](security.md) | add an API endpoint, a persisted field, or a new external resource |
 | [testing.md](testing.md) | decide whether/how to test something, or need the fixture helpers |
-| [project-structure.md](project-structure.md) | need the full annotated file tree |
+| [project-structure.md](project-structure.md) | add a file, a directory, or a naming convention — where things live and why |
 
 **Keep these accurate in the same commit as the change that invalidates them.** Unlike memory, there is no tolerance for drift here — these files are asserted as the current state of the system, not a record of a past decision.
