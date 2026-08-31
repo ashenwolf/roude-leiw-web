@@ -1,0 +1,289 @@
+[
+  {
+    "type": "distractor_en_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "english",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "distractor_lu_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "luxembourgish",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "en_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "english",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_alt_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "quoted_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "quoted_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lesson_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lesson_id",
+          "named": true
+        },
+        {
+          "type": "quoted_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lu_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "luxembourgish",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "question_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "luxembourgish",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "distractor_en_line",
+          "named": true
+        },
+        {
+          "type": "distractor_lu_line",
+          "named": true
+        },
+        {
+          "type": "en_line",
+          "named": true
+        },
+        {
+          "type": "fill_marker",
+          "named": true
+        },
+        {
+          "type": "image_alt_declaration",
+          "named": true
+        },
+        {
+          "type": "image_declaration",
+          "named": true
+        },
+        {
+          "type": "lesson_declaration",
+          "named": true
+        },
+        {
+          "type": "lu_line",
+          "named": true
+        },
+        {
+          "type": "question_line",
+          "named": true
+        },
+        {
+          "type": "sentence_marker",
+          "named": true
+        },
+        {
+          "type": "word_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "word_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "english",
+          "named": true
+        },
+        {
+          "type": "luxembourgish",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "@distractor-en",
+    "named": false
+  },
+  {
+    "type": "@distractor-lu",
+    "named": false
+  },
+  {
+    "type": "@en",
+    "named": false
+  },
+  {
+    "type": "@image",
+    "named": false
+  },
+  {
+    "type": "@image-alt",
+    "named": false
+  },
+  {
+    "type": "@lesson",
+    "named": false
+  },
+  {
+    "type": "@lu",
+    "named": false
+  },
+  {
+    "type": "@question",
+    "named": false
+  },
+  {
+    "type": "@word",
+    "named": false
+  },
+  {
+    "type": "blank",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "english",
+    "named": true
+  },
+  {
+    "type": "fill_marker",
+    "named": true
+  },
+  {
+    "type": "lesson_id",
+    "named": true
+  },
+  {
+    "type": "luxembourgish",
+    "named": true
+  },
+  {
+    "type": "quoted_string",
+    "named": true
+  },
+  {
+    "type": "sentence_marker",
+    "named": true
+  }
+]

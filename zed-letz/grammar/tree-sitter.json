@@ -1,0 +1,16 @@
+{
+  "grammars": [
+    {
+      "name": "letz",
+      "camelcase": "Letz",
+      "scope": "source.letz",
+      "path": ".",
+      "file-types": ["letz"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for .letz Luxembourgish lesson files"
+  }
+}

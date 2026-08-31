@@ -1,0 +1,7 @@
+{
+  "name": "tree-sitter-letz",
+  "version": "1.0.0",
+  "description": "Tree-sitter grammar for .letz Luxembourgish lesson files",
+  "type": "commonjs",
+  "license": "MIT"
+}

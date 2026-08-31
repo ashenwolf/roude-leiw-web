@@ -18,6 +18,7 @@ new layering constraint), not when a file is added under an existing rule.
 | `scripts/` | plain-ESM Node utilities (content audit, audio generation/sync) — no build step |
 | `tools/lod-mcp/` | zero-dep MCP server over lod.lu, registered in `.mcp.json` |
 | `vscode-letz/` | unpublished VS Code extension: `.letz` syntax highlighting |
+| `zed-letz/` | Zed dev extension: `.letz` highlighting via a Tree-sitter grammar pinned to a commit — regenerate + re-pin per its README |
 | `CLAUDE.md` · `AGENTS.md` · `.claude/` | agent guidance (hub, redirect, reference + memory + skills) |
 
 ## `src/` — one directory per role in the pipeline

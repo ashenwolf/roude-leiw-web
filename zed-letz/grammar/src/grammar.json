@@ -1,0 +1,296 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "letz",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "lesson_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "image_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "image_alt_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "word_entry"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "sentence_marker"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "fill_marker"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "question_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "lu_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "en_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "distractor_lu_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "distractor_en_line"
+          }
+        ]
+      }
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "#[^\\r\\n]*"
+      }
+    },
+    "lesson_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@lesson"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "lesson_id"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_string"
+        }
+      ]
+    },
+    "image_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@image"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_string"
+        }
+      ]
+    },
+    "image_alt_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@image-alt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_string"
+        }
+      ]
+    },
+    "word_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text"
+          },
+          "named": true,
+          "value": "luxembourgish"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text"
+          },
+          "named": true,
+          "value": "english"
+        }
+      ]
+    },
+    "sentence_marker": {
+      "type": "STRING",
+      "value": "@sentence"
+    },
+    "fill_marker": {
+      "type": "STRING",
+      "value": "@fill"
+    },
+    "question_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@question"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_lu_content"
+        }
+      ]
+    },
+    "lu_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@lu"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_lu_content"
+        }
+      ]
+    },
+    "en_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@en"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_en_content"
+        }
+      ]
+    },
+    "distractor_lu_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@distractor-lu"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text"
+          },
+          "named": true,
+          "value": "luxembourgish"
+        }
+      ]
+    },
+    "distractor_en_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@distractor-en"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_text"
+          },
+          "named": true,
+          "value": "english"
+        }
+      ]
+    },
+    "_lu_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_text"
+            },
+            "named": true,
+            "value": "luxembourgish"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "blank"
+          }
+        ]
+      }
+    },
+    "_en_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_text"
+            },
+            "named": true,
+            "value": "english"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "blank"
+          }
+        ]
+      }
+    },
+    "lesson_id": {
+      "type": "PATTERN",
+      "value": "[A-Za-z]\\d+\\.\\d+"
+    },
+    "quoted_string": {
+      "type": "PATTERN",
+      "value": "\"[^\"\\r\\n]+\""
+    },
+    "blank": {
+      "type": "PATTERN",
+      "value": "\\[[^\\[\\]\\r\\n]+\\]"
+    },
+    "_text": {
+      "type": "PATTERN",
+      "value": "[^=\\r\\n#@\\[\\]]+"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}
