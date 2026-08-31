@@ -4,6 +4,8 @@
 # Slash variants and bracket alternatives split into atomic pairs;
 # (formal)/(informal)/(male) qualifiers stripped;
 # (with the) and "to do sports/to work out" alternatives split across multiple variants.
+# Fills added: workplace prepositions (op/bei/fir/mat/un/am/um/beim/mam),
+# verb forms (schafft/schreifs/hëllefs), and question words (Wou/Wéi).
 
 @lesson A1.05 "Work & Days"
 
@@ -277,3 +279,156 @@
 @distractor-en Monday
 @distractor-lu Sonndeg
 @distractor-lu Méindeg
+
+# --- @fill: workplace prepositions --------------------------------------------
+# The frame keeps the determiner/article, so only the preposition is in play.
+# Distractors are other taught prepositions from the same lesson — the confusion
+# set is exactly the one the lesson introduces (op/bei/fir/mat/un/am/um/beim/mam).
+
+@fill
+@lu Mäi Brudder schafft [op] der Post.
+@en My brother works [at] the post office.
+@distractor-lu bei
+@distractor-lu fir
+@distractor-lu un
+@distractor-en for
+@distractor-en with
+@distractor-en on
+
+@fill
+@lu Meng Schwëster schafft [beim] Coiffer.
+@en My sister works [at] the hairdresser's.
+@distractor-lu mam
+@distractor-lu um
+@distractor-lu fir
+@distractor-en with
+@distractor-en for
+@distractor-en on
+
+@fill
+@lu Mäi Papp schafft [fir] de Staat.
+@en My father works [for] the government.
+@distractor-lu bei
+@distractor-lu mat
+@distractor-lu un
+@distractor-en at
+@distractor-en with
+@distractor-en on
+
+@fill
+@lu Hie schafft [un] engem Projet.
+@en He works [on] a project.
+@distractor-lu fir
+@distractor-lu mat
+@distractor-lu bei
+@distractor-en for
+@distractor-en with
+@distractor-en at
+
+@fill
+@lu Hie schafft [am] Gaart.
+@en He works [in] the garden.
+@distractor-lu um
+@distractor-lu beim
+@distractor-lu op
+@distractor-en at
+@distractor-en on
+@distractor-en for
+
+@fill
+@lu Si schafft [mat] enger Bank.
+@en She works [with] a bank.
+@distractor-lu fir
+@distractor-lu bei
+@distractor-lu un
+@distractor-en for
+@distractor-en at
+@distractor-en on
+
+@fill
+@lu Hie schafft [mam] Direkter.
+@en He works [with] the director.
+@distractor-lu beim
+@distractor-lu um
+@distractor-lu fir
+@distractor-en for
+@distractor-en at
+@distractor-en on
+
+@fill
+@lu Hie schafft [um] Ministère.
+@en He works [at] the Ministry.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu op
+@distractor-en in
+@distractor-en on
+@distractor-en for
+
+@fill
+@lu Si geet [mam] Bus schaffen.
+@en She goes to work [by] bus.
+@distractor-lu um
+@distractor-lu beim
+@distractor-lu am
+@distractor-en at
+@distractor-en in
+@distractor-en on
+
+# --- @fill: verb forms --------------------------------------------------------
+# 2nd- and 3rd-person singular of lesson verbs (schreiwen → schreifs,
+# hëllefen → hëllefs, schaffen → schafft). Distractors are other
+# conjugations of the same verb — the inflection IS the drill.
+
+@fill
+@lu Du [schreifs] Artikelen.
+@en You [write] articles.
+@distractor-lu schreift
+@distractor-lu schreiwen
+@distractor-lu geschriwwen
+@distractor-en writes
+@distractor-en wrote
+@distractor-en writing
+
+@fill
+@lu Hie [schafft] vill um Computer.
+@en He [works] on the computer a lot.
+@distractor-lu schaffen
+@distractor-lu schaffs
+@distractor-lu geschafft
+@distractor-en work
+@distractor-en worked
+@distractor-en working
+
+@fill
+@lu Du [hëllefs] der Mamm.
+@en You [help] your mother.
+@distractor-lu hëlleft
+@distractor-lu hëllefen
+@distractor-lu gehollef
+@distractor-en helps
+@distractor-en helped
+@distractor-en helping
+
+# --- @fill: question words ----------------------------------------------------
+# Wou / Wéi / Wéini are the A1 question-word confusion set.
+
+@fill
+@lu [Wou] schafft si?
+@en [Where] does she work?
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-lu Wat
+@distractor-en How
+@distractor-en When
+@distractor-en What
+
+@fill
+@lu [Wéi] geet hie schaffen?
+@en [How] does he get to work?
+@distractor-lu Wou
+@distractor-lu Wéini
+@distractor-lu Wat
+@distractor-en Where
+@distractor-en When
+@distractor-en What

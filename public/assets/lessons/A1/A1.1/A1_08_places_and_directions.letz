@@ -4,6 +4,8 @@
 # Comma-separated noun forms split; gender markers stripped;
 # (no) and (ewech) optional words produce extra @lu variants;
 # (to) optional EN endings produce extra @en variants.
+# @fill exercises added: an+dative/accusative contrast, locative prepositions,
+# direction words (lénks/riets/riichtaus), question words (Wou/Wuer).
 
 @lesson A1.08 "Places & Directions"
 
@@ -253,3 +255,179 @@
 @distractor-en right
 @distractor-lu lénks
 @distractor-lu riets
+
+# --- @fill: an + dative (location) vs accusative (motion) -------------------
+# Centrepiece of this lesson: "am/an der" (I am IN) vs "an d'/an den" (I go TO).
+# Distractors swap the two contracted forms so the learner must pick the right case.
+
+@fill
+@lu D'Sophie ass [an der] Schoul.
+@en Sophie is [in] school.
+@distractor-lu an d'
+@distractor-lu am
+@distractor-lu op der
+@distractor-en at
+@distractor-en to
+@distractor-en from
+
+@fill
+@lu De Tom geet [an d'] Schoul.
+@en Tom goes [to] school.
+@distractor-lu an der
+@distractor-lu am
+@distractor-lu op d'
+@distractor-en in
+@distractor-en from
+@distractor-en at
+
+@fill
+@lu D'Sophie ass [am] Kino.
+@en Sophie is [at] the cinema.
+@distractor-lu an den
+@distractor-lu an d'
+@distractor-lu op dem
+@distractor-en to
+@distractor-en in the
+@distractor-en from
+
+@fill
+@lu De Rick geet [an den] Kino.
+@en Rick goes [to the] cinema.
+@distractor-lu am
+@distractor-lu an d'
+@distractor-lu op den
+@distractor-en at the
+@distractor-en in the
+@distractor-en from the
+
+@fill
+@lu D'Martine geet [an d'] Stad.
+@en Martine goes [to the] city.
+@distractor-lu an der
+@distractor-lu am
+@distractor-lu op d'
+@distractor-en in the
+@distractor-en at the
+@distractor-en from the
+
+@fill
+@lu De Vic ass [an der] Stad.
+@en Vic is [in the] city.
+@distractor-lu an d'
+@distractor-lu am
+@distractor-lu op der
+@distractor-en to the
+@distractor-en at the
+@distractor-en from the
+
+# --- @fill: locative prepositions -------------------------------------------
+# Each fill drills one preposition from the lesson's taught set. Distractors are
+# other prepositions from the same set so the learner discriminates meaning.
+
+@fill
+@lu D'Schoul ass [niewent] der Kierch.
+@en The school is [next to] the church.
+@distractor-lu hannert
+@distractor-lu virun
+@distractor-lu tëschent
+@distractor-en behind
+@distractor-en in front of
+@distractor-en between
+
+@fill
+@lu De Café ass [hannert] der Bréck.
+@en The café is [behind] the bridge.
+@distractor-lu virun
+@distractor-lu niewent
+@distractor-lu tëschent
+@distractor-en in front of
+@distractor-en next to
+@distractor-en between
+
+@fill
+@lu De Kino ass [virun] der Gemeng.
+@en The cinema is [in front of] the commune.
+@distractor-lu hannert
+@distractor-lu niewent
+@distractor-lu tëschent
+@distractor-en behind
+@distractor-en next to
+@distractor-en between
+
+@fill
+@lu D'Kierch ass [tëschent] der Post an der Apdikt.
+@en The church is [between] the post office and the pharmacy.
+@distractor-lu niewent
+@distractor-lu hannert
+@distractor-lu virun
+@distractor-en next to
+@distractor-en behind
+@distractor-en in front of
+
+@fill
+@lu D'Apdikt ass [vis-à-vis] vun der Kierch.
+@en The pharmacy is [opposite] the church.
+@distractor-lu niewent
+@distractor-lu hannert
+@distractor-lu virun
+@distractor-en next to
+@distractor-en behind
+@distractor-en in front of
+
+@fill
+@lu De Buttek ass [wäit] vun der Schoul.
+@en The shop is [far] from the school.
+@distractor-lu no
+@distractor-lu niewent
+@distractor-lu hannert
+@distractor-en close
+@distractor-en next
+@distractor-en behind
+
+# --- @fill: directions (lénks / riets / riichtaus) --------------------------
+# The imperative frame is already drilled by @sentence, so these fills use a
+# different subject or add context to avoid duplication.
+
+@fill
+@lu D'Sophie geet [lénks] an de Park.
+@en Sophie goes [left] to the park.
+@distractor-lu riets
+@distractor-lu riichtaus
+@distractor-lu hannert
+@distractor-en right
+@distractor-en straight ahead
+@distractor-en behind
+
+@fill
+@lu De Tom geet [riets] bei de Buttek.
+@en Tom goes [right] towards the shop.
+@distractor-lu lénks
+@distractor-lu riichtaus
+@distractor-lu virun
+@distractor-en left
+@distractor-en straight ahead
+@distractor-en in front of
+
+# --- @fill: question words (Wou / Wuer) ------------------------------------
+# Wou = where (location), Wuer = where to (direction). The learner must pick the
+# right question word for the context.
+
+@fill
+@lu [Wou] ass de Buttek?
+@en [Where] is the shop?
+@distractor-lu Wuer
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-en When
+@distractor-en How
+@distractor-en What
+
+@fill
+@lu [Wuer] gees du muer?
+@en [Where] are you going tomorrow?
+@distractor-lu Wou
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-en When
+@distractor-en How
+@distractor-en What

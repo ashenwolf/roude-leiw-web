@@ -6,6 +6,8 @@
 # Slash variants and bracket alternatives are split into atomic pairs;
 # (m)/(f)/(n)/(pl)/non-countable markers stripped; (formal)/(informal) qualifiers stripped.
 # Distractor tokens are sourced from other entries within these same Quizlet sets.
+# @fill added: sinn/hunn verb-form agreement (pronoun + correct conjugation),
+# question words (Wat/Wien/Wou/Wéi).
 
 @lesson A1.02 "Introductions & Basics"
 
@@ -612,3 +614,136 @@
 @distractor-en they
 @distractor-lu Hien
 @distractor-lu Si
+
+# --- @fill: sinn conjugation -------------------------------------------------
+# The core grammar here is pronoun + correct form of sinn. Distractors are
+# wrong-person forms of the SAME verb, forcing the learner to match person.
+
+@fill
+@lu Ech [sinn] frou.
+@en I [am] happy.
+@distractor-lu bass
+@distractor-lu ass
+@distractor-lu sidd
+@distractor-en is
+@distractor-en are
+@distractor-en has
+
+@fill
+@lu Du [bass] de Riichter.
+@en You [are] the judge.
+@distractor-lu sinn
+@distractor-lu ass
+@distractor-lu sidd
+@distractor-en am
+@distractor-en is
+@distractor-en has
+
+@fill
+@lu Hatt [ass] d'Bäckesch.
+@en She [is] the baker.
+@distractor-lu sinn
+@distractor-lu bass
+@distractor-lu sidd
+@distractor-en am
+@distractor-en are
+@distractor-en have
+
+@fill
+@lu Dir [sidd] d'Frëndinnen.
+@en You [are] the friends.
+@distractor-lu sinn
+@distractor-lu bass
+@distractor-lu ass
+@distractor-en am
+@distractor-en is
+@distractor-en has
+
+@fill
+@lu Si [sinn] op der Gare.
+@en They [are] at the train station.
+@distractor-lu bass
+@distractor-lu ass
+@distractor-lu sidd
+@distractor-en am
+@distractor-en is
+@distractor-en has
+
+# --- @fill: hunn conjugation -------------------------------------------------
+# Same drill for hunn: the blank is the verb form, distractors are wrong-person
+# forms of hunn. Nouns in the frame are all taught in this lesson or A1.01.
+
+@fill
+@lu Du [hues] de Schlëssel.
+@en You [have] the key.
+@distractor-lu huet
+@distractor-lu hutt
+@distractor-lu hunn
+@distractor-en has
+@distractor-en am
+@distractor-en is
+
+@fill
+@lu Hatt [huet] d'Fläsch.
+@en She [has] the bottle.
+@distractor-lu hues
+@distractor-lu hutt
+@distractor-lu hunn
+@distractor-en have
+@distractor-en am
+@distractor-en is
+
+@fill
+@lu Dir [hutt] d'Rechnung.
+@en You [have] the bill.
+@distractor-lu hues
+@distractor-lu huet
+@distractor-lu hunn
+@distractor-en has
+@distractor-en am
+@distractor-en is
+
+# --- @fill: question words ----------------------------------------------------
+# Wat/Wien/Wou/Wéi confusion is a genuine A1 pain point. All blanks are
+# sentence-initial so no Eifeler-Regel risk. Frames use vocabulary from
+# this lesson, distinct from the question-word fills in A1_04/A1_05/A1_08.
+
+@fill
+@lu [Wien] ass de Mann?
+@en [Who] is the man?
+@distractor-lu Wat
+@distractor-lu Wou
+@distractor-lu Wéi
+@distractor-en What
+@distractor-en Where
+@distractor-en How
+
+@fill
+@lu [Wou] ass d'Gare?
+@en [Where] is the train station?
+@distractor-lu Wat
+@distractor-lu Wien
+@distractor-lu Wéi
+@distractor-en What
+@distractor-en Who
+@distractor-en How
+
+@fill
+@lu [Wat] ass däin Familljennumm?
+@en [What] is your surname?
+@distractor-lu Wou
+@distractor-lu Wien
+@distractor-lu Wéi
+@distractor-en Where
+@distractor-en Who
+@distractor-en How
+
+@fill
+@lu [Wéi] heescht de Jong?
+@en [How] is the boy called?
+@distractor-lu Wat
+@distractor-lu Wou
+@distractor-lu Wien
+@distractor-en What
+@distractor-en Where
+@distractor-en Who

@@ -3,6 +3,8 @@
 #   https://quizlet.com/_h2sw80
 # Comma-separated noun forms split; gender markers stripped; (formal)/(informal)/(plural)
 # qualifiers stripped; "rolls/sandwiches" slash split into multiple @en variants.
+# Fills added: shopping-location prepositions (an der/am/um/op der), kafen conjugation
+# (keefs/keeft/kafe), quantity/container frames, kascht/kaschten, question words.
 
 @lesson A1.07 "Food & Shopping"
 
@@ -440,3 +442,184 @@
 @distractor-en where
 @distractor-lu Wéi
 @distractor-lu Wou
+
+# --- @fill: shopping-location prepositions ------------------------------------
+# The lesson drills six shops with their prepositions: an der (f. dative),
+# am (m. dative), um (contraction of un dem), op der. Distractors are the other
+# shopping prepositions from this lesson — the confusion is which shop takes which.
+
+@fill
+@lu Hatt keeft Brout [an der] Bäckerei.
+@en She buys bread [at the] bakery.
+@distractor-lu am
+@distractor-lu um
+@distractor-lu op der
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Hie keeft Béier [am] Supermarché.
+@en He buys beer [at the] supermarket.
+@distractor-lu an der
+@distractor-lu um
+@distractor-lu op der
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Mir kafe Kéis [um] Maart.
+@en We buy cheese [at the] market.
+@distractor-lu am
+@distractor-lu an der
+@distractor-lu op der
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+@fill
+@lu Hie keeft e Kaddo [op der] Post.
+@en He buys a present [at the] post office.
+@distractor-lu an der
+@distractor-lu am
+@distractor-lu um
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+# --- @fill: kafen conjugation -------------------------------------------------
+# 2nd/3rd singular of kafen: du keefs, hie/hatt keeft, si kafe. Distractors are
+# the other conjugated forms — the inflection IS the drill.
+
+@fill
+@lu [Du] keefs Croissanten.
+@en [You] buy croissants.
+@distractor-lu Hie
+@distractor-lu Hatt
+@distractor-lu Mir
+@distractor-en He
+@distractor-en She
+@distractor-en We
+
+@fill
+@lu Hatt [keeft] Wurscht a Fësch.
+@en She [buys] sausage and fish.
+@distractor-lu keefs
+@distractor-lu kafe
+@distractor-lu kafen
+@distractor-en buy
+@distractor-en are buying
+@distractor-en buying
+
+@fill
+@lu Si [kafe] Blumme fir de Kaddo.
+@en They [buy] flowers for the present.
+@distractor-lu keeft
+@distractor-lu keefs
+@distractor-lu kafen
+@distractor-en buys
+@distractor-en is buying
+@distractor-en bought
+
+# --- @fill: quantity and container frames --------------------------------------
+# The lesson teaches e Stéck / eng Fläsch / eng Béchs / eng Taass / e Pak.
+# Distractors are sibling containers — the learner must pick the right one.
+
+@fill
+@lu Ech hätt gär [e Stéck] Kuch, w.e.g.
+@en I would like [a piece of] cake, please.
+@distractor-lu eng Taass
+@distractor-lu e Pak
+@distractor-lu eng Béchs
+@distractor-en a cup of
+@distractor-en a pack of
+@distractor-en a can of
+
+@fill
+@lu Ech hätt gär [eng Fläsch] Wäin, w.e.g.
+@en I would like [a bottle of] wine, please.
+@distractor-lu eng Taass
+@distractor-lu eng Béchs
+@distractor-lu e Pak
+@distractor-en a cup of
+@distractor-en a can of
+@distractor-en a pack of
+
+@fill
+@lu Hätt Dir gär [eng Béchs] Kola?
+@en Would you like [a can of] cola?
+@distractor-lu eng Fläsch
+@distractor-lu eng Taass
+@distractor-lu e Pak
+@distractor-en a bottle of
+@distractor-en a cup of
+@distractor-en a pack of
+
+@fill
+@lu Mir brauche [e Pak] Zocker.
+@en We need [a pack of] sugar.
+@distractor-lu eng Fläsch
+@distractor-lu eng Béchs
+@distractor-lu eng Taass
+@distractor-en a bottle of
+@distractor-en a can of
+@distractor-en a cup of
+
+@fill
+@lu Hatt hätt gär [eng Taass] Téi.
+@en She would like [a cup of] tea.
+@distractor-lu eng Fläsch
+@distractor-lu eng Béchs
+@distractor-lu e Stéck
+@distractor-en a bottle of
+@distractor-en a can of
+@distractor-en a piece of
+
+# --- @fill: kascht / kaschten -------------------------------------------------
+# The singular/plural split of kaschten is a genuine A1 confusion:
+# dat kascht (sg.) vs. déi kaschten (pl.). Distractors are the wrong number form.
+
+@fill
+@lu Déi Äppel [kaschten] véier Euro.
+@en Those apples [cost] four euros.
+@distractor-lu kascht
+@distractor-lu kritt
+@distractor-lu hëlt
+@distractor-en costs
+@distractor-en gets
+@distractor-en takes
+
+@fill
+@lu Dat Bréitche [kascht] ee Euro.
+@en That roll [costs] one euro.
+@distractor-lu kaschten
+@distractor-lu kritt
+@distractor-lu hëlt
+@distractor-en cost
+@distractor-en gets
+@distractor-en takes
+
+# --- @fill: question words (wéi vill / wéini / wat) --------------------------
+# Wéi vill (how much/many) vs. Wéini (when) vs. Wat (what) — the shopping
+# question-word confusion set. Distinct from A1_04's Wou/Wat/Wéi/Wéini fills.
+
+@fill
+@lu [Wéi vill] kascht de Kéis?
+@en [How much] does the cheese cost?
+@distractor-lu Wat
+@distractor-lu Wéini
+@distractor-lu Wou
+@distractor-en What
+@distractor-en When
+@distractor-en Where
+
+@fill
+@lu [Wéini] kënnt Dir erëm?
+@en [When] do you come back?
+@distractor-lu Wéi vill
+@distractor-lu Wat
+@distractor-lu Wou
+@distractor-en How much
+@distractor-en What
+@distractor-en Where

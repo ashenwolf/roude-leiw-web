@@ -4,6 +4,8 @@
 # Slash variants and bracket alternatives split into atomic pairs;
 # gender markers (m)/(f)/(n)/(pl) stripped; multi-meaning EN like "wardrobe, wardrobes,
 # cupboard, cupboards" expanded so each LU form pairs with each compatible EN.
+# @fill added: weather frames (Et ass/Et gëtt), predicative adjectives with sinn/ass,
+# question words, and prepositions (zu/beim/an/op).
 
 @lesson A1.04 "Things, Adjectives & Weather"
 
@@ -304,3 +306,169 @@
 @distractor-en raining
 @distractor-lu schneit
 @distractor-lu reent
+
+# --- @fill: weather frames ----------------------------------------------------
+# Weather is this lesson's centerpiece. Distractors are sibling weather adjectives
+# the learner already knows, forcing discrimination between similar states.
+
+@fill
+@lu Et ass [sonneg] an et ass waarm.
+@en It is [sunny] and it is warm.
+@distractor-lu bedeckt
+@distractor-lu niwweleg
+@distractor-lu donkel
+@distractor-en cloudy
+@distractor-en foggy
+@distractor-en dark
+
+@fill
+@lu D'Luucht ass [hell] an d'Kichen ass grouss.
+@en The lamp is [bright] and the kitchen is big.
+@distractor-lu donkel
+@distractor-lu kuerz
+@distractor-lu bëlleg
+@distractor-en dark
+@distractor-en short
+@distractor-en cheap
+
+@fill
+@lu Et ass [bedeckt] an et reent e bëssen.
+@en It is [cloudy] and it is raining a bit.
+@distractor-lu sonneg
+@distractor-lu niwweleg
+@distractor-lu waarm
+@distractor-en sunny
+@distractor-en foggy
+@distractor-en warm
+
+@fill
+@lu Et ass [niwweleg] an ech gesinn net vill.
+@en It is [foggy] and I do not see much.
+@distractor-lu bedeckt
+@distractor-lu sonneg
+@distractor-lu donkel
+@distractor-en cloudy
+@distractor-en sunny
+@distractor-en dark
+
+# --- @fill: predicative adjectives with sinn/ass ------------------------------
+# The learner sees the frame with the subject + copula and picks the adjective.
+# Distractors are other adjectives from this lesson, all plausible in context.
+
+@fill
+@lu D'Stuff ass [grouss] an d'Kichen ass kleng.
+@en The living room is [big] and the kitchen is small.
+@distractor-lu schéin
+@distractor-lu nei
+@distractor-lu al
+@distractor-en beautiful
+@distractor-en new
+@distractor-en old
+
+@fill
+@lu Dat Bett ass [nei] an d'Couche ass al.
+@en That bed is [new] and the sofa is old.
+@distractor-lu grouss
+@distractor-lu hell
+@distractor-lu bëlleg
+@distractor-en big
+@distractor-en bright
+@distractor-en cheap
+
+@fill
+@lu De Computer ass [bëlleg] an d'Couche ass al.
+@en The computer is [cheap] and the sofa is old.
+@distractor-lu grouss
+@distractor-lu nei
+@distractor-lu kuerz
+@distractor-en big
+@distractor-en new
+@distractor-en short
+
+@fill
+@lu De Pullover ass [rout] an d'Box ass schwaarz.
+@en The jumper is [red] and the pants are black.
+@distractor-lu blo
+@distractor-lu gréng
+@distractor-lu giel
+@distractor-en blue
+@distractor-en green
+@distractor-en yellow
+
+# --- @fill: question words ----------------------------------------------------
+# Wou/Wat/Wéi/Wéini confusion is a genuine A1 pain point. The blank is always
+# sentence-initial so no Eifeler-Regel risk.
+
+@fill
+@lu [Wou] ass d'Buedzëmmer?
+@en [Where] is the bathroom?
+@distractor-lu Wat
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-en What
+@distractor-en How
+@distractor-en When
+
+@fill
+@lu [Wat] ass dat op dem Dësch?
+@en [What] is that on the table?
+@distractor-lu Wou
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-en Where
+@distractor-en How
+@distractor-en When
+
+@fill
+@lu [Wéi] ass de Pullover?
+@en [How] is the jumper?
+@distractor-lu Wat
+@distractor-lu Wou
+@distractor-lu Wéini
+@distractor-en What
+@distractor-en Where
+@distractor-en When
+
+@fill
+@lu [Wéini] reent et?
+@en [When] does it rain?
+@distractor-lu Wou
+@distractor-lu Wat
+@distractor-lu Wéi
+@distractor-en Where
+@distractor-en What
+@distractor-en How
+
+# --- @fill: prepositions and contractions -------------------------------------
+# Prepositions zu/beim/an/op from sentences already taught in A1.01-A1.03.
+# Determiners stay in the frame so the correct text is tile-independent.
+
+@fill
+@lu D'Couche ass [an] der Stuff.
+@en The sofa is [in] the living room.
+@distractor-lu op
+@distractor-lu bei
+@distractor-lu aus
+@distractor-en on
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu De Kaffi ass [op] dem Dësch.
+@en The coffee is [on] the table.
+@distractor-lu an
+@distractor-lu bei
+@distractor-lu aus
+@distractor-en in
+@distractor-en near
+@distractor-en from
+
+@fill
+@lu Ech si [beim] Computer.
+@en I am [at the] computer.
+@distractor-lu um
+@distractor-lu am
+@distractor-lu aus dem
+@distractor-en on the
+@distractor-en in the
+@distractor-en from the

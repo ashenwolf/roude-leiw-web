@@ -5,6 +5,8 @@
 # Slash variants and bracket alternatives are split into atomic pairs;
 # (formal)/(informal) qualifiers are stripped (LU form already encodes formality).
 # Distractor tokens are sourced from other entries within this same Quizlet set.
+# @fill added: time-of-day greetings/farewells, dative pronoun frames (ginn + dir/Iech/eis/hinnen),
+# hunn vs sinn copula, prepositions (zu/beim/an), and emotion adjectives.
 
 @lesson A1.01 "Greetings"
 
@@ -381,3 +383,177 @@
 @distractor-en bye
 @distractor-lu Nee
 @distractor-lu Äddi
+
+# --- @fill: time-of-day greetings -----------------------------------------------
+# Distractors are sibling time-of-day greetings the learner already knows,
+# forcing discrimination between morning/afternoon/evening.
+
+@fill
+@lu [Gudde Moien], wëllt Dir e Kaffi drénken?
+@en [Good morning], would you like to drink a coffee?
+@distractor-lu Gudde Mëtteg
+@distractor-lu Gudden Owend
+@distractor-lu Salut
+@distractor-en Good afternoon
+@distractor-en Good evening
+@distractor-en Hi
+
+@fill
+@lu [Gudde Mëtteg], ech sinn de Tom aus Lëtzebuerg.
+@en [Good afternoon], I'm Tom from Luxembourg.
+@distractor-lu Gudde Moien
+@distractor-lu Gudden Owend
+@distractor-lu Moien
+@distractor-en Good morning
+@distractor-en Good evening
+@distractor-en Hi
+
+@fill
+@lu [Gudden Owend], wëllt Dir e Kaffi?
+@en [Good evening], do you want a coffee?
+@distractor-lu Gudde Moien
+@distractor-lu Gudde Mëtteg
+@distractor-lu Bonjour
+@distractor-en Good morning
+@distractor-en Good afternoon
+@distractor-en Hello
+
+# --- @fill: farewells -----------------------------------------------------------
+# Bis + time-word confusion is a genuine A1 pain point. Distractors are
+# other farewell time words from this lesson.
+
+@fill
+@lu [Bis muer], ech ginn heem.
+@en [See you tomorrow], I'm going home.
+@distractor-lu Bis geschwënn
+@distractor-lu Bis den Owend
+@distractor-lu Bis herno
+@distractor-en See you soon
+@distractor-en See you in the evening
+@distractor-en See you later
+
+@fill
+@lu [Bis geschwënn], ech kommen erëm.
+@en [See you soon], I'm coming back.
+@distractor-lu Bis muer
+@distractor-lu Bis den Owend
+@distractor-lu Bis dann
+@distractor-en See you tomorrow
+@distractor-en See you in the evening
+@distractor-en See you later
+
+@fill
+@lu [Bis den Owend], mir ginn zesummen iessen.
+@en [See you in the evening], we're eating together.
+@distractor-lu Bis de Mëtteg
+@distractor-lu Bis muer
+@distractor-lu Bis geschwënn
+@distractor-en See you at noon
+@distractor-en See you tomorrow
+@distractor-en See you soon
+
+# --- @fill: dative pronoun frames (ginn + indirect object) ----------------------
+# The learner picks the correct indirect-object pronoun. Distractors are
+# other dative pronouns from the same "Ech ginn X e Bic" paradigm.
+
+@fill
+@lu Ech ginn haut [Iech] e Glas Waasser.
+@en Today I give [you] a glass of water.
+@distractor-lu dir
+@distractor-lu eis
+@distractor-lu hinnen
+@distractor-en us
+@distractor-en them
+@distractor-en me
+
+@fill
+@lu Mir ginn haut [eis] e Kaffi.
+@en Today we give [ourselves] a coffee.
+@distractor-lu dir
+@distractor-lu Iech
+@distractor-lu hinnen
+@distractor-en you
+@distractor-en them
+@distractor-en him
+
+@fill
+@lu Du gëss [hinnen] e Stéck Schockela.
+@en You give [them] a piece of chocolate.
+@distractor-lu dir
+@distractor-lu eis
+@distractor-lu Iech
+@distractor-en us
+@distractor-en me
+@distractor-en you
+
+# --- @fill: hunn vs sinn (copula / auxiliary) -----------------------------------
+# The learner confuses "Ech hunn" and "Ech sinn" — the blank is the verb,
+# distractors are the other auxiliary or a wrong conjugation.
+
+@fill
+@lu Ech [sinn] traureg a kleng.
+@en I [am] sad and small.
+@distractor-lu hunn
+@distractor-lu ginn
+@distractor-lu gees
+@distractor-en have
+@distractor-en give
+@distractor-en go
+
+@fill
+@lu Ech [hunn] e Kaffi a Zocker.
+@en I [have] a coffee and sugar.
+@distractor-lu sinn
+@distractor-lu ginn
+@distractor-lu kréien
+@distractor-en am
+@distractor-en give
+@distractor-en get
+
+# --- @fill: prepositions (zu/beim/an) -------------------------------------------
+# Prepositions from the sentences this lesson teaches. Determiners stay
+# in the frame so correct text never depends on which tile is placed.
+
+@fill
+@lu Ech si [zu] Lëtzebuerg.
+@en I am [in] Luxembourg.
+@distractor-lu bei
+@distractor-lu mat
+@distractor-lu aus
+@distractor-en at
+@distractor-en with
+@distractor-en from
+
+@fill
+@lu Mir si [beim] Dokter.
+@en We are [at the] doctor.
+@distractor-lu am
+@distractor-lu um
+@distractor-lu aus dem
+@distractor-en in the
+@distractor-en on the
+@distractor-en from the
+
+# --- @fill: emotion adjectives --------------------------------------------------
+# The blank is the predicate adjective after sinn/ass; distractors are
+# other emotion/state adjectives from this lesson.
+
+@fill
+@lu Ech si [frou] a mir geet et gutt.
+@en I am [happy] and I'm fine.
+@distractor-lu traureg
+@distractor-lu hongereg
+@distractor-lu kleng
+@distractor-en sad
+@distractor-en hungry
+@distractor-en small
+
+@fill
+@lu Dat ass [sauer], ech drénke Waasser.
+@en That is [sour], I'm drinking water.
+@distractor-lu kleng
+@distractor-lu frou
+@distractor-lu traureg
+@distractor-en small
+@distractor-en happy
+@distractor-en sad

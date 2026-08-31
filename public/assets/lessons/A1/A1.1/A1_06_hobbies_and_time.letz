@@ -2,6 +2,8 @@
 # Source: Quizlet "A1 Basics Beginner Luxembourgish Lesson 6"
 #   https://quizlet.com/_h2swbj
 # Bracket alternatives like "(with me)" split into multiple @en variants.
+# Fills added: time telling (vir/op/hallwer), frequency adverbs, modal verbs,
+# prepositions (um/virum/am), and the gär liking scale.
 
 @lesson A1.06 "Hobbies & Time"
 
@@ -352,3 +354,181 @@
 @distractor-en to go swimming
 @distractor-lu Sport maachen
 @distractor-lu schwamme goen
+
+# --- @fill: time telling (Véierel vir / op / hallwer) --------------------------
+# Distractors are the other two time-telling words — the three-way confusion
+# (quarter to / quarter past / half past) is the core A1 clock drill.
+
+@fill
+@lu Et ass [Véierel vir] sechs.
+@en It's [quarter to] six.
+@distractor-lu Véierel op
+@distractor-lu hallwer
+@distractor-lu fënnef vir
+@distractor-en quarter past
+@distractor-en half past
+@distractor-en five to
+
+@fill
+@lu Et ass [Véierel op] dräi.
+@en It's [quarter past] three.
+@distractor-lu Véierel vir
+@distractor-lu hallwer
+@distractor-lu fënnef op
+@distractor-en quarter to
+@distractor-en half past
+@distractor-en five past
+
+@fill
+@lu Et ass [hallwer] véier.
+@en It is [half past] three.
+@distractor-lu Véierel vir
+@distractor-lu Véierel op
+@distractor-lu fënnef op
+@distractor-en quarter to
+@distractor-en quarter past
+@distractor-en five past
+
+# --- @fill: prepositions of time and place ------------------------------------
+# um (at a clock time) vs. am (in the month) vs. virum (in front of) — the
+# contracted forms this level teaches.
+
+@fill
+@lu Ech gi [um] siwen Auer lafe.
+@en I go running [at] seven o'clock.
+@distractor-lu am
+@distractor-lu vum
+@distractor-lu beim
+@distractor-en in
+@distractor-en from
+@distractor-en by
+
+@fill
+@lu Mir treffe [virum] Kino.
+@en We meet [in front of the] cinema.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu um
+@distractor-en at the
+@distractor-en by the
+@distractor-en in the
+
+@fill
+@lu Hatt spillt [eemol am] Mount Piano.
+@en She plays the piano [once a] month.
+@distractor-lu zweemol an der
+@distractor-lu dacks am
+@distractor-lu ni am
+@distractor-en twice a
+@distractor-en often a
+@distractor-en never a
+
+# --- @fill: frequency adverbs ------------------------------------------------
+# dacks / heiansdo / ni — the lesson's frequency trio, easily confused at A1.
+
+@fill
+@lu Ech gi [dacks] spadséieren.
+@en I [often] go for a walk.
+@distractor-lu heiansdo
+@distractor-lu ni
+@distractor-lu léiwer
+@distractor-en sometimes
+@distractor-en never
+@distractor-en rather
+
+@fill
+@lu Hatt kuckt [heiansdo] Tëlee.
+@en She [sometimes] watches TV.
+@distractor-lu dacks
+@distractor-lu ni
+@distractor-lu moies
+@distractor-en often
+@distractor-en never
+@distractor-en always
+
+@fill
+@lu Ech schwamme [ni] moies.
+@en I [never] swim in the morning.
+@distractor-lu dacks
+@distractor-lu heiansdo
+@distractor-lu gär
+@distractor-en often
+@distractor-en sometimes
+@distractor-en gladly
+
+# --- @fill: modal verbs -------------------------------------------------------
+# The lesson drills kann/ka, muss, soll, wëll, däerf heavily. Distractors are
+# the other modals — the five-way confusion is what this level tests.
+
+@fill
+@lu Hatt [muss] d'Leit treffen.
+@en She [has to] meet the people.
+@distractor-lu wëll
+@distractor-lu soll
+@distractor-lu däerf
+@distractor-en wants to
+@distractor-en should
+@distractor-en is allowed to
+
+@fill
+@lu Hatt [wëll] Bicher liesen.
+@en She [wants to] read books.
+@distractor-lu muss
+@distractor-lu soll
+@distractor-lu däerf
+@distractor-en has to
+@distractor-en should
+@distractor-en is allowed to
+
+@fill
+@lu Hatt [soll] Lëtzebuergesch léieren.
+@en She [should] learn Luxembourgish.
+@distractor-lu muss
+@distractor-lu wëll
+@distractor-lu däerf
+@distractor-en has to
+@distractor-en wants to
+@distractor-en is allowed to
+
+@fill
+@lu Hatt [däerf] Musek lauschteren.
+@en She [is allowed to] listen to music.
+@distractor-lu muss
+@distractor-lu soll
+@distractor-lu wëll
+@distractor-en has to
+@distractor-en should
+@distractor-en wants to
+
+@fill
+@lu Hatt [ka] ganz gutt danze goen.
+@en She [can] go dancing very well.
+@distractor-lu muss
+@distractor-lu soll
+@distractor-lu däerf
+@distractor-en has to
+@distractor-en should
+@distractor-en is allowed to
+
+# --- @fill: gär liking scale --------------------------------------------------
+# gär / net gär / guer net gär — the three-step scale the lesson introduces.
+
+@fill
+@lu Hatt kuckt [gär] Tëlee.
+@en She [likes to] watch TV.
+@distractor-lu net gär
+@distractor-lu guer net gär
+@distractor-lu léiwer
+@distractor-en doesn't like to
+@distractor-en really doesn't like to
+@distractor-en prefers to
+
+@fill
+@lu Hatt geet [guer net gär] lafe.
+@en She [really doesn't like to] go running.
+@distractor-lu gär
+@distractor-lu net gär
+@distractor-lu dacks
+@distractor-en likes to
+@distractor-en doesn't like to
+@distractor-en often

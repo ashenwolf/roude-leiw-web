@@ -4,6 +4,8 @@
 # Slash variants and bracket alternatives split into atomic pairs;
 # (m)/(f)/(pl) markers stripped; (formal)/(informal) qualifiers stripped;
 # (were) and (boyfriend) bracket alternatives produce extra @en variants.
+# @fill added: question words (Wéi/Wéini/Wou), hunn vs sinn in personal-info
+# frames, kee/keng negation contrast, numbers, and prepositions (zu/um/bei/an).
 
 @lesson A1.03 "Numbers & Personal Info"
 
@@ -220,3 +222,144 @@
 @distractor-en seven
 @distractor-lu sechs
 @distractor-lu siwen
+
+# --- @fill: question words -------------------------------------------------------
+# Wéi/Wéini/Wou confusion is a genuine A1 pain point. Blanks are
+# sentence-initial so no Eifeler Regel risk; distractors are the
+# other question words from A1.02.
+
+@fill
+@lu [Wéi] ass deng Telefonsnummer, wannechgelift?
+@en [What] is your telephone number, please?
+@distractor-lu Wou
+@distractor-lu Wéini
+@distractor-lu Wat
+@distractor-en Where
+@distractor-en When
+@distractor-en How
+
+@fill
+@lu [Wéini] bass du gebuer, wannechgelift?
+@en [When] were you born, please?
+@distractor-lu Wéi
+@distractor-lu Wou
+@distractor-lu Wat
+@distractor-en How
+@distractor-en Where
+@distractor-en What
+
+@fill
+@lu [Wou] wunnt deng Schwëster?
+@en [Where] does your sister live?
+@distractor-lu Wéi
+@distractor-lu Wéini
+@distractor-lu Wat
+@distractor-en How
+@distractor-en When
+@distractor-en What
+
+# --- @fill: hunn vs sinn (personal-info frames) ---------------------------------
+# The learner confuses hunn (possession) and sinn (state/identity) in
+# personal-info contexts. Distractors are the wrong auxiliary.
+
+@fill
+@lu Ech [si] bestuet a frou.
+@en I [am] married and happy.
+@distractor-lu hunn
+@distractor-lu ginn
+@distractor-lu gees
+@distractor-en have
+@distractor-en give
+@distractor-en go
+
+@fill
+@lu Ech [hunn] zwee Bridder a véier Kanner.
+@en I [have] two brothers and four children.
+@distractor-lu sinn
+@distractor-lu ginn
+@distractor-lu kommen
+@distractor-en am
+@distractor-en give
+@distractor-en come
+
+@fill
+@lu Ech [si] gescheet, mee ech sinn net traureg.
+@en I [am] divorced, but I'm not sad.
+@distractor-lu hunn
+@distractor-lu ginn
+@distractor-lu kréien
+@distractor-en have
+@distractor-en give
+@distractor-en get
+
+# --- @fill: kee/keng negation contrast ------------------------------------------
+# kee (masc.) vs keng (fem.) is a genuine confusion point. Distractors
+# are the wrong gender form plus a non-negation word.
+
+@fill
+@lu Ech hu [kee] Brudder, mee dräi Schwësteren.
+@en I have [no] brother, but three sisters.
+@distractor-lu keng
+@distractor-lu eent
+@distractor-lu dräi
+@distractor-en a
+@distractor-en one
+@distractor-en three
+
+@fill
+@lu Ech hu [keng] Schwëster, mee zwee Bridder.
+@en I have [no] sister, but two brothers.
+@distractor-lu kee
+@distractor-lu eent
+@distractor-lu zwee
+@distractor-en a
+@distractor-en one
+@distractor-en two
+
+# --- @fill: numbers in context ---------------------------------------------------
+# The blank is the number; distractors are other numbers from this lesson.
+# Frames reuse taught vocabulary (Joer, Bridder, Kanner).
+
+@fill
+@lu Ech hu [fënnef] Joer.
+@en I am [five] years old.
+@distractor-lu dräi
+@distractor-lu siwen
+@distractor-lu zéng
+@distractor-en three
+@distractor-en seven
+@distractor-en ten
+
+@fill
+@lu Ech hu [sechs] Schwësteren, mir si [siwen] zesummen.
+@en I have [six] sisters, we are [seven] together.
+@distractor-lu aacht
+@distractor-lu véier
+@distractor-lu dräi
+@distractor-en eight
+@distractor-en four
+@distractor-en three
+
+# --- @fill: prepositions (zu/um/bei/an) -----------------------------------------
+# Prepositions from sentences this lesson and A1.01 teach. Determiners
+# stay in the frame so correct text is tile-independent.
+
+@fill
+@lu Meng Schwëster wunnt [zu] Bréissel.
+@en My sister lives [in] Brussels.
+@distractor-lu bei
+@distractor-lu um
+@distractor-lu aus
+@distractor-en at
+@distractor-en on
+@distractor-en from
+
+@fill
+@lu Mäi Brudder wunnt [um] Kierchbierg.
+@en My brother lives [in the] Kirchberg neighbourhood.
+@distractor-lu am
+@distractor-lu beim
+@distractor-lu zu
+@distractor-en at the
+@distractor-en to
+@distractor-en in
