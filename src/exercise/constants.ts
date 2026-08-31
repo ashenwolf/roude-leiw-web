@@ -75,12 +75,19 @@ const LESSON_SLOTS_PER_BLOCK = 5;
  * stragglers shown many times but still missed, which would otherwise drop out
  * of every priority bucket and permanently cap the lesson below threshold.
  * Empty buckets re-roll (see `pickFromPool`).
+ *
+ * `fillShare` is the slice of NON-word-match slots given to fill-blank when the
+ * current lesson actually declares `@fill` Elements. It is carved out of
+ * sentence-builder's share, mirroring Fix Errors. A lesson with no fills keeps a
+ * share of 0 and therefore plans byte-identically to before fills existed —
+ * load-bearing, because every A1 lesson is fill-free and must not change.
  */
 export const LESSON = {
   slotsPerBlock: LESSON_SLOTS_PER_BLOCK,
   totalSlots: BLOCK_COUNT * LESSON_SLOTS_PER_BLOCK,
   wordMatchPairs: 5,
   wordMatchShare: { min: 0.2, max: 0.6 },
+  fillShare: 0.4,
   buckets: {
     wordMatch: [
       { name: "not-yet-mastered", upTo: 0.3 },
@@ -88,6 +95,11 @@ export const LESSON = {
       { name: "previous", upTo: 1.0 },
     ],
     sentenceLesson: [
+      { name: "not-yet-mastered", upTo: 0.3 },
+      { name: "current", upTo: 0.8 },
+      { name: "previous", upTo: 1.0 },
+    ],
+    fillLesson: [
       { name: "not-yet-mastered", upTo: 0.3 },
       { name: "current", upTo: 0.8 },
       { name: "previous", upTo: 1.0 },
@@ -102,9 +114,11 @@ export const LESSON = {
   totalSlots: number;
   wordMatchPairs: number;
   wordMatchShare: { min: number; max: number };
+  fillShare: number;
   buckets: {
     wordMatch: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
     sentenceLesson: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
+    fillLesson: ReadonlyArray<Bucket<"not-yet-mastered" | "current" | "previous">>;
     direction: ReadonlyArray<Bucket<"en-lu" | "lu-en">>;
   };
 };

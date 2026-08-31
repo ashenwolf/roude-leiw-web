@@ -31,6 +31,11 @@ dist-ssr
 # Claude
 .claude/plans
 
+# Agent scratch space — ephemeral notes, extracted PDF text, rendered slide pages,
+# throwaway audit scripts. Never deliverables; see the scratchpad convention.
+.agents/
+.kermes/
+
 # Audio files
 /**/audio/
 .claude/settings.local.json

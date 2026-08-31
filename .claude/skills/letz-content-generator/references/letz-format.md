@@ -141,9 +141,12 @@ a violation and name the file. Rules that stay authoring judgement: a distractor
 must be wrong in *every* blank, and no two blanks may be grammatically
 interchangeable.
 
-**Exam SubLessons only.** Do not put `@fill` in `public/assets/lessons/` (the
-course track): Lesson Mode schedules no fill Slots, so those Elements could never
-reach the mastery gate and the lesson would become unpassable.
+**Both tracks.** `@fill` is legal under `public/assets/lessons/` as well as in exam
+SubLessons: `planLessonMode` schedules fill Slots for any lesson that declares
+`@fill` (see `.claude/reference/mode-specs.md` > Lesson). Before Sep 2026 it did
+not, and a course fill was an unreachable Element that made its lesson
+permanently unpassable — if you are reading an older copy of this rule, that is
+why it said "exam only".
 
 ```
 @fill

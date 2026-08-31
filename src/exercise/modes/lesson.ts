@@ -3,17 +3,22 @@
 // See .claude/reference/mode-specs.md > Mode specs > Lesson.
 
 import { LESSON, MASTERY_CORRECT_COUNT } from "../constants";
-import { buildSentenceExercise, buildWordMatchExercise, tokenizeSentence } from "../exercise-builders";
-import { combinedPhraseStats, wordKey } from "../progression";
-import { bucketedPick, pickPair, pickSentence } from "../selection";
+import {
+  buildFillExercise,
+  buildSentenceExercise,
+  buildWordMatchExercise,
+  tokenizeSentence,
+} from "../exercise-builders";
+import { combinedFillStats, combinedPhraseStats, wordKey } from "../progression";
+import { bucketedPick, pickFromPool, pickPair, pickSentence } from "../selection";
 
 import type { WordStats } from "../../context/auth";
-import type { Lesson, SentenceEntry, WordEntry } from "../letz-parser";
+import type { FillEntry, Lesson, SentenceEntry, WordEntry } from "../letz-parser";
 import type { ModeConfig } from "../mode-config";
 import type { Exercise } from "../types";
 import type { Bucket } from "../selection";
 
-type SlotType = "word-match" | "sentence-builder";
+type SlotType = "word-match" | "sentence-builder" | "fill-blank";
 
 /**
  * Adaptive slot-type distribution for Lesson Mode.
@@ -23,10 +28,17 @@ type SlotType = "word-match" | "sentence-builder";
  * mastered) the share falls back to MIN — the historical fixed split. Returns a
  * bucket table in the same shape as FIX_ERRORS.buckets.slotType so it drops straight
  * into `bucketedPick`.
+ *
+ * `hasFills` splits the remaining (non-word-match) probability between
+ * sentence-builder and fill-blank. When the lesson declares no `@fill` the fill
+ * bucket is omitted entirely, so the returned table is identical to the pre-fill
+ * two-bucket one — that keeps every fill-free lesson (all of A1) planning exactly
+ * as before, rng consumption order included.
  */
 export const lessonSlotTypeDistribution = (
   unmasteredWords: number,
   unmasteredSentences: number,
+  hasFills = false,
 ): ReadonlyArray<Bucket<SlotType>> => {
   const backlog = unmasteredWords + unmasteredSentences;
   const raw = backlog > 0 ? unmasteredWords / backlog : LESSON.wordMatchShare.min;
@@ -34,9 +46,19 @@ export const lessonSlotTypeDistribution = (
     LESSON.wordMatchShare.max,
     Math.max(LESSON.wordMatchShare.min, raw),
   );
+  if (!hasFills) {
+    return [
+      { name: "word-match", upTo: share },
+      { name: "sentence-builder", upTo: 1.0 },
+    ];
+  }
+  // Fill's slice is carved out of sentence-builder's, never out of word-match:
+  // word exposure is what the adaptive share above exists to protect.
+  const sentenceUpTo = share + (1 - share) * (1 - LESSON.fillShare);
   return [
     { name: "word-match", upTo: share },
-    { name: "sentence-builder", upTo: 1.0 },
+    { name: "sentence-builder", upTo: sentenceUpTo },
+    { name: "fill-blank", upTo: 1.0 },
   ];
 };
 
@@ -99,6 +121,18 @@ export const planLessonMode = (
 
   const unmasteredWords = currentLesson.entries.filter(isWordNotYetMastered);
 
+  // Same synthetic-lesson trick as sentences, for fills. `combinedFillStats`
+  // sums the two presentation directions, matching how the unlock gate scores a
+  // fill Element.
+  const notYetMasteredFills = currentLesson.fills.filter(
+    (f) => combinedFillStats(userWords, f.en).correct < MASTERY_CORRECT_COUNT,
+  );
+
+  // Fill slots are scheduled only when the current lesson actually declares
+  // fills. Without this guard a fill-free lesson would burn slots re-rolling an
+  // empty pool, and its plan would stop matching the pre-fill one.
+  const hasFills = currentLesson.fills.length > 0;
+
   // Adaptive slot-type split: the more word-heavy the current lesson's backlog,
   // the more word-match slots this session schedules (clamped to [MIN, MAX]).
   // Counts are the current-lesson unmastered elements only — previous-lesson
@@ -106,6 +140,7 @@ export const planLessonMode = (
   const slotTypeDistribution = lessonSlotTypeDistribution(
     unmasteredWords.length,
     notYetMasteredSentences.length,
+    hasFills,
   );
 
   const wordPools = {
@@ -122,6 +157,15 @@ export const planLessonMode = (
     previous: previousLessons,
   };
 
+  // Fills are picked as flat Element lists rather than via lesson pools: unlike
+  // sentences, a previous lesson may legitimately have no fills at all, and
+  // `pickFromPool` already re-rolls past an empty bucket.
+  const fillPools = {
+    "not-yet-mastered": notYetMasteredFills,
+    current: currentLesson.fills,
+    previous: previousLessons.flatMap((l) => l.fills),
+  };
+
   // Lesson vocab used as distractor fallback for sentence-builder
   const lessonVocab = [...new Set(
     currentLesson.entries.flatMap((e) => tokenizeSentence(e.lu, "lu")),
@@ -131,7 +175,7 @@ export const planLessonMode = (
 
   const queue = Array.from(
     { length: LESSON.totalSlots },
-    () => buildSlot(wordPools, sentencePools, slotTypeDistribution, lessonVocab, rng, budget),
+    () => buildSlot(wordPools, sentencePools, fillPools, slotTypeDistribution, lessonVocab, rng, budget),
   ).filter((slot): slot is Exercise => slot !== null);
 
   return {
@@ -149,6 +193,7 @@ export const planLessonMode = (
 
 type WordBucketName = (typeof LESSON.buckets.wordMatch)[number]["name"];
 type SentenceBucketName = (typeof LESSON.buckets.sentenceLesson)[number]["name"];
+type FillBucketName = (typeof LESSON.buckets.fillLesson)[number]["name"];
 
 /** Per-Session scheduling budget for sentences (see `makeSentenceBudget`). */
 type SentenceBudget = {
@@ -234,6 +279,7 @@ const pickUniquePairs = (
 const buildSlot = (
   wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
   sentencePools: Record<SentenceBucketName, ReadonlyArray<Lesson>>,
+  fillPools: Record<FillBucketName, ReadonlyArray<FillEntry>>,
   slotTypeDistribution: ReadonlyArray<Bucket<SlotType>>,
   lessonVocab: string[],
   rng: () => number,
@@ -241,6 +287,13 @@ const buildSlot = (
 ): Exercise | null => {
   for (let attempt = 0; attempt < 10; attempt++) {
     const slotType = bucketedPick(rng(), slotTypeDistribution);
+
+    if (slotType === "fill-blank") {
+      const fill = pickFromPool(fillPools, LESSON.buckets.fillLesson, rng);
+      if (!fill) continue; // no fills in pool → re-roll
+      const direction = bucketedPick(rng(), LESSON.buckets.direction);
+      return buildFillExercise(fill, direction);
+    }
 
     if (slotType === "sentence-builder") {
       const picked = pickSentence(sentencePools, LESSON.buckets.sentenceLesson, rng);

@@ -4,7 +4,7 @@ import { lessonSlotTypeDistribution, planLessonMode } from "../../../../src/exer
 import { LESSON, MASTERY_CORRECT_COUNT } from "../../../../src/exercise/constants.ts";
 import { computeLessonProgress, phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
 
-import type { Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
+import type { FillEntry, Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
 import type { WordStats } from "../../../../src/context/auth.ts";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
@@ -16,11 +16,23 @@ const sentence = (firstEn: string, lu: string): SentenceEntry => ({
   distractorsLu: [],
 });
 
-const lesson = (id: string, words: [string, string][], sentences: SentenceEntry[] = []): Lesson => ({
+const lesson = (
+  id: string,
+  words: [string, string][],
+  sentences: SentenceEntry[] = [],
+  fills: FillEntry[] = [],
+): Lesson => ({
   meta: { id, title: id, level: "A1" },
   entries: words.map(([lu, en]) => ({ lu, en })),
   sentences,
-  fills: [],
+  fills,
+});
+
+const fill = (en: string, lu: string): FillEntry => ({
+  en,
+  lu,
+  distractorsEn: ["wrongA", "wrongB"],
+  distractorsLu: ["falschA", "falschB"],
 });
 
 // RNG that always rolls below the word-match threshold (0.2) → always picks word-match
@@ -258,6 +270,73 @@ describe("lessonSlotTypeDistribution", () => {
   it("last bucket always closes at 1.0", () => {
     const buckets = lessonSlotTypeDistribution(50, 50);
     expect(buckets[buckets.length - 1].upTo).toBe(1.0);
+  });
+
+  // The fill bucket exists only for lessons that declare @fill. Every A1 lesson is
+  // fill-free, so the fill-free table must stay exactly two buckets: a third one
+  // would shift rng consumption and change plans that are meant to be untouched.
+  it("omits the fill bucket entirely when the lesson has no fills", () => {
+    expect(lessonSlotTypeDistribution(50, 50, false).map((b) => b.name)).toEqual([
+      "word-match",
+      "sentence-builder",
+    ]);
+  });
+
+  it("adds a fill bucket only when the lesson has fills", () => {
+    expect(lessonSlotTypeDistribution(50, 50, true).map((b) => b.name)).toEqual([
+      "word-match",
+      "sentence-builder",
+      "fill-blank",
+    ]);
+  });
+
+  it("carves the fill share out of sentence-builder, leaving word-match untouched", () => {
+    const without = lessonSlotTypeDistribution(50, 50, false);
+    const with_ = lessonSlotTypeDistribution(50, 50, true);
+    // word-match keeps its adaptive share either way — word exposure is what the
+    // adaptive share exists to protect, so fill must not eat into it.
+    expect(share(with_)).toBe(share(without));
+    // ...and the slice fill takes is exactly fillShare of what remains.
+    const remaining = 1 - share(with_);
+    const fillSlice = 1 - with_.find((b) => b.name === "sentence-builder")!.upTo;
+    expect(fillSlice).toBeCloseTo(remaining * LESSON.fillShare);
+  });
+
+  it("still closes at 1.0 with the fill bucket present", () => {
+    const buckets = lessonSlotTypeDistribution(50, 50, true);
+    expect(buckets[buckets.length - 1].upTo).toBe(1.0);
+  });
+});
+
+// The reason this planner change exists. The unlock gate requires EVERY Element to
+// reach MASTERY_CORRECT_COUNT, so an Element the planner can never schedule makes
+// its lesson permanently unpassable. Before this change `planLessonMode` had no
+// fill branch, so a course lesson carrying `@fill` was a trap.
+describe("planLessonMode — fill reachability", () => {
+  const withFills = lesson(
+    "A1_01",
+    [["Moien", "hi"]],
+    [sentence("Good morning", "Gudde Moien")],
+    [fill("I go [to] work", "Ech ginn [op] d'Aarbecht")],
+  );
+
+  // Roll 1.0 lands in the last bucket, which is fill-blank once fills exist.
+  const fillRng = () => 0.99;
+
+  it("schedules fill-blank slots for a lesson that declares fills", () => {
+    const queue = planLessonMode([withFills], "A1_01", {}, fillRng).queue;
+    expect(queue.some((s) => s.type === "fill-blank")).toBe(true);
+  });
+
+  it("never schedules a fill-blank slot for a fill-free lesson", () => {
+    const noFills = lesson("A1_01", [["Moien", "hi"]], [sentence("Good morning", "Gudde Moien")]);
+    const queue = planLessonMode([noFills], "A1_01", {}, fillRng).queue;
+    expect(queue.some((s) => s.type === "fill-blank")).toBe(false);
+  });
+
+  it("fills the whole session rather than dropping slots when fill is rolled", () => {
+    const queue = planLessonMode([withFills], "A1_01", {}, fillRng).queue;
+    expect(queue.length).toBe(LESSON.totalSlots);
   });
 });
 

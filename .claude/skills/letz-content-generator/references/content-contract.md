@@ -235,7 +235,7 @@ Lexer facts that bite while authoring:
 
 | Rule | Why |
 |---|---|
-| `@fill` in exam sub-lessons **only**, never `public/assets/lessons/` | Lesson Mode schedules no fill Slots, so those Elements can never reach the mastery gate and the lesson becomes unpassable. |
+| `@fill` is allowed on **both** tracks | Lesson Mode schedules fill Slots when the lesson declares `@fill` (`hasFills` in `lessonSlotTypeDistribution`), so those Elements do reach the mastery gate. Before Sep 2026 the planner had no fill branch and a course fill made its lesson unpassable — that is fixed, not merely tolerated. |
 | `@fill` is **not** level-scoped | Its criterion is *reuse across topics*; A1 frames are first-class. |
 | `@sentence` stays assemblable | The learner builds every tile: main clauses and short two-clause sentences; attributive adjectives only on feminine nouns (uninflected). |
 | Declined attributives and verb-final subordinate clauses → `@fill` frames | The learner reads the frame rather than assembling it. |

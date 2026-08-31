@@ -196,10 +196,14 @@ source:
 
 ## The remaining gap
 
-**`planLessonMode` schedules no fill Slots.** Only Exam and Fix Errors do. So a
-**course** lesson carrying `@fill` would be unpassable — its fill Elements could
-never reach the gate. Adding `@fill` under `public/assets/lessons/` requires a
-Lesson-planner change in the same commit.
+**`planLessonMode` schedules fill Slots when the lesson declares them** (Sep 2026).
+It originally did not, and only Exam and Fix Errors did — which made a **course**
+lesson carrying `@fill` unpassable, since its fill Elements could never reach the
+gate. The planner now takes a `hasFills` flag: a fill-free lesson gets the
+unchanged two-bucket slot-type table (so all of A1 plans identically), and a lesson
+with fills gets a third bucket carved out of sentence-builder's share. The guard
+against regressing to the trap is `tests/src/exercise/modes/lesson.test.ts` >
+"fill reachability".
 
 Related: [[exam-track]], [[picture-description-theme]] (the frame library),
 [[mastery-and-unlock]] (the key family and validator trap). The mechanized bounds
