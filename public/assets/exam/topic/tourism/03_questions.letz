@@ -1,0 +1,387 @@
+# Exam track — Theme: Tourismus am Heemechtsland — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview on 2026-09-01
+# (home country: Ukraine) — do not "improve" or genericize them in a later
+# editing pass. The point is that the learner rehearses what they will
+# actually say in the Sproochentest.
+#
+# Question texts come verbatim from the class handout, with two mechanical
+# fixes: Festivaler -> Festivaller (LOD-flagged misspelling) and
+# Sproochbarrièren fir -> Sproochbarrière fir (Eifeler Regel: -n drops
+# before f).
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional (x2), obwuel-contrast, comparative "léiwer wéi",
+# "fir ... ze" purpose, fronted-adverb inversion (dofir), a duration blank,
+# a frequency-adverb blank, and an "Ech mengen" hedge.
+
+@lesson T1.03 "Talking About Tourism"
+
+@word vu wou = where from
+@word firwat = why
+@word woufir = what for
+@word de Westen = the west
+@word de Krich = the war
+@word sécher = safe
+@word zimmlech = quite
+@word d'Leit = the people
+@word d'Sprooch = the language
+@word schwätzen = to speak
+@word de Kaffi = the coffee
+@word d'Schlässer = the castles
+@word d'Karpaten = the Carpathians
+@word de Wuesstum = the growth
+@word d'Wirtschaft = the economy
+@word bekannt = well-known
+@word onbekannt = unknown
+@word den Nuetszuch = the night train
+@word d'Flich = the flights
+@word d'Regiounen = the regions
+@word d'Zil = the destination
+@word schmaachen = to taste
+@word probéieren = to try
+@word mengen = to think
+@word d'Barrière = the barrier
+@word manner = less
+@word néierens = nowhere
+@word heiansdo = sometimes
+@word ëmmer = always
+@word flott = nice
+
+@sentence
+@question Vu wou kommt Dir?
+@lu Ech komme vun der Ukrain.
+@en I come from Ukraine.
+@distractor-lu wunnen
+@distractor-lu Land
+@distractor-en go
+@distractor-en live
+
+@sentence
+@question Wéi ass d'Wieder an Ärem Heemechtsland?
+@lu D'Wieder ass heiansdo extrem, de Wanter ass kal an de Summer ass waarm.
+@en The weather is sometimes extreme, the winter is cold and the summer is warm.
+@distractor-lu schéin
+@distractor-lu frësch
+@distractor-en beautiful
+@distractor-en fresh
+
+@sentence
+@question Wéi ass d'Natur an Ärem Heemechtsland?
+@lu Mir hu vill Bëscher an och d'Stepp.
+@en We have many forests and also the steppe.
+@distractor-lu Bierger
+@distractor-lu Mier
+@distractor-en mountains
+@distractor-en sea
+
+@sentence
+@question Wéi eng Sprooche ginn an Ärem Heemechtsland geschwat?
+@lu An der Ukrain schwätze mir Ukrainesch.
+@en In Ukraine we speak Ukrainian.
+@distractor-lu Englesch
+@distractor-lu liesen
+@distractor-en English
+@distractor-en read
+
+@sentence
+@question Ginn et vill Touristen an Ärem Heemechtsland?
+@lu Jo, am Weste vum Land gëtt et vill Touristen.
+@en Yes, in the west of the country there are many tourists.
+@distractor-lu Osten
+@distractor-lu wéineg
+@distractor-en east
+@distractor-en few
+
+@sentence
+@question Ass Äert Heemechtsland touristefrëndlech? Firwat, firwat net?
+@lu Jo, d'Land ass touristefrëndlech, well d'Leit ganz frëndlech sinn.
+@en Yes, the country is tourist-friendly, because the people are very friendly.
+@distractor-lu geféierlech
+@distractor-lu ni
+@distractor-en dangerous
+@distractor-en never
+
+@sentence
+@question Ginn et geféierlech Plazen an Ärem Heemechtsland?
+@lu Fréier war et méi geféierlech, mee virum Krich war et zimmlech sécher.
+@en In the past it was more dangerous, but before the war it was quite safe.
+@distractor-lu ëmmer
+@distractor-lu wäit
+@distractor-en always
+@distractor-en far
+
+@sentence
+@question Wourop muss een als Tourist an Ärem Heemechtsland oppassen?
+@lu Net op vill, well d'Land virum Krich sécher war.
+@en Not much, because the country was safe before the war.
+@distractor-lu alles
+@distractor-lu Wieder
+@distractor-en everything
+@distractor-en weather
+
+@sentence
+@question Ginn et vill Touristenattraktiounen an Ärem Heemechtsland?
+@lu Jo, virun allem an de grousse Stied an am Westen.
+@en Yes, above all in the big cities and in the west.
+@distractor-lu Dierfer
+@distractor-lu keng
+@distractor-en villages
+@distractor-en none
+
+@sentence
+@question Wéi eng Aktivitéite kann een an Ärem Heemechtsland maachen?
+@lu Ee ka wanderen an d'lokal Kichen entdecken.
+@en One can hike and discover the local cuisine.
+@distractor-lu schwammen
+@distractor-lu kafen
+@distractor-en swim
+@distractor-en buy
+
+@sentence
+@question Wéi eng Saison ass am beschte fir Touristen an Ärem Heemechtsland?
+@lu Déi bescht Saison ass de Summer.
+@en The best season is the summer.
+@distractor-lu Wanter
+@distractor-lu deier
+@distractor-en winter
+@distractor-en expensive
+
+@sentence
+@question Wat sinn déi populärst Stied an Ärem Heemechtsland fir Touristen?
+@lu Déi populärst Stied si Lwiw, Kiew, Charkiw an Odessa.
+@en The most popular cities are Lviv, Kyiv, Kharkiv, and Odesa.
+@distractor-lu Dierfer
+@distractor-lu Bëscher
+@distractor-en villages
+@distractor-en forests
+
+@sentence
+@question Wat sollen Touristen an Ärem Heemechtsland besichen?
+@lu Si sollen d'Schlässer am Weste vum Land besichtegen.
+@en They should visit the castles in the west of the country.
+@distractor-lu kafen
+@distractor-lu Plagen
+@distractor-en buy
+@distractor-en beaches
+
+@sentence
+@question Woufir ass Äert Heemechtsland bekannt?
+@lu D'Ukrain ass bekannt fir d'Iessen, fir Tschernobyl a fir al slawesch Monumenter.
+@en Ukraine is known for the food, for Chernobyl, and for old Slavic landmarks.
+@distractor-lu onbekannt
+@distractor-lu Autoen
+@distractor-en unknown
+@distractor-en cars
+
+@sentence
+@question Wat sollen Touristen an Ärem Heemechtsland onbedéngt schmaachen?
+@lu Si sollen onbedéngt Borschtsch, Varenyky an Holubtsi schmaachen.
+@en They should definitely taste borsch, varenyky, and holubtsi.
+@distractor-lu kachen
+@distractor-lu kafen
+@distractor-en cook
+@distractor-en buy
+
+@sentence
+@question Hutt Dir schonn eng Kéier selwer Tourist an Ärem Heemechtsland gespillt?
+@lu Jo, ech hunn déi meescht Regioune vun der Ukrain besichtegt.
+@en Yes, I have visited most regions of Ukraine.
+@distractor-lu keng
+@distractor-lu verkaaft
+@distractor-en none
+@distractor-en sold
+
+@sentence
+@question Wéi verännert den Tourismus d'Wirtschaft an Ärem Heemechtsland?
+@lu Den Tourismus ass net grouss, well d'Ukrain fir vill Leit onbekannt ass.
+@en Tourism is not big, because Ukraine is unknown to many people.
+@distractor-lu bekannt
+@distractor-lu deier
+@distractor-en famous
+@distractor-en expensive
+
+@sentence
+@question Wat sinn déi bekanntste Festivaller oder Evenementer an Ärem Heemechtsland?
+@lu Mir hu vill Festivaller mat Folklor a Musek.
+@en We have many festivals with folklore and music.
+@distractor-lu Muséeën
+@distractor-lu deier
+@distractor-en museums
+@distractor-en expensive
+
+@sentence
+@question Wéi ass den Transport an Ärem Heemechtsland?
+@lu Den Nuetszuch ass flott, mee de Bus ass manner gutt an d'Flich sinn deier.
+@en The night train is nice, but the bus is less good and the flights are expensive.
+@distractor-lu bëlleg
+@distractor-lu Kaffi
+@distractor-en cheap
+@distractor-en coffee
+
+@sentence
+@question Wéi vill Hoteller oder Wunnenge sinn an Ärem Heemechtsland verfügbar fir Touristen?
+@lu An den touristesche Regioune sinn d'Hoteller gutt.
+@en In the tourist regions the hotels are good.
+@distractor-lu schlecht
+@distractor-lu Muséeën
+@distractor-en bad
+@distractor-en museums
+
+@sentence
+@question Ginn et vill Muséeën an Ärem Heemechtsland?
+@lu Jo, mee si sinn net sou modern wéi an Europa.
+@en Yes, but they are not as modern as in Europe.
+@distractor-lu deier
+@distractor-lu ni
+@distractor-en expensive
+@distractor-en never
+
+@sentence
+@question Ginn et Plazen, déi méi wéineg besicht ginn, mee interessant fir Touriste sinn?
+@lu Jo, d'Schlässer am Weste vum Land si manner bekannt, mee ganz interessant.
+@en Yes, the castles in the west of the country are less known, but very interesting.
+@distractor-lu Plagen
+@distractor-lu deier
+@distractor-en beaches
+@distractor-en expensive
+
+@sentence
+@question Wat denkt Dir iwwert de Wuesstum vum Tourismus an Ärem Heemechtsland?
+@lu De Wuesstum ass nach kleng, well vill Leit d'Ukrain net kennen.
+@en The growth is still small, because many people don't know Ukraine.
+@distractor-lu grouss
+@distractor-lu deier
+@distractor-en big
+@distractor-en expensive
+
+@sentence
+@question Gëtt et Sproochbarrière fir Touristen, déi Äert Heemechtsland besichen?
+@lu D'Sprooch kann eng Barrière sinn, mee et gëtt ëmmer besser.
+@en The language can be a barrier, but it is getting better.
+@distractor-lu Kichen
+@distractor-lu ni
+@distractor-en cuisine
+@distractor-en never
+
+@sentence
+@question Wéi kënnen Touristen eng richteg Erfarung mat der lokaler Kultur maachen?
+@lu D'Leit si frëndlech a weisen den Touriste gär hir Kultur.
+@en The people are friendly and gladly show the tourists their culture.
+@distractor-lu verkafen
+@distractor-lu ni
+@distractor-en sell
+@distractor-en never
+
+@sentence
+@question Wat fir Rotschléi hutt Dir fir Touristen, déi fir déi éischt Kéier an Äert Heemechtsland reesen?
+@lu Probéiert de Kaffi zu Kiew an zu Lwiw, well en néierens sou gutt ass.
+@en Try the coffee in Kyiv and in Lviv, because it is nowhere as good.
+@distractor-lu Zopp
+@distractor-lu deier
+@distractor-en soup
+@distractor-en expensive
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech reese gär an d'Ukrain, well d'Natur do [schéin] ass.
+@en I like traveling to Ukraine, because the nature there is [beautiful].
+@distractor-lu deier
+@distractor-lu wäit
+@distractor-lu kal
+@distractor-en expensive
+@distractor-en far
+@distractor-en cold
+
+@fill
+@lu Wann d'Wieder waarm ass, wandere mir an de [Karpaten].
+@en When the weather is warm, we hike in the [Carpathians].
+@distractor-lu Muséeën
+@distractor-lu Flich
+@distractor-lu Hoteller
+@distractor-en museums
+@distractor-en flights
+@distractor-en hotels
+
+@fill
+@lu D'Muséeë sinn interessant, obwuel si net ganz [modern] sinn.
+@en The museums are interesting, although they are not very [modern].
+@distractor-lu frësch
+@distractor-lu staark
+@distractor-lu Kaffi
+@distractor-en fresh
+@distractor-en strong
+@distractor-en coffee
+
+@fill
+@lu Ech fuere léiwer mam [Nuetszuch] wéi mam Bus.
+@en I prefer taking the [night train] over the bus.
+@distractor-lu Wieder
+@distractor-lu Kichen
+@distractor-lu Musek
+@distractor-en weather
+@distractor-en cuisine
+@distractor-en music
+
+@fill
+@lu Vill Leit fueren an d'Ukrain, fir d'Kichen ze [entdecken].
+@en Many people travel to Ukraine, in order to [discover] the cuisine.
+@distractor-lu kafen
+@distractor-lu schwammen
+@distractor-lu wunnen
+@distractor-en buy
+@distractor-en swim
+@distractor-en live
+
+@fill
+@lu D'Ukrain ass nach onbekannt, dofir [kommen] net vill Touristen.
+@en Ukraine is still unknown, that's why not many tourists [come].
+@distractor-lu schmaachen
+@distractor-lu kafen
+@distractor-lu danzen
+@distractor-en taste
+@distractor-en buy
+@distractor-en dance
+
+@fill
+@lu D'Rees mam Zuch dauert eng [Nuecht].
+@en The trip by train takes one [night].
+@distractor-lu Kaffi
+@distractor-lu Stad
+@distractor-lu Musek
+@distractor-en coffee
+@distractor-en city
+@distractor-en music
+
+@fill
+@lu Am Weste gëtt et [ëmmer] vill Touristen.
+@en In the west there are [always] many tourists.
+@distractor-lu deier
+@distractor-lu Kaffi
+@distractor-lu ni
+@distractor-en expensive
+@distractor-en coffee
+@distractor-en never
+
+@fill
+@lu Ech mengen, d'Ukrain ass e gutt [Zil] fir Touristen.
+@en I think Ukraine is a good [destination] for tourists.
+@distractor-lu Kaffi
+@distractor-lu Wieder
+@distractor-lu Musek
+@distractor-en coffee
+@distractor-en weather
+@distractor-en music
+
+@fill
+@lu Wann d'Saison gutt ass, [buchen] ech en Hotel am Weste vum Land.
+@en When the season is good, I [book] a hotel in the west of the country.
+@distractor-lu schmaachen
+@distractor-lu danzen
+@distractor-lu iessen
+@distractor-en taste
+@distractor-en dance
+@distractor-en eat

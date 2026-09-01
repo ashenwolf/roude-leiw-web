@@ -141,6 +141,26 @@
       ]
     },
     {
+      "id": "tourism",
+      "kind": "topic",
+      "title": "Tourismus am Heemechtsland",
+      "subLessons": [
+        { "id": "tourism.01", "file": "topic/tourism/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "tourism.02", "file": "topic/tourism/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "tourism.03", "file": "topic/tourism/03_questions.letz", "title": "Talking About It" }
+      ]
+    },
+    {
+      "id": "musek",
+      "kind": "topic",
+      "title": "Musek",
+      "subLessons": [
+        { "id": "musek.01", "file": "topic/musek/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "musek.02", "file": "topic/musek/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "musek.03", "file": "topic/musek/03_questions.letz", "title": "Talking About It" }
+      ]
+    },
+    {
       "id": "hobbies",
       "kind": "topic",
       "title": "Hobbies & Free Time",

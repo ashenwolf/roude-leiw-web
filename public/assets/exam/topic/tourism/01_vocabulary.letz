@@ -1,0 +1,85 @@
+# Exam track — Theme: Tourismus am Heemechtsland — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+# The manifest id (tourism.01) is the authoritative identity; T1.01 is a label.
+#
+# Every sub-lesson mixes words AND sentences so each session alternates
+# word-match and sentence-builder slots; the emphasis here is vocabulary.
+
+@lesson T1.01 "Tourism Vocabulary"
+
+# --- People & travel ---
+@word d'Rees = the trip
+@word den Tourist = the tourist
+@word d'Touristen = the tourists
+@word d'Heemechtsland = the home country
+@word d'Saison = the season
+@word den Transport = the transport
+@word d'Hoteller = the hotels
+
+# --- Places & nature ---
+@word d'Stad = the city
+@word d'Stied = the cities
+@word d'Duerf = the village
+@word d'Natur = the nature
+@word de Bësch = the forest
+@word d'Bëscher = the forests
+@word d'Landschaft = the landscape
+@word d'Aussiicht = the view
+@word d'Schéinheet = the beauty
+@word d'Schlass = the castle
+
+# --- Culture & sights ---
+@word d'Kultur = the culture
+@word d'Geschicht = the history
+@word d'Attraktioun = the attraction
+@word de Musée = the museum
+@word d'Muséeën = the museums
+@word d'Festivaller = the festivals
+@word d'Féierung = the guided tour
+@word den Ausfluch = the excursion
+@word d'Kichen = the cuisine
+@word d'Erfarung = the experience
+
+# --- Doing things ---
+@word reesen = to travel
+@word besichen = to visit
+@word besichtegen = to sightsee
+@word entdecken = to discover
+@word wanderen = to hike
+@word buchen = to book
+@word fléien = to fly
+@word genéissen = to enjoy
+@word lokal = local
+@word immens = very
+
+@sentence
+@lu Den Tourist bucht eng Féierung am Musée.
+@en The tourist books a guided tour in the museum.
+@distractor-lu Ticket
+@distractor-lu kaaft
+@distractor-en ticket
+@distractor-en buys
+
+@sentence
+@lu D'Aussiicht vum Schlass ass immens schéin.
+@en The view from the castle is very beautiful.
+@distractor-lu Musée
+@distractor-lu kleng
+@distractor-en museum
+@distractor-en small
+
+@sentence
+@lu Mir maachen en Ausfluch an d'Duerf.
+@en We take an excursion to the village.
+@distractor-lu Stad
+@distractor-lu Rees
+@distractor-en city
+@distractor-en trip
+
+@sentence
+@lu Mir entdecken d'lokal Kichen.
+@en We discover the local cuisine.
+@distractor-lu kachen
+@distractor-lu Hotel
+@distractor-en cook
+@distractor-en hotel

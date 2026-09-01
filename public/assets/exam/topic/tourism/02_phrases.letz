@@ -1,0 +1,125 @@
+# Exam track — Theme: Tourismus am Heemechtsland — Sub-lesson 2: Key Phrases
+# Plain sentences (no @question): presented in either direction.
+#
+# These phrases are grounded in the user's real interview answers (2026-09-01,
+# home country: Ukraine) — do not "improve" or genericize them in a later
+# editing pass. Shorter restatements of the same facts drilled in depth in
+# 03_questions.letz.
+
+@lesson T1.02 "Tourism Phrases"
+
+@word schéin = beautiful
+@word frëndlech = friendly
+@word historesch = historical
+@word interessant = interesting
+@word geféierlech = dangerous
+@word deier = expensive
+@word gënschteg = affordable
+@word frësch = fresh
+@word staark = strong
+@word berouegend = calming
+@word aktiv = active
+@word entspaant = relaxed
+@word besonnesch = special
+@word wëllkomm = welcome
+@word gesond = healthy
+@word extrem = extreme
+@word modern = modern
+@word sonneg = sunny
+@word waarm = warm
+@word kal = cold
+@word de Wanter = the winter
+@word de Summer = the summer
+@word d'Mëschung = the mixture
+@word d'Wolleken = the clouds
+@word d'Sonn = the sun
+@word sech entspanen = to relax
+@word hëllefen = to help
+
+@sentence
+@lu D'Natur an der Ukrain ass schéin a berouegend.
+@en The nature in Ukraine is beautiful and calming.
+@distractor-lu Stied
+@distractor-lu deier
+@distractor-en cities
+@distractor-en expensive
+
+@sentence
+@lu Mir hunn eng gesond Mëschung vu Sonn a Wolleken.
+@en We have a healthy mixture of sun and clouds.
+@distractor-lu Gepäck
+@distractor-lu Muséeën
+@distractor-en luggage
+@distractor-en museums
+
+@sentence
+@lu D'Leit am Weste si besonnesch frëndlech.
+@en The people in the west are especially friendly.
+@distractor-lu geféierlech
+@distractor-lu ni
+@distractor-en dangerous
+@distractor-en never
+
+@sentence
+@lu De Kaffi zu Kiew an zu Lwiw ass eng besonnesch Erfarung.
+@en The coffee in Kyiv and Lviv is a special experience.
+@distractor-lu Zuch
+@distractor-lu schlecht
+@distractor-en train
+@distractor-en bad
+
+@sentence
+@lu D'ukrainesch Kichen ass bekannt a ganz gutt.
+@en The Ukrainian cuisine is well-known and very good.
+@distractor-lu onbekannt
+@distractor-lu kal
+@distractor-en unknown
+@distractor-en cold
+
+@sentence
+@lu Ech fuere gär mam Nuetszuch duerch d'Land.
+@en I like taking the night train through the country.
+@distractor-lu Kaffi
+@distractor-lu ni
+@distractor-en coffee
+@distractor-en never
+
+@sentence
+@lu Am Summer wandere mir gär an de Karpaten.
+@en In summer we like hiking in the Carpathians.
+@distractor-lu Wanter
+@distractor-lu schwammen
+@distractor-en winter
+@distractor-en swim
+
+@sentence
+@lu D'Stëmmung op de Festivaller ass ëmmer flott.
+@en The atmosphere at the festivals is always nice.
+@distractor-lu deier
+@distractor-lu kal
+@distractor-en expensive
+@distractor-en cold
+
+@sentence
+@lu Vill Touriste wëllen Tschernobyl gesinn.
+@en Many tourists want to see Chernobyl.
+@distractor-lu Gepäck
+@distractor-lu kafen
+@distractor-en luggage
+@distractor-en buy
+
+@sentence
+@lu Ech hunn d'Ukrain als Tourist entdeckt.
+@en I discovered Ukraine as a tourist.
+@distractor-lu verkaaft
+@distractor-lu Wieder
+@distractor-en sold
+@distractor-en weather
+
+@sentence
+@lu Wann Dir d'Ukrain besichtegt, sidd Dir wëllkomm.
+@en If you visit Ukraine, you are welcome.
+@distractor-lu Gepäck
+@distractor-lu ni
+@distractor-en luggage
+@distractor-en never
