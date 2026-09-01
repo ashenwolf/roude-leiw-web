@@ -1,0 +1,62 @@
+# Exam track — Theme: Musek — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Every sub-lesson mixes words AND sentences so each session alternates
+# word-match and sentence-builder slots; the emphasis here is vocabulary.
+
+@lesson M1.01 "Music Vocabulary"
+
+@word d'Musek = the music
+@word d'Lidder = the songs
+@word de Sänger = the singer
+@word de Museker = the musician
+@word d'Band = the band
+@word d'Genren = the genres
+@word de Concert = the concert
+@word de Festival = the festival
+@word d'Volleksmusek = folk music
+@word d'Gittar = the guitar
+@word lauschteren = to listen
+@word sangen = to sing
+@word kennen = to know
+@word d'Erënnerungen = the memories
+
+@sentence
+@lu Ech lauschteren all Dag gär Musek.
+@en I like listening to music every day.
+@distractor-lu sangen
+@distractor-lu kucken
+@distractor-en singing
+@distractor-en watching
+
+@sentence
+@lu D'Band spillt haut e Concert op engem Festival.
+@en The band is playing a concert at a festival today.
+@distractor-lu Radio
+@distractor-lu Schoul
+@distractor-en radio
+@distractor-en school
+
+@sentence
+@lu Ech kenne vill Genren, mee Volleksmusek hunn ech am léifsten.
+@en I know many genres, but I like folk music the most.
+@distractor-lu danzen
+@distractor-lu Radio
+@distractor-en dance
+@distractor-en radio
+
+@sentence
+@lu De Museker spillt Gittar, mee hie kann net sangen.
+@en The musician plays the guitar, but he cannot sing.
+@distractor-lu Schoul
+@distractor-lu Auto
+@distractor-en school
+@distractor-en car
+
+@sentence
+@lu Al Lidder brénge mir dacks Erënnerungen.
+@en Old songs often bring back memories for me.
+@distractor-lu sangen
+@distractor-lu lauschteren
+@distractor-en sing
+@distractor-en listen
