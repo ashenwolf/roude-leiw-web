@@ -1,0 +1,96 @@
+# Exam track — Theme: Film & TV — Sub-lesson 2: Key Phrases
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Sentences are grounded in the user's real answers, gathered by interview on
+# 2026-09-01 — do not "improve" or genericize them in a later editing pass.
+# Genres + describing adjectives live here; 03 carries the examiner Q&A.
+
+@lesson T1.02 "Film & TV Phrases"
+
+@word den Actionfilm = the action film
+@word de romantesche Film = the romance film
+@word d'Comedie = the comedy
+@word den Drama = the drama
+@word den Thriller = the thriller
+@word den Horrorfilm = the horror movie
+@word d'Science-Fiction = the science fiction
+@word den Abenteuerfilm = the adventure film
+@word d'Fantasie = the imagination
+@word de Klassiker = the classic
+@word de Musical = the musical
+@word de Krimi = the crime film
+@word den Animatiounsfilm = the animated film
+@word de Familljefilm = the family movie
+@word de Kuerzfilm = the short film
+@word langweileg = boring
+@word spannend = exciting
+@word interessant = interesting
+@word emotional = emotional
+@word trist = dreary
+@word fad = dull
+@word lächerlech = ridiculous
+@word komesch = strange
+@word witzeg = funny
+@word grujeleg = scary
+@word spaasseg = amusing
+@word traureg = sad
+@word ergräifend = touching
+@word erstaunlech = amazing
+@word intensiv = intense
+@word mënschlech = human
+
+@sentence
+@lu Den Actionfilm iwwer d'Superhelde war spannend.
+@en The action movie about the superheroes was exciting.
+@distractor-lu langweileg
+@distractor-lu Kino
+@distractor-en boring
+@distractor-en cinema
+
+@sentence
+@lu D'Comedie war net witzeg, mee lächerlech.
+@en The comedy was not funny, but ridiculous.
+@distractor-lu spannend
+@distractor-lu traureg
+@distractor-en exciting
+@distractor-en sad
+
+@sentence
+@lu Science-Fiction weist vill Fantasie, an dat fannen ech erstaunlech.
+@en Science fiction shows a lot of imagination, and I find that amazing.
+@distractor-lu Comedie
+@distractor-lu langweileg
+@distractor-en comedy
+@distractor-en boring
+
+@sentence
+@lu De Film Inception ass fir mech e Klassiker.
+@en The movie Inception is a classic for me.
+@distractor-lu Thriller
+@distractor-lu Musical
+@distractor-en thriller
+@distractor-en musical
+
+@sentence
+@lu Ech kucke gär Comedien, wa se wierklech witzeg sinn.
+@en I like watching comedies, when they are really funny.
+@distractor-lu Krimi
+@distractor-lu fad
+@distractor-en thriller
+@distractor-en dull
+
+@sentence
+@lu Serien erzielen d'Geschicht besser wéi Filmer.
+@en Series tell the story better than movies.
+@distractor-lu Comedien
+@distractor-lu Handlung
+@distractor-en comedies
+@distractor-en plot
+
+@sentence
+@lu Reality-Showe fannen ech lächerlech a fad.
+@en I find reality shows ridiculous and dull.
+@distractor-lu witzeg
+@distractor-lu spannend
+@distractor-en funny
+@distractor-en exciting

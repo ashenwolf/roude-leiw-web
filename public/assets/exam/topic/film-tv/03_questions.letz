@@ -1,0 +1,394 @@
+# Exam track — Theme: Film & TV — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview on 2026-09-01 —
+# do not "improve" or genericize them in a later editing pass. The point is
+# that the learner rehearses what they will actually say in the Sproochentest.
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional, obwuel-contrast, léiwer-wéi comparative, fir…ze purpose,
+# dofir inversion, a number blank, a frequency adverb, and an Ech-mengen hedge.
+
+@lesson T1.03 "Talking About Film & TV"
+
+@word kucken = to watch
+@word streamen = to stream
+@word léinen = to borrow
+@word eraussichen = to pick out
+@word sech entspanen = to relax
+@word abonéieren = to subscribe
+@word oplueden = to upload
+@word wiesselen = to switch
+@word wielen = to choose
+@word de Superheld = the superhero
+@word d'Handlung = the plot
+@word d'Sendung = the broadcast
+@word de Programm = the program
+@word d'Paus = the break
+@word de Virdeel = the advantage
+@word d'Gesellschaft = the company
+@word d'Schlofzëmmer = the bedroom
+@word de Kapp = the head
+@word bequeem = convenient
+@word deier = expensive
+
+@sentence
+@question Kuckt Dir gär Filmer? Firwat?
+@lu Jo, ech kucke gär Filmer, well ech dat entspanend fannen an et mir hëlleft, de Kapp fräi ze maachen.
+@en Yes, I like watching movies, because I find that relaxing and it helps me clear my mind.
+@distractor-lu langweileg
+@distractor-lu Kino
+@distractor-en boring
+@distractor-en cinema
+
+@sentence
+@question Wat fir e Film hutt Dir fir d'lescht gesinn, a wéi war en?
+@lu Fir d'lescht hunn ech en Actionfilm iwwer eng Grupp vu Superhelde gesinn, an e war spannend.
+@en Last I saw an action movie about a group of superheroes, and it was exciting.
+@distractor-lu Comedie
+@distractor-lu langweileg
+@distractor-en comedy
+@distractor-en boring
+
+@sentence
+@question Gitt Dir gär an de Kino? Wéi dacks?
+@lu Jo, ech gi gär an de Kino, mee nëmmen eemol de Mount, well et e bëssen deier ass.
+@en Yes, I like going to the cinema, but only once a month, because it is a bit expensive.
+@distractor-lu Woch
+@distractor-lu Internet
+@distractor-en week
+@distractor-en internet
+
+@sentence
+@question Wat fir eng Zort Filmer hutt Dir am léifsten?
+@lu Ech hu Science-Fiction Filmer am léifsten, well se vill Fantasie weisen a spannend sinn.
+@en I like science fiction movies the most, because they show a lot of imagination and are exciting.
+@distractor-lu Comedien
+@distractor-lu fad
+@distractor-en comedies
+@distractor-en dull
+
+@sentence
+@question Wat ass dee schlechste Film, deen Dir je gesinn hutt?
+@lu De schlechste Film war eng Comedie, déi ech guer net witzeg fonnt hunn.
+@en The worst movie was a comedy that I did not find funny at all.
+@distractor-lu spannend
+@distractor-lu Thriller
+@distractor-en exciting
+@distractor-en thriller
+
+@sentence
+@question Wat ass Äre Liblingsfilm?
+@lu Mäi Liblingsfilm ass Inception, well e ganz intelligent an interessant ass.
+@en My favorite movie is Inception, because it is very intelligent and interesting.
+@distractor-lu langweileg
+@distractor-lu Serie
+@distractor-en boring
+@distractor-en series
+
+@sentence
+@question Hutt Dir e Liblingsschauspiller?
+@lu Jo, mäi Liblingsschauspiller ass de Leonardo DiCaprio, well hie super an all Aart vu Filmer ass.
+@en Yes, my favorite actor is Leonardo DiCaprio, because he is great in all kinds of movies.
+@distractor-lu Regisseur
+@distractor-lu Musical
+@distractor-en director
+@distractor-en musical
+
+@sentence
+@question Leeft de Moment e Film am Kino, deen Dir gesi wëllt?
+@lu Jo, de Moment leeft en Documentaire iwwer d'Natur, deen ech gesi wëll.
+@en Yes, currently there is a documentary about nature that I want to see.
+@distractor-lu Comedie
+@distractor-lu Reklamm
+@distractor-en comedy
+@distractor-en advertisement
+
+@sentence
+@question Mat wiem gitt Dir normalerweis an de Kino?
+@lu Ech ginn normalerweis mat menge Frënn an de Kino.
+@en I usually go to the cinema with my friends.
+@distractor-lu eleng
+@distractor-lu Regisseur
+@distractor-en alone
+@distractor-en director
+
+@sentence
+@question Eleng an de Kino goen: Wat haalt Dir dovun?
+@lu Ech fannen et okay, eleng an de Kino ze goen, well ech net ëmmer Gesellschaft brauch.
+@en I find it okay to go to the cinema alone, because I do not always need company.
+@distractor-lu Frënn
+@distractor-lu langweileg
+@distractor-en friends
+@distractor-en boring
+
+@sentence
+@question Wat mécht e Film interessant fir Iech?
+@lu E Film ass fir mech interessant, wann d'Handlung spannend bleift.
+@en A movie is interesting for me when the plot stays exciting.
+@distractor-lu langweileg
+@distractor-lu Reklamm
+@distractor-en boring
+@distractor-en advertisement
+
+@sentence
+@question A wéi enger Sprooch kuckt Dir Filmer?
+@lu Ech kucke Filmer meeschtens op Englesch, well dat eng international Sprooch ass.
+@en I watch movies mostly in English, because that is an international language.
+@distractor-lu Lëtzebuergesch
+@distractor-lu Ënnertitelen
+@distractor-en Luxembourgish
+@distractor-en subtitles
+
+@sentence
+@question Wéi oft kaaft Dir Filmer op DVD?
+@lu Ech kafe bal ni DVDen, well ech éischter um Internet streamen.
+@en I almost never buy DVDs, because I rather stream on the internet.
+@distractor-lu Kino
+@distractor-lu Serien
+@distractor-en cinema
+@distractor-en series
+
+@sentence
+@question Kuckt Dir och Filmer um Internet? Wat sinn d'Virdeeler?
+@lu Jo, dat ass ganz bequeem, well ech selwer wiele kann, wat ech kucke wëll.
+@en Yes, that is very convenient, because I can choose myself what I want to watch.
+@distractor-lu deier
+@distractor-lu Kino
+@distractor-en expensive
+@distractor-en cinema
+
+@sentence
+@question Wat denkt Dir iwwer Bicher, déi verfilmt ginn?
+@lu Dat hänkt dovun of, wéi et gemaach ass, mee heiansdo weist de Film seng eege Vue op d'Buch.
+@en That depends on how it is done, but sometimes the movie shows its own view of the book.
+@distractor-lu Handlung
+@distractor-lu Kino
+@distractor-en plot
+@distractor-en cinema
+
+@sentence
+@question Hutt Dir eng Tëlee doheem, an och am Schlofzëmmer?
+@lu Mir hunn eng Tëlee doheem, mee am Schlofzëmmer hu mir keng, an dat fannen ech gutt esou.
+@en We have a TV at home, but in the bedroom we have none, and I find that good.
+@distractor-lu Kino
+@distractor-lu Internet
+@distractor-en cinema
+@distractor-en internet
+
+@sentence
+@question Kuckt Dir vill Tëlee, a wéi vill an der Moyenne pro Woch?
+@lu Ech kucken net esou vill, an der Moyenne ongeféier fënnef Stonnen an der Woch.
+@en I do not watch that much, on average about five hours a week.
+@distractor-lu Dag
+@distractor-lu Reklammen
+@distractor-en day
+@distractor-en advertisements
+
+@sentence
+@question Wat kuckt Dir gär op der Tëlee?
+@lu Ech kucke gär Comedien a Filmer iwwer Reesen.
+@en I like watching comedies and movies about traveling.
+@distractor-lu Krimi
+@distractor-lu Noriichten
+@distractor-en thriller
+@distractor-en news
+
+@sentence
+@question Wat fir Sendunge kuckt Dir nach?
+@lu Ech kucken d'Noriichten an och Kachsendungen, well se mech ëmmer inspiréieren.
+@en I watch the news and also cooking shows, because they always inspire me.
+@distractor-lu Reklammen
+@distractor-lu Musical
+@distractor-en advertisements
+@distractor-en musical
+
+@sentence
+@question Hutt Dir Filmer oder Serië léiwer?
+@lu Ech hu Serië léiwer, well se d'Geschicht besser erziele kënnen.
+@en I like series better, because they can tell the story better.
+@distractor-lu Filmer
+@distractor-lu Comedien
+@distractor-en movies
+@distractor-en comedies
+
+@sentence
+@question Wéi ee Programm kuckt Dir ni op der Tëlee?
+@lu Reality-Showe kucken ech ni, well se mech guer net interesséieren.
+@en I never watch reality shows, because they do not interest me at all.
+@distractor-lu dacks
+@distractor-lu spannend
+@distractor-en often
+@distractor-en exciting
+
+@sentence
+@question Benotzt Dir och Streaming-Plattformen?
+@lu Jo, ech benotzen Amazon Prime, Netflix an Apple TV.
+@en Yes, I use Amazon Prime, Netflix and Apple TV.
+@distractor-lu DVDen
+@distractor-lu Kino
+@distractor-en DVDs
+@distractor-en cinema
+
+@sentence
+@question Wéini hutt Dir fir d'lescht eng klassesch Tëlee gekuckt?
+@lu Dat war viru Joren, well haut bei mir alles iwwer den Internet leeft.
+@en That was years ago, because today everything at my place runs over the internet.
+@distractor-lu Owend
+@distractor-lu Kino
+@distractor-en evening
+@distractor-en cinema
+
+@sentence
+@question A wéi enger Sprooch kuckt Dir d'Noriichten?
+@lu Meeschtens kucken ech d'Noriichten op Englesch, mee elo probéieren ech se och op Lëtzebuergesch ze liesen.
+@en Mostly I watch the news in English, but now I also try to read them in Luxembourgish.
+@distractor-lu Filmer
+@distractor-lu Ënnertitelen
+@distractor-en movies
+@distractor-en subtitles
+
+@sentence
+@question Wat maacht Dir, wa Reklammen op der Tëlee kommen?
+@lu Wann ze vill Reklamme kommen, wiesselen ech de Kanal oder maachen eng Paus.
+@en When too many advertisements come, I switch the channel or take a break.
+@distractor-lu Film
+@distractor-lu Noriichten
+@distractor-en movie
+@distractor-en news
+
+@sentence
+@question Ass d'Tëlee wichteg fir Iech?
+@lu Nee, d'Tëlee ass net esou wichteg fir mech, mee ech kucken dacks thematesch Videoen op YouTube.
+@en No, the TV is not that important to me, but I often watch thematic videos on YouTube.
+@distractor-lu Noriichten
+@distractor-lu Kino
+@distractor-en news
+@distractor-en cinema
+
+@sentence
+@question Wat maacht Dir léiwer: Tëlee kucken oder liesen? Firwat?
+@lu Ech liese léiwer, well ech a mengem eegenen Tempo liesen an en Abschnitt nach eng Kéier liese kann.
+@en I prefer reading, because I read at my own pace and can read a paragraph one more time.
+@distractor-lu Filmer
+@distractor-lu Tëlee
+@distractor-en movies
+@distractor-en television
+
+@sentence
+@question Hutt Dir als Kand méi oder manner Tëlee gekuckt?
+@lu Ongeféier d'selwecht, mee haut kucken ech YouTube a wielen, wat mech wierklech interesséiert.
+@en About the same, but today I watch YouTube and choose what really interests me.
+@distractor-lu Radio
+@distractor-lu Kino
+@distractor-en radio
+@distractor-en cinema
+
+@sentence
+@question Kucken d'Kanner hautdesdaags ze vill Tëlee?
+@lu D'Kanner kucken haut net vill Tëlee, mee si kucken TikTok, an dat ass schlecht fir de Kapp.
+@en Children today do not watch much TV, but they watch TikTok, and that is bad for the head.
+@distractor-lu Filmer
+@distractor-lu gutt
+@distractor-en movies
+@distractor-en good
+
+@sentence
+@question Tëlee kucke mécht domm: Wat mengt Dir?
+@lu Ech mengen, et hänkt dovun of, wat ee kuckt, an eng gutt Sendung mécht net domm.
+@en I think it depends on what you watch, and a good broadcast does not make you dumb.
+@distractor-lu Reklamm
+@distractor-lu langweileg
+@distractor-en advertisement
+@distractor-en boring
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech kucke gär Serien, well se d'Geschicht besser [erzielen].
+@en I like watching series, because they [tell] the story better.
+@distractor-lu kafen
+@distractor-lu molen
+@distractor-en buy
+@distractor-en paint
+
+@fill
+@lu Wann ech midd sinn, [streamen] ech eng Serie.
+@en When I am tired, I [stream] a series.
+@distractor-lu kachen
+@distractor-lu danzen
+@distractor-en cook
+@distractor-en dance
+
+@fill
+@lu Obwuel de Kino deier ass, wëll ech all neie [Film] gesinn.
+@en Although the cinema is expensive, I want to see every new [film].
+@distractor-lu Kapp
+@distractor-lu Owend
+@distractor-en head
+@distractor-en evening
+
+@fill
+@lu Ech hu Serië léiwer [wéi] Filmer.
+@en I like series better [than] movies.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech kucke Filmer, [fir] de Kapp fräi ze maachen.
+@en I watch movies, [in order to] clear my mind.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu De Kino ass deier, [dofir] streamen ech doheem.
+@en The cinema is expensive, [that is why] I stream at home.
+@distractor-lu well
+@distractor-lu mee
+@distractor-en because
+@distractor-en but
+
+@fill
+@lu Ech kucken all Woch ongeféier [fënnef] Stonnen Tëlee.
+@en Every week I watch about [five] hours of TV.
+@distractor-lu zéng
+@distractor-lu dräi
+@distractor-en ten
+@distractor-en three
+
+@fill
+@lu Reality-Showe kucken ech [ni].
+@en I [never] watch reality shows.
+@distractor-lu dacks
+@distractor-lu ëmmer
+@distractor-en often
+@distractor-en always
+
+@fill
+@lu Ech mengen, TikTok ass net gutt fir de [Kapp].
+@en I think TikTok is not good for the [brain].
+@distractor-lu Film
+@distractor-lu Kino
+@distractor-en movie
+@distractor-en cinema
+
+@fill
+@lu Wann d'Reklamm kënnt, wiesselen ech de [Kanal].
+@en When the advertisement comes, I change the [channel].
+@distractor-lu Owend
+@distractor-lu Mount
+@distractor-en evening
+@distractor-en month
+
+@fill
+@lu Ech léiere Lëtzebuergesch, well et eng schéi [Sprooch] ass.
+@en I am learning Luxembourgish, because it is a beautiful [language].
+@distractor-lu Serie
+@distractor-lu Paus
+@distractor-en series
+@distractor-en break

@@ -1,0 +1,74 @@
+# Exam track — Theme: Film & TV — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Sentences are grounded in the user's real answers, gathered by interview on
+# 2026-09-01 — do not "improve" or genericize them in a later editing pass.
+
+@lesson T1.01 "Film & TV Vocabulary"
+
+@word de Film = the movie
+@word d'Tëlee = the TV
+@word de Fernsee = the television
+@word de Kino = the cinema
+@word de Schauspiller = the actor
+@word d'Schauspillerin = the actress
+@word de Regisseur = the director
+@word d'Ënnertitelen = the subtitles
+@word d'Sprooch = the language
+@word de Genre = the genre
+@word d'Serie = the series
+@word den Documentaire = the documentary
+@word d'Noriichten = the news
+@word d'Reklamm = the advertisement
+@word d'Seance = the screening
+@word d'DVD = the DVD
+@word d'Plattform = the platform
+@word den Internet = the internet
+@word de Kanal = the channel
+@word d'Filmkritik = the film review
+@word de Filmfestival = the film festival
+@word de Museksvideo = the music video
+@word d'Bewäertung = the rating
+@word den Inhalt = the content
+@word aschalten = to turn on
+@word ausschalten = to turn off
+
+@sentence
+@lu Ech kucke Filmer um Internet a bal ni op DVD.
+@en I watch movies on the internet and almost never on DVD.
+@distractor-lu Kino
+@distractor-lu Reklamm
+@distractor-en cinema
+@distractor-en advertisement
+
+@sentence
+@lu Ech kucken d'Noriichten op Englesch.
+@en I watch the news in English.
+@distractor-lu Sprooch
+@distractor-lu Kino
+@distractor-en language
+@distractor-en cinema
+
+@sentence
+@lu Ech maachen eng Paus, wann d'Reklamm kënnt.
+@en I take a break when the advertisement comes.
+@distractor-lu Kanal
+@distractor-lu Film
+@distractor-en channel
+@distractor-en movie
+
+@sentence
+@lu De Kino ass flott, mee och e bëssen deier.
+@en The cinema is nice, but also a bit expensive.
+@distractor-lu bequeem
+@distractor-lu Internet
+@distractor-en convenient
+@distractor-en internet
+
+@sentence
+@lu Ech streame Serien op enger Plattform.
+@en I stream series on a platform.
+@distractor-lu Tëlee
+@distractor-lu Kino
+@distractor-en television
+@distractor-en cinema
