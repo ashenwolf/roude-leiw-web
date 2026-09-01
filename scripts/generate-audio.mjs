@@ -1,20 +1,35 @@
 #!/usr/bin/env node
 /**
- * Generate ElevenLabs audio for every Luxembourgish phrase (`@lu`) inside the
- * `@sentence` blocks of a `.letz` lesson file.
+ * Generate Sproochmaschinn audio for every Luxembourgish phrase (`@lu`) inside
+ * the `@sentence` blocks of a `.letz` lesson file.
+ *
+ * Sproochmaschinn (https://sproochmaschinn.lu) is the free TTS/STT service run
+ * by the Zenter fir d'Lëtzebuerger Sprooch (ZLS). Its voices are purpose-built
+ * Luxembourgish models. There is NO API key: every request is authenticated by
+ * a short-lived session id. Non-commercial use only — for commercial
+ * deployment, ZLS asks to be contacted directly (see the in-app API docs).
  *
  * Usage
  * -----
  *   node scripts/generate-audio.mjs <path/to/lesson.letz>
- *   node --env-file=.env scripts/generate-audio.mjs <path/to/lesson.letz>
  *   npm run generate-audio -- <path/to/lesson.letz>
  *
  * Environment variables
  * ---------------------
- *   ELEVENLABS_API_KEY    (required)
- *   ELEVENLABS_VOICE_ID   (optional, default "cgSgspJ2msm6clMCkdW9" / "Jessica")
- *   ELEVENLABS_MODEL_ID   (optional, default "eleven_multilingual_v2";
- *                          set to "eleven_v3" for higher-quality alpha model)
+ *   SPROOCHMASCHINN_MODEL  (optional: "claude" | "max" | "maxine";
+ *                           default "claude" — VITS2 engine. "max" and
+ *                           "maxine" are Coqui-engine male/female voices)
+ *
+ * Requires `ffmpeg` on PATH: the API returns WAV (22.05 kHz mono PCM), which
+ * is re-encoded to mp3 locally.
+ *
+ * API flow (documented inside the sproochmaschinn.lu SPA under "API"):
+ *   POST /api/session                 -> { session_id }   (expires after 10 min idle)
+ *   POST /api/tts/{session_id}        -> { request_id }   (json: { text, model })
+ *   GET  /api/result/{request_id}     -> poll until status "completed";
+ *                                        result.data is base64 WAV
+ * Rate limit: 10 TTS requests per minute per session. A result is deleted
+ * 30 seconds after it is first retrieved.
  *
  * Output
  * ------
@@ -24,63 +39,63 @@
  * single hyphens). Existing files are skipped — re-running the script only
  * fetches phrases that don't already have audio.
  */
+import { spawn, spawnSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import process from "node:process";
 
 import { extractLuPhrases, pathExists, slugify } from "./lib/letz-audio.mjs";
 
-const DEFAULT_VOICE_ID = "cgSgspJ2msm6clMCkdW9"; // "Jessica" — featured on ElevenLabs' Luxembourgish page
-const DEFAULT_MODEL_ID = "eleven_multilingual_v2";
-// For higher-quality, more expressive output (and full audio-tag support like
-// [whispers], [excited], etc.), set ELEVENLABS_MODEL_ID=eleven_v3. v3 is in
-// alpha as of 2026; multilingual_v2 is the stable default. Both officially
-// support Luxembourgish — see https://elevenlabs.io/text-to-speech/luxembourgish
+const BASE_URL = "https://sproochmaschinn.lu";
+const VOICE_MODELS = ["claude", "max", "maxine"];
+const DEFAULT_MODEL = "claude";
 
-const REQUEST_INTERVAL_MS = 250;       // polite spacing between successful requests
-const MAX_RETRIES = 5;                 // for 429 / 5xx
+const REQUEST_INTERVAL_MS = 6500;      // TTS is limited to 10 requests/min/session
+const POLL_INTERVAL_MS = 1000;         // result polling cadence
+const RESULT_TIMEOUT_MS = 5 * 60 * 1000; // same bound the web client uses
+const MAX_RETRIES = 5;                 // for 429 / 5xx / expired session
 const RETRY_BASE_DELAY_MS = 1000;      // exponential backoff base
-
-// ---------------------------------------------------------------------------
-// ElevenLabs client
-// ---------------------------------------------------------------------------
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// ---------------------------------------------------------------------------
+// Sproochmaschinn client
+// ---------------------------------------------------------------------------
+
+const createSession = async () => {
+  const response = await fetch(`${BASE_URL}/api/session`, { method: "POST" });
+  if (!response.ok) throw new Error(`session creation failed: HTTP ${response.status}`);
+  const { session_id: sessionId } = await response.json();
+  return sessionId;
+};
+
 /**
- * Synthesize one phrase. Retries on 429 (rate-limited) and 5xx, honoring the
- * `Retry-After` header when present and falling back to exponential backoff.
- * Returns the raw mp3 bytes.
+ * Submit one phrase for synthesis. A 404 means the session expired (10 min
+ * idle) — recreate it and resubmit, mirroring the web client. 429/5xx retry
+ * with `Retry-After` when present, exponential backoff otherwise. Returns the
+ * request id plus whichever session id is now live.
  */
-const fetchAudio = async (text, { apiKey, voiceId, modelId }) => {
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
-  const body = JSON.stringify({
-    text,
-    model_id: modelId,
-    voice_settings: { stability: 0.5, similarity_boost: 0.75 },
+const submitTts = async (sessionId, text, model, attempt = 0) => {
+  const response = await fetch(`${BASE_URL}/api/tts/${sessionId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, model }),
   });
 
-  for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "xi-api-key": apiKey,
-        "Content-Type": "application/json",
-        Accept: "audio/mpeg",
-      },
-      body,
-    });
+  if (response.ok) {
+    const { request_id: requestId } = await response.json();
+    return { requestId, sessionId };
+  }
 
-    if (response.ok) {
-      return Buffer.from(await response.arrayBuffer());
-    }
+  if (attempt >= MAX_RETRIES - 1) {
+    throw new Error(`Sproochmaschinn TTS failed after ${MAX_RETRIES} attempts (HTTP ${response.status})`);
+  }
 
-    const isThrottled = response.status === 429 || response.status >= 500;
-    if (!isThrottled) {
-      const errorText = await response.text();
-      throw new Error(`ElevenLabs API error ${response.status}: ${errorText}`);
-    }
+  if (response.status === 404) {
+    return submitTts(await createSession(), text, model, attempt + 1);
+  }
 
+  if (response.status === 429 || response.status >= 500) {
     const retryAfterHeader = parseFloat(response.headers.get("retry-after") ?? "");
     const delay = Number.isFinite(retryAfterHeader) && retryAfterHeader > 0
       ? retryAfterHeader * 1000
@@ -90,14 +105,78 @@ const fetchAudio = async (text, { apiKey, voiceId, modelId }) => {
         `(attempt ${attempt + 1}/${MAX_RETRIES})`,
     );
     await sleep(delay);
+    return submitTts(sessionId, text, model, attempt + 1);
   }
 
-  throw new Error(`ElevenLabs API failed after ${MAX_RETRIES} retries`);
+  const errorText = await response.text();
+  throw new Error(`Sproochmaschinn TTS error ${response.status}: ${errorText}`);
+};
+
+/**
+ * Poll until the request completes, then return the result payload
+ * (`{ data, format, duration, ... }` — `data` is base64-encoded WAV).
+ * Async recursion keeps the stack flat; the deadline bounds the whole wait.
+ */
+const pollResult = async (requestId, deadline = Date.now() + RESULT_TIMEOUT_MS) => {
+  if (Date.now() > deadline) {
+    throw new Error(`timed out waiting for result ${requestId}`);
+  }
+  const response = await fetch(`${BASE_URL}/api/result/${requestId}`);
+  if (!response.ok) throw new Error(`result fetch failed: HTTP ${response.status}`);
+  const payload = await response.json();
+  if (payload.status === "completed") return payload.result;
+  if (payload.status === "failed" || payload.status === "error") {
+    throw new Error(`synthesis failed: ${payload.error ?? "unknown error"}`);
+  }
+  await sleep(POLL_INTERVAL_MS);
+  return pollResult(requestId, deadline);
+};
+
+// ---------------------------------------------------------------------------
+// WAV → mp3 (ffmpeg, fully piped — no temp files)
+// ---------------------------------------------------------------------------
+
+const wavToMp3 = (wav) =>
+  new Promise((resolvePromise, reject) => {
+    const ffmpeg = spawn("ffmpeg", [
+      "-hide_banner", "-loglevel", "error",
+      "-i", "pipe:0",
+      "-codec:a", "libmp3lame", "-qscale:a", "4",
+      "-f", "mp3", "pipe:1",
+    ]);
+    const out = [];
+    const err = [];
+    ffmpeg.stdout.on("data", (chunk) => out.push(chunk));
+    ffmpeg.stderr.on("data", (chunk) => err.push(chunk));
+    ffmpeg.on("error", reject);
+    ffmpeg.on("close", (code) =>
+      code === 0
+        ? resolvePromise(Buffer.concat(out))
+        : reject(new Error(`ffmpeg exited ${code}: ${Buffer.concat(err).toString().trim()}`)),
+    );
+    ffmpeg.stdin.end(wav);
+  });
+
+const assertFfmpeg = () => {
+  const probe = spawnSync("ffmpeg", ["-version"], { stdio: "ignore" });
+  if (probe.error || probe.status !== 0) {
+    console.error("ffmpeg not found on PATH — required to convert Sproochmaschinn WAV output to mp3.");
+    console.error("Install it with: brew install ffmpeg");
+    process.exit(1);
+  }
 };
 
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
+
+/** Synthesize one phrase end-to-end; returns mp3 bytes and the live session id. */
+const synthesizeMp3 = async (sessionId, text, model) => {
+  const { requestId, sessionId: liveSessionId } = await submitTts(sessionId, text, model);
+  const result = await pollResult(requestId);
+  const mp3 = await wavToMp3(Buffer.from(result.data, "base64"));
+  return { mp3, sessionId: liveSessionId };
+};
 
 const main = async () => {
   const inputPath = process.argv[2];
@@ -106,15 +185,13 @@ const main = async () => {
     process.exit(1);
   }
 
-  const apiKey = process.env.ELEVENLABS_API_KEY;
-  if (!apiKey) {
-    console.error("Missing ELEVENLABS_API_KEY environment variable.");
-    console.error('Tip: run with `node --env-file=.env scripts/generate-audio.mjs ...` to load .env');
+  const model = process.env.SPROOCHMASCHINN_MODEL ?? DEFAULT_MODEL;
+  if (!VOICE_MODELS.includes(model)) {
+    console.error(`Unknown SPROOCHMASCHINN_MODEL "${model}". Options: ${VOICE_MODELS.join(", ")}.`);
     process.exit(1);
   }
 
-  const voiceId = process.env.ELEVENLABS_VOICE_ID ?? DEFAULT_VOICE_ID;
-  const modelId = process.env.ELEVENLABS_MODEL_ID ?? DEFAULT_MODEL_ID;
+  assertFfmpeg();
 
   const absolutePath = resolve(inputPath);
   const content = await readFile(absolutePath, "utf-8");
@@ -144,39 +221,41 @@ const main = async () => {
 
   console.log(`File:    ${absolutePath}`);
   console.log(`Output:  ${audioDir}`);
-  console.log(`Voice:   ${voiceId}`);
-  console.log(`Model:   ${modelId}`);
+  console.log(`Model:   ${model}`);
   console.log(`Phrases: ${phrases.length} total, ${tasks.length} unique`);
   console.log();
 
-  let generated = 0;
-  let skipped = 0;
-  let failed = 0;
+  const initialSessionId = await createSession();
 
-  for (let i = 0; i < tasks.length; i += 1) {
-    const { phrase, slug } = tasks[i];
-    const outputPath = join(audioDir, `${slug}.mp3`);
-    const prefix = `[${i + 1}/${tasks.length}]`;
+  // Sequential on purpose: the rate limit is per session and the queue is a
+  // shared public resource. The session id threads through the accumulator so
+  // an expiry-triggered recreation carries over to the next phrase.
+  const { generated, skipped, failed } = await tasks.reduce(
+    async (statePromise, { phrase, slug }, i) => {
+      const state = await statePromise;
+      const outputPath = join(audioDir, `${slug}.mp3`);
+      const prefix = `[${i + 1}/${tasks.length}]`;
 
-    if (await pathExists(outputPath)) {
-      console.log(`${prefix} • skip   ${slug}.mp3   (${phrase})`);
-      skipped += 1;
-      continue;
-    }
+      if (await pathExists(outputPath)) {
+        console.log(`${prefix} • skip   ${slug}.mp3   (${phrase})`);
+        return { ...state, skipped: state.skipped + 1 };
+      }
 
-    try {
-      const audio = await fetchAudio(phrase, { apiKey, voiceId, modelId });
-      await writeFile(outputPath, audio);
-      console.log(`${prefix} ✓ saved  ${slug}.mp3   (${phrase})`);
-      generated += 1;
-      // Polite spacing only after a real request, not after a skip
-      if (i < tasks.length - 1) await sleep(REQUEST_INTERVAL_MS);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error(`${prefix} ✗ error  ${slug}.mp3   (${phrase})  — ${msg}`);
-      failed += 1;
-    }
-  }
+      try {
+        // Space real submissions to stay under 10 requests/min/session.
+        if (state.generated + state.failed > 0) await sleep(REQUEST_INTERVAL_MS);
+        const { mp3, sessionId } = await synthesizeMp3(state.sessionId, phrase, model);
+        await writeFile(outputPath, mp3);
+        console.log(`${prefix} ✓ saved  ${slug}.mp3   (${phrase})`);
+        return { ...state, sessionId, generated: state.generated + 1 };
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error(`${prefix} ✗ error  ${slug}.mp3   (${phrase})  — ${msg}`);
+        return { ...state, failed: state.failed + 1 };
+      }
+    },
+    Promise.resolve({ sessionId: initialSessionId, generated: 0, skipped: 0, failed: 0 }),
+  );
 
   console.log();
   console.log(`Done. Generated: ${generated}, skipped: ${skipped}, failed: ${failed}.`);

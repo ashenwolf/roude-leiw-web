@@ -2,7 +2,7 @@
  * Shared utilities for working with .letz lesson files and their derived audio.
  *
  * Used by:
- *   - scripts/generate-audio.mjs  (creates .mp3 files via ElevenLabs)
+ *   - scripts/generate-audio.mjs  (creates .mp3 files via Sproochmaschinn)
  *   - scripts/sync-audio.mjs      (mirrors .mp3 files to/from Cloudflare R2)
  */
 import { readdir, readFile, stat } from "node:fs/promises";

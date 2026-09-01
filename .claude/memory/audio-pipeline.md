@@ -1,4 +1,4 @@
-# Audio pipeline — ElevenLabs TTS, R2 as source of truth
+# Audio pipeline — Sproochmaschinn TTS, R2 as source of truth
 
 **Status: generated and backed up, but NOT wired into the build and NOT consumed
 by the app.** The `prebuild` hook was removed — it wasted ~30 s and emitted R2 403
@@ -25,8 +25,8 @@ the local path), and copied into `dist/` at build time.
 
 | Alternative | Why not |
 |---|---|
-| Commit to git | mp3s bloat the repo and ElevenLabs output is regeneratable; full coverage of 100 lessons ≈ 200 MB |
-| Local-only, ship via deploy | loses audio if the checkout disappears, forcing re-spend on API credits |
+| Commit to git | mp3s bloat the repo and Sproochmaschinn output is regeneratable for free; full coverage of 100 lessons ≈ 200 MB |
+| Local-only, ship via deploy | loses audio if the checkout disappears, forcing slow regeneration (rate-limited to ~9 phrases/min) |
 | Serve from R2 via a Worker route | production-grade, but needs a route + frontend URL change; deferred until deploy size or build time hurts (~50+ lessons) |
 
 R2 is the durable backup and egress inside Cloudflare is free, so build-time
@@ -73,8 +73,32 @@ integration runs `npm run build`, not `npm run deploy`, so hooking `deploy` woul
 only help local CLI deploys. `predev` deliberately does not exist, so the dev
 server starts instantly without touching R2.
 
-## Voice defaults
+## Voice provider: Sproochmaschinn (ZLS), not ElevenLabs
 
-Jessica (`cgSgspJ2msm6clMCkdW9`), model `eleven_multilingual_v2` — stable, and
-Luxembourgish is in ElevenLabs' listed languages. `eleven_v3` is more expressive
-but alpha and may be access-restricted; override via `ELEVENLABS_MODEL_ID`.
+`https://sproochmaschinn.lu` — the free TTS service by the Zenter fir d'Lëtzebuerger
+Sprooch, with purpose-built Luxembourgish voices. Replaced ElevenLabs because it is
+free, keyless, and native-Luxembourgish rather than multilingual-approximate.
+
+- **No API key.** `POST /api/session` returns a `session_id`; everything else is
+  authenticated by it. Sessions expire after 10 min idle — the script transparently
+  recreates on 404, like the web client does.
+- **API is documented inside the SPA** (menu → "API Documentation"), not on a
+  separate docs site. Flow: `POST /api/tts/{session_id}` with `{ text, model }` →
+  `{ request_id }` → poll `GET /api/result/{request_id}` until `completed`.
+  The result carries base64 WAV (22.05 kHz mono PCM); a result is deleted 30 s
+  after first retrieval, so read it once and keep the bytes.
+- **Rate limit: 10 TTS requests/min/session**, max 10,000 chars per request. The
+  generator runs sequentially with ~6.5 s spacing — a full lesson (~50 phrases)
+  takes ~6 min. WebSocket progress updates exist but polling is simpler for a batch
+  script.
+- **Voices:** `claude` (default, VITS2), `max` (male, Coqui), `maxine` (female,
+  Coqui). Override via `SPROOCHMASCHINN_MODEL`.
+- **mp3 is produced locally via ffmpeg** (`libmp3lame -qscale:a 4`, piped, no temp
+  files) since the API only emits WAV. ffmpeg on PATH is a hard prerequisite.
+- **Non-commercial use only.** The in-app docs state API access is limited to
+  non-commercial use; commercial deployment requires contacting ZLS. Fine for this
+  project today; revisit if Roude Leiw ever monetizes.
+
+ElevenLabs (Jessica voice, `eleven_multilingual_v2`) was the original provider —
+it worked but cost credits and its Luxembourgish is a multilingual model's
+approximation, not a dedicated voice.
