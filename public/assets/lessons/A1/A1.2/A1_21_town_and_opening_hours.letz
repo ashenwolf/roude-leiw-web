@@ -281,14 +281,6 @@
 @distractor-lu op
 @distractor-lu Wou
 
-@sentence
-@lu Mir kafen Uebst op dem Maart.
-@en We buy fruit at the market.
-@distractor-en forest
-@distractor-en cinema
-@distractor-lu Bësch
-@distractor-lu Kino
-
 # --- @fill: prepositions an / op / bei ----------------------------------------
 # The deck's core grammar: spatial an (closed places), op (open/institutional),
 # bei (people/companies). Distractors are the other two — the three-way confusion.
@@ -516,30 +508,6 @@
 @distractor-lu samsdes
 
 @sentence
-@lu Wéini mécht d'Apdikt op?
-@en When does the pharmacy open?
-@distractor-en close
-@distractor-en where
-@distractor-lu zou
-@distractor-lu Wou
-
-@sentence
-@lu Wéini mécht d'Apdikt zou?
-@en When does the pharmacy close?
-@distractor-en open
-@distractor-en where
-@distractor-lu op
-@distractor-lu Wou
-
-@sentence
-@lu De Coiffeur ass sonndes zou.
-@en The hairdresser is closed on Sundays.
-@distractor-en open
-@distractor-en Saturday
-@distractor-lu op
-@distractor-lu samsdes
-
-@sentence
 @lu Ass de Supermarché sonndes op?
 @en Is the supermarket open on Sundays?
 @distractor-en closed
@@ -567,6 +535,7 @@
 
 @sentence
 @lu Mir kafen Uebst um Maart.
+@lu Mir kafen Uebst op dem Maart.
 @en We buy fruit at the market.
 @distractor-en bread
 @distractor-en supermarket

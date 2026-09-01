@@ -34,8 +34,6 @@
 @word ze schwéier = too heavy
 @word ze grouss = too big
 @word ze deier = too expensive
-@word däischter = dark
-@word dréngend = urgent
 
 # --- Negation ---
 @word kee = no (masculine)
@@ -165,22 +163,6 @@
 @distractor-en bright
 @distractor-en kitchen
 @distractor-lu hell
-@distractor-lu Kichen
-
-@sentence
-@lu D'Kichen ass modern, mä se ass deier.
-@en The kitchen is modern, but it is expensive.
-@distractor-en cheap
-@distractor-en cellar
-@distractor-lu bëlleg
-@distractor-lu Keller
-
-@sentence
-@lu D'Haus ass schéin, mee et ass e bëssen kleng.
-@en The house is beautiful, but it is a bit small.
-@distractor-en big
-@distractor-en kitchen
-@distractor-lu grouss
 @distractor-lu Kichen
 
 @sentence

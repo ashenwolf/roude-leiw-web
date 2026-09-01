@@ -14,7 +14,6 @@
 @word de Kont = the bank account
 @word de Spuerkont = the savings account
 @word de Prêt = the loan
-@word d'Kreditkaart = the credit card
 
 # --- Cash ---
 @word d'Mënz = the coin
@@ -34,8 +33,6 @@
 # --- Verbs ---
 @word ophiewen = to withdraw
 @word iwwerweisen = to transfer
-@word opmaachen = to open
-@word zoumaachen = to close
 @word ausfëllen = to fill in
 @word ënnerschreiwen = to sign
 @word ausginn = to spend
@@ -49,7 +46,6 @@
 @word dausend = thousand
 @word eng hallef Millioun = half a million
 @word am Duerchschnëtt = on average
-@word ongeféier = approximately
 
 # --- At the bank ---
 @sentence

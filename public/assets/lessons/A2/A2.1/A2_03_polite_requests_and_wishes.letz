@@ -10,12 +10,9 @@
 
 @lesson A2.03 "Polite Requests & Wishes"
 
-# --- Modal verbs ---
-@word mussen = must
-@word kënnen = can
-@word wëllen = to want
-@word sollen = should
-@word däerfen = to be allowed to
+# Modal verbs (mussen/kënnen/wëllen/sollen/däerfen) are taught in A1.09 — the
+# sequential gate makes it a prerequisite, so they are drilled here through the
+# sentences and fills only, not re-taught as Elements.
 
 # --- Bakery & shopping words used in the requests ---
 @word de Kuch = the cake
@@ -32,8 +29,6 @@
 # --- Verbs & expressions ---
 @word wënschen = to wish
 @word ofhuelen = to lose weight
-@word fëmmen = to smoke
-@word bezuelen = to pay
 @word probéieren = to try
 @word d'Kreditkaart = the credit card
 @word de Comptoir = the counter
@@ -166,14 +161,6 @@
 @distractor-en pay
 @distractor-lu iessen
 @distractor-lu bezuelen
-
-@sentence
-@lu Kanns du kuerz waarden?
-@en Can you wait a moment?
-@distractor-en pay
-@distractor-en smoke
-@distractor-lu bezuelen
-@distractor-lu fëmmen
 
 @sentence
 @lu Ech muss Zigarette kafe goen.
@@ -403,14 +390,6 @@
 @distractor-en leave
 @distractor-lu waarden
 @distractor-lu goen
-
-@sentence
-@lu Wëllt Dir matgoen?
-@en Do you want to come along?
-@distractor-en pay
-@distractor-en smoke
-@distractor-lu bezuelen
-@distractor-lu fëmmen
 
 @sentence
 @lu Däerfs du d'Taart probéieren?

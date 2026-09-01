@@ -50,14 +50,6 @@
 @distractor-lu Stad
 
 @sentence
-@lu Op wéi engem Stack läit d'Appartement?
-@en On which floor is the apartment?
-@distractor-en price
-@distractor-en garden
-@distractor-lu Präis
-@distractor-lu Gaart
-
-@sentence
 @lu Et ass um Rez-de-chaussée.
 @en It is on the ground floor.
 @distractor-en attic

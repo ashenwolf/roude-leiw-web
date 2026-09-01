@@ -29,7 +29,6 @@
 # --- Frequency & sequence ---
 @word meeschtens = mostly
 @word reegelméisseg = regularly
-@word duerno = afterwards
 
 @sentence
 @lu Wat ass deng Mammesprooch?
@@ -380,14 +379,6 @@
 @distractor-en workplace
 @distractor-lu Infirmière
 @distractor-lu Aarbechtsplaz
-
-@sentence
-@lu Vu wou kënns du?
-@en Where do you come from?
-@distractor-en live
-@distractor-en what
-@distractor-lu wunns
-@distractor-lu Wat
 
 @sentence
 @lu Ech kommen aus der Ukrain.

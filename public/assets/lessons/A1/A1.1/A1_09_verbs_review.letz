@@ -23,18 +23,15 @@
 @lesson A1.09 "Verbs Review"
 
 # --- Action verbs ---
-@word schwätzen = to talk
 @word schwätzen = to speak
 @word ginn = to give
 @word hunn = to have
 @word sinn = to be
 @word wunnen = to live
-@word wunnen = to reside
 @word heeschen = to be called
 @word bréngen = to bring
 @word spillen = to play
 @word schaffen = to work
-@word maachen = to make
 @word maachen = to do
 @word goen = to go
 @word fueren = to drive
@@ -42,7 +39,6 @@
 
 # --- Modal verbs ---
 @word mussen = must
-@word mussen = have to
 @word kënnen = can
 @word wëllen = to want
 @word sollen = should
@@ -81,14 +77,6 @@
 @distractor-lu sinn
 
 @sentence
-@lu Hues du Kanner?
-@en Do you have children?
-@distractor-en are
-@distractor-en where
-@distractor-lu bass
-@distractor-lu Wou
-
-@sentence
 @lu Hien huet en Auto.
 @en He has a car.
 @distractor-en is
@@ -113,36 +101,12 @@
 @distractor-lu Wou
 
 @sentence
-@lu Wou wunns du?
-@en Where do you live?
-@distractor-en what
-@distractor-en work
-@distractor-lu Wat
-@distractor-lu schaffs
-
-@sentence
-@lu Ech wunnen zu Lëtzebuerg.
-@en I live in Luxembourg.
-@distractor-en work
-@distractor-en from
-@distractor-lu schaffen
-@distractor-lu aus
-
-@sentence
 @lu Hie wunnt an der Stad.
 @en He lives in the city.
 @distractor-en works
 @distractor-en village
 @distractor-lu schafft
 @distractor-lu Duerf
-
-@sentence
-@lu Wéi heeschs du?
-@en What are you called?
-@distractor-en where
-@distractor-en live
-@distractor-lu Wou
-@distractor-lu wunns
 
 @sentence
 @lu Ech heeschen Marie.
@@ -215,14 +179,6 @@
 @distractor-en village
 @distractor-lu fueren
 @distractor-lu Duerf
-
-@sentence
-@lu Wou gees du?
-@en Where are you going?
-@distractor-en what
-@distractor-en drive
-@distractor-lu Wat
-@distractor-lu fiers
 
 @sentence
 @lu Hie geet an d'Schoul.

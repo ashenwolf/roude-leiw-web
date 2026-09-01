@@ -16,30 +16,22 @@
 @word de Billjee = the ticket
 @word d'Billjeeën = the tickets
 @word d'Gare = the railway station
-@word de Quai = the platform
 @word den Départ = the departure
-@word d'Arrivée = the arrival
 @word d'Reservatioun = the reservation
 @word de Spezialtarif = the special fare
 @word de Virdeel = the advantage
-@word d'Virdeeler = the advantages
 
 # --- Verbs of travel ---
 @word fortfueren = to depart by vehicle
-@word ukommen = to arrive
 @word ëmklammen = to change trains
 @word eraklammen = to board
 @word erausklammen = to get off
 @word fortfléien = to depart by plane
-@word reservéieren = to reserve
 @word kaschten = to cost
 @word widderhuelen = to repeat
 
 # --- Describing the journey ---
-@word immens = extremely
-@word voll = full
 @word pünktlech = punctually
-@word natierlech = of course
 @word Lount dat sech? = Is it worth it?
 
 @sentence
@@ -145,14 +137,6 @@
 @distractor-en late
 @distractor-lu Zuch
 @distractor-lu spéit
-
-@sentence
-@lu Kënnt Dir dat widderhuelen, w.e.g.?
-@en Can you repeat that, please?
-@distractor-en reserve
-@distractor-en ticket
-@distractor-lu reservéieren
-@distractor-lu Billjee
 
 @sentence
 @lu Ech géif gär eng Reservatioun maachen.
@@ -267,14 +251,6 @@
 @distractor-en seven
 @distractor-lu fortfiert
 @distractor-lu siwen
-
-@sentence
-@lu Wéi vill kascht den Ticket?
-@en How much does the ticket cost?
-@distractor-en platform
-@distractor-en reservation
-@distractor-lu Quai
-@distractor-lu Reservatioun
 
 @sentence
 @lu Den Ticket kascht eenanzwanzeg Euro.

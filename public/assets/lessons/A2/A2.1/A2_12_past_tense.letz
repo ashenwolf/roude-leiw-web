@@ -18,24 +18,19 @@
 
 # --- Talking about the past ---
 @word d'Vergaangenheet = the past
-@word gëschter = yesterday
 @word virgëschter = the day before yesterday
 @word hënt = last night
 @word virdrun = before that
 @word gläichzäiteg = at the same time
 @word kuerz drop = shortly afterwards
-@word reegelméisseg = regularly
-@word nëmmen = only
 
 # --- Nouns from the deck ---
 @word d'Reunioun = the meeting
 @word d'Ausbildung = the training
 @word d'Nuechtiessen = the evening meal
-@word d'Mëttespaus = the lunch break
 
 # --- Verbs & expressions ---
 @word gebuer sinn = to be born
-@word ufänken = to start
 @word pendelen = to commute
 @word iwwernuechten = to stay overnight
 
