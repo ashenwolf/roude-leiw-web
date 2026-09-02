@@ -54,6 +54,40 @@ const BUCKET = process.env.R2_BUCKET ?? "roude-leiw-audio";
 const ASSETS_ROOT = "public/assets";
 const CONCURRENCY = 4;
 
+const credStatus = (value) => (value ? `set (${value.length} chars)` : "unset");
+
+/** One-line CI banner — never prints secret values. */
+const printSyncContext = (mode, extraLines = []) => {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  console.log(`Bucket:     ${BUCKET}${process.env.R2_BUCKET ? " (R2_BUCKET)" : " (default)"}`);
+  console.log(`Account:    ${accountId ?? "(unset — wrangler default)"}`);
+  console.log(`API token:  ${credStatus(process.env.CLOUDFLARE_API_TOKEN)}`);
+  console.log(`Mode:       ${mode}`);
+  extraLines.forEach((line) => console.log(line));
+};
+
+/** Dump the first wrangler result once so a Pages log shows 404 vs 403 vs auth. */
+const logFirstProbe = (() => {
+  let logged = false;
+  return (result) => {
+    if (logged) return;
+    logged = true;
+    const kind = result.ok
+      ? "ok"
+      : isAuthError(result)
+        ? "auth"
+        : isNotFound(result)
+          ? "not-found"
+          : "error";
+    console.log(`First probe: ${kind} (wrangler exit ${result.code})`);
+    const detail = `${result.stderr}\n${result.stdout}`.trim();
+    if (detail.length > 0) {
+      console.log(detail.split("\n").slice(0, 16).join("\n"));
+    }
+    console.log();
+  };
+})();
+
 // ---------------------------------------------------------------------------
 // CLI parsing
 // ---------------------------------------------------------------------------
@@ -194,9 +228,10 @@ const upload = async (target) => {
     return;
   }
 
-  console.log(`Bucket: ${BUCKET}`);
-  console.log(`Mode:   upload`);
-  console.log(`Files:  ${files.length}`);
+  printSyncContext("upload", [
+    `Files:      ${files.length}`,
+    `Sample key: ${localToR2Key(files[0])}`,
+  ]);
   console.log();
 
   let uploaded = 0;
@@ -255,11 +290,13 @@ const download = async (target, force) => {
     }
   }
 
-  console.log(`Bucket:  ${BUCKET}`);
-  console.log(`Mode:    download`);
-  console.log(`Lessons: ${letzFiles.length}`);
-  console.log(`Phrases: ${tasks.length}`);
-  if (force) console.log(`Force:   yes (will overwrite local files)`);
+  printSyncContext("download", [
+    `Lessons:    ${letzFiles.length}`,
+    `Phrases:    ${tasks.length}`,
+    `Sample key: ${tasks[0].key}`,
+    `Wrangler:   r2 object get ${BUCKET}/${tasks[0].key} --remote`,
+    ...(force ? ["Force:      yes (will overwrite local files)"] : []),
+  ]);
   console.log();
 
   let downloaded = 0;
@@ -285,6 +322,7 @@ const download = async (target, force) => {
 
     await mkdir(dirname(task.localPath), { recursive: true });
     const result = await r2Get(task.key, task.localPath);
+    logFirstProbe(result);
 
     if (result.ok) {
       console.log(`${prefix} ✓ pulled ${task.key}`);
