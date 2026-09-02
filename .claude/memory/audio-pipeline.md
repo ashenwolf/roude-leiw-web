@@ -1,10 +1,11 @@
 # Audio pipeline — Sproochmaschinn TTS, R2 as source of truth
 
-**Status: generated and backed up, but NOT wired into the build and NOT consumed
-by the app.** The `prebuild` hook was removed — it wasted ~30 s and emitted R2 403
-noise on machines without credentials, for files nothing reads yet. Restore the
-hook (or replace it with a Worker route serving R2) when the app starts playing
-mp3s.
+**Status: question audio is live — generated, backed up, and played by the app.**
+SentenceBuilder auto-plays a question's mp3 on arrival and offers a replay button
+(`useQuestionAudio` in `src/exercise/SentenceBuilder/index.tsx`). Sentence (`@lu`)
+audio remains generated-but-unconsumed. The `prebuild` hook is restored, scoped to
+`public/assets/exam` — that is the only tree the app reads audio from today;
+widen it when sentence audio ships.
 
 Commands are in CLAUDE.md; scripts are `scripts/{generate,sync}-audio.mjs`.
 
@@ -54,6 +55,21 @@ time.
 
 R2 is the durable backup and egress inside Cloudflare is free, so build-time
 fetching is essentially free.
+
+## Playback: URL derived at the load edge, optimistic
+
+`fetchLetzFile` stamps `questionAudioUrl` onto each question-carrying
+`SentenceEntry` (`<letz-dir>/audio/questions/<slug>.mp3`) — the loader is the only
+place that knows where the file was served from, and both catalogs (course + exam)
+share it, so Fix Errors' rebuilt Q&A phrases carry the URL for free via the error
+pool's stored entries. `src/lib/audio-slug.ts` duplicates the scripts' slugify
+(plain-Node tree stays import-free from the app); a parity test walks the real
+question corpus with both implementations — divergence is a silent 404, which is
+also why the URL is optimistic: nothing verifies the file exists, the player
+swallows the rejection. Browser autoplay policy can veto the first auto-play
+before any gesture on the page; the replay button is the designed fallback, not a
+nice-to-have. mp3s are deliberately NOT in the service-worker `globPatterns` —
+on-demand fetch, not precache.
 
 ## Slugs are deterministic from the phrase
 

@@ -36,6 +36,11 @@ export type SentenceBuilderItem = {
    * `resolveSentenceDirection`).
    */
   question?: string;
+  /**
+   * Pre-generated audio of `question`, played on arrival and replayable via
+   * the speaker button. Absent when no question or when the slug is empty.
+   */
+  questionAudioUrl?: string;
 };
 
 /** Assemble a sentence from token tiles. One Step per submit. */

@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
 import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
+import { SpeakerHighIcon } from "../../ui/icons";
 import { toWordResultMap } from "./sentence-logic";
 import { useSentenceGame } from "./use-sentence-game";
 
@@ -15,6 +16,35 @@ type Props = {
   item: SentenceBuilderItem;
   onResult: (results: WordResultMap) => void;
   onInteraction?: () => void;
+};
+
+/**
+ * Owns the question's <audio> element: plays once on arrival (browser autoplay
+ * policy may veto the first one before any user gesture — the returned replay
+ * handler is the fallback), stops on unmount so audio never bleeds into the
+ * next Slot. A 404 (file not yet generated) rejects play() and is ignored the
+ * same way as an autoplay veto.
+ */
+const useQuestionAudio = (url: string | undefined) => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (url === undefined) return;
+    const audio = new Audio(url);
+    audioRef.current = audio;
+    audio.play().catch(() => {});
+    return () => {
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, [url]);
+
+  return () => {
+    const audio = audioRef.current;
+    if (audio === null) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  };
 };
 
 type AssembledRowProps = {
@@ -67,6 +97,7 @@ const AssembledRow = ({ tokens, assembled, status, onTap }: AssembledRowProps) =
 
 export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const { state, tapToken, tapAssembled, submit } = useSentenceGame(item);
+  const playQuestion = useQuestionAudio(item.questionAudioUrl);
 
   const handleTapToken = (idx: number) => {
     onInteraction?.();
@@ -100,9 +131,21 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
     <div className="flex flex-col flex-1">
       <ExerciseAnswerArea className="gap-3">
         {item.question !== undefined && (
-          <p className="text-center text-xl font-bold text-gray-900 px-2">
-            {item.question}
-          </p>
+          <div className="flex items-center justify-center gap-2 px-2">
+            <p className="text-center text-xl font-bold text-gray-900">
+              {item.question}
+            </p>
+            {item.questionAudioUrl !== undefined && (
+              <button
+                type="button"
+                onClick={playQuestion}
+                aria-label="Play question audio"
+                className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
+              >
+                <SpeakerHighIcon className="w-6 h-6" />
+              </button>
+            )}
+          </div>
         )}
         <p
           className={

@@ -42,6 +42,14 @@ export type SentenceEntry = {
   enVariants: string[];
   /** Examiner-style question (in Luxembourgish) this sentence answers — exam-track Q&A. */
   question?: string;
+  /**
+   * URL of the question's pre-generated audio, stamped by `fetchLetzFile` from
+   * the .letz file's own directory (`<dir>/audio/questions/<slug>.mp3`). The
+   * parser never sets it — audio location is a serving concern, and only the
+   * loader knows where the file came from. Optimistic: derived, not verified;
+   * the player treats a 404 as "no audio".
+   */
+  questionAudioUrl?: string;
   distractorsEn?: string[];
   distractorsLu?: string[];
 };

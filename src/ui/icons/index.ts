@@ -12,6 +12,7 @@ export { LockIcon } from "./LockIcon";
 export { MoonIcon } from "./MoonIcon";
 export { RefreshIcon } from "./RefreshIcon";
 export { ShuffleIcon } from "./ShuffleIcon";
+export { SpeakerHighIcon } from "./SpeakerHighIcon";
 export { ThumbsDownIcon } from "./ThumbsDownIcon";
 export { ThumbsUpIcon } from "./ThumbsUpIcon";
 export { TrophyIcon } from "./TrophyIcon";

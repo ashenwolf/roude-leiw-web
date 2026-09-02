@@ -1,4 +1,5 @@
 import { parseLetzContent } from "./letz-parser";
+import { questionAudioUrl } from "../lib/audio-slug";
 
 import type { Lesson } from "./letz-parser";
 
@@ -102,6 +103,12 @@ export const loadLessonsUpToCursor = async (
 /**
  * Fetch and parse any .letz file by URL. Shared by the course catalog (below)
  * and the exam catalog (src/exam/exam-catalog.ts).
+ *
+ * Stamps each question-carrying sentence with its pre-generated audio URL
+ * (`<letz-dir>/audio/questions/<slug>.mp3`) — the loader is the only place
+ * that knows where the file was served from, so the URL is derived here, at
+ * the edge, and everything downstream (builders, Fix Errors' rebuild) just
+ * carries it.
  */
 export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Lesson> => {
   const response = await fetch(url);
@@ -109,7 +116,16 @@ export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Le
     throw new Error(`Failed to fetch lesson ${url}: ${response.statusText}`);
   }
   const content = await response.text();
-  return await parseLetzContent(content, fallbackId);
+  const lesson = await parseLetzContent(content, fallbackId);
+  const letzDir = url.slice(0, url.lastIndexOf("/"));
+  return {
+    ...lesson,
+    sentences: lesson.sentences.map((sentence) =>
+      sentence.question !== undefined
+        ? { ...sentence, questionAudioUrl: questionAudioUrl(letzDir, sentence.question) }
+        : sentence,
+    ),
+  };
 };
 
 /**

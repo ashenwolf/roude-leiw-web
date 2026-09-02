@@ -157,6 +157,7 @@ export const buildSentenceExercise = (
     // repeat the exact direction the user struggled with.
     phraseKey: phraseKey(direction, entry.enVariants[0]),
     ...(entry.question !== undefined ? { question: entry.question } : {}),
+    ...(entry.questionAudioUrl !== undefined ? { questionAudioUrl: entry.questionAudioUrl } : {}),
   };
 
   return { type: "sentence-builder", item };
