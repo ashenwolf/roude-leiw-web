@@ -136,6 +136,11 @@ the build log.
   ~0.5 s CLI boot per call) but needs R2 access keys — an extra dashboard step and
   an extra secret — plus a heavyweight dep. Concurrency 4 amortizes the boot cost,
   measured at a ~4× speedup on a full lesson's worth of files.
+- **List-then-get on download:** the catalog has ~2000 expected slugs and only
+  ~1000 generated mp3s. Probing each missing key via wrangler is a 404 that still
+  costs ~1 s and blows the Pages 20-minute timeout. Download lists the bucket
+  once (REST, same call `prune-audio` uses) and only `wrangler r2 object get`s
+  keys that exist. No inventory (token missing) falls back to per-file probe.
 
 ## CI auth
 

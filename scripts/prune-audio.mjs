@@ -32,41 +32,16 @@ import process from "node:process";
 import { dirname, join, relative, resolve, sep } from "node:path";
 
 import { expectedSlugsForLetz, findLetzFiles } from "./lib/letz-audio.mjs";
+import { listR2Keys } from "./lib/r2.mjs";
 
 const BUCKET = process.env.R2_BUCKET ?? "roude-leiw-audio";
 const ASSETS_ROOT = "public/assets";
 const API_BASE = "https://api.cloudflare.com/client/v4";
 
-// ---------------------------------------------------------------------------
-// Cloudflare R2 REST client
-// ---------------------------------------------------------------------------
-
-const authHeaders = (token) => ({ Authorization: `Bearer ${token}` });
-
-/** List every object key in the bucket, following pagination cursors. */
-const listAllKeys = async (accountId, token, cursor = undefined, acc = []) => {
-  const params = new URLSearchParams({ per_page: "1000", ...(cursor ? { cursor } : {}) });
-  const response = await fetch(
-    `${API_BASE}/accounts/${accountId}/r2/buckets/${BUCKET}/objects?${params}`,
-    { headers: authHeaders(token) },
-  );
-  if (!response.ok) {
-    throw new Error(`R2 list failed: HTTP ${response.status}: ${await response.text()}`);
-  }
-  const payload = await response.json();
-  if (!payload.success) {
-    throw new Error(`R2 list failed: ${JSON.stringify(payload.errors)}`);
-  }
-  const keys = [...acc, ...payload.result.map((obj) => obj.key)];
-  return payload.result_info?.is_truncated
-    ? listAllKeys(accountId, token, payload.result_info.cursor, keys)
-    : keys;
-};
-
 const deleteKey = async (accountId, token, key) => {
   const response = await fetch(
     `${API_BASE}/accounts/${accountId}/r2/buckets/${BUCKET}/objects/${encodeURIComponent(key)}`,
-    { method: "DELETE", headers: authHeaders(token) },
+    { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
   );
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}: ${await response.text()}`);
@@ -117,7 +92,7 @@ const main = async () => {
 
   const [expected, remoteKeys] = await Promise.all([
     expectedKeys(),
-    listAllKeys(accountId, token),
+    listR2Keys({ accountId, token, bucket: BUCKET }),
   ]);
 
   const mp3Keys = remoteKeys.filter((key) => key.endsWith(".mp3"));

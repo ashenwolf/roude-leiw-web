@@ -27,8 +27,8 @@
  *           re-uploading is safe.
  *
  * download  Reads each .letz file under the target, derives the expected
- *           slugs, and pulls any missing audio from R2. 404s are treated as
- *           "not yet generated" and skipped without failing.
+ *           slugs, lists the bucket once, and pulls only keys that exist.
+ *           Never-generated slugs are skipped without a per-file 404.
  *
  * Setup
  * -----
@@ -47,8 +47,8 @@ import {
   findLetzFiles,
   findMp3Files,
   pathExists,
-  shortLabel,
 } from "./lib/letz-audio.mjs";
+import { classifyAudioDownload, listR2Keys } from "./lib/r2.mjs";
 
 const BUCKET = process.env.R2_BUCKET ?? "roude-leiw-audio";
 const ASSETS_ROOT = "public/assets";
@@ -179,6 +179,20 @@ const isNotFound = (result) =>
 const isAuthError = (result) =>
   /not authenticated|unauthorized|please run.*login|authentication/i.test(result.stderr);
 
+const loadRemoteKeys = async () => {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const token = process.env.CLOUDFLARE_API_TOKEN;
+  if (!accountId || !token) return null;
+  try {
+    const keys = await listR2Keys({ accountId, token, bucket: BUCKET });
+    return new Set(keys);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.warn(`⚠  Could not list R2 objects — falling back to per-file get.\n   ${msg}`);
+    return null;
+  }
+};
+
 // ---------------------------------------------------------------------------
 // Concurrency helper
 // ---------------------------------------------------------------------------
@@ -290,11 +304,13 @@ const download = async (target, force) => {
     }
   }
 
+  const remoteKeys = await loadRemoteKeys();
+
   printSyncContext("download", [
     `Lessons:    ${letzFiles.length}`,
     `Phrases:    ${tasks.length}`,
+    `Inventory:  ${remoteKeys === null ? "unavailable (will probe each key)" : `${remoteKeys.size} objects`}`,
     `Sample key: ${tasks[0].key}`,
-    `Wrangler:   r2 object get ${BUCKET}/${tasks[0].key} --remote`,
     ...(force ? ["Force:      yes (will overwrite local files)"] : []),
   ]);
   console.log();
@@ -309,14 +325,23 @@ const download = async (target, force) => {
     const prefix = `[${i + 1}/${tasks.length}]`;
 
     if (authMissing) {
-      // Don't keep retrying once we know auth is broken; just skip the rest.
       missing += 1;
       return;
     }
 
-    if (!force && (await pathExists(task.localPath))) {
+    const localExists = await pathExists(task.localPath);
+    const remoteHas = remoteKeys === null ? null : remoteKeys.has(task.key);
+    const action = classifyAudioDownload({ force, localExists, remoteHas });
+
+    if (action === "have") {
       console.log(`${prefix} • have   ${task.key}`);
       skipped += 1;
+      return;
+    }
+
+    if (action === "absent") {
+      console.log(`${prefix} · absent ${task.key}`);
+      missing += 1;
       return;
     }
 
