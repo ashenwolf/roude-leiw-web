@@ -44,3 +44,7 @@ dist-ssr
 # Only the optimized WebP derived from them (16:9, <=880px) is, under
 # public/assets/exam/<theme>/.../img/. See .claude/memory/picture-description-theme.md
 public/assets/tmp/
+
+# Audio sneakernet archive — `npm run pack-audio` output. Regenerable from the
+# local mp3 corpus, so it is transferred by scp, never committed.
+/audio-transfer/

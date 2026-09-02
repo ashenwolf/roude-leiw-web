@@ -9,7 +9,7 @@
  *
  * Usage
  * -----
- *   npm run pack-audio                       # -> .agents/audio-transfer/roude-leiw-audio.tar
+ *   npm run pack-audio                       # -> audio-transfer/roude-leiw-audio.tar
  *   npm run pack-audio -- path/to/out.tar    # explicit destination
  *   npm run pack-audio -- --root public/assets/lessons/A1   # pack a subtree only
  *
@@ -32,7 +32,7 @@ import process from "node:process";
 
 import { findMp3Files } from "./lib/letz-audio.mjs";
 
-const DEFAULT_OUTPUT = ".agents/audio-transfer/roude-leiw-audio.tar";
+const DEFAULT_OUTPUT = "audio-transfer/roude-leiw-audio.tar";
 const DEFAULT_ROOT = "public/assets";
 
 const REPO_ROOT = resolve(import.meta.dirname, "..");
