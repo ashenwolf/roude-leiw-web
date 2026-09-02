@@ -1,0 +1,634 @@
+# Exam track — Theme: De Stot — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass. The point is that the learner
+# rehearses what they will actually say in the Sproochentest.
+#
+# Question order follows the reported real exam: the examiner opened on the
+# PARENTS' household (how long the candidate lived there, which chores were
+# theirs versus their parents', whether they helped), then moved to the present
+# household, the cleaning lady and why there is none, and how cleaning feels.
+# That cluster is answered first and in the most depth.
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional, obwuel-contrast, léiwer-wéi comparative, fir…ze purpose,
+# dofir inversion, wärenddeems-temporal, a duration, a frequency adverb, a past
+# participle, a number, and an Ech-mengen hedge.
+
+@lesson W1.03 "Talking About Household Chores"
+
+@word d'Kand = the child
+@word de Mann = the husband
+@word d'Universitéit = the university
+@word d'Woch = the week
+@word de Supermarché = the supermarket
+@word d'Aarbecht = the work
+@word d'Hëllef = the help
+@word d'Kleeder = the clothes
+@word d'Saach = the thing
+@word de Kapp = the head
+@word d'Kaméidi = the noise
+@word de Kopfhörer = the headphones
+@word d'Musek = the music
+@word de Podcast = the podcast
+@word de Handwierker = the workman
+@word d'Kommissioun = the errand
+@word de Maart = the market
+@word d'Temperatur = the temperature
+@word d'Këscht = the box
+@word studéieren = to study
+@word erausplënneren = to move out
+@word wunnen = to live
+@word akafen = to do the shopping
+@word bestellen = to order
+@word bezuelen = to pay
+@word spueren = to save
+@word oppassen = to pay attention
+@word ruffen = to call
+@word iwwerflächlech = superficial
+@word gemaach = done
+@word gewunnt = lived
+@word gehat = had
+@word midd = tired
+
+# --- The parents' household: the real exam's opening cluster ---
+
+@sentence
+@question Wéi laang hutt Dir mat Ären Eltere gewunnt?
+@lu Ech hu bis siwwenzéng Joer mat mengen Eltere gewunnt.
+@distractor-lu Kanner
+@distractor-lu eleng
+@en I lived with my parents until seventeen years of age.
+@distractor-en children
+@distractor-en alone
+
+@sentence
+@question Wéini sidd Dir doheem erausgeplënnert?
+@lu Ech si mat siwwenzéng Joer erausgeplënnert, well ech op der Universitéit studéiert hunn.
+@distractor-lu geschafft
+@distractor-lu Aarbecht
+@en I moved out at seventeen years of age because I studied at university.
+@distractor-en worked
+@distractor-en work
+
+@sentence
+@question Hutt Dir Ären Elteren am Stot gehollef?
+@lu Jo, ech hunn hinne gehollef, mee net all Dag.
+@distractor-lu Nee
+@distractor-lu dacks
+@en Yes, I helped them, but not every day.
+@distractor-en No
+@distractor-en often
+
+@sentence
+@question Wéi eng Aufgaben hutt Dir am Stot gemaach, a wéi eng hunn Är Eltere gemaach?
+@lu Ech hu mäi Zëmmer gebotzt, a meng Eltere hunn de Rescht vun der Wunneng gemaach.
+@distractor-lu Gaart
+@distractor-lu Botzfra
+@en I cleaned my room, and my parents did the rest of the apartment.
+@distractor-en garden
+@distractor-en cleaner
+
+@sentence
+@question Hutt Dir bei Ären Elteren och gekacht?
+@lu Ech hunn heiansdo mat menger Mamm gekacht, mee ech hu ni eleng gekacht.
+@distractor-lu ëmmer
+@distractor-lu gebotzt
+@en I sometimes cooked with my mother, but I never cooked alone.
+@distractor-en always
+@distractor-en cleaned
+
+@sentence
+@question Wéi eng Aufgaben hutt Dir gär gemaach?
+@lu Ganz éierlech: ech hu keng Aufgab am Stot gär gemaach.
+@distractor-lu alles
+@distractor-lu kachen
+@en Quite honestly: I did not like doing any task in the household.
+@distractor-en everything
+@distractor-en cooking
+
+@sentence
+@question Firwat hutt Dir de Stot deemools net gär gemaach?
+@lu Ech hunn de Stot gemaach, well et néideg war, an net well et Spaass mécht.
+@distractor-lu angeneem
+@distractor-lu Hëllef
+@en I did the household chores because it was necessary, and not because it is fun.
+@distractor-en pleasant
+@distractor-en help
+
+# --- Today's household ---
+
+@sentence
+@question Mat wiem wunnt Dir?
+@lu Ech wunne mat menger Fra, a mir hunn e Hond.
+@distractor-lu eleng
+@distractor-lu Kaz
+@en I live with my wife, and we have a dog.
+@distractor-en alone
+@distractor-en cat
+
+@sentence
+@question Wunnt Dir eleng?
+@lu Nee, ech wunnen net eleng, mee mir hu keng Kanner.
+@distractor-lu Jo
+@distractor-lu Eltere
+@en No, I do not live alone, but we have no children.
+@distractor-en Yes
+@distractor-en parents
+
+@sentence
+@question Wéi eng Aufgabe gëtt et bei Iech am Stot?
+@lu Bei eis gëtt et botzen, kachen, d'Wäsch, d'Geschier an de Gaart.
+@distractor-lu strecken
+@distractor-lu Botzfra
+@en At our place there is cleaning, cooking, the laundry, the dishes and the garden.
+@distractor-en ironing
+@distractor-en cleaner
+
+@sentence
+@question Wien hëlleft Iech de Stot ze maachen?
+@lu Meng Fra an ech maachen de Stot zesummen, a keen hëlleft eis.
+@distractor-lu Botzfra
+@distractor-lu Kanner
+@en My wife and I do the household chores together, and nobody helps us.
+@distractor-en cleaner
+@distractor-en children
+
+@sentence
+@question Wéi deelt Dir d'Aufgabe mat Ärer Fra?
+@lu Mir probéiere keng fest Trennung ze hunn, well mir déiselwecht Verantwortung wëllen.
+@distractor-lu Botzfra
+@distractor-lu deier
+@en We try not to have a fixed separation, because we want the same responsibility.
+@distractor-en cleaner
+@distractor-en expensive
+
+@sentence
+@question Wat mécht Är Fra, a wat maacht Dir?
+@lu Meng Fra kacht méi, an ech maachen d'Reparaturen an droen de Dreck eraus.
+@distractor-lu strecken
+@distractor-lu Blummen
+@en My wife cooks more, and I do the repairs and carry the trash outside.
+@distractor-en irons
+@distractor-en flowers
+
+@sentence
+@question Botzt Dir zwee gläich vill?
+@lu Mir botze gläich vill, an dat fanne mir wichteg.
+@distractor-lu manner
+@distractor-lu langweileg
+@en We clean equally much, and we find that important.
+@distractor-en less
+@distractor-en boring
+
+@sentence
+@question Wéini maacht Dir de Stot?
+@lu Ech maachen de Stot e puer Mol an der Woch owes, an de gréissten Deel de Weekend.
+@distractor-lu moies
+@distractor-lu ni
+@en I do the household chores a few times a week in the evening, and the biggest part at the weekend.
+@distractor-en morning
+@distractor-en never
+
+@sentence
+@question Wéi dacks maacht Dir de Stot?
+@lu Dräi bis véier Mol an der Woch maachen ech eppes am Stot.
+@distractor-lu Joer
+@distractor-lu seelen
+@en Three to four times a week I do something in the household.
+@distractor-en year
+@distractor-en rarely
+
+# --- The cleaning lady: advantages and disadvantages ---
+
+@sentence
+@question Hutt Dir eng Botzfra? Wann nee, firwat net?
+@lu Mir hu keng Botzfra méi, well mir no dem Plënneren nach keng gutt fonnt hunn.
+@distractor-lu Jo
+@distractor-lu Firma
+@en We no longer have a cleaning lady, because after the move we have not yet found a good one.
+@distractor-en Yes
+@distractor-en company
+
+@sentence
+@question Hutt Dir fréier eng Botzfra gehat?
+@lu Jo, an eiser aler Wunneng hate mir eng Botzfra.
+@distractor-lu Handwierker
+@distractor-lu ni
+@en Yes, in our old apartment we had a cleaning lady.
+@distractor-en workman
+@distractor-en never
+
+@sentence
+@question Wat sinn d'Virdeeler vun enger Botzfra?
+@lu De gréisste Virdeel ass, datt mir dann net botze mussen, well kee vun eis dat gär mécht.
+@distractor-lu Nodeel
+@distractor-lu bëlleg
+@en The biggest advantage is that we then do not have to clean, because neither of us likes doing that.
+@distractor-en disadvantage
+@distractor-en cheap
+
+@sentence
+@question Wat sinn d'Nodeeler vun enger Botzfra?
+@lu Eng Botzfra ass net bëlleg, dofir kënne mir se net all Woch bezuelen.
+@distractor-lu Virdeel
+@distractor-lu propper
+@en A cleaning lady is not cheap, that is why we cannot pay her every week.
+@distractor-en advantage
+@distractor-en clean
+
+@sentence
+@question Wat huet Är Botzfra gemaach?
+@lu Si huet gestaubsaugt, de Buedem gebotzt an d'Buedzëmmer propper gemaach.
+@distractor-lu gekacht
+@distractor-lu Gaart
+@en She vacuumed, cleaned the floor and made the bathroom clean.
+@distractor-en cooked
+@distractor-en garden
+
+@sentence
+@question Sicht Dir eng nei Botzfra?
+@lu Jo, mir sichen nach eng gutt Botzfra, mee bis dohinner botze mir selwer.
+@distractor-lu Handwierker
+@distractor-lu ni
+@en Yes, we are still looking for a good cleaning lady, but until then we clean ourselves.
+@distractor-en workman
+@distractor-en never
+
+# --- How cleaning feels ---
+
+@sentence
+@question Maacht Dir gär de Stot? Firwat oder firwat net?
+@lu Ech maachen de Stot net gär, well et langweileg an ustrengend ass.
+@distractor-lu angeneem
+@distractor-lu spannend
+@en I do not like doing the household chores, because it is boring and exhausting.
+@distractor-en pleasant
+@distractor-en exciting
+
+@sentence
+@question Wéi fillt Dir Iech, wann Dir gebotzt hutt?
+@lu No dem Botzen sinn ech midd, mee eng propper Wunneng mécht de Kapp fräi.
+@distractor-lu knaschteg
+@distractor-lu Stëbs
+@en After cleaning I am tired, but a clean apartment clears the head.
+@distractor-en dirty
+@distractor-en dust
+
+@sentence
+@question Wéi eng Hausaarbecht fannt Dir ustrengend? Firwat?
+@lu Ech fannen de Buedem opbotzen a stëbsen ustrengend, well se lang daueren.
+@distractor-lu angeneem
+@distractor-lu séier
+@en I find mopping the floor and dusting exhausting, because they take long.
+@distractor-en pleasant
+@distractor-en fast
+
+@sentence
+@question Wat ass Är Liblingshausaarbecht? Firwat?
+@lu Ech raume gär Këschte mat ale Saachen op, well ech da vill ewechgeheien.
+@distractor-lu stëbsen
+@distractor-lu langweileg
+@en I like tidying up boxes with old things, because I then throw a lot away.
+@distractor-en dusting
+@distractor-en boring
+
+@sentence
+@question Lauschtert Dir Musek, wann Dir de Stot maacht?
+@lu Jo, ech lauschtere Musek oder e Podcast, mee net beim Staubsaugen.
+@distractor-lu ëmmer
+@distractor-lu Kopfhörer
+@en Yes, I listen to music or a podcast, but not while vacuuming.
+@distractor-en always
+@distractor-en headphones
+
+@sentence
+@question Firwat lauschtert Dir beim Staubsaugen keng Musek?
+@lu De Staubsauger mécht ze vill Kaméidi, dofir héieren ech déi Musek net.
+@distractor-lu roueg
+@distractor-lu Biesem
+@en The vacuum cleaner makes too much noise, that is why I do not hear the music.
+@distractor-en quiet
+@distractor-en broom
+
+# --- Dishwasher, laundry, ironing ---
+
+@sentence
+@question Hutt Dir eng Spullmaschinn? Wie raumt se an an aus?
+@lu Mir hunn eng Spullmaschinn, a meeschtens raumen ech se an.
+@distractor-lu Fra
+@distractor-lu ni
+@en We have a dishwasher, and mostly I load it.
+@distractor-en wife
+@distractor-en never
+
+@sentence
+@question Firwat raumt Dir d'Spullmaschinn an?
+@lu Ech raume se an, well ech d'Geschier méi effizient stellen.
+@distractor-lu lues
+@distractor-lu Fra
+@en I load it because I place the dishes more efficiently.
+@distractor-en slowly
+@distractor-en wife
+
+@sentence
+@question Wat sinn d'Virdeeler vun enger Spullmaschinn?
+@lu Ech verléiere keng Zäit mam Geschier, an ech mengen, si brauch manner Waasser wéi ech.
+@distractor-lu méi
+@distractor-lu Stëbs
+@en I lose no time with the dishes, and I think it needs less water than I do.
+@distractor-en more
+@distractor-en dust
+
+@sentence
+@question Wéi dacks maacht Dir d'Wäsch?
+@lu Mir maachen d'Wäsch all zwee bis dräi Deeg, a meeschtens mécht meng Fra se.
+@distractor-lu Wochen
+@distractor-lu ech
+@en We do the laundry every two to three days, and mostly my wife does it.
+@distractor-en weeks
+@distractor-en I
+
+@sentence
+@question Wäscht Dir Är Kleeder separat? Wéi trennt Dir se?
+@lu Mir trennen d'Kleeder no Faarf an no Temperatur, mee net ganz genau.
+@distractor-lu ni
+@distractor-lu Këscht
+@en We separate the clothes by colour and by temperature, but not very exactly.
+@distractor-en never
+@distractor-en box
+
+@sentence
+@question Op wat muss ee beim Wäschen oppassen?
+@lu Ech passen op déi richteg Temperatur op, fir déi hell Kleeder net ze ruinéieren.
+@distractor-lu Bett
+@distractor-lu kachen
+@en I pay attention to the right temperature, in order not to ruin the light clothes.
+@distractor-en bed
+@distractor-en cook
+
+@sentence
+@question Streckt Dir? Wéi dacks? Streckt Dir gär?
+@lu Ech strecke seelen, an ech maachen dat guer net gär.
+@distractor-lu dacks
+@distractor-lu Zäit
+@en I iron rarely, and I do not like doing that at all.
+@distractor-en often
+@distractor-en time
+
+# --- Daily routine, weekend, and no time ---
+
+@sentence
+@question Nennt dräi Saachen, déi Dir all Dag am Stot maacht.
+@lu All Dag maachen ech de Kaffi, ech raumen d'Spullmaschinn an an ech fiddere den Hond.
+@distractor-lu strecken
+@distractor-lu weekends
+@en Every day I make the coffee, I load the dishwasher and I feed the dog.
+@distractor-en iron
+@distractor-en Saturday
+
+@sentence
+@question Wéi eng Hausaarbechte maacht Dir just de Weekend?
+@lu De Weekend staubsaugen ech, ech botzen de Buedem, ech maachen d'Wäsch an ech schaffen am Gaart.
+@distractor-lu moies
+@distractor-lu Kaffi
+@en At the weekend I vacuum, I clean the floor, I do the laundry and I work in the garden.
+@distractor-en morning
+@distractor-en coffee
+
+@sentence
+@question Wéi oft staubsaugt Dir d'Wunneng?
+@lu Ech staubsaugen d'Wunneng eemol an der Woch, meeschtens samschdes.
+@distractor-lu Joer
+@distractor-lu ni
+@en I vacuum the apartment once a week, mostly on Saturdays.
+@distractor-en year
+@distractor-en never
+
+@sentence
+@question Wéi oft botzt Dir d'Fënstere vum Haus?
+@lu D'Fënstere botzen ech ganz seelen, villäicht zweemol am Joer.
+@distractor-lu Woch
+@distractor-lu dacks
+@en I clean the windows very rarely, maybe twice a year.
+@distractor-en week
+@distractor-en often
+
+@sentence
+@question Wat maacht Dir, wann Dir keng Zäit hutt fir ze botzen?
+@lu Wann ech keng Zäit hunn, botzen ech just iwwerflächlech, an de Rescht waart op de Weekend.
+@distractor-lu ëmmer
+@distractor-lu Botzfra
+@en When I have no time, I clean only superficially, and the rest waits for the weekend.
+@distractor-en always
+@distractor-en cleaner
+
+@sentence
+@question Wéi haalt Dir Är Wunneng propper?
+@lu Ech raume kleng Saache jeden Dag op, an de Weekend botze mir d'ganz Wunneng am Fong.
+@distractor-lu knaschteg
+@distractor-lu Gaart
+@en I tidy up small things every day, and at the weekend we clean the whole apartment thoroughly.
+@distractor-en dirty
+@distractor-en garden
+
+@sentence
+@question Wat braucht Dir fir de Stot ze maachen?
+@lu Ech brauche de Staubsauger, d'Mopp, en Eemer a gutt Botzmëttel.
+@distractor-lu Streckeisen
+@distractor-lu Musek
+@en I need the vacuum cleaner, the mop, a bucket and good cleaning agents.
+@distractor-en iron
+@distractor-en music
+
+@sentence
+@question Wat braucht Dir fir d'Buedzëmmer ze botzen?
+@lu Fir d'Buedzëmmer brauch ech e Schwamm, eng Fatz an Händsch.
+@distractor-lu Biesem
+@distractor-lu Wäschmëttel
+@en For the bathroom I need a sponge, a cloth and gloves.
+@distractor-en broom
+@distractor-en detergent
+
+# --- Shopping, garden, repairs, bad habits ---
+
+@sentence
+@question Wie geet akafen a mécht d'Kommissiounen?
+@lu Mir gi meeschtens zesummen akafen, an dat gefält mir besser.
+@distractor-lu eleng
+@distractor-lu Botzfra
+@en We mostly go shopping together, and I like that better.
+@distractor-en alone
+@distractor-en cleaner
+
+@sentence
+@question Wou maacht Dir d'Kommissiounen?
+@lu Mir kafen am Pall Center nieft dem Haus oder am Cactus an.
+@distractor-lu Maart
+@distractor-lu online
+@en We shop at the Pall Center next to the house or at Cactus.
+@distractor-en market
+@distractor-en online
+
+@sentence
+@question Kaaft Dir och online? Wat sinn d'Virdeeler?
+@lu Ech bestellen eng Partie Saachen op Amazon, well dat Zäit spuert.
+@distractor-lu Nodeel
+@distractor-lu Maart
+@en I order a number of things on Amazon, because that saves time.
+@distractor-en disadvantage
+@distractor-en market
+
+@sentence
+@question Kaaft Dir och Bioprodukter? Firwat oder firwat net?
+@lu Mir probéiere Bioprodukter ze kafen, obwuel se méi deier sinn.
+@distractor-lu bëlleg
+@distractor-lu ni
+@en We try to buy organic products, although they are more expensive.
+@distractor-en cheap
+@distractor-en never
+
+@sentence
+@question Hutt Dir e Gaart? Wie schafft am Gaart?
+@lu Mir hunn e ganz klenge Gaart: meng Fra këmmert sech ëm d'Blummen, an ech méien d'Gras.
+@distractor-lu grouss
+@distractor-lu Bett
+@en We have a very small garden: my wife takes care of the flowers, and I mow the grass.
+@distractor-en big
+@distractor-en bed
+
+@sentence
+@question Wat maacht Dir, wann eppes am Haus futti ass?
+@lu Wann ech eppes selwer reparéiere kann, maachen ech dat, soss ruffe mir eng Firma.
+@distractor-lu Botzfra
+@distractor-lu ni
+@en When I can repair something myself, I do that, otherwise we call a company.
+@distractor-en cleaner
+@distractor-en never
+
+@sentence
+@question Wat maacht Dir am oder fir d'Haus ausser botzen?
+@lu Ausser botze maachen ech kleng Reparaturen, ech schaffen am Gaart an ech gi mam Hond spadséieren.
+@distractor-lu strecken
+@distractor-lu Kaffi
+@en Apart from cleaning I do small repairs, I work in the garden and I go walking with the dog.
+@distractor-en iron
+@distractor-en coffee
+
+@sentence
+@question Wéi eng schlecht Gewunnechten hutt Dir am Stot?
+@lu Heiansdo loossen ech d'Geschier iwwer Nuecht am Lavabo stoen.
+@distractor-lu ëmmer
+@distractor-lu propper
+@en Sometimes I leave the dishes in the basin overnight.
+@distractor-en always
+@distractor-en clean
+
+@sentence
+@question Wien ass bei Iech responsabel fir ze kachen?
+@lu Meng Fra kacht méi dacks, mee ech hëllefen, an de Weekend kache mir zesummen.
+@distractor-lu ni
+@distractor-lu Botzfra
+@en My wife cooks more often, but I help, and at the weekend we cook together.
+@distractor-en never
+@distractor-en cleaner
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech maachen de Stot net gär, [well] et langweileg ass.
+@en I do not like doing the household chores, [because] it is boring.
+@distractor-lu ouni
+@distractor-lu duerch
+@distractor-en without
+@distractor-en through
+
+@fill
+@lu [Wann] ech keng Zäit hunn, botzen ech just iwwerflächlech.
+@en [When] I have no time, I clean only superficially.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu [Obwuel] mir keng Botzfra hunn, ass d'Wunneng propper.
+@en [Although] we have no cleaning lady, the apartment is clean.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu Ech geheie léiwer al Saachen ewech [wéi] stëbsen.
+@en I prefer throwing old things away [to] dusting.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech droen Händsch, [fir] d'Buedzëmmer ze botzen.
+@en I wear gloves [in order to] clean the bathroom.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu De Staubsauger ass ze haart, [dofir] lauschteren ech da keng Musek.
+@en The vacuum cleaner is too loud, [that is why] I then listen to no music.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Ech lauschtere gär e Podcast, [wärenddeems] ech de Buedem botzen.
+@en I like listening to a podcast [while] I clean the floor.
+@distractor-lu obwuel
+@distractor-lu ouni
+@distractor-en although
+@distractor-en without
+
+@fill
+@lu Ech si mat [siwwenzéng] Joer doheem erausgeplënnert.
+@en I moved out of home at [seventeen] years of age.
+@distractor-lu drësseg
+@distractor-lu zwanzeg
+@distractor-en thirty
+@distractor-en twenty
+
+@fill
+@lu Mir maachen d'Wäsch all zwee bis dräi [Deeg].
+@en We do the laundry every two to three [days].
+@distractor-lu Wochen
+@distractor-lu Joer
+@distractor-en weeks
+@distractor-en years
+
+@fill
+@lu D'Fënstere botzen ech ganz [seelen].
+@en I clean the windows very [rarely].
+@distractor-lu dacks
+@distractor-lu ëmmer
+@distractor-en often
+@distractor-en always
+
+@fill
+@lu Als Kand hunn ech just mäi Zëmmer [gebotzt].
+@en As a child I only [cleaned] my room.
+@distractor-lu gekacht
+@distractor-lu gestreckt
+@distractor-en cooked
+@distractor-en ironed
+
+@fill
+@lu Ech mengen, eng Spullmaschinn brauch [manner] Waasser wéi ech.
+@en I think a dishwasher needs [less] water than I do.
+@distractor-lu méi
+@distractor-lu vill
+@distractor-en more
+@distractor-en much

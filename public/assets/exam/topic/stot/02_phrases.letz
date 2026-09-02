@@ -1,0 +1,177 @@
+# Exam track — Theme: De Stot — Sub-lesson 2: Key Phrases
+# Plain @sentence blocks (no @question) — shorter restatements of the same
+# interview facts that sub-lesson 3 answers in full.
+#
+# These are the user's real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass.
+
+@lesson W1.02 "Household Phrases"
+
+@word d'Wunneng = the apartment
+@word de Gaart = the garden
+@word d'Blumm = the flower
+@word d'Gras = the grass
+@word de Kaffi = the coffee
+@word den Hond = the dog
+@word d'Fra = the wife
+@word d'Elteren = the parents
+@word d'Botzfra = the cleaning lady
+@word de Virdeel = the advantage
+@word den Nodeel = the disadvantage
+@word d'Zäit = the time
+@word d'Gewunnecht = the habit
+@word d'Verantwortung = the responsibility
+@word de Weekend = the weekend
+@word de Rescht = the rest
+@word d'Waasser = the water
+@word d'Firma = the company
+@word d'Reparatur = the repair
+@word d'Ëmwelt = the environment
+@word de Bioprodukt = the organic product
+@word d'Faarf = the colour
+@word méien = to mow
+@word fidderen = to feed
+@word reparéieren = to repair
+@word opraumen = to tidy up
+@word trennen = to separate
+@word deelen = to share
+@word hëllefen = to help
+@word ewechgeheien = to throw away
+@word plënneren = to move house
+@word propper = clean
+@word knaschteg = dirty
+@word uerdentlech = tidy
+@word ustrengend = exhausting
+@word langweileg = boring
+@word néideg = necessary
+@word effizient = efficient
+@word haart = loud
+@word deier = expensive
+
+@sentence
+@lu Ech wunne mat menger Fra an enger Wunneng.
+@en I live with my wife in an apartment.
+@distractor-lu eleng
+@distractor-lu Gaart
+@distractor-en alone
+@distractor-en garden
+
+@sentence
+@lu Mir hu keng fest Aufgaben, mee mir hu déiselwecht Verantwortung.
+@en We have no fixed tasks, but we have the same responsibility.
+@distractor-lu Botzfra
+@distractor-lu deier
+@distractor-en cleaner
+@distractor-en expensive
+
+@sentence
+@lu Meng Fra kacht méi dacks wéi ech.
+@en My wife cooks more often than I do.
+@distractor-lu seelen
+@distractor-lu strecken
+@distractor-en rarely
+@distractor-en ironing
+
+@sentence
+@lu Ech maachen d'Reparaturen an droen de Dreck eraus.
+@en I do the repairs and carry the trash outside.
+@distractor-lu kachen
+@distractor-lu Blummen
+@distractor-en cook
+@distractor-en flowers
+
+@sentence
+@lu Ech maache moies e Kaffi fir eis zwee.
+@en In the morning I make a coffee for the two of us.
+@distractor-lu owes
+@distractor-lu Waasser
+@distractor-en evening
+@distractor-en water
+
+@sentence
+@lu Ech fiddere den Hond all Dag.
+@en I feed the dog every day.
+@distractor-lu Woch
+@distractor-lu Blumm
+@distractor-en week
+@distractor-en flower
+
+@sentence
+@lu Mir haten eng Botzfra, mee no dem Plënneren net méi.
+@en We had a cleaning lady, but after the move no longer.
+@distractor-lu Firma
+@distractor-lu propper
+@distractor-en company
+@distractor-en clean
+
+@sentence
+@lu Botzen ass langweileg an ustrengend fir mech.
+@en Cleaning is boring and exhausting for me.
+@distractor-lu angeneem
+@distractor-lu Rou
+@distractor-en pleasant
+@distractor-en quiet
+
+@sentence
+@lu Ech geheie gär al Saachen ewech.
+@en I like throwing old things away.
+@distractor-lu nei
+@distractor-lu kachen
+@distractor-en new
+@distractor-en cook
+
+@sentence
+@lu D'Spullmaschinn spuert Zäit a Waasser.
+@en The dishwasher saves time and water.
+@distractor-lu kascht
+@distractor-lu Stëbs
+@distractor-en costs
+@distractor-en dust
+
+@sentence
+@lu Ech strecken net gär, dofir strecken ech seelen.
+@en I do not like ironing, that is why I iron rarely.
+@distractor-lu dacks
+@distractor-lu kachen
+@distractor-en often
+@distractor-en cook
+
+@sentence
+@lu Meng Fra këmmert sech ëm d'Blummen, an ech méien d'Gras.
+@en My wife takes care of the flowers, and I mow the grass.
+@distractor-lu Hond
+@distractor-lu Kichen
+@distractor-en dog
+@distractor-en kitchen
+
+@sentence
+@lu Wa muer keng Zäit ass, botze mir de Weekend.
+@en If there is no time tomorrow, we clean at the weekend.
+@distractor-lu Moien
+@distractor-lu Firma
+@distractor-en morning
+@distractor-en company
+
+@sentence
+@lu Mir kafe Bioprodukter, well si besser fir d'Ëmwelt sinn.
+@en We buy organic products because they are better for the environment.
+@distractor-lu bëlleg
+@distractor-lu Blummen
+@distractor-en cheap
+@distractor-en flowers
+
+@sentence
+@lu Wann ech eppes net reparéiere kann, ruffe mir eng Firma.
+@en When I cannot repair something, we call a company.
+@distractor-lu Botzfra
+@distractor-lu Gaart
+@distractor-en cleaner
+@distractor-en garden
+
+@sentence
+@lu Meng schlecht Gewunnecht ass d'Geschier am Lavabo.
+@en My bad habit is the dishes in the basin.
+@distractor-lu propper
+@distractor-lu Bett
+@distractor-en clean
+@distractor-en bed

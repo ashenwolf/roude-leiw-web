@@ -1,0 +1,125 @@
+# Exam track — Theme: De Stot — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Sentences are grounded in the user's real answers, gathered by interview —
+# do not "improve" or genericize them in a later editing pass.
+#
+# Handout corrections applied after LOD verification: Hinderniss → Hindernis,
+# verstëbst → stëbseg, de Mopp → d'Mopp (LOD gives it as feminine).
+
+@lesson W1.01 "Household Vocabulary"
+
+@word de Stot = the household chores
+@word d'Hausaarbecht = the housework
+@word d'Aufgab = the task
+@word d'Wäsch = the laundry
+@word d'Geschier = the dishes
+@word d'Buedzëmmer = the bathroom
+@word de Buedem = the floor
+@word d'Bett = the bed
+@word den Dësch = the table
+@word de Dreck = the dirt
+@word de Stëbs = the dust
+@word d'Spullmaschinn = the dishwasher
+@word de Staubsauger = the vacuum cleaner
+@word de Biesem = the broom
+@word d'Mopp = the mop
+@word den Eemer = the bucket
+@word de Schwamm = the sponge
+@word d'Fatz = the cloth
+@word d'Botzmëttel = the cleaning agent
+@word d'Wäschmëttel = the laundry detergent
+@word d'Spullmëttel = the dishwashing liquid
+@word d'Streckeisen = the iron
+@word d'Wäschléngt = the clothesline
+@word d'Dreckskëscht = the trash bin
+@word d'Dreckstut = the trash bag
+@word de Lavabo = the basin
+@word de Spullsteen = the kitchen sink
+@word d'Handduch = the towel
+@word d'Händsch = the glove
+@word d'Planz = the plant
+@word botzen = to clean
+@word rengegen = to purify
+@word wëschen = to wipe
+@word spullen = to wash up
+@word wäschen = to wash
+@word strecken = to iron
+@word stëbsen = to dust
+@word staubsaugen = to vacuum
+@word lëften = to air out
+@word kachen = to cook
+@word decken = to set
+@word ofraumen = to clear away
+@word araumen = to load
+@word ausraumen = to unload
+@word ophänken = to hang up
+@word eraushänken = to hang outside
+@word falen = to fold
+@word nätzen = to water
+@word erausdroen = to carry outside
+@word opbotzen = to mop up
+
+@sentence
+@lu Ech maache mäi Bett all Moien.
+@en I make my bed every morning.
+@distractor-lu Dësch
+@distractor-lu owes
+@distractor-en table
+@distractor-en evening
+
+@sentence
+@lu Meng Fra an ech deelen eis de Stot.
+@en My wife and I share the household chores.
+@distractor-lu Gaart
+@distractor-lu Dreck
+@distractor-en garden
+@distractor-en dirt
+
+@sentence
+@lu Ech raumen d'Spullmaschinn all Owend an.
+@en I load the dishwasher every evening.
+@distractor-lu ausraumen
+@distractor-lu moies
+@distractor-en unload
+@distractor-en morning
+
+@sentence
+@lu De Staubsauger ass ze haart fir Musek.
+@en The vacuum cleaner is too loud for music.
+@distractor-lu roueg
+@distractor-lu Biesem
+@distractor-en quiet
+@distractor-en broom
+
+@sentence
+@lu Ech droen de Dreck all Woch eraus.
+@en I carry the trash outside every week.
+@distractor-lu Wäsch
+@distractor-lu Geschier
+@distractor-en laundry
+@distractor-en dishes
+
+@sentence
+@lu Meng Fra nätzt d'Planzen am Gaart.
+@en My wife waters the plants in the garden.
+@distractor-lu botzt
+@distractor-lu Buedem
+@distractor-en cleans
+@distractor-en floor
+
+@sentence
+@lu Ech botzen de Buedem mat der Mopp.
+@en I clean the floor with the mop.
+@distractor-lu Biesem
+@distractor-lu Handduch
+@distractor-en broom
+@distractor-en towel
+
+@sentence
+@lu D'Botzmëttel steet ënner dem Spullsteen.
+@en The cleaning agent is under the kitchen sink.
+@distractor-lu Lavabo
+@distractor-lu op
+@distractor-en basin
+@distractor-en on
