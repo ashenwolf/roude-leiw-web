@@ -18,7 +18,8 @@
     "generate-question-audio": "node --env-file-if-exists=.env scripts/generate-question-audio.mjs",
     "sync-audio:upload": "node scripts/sync-audio.mjs upload",
     "sync-audio:download": "node scripts/sync-audio.mjs download",
-    "prune-audio": "node --env-file-if-exists=.env scripts/prune-audio.mjs"
+    "prune-audio": "node --env-file-if-exists=.env scripts/prune-audio.mjs",
+    "pack-audio": "node scripts/pack-audio.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.47.0",

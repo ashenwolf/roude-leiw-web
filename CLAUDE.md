@@ -16,6 +16,8 @@ npm run generate-audio    -- <path-to-lesson.letz>   # Sproochmaschinn TTS for @
 npm run generate-question-audio -- [path]            # Sproochmaschinn TTS for @question prompts (default: all content)
 npm run sync-audio:upload -- [path]                  # push local mp3s to R2
 npm run sync-audio:download -- [path]                # pull mp3s from R2 (auto-runs in prebuild)
+npm run pack-audio -- [out.tar]                      # tar all mp3s (repo-relative paths) to move between hosts
+npm run prune-audio -- [--delete]                    # delete R2 objects no .letz expects (needs CLOUDFLARE_* env)
 ```
 
 Audio files are gitignored. R2 is the source of truth. SentenceBuilder plays prompt audio (question for Q&A, Luxembourgish phrase for lu→en — never for en→lu, which would leak the answer). See [`.claude/memory/audio-pipeline.md`](.claude/memory/audio-pipeline.md).

@@ -67,6 +67,13 @@ time.
 R2 is the durable backup and egress inside Cloudflare is free, so build-time
 fetching is essentially free.
 
+`pack-audio` is the credential-free alternative for moving audio between
+checkouts: one uncompressed tar (mp3 is already compressed) with repo-relative
+entries, so `tar -xf … -C <repo root>` lands every file where the app and the
+generators expect it. `prune-audio` deletes R2 objects no current `.letz`
+expects — dead keys from a renamed phrase, a deleted lesson, or the ElevenLabs
+era — over the Cloudflare REST API, so it works without wrangler.
+
 ## Playback: URL derived at the load edge, optimistic
 
 `fetchLetzFile` stamps `questionAudioUrl` and `luAudioUrl` onto each sentence
