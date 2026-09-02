@@ -171,6 +171,16 @@
       ]
     },
     {
+      "id": "medien",
+      "kind": "topic",
+      "title": "Medien & Technologie",
+      "subLessons": [
+        { "id": "medien.01", "file": "topic/medien/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "medien.02", "file": "topic/medien/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "medien.03", "file": "topic/medien/03_questions.letz", "title": "Talking About It" }
+      ]
+    },
+    {
       "id": "hobbies",
       "kind": "topic",
       "title": "Hobbies & Free Time",

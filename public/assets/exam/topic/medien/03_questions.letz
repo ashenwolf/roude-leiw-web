@@ -1,0 +1,559 @@
+# Exam track — Theme: Medien & Technologie — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass. The point is that the learner
+# rehearses what they will actually say in the Sproochentest.
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional, obwuel-contrast, léiwer-wéi comparative, fir…ze purpose,
+# dofir inversion, wärenddeems-temporal, a number, a duration, a frequency
+# adverb, a past participle, and an Ech-mengen hedge.
+
+@lesson D1.03 "Talking About Media"
+
+@word d'Kand = the child
+@word d'Zukunft = the future
+@word d'Reputatioun = the reputation
+@word d'Ligen = the lie
+@word d'Batterie = the battery
+@word den Toun = the sound
+@word de Kont = the account
+@word d'Passwuert = the password
+@word de Kopfhörer = the headphones
+@word d'Notifikatioun = the notification
+@word de Journalist = the journalist
+@word de Regisseur = the film director
+@word de Fuerscher = the researcher
+@word d'Sektioun = the section
+@word de Kommentar = the comment
+@word d'Videospill = the video game
+@word de Radiosender = the radio station
+@word de Cours = the course
+@word de Fotoapparat = the camera
+@word d'Gespréich = the conversation
+@word d'Opmierksamkeet = the attention
+@word eroflueden = to download
+@word eroplueden = to upload
+@word läschen = to delete
+@word kréien = to get
+@word changéieren = to change
+@word umaachen = to switch on
+@word ausmaachen = to switch off
+@word oflenken = to distract
+@word gleewen = to believe
+@word kontrolléieren = to check
+@word auswielen = to select
+@word opwuessen = to grow up
+@word poteren = to chat
+@word beäntweren = to answer
+@word erwuessen = adult
+@word séier = fast
+@word roueg = quiet
+@word modern = modern
+@word reegelméisseg = regularly
+@word auswenneg = by heart
+
+@sentence
+@question Wat heescht fir Iech Technologie? Firwat hutt Dir dat Theema gewielt?
+@lu Technologie ass haut en Deel vum Liewen, an ech hunn dat Theema gewielt, well ech domat schaffen.
+@distractor-lu Kandheet
+@distractor-lu langweileg
+@en Technology is a part of life today, and I chose this topic because I work with it.
+@distractor-en childhood
+@distractor-en boring
+
+@sentence
+@question Wéi eng Medie benotzt Dir, fir Iech iwwer d'Aktualitéit ze informéieren?
+@lu Ech informéiere mech um Internet, virun allem op Twitter an op Telegram.
+@distractor-lu Radio
+@distractor-lu Zeitung
+@en I inform myself on the internet, above all on Twitter and on Telegram.
+@distractor-en radio
+@distractor-en newspaper
+
+@sentence
+@question Wat fir Sektiounen interesséieren Iech an der Aktualitéit?
+@lu Mech interesséieren Technologie, Politik, Europa, Lëtzebuerg an d'Ukrain.
+@distractor-lu Sport
+@distractor-lu Reklamm
+@en Technology, politics, Europe, Luxembourg and Ukraine interest me.
+@distractor-en sport
+@distractor-en advertisement
+
+@sentence
+@question Firwat liest Dir all Moien d'Noriichten aus der Ukrain?
+@lu Ech liese se all Moien, well meng Eltere a meng Frënn do wunnen.
+@distractor-lu owes
+@distractor-lu seelen
+@en I read them every morning, because my parents and my friends live there.
+@distractor-en evening
+@distractor-en rarely
+
+@sentence
+@question Wat fir Medie benotzt Dir reegelméisseg?
+@lu Ech benotze reegelméisseg den Handy, de Laptop an d'Tëlee.
+@distractor-lu Zeitung
+@distractor-lu Radio
+@en I regularly use the mobile phone, the laptop and the TV.
+@distractor-en newspaper
+@distractor-en radio
+
+@sentence
+@question Wat fir Applikatioune benotzt Dir all Dag?
+@lu All Dag benotzen ech Google Maps, Kindle, Audible, Chrome, Spotify, Telegram a WhatsApp.
+@distractor-lu seelen
+@distractor-lu Videospill
+@en Every day I use Google Maps, Kindle, Audible, Chrome, Spotify, Telegram and WhatsApp.
+@distractor-en rarely
+@distractor-en game
+
+@sentence
+@question Wéini krut Dir Ären éischten Handy?
+@lu Ech hunn en am Joer zweedausendvéier kritt, an ech war deemools nonzéng Joer al.
+@distractor-lu Laptop
+@distractor-lu Fotoapparat
+@en I got it in the year two thousand four, and I was nineteen years old then.
+@distractor-en laptop
+@distractor-en camera
+
+@sentence
+@question Wéi oft changéiert Dir den Handy?
+@lu Ech benotze mäin iPhone säit véier Joer, an ech changéieren en all fënnef bis aacht Joer.
+@distractor-lu Wochen
+@distractor-lu Stonnen
+@en I have been using my iPhone for four years, and I change it every five to eight years.
+@distractor-en weeks
+@distractor-en hours
+
+@sentence
+@question Wéi wichteg ass den Handy fir Iech, a wat maacht Dir domat?
+@lu Den Handy ass wichteg fir mech, well ech domat liesen, Fotoe maachen an telefonéieren.
+@distractor-lu onwichteg
+@distractor-lu langweileg
+@en The mobile phone is important to me, because I read, take photos and phone with it.
+@distractor-en unimportant
+@distractor-en boring
+
+@sentence
+@question Hutt Dir den Handy wärend dem Iessen um Dësch leien? Firwat?
+@lu Wann ech eleng iessen, hunn ech den Handy um Dësch, mee mat anere Leit schwätzen ech léiwer.
+@distractor-lu Bildschierm
+@distractor-lu Kopfhörer
+@en When I eat alone, I have the phone on the table, but with other people I prefer talking.
+@distractor-en screen
+@distractor-en headphones
+
+@sentence
+@question Wéini stellt Dir den Handy op roueg?
+@lu Mäin Handy ass ëmmer roueg, an ech maachen den Toun just un, wann ech e wichtegen Uruff erwaarden.
+@distractor-lu Bildschierm
+@distractor-lu Batterie
+@en My phone is always silent, and I only switch the sound on when I expect an important call.
+@distractor-en screen
+@distractor-en battery
+
+@sentence
+@question Wéini maacht Dir den Handy aus?
+@lu Ech maache mäin Handy ni aus, ausser d'Batterie ass eidel.
+@distractor-lu dacks
+@distractor-lu Toun
+@en I never switch my phone off, unless the battery is empty.
+@distractor-en often
+@distractor-en sound
+
+@sentence
+@question Wéi vill Message schéckt Dir am Dag?
+@lu Ech schécken ongeféier fofzeg Message am Dag.
+@distractor-lu zéng
+@distractor-lu Bréiwer
+@en I send about fifty messages a day.
+@distractor-en ten
+@distractor-en letters
+
+@sentence
+@question Wéi vill E-Maile kritt Dir pro Dag?
+@lu Ech kréien ongeféier drësseg E-Mailen den Dag, mee ech liese just d'Sujeten a läschen de Rescht.
+@distractor-lu Postkaarten
+@distractor-lu schreiwen
+@en I get about thirty emails a day, but I only read the subjects and delete the rest.
+@distractor-en postcards
+@distractor-en calls
+
+@sentence
+@question Wéi vill Telefonsnummere kennt Dir auswenneg?
+@lu Ech kenne just meng Nummer an d'Nummer vu menger Fra.
+@distractor-lu Passwuert
+@distractor-lu Kont
+@en I only know my number and my wife's number.
+@distractor-en password
+@distractor-en account
+
+@sentence
+@question Firwat benotzt Dir den Internet?
+@lu Ech benotzen den Internet fir Noriichten, fir Akeef a fir sozial Netzwierker.
+@distractor-lu Reklamm
+@distractor-lu Radio
+@en I use the internet for news, for shopping and for social networks.
+@distractor-en advertisement
+@distractor-en radio
+
+@sentence
+@question Wéi vill Zäit verbréngt Dir den Dag um Internet?
+@lu Ech sinn dräi bis véier Stonnen den Dag um Internet, an heiansdo verléieren ech do Zäit.
+@distractor-lu Minutten
+@distractor-lu Wochen
+@en I am on the internet three to four hours a day, and sometimes I lose time there.
+@distractor-en minutes
+@distractor-en weeks
+
+@sentence
+@question Liest Dir gär Bicher? Wat hutt Dir léiwer: en Héierbuch oder e Buch?
+@lu Ech liese gär richteg Bicher, mee en Héierbuch ass praktesch, wann ech fueren oder mam Hond spadséieren.
+@distractor-lu langweileg
+@distractor-lu Zäitschrëft
+@en I like reading real books, but an audiobook is practical when I drive or walk with the dog.
+@distractor-en boring
+@distractor-en magazine
+
+@sentence
+@question Wéi ee Buch hutt Dir fir d'lescht gelies?
+@lu Fir d'lescht hunn ech Colony vum Max Kidruk gelies, an dat ass Science-Fiction.
+@distractor-lu Zeitung
+@distractor-lu Kommentar
+@en Last I read Colony by Max Kidruk, and that is science fiction.
+@distractor-en newspaper
+@distractor-en comment
+
+@sentence
+@question Schreift Dir heiansdo Bréiwer?
+@lu Nee, ech schreiwe keng Bréiwer, mee mir schécke gär Postkaarten un eis Frënn.
+@distractor-lu Message
+@distractor-lu läschen
+@en No, I do not write letters, but we like sending postcards to our friends.
+@distractor-en messages
+@distractor-en messages
+
+@sentence
+@question Hutt Dir e Liblingspodcast? Wa jo, wéi een?
+@lu Mäi Liblingspodcast heescht Bromance, an do schwätzen e Journalist an e Regisseur iwwer alles.
+@distractor-lu Radiosender
+@distractor-lu Sendung
+@en My favorite podcast is called Bromance, and there a journalist and a film director talk about everything.
+@distractor-en radio
+@distractor-en broadcast
+
+@sentence
+@question Wéi bleift Dir a Kontakt mat Frënn a Famill?
+@lu Mir hunn e Chat mat de Frënn, a mat menger Famill telefonéieren ech all Woch mat Video.
+@distractor-lu Bréif
+@distractor-lu Reklamm
+@en We have a chat with the friends, and with my family I make a video call every week.
+@distractor-en letter
+@distractor-en advertisement
+
+@sentence
+@question Sidd Dir op de sozialen Netzwierker aktiv?
+@lu Ech war fréier vill op Facebook, mee elo benotzen ech meeschtens Twitter.
+@distractor-lu Radio
+@distractor-lu Zeitung
+@en In the past I was a lot on Facebook, but now I mostly use Twitter.
+@distractor-en radio
+@distractor-en newspaper
+
+@sentence
+@question Wat haalt Dir vun Instagram?
+@lu Instagram gefält mir net esou gutt, well ech léiwer liese wéi Biller kucken.
+@distractor-lu lauschteren
+@distractor-lu Toun
+@en I do not like Instagram that much, because I prefer reading to looking at pictures.
+@distractor-en listening
+@distractor-en sound
+
+@sentence
+@question Benotzt Dir Instagram guer net?
+@lu Heiansdo kucken ech do lëschteg Videoe vun Déieren a gutt Fotografie.
+@distractor-lu Bréiwer
+@distractor-lu Zeitungen
+@en Sometimes I look at funny videos of animals and at good photography there.
+@distractor-en letters
+@distractor-en newspapers
+
+@sentence
+@question Kommentéiert Dir online, zum Beispill op Youtube oder Telegram?
+@lu Jo, ech schreiwen dacks Kommentaren op Twitter an an Telegram-Gruppen, mee op YouTube seelen.
+@distractor-lu Postkaarten
+@distractor-lu ëmmer
+@en Yes, I often write comments on Twitter and in Telegram groups, but on YouTube rarely.
+@distractor-en postcards
+@distractor-en always
+
+@sentence
+@question Wéi eng YouTube Channelen hutt Dir abonéiert?
+@lu Ech hu Veritasium an Alyn Wallace abonéiert, an do geet et ëm Physik a Fotografie.
+@distractor-lu Radiosender
+@distractor-lu Zäitschrëft
+@en I have subscribed to Veritasium and Alyn Wallace, and there it is about physics and photography.
+@distractor-en radio
+@distractor-en magazine
+
+@sentence
+@question Maacht Dir Fotoe mam Handy? Wéi vill?
+@lu Jo, ech maache ganz vill Fotoe mam Handy, virun allem vu mengem Hond.
+@distractor-lu Videospiller
+@distractor-lu Kommentaren
+@en Yes, I take very many photos with the phone, above all of my dog.
+@distractor-en games
+@distractor-en comments
+
+@sentence
+@question Wat maacht Dir mat de Fotoen?
+@lu Déi schéinste Fotoen deelen ech online, an de Rescht bleift just fir mech.
+@distractor-lu läschen
+@distractor-lu Passwuert
+@en The most beautiful photos I share online, and the rest stays just for me.
+@distractor-en deleting
+@distractor-en password
+
+@sentence
+@question Hutt Dir eng Tëlee? Wat maacht Dir domat?
+@lu Jo, mir hunn eng Tëlee, mee mir benotze se fir Streaming, YouTube a Videospiller.
+@distractor-lu Noriichten
+@distractor-lu Radio
+@en Yes, we have a TV, but we use it for streaming, YouTube and video games.
+@distractor-en news
+@distractor-en radio
+
+@sentence
+@question Kuckt Dir léiwer Filmer um Handy oder um Laptop? Firwat?
+@lu Ech kucke Filmer op der Tëlee, heiansdo um Laptop, mee ni um Handy, well de Bildschierm ze kleng ass.
+@distractor-lu grouss
+@distractor-lu Kopfhörer
+@en I watch movies on the TV, sometimes on the laptop, but never on the phone, because the screen is too small.
+@distractor-en big
+@distractor-en headphones
+
+@sentence
+@question Lauschtert Dir de Radio?
+@lu Nee, ech lauschtere kee Radio, mee ech wëll lëtzebuergesch Podcaste probéieren, wann ech besser schwätzen.
+@distractor-lu Videospiller
+@distractor-lu dacks
+@en No, I do not listen to the radio, but I want to try Luxembourgish podcasts when I speak better.
+@distractor-en games
+@distractor-en often
+
+@sentence
+@question Wat ass Äre Liblingsradiosender zu Lëtzebuerg?
+@lu Ech hunn nach kee Liblingssender, well ech de Radio guer net unmaachen.
+@distractor-lu Kanal
+@distractor-lu Kommentar
+@en I do not have a favorite station yet, because I do not switch the radio on at all.
+@distractor-en channel
+@distractor-en comment
+
+@sentence
+@question Wat war dee beschten Uruff, deen Dir jee krut?
+@lu Dee beschten Uruff war vun der Bank, well si mir gesot hunn, datt mäi Kredit ugeholl ass.
+@distractor-lu Postkaart
+@distractor-lu Reklamm
+@en The best call was from the bank, because they told me that my loan is accepted.
+@distractor-en postcard
+@distractor-en advertisement
+
+@sentence
+@question Hutt Dir eng Period am Dag, wou Dir net op den Handy kuckt?
+@lu Am Dag kucken ech net vill op den Handy, well ech souwéisou virum Laptop schaffen.
+@distractor-lu owes
+@distractor-lu nuets
+@en During the day I do not look at the phone much, because I work in front of the laptop anyway.
+@distractor-en evening
+@distractor-en night
+
+@sentence
+@question Wat ass e gudden Alter, fir de Kanner en Handy ze ginn? Firwat?
+@lu Ech mengen, Kanner kënne relativ fréi en Handy kréien, well se domat léiere a spille kënnen.
+@distractor-lu spéit
+@distractor-lu erwuessen
+@en I think children can get a phone relatively early, because they can learn and play with it.
+@distractor-en late
+@distractor-en adult
+
+@sentence
+@question A wéi engem Alter kann een aktiv op sozialen Netzwierker sinn?
+@lu Fir sozial Netzwierker sollen d'Kanner erwuesse sinn, villäicht mat siwwenzéng Joer.
+@distractor-lu Stonnen
+@distractor-lu fréi
+@en For social networks the children should be adult, maybe at seventeen years.
+@distractor-en hours
+@distractor-en early
+
+@sentence
+@question Wéi eng Probleemer bréngt den Internet?
+@lu Den Internet bréngt ze vill Informatioun a vill Fake News.
+@distractor-lu Sécherheet
+@distractor-lu Virdeel
+@en The internet brings too much information and a lot of fake news.
+@distractor-en security
+@distractor-en advantage
+
+@sentence
+@question Firwat ass dat e Problem?
+@lu D'Reputatioun zielt am Internet net méi, an e Fuerscher huet déiselwecht Stëmm wéi een, deen un eng flaach Äerd gleeft.
+@distractor-lu Journalist
+@distractor-lu Kommentar
+@en Reputation does not count on the internet anymore, and a researcher has the same voice as someone who believes in a flat Earth.
+@distractor-en journalist
+@distractor-en comment
+
+@sentence
+@question Wéi kann een de Stress duerch déi nei Medie reduzéieren?
+@lu Ech wiele meng Quelle gutt aus a gi mam Hond spadséieren, dacks mat Musek oder mat engem Gespréich mat menger Fra.
+@distractor-lu Notifikatioun
+@distractor-lu Bildschierm
+@en I select my sources well and go walking with the dog, often with music or with a conversation with my wife.
+@distractor-en notification
+@distractor-en screen
+
+@sentence
+@question Wat sinn d'Vir- an Nodeeler vun engem Lëtzebuergesch Online-Cours?
+@lu En Online-Cours ass praktesch a modern, mee ech schwätze do net mat anere Leit.
+@distractor-lu langweileg
+@distractor-lu Passwuert
+@en An online course is practical and modern, but I do not talk with other people there.
+@distractor-en boring
+@distractor-en password
+
+@sentence
+@question Benotzt Dir den Handy och fir Lëtzebuergesch ze léieren?
+@lu Jo, ech léiere Lëtzebuergesch mat menger App um Handy, well ech kee gudden Online-Cours fonnt hunn.
+@distractor-lu Zeitung
+@distractor-lu Fotoapparat
+@en Yes, I learn Luxembourgish with my app on the phone, because I did not find a good online course.
+@distractor-en newspaper
+@distractor-en camera
+
+@sentence
+@question Wéi war Är Kandheet ouni Handy?
+@lu Meng Kandheet war gutt: ech sinn dobausse gespillt an hunn um Computer Spiller gespillt.
+@distractor-lu Handy
+@distractor-lu Tablet
+@en My childhood was good: I played outside and played games on the computer.
+@distractor-en phone
+@distractor-en tablet
+
+@sentence
+@question Säit wéini hutt Dir e Laptop, a firwat benotzt Dir en?
+@lu Ech hunn e Laptop säit der Uni, an ech schaffe domat all Dag.
+@distractor-lu Fotoapparat
+@distractor-lu seelen
+@en I have had a laptop since university, and I work with it every day.
+@distractor-en camera
+@distractor-en rarely
+
+@sentence
+@question Wat fir Technologie benotzt Dir fir online anzekafen, a wat kaaft Dir?
+@lu Ech kafen online mam Laptop, meeschtens Bicher a Kleeder.
+@distractor-lu Fotoapparat
+@distractor-lu Toun
+@en I shop online with the laptop, mostly books and clothes.
+@distractor-en camera
+@distractor-en sound
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech liesen d'Noriichten all Moien, [well] meng Eltere an der Ukrain wunnen.
+@en I read the news every morning, [because] my parents live in Ukraine.
+@distractor-lu ouni
+@distractor-lu duerch
+@distractor-en without
+@distractor-en through
+
+@fill
+@lu [Wann] ech eleng iessen, hunn ech den Handy um Dësch.
+@en [When] I eat alone, I have the phone on the table.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu [Obwuel] mäin Handy ëmmer roueg ass, kucken ech dacks op den Ecran.
+@en [Although] my phone is always silent, I often look at the screen.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu Ech kucke Filmer léiwer op der Tëlee [wéi] um Handy.
+@en I like watching movies on the TV better [than] on the phone.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech benotzen eng App, [fir] Lëtzebuergesch ze léieren.
+@en I use an app [in order to] learn Luxembourgish.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu De Bildschierm vum Handy ass ze kleng, [dofir] kucken ech Filmer op der Tëlee.
+@en The screen of the phone is too small, [that is why] I watch movies on the TV.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Ech lauschtere Musek, [wärenddeems] ech mam Hond spadséieren.
+@en I listen to music [while] I go walking with the dog.
+@distractor-lu obwuel
+@distractor-lu ouni
+@distractor-en although
+@distractor-en without
+
+@fill
+@lu Ech schécken all Dag ongeféier [fofzeg] Message.
+@en Every day I send about [fifty] messages.
+@distractor-lu zéng
+@distractor-lu véier
+@distractor-en ten
+@distractor-en four
+
+@fill
+@lu Ech sinn den Dag dräi bis véier [Stonnen] um Internet.
+@en I am on the internet three to four [hours] a day.
+@distractor-lu Minutten
+@distractor-lu Wochen
+@distractor-en minutes
+@distractor-en weeks
+
+@fill
+@lu Op YouTube kommentéieren ech [seelen].
+@en On YouTube I comment [rarely].
+@distractor-lu dacks
+@distractor-lu ëmmer
+@distractor-en often
+@distractor-en always
+
+@fill
+@lu Als Kand hunn ech vill Bicher [gelies].
+@en As a child I [read] a lot of books.
+@distractor-lu gespillt
+@distractor-lu geschwat
+@distractor-en played
+@distractor-en talked
+
+@fill
+@lu Ech mengen, Kanner kënne relativ [fréi] en Handy kréien.
+@en I think children can get a phone relatively [early].
+@distractor-lu lues
+@distractor-lu roueg
+@distractor-en slowly
+@distractor-en quietly

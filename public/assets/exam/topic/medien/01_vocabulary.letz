@@ -1,0 +1,94 @@
+# Exam track — Theme: Medien & Technologie — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Sentences are grounded in the user's real answers, gathered by interview —
+# do not "improve" or genericize them in a later editing pass.
+
+@lesson D1.01 "Media Vocabulary"
+
+@word d'Medien = the media
+@word d'Noriichten = the news
+@word d'Aktualitéit = current events
+@word d'Zeitung = the newspaper
+@word d'Zäitschrëft = the magazine
+@word d'Websäit = the website
+@word d'Buch = the book
+@word d'Bicher = the books
+@word d'Héierbuch = the audiobook
+@word de Radio = the radio
+@word de Podcast = the podcast
+@word de Fernsee = the television
+@word d'Tëlee = the TV
+@word de Kanal = the channel
+@word d'Sendung = the broadcast
+@word d'Reklamm = the advertisement
+@word den Internet = the internet
+@word d'Netzwierk = the network
+@word den Handy = the mobile phone
+@word de Computer = the computer
+@word de Laptop = the laptop
+@word den Tablet = the tablet
+@word de Bildschierm = the screen
+@word d'App = the app
+@word d'Technologie = the technology
+@word de Message = the message
+@word d'Telefonsnummer = the phone number
+@word den Uruff = the phone call
+@word de Bäitrag = the post
+@word d'Foto = the photo
+@word de Bréif = the letter
+@word d'Postkaart = the postcard
+@word liesen = to read
+@word schreiwen = to write
+@word lauschteren = to listen
+@word kucken = to watch
+@word benotzen = to use
+@word telefonéieren = to phone
+
+@sentence
+@lu Ech liesen d'Noriichten all Moien um Internet.
+@en Every morning I read the news on the internet.
+@distractor-lu Reklamm
+@distractor-lu Bréif
+@distractor-en advertisement
+@distractor-en letter
+
+@sentence
+@lu Mäin Handy ass ëmmer roueg.
+@en My mobile phone is always silent.
+@distractor-lu Laptop
+@distractor-lu Tëlee
+@distractor-en laptop
+@distractor-en television
+
+@sentence
+@lu Ech lauschteren en Héierbuch am Auto.
+@en I listen to an audiobook in the car.
+@distractor-lu Zeitung
+@distractor-lu Reklamm
+@distractor-en newspaper
+@distractor-en advertisement
+
+@sentence
+@lu Meng Fra an ech schécke gär Postkaarten.
+@en My wife and I like sending postcards.
+@distractor-lu Bréiwer
+@distractor-lu Bäiträg
+@distractor-en letters
+@distractor-en posts
+
+@sentence
+@lu Ech schreiwen all Dag vill Message.
+@en I write a lot of messages every day.
+@distractor-lu Bicher
+@distractor-lu Zäitschrëften
+@distractor-en books
+@distractor-en magazines
+
+@sentence
+@lu De Podcast ass op Ukrainesch a ganz interessant.
+@en The podcast is in Ukrainian and very interesting.
+@distractor-lu Radio
+@distractor-lu langweileg
+@distractor-en radio
+@distractor-en boring
