@@ -132,6 +132,11 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
       <ExerciseAnswerArea className="gap-3">
         {item.question !== undefined && (
           <div className="flex items-center justify-center gap-2 px-2">
+            {/* Invisible mirror of the button keeps the question truly centered:
+                both sides of the flex row reserve the same width. */}
+            {item.questionAudioUrl !== undefined && (
+              <div aria-hidden="true" className="shrink-0 w-9 h-9" />
+            )}
             <p className="text-center text-xl font-bold text-gray-900">
               {item.question}
             </p>
