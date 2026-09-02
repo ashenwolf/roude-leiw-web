@@ -28,7 +28,7 @@ Four rules that must hold across this architecture (in addition to the Data Pipe
 1. **One-shot planning.** Mode planners run once at Session start, read a stats snapshot, and emit a complete `ModeConfig` with every Slot's Exercise pre-built. Mid-Session events update global Stats (sink) but do **not** re-enter the planner. Planners are stateless producers; the SessionMachine is a stupid consumer.
 2. **No callbacks across layer boundaries.** `ModeConfig.completionEffect` is a plain enum tag (`'unlock-check' | 'noop'`), not a function. The wiring hook (`use-exercise-session`) reads the tag and invokes the relevant pure derivation plus the relevant edge action (navigation, refresh). No layer hands a closure to a layer above it.
 3. **Named typed data is the only stage contract.** Anything crossing a layer boundary must be a plain typed value with an exported type. No shared mutable state, no implicit ordering.
-4. **Progress tick granularity is owned by Exercise, not Mode.** WordMatch emits a tick per Step (per pair); SentenceBuilder emits a tick per Slot (per submit); future Exercises declare their own. Total progress bar size for a Session = sum of each Slot's `exerciseTickCount`. Block boundaries on the bar are placed at the cumulative tick count where each Block ends.
+4. **Progress granularity is per Slot, with an optional intra-Slot fraction owned by the Exercise.** The bar's structure comes from `ModeConfig.blockBoundaries`, which are cumulative **Slot** counts — not a tick budget. `computeProgressView(completedSlots, slotProgress, …)` fills each section from completed Slots plus `slotProgress` (0–1) for the Slot in flight. An Exercise reports that fraction if it can: WordMatch calls `onMatch(matched, total)` per pair, so a 20-pair Word Mix Slot advances smoothly; SentenceBuilder and FillBlank are single-submit and report nothing, so their Slot jumps 0 → 1. Re-queued correction Slots land past the last boundary and render as the `overflow` section.
 
 ## Mode specs
 
@@ -55,15 +55,16 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - One-shot plan; mid-Session results do not re-bucket later pairs.
 - Popups: only on Slot/Block complete (3 total — Slot boundary = Block boundary).
 - `completionEffect: 'noop'`.
-- Progress bar: one tick per pair across the whole Session, with a milestone at each Slot boundary.
+- Progress bar: 3 sections of one Slot each; WordMatch's per-pair `onMatch` fills the current section smoothly, so a Slot's 20 pairs read as continuous progress.
 - Words only — Word Mix is pair matching by definition, so it schedules no sentence-builder or fill-blank Slots.
+- Pairs are **not** deduplicated within a Slot (unlike Lesson, and unlike Fix Errors' bounded top-up): a 20-pair Slot drawn from a small pool repeats words, and from a pool under 20 it must. Identical tiles make every pairing between them correct, so a tiny pool yields free taps — acceptable today because the `errors` bucket is only a fraction of draws and the other buckets span every unlocked lesson.
 
 **Fix Errors** — `planFixErrorsMode(lessons, stats, persistedUnlocked)`.
 - **Global scope**: `lessons` = all course lessons + exam SubLessons in error scope (played or unlocked — see `loadErrorScopeLessons` in `src/exercise/error-scope.ts`). The planner itself is track-agnostic; the call sites decide the scope. A failed exam Q&A phrase is rebuilt with its `question` in the failed direction.
 - Home button disabled when error pool is empty (same global scope via `loadExamErrorLessons`).
 - Same Session shape as Lesson (`LESSON.totalSlots` + optional correction). **Its own three-way slot-type roll** (`FIX_ERRORS.buckets.slotType`) — word-match / sentence-builder / fill-blank, **fixed**, not adaptive like Lesson's, because its backlog is by definition all struggling Elements. Fill's share is carved out of sentence-builder's, not word-match's.
 - The one Mode that draws from all three error pools — it is where a failed `@fill` gets retried, since neither Lesson nor Word Mix schedules one.
-- WordMatch Slot: `LESSON.wordMatchPairs` pairs drawn independently **with replacement** from the word-error pool (duplicates allowed).
+- WordMatch Slot: up to `LESSON.wordMatchPairs` pairs, **distinct within the Slot**. Repetition across Slots is retained (it is the point of the Mode), but a Slot of one distinct word cannot be failed — WordMatch matches by value, so every pairing is correct and each free tap still books a `correct`. When the error pool holds too few distinct words, the Slot is topped up with **non-error** words from the same lessons; below `MIN_WORD_MATCH_PAIRS` distinct words in total no word-match Slot is built and the roll falls through to another type.
 - SentenceBuilder Slot: 1 `PhraseError` from sentence-error pool — presented in the **same direction the user failed** (the pool entry carries its direction; no direction roll here).
 - FillBlank Slot: 1 `FillError` from the fill-error pool, same failed-direction rule.
 - Empty pool for rolled type → re-roll a bounded number of times, then a fixed-order fallback (word → sentence → fill) so a Session still fills when only one pool has content. **A builder must check its pool before consuming any rng** — otherwise a re-roll shifts every later draw and `fakeRng` tests stop describing real Sessions.
@@ -72,7 +73,7 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 
 **Exam** — `planExamMode(subLesson)`.
 - Input: ONE SubLesson's `Lesson` (loaded via `src/exam/exam-catalog.ts`, never `loadAllLessons`). No stats input — the plan is content-deterministic ("we only shuffle it").
-- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — `pairCount` pairs per Slot, and a trailing chunk below `minChunk` merges into the previous Slot rather than forming a degenerate one. Sentences: one SentenceBuilder Slot each. Fills: one FillBlank Slot each. Combined Slot list shuffled.
+- Shape: every Element exactly once. Words: shuffled, then `chunkIntoWordMatchExercises` (shared Layer 1) with `EXAM.wordMatch` sizing — **every Slot holds exactly `pairCount` pairs**. A list that does not divide evenly is padded with repeats drawn from *other* Slots, never merged into an oversized one: the UI shows a fixed `DISPLAY_SLOTS` rows, so an odd-sized Slot either hides pairs or leaves holes, while a repeat costs one extra correct answer toward that word's gate. A pad never lands in the Slot the word already occupies (WordMatch matches by value, so two identical tiles make every pairing between them correct — two unmissable taps rather than two decisions). Below `pairCount` entries there is nothing to pad from and the single Slot is short. Sentences: one SentenceBuilder Slot each. Fills: one FillBlank Slot each. Combined Slot list shuffled.
 - Direction: rolled with the Lesson direction table, then normalized by `resolveSentenceDirection` — a Sentence carrying `question` is **always** en→lu. That rule is Layer 1, not Mode-specific, so course lessons using `@question` behave identically. Fills roll from the same table with nothing to override it (a `@fill` never carries `@question`).
 - Elements missing a line on either side (`@lu` or `@en` empty) are skipped rather than planned as a broken Slot — applies to both sentences and fills.
 - Block boundaries: `BLOCK_COUNT` near-equal cuts over the queue (deduped for tiny queues). Correction Block: yes (same re-queue mechanic as Lesson).
@@ -87,6 +88,8 @@ One rule gates progression on the course track (lesson → next lesson) and on t
 - For a **Sentence**, the two presentation directions are summed first: a phrase passes iff `enLu.correct + luEn.correct` clears the same constant (`combinedElementStats`). Both directions count toward the one phrase Element.
 
 The lesson unlocks the next lesson iff `passingElements / totalElements >= UNLOCK_LESSON_THRESHOLD` — currently **1.0**, i.e. every Element must pass (see [mastery-and-unlock](../memory/mastery-and-unlock.md)). Read the value from `constants.ts`; the fact that it *is* 1.0 is load-bearing for content sizing, so it is stated once here and nowhere else.
+
+`LessonProgress` carries **two** readings of the same stats: `percentage` (`mastered / total`) is the gate, and `credit` (`Σ min(correct, MASTERY_CORRECT_COUNT) / (total × MASTERY_CORRECT_COUNT)`) is that progress with the sub-mastery resolution left in. Both are monotonic and both reach 1.0 together, so `credit` can never promise a completion the gate withholds. Progress **bars** read `credit`; the numeric label reads `mastered/total`. Unlock, `isComplete`, and the cursor read only `percentage` — do not point them at `credit`.
 
 Unlock is **sticky**: `correct` is monotonic, so once a lesson passes the threshold it stays unlocked without storing an `unlockedLessons` set. Don't introduce one; deriving from stats stays correct as long as stats are append-only.
 

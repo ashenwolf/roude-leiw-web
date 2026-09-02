@@ -16,7 +16,7 @@ import {
   isWordKey,
   MASTERY,
 } from "../../../src/exercise/progression.ts";
-import { MIN_ANSWERS, MASTERY_CORRECT_COUNT, UNLOCK_ELEMENT_THRESHOLD } from "../../../src/exercise/constants.ts";
+import { MIN_ANSWERS, MASTERY_CORRECT_COUNT, ERROR_THRESHOLD } from "../../../src/exercise/constants.ts";
 import type { WordStats } from "../../../src/context/auth.ts";
 import type { FillEntry, Lesson, SentenceEntry } from "../../../src/exercise/letz-parser.ts";
 
@@ -67,10 +67,18 @@ describe("classifyWord — live accuracy-based classification", () => {
     expect(classifyWord(input)).toBe(expected);
   });
 
-  it("MASTERY constants match expected values", () => {
-    expect(MASTERY.correctToMaster).toBe(MASTERY_CORRECT_COUNT);  // 3
-    expect(MASTERY.accuracyThreshold).toBe(UNLOCK_ELEMENT_THRESHOLD);  // 0.8
-    expect(MASTERY.minShown).toBe(MIN_ANSWERS);  // 5
+  it("MASTERY mirrors the canonical constants", () => {
+    expect(MASTERY.correctToMaster).toBe(MASTERY_CORRECT_COUNT);
+    expect(MASTERY.accuracyThreshold).toBe(ERROR_THRESHOLD);
+    expect(MASTERY.minShown).toBe(MIN_ANSWERS);
+  });
+
+  // classifyWord and the error pool must read the SAME boundary, or an Element could
+  // be labelled mastered while sitting in the error pool.
+  it("shares its accuracy boundary with the error pool", () => {
+    expect(classifyWord(s(MIN_ANSWERS, 4, 1))).toBe("mastered");    // 4/5 = exactly 0.8
+    expect(classifyWord(s(MIN_ANSWERS, 3, 2))).toBe("struggling"); // 3/5 = 0.6
+    expect(MASTERY.accuracyThreshold).toBe(ERROR_THRESHOLD);
   });
 });
 
@@ -205,7 +213,7 @@ describe("computeLessonProgress", () => {
 
   it("no user words → 0% progress", () => {
     const progress = computeLessonProgress(greetings, {});
-    expect(progress).toEqual({ total: 3, mastered: 0, percentage: 0, isComplete: false });
+    expect(progress).toEqual({ total: 3, mastered: 0, percentage: 0, credit: 0, isComplete: false });
   });
 
   it("element with correct < MASTERY_CORRECT_COUNT does not pass, even at 100% accuracy", () => {
@@ -247,7 +255,33 @@ describe("computeLessonProgress", () => {
       "Merci|thanks": passing(),
     };
     const progress = computeLessonProgress(greetings, words);
-    expect(progress).toEqual({ total: 3, mastered: 3, percentage: 1, isComplete: true });
+    expect(progress).toEqual({ total: 3, mastered: 3, percentage: 1, credit: 1, isComplete: true });
+  });
+
+  // The reason `credit` exists: `percentage` is a cliff at MASTERY_CORRECT_COUNT,
+  // so a learner who answered every Element correctly twice sees 0% and concludes
+  // the repeats earned nothing.
+  it("credit moves on every correct answer while percentage stays at 0", () => {
+    const afterRounds = (correct: number) =>
+      computeLessonProgress(greetings, {
+        "Moien|hi": s(correct, correct, 0),
+        "Äddi|bye": s(correct, correct, 0),
+        "Merci|thanks": s(correct, correct, 0),
+      });
+
+    expect(afterRounds(1).percentage).toBe(0);
+    expect(afterRounds(2).percentage).toBe(0);
+    expect(afterRounds(1).credit).toBeCloseTo(1 / 3);
+    expect(afterRounds(2).credit).toBeCloseTo(2 / 3);
+  });
+
+  it("credit caps per Element, so extra correct answers cannot exceed 1", () => {
+    const words = {
+      "Moien|hi": s(99, 99, 0),
+      "Äddi|bye": passing(),
+      "Merci|thanks": passing(),
+    };
+    expect(computeLessonProgress(greetings, words).credit).toBe(1);
   });
 
   it("empty lesson → isComplete false (total=0 guard)", () => {

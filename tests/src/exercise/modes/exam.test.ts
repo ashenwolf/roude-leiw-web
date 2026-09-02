@@ -41,10 +41,9 @@ const subLesson = (
 // ─── planExamMode ─────────────────────────────────────────────────────────────
 
 describe("planExamMode", () => {
-  it("covers every word exactly once across word-match slots", () => {
+  it("covers every word at least once across word-match slots", () => {
     const config = planExamMode(subLesson(words(12)), fakeRng(0.5));
     const pairs = config.queue.flatMap((ex) => (ex.type === "word-match" ? ex.pairs : []));
-    expect(pairs).toHaveLength(12);
     expect(new Set(pairs.map(([lu]) => lu)).size).toBe(12);
   });
 
@@ -54,24 +53,24 @@ describe("planExamMode", () => {
     expect(sizes).toEqual([5, 5, 5]);
   });
 
-  it("merges a trailing chunk smaller than 3 into the previous slot", () => {
+  // Uniform slot size beats exact coverage: the UI shows a fixed 5 rows, and a
+  // repeat costs one extra correct answer toward that word's gate.
+  it("pads an uneven word list to full 5-pair slots", () => {
     const config = planExamMode(subLesson(words(12)), fakeRng(0.5));
     const sizes = config.queue
       .filter((ex) => ex.type === "word-match")
-      .map((ex) => (ex.type === "word-match" ? ex.pairs.length : 0))
-      .sort((a, b) => a - b);
-    expect(sizes).toEqual([5, 7]);
+      .map((ex) => (ex.type === "word-match" ? ex.pairs.length : 0));
+    expect(sizes).toEqual([5, 5, 5]);
   });
 
-  it("keeps a trailing chunk of 3+ as its own slot", () => {
+  it("pads rather than emitting a short trailing slot", () => {
     const config = planExamMode(subLesson(words(8)), fakeRng(0.5));
     const sizes = config.queue
-      .map((ex) => (ex.type === "word-match" ? ex.pairs.length : 0))
-      .sort((a, b) => a - b);
-    expect(sizes).toEqual([3, 5]);
+      .map((ex) => (ex.type === "word-match" ? ex.pairs.length : 0));
+    expect(sizes).toEqual([5, 5]);
   });
 
-  it("keeps a single undersized chunk when it is the only one", () => {
+  it("keeps a single short slot when there is nothing to pad from", () => {
     const config = planExamMode(subLesson(words(2)), fakeRng(0.5));
     expect(config.queue).toHaveLength(1);
     expect(config.queue[0].type).toBe("word-match");

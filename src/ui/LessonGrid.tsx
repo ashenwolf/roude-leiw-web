@@ -11,7 +11,9 @@ type LessonCardProps = {
 };
 
 const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: LessonCardProps) => {
-  const pct = progress ? Math.round(progress.percentage * 100) : 0;
+  // Bar reads `credit`, label reads the gate: `mastered` alone sits at 0% through
+  // two Sessions of real work.
+  const pct = progress ? Math.round(progress.credit * 100) : 0;
   const isComplete = progress?.isComplete ?? false;
 
   return (
@@ -61,7 +63,7 @@ const LessonCard = ({ lesson, progress, isUnlocked, isCurrent, onSelect }: Lesso
             />
           </div>
           <span className="text-[10px] text-gray-400 mt-0.5 block text-center">
-            {pct}%
+            {progress?.mastered ?? 0}/{progress?.total ?? 0}
           </span>
         </div>
       )}

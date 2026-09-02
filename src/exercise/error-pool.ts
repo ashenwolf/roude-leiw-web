@@ -43,11 +43,11 @@ const isFallback = (stats: WordStats | undefined): boolean =>
 /**
  * Single source of truth for "struggling content" across the app.
  *
- * Primary pool  — shown >= MIN_ANSWERS AND correct/shown < ERROR_THRESHOLD (0.9).
- * Fallback pool — used when primary is empty for that type; all elements with
- *                 incorrect > 0, sorted ascending by correct/shown (worst first).
+ * Primary pool  — shown >= MIN_ANSWERS AND accuracy < ERROR_THRESHOLD.
+ * Fallback pool — when primary is empty for that kind: all elements with
+ *                 incorrect > 0, worst accuracy first.
  *
- * Each element kind is computed independently so a caller can get a non-empty
+ * Each element kind is computed independently, so a caller can get a non-empty
  * phrase pool even when the word pool is empty (and vice-versa).
  */
 export const selectErrorPool = (

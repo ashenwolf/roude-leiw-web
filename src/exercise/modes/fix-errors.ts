@@ -1,15 +1,16 @@
 // Layer 4 — Fix Errors Mode planner.
 // See .claude/reference/mode-specs.md > Mode specs > Fix Errors.
 
-import { FIX_ERRORS, LESSON } from "../constants";
+import { shuffle } from "../../lib/shuffle";
+import { FIX_ERRORS, LESSON, MIN_WORD_MATCH_PAIRS } from "../constants";
 import { selectErrorPool } from "../error-pool";
 import {
   buildFillExercise,
   buildSentenceExercise,
   buildWordMatchExercise,
 } from "../exercise-builders";
-import { findCurrentLessonId } from "../progression";
-import { bucketedPick, pickPair } from "../selection";
+import { findCurrentLessonId, wordKey } from "../progression";
+import { bucketedPick, pickUniquePairs } from "../selection";
 
 import type { WordStats } from "../../context/auth";
 import type { FillError, PhraseError } from "../error-pool";
@@ -65,9 +66,17 @@ export const planFixErrorsMode = (
   const phrasePool = errorPool.phrases;
   const fillPool = errorPool.fills;
 
+  // Non-error words from the same lessons, used only to pad a WordMatch Slot the
+  // error pool cannot fill — one struggling word is enough to open this Mode, and a
+  // Slot needs distinct words to have a wrong answer at all.
+  const errorKeys = new Set(errorPool.words.map((e) => wordKey(e.lu, e.en)));
+  const fillerWords = lessons
+    .flatMap((lesson) => lesson.entries)
+    .filter((entry) => !errorKeys.has(wordKey(entry.lu, entry.en)));
+
   const queue: Exercise[] = [];
   for (let i = 0; i < LESSON.totalSlots; i++) {
-    const slot = buildSlot(wordPools, phrasePool, fillPool, rng);
+    const slot = buildSlot(wordPools, fillerWords, phrasePool, fillPool, rng);
     if (slot) queue.push(slot);
   }
 
@@ -86,6 +95,7 @@ export const planFixErrorsMode = (
 
 const buildSlot = (
   wordPools: Record<"errors", ReadonlyArray<WordEntry>>,
+  fillerWords: ReadonlyArray<WordEntry>,
   phrasePool: ReadonlyArray<PhraseError>,
   fillPool: ReadonlyArray<FillError>,
   rng: () => number,
@@ -98,11 +108,23 @@ const buildSlot = (
       // Checked before drawing: a builder for an empty pool must consume no rng,
       // or a re-roll would silently shift every later draw.
       if (wordPools.errors.length === 0) return null;
-      // Independent draws with replacement from the error pool
-      const pairs = Array.from({ length: LESSON.wordMatchPairs }, () =>
-        pickPair(wordPools, ERRORS_ONLY_BUCKET, rng),
-      ).filter((p): p is WordEntry => p !== undefined);
-      return pairs.length > 0 ? buildWordMatchExercise(pairs) : null;
+      // Distinct within the Slot: with-replacement draws from a tiny error pool
+      // produced identical tiles, an unfailable Slot that still booked `correct`.
+      // Repetition ACROSS Slots is retained — that is the point of the Mode.
+      const errorPairs = pickUniquePairs(
+        wordPools,
+        ERRORS_ONLY_BUCKET,
+        LESSON.wordMatchPairs,
+        rng,
+      );
+      // Sequential from a shuffled list rather than rng-per-pick: padding is not a
+      // selection decision.
+      const needed = LESSON.wordMatchPairs - errorPairs.length;
+      const pairs =
+        needed > 0
+          ? [...errorPairs, ...shuffle([...fillerWords], rng).slice(0, needed)]
+          : errorPairs;
+      return pairs.length >= MIN_WORD_MATCH_PAIRS ? buildWordMatchExercise(pairs) : null;
     },
     "sentence-builder": (): Exercise | null => {
       if (phrasePool.length === 0) return null;

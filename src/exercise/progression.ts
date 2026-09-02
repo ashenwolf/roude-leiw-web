@@ -1,7 +1,7 @@
 import {
   MIN_ANSWERS,
   MASTERY_CORRECT_COUNT,
-  UNLOCK_ELEMENT_THRESHOLD,
+  ERROR_THRESHOLD,
   UNLOCK_LESSON_THRESHOLD,
 } from "./constants";
 
@@ -17,11 +17,11 @@ import type { WordStats } from "../context/auth";
  */
 export const MASTERY = {
   /** Correct count for the monotonic pass gate (lesson progress, unlock, XP). */
-  correctToMaster: MASTERY_CORRECT_COUNT,       // 3
-  /** Accuracy boundary used by the live classifyWord and error pool. */
-  accuracyThreshold: UNLOCK_ELEMENT_THRESHOLD,  // 0.8
-  /** Minimum showings before an element can be mastered or struggling (live view only). */
-  minShown: MIN_ANSWERS,                        // 5
+  correctToMaster: MASTERY_CORRECT_COUNT,
+  /** Accuracy boundary for the live view — `classifyWord` and the error pool. */
+  accuracyThreshold: ERROR_THRESHOLD,
+  /** Minimum showings before live accuracy may classify an Element. */
+  minShown: MIN_ANSWERS,
 } as const;
 
 // --- Word Classification ---
@@ -33,16 +33,15 @@ const accuracy = (s: WordStats): number =>
   s.correct + s.incorrect > 0 ? s.correct / (s.correct + s.incorrect) : 0;
 
 /**
- * Live classification — can change as `correct` and `incorrect` accumulate.
+ * Live classification — changes as `correct` and `incorrect` accumulate.
  *
- * Rules:
- *   unseen    — never shown (shown = 0)
+ *   unseen    — never shown
  *   learning  — shown < MIN_ANSWERS (not enough data to classify)
- *   mastered  — shown >= MIN_ANSWERS AND accuracy >= 0.8
- *   struggling— shown >= MIN_ANSWERS AND accuracy < 0.8
+ *   mastered  — shown >= MIN_ANSWERS AND accuracy >= ERROR_THRESHOLD
+ *   struggling— shown >= MIN_ANSWERS AND accuracy < ERROR_THRESHOLD
  *
- * Use this for error-pool selection and UI mastery labels.
- * Do NOT use this for lesson progress or XP — use `isElementMastered` instead.
+ * Drives error-pool selection and UI labels. NOT lesson progress or XP — those use
+ * `isElementMastered`.
  */
 export const classifyWord = (stats: WordStats | undefined): WordMastery => {
   if (!stats || stats.shown === 0) return "unseen";
@@ -51,18 +50,12 @@ export const classifyWord = (stats: WordStats | undefined): WordMastery => {
 };
 
 /**
- * Monotonic mastery gate — once `true`, never reverts.
+ * Monotonic mastery gate — once `true`, never reverts, because `correct` only
+ * grows. No minimum-shown gate and no accuracy ratio.
  *
- * An element is mastered when it has been answered correctly enough times in
- * total (`correct >= MASTERY_CORRECT_COUNT`). There is no minimum-shown gate and
- * no accuracy ratio — three correct answers passes the element regardless of how
- * many times it was missed. `correct` only ever grows, so this predicate can
- * only flip from false → true.
- *
- * Use this for lesson progress, XP, and the "Learned X/Y" display stat.
- * A word can simultaneously pass this gate AND be `struggling` in `classifyWord`
- * (meaning: it was mastered historically but accuracy has since dropped and the
- * user should practise it again via the error pool).
+ * Use for lesson progress, XP, and "Learned X/Y". An Element can pass this AND be
+ * `struggling` in `classifyWord`: mastered historically, accuracy since dropped, so
+ * the error pool should still drill it.
  */
 export const isElementMastered = (stats: WordStats | undefined): boolean =>
   stats !== undefined && stats.correct >= MASTERY.correctToMaster;
@@ -211,6 +204,16 @@ export type LessonProgress = {
   /** Elements that pass the unlock check (correct >= MASTERY_CORRECT_COUNT). */
   mastered: number;
   percentage: number;
+  /**
+   * Progress toward the gate with **partial** credit, in [0, 1]: each Element
+   * contributes `min(correct, MASTERY_CORRECT_COUNT)` of what it owes.
+   *
+   * `percentage` is a cliff — an Element at 1 or 2 correct reads identically to one
+   * never seen — so two Sessions of real work can leave it at exactly 0. Monotonic
+   * for the same reason `percentage` is, and reaches 1 exactly when `isComplete`
+   * does, so it cannot promise a completion the gate withholds.
+   */
+  credit: number;
   /** True when percentage >= UNLOCK_LESSON_THRESHOLD (every element passes). */
   isComplete: boolean;
 };
@@ -219,48 +222,53 @@ export type LessonProgress = {
  *  lesson completion percentages never decrease as the user keeps practising. */
 const isElementPassing = isElementMastered;
 
+/** An Element's answered-toward-the-gate count, capped at what the gate asks. */
+const creditOf = (stats: WordStats | undefined): number =>
+  Math.min(stats?.correct ?? 0, MASTERY.correctToMaster);
+
 export const computeLessonProgress = (
   lesson: Lesson,
   userWords: Record<string, WordStats>,
 ): LessonProgress => {
-  const wordTotal = lesson.entries.length;
-  const wordPassing = lesson.entries.filter(
-    (e) => isElementPassing(userWords[wordKey(e.lu, e.en)]),
-  ).length;
+  // One stats value per Element, directions already summed — so the gate and the
+  // credit total cannot diverge.
+  const elementStats: ReadonlyArray<WordStats | undefined> = [
+    ...lesson.entries.map((e) => userWords[wordKey(e.lu, e.en)]),
+    ...lesson.sentences
+      .filter((s) => s.enVariants.length > 0)
+      .map((s) => combinedPhraseStats(userWords, s.enVariants[0])),
+    ...lesson.fills.map((f) => combinedFillStats(userWords, f.en)),
+  ];
 
-  // Each sentence is one element; both directions are summed before the gate.
-  const sentenceTotal = lesson.sentences.length;
-  const sentencePassing = lesson.sentences.filter(
-    (s) => s.enVariants.length > 0 && isElementPassing(combinedPhraseStats(userWords, s.enVariants[0])),
-  ).length;
-
-  // Each fill is one element, on the same terms as a sentence.
-  const fillTotal = lesson.fills.length;
-  const fillPassing = lesson.fills.filter(
-    (f) => isElementPassing(combinedFillStats(userWords, f.en)),
-  ).length;
-
-  const total = wordTotal + sentenceTotal + fillTotal;
-  const mastered = wordPassing + sentencePassing + fillPassing;
+  // A sentence without an @en line is an unreachable Element: it stays in `total`
+  // (as it always has) but can never be mastered.
+  const total = lesson.entries.length + lesson.sentences.length + lesson.fills.length;
+  const mastered = elementStats.filter(isElementPassing).length;
   const percentage = total > 0 ? mastered / total : 0;
-  return { total, mastered, percentage, isComplete: total > 0 && percentage >= UNLOCK_LESSON_THRESHOLD };
+  const credit =
+    total > 0
+      ? elementStats.reduce((sum, s) => sum + creditOf(s), 0) / (total * MASTERY.correctToMaster)
+      : 0;
+
+  return {
+    total,
+    mastered,
+    percentage,
+    credit,
+    isComplete: total > 0 && percentage >= UNLOCK_LESSON_THRESHOLD,
+  };
 };
 
 // --- Lesson Unlock ---
 
 /**
- * Lessons the user can access right now.
+ * Lessons the user can access right now: the first lesson, every lesson whose
+ * predecessor passes the unlock threshold, and everything in `persistedUnlocked`.
  *
- * The set is the union of:
- *   - the first lesson (always unlocked);
- *   - every lesson whose previous lesson currently passes the unlock threshold;
- *   - every lesson in `persistedUnlocked` (sticky — once unlocked, always
- *     unlocked, even if the predecessor's `correct/shown` later drifts below
- *     threshold).
- *
- * The persisted set is the load-bearing part of stickiness: stats are
- * append-only but the ratio `correct/shown` is not monotonic, so without a
- * separate store the unlock set could shrink between renders.
+ * The derived part is already monotonic (the gate is a correct count, and `correct`
+ * only grows), so the persisted set is not what makes unlock sticky today — it
+ * protects users who unlocked lessons under the older accuracy-based 0.8 gate. See
+ * `.claude/memory/mastery-and-unlock.md`; don't remove it.
  */
 export const computeUnlockedLessonIds = (
   lessons: Lesson[],

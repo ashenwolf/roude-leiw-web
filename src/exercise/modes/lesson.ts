@@ -10,7 +10,7 @@ import {
   tokenizeSentence,
 } from "../exercise-builders";
 import { combinedFillStats, combinedPhraseStats, wordKey } from "../progression";
-import { bucketedPick, phrasesOf, pickPair, pickPhrase } from "../selection";
+import { bucketedPick, phrasesOf, pickPhrase, pickUniquePairs } from "../selection";
 
 import type { WordStats } from "../../context/auth";
 import type { Lesson, WordEntry } from "../letz-parser";
@@ -26,6 +26,11 @@ type SlotType = "word-match" | "phrase";
  * The word-match share scales with how word-heavy the current lesson's remaining
  * backlog is, clamped to [MIN, MAX]. When there is no backlog at all (everything
  * mastered) the share falls back to MIN — the historical fixed split.
+ *
+ * The clamp is **unconditional on purpose**, including when one side's backlog is
+ * zero: passing at `correct >= 3` does not mean the user still knows the word next
+ * week, so both exercise types keep appearing to hold learned content warm. See
+ * .claude/memory/lesson-throughput.md — lifting it buys ~0.3 of a Session.
  *
  * `unmasteredPhrases` counts sentences AND fills, because both compete for the
  * same Slot. Counting only sentences would over-weight word-match in a fill-heavy
@@ -215,29 +220,6 @@ const claimPhrase = (budget: PhraseBudget, key: string): boolean => {
   return true;
 };
 
-// Picks up to `count` unique word pairs (deduplicated by wordKey).
-// Generates count*4 candidates via with-replacement draws, then keeps the first
-// `count` distinct ones. Returns fewer than `count` only when the pool itself
-// has fewer unique words.
-const pickUniquePairs = (
-  pools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
-  count: number,
-  rng: () => number,
-): WordEntry[] => {
-  const seen = new Set<string>();
-  return Array.from({ length: count * 4 }, () =>
-    pickPair(pools, LESSON.buckets.wordMatch, rng),
-  )
-    .filter((p): p is WordEntry => p !== undefined)
-    .reduce<WordEntry[]>((acc, entry) => {
-      if (acc.length >= count) return acc;
-      const k = wordKey(entry.lu, entry.en);
-      if (seen.has(k)) return acc;
-      seen.add(k);
-      return [...acc, entry];
-    }, []);
-};
-
 const buildSlot = (
   wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
   phrasePools: Record<PhraseBucketName, ReadonlyArray<Lesson>>,
@@ -257,7 +239,12 @@ const buildSlot = (
       return buildPhraseExercise(picked.phrase, direction, lessonVocab);
     }
 
-    const pairs = pickUniquePairs(wordPools, LESSON.wordMatchPairs, rng);
+    const pairs = pickUniquePairs(
+      wordPools,
+      LESSON.buckets.wordMatch,
+      LESSON.wordMatchPairs,
+      rng,
+    );
     if (pairs.length > 0) return buildWordMatchExercise(pairs);
   }
 
@@ -271,6 +258,11 @@ const buildSlot = (
     return buildPhraseExercise(fallback.phrase, direction, lessonVocab);
   }
   // No phrases at all in pool → fall back to word-match
-  const fallbackPairs = pickUniquePairs(wordPools, LESSON.wordMatchPairs, rng);
+  const fallbackPairs = pickUniquePairs(
+    wordPools,
+    LESSON.buckets.wordMatch,
+    LESSON.wordMatchPairs,
+    rng,
+  );
   return fallbackPairs.length > 0 ? buildWordMatchExercise(fallbackPairs) : null;
 };

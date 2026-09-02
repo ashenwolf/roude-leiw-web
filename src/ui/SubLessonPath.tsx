@@ -36,7 +36,8 @@ type SubLessonNodeProps = {
 
 const SubLessonNode = ({ view, isCurrent, onSelect }: SubLessonNodeProps) => {
   const state = nodeState(view, isCurrent);
-  const pct = view.progress ? Math.round(view.progress.percentage * 100) : 0;
+  // Partial credit on the bar, passed Elements in the label — see LessonGrid.
+  const pct = view.progress ? Math.round(view.progress.credit * 100) : 0;
 
   return (
     <button
@@ -65,7 +66,9 @@ const SubLessonNode = ({ view, isCurrent, onSelect }: SubLessonNodeProps) => {
                 style={{ width: `${pct}%` }}
               />
             </span>
-            <span className="text-[10px] text-gray-400">{pct}%</span>
+            <span className="text-[10px] text-gray-400">
+              {view.progress.mastered}/{view.progress.total}
+            </span>
           </span>
         )}
       </span>

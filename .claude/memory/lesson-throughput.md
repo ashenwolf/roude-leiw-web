@@ -54,6 +54,20 @@ Rejected: deficit-proportional weighting accounting for 5 pairs/word-slot vs
 1 Element/sentence-slot. More precise, more logic; escalate only if starvation
 persists after content splitting.
 
+**Rejected: lifting the clamp when one side's backlog is exactly zero.** The
+clamp looks wrong at the extremes — a tail of 4 phrases and 0 unmastered words
+still sends ~3 of 15 Slots to word-match, spending ~15 graded answers on words
+already past the gate. Measured cost of removing it: **~0.3 of a Session** with 4
+phrases left, and nothing at all with 1–2 left or anywhere mid-lesson (9→10
+Slots). That is not a throughput argument.
+
+It is also not the goal. The floor is deliberate **spaced repetition**: mastery
+at `correct >= 3` is a pass gate, not a claim the user will still know the word
+next week, and `min`/`max` guarantee both exercise types keep appearing so
+learned content stays warm. Learning is repetition — a Session that drills only
+the last unmastered Element would be optimizing the percentage rather than the
+learner. Keep the clamp unconditional; do not special-case a zero backlog.
+
 ## 3. `SentenceBudget` — throughput asymmetry
 
 A **word** can be drawn by several word-match Slots in one Session (`pickUniquePairs`
@@ -121,13 +135,36 @@ lesson". Current sizes: `grep -c '^@word\|^@sentence' public/assets/lessons/A1/A
 
 ## Known gaps, deliberately not fixed
 
-1. **No sub-mastery feedback anywhere.** The card shows a frozen percentage;
-   "N Elements left" would remove the dead zone.
-2. **`DebugPanel` lists only `lesson.entries`** — sentences are invisible, so a
+1. **`DebugPanel` lists only `lesson.entries`** — sentences are invisible, so a
    sentence-only tail shows all-green words. Also desktop-only. Both made this
    bug much harder to self-diagnose.
-3. **Neither fallback Mode reaches a never-drawn straggler.** Word Mix builds only
+2. **Neither fallback Mode reaches a never-drawn straggler.** Word Mix builds only
    word-match Exercises; the error pool needs `shown >= MIN_ANSWERS` or
    `incorrect > 0`, and tail stragglers typically have neither.
+
+## 5. The gate is a cliff, so the bar had no sub-mastery resolution
+
+Separate from *reaching* an Element (§1) and from *how fast* the tail clears
+(§4): the displayed number itself could not move. `mastered / total` counts
+Elements at `correct >= MASTERY_CORRECT_COUNT`, so an Element at 1 or 2 correct
+reads identically to one never seen. On the exam track this is exact, not
+probabilistic: a SubLesson plans every Element once, so two clean Sessions raise
+every `correct` to 2 and leave the ring at **precisely 0%**, then the third jumps
+it to 100%. The user's own report — "the phrase came up three times and the
+percentage didn't move, so it must already be mastered" — is the reasonable
+inference from a display with no resolution below the cliff, and it is wrong in
+the worst direction: it reads working practice as wasted.
+
+`LessonProgress.credit` is the same stats summed with partial credit
+(`Σ min(correct, gate) / (total × gate)`). Bars read it; the numeric label
+reads `mastered/total`, which is the number that actually gates unlock. It is
+computed in `computeLessonProgress` off the one per-Element stats list the gate
+also reads, so the two cannot diverge — and it is monotonic and reaches 1.0
+exactly when `isComplete` does, so it cannot promise a completion the gate
+withholds.
+
+Rejected: showing "N Elements left" instead. It is honest but still frozen for a
+whole Session, and it needs its own copy in every card; the bar already exists
+and this makes it tell the truth.
 
 Related: [[mastery-and-unlock]] (the gate this exists to satisfy).

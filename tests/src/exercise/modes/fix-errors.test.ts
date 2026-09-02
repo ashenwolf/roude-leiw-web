@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { planFixErrorsMode } from "../../../../src/exercise/modes/fix-errors.ts";
-import { LESSON, MIN_ANSWERS } from "../../../../src/exercise/constants.ts";
+import { LESSON, MIN_ANSWERS, MIN_WORD_MATCH_PAIRS } from "../../../../src/exercise/constants.ts";
 import { wordKey, phraseKey, fillKey } from "../../../../src/exercise/progression.ts";
 
 import type { WordStats } from "../../../../src/context/auth.ts";
@@ -44,6 +44,75 @@ describe("planFixErrorsMode — empty error pool", () => {
 
   it("completionEffect is noop even when empty", () => {
     expect(planFixErrorsMode([], {}).completionEffect).toBe("noop");
+  });
+});
+
+// ─── Degenerate word-match slots ──────────────────────────────────────────────
+
+describe("planFixErrorsMode — word-match slots stay failable", () => {
+  const errorWordStats = s(MIN_ANSWERS, 0, MIN_ANSWERS);
+  const distinctCounts = (config: ReturnType<typeof planFixErrorsMode>) =>
+    config.queue
+      .filter((ex) => ex.type === "word-match")
+      .map((ex) => (ex.type === "word-match" ? new Set(ex.pairs.map(([lu]) => lu)).size : 0));
+
+  // A Slot of one distinct word cannot be failed: WordMatch matches by value, so
+  // every pairing is correct and each tap still books a `correct`.
+  it("never builds a slot below MIN_WORD_MATCH_PAIRS distinct words", () => {
+    const lessons = [lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"], ["Merci", "thanks"]])];
+    const stats = { [wordKey("Moien", "hi")]: errorWordStats };
+    const counts = distinctCounts(planFixErrorsMode(lessons, stats));
+    expect(counts.length).toBeGreaterThan(0);
+    counts.forEach((n) => expect(n).toBeGreaterThanOrEqual(MIN_WORD_MATCH_PAIRS));
+  });
+
+  it("pads a single-word error pool with non-error words rather than repeating it", () => {
+    const lessons = [
+      lesson("A1_01", [
+        ["Moien", "hi"],
+        ["Äddi", "bye"],
+        ["Merci", "thanks"],
+        ["Jo", "yes"],
+        ["Nee", "no"],
+        ["Wann ech gelift", "please"],
+      ]),
+    ];
+    const stats = { [wordKey("Moien", "hi")]: errorWordStats };
+    const config = planFixErrorsMode(lessons, stats);
+    const wordSlots = config.queue.filter((ex) => ex.type === "word-match");
+
+    expect(wordSlots.length).toBeGreaterThan(0);
+    wordSlots.forEach((ex) => {
+      if (ex.type !== "word-match") return;
+      const lus = ex.pairs.map(([lu]) => lu);
+      expect(new Set(lus).size).toBe(lus.length);
+      expect(lus).toContain("Moien");
+    });
+  });
+
+  // The Home button enables on a non-empty error pool, so an empty queue here
+  // would strand the user on "No mistakes to fix".
+  it("still fills a session when one word is the only error", () => {
+    const lessons = [
+      lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"], ["Merci", "thanks"], ["Jo", "yes"]]),
+    ];
+    const stats = { [wordKey("Moien", "hi")]: errorWordStats };
+    expect(planFixErrorsMode(lessons, stats).queue).toHaveLength(LESSON.totalSlots);
+  });
+
+  // Padding must not invent content: with too few words overall, the Mode rolls a
+  // phrase instead of a short slot.
+  it("falls back to a phrase when no padding is available", () => {
+    const lessons = [
+      lesson("A1_01", [["Moien", "hi"]], [sentence("Good morning", "Gudde Moien")]),
+    ];
+    const stats = {
+      [wordKey("Moien", "hi")]: errorWordStats,
+      [phraseKey("en-lu", "Good morning")]: errorWordStats,
+    };
+    const config = planFixErrorsMode(lessons, stats);
+    expect(config.queue).toHaveLength(LESSON.totalSlots);
+    expect(config.queue.every((ex) => ex.type === "sentence-builder")).toBe(true);
   });
 });
 
@@ -175,8 +244,12 @@ describe("planFixErrorsMode — fill errors", () => {
   });
 
   it("re-rolls to another type when the fill pool is empty", () => {
-    const lessons = [lesson("A1_01", [["Moien", "hi"]])]; // no fills at all
-    const stats = { [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS) };
+    const lessons = [lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"], ["Merci", "thanks"]])];
+    // Two errors, one clean word left to pad with, so a word-match Slot is playable.
+    const stats = {
+      [wordKey("Moien", "hi")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+      [wordKey("Äddi", "bye")]: s(MIN_ANSWERS, 0, MIN_ANSWERS),
+    };
 
     const config = planFixErrorsMode(lessons, stats, [], fillRng);
 

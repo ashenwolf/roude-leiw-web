@@ -262,32 +262,43 @@ describe("buildSentenceExercise — lu→en direction", () => {
 describe("chunkIntoWordMatchExercises", () => {
   const words = (n: number): WordEntry[] =>
     Array.from({ length: n }, (_, i) => word(`lu${i}`, `en${i}`));
-  const sizing = { pairCount: 5, minChunk: 3 };
+  const sizing = { pairCount: 5 };
+  const sizes = (n: number) =>
+    chunkIntoWordMatchExercises(words(n), sizing).map((e) => e.pairs.length);
 
   it("splits into exact chunks when evenly divisible", () => {
-    expect(chunkIntoWordMatchExercises(words(15), sizing).map((e) => e.pairs.length)).toEqual([5, 5, 5]);
+    expect(sizes(15)).toEqual([5, 5, 5]);
   });
 
-  it("merges a trailing chunk below minChunk into the previous exercise", () => {
-    expect(chunkIntoWordMatchExercises(words(12), sizing).map((e) => e.pairs.length)).toEqual([5, 7]);
+  it("pads an uneven list up to full slots instead of merging", () => {
+    expect(sizes(12)).toEqual([5, 5, 5]);
+    expect(sizes(8)).toEqual([5, 5]);
+    expect(sizes(21)).toEqual([5, 5, 5, 5, 5]);
   });
 
-  it("keeps a trailing chunk at or above minChunk", () => {
-    expect(chunkIntoWordMatchExercises(words(8), sizing).map((e) => e.pairs.length)).toEqual([5, 3]);
-  });
-
-  it("keeps a lone undersized chunk", () => {
-    expect(chunkIntoWordMatchExercises(words(2), sizing).map((e) => e.pairs.length)).toEqual([2]);
+  it("keeps a lone short slot when there is nothing to pad from", () => {
+    expect(sizes(2)).toEqual([2]);
+    expect(sizes(5)).toEqual([5]);
   });
 
   it("returns nothing for an empty list", () => {
     expect(chunkIntoWordMatchExercises([], sizing)).toEqual([]);
   });
 
-  it("covers every entry exactly once", () => {
+  it("covers every entry at least once", () => {
     const pairs = chunkIntoWordMatchExercises(words(23), sizing).flatMap((e) => e.pairs);
-    expect(pairs).toHaveLength(23);
     expect(new Set(pairs.map(([lu]) => lu)).size).toBe(23);
+  });
+
+  // WordMatch matches by VALUE, so two identical tiles make every pairing between
+  // them correct — two unmissable taps rather than two decisions.
+  it("never repeats a word within one slot", () => {
+    for (const n of [6, 7, 11, 12, 17, 19, 23, 28, 41, 65]) {
+      for (const exercise of chunkIntoWordMatchExercises(words(n), sizing)) {
+        const lus = exercise.pairs.map(([lu]) => lu);
+        expect(new Set(lus).size, `n=${n}`).toBe(lus.length);
+      }
+    }
   });
 });
 

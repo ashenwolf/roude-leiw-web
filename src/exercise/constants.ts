@@ -4,32 +4,32 @@
 
 // --- Stats gate (global) -----------------------------------------------------
 
-/** Minimum `shown` count before an Element's success rate is allowed to influence
- *  unlock or error-pool membership. Below this, the Element contributes 0. */
+/** Minimum `shown` count before an Element's live accuracy is allowed to classify
+ *  it (`classifyWord`) or admit it to the error pool. Not part of the pass gate. */
 export const MIN_ANSWERS = 5;
 
 // --- Thresholds --------------------------------------------------------------
 
 /**
- * Accuracy boundary (correct / (correct + incorrect)) below which an element
- * is considered "struggling" and enters the error pool for Fix Errors / Word Mix.
- * Also the boundary above which `classifyWord` returns "mastered" (live view).
+ * Accuracy boundary (`correct / (correct + incorrect)`) separating "mastered" from
+ * "struggling" in the **live** view: `classifyWord`'s label and error-pool
+ * membership read this same number, so the two can never disagree about whether an
+ * Element is struggling.
+ *
+ * Not the pass gate — that is `MASTERY_CORRECT_COUNT`, which ignores accuracy
+ * entirely (see `.claude/memory/mastery-and-unlock.md` on why the two systems stay
+ * separate).
  */
 export const ERROR_THRESHOLD = 0.8;
-
-/** An Element passes the lesson's unlock check if `correct/shown >= this`. */
-export const UNLOCK_ELEMENT_THRESHOLD = 0.8;
 
 /**
  * Number of correct answers an Element needs to "pass" — the **monotonic**
  * mastery gate used by lesson progress, lesson unlock, XP, and the "Learned X/Y"
- * stat. The rule is intentionally simple: pass iff `correct >= this`. There is no
- * accuracy ratio and no minimum-shown gate — three correct answers is enough,
+ * stat. Pass iff `correct >= this`: no accuracy ratio, no minimum-shown gate,
  * regardless of how many times the Element was missed.
  *
- * Unlike `classifyWord` (which uses live accuracy and can fluctuate),
- * `isElementMastered` only becomes `true` and never reverts, because `correct`
- * is a monotonically increasing counter.
+ * Unlike `classifyWord` (live accuracy, fluctuates), `isElementMastered` only ever
+ * flips false → true, because `correct` only grows.
  */
 export const MASTERY_CORRECT_COUNT = 3;
 
@@ -48,6 +48,15 @@ export const UNLOCK_LESSON_THRESHOLD = 1.0;
 
 /** Every Mode has 3 normal Blocks (plus optional correction for Lesson/Fix Errors/Exam). */
 export const BLOCK_COUNT = 3;
+
+/**
+ * Fewest distinct words a WordMatch Slot needs to be an exercise.
+ *
+ * WordMatch matches by value, so a Slot of one distinct word cannot be failed:
+ * every pairing is correct and each free tap still books a `correct`. Two is the
+ * smallest Slot where a wrong pairing exists.
+ */
+export const MIN_WORD_MATCH_PAIRS = 2;
 
 // --- Probability tables ------------------------------------------------------
 //
@@ -68,13 +77,6 @@ const LESSON_SLOTS_PER_BLOCK = 5;
  * `lessonSlotTypeDistribution` in `modes/lesson.ts`). `min` preserves the
  * historical 20/80 balance so phrase practice never starves in a word-light
  * lesson; `max` keeps phrase practice present in the most word-heavy one.
- *
- * `buckets.wordMatch` / `buckets.phraseLesson` both lead with
- * `not-yet-mastered` — current-lesson Elements below the unlock gate
- * (`correct < MASTERY_CORRECT_COUNT`). That covers never-seen Elements AND
- * stragglers shown many times but still missed, which would otherwise drop out
- * of every priority bucket and permanently cap the lesson below threshold.
- * Empty buckets re-roll (see `pickFromPool`).
  *
  * `buckets.wordMatch` / `buckets.phraseLesson` both lead with
  * `not-yet-mastered` — current-lesson Elements below the unlock gate
@@ -162,10 +164,11 @@ export const FIX_ERRORS = {
 };
 
 /**
- * Exam — WordMatch chunk sizing for full-coverage planning.
- * A trailing chunk below `minChunk` merges into the previous Slot rather than
- * forming a degenerate 1–2 pair Slot (see `chunkIntoWordMatchExercises`).
+ * Exam — WordMatch slot sizing for full-coverage planning.
+ * Every Slot holds exactly `pairCount` pairs; a list that doesn't divide evenly
+ * is padded with repeats drawn from other Slots (see
+ * `chunkIntoWordMatchExercises`) rather than yielding an odd-sized Slot.
  */
 export const EXAM = {
-  wordMatch: { pairCount: 5, minChunk: 3 },
+  wordMatch: { pairCount: 5 },
 } as const;

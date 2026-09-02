@@ -13,6 +13,13 @@ Current values live in `src/exercise/constants.ts` — read them there, not here
 | Monotonic? | no — fluctuates | yes — only false → true |
 | Drives | error pool, UI mastery labels | lesson progress, unlock, XP, "Learned X/Y" |
 
+`classifyWord` and the error pool read the **same** constant and the same formula,
+so they can never disagree about whether an Element is struggling. There was once a
+second constant (`UNLOCK_ELEMENT_THRESHOLD`) holding the same 0.8 for the live
+view; its name outlived the accuracy-based unlock gate it was written for, and it
+is gone. Don't reintroduce a per-Element accuracy threshold: unlock is a correct
+count.
+
 A word can be `isElementMastered` **and** `struggling` at once: progress must not
 regress, but the user should still drill it. Don't collapse the two.
 

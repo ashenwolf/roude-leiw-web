@@ -55,27 +55,37 @@ export const buildWordMatchExercise = (pairs: WordEntry[]): WordMatchBatch => ({
 });
 
 /**
- * Splits an ordered word list into consecutive WordMatch exercises of
- * `pairCount` pairs each. A trailing chunk smaller than `minChunk` is merged
- * into the previous exercise instead of forming a degenerate 1–2 pair slot.
+ * Splits an ordered word list into consecutive WordMatch exercises of **exactly**
+ * `pairCount` pairs each, covering every entry at least once.
  *
- * Mode-agnostic: any Mode that wants "cover this whole word list" slots uses
- * it, passing its own sizing. Callers shuffle first if they want random order.
+ * A short final chunk is padded with repeats rather than merged into an oversized
+ * Slot: the UI shows a fixed `DISPLAY_SLOTS` rows, so an odd-sized Slot either
+ * hides pairs or leaves holes, while a repeat costs one extra correct answer
+ * toward that word's gate.
+ *
+ * Pads come from entries *outside* the chunk they fill — WordMatch matches by
+ * value, so two identical tiles in one Slot make every pairing between them
+ * correct. That always suffices once `entries.length >= pairCount`; below it the
+ * single Slot is short.
+ *
+ * Mode-agnostic: any Mode that wants "cover this whole word list" slots uses it,
+ * passing its own sizing. Callers shuffle first if they want random order.
  */
 export const chunkIntoWordMatchExercises = (
   entries: ReadonlyArray<WordEntry>,
-  { pairCount, minChunk }: { pairCount: number; minChunk: number },
+  { pairCount }: { pairCount: number },
 ): WordMatchBatch[] => {
-  const chunks = Array.from(
-    { length: Math.ceil(entries.length / pairCount) },
-    (_, i) => entries.slice(i * pairCount, (i + 1) * pairCount),
+  if (entries.length === 0) return [];
+  if (entries.length <= pairCount) return [buildWordMatchExercise([...entries])];
+
+  const slotCount = Math.ceil(entries.length / pairCount);
+  const shortfall = slotCount * pairCount - entries.length;
+  // From the front, which is outside the final chunk — the only one that can be short.
+  const padded = [...entries, ...entries.slice(0, shortfall)];
+
+  return Array.from({ length: slotCount }, (_, i) =>
+    buildWordMatchExercise(padded.slice(i * pairCount, (i + 1) * pairCount)),
   );
-  const last = chunks[chunks.length - 1];
-  const merged =
-    chunks.length > 1 && last.length < minChunk
-      ? [...chunks.slice(0, -2), [...chunks[chunks.length - 2], ...last]]
-      : chunks;
-  return merged.filter((chunk) => chunk.length > 0).map(buildWordMatchExercise);
 };
 
 /**

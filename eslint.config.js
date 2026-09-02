@@ -6,7 +6,10 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // zed-letz/grammars/ is a local Zed build artifact: installing the extension clones
+  // the whole repo in there, so linting it would parse a second copy of the app under
+  // a second tsconfig root and fail every file. Gitignored, but eslint needs telling.
+  globalIgnores(['dist', 'zed-letz/grammars']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

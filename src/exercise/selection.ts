@@ -2,6 +2,8 @@
 // Pure functions: no React, no fetch, no KV. Mode planners (Layer 4) import from here.
 // See .claude/reference/mode-specs.md > Encapsulation layering.
 
+import { wordKey } from "./progression";
+
 import type { Lesson, WordEntry, SentenceEntry, FillEntry } from "./letz-parser";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -65,6 +67,38 @@ export const pickPair = <K extends string>(
   buckets: ReadonlyArray<Bucket<K>>,
   rng: () => number = Math.random,
 ): WordEntry | undefined => pickFromPool(pools, buckets, rng);
+
+/**
+ * Picks up to `count` **distinct** word pairs for ONE WordMatch Slot.
+ *
+ * Dedup is per Slot, not per Session: a word recurring in later Slots is how a
+ * straggler reaches the gate, but two tiles of the same word inside one Slot make
+ * every pairing between them correct.
+ *
+ * The `count * 4` over-draw is fixed regardless of how many survive, so rng
+ * consumption does not depend on the dedup outcome and `fakeRng` tests keep
+ * describing real Sessions.
+ *
+ * Returns fewer than `count` when the pools hold fewer distinct words — the caller
+ * decides whether that is a usable Slot (see `MIN_WORD_MATCH_PAIRS`).
+ */
+export const pickUniquePairs = <K extends string>(
+  pools: Record<K, ReadonlyArray<WordEntry>>,
+  buckets: ReadonlyArray<Bucket<K>>,
+  count: number,
+  rng: () => number = Math.random,
+): WordEntry[] => {
+  const seen = new Set<string>();
+  return Array.from({ length: count * 4 }, () => pickPair(pools, buckets, rng))
+    .filter((p): p is WordEntry => p !== undefined)
+    .reduce<WordEntry[]>((acc, entry) => {
+      if (acc.length >= count) return acc;
+      const key = wordKey(entry.lu, entry.en);
+      if (seen.has(key)) return acc;
+      seen.add(key);
+      return [...acc, entry];
+    }, []);
+};
 
 /** One `@sentence` or one `@fill`: the same Element to every stage that schedules it. */
 export type Phrase =
