@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
@@ -19,32 +19,53 @@ type Props = {
 };
 
 /**
- * Owns the prompt's <audio> element: plays once on arrival (browser autoplay
- * policy may veto the first one before any user gesture — the returned replay
- * handler is the fallback), stops on unmount so audio never bleeds into the
- * next Slot. A 404 (file not yet generated) rejects play() and is ignored the
- * same way as an autoplay veto.
+ * Owns the prompt's <audio> element and reports whether the file is actually
+ * playable, so a missing mp3 renders no speaker button at all rather than a
+ * control that does nothing.
+ *
+ * Plays once on arrival and stops on unmount, so audio never bleeds into the
+ * next Slot.
+ *
+ * The two failure modes must not be conflated:
+ * - **`error` on the element** — the file is missing or undecodable (audio for
+ *   this phrase was never generated, or the R2 sync skipped it). Unavailable:
+ *   hide the button.
+ * - **`play()` rejecting** — usually the browser's autoplay policy vetoing the
+ *   first playback before any user gesture. The file is fine, and the button is
+ *   exactly the recovery, so this must NOT hide it.
+ *
+ * Availability is therefore optimistic: it is derived by comparing the current
+ * url against the one that last errored, so only a real `error` event withdraws
+ * the button, and a new slot's url is trusted again without an effect having to
+ * reset state. Waiting for `canplay` instead would flicker the button in on
+ * every slot once the network resolves.
  */
 const usePromptAudio = (url: string | undefined) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (url === undefined) return;
     const audio = new Audio(url);
     audioRef.current = audio;
+    const handleError = () => setFailedUrl(url);
+    audio.addEventListener("error", handleError);
     audio.play().catch(() => {});
     return () => {
+      audio.removeEventListener("error", handleError);
       audio.pause();
       audioRef.current = null;
     };
   }, [url]);
 
-  return () => {
+  const play = () => {
     const audio = audioRef.current;
     if (audio === null) return;
     audio.currentTime = 0;
     audio.play().catch(() => {});
   };
+
+  return { play, isAvailable: url !== undefined && failedUrl !== url };
 };
 
 type AssembledRowProps = {
@@ -98,42 +119,53 @@ const AssembledRow = ({ tokens, assembled, status, onTap }: AssembledRowProps) =
 type PromptLineProps = {
   text: string;
   emphasis: "headline" | "sub" | "plain";
+  /** Reserve room for the audio button (audio was expected for this line). */
+  hasAudioSlot?: boolean;
+  /** Absent while the file is still unproven or known missing — no button drawn. */
   onPlay?: () => void;
 };
 
 /**
- * One prompt line, optionally with the audio replay button. The invisible
- * mirror of the button keeps the text truly centered — both sides of the flex
- * row reserve the same width.
+ * One prompt line, optionally with the audio replay button.
+ *
+ * Both sides of the flex row reserve the button's width — the visible control on
+ * the right, an invisible mirror on the left — so the text stays truly centered.
+ * The reservation is driven by `hasAudioSlot`, not by whether the button renders,
+ * so a load failure arriving after mount removes the icon without reflowing the
+ * line under the learner's eyes.
  */
-const PromptLine = ({ text, emphasis, onPlay }: PromptLineProps) => {
+const PromptLine = ({ text, emphasis, hasAudioSlot = false, onPlay }: PromptLineProps) => {
   const textClass = {
     headline: "text-center text-xl font-bold text-gray-900",
     sub: "text-center text-sm italic text-gray-500",
     plain: "text-center text-lg font-semibold text-gray-800",
   }[emphasis];
 
-  if (onPlay === undefined) return <p className={`${textClass} px-2`}>{text}</p>;
+  if (!hasAudioSlot) return <p className={`${textClass} px-2`}>{text}</p>;
 
   return (
     <div className="flex items-center justify-center gap-2 px-2">
       <div aria-hidden="true" className="shrink-0 w-9 h-9" />
       <p className={textClass}>{text}</p>
-      <button
-        type="button"
-        onClick={onPlay}
-        aria-label="Play prompt audio"
-        className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
-      >
-        <SpeakerHighIcon className="w-6 h-6" />
-      </button>
+      {onPlay === undefined ? (
+        <div aria-hidden="true" className="shrink-0 w-9 h-9" />
+      ) : (
+        <button
+          type="button"
+          onClick={onPlay}
+          aria-label="Play prompt audio"
+          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
+        >
+          <SpeakerHighIcon className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };
 
 export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const { state, tapToken, tapAssembled, submit } = useSentenceGame(item);
-  const playPrompt = usePromptAudio(item.audioUrl);
+  const { play: playPrompt, isAvailable: hasAudio } = usePromptAudio(item.audioUrl);
 
   const handleTapToken = (idx: number) => {
     onInteraction?.();
@@ -167,20 +199,21 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
     <div className="flex flex-col flex-1">
       <ExerciseAnswerArea className="gap-3">
         {/* The audio button rides the line the audio voices: the question for
-            Q&A, the Luxembourgish prompt for lu→en. */}
+            Q&A, the Luxembourgish prompt for lu→en. It disappears entirely when
+            the file failed to load — the exercise is fully usable without it. */}
         {item.question !== undefined && (
           <PromptLine
             text={item.question}
             emphasis="headline"
-            onPlay={item.audioUrl !== undefined ? playPrompt : undefined}
+            hasAudioSlot={item.audioUrl !== undefined}
+            onPlay={hasAudio ? playPrompt : undefined}
           />
         )}
         <PromptLine
           text={item.promptText}
           emphasis={item.question !== undefined ? "sub" : "plain"}
-          onPlay={
-            item.question === undefined && item.audioUrl !== undefined ? playPrompt : undefined
-          }
+          hasAudioSlot={item.question === undefined && item.audioUrl !== undefined}
+          onPlay={item.question === undefined && hasAudio ? playPrompt : undefined}
         />
 
         <AssembledRow

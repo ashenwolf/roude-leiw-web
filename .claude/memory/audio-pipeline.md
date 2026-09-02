@@ -91,6 +91,23 @@ before any gesture on the page; the replay button is the designed fallback, not 
 nice-to-have. mp3s are deliberately NOT in the service-worker `globPatterns` —
 on-demand fetch, not precache.
 
+**Missing-file fallback.** A phrase whose mp3 was never generated (or never
+synced) must degrade to a silent, fully usable exercise — audio is an aid, never a
+requirement. `usePromptAudio` distinguishes the two failure modes, which is the
+whole subtlety: an `error` event on the element means the file is missing or
+undecodable, so the speaker button is withdrawn; `play()` rejecting usually means
+the autoplay policy vetoed the first playback, and the button is precisely the
+recovery, so that must NOT hide it. Availability is derived by comparing the
+current url against the one that last errored — optimistic, so a new slot's url is
+trusted without an effect resetting state (an effect-time `setState` also trips
+the react-hooks lint). Waiting for `canplay` instead would flicker the button in
+on every slot once the network resolves. `PromptLine` reserves the button's
+geometry whenever audio was *expected* rather than when the button renders, so a
+failure arriving after mount removes the icon without reflowing the line.
+Verified against a real preview server: an absent mp3 returns 404 `text/plain`
+(the SW's `navigateFallback` applies only to navigations, so no index.html is
+substituted), which is what raises `error`.
+
 ## Slugs are deterministic from the phrase
 
 NFD-normalize → strip combining marks → lowercase → non-alphanumeric runs to `-` →
