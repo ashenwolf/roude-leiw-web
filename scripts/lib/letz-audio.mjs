@@ -65,6 +65,20 @@ export const extractLuPhrases = (content) => {
   return phrases;
 };
 
+/**
+ * Extract every `@question` line (examiner prompts, always Luxembourgish).
+ * Position-independent: a `@question` belongs to its `@sentence` block, but
+ * for audio we only need the text, so a flat line scan is enough. Comments
+ * (`#…`) are ignored — content files quote `@question` in prose comments.
+ */
+export const extractQuestions = (content) =>
+  content
+    .split(/\r?\n/)
+    .map((rawLine) => rawLine.trim())
+    .filter((line) => line.startsWith("@question "))
+    .map((line) => line.slice("@question ".length).trim())
+    .filter((question) => question.length > 0);
+
 // ---------------------------------------------------------------------------
 // File discovery
 // ---------------------------------------------------------------------------
@@ -118,16 +132,16 @@ export const pathExists = async (path) => {
 /**
  * Read a .letz file and return the slugs we expect under its sibling audio/
  * directory (deduplicated). Useful for download mode — tells us what to pull.
+ * Sentence audio lives flat under audio/, question audio under
+ * audio/questions/ — the two lists keep that distinction.
  */
 export const expectedSlugsForLetz = async (letzPath) => {
   const content = await readFile(letzPath, "utf-8");
-  const phrases = extractLuPhrases(content);
-  const slugs = new Set();
-  for (const phrase of phrases) {
-    const slug = slugify(phrase);
-    if (slug.length > 0) slugs.add(slug);
-  }
-  return [...slugs];
+  const dedupe = (phrases) => [...new Set(phrases.map(slugify).filter((s) => s.length > 0))];
+  return {
+    sentences: dedupe(extractLuPhrases(content)),
+    questions: dedupe(extractQuestions(content)),
+  };
 };
 
 /** Pretty file label for log lines, e.g. "A1/A1_01_greetings.letz". */

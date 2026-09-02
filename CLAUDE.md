@@ -13,6 +13,7 @@ npm run preview      # Preview production build locally
 npm run deploy       # Build and deploy to Cloudflare Pages
 
 npm run generate-audio    -- <path-to-lesson.letz>   # Sproochmaschinn TTS for @lu phrases (needs ffmpeg)
+npm run generate-question-audio -- [path]            # Sproochmaschinn TTS for @question prompts (default: all content)
 npm run sync-audio:upload -- [path]                  # push local mp3s to R2
 npm run sync-audio:download -- [path]                # pull mp3s from R2 (auto-runs in prebuild)
 ```

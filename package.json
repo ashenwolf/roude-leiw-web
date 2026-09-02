@@ -14,6 +14,7 @@
     "test:watch": "vitest",
     "check-content": "node scripts/check-content.mjs",
     "generate-audio": "node --env-file-if-exists=.env scripts/generate-audio.mjs",
+    "generate-question-audio": "node --env-file-if-exists=.env scripts/generate-question-audio.mjs",
     "sync-audio:upload": "node scripts/sync-audio.mjs upload",
     "sync-audio:download": "node scripts/sync-audio.mjs download"
   },

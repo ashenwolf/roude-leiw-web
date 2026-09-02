@@ -8,20 +8,43 @@ mp3s.
 
 Commands are in CLAUDE.md; scripts are `scripts/{generate,sync}-audio.mjs`.
 
-## Coverage: sentences only
+## Coverage: sentences and questions
 
-Only `@lu` lines inside `@sentence` blocks are voiced. `@word` entries are
-deliberately excluded — sentences are the higher-value listening practice and
-vocabulary lookups don't need it. Adding word audio later is another generator
-pass, not a redesign.
+Two generators, one shared client (`scripts/lib/sproochmaschinn.mjs`):
+
+- `generate-audio.mjs` — `@lu` lines inside `@sentence` blocks, one lesson file at
+  a time. `@word` entries are deliberately excluded — sentences are the
+  higher-value listening practice and vocabulary lookups don't need it. Adding
+  word audio later is another generator pass, not a redesign.
+- `generate-question-audio.mjs` — every `@question` examiner prompt under a root
+  (default: all content). Questions are always Luxembourgish, so the whole corpus
+  is one Sproochmaschinn batch. In practice all `@question` content is exam-track
+  topic themes (picture themes forbid it), but the extractor is track-agnostic —
+  a course lesson adopting `@question` is covered without a script change.
 
 Each `@lu` variant gets its own file: variants are different phrasings (formal vs
 informal) and warrant separate audio.
 
+## Layout: audio/ flat for sentences, audio/questions/ for prompts
+
+`<letz-dir>/audio/<slug>.mp3` for sentences, `<letz-dir>/audio/questions/<slug>.mp3`
+for questions. The `questions/` subdirectory keeps the two corpora from colliding
+(a sentence and a question could slugify identically) and the per-theme/per-level
+.letz directories provide the nesting — no single folder collects everything.
+Sub-lessons of one exam theme share a directory, so a question repeated across
+them is generated once and stored once.
+
 ## Storage: R2, not git
 
-Files live in three states — local (gitignored), R2 (`roude-leiw-audio`, mirroring
-the local path), and copied into `dist/` at build time.
+Files live in three states — local (gitignored), R2 (`roude-leiw-audio`, keyed by
+path relative to `public/assets/`, e.g. `lessons/A1/audio/<slug>.mp3` and
+`exam/topic/tourism/audio/questions/<slug>.mp3`), and copied into `dist/` at build
+time.
+
+> The R2 key root moved from `public/assets/lessons/` to `public/assets/` when
+> question audio arrived (exam content was invisible to the old root). Old
+> `A1/audio/…` keys are dead objects; everything was re-uploaded under
+> `lessons/A1/audio/…`. No cleanup — storage cost is negligible.
 
 | Alternative | Why not |
 |---|---|

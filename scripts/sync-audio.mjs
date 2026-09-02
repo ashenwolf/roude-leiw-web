@@ -4,16 +4,19 @@
  * R2 bucket. Audio files are gitignored — R2 is the durable backup, and this
  * script is what keeps them in sync.
  *
- * Local layout:   public/assets/lessons/<level>/audio/<slug>.mp3
- * R2 key layout:  <level>/audio/<slug>.mp3
+ * Local layout:   public/assets/<track…>/audio/<slug>.mp3            (@lu sentences)
+ *                 public/assets/<track…>/audio/questions/<slug>.mp3  (@question prompts)
+ * R2 key layout:  path relative to public/assets/, e.g.
+ *                 lessons/A1/audio/<slug>.mp3
+ *                 exam/topic/tourism/audio/questions/<slug>.mp3
  *
  * Usage
  * -----
  *   node scripts/sync-audio.mjs upload   [letzPathOrDir] [--force]
  *   node scripts/sync-audio.mjs download [letzPathOrDir] [--force]
  *
- *   letzPathOrDir   Path to a .letz file or a directory under public/assets/
- *                   lessons/. Defaults to the lessons root (sync everything).
+ *   letzPathOrDir   Path to a .letz file or a directory under public/assets/.
+ *                   Defaults to the assets root (sync everything).
  *   --force         Re-download files even if a local copy already exists.
  *                   (Uploads always overwrite — they are idempotent.)
  *
@@ -48,7 +51,7 @@ import {
 } from "./lib/letz-audio.mjs";
 
 const BUCKET = process.env.R2_BUCKET ?? "roude-leiw-audio";
-const LESSONS_ROOT = "public/assets/lessons";
+const ASSETS_ROOT = "public/assets";
 const CONCURRENCY = 4;
 
 // ---------------------------------------------------------------------------
@@ -61,7 +64,7 @@ const parseArgs = (argv) => {
   const flags = new Set(rest.filter((a) => a.startsWith("--")));
   return {
     mode,
-    target: positionals[0] ?? LESSONS_ROOT,
+    target: positionals[0] ?? ASSETS_ROOT,
     force: flags.has("--force"),
   };
 };
@@ -76,21 +79,23 @@ const printUsage = () => {
 // Path helpers
 // ---------------------------------------------------------------------------
 
-const lessonsRootAbs = resolve(LESSONS_ROOT);
+const assetsRootAbs = resolve(ASSETS_ROOT);
 
-/** Convert a local .mp3 path to its R2 key (level/audio/slug.mp3). */
+/** Convert a local .mp3 path to its R2 key (path relative to public/assets/). */
 const localToR2Key = (localAbsPath) => {
-  const rel = relative(lessonsRootAbs, localAbsPath);
+  const rel = relative(assetsRootAbs, localAbsPath);
   return rel.split(sep).join("/");
 };
 
-/** Convert a (letzPath, slug) to its local audio path. */
-const slugToLocalPath = (letzPath, slug) =>
-  join(dirname(letzPath), "audio", `${slug}.mp3`);
+/** Convert a (letzPath, slug, kind) to its local audio path. */
+const slugToLocalPath = (letzPath, slug, kind) =>
+  kind === "questions"
+    ? join(dirname(letzPath), "audio", "questions", `${slug}.mp3`)
+    : join(dirname(letzPath), "audio", `${slug}.mp3`);
 
-/** Convert a (letzPath, slug) to its R2 key. */
-const slugToR2Key = (letzPath, slug) =>
-  localToR2Key(slugToLocalPath(letzPath, slug));
+/** Convert a (letzPath, slug, kind) to its R2 key. */
+const slugToR2Key = (letzPath, slug, kind) =>
+  localToR2Key(slugToLocalPath(letzPath, slug, kind));
 
 // ---------------------------------------------------------------------------
 // wrangler r2 wrappers
@@ -232,17 +237,21 @@ const download = async (target, force) => {
     return;
   }
 
-  // Build the full task list: every (letz, slug) pair becomes a candidate.
+  // Build the full task list: every (letz, slug, kind) triple becomes a
+  // candidate — sentence audio flat under audio/, question audio under
+  // audio/questions/.
   const tasks = [];
   for (const letzPath of letzFiles) {
-    const slugs = await expectedSlugsForLetz(letzPath);
-    for (const slug of slugs) {
-      tasks.push({
-        letzPath,
-        slug,
-        localPath: slugToLocalPath(letzPath, slug),
-        key: slugToR2Key(letzPath, slug),
-      });
+    const { sentences, questions } = await expectedSlugsForLetz(letzPath);
+    for (const [kind, slugs] of [["sentences", sentences], ["questions", questions]]) {
+      for (const slug of slugs) {
+        tasks.push({
+          letzPath,
+          slug,
+          localPath: slugToLocalPath(letzPath, slug, kind),
+          key: slugToR2Key(letzPath, slug, kind),
+        });
+      }
     }
   }
 
