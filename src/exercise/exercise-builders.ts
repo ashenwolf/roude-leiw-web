@@ -157,7 +157,15 @@ export const buildSentenceExercise = (
     // repeat the exact direction the user struggled with.
     phraseKey: phraseKey(direction, entry.enVariants[0]),
     ...(entry.question !== undefined ? { question: entry.question } : {}),
-    ...(entry.questionAudioUrl !== undefined ? { questionAudioUrl: entry.questionAudioUrl } : {}),
+    // Prompt audio: the question for Q&A (always en→lu), the Luxembourgish
+    // phrase when it IS the prompt (lu→en). Plain en→lu gets none — the
+    // Luxembourgish is the answer, and audio would give it away.
+    ...(entry.question !== undefined && entry.questionAudioUrl !== undefined
+      ? { audioUrl: entry.questionAudioUrl }
+      : {}),
+    ...(entry.question === undefined && direction === "lu-en" && entry.luAudioUrl !== undefined
+      ? { audioUrl: entry.luAudioUrl }
+      : {}),
   };
 
   return { type: "sentence-builder", item };

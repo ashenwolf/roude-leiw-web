@@ -19,13 +19,13 @@ type Props = {
 };
 
 /**
- * Owns the question's <audio> element: plays once on arrival (browser autoplay
+ * Owns the prompt's <audio> element: plays once on arrival (browser autoplay
  * policy may veto the first one before any user gesture — the returned replay
  * handler is the fallback), stops on unmount so audio never bleeds into the
  * next Slot. A 404 (file not yet generated) rejects play() and is ignored the
  * same way as an autoplay veto.
  */
-const useQuestionAudio = (url: string | undefined) => {
+const usePromptAudio = (url: string | undefined) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -95,9 +95,45 @@ const AssembledRow = ({ tokens, assembled, status, onTap }: AssembledRowProps) =
   </div>
 );
 
+type PromptLineProps = {
+  text: string;
+  emphasis: "headline" | "sub" | "plain";
+  onPlay?: () => void;
+};
+
+/**
+ * One prompt line, optionally with the audio replay button. The invisible
+ * mirror of the button keeps the text truly centered — both sides of the flex
+ * row reserve the same width.
+ */
+const PromptLine = ({ text, emphasis, onPlay }: PromptLineProps) => {
+  const textClass = {
+    headline: "text-center text-xl font-bold text-gray-900",
+    sub: "text-center text-sm italic text-gray-500",
+    plain: "text-center text-lg font-semibold text-gray-800",
+  }[emphasis];
+
+  if (onPlay === undefined) return <p className={`${textClass} px-2`}>{text}</p>;
+
+  return (
+    <div className="flex items-center justify-center gap-2 px-2">
+      <div aria-hidden="true" className="shrink-0 w-9 h-9" />
+      <p className={textClass}>{text}</p>
+      <button
+        type="button"
+        onClick={onPlay}
+        aria-label="Play prompt audio"
+        className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
+      >
+        <SpeakerHighIcon className="w-6 h-6" />
+      </button>
+    </div>
+  );
+};
+
 export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   const { state, tapToken, tapAssembled, submit } = useSentenceGame(item);
-  const playQuestion = useQuestionAudio(item.questionAudioUrl);
+  const playPrompt = usePromptAudio(item.audioUrl);
 
   const handleTapToken = (idx: number) => {
     onInteraction?.();
@@ -130,37 +166,22 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
   return (
     <div className="flex flex-col flex-1">
       <ExerciseAnswerArea className="gap-3">
+        {/* The audio button rides the line the audio voices: the question for
+            Q&A, the Luxembourgish prompt for lu→en. */}
         {item.question !== undefined && (
-          <div className="flex items-center justify-center gap-2 px-2">
-            {/* Invisible mirror of the button keeps the question truly centered:
-                both sides of the flex row reserve the same width. */}
-            {item.questionAudioUrl !== undefined && (
-              <div aria-hidden="true" className="shrink-0 w-9 h-9" />
-            )}
-            <p className="text-center text-xl font-bold text-gray-900">
-              {item.question}
-            </p>
-            {item.questionAudioUrl !== undefined && (
-              <button
-                type="button"
-                onClick={playQuestion}
-                aria-label="Play question audio"
-                className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
-              >
-                <SpeakerHighIcon className="w-6 h-6" />
-              </button>
-            )}
-          </div>
+          <PromptLine
+            text={item.question}
+            emphasis="headline"
+            onPlay={item.audioUrl !== undefined ? playPrompt : undefined}
+          />
         )}
-        <p
-          className={
-            item.question !== undefined
-              ? "text-center text-sm italic text-gray-500 px-2"
-              : "text-center text-lg font-semibold text-gray-800 px-2"
+        <PromptLine
+          text={item.promptText}
+          emphasis={item.question !== undefined ? "sub" : "plain"}
+          onPlay={
+            item.question === undefined && item.audioUrl !== undefined ? playPrompt : undefined
           }
-        >
-          {item.promptText}
-        </p>
+        />
 
         <AssembledRow
           tokens={item.tokens}

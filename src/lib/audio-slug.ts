@@ -36,3 +36,12 @@ export const questionAudioUrl = (letzDir: string, question: string): string | un
   const slug = audioSlug(question);
   return slug.length > 0 ? `${letzDir}/audio/questions/${slug}.mp3` : undefined;
 };
+
+/**
+ * URL of a sentence phrase's pre-generated audio — flat under `audio/`, unlike
+ * questions (see the generator scripts for the layout contract).
+ */
+export const sentenceAudioUrl = (letzDir: string, phrase: string): string | undefined => {
+  const slug = audioSlug(phrase);
+  return slug.length > 0 ? `${letzDir}/audio/${slug}.mp3` : undefined;
+};

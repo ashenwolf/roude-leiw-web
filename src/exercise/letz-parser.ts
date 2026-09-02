@@ -50,6 +50,13 @@ export type SentenceEntry = {
    * the player treats a 404 as "no audio".
    */
   questionAudioUrl?: string;
+  /**
+   * URL of the primary Luxembourgish variant's pre-generated audio
+   * (`<dir>/audio/<slug>.mp3`), stamped by `fetchLetzFile` like
+   * `questionAudioUrl`. Played when the sentence is presented lu→en — hearing
+   * the phrase catches the parts skimming misses. Optimistic like its sibling.
+   */
+  luAudioUrl?: string;
   distractorsEn?: string[];
   distractorsLu?: string[];
 };

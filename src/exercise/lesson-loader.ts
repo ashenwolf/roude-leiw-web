@@ -1,5 +1,5 @@
 import { parseLetzContent } from "./letz-parser";
-import { questionAudioUrl } from "../lib/audio-slug";
+import { questionAudioUrl, sentenceAudioUrl } from "../lib/audio-slug";
 
 import type { Lesson } from "./letz-parser";
 
@@ -104,11 +104,12 @@ export const loadLessonsUpToCursor = async (
  * Fetch and parse any .letz file by URL. Shared by the course catalog (below)
  * and the exam catalog (src/exam/exam-catalog.ts).
  *
- * Stamps each question-carrying sentence with its pre-generated audio URL
- * (`<letz-dir>/audio/questions/<slug>.mp3`) — the loader is the only place
- * that knows where the file was served from, so the URL is derived here, at
+ * Stamps each sentence with its pre-generated audio URLs — the question's
+ * (`<letz-dir>/audio/questions/<slug>.mp3`) and the primary Luxembourgish
+ * variant's (`<letz-dir>/audio/<slug>.mp3`) — the loader is the only place
+ * that knows where the file was served from, so the URLs are derived here, at
  * the edge, and everything downstream (builders, Fix Errors' rebuild) just
- * carries it.
+ * carries them.
  */
 export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Lesson> => {
   const response = await fetch(url);
@@ -120,11 +121,15 @@ export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Le
   const letzDir = url.slice(0, url.lastIndexOf("/"));
   return {
     ...lesson,
-    sentences: lesson.sentences.map((sentence) =>
-      sentence.question !== undefined
-        ? { ...sentence, questionAudioUrl: questionAudioUrl(letzDir, sentence.question) }
-        : sentence,
-    ),
+    sentences: lesson.sentences.map((sentence) => ({
+      ...sentence,
+      ...(sentence.question !== undefined
+        ? { questionAudioUrl: questionAudioUrl(letzDir, sentence.question) }
+        : {}),
+      ...(sentence.luVariants.length > 0
+        ? { luAudioUrl: sentenceAudioUrl(letzDir, sentence.luVariants[0]) }
+        : {}),
+    })),
   };
 };
 

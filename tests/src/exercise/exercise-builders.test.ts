@@ -117,6 +117,30 @@ describe("buildSentenceExercise — en→lu direction", () => {
     expect(ex.item.question).toBeUndefined();
   });
 
+  // Prompt-audio rule: audio voices the prompt as presented. A Q&A sentence
+  // plays its question; a lu→en sentence plays the Luxembourgish prompt; a
+  // plain en→lu sentence gets NO audio — the Luxembourgish is the answer, and
+  // hearing it would leak the tiles to assemble.
+  it("uses the question audio for Q&A sentences", () => {
+    const entry = {
+      ...sentence(["We are going to France."], ["Mir fueren a Frankräich."]),
+      question: "Wou fuert Dir?",
+      questionAudioUrl: "/x/audio/questions/wou-fuert-dir.mp3",
+      luAudioUrl: "/x/audio/mir-fueren-a-frankraich.mp3",
+    };
+    const ex = buildSentenceExercise(entry, "en-lu", []);
+    expect(ex.item.audioUrl).toBe("/x/audio/questions/wou-fuert-dir.mp3");
+  });
+
+  it("withholds audio for plain en→lu — the LU phrase is the answer", () => {
+    const entry = {
+      ...sentence(["Good morning"], ["Gudde Moien"]),
+      luAudioUrl: "/x/audio/gudde-moien.mp3",
+    };
+    const ex = buildSentenceExercise(entry, "en-lu", []);
+    expect(ex.item.audioUrl).toBeUndefined();
+  });
+
   it("sets acceptedAnswers to LU variants", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien", "Moien"]);
     const ex = buildSentenceExercise(entry, "en-lu", []);
@@ -200,6 +224,15 @@ describe("buildSentenceExercise — en→lu direction", () => {
 });
 
 describe("buildSentenceExercise — lu→en direction", () => {
+  it("plays the Luxembourgish prompt's audio when it IS the prompt", () => {
+    const entry = {
+      ...sentence(["Good morning"], ["Gudde Moien"]),
+      luAudioUrl: "/x/audio/gudde-moien.mp3",
+    };
+    const ex = buildSentenceExercise(entry, "lu-en", []);
+    expect(ex.item.audioUrl).toBe("/x/audio/gudde-moien.mp3");
+  });
+
   it("sets promptText to the first LU variant", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien"]);
     const ex = buildSentenceExercise(entry, "lu-en", []);

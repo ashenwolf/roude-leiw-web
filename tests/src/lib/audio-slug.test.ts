@@ -3,12 +3,12 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { audioSlug, questionAudioUrl } from "../../../src/lib/audio-slug";
+import { audioSlug, questionAudioUrl, sentenceAudioUrl } from "../../../src/lib/audio-slug";
 
 // The scripts tree is deliberately plain ESM Node (no types) — this parity
 // test is the one sanctioned crossing point between the two copies of slugify.
 // @ts-expect-error untyped .mjs module
-import { extractQuestions, slugify } from "../../../scripts/lib/letz-audio.mjs";
+import { extractLuPhrases, extractQuestions, slugify } from "../../../scripts/lib/letz-audio.mjs";
 
 const ASSETS_ROOT = join(__dirname, "../../../public/assets");
 
@@ -25,19 +25,25 @@ const findLetzFiles = async (root: string): Promise<string[]> => {
 };
 
 describe("audioSlug — parity with scripts/lib/letz-audio.mjs slugify", () => {
-  it("agrees with the generator on every @question in the real corpus", async () => {
+  it("agrees with the generator on every @question and @lu phrase in the real corpus", async () => {
     const letzFiles = await findLetzFiles(ASSETS_ROOT);
-    const questions = (
+    const phrases = (
       await Promise.all(
-        letzFiles.map(async (file) => extractQuestions(await readFile(file, "utf-8")) as string[]),
+        letzFiles.map(async (file) => {
+          const content = await readFile(file, "utf-8");
+          return [
+            ...(extractQuestions(content) as string[]),
+            ...(extractLuPhrases(content) as string[]),
+          ];
+        }),
       )
     ).flat();
 
     // Guard against the corpus silently vanishing and the test passing on nothing.
-    expect(questions.length).toBeGreaterThan(100);
+    expect(phrases.length).toBeGreaterThan(1000);
 
-    questions.forEach((question) => {
-      expect(audioSlug(question)).toBe(slugify(question));
+    phrases.forEach((phrase) => {
+      expect(audioSlug(phrase)).toBe(slugify(phrase));
     });
   });
 
@@ -57,5 +63,17 @@ describe("questionAudioUrl", () => {
 
   it("returns undefined when the question slugifies to nothing", () => {
     expect(questionAudioUrl("/assets/exam/topic/tourism", "???")).toBeUndefined();
+  });
+});
+
+describe("sentenceAudioUrl", () => {
+  it("builds the flat audio/ URL from the letz dir", () => {
+    expect(sentenceAudioUrl("/assets/lessons/A1/A1.1", "Wéi geet et?")).toBe(
+      "/assets/lessons/A1/A1.1/audio/wei-geet-et.mp3",
+    );
+  });
+
+  it("returns undefined when the phrase slugifies to nothing", () => {
+    expect(sentenceAudioUrl("/assets/lessons/A1/A1.1", "???")).toBeUndefined();
   });
 });

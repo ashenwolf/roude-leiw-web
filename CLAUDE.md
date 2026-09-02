@@ -18,7 +18,7 @@ npm run sync-audio:upload -- [path]                  # push local mp3s to R2
 npm run sync-audio:download -- [path]                # pull mp3s from R2 (auto-runs in prebuild)
 ```
 
-Audio files are gitignored. R2 is the source of truth. Question audio (`@question`) is played in-app by SentenceBuilder; sentence audio is generated but not yet consumed. See [`.claude/memory/audio-pipeline.md`](.claude/memory/audio-pipeline.md).
+Audio files are gitignored. R2 is the source of truth. SentenceBuilder plays prompt audio (question for Q&A, Luxembourgish phrase for lu→en — never for en→lu, which would leak the answer). See [`.claude/memory/audio-pipeline.md`](.claude/memory/audio-pipeline.md).
 
 Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under `tests/` mirroring the source tree. Full coverage table and the no-mocks rule: [`.claude/reference/testing.md`](.claude/reference/testing.md).
 

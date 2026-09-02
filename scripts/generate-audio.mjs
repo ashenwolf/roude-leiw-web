@@ -5,7 +5,8 @@
  *
  * Usage
  * -----
- *   node scripts/generate-audio.mjs <path/to/lesson.letz>
+ *   node scripts/generate-audio.mjs <letzFileOrDir>
+ *   npm run generate-audio -- public/assets/lessons/A1
  *   npm run generate-audio -- <path/to/lesson.letz>
  *
  * Environment variables
@@ -29,13 +30,13 @@ import { mkdir, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import process from "node:process";
 
-import { extractLuPhrases, slugify } from "./lib/letz-audio.mjs";
+import { extractLuPhrases, findLetzFiles, shortLabel, slugify } from "./lib/letz-audio.mjs";
 import { assertFfmpeg, generateAll, DEFAULT_MODEL, VOICE_MODELS } from "./lib/sproochmaschinn.mjs";
 
 const main = async () => {
   const inputPath = process.argv[2];
   if (!inputPath) {
-    console.error("Usage: node scripts/generate-audio.mjs <path/to/lesson.letz>");
+    console.error("Usage: node scripts/generate-audio.mjs <letzFileOrDir>");
     process.exit(1);
   }
 
@@ -47,36 +48,52 @@ const main = async () => {
 
   assertFfmpeg();
 
-  const absolutePath = resolve(inputPath);
-  const content = await readFile(absolutePath, "utf-8");
-  const phrases = extractLuPhrases(content);
+  const target = resolve(inputPath);
+  const letzFiles = target.endsWith(".letz") ? [target] : await findLetzFiles(target);
+  if (letzFiles.length === 0) {
+    console.error(`No .letz files found under ${target}`);
+    process.exit(1);
+  }
 
-  if (phrases.length === 0) {
+  const withPhrases = await Promise.all(
+    letzFiles.map(async (letzPath) => ({
+      letzPath,
+      phrases: extractLuPhrases(await readFile(letzPath, "utf-8")),
+    })),
+  );
+
+  // One task per unique (audio dir, slug): lessons sharing a directory (one
+  // level section) collapse repeated phrasings to a single mp3, same as the
+  // question generator.
+  const seen = new Set();
+  const tasks = withPhrases.flatMap(({ letzPath, phrases }) => {
+    const audioDir = join(dirname(letzPath), "audio");
+    return phrases.flatMap((phrase) => {
+      const slug = slugify(phrase);
+      if (slug.length === 0) {
+        console.log(`skip (empty slug): "${phrase}"`);
+        return [];
+      }
+      const outputPath = join(audioDir, `${slug}.mp3`);
+      if (seen.has(outputPath)) return [];
+      seen.add(outputPath);
+      return [{ text: phrase, outputPath, label: shortLabel(outputPath, "public/assets") }];
+    });
+  });
+
+  if (tasks.length === 0) {
     console.log("No @lu phrases found in @sentence blocks.");
     return;
   }
 
-  const audioDir = join(dirname(absolutePath), "audio");
-  await mkdir(audioDir, { recursive: true });
+  await Promise.all([...new Set(tasks.map(({ outputPath }) => dirname(outputPath)))]
+    .map((dir) => mkdir(dir, { recursive: true })));
 
-  // Deduplicate by slug. If two phrases collapse to the same slug they share
-  // a single audio file — cross-run, the existence check catches the rest.
-  const seenSlugs = new Set();
-  const tasks = phrases.flatMap((phrase) => {
-    const slug = slugify(phrase);
-    if (slug.length === 0) {
-      console.log(`skip (empty slug): "${phrase}"`);
-      return [];
-    }
-    if (seenSlugs.has(slug)) return [];
-    seenSlugs.add(slug);
-    return [{ text: phrase, outputPath: join(audioDir, `${slug}.mp3`), label: `${slug}.mp3` }];
-  });
-
-  console.log(`File:    ${absolutePath}`);
-  console.log(`Output:  ${audioDir}`);
+  const totalPhrases = withPhrases.reduce((sum, { phrases }) => sum + phrases.length, 0);
+  console.log(`Target:  ${target}`);
   console.log(`Model:   ${model}`);
-  console.log(`Phrases: ${phrases.length} total, ${tasks.length} unique`);
+  console.log(`Files:   ${letzFiles.length} .letz`);
+  console.log(`Phrases: ${totalPhrases} total, ${tasks.length} unique`);
   console.log();
 
   const { generated, skipped, failed } = await generateAll(tasks, model);

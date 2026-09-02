@@ -37,10 +37,12 @@ export type SentenceBuilderItem = {
    */
   question?: string;
   /**
-   * Pre-generated audio of `question`, played on arrival and replayable via
-   * the speaker button. Absent when no question or when the slug is empty.
+   * Pre-generated audio of the PROMPT as presented — the examiner question for
+   * Q&A sentences, the Luxembourgish phrase for lu→en, and absent for plain
+   * en→lu (hearing the Luxembourgish would leak the answer). Played on arrival
+   * and replayable via the speaker button.
    */
-  questionAudioUrl?: string;
+  audioUrl?: string;
 };
 
 /** Assemble a sentence from token tiles. One Step per submit. */

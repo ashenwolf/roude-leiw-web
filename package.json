@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/sync-audio.mjs download public/assets/exam",
+    "prebuild": "node scripts/sync-audio.mjs download",
     "build": "vitest run && eslint . && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
