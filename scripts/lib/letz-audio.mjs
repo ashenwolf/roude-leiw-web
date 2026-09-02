@@ -34,36 +34,41 @@ export const slugify = (input) =>
 // .letz parsing
 // ---------------------------------------------------------------------------
 
+// Top-level directives that end a `@sentence` block. `@fill` is here because a
+// fill is a DIFFERENT Element kind that also uses `@lu` — see extractLuPhrases.
+const BLOCK_BOUNDARIES = ["@lesson", "@word", "@fill", "@image"];
+
 /**
  * Extract every Luxembourgish phrase that appears as `@lu` inside an
  * `@sentence` block. A sentence block begins at `@sentence` and ends at the
- * next top-level directive (`@lesson` or `@word`). Comments (`#…`) and blank
- * lines are ignored. Multiple `@lu` lines inside one block are returned
- * separately — each is a distinct phrase that gets its own audio file.
+ * next top-level directive. Comments (`#…`) and blank lines are ignored.
+ * Multiple `@lu` lines inside one block are returned separately — each is a
+ * distinct phrase that gets its own audio file.
+ *
+ * `@fill` is a boundary, not a continuation: a fill's `@lu` carries
+ * `[bracketed]` blanks, so voicing it would both read the answer aloud and
+ * key the file to a slug no sentence lookup can ever request.
  */
-export const extractLuPhrases = (content) => {
-  const phrases = [];
-  let inSentence = false;
-
-  for (const rawLine of content.split(/\r?\n/)) {
-    const line = rawLine.trim();
-    if (line.length === 0 || line.startsWith("#")) continue;
-
-    if (line.startsWith("@sentence")) {
-      inSentence = true;
-      continue;
-    }
-    if (line.startsWith("@lesson") || line.startsWith("@word")) {
-      inSentence = false;
-      continue;
-    }
-    if (inSentence && line.startsWith("@lu ")) {
-      const phrase = line.slice(4).trim();
-      if (phrase.length > 0) phrases.push(phrase);
-    }
-  }
-  return phrases;
-};
+export const extractLuPhrases = (content) =>
+  content
+    .split(/\r?\n/)
+    .map((rawLine) => rawLine.trim())
+    .filter((line) => line.length > 0 && !line.startsWith("#"))
+    .reduce(
+      ({ inSentence, phrases }, line) => {
+        if (line.startsWith("@sentence")) return { inSentence: true, phrases };
+        if (BLOCK_BOUNDARIES.some((directive) => line.startsWith(directive))) {
+          return { inSentence: false, phrases };
+        }
+        if (!inSentence || !line.startsWith("@lu ")) return { inSentence, phrases };
+        const phrase = line.slice(4).trim();
+        return {
+          inSentence,
+          phrases: phrase.length > 0 ? [...phrases, phrase] : phrases,
+        };
+      },
+      { inSentence: false, phrases: [] },
+    ).phrases;
 
 /**
  * Extract every `@question` line (examiner prompts, always Luxembourgish).

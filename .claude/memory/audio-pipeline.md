@@ -27,6 +27,16 @@ Two generators, one shared client (`scripts/lib/sproochmaschinn.mjs`):
 Each `@lu` variant gets its own file: variants are different phrasings (formal vs
 informal) and warrant separate audio.
 
+**`@fill` is a block boundary, never a voiced sentence.** A fill is a different
+Element kind that also uses `@lu`, with `[bracketed]` blanks in the line. The
+extractor originally reset its sentence flag only on `@lesson`/`@word`, so every
+fill was voiced — reading the answer aloud, and keyed to a slug (brackets vanish
+in slugification) that no sentence lookup can ever request. That produced 371 dead
+files across A1 before it was caught. `BLOCK_BOUNDARIES` in
+`scripts/lib/letz-audio.mjs` is the fix; `tests/scripts/letz-audio.test.ts` pins
+it. FillBlank has no audio wiring at all — voicing a gapped sentence is an open
+design question, not an oversight.
+
 ## Layout: audio/ flat for sentences, audio/questions/ for prompts
 
 `<letz-dir>/audio/<slug>.mp3` for sentences, `<letz-dir>/audio/questions/<slug>.mp3`
