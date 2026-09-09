@@ -6,6 +6,10 @@
 #
 # Handout corrections applied after LOD verification: Hinderniss → Hindernis,
 # verstëbst → stëbseg, de Mopp → d'Mopp (LOD gives it as feminine).
+#
+# Vocabulary from the official Sproochentest handout for this theme, merged in
+# after LOD verification. Rejected as absent from LOD: Syndic, Hausmeeschter,
+# kabellos, Studentenhaus (use Verwalter / Studentenheem instead).
 
 @lesson W1.01 "Household Vocabulary"
 
@@ -39,6 +43,24 @@
 @word d'Handduch = the towel
 @word d'Händsch = the glove
 @word d'Planz = the plant
+@word en Hindernis = the obstacle
+@word de Géigendeel = the opposite
+@word d'Uerdnung = the order
+@word de Chaos = the chaos
+@word d'Freed = the joy
+@word frësch = fresh
+@word wichteg = important
+@word angeneem = pleasant
+@word praktesch = practical
+@word onpraktesch = impractical
+@word chaotesch = chaotic
+@word onuerdentlech = messy
+@word friddlech = peaceful
+@word ermiddend = tiring
+@word stëbseg = dusty
+@word séier = fast
+@word lues = slow
+@word eidel = empty
 @word botzen = to clean
 @word rengegen = to purify
 @word wëschen = to wipe
@@ -59,6 +81,10 @@
 @word nätzen = to water
 @word erausdroen = to carry outside
 @word opbotzen = to mop up
+@word kieren = to sweep
+@word vermeiden = to avoid
+@word systematiséieren = to systematize
+@word wiesselen = to switch
 
 @sentence
 @lu Ech maache mäi Bett all Moien.
@@ -123,3 +149,51 @@
 @distractor-lu op
 @distractor-en basin
 @distractor-en on
+
+@sentence
+@lu Ech kiere d'Kichen, an ech maachen d'Dreckskëscht eidel.
+@en I sweep the kitchen, and I empty the trash bin.
+@distractor-lu Buedzëmmer
+@distractor-lu propper
+@distractor-en bathroom
+@distractor-en clean
+
+@sentence
+@lu Eng propper Kichen ass fir mech wichteg.
+@en A clean kitchen is important for me.
+@distractor-lu knaschteg
+@distractor-lu Gaart
+@distractor-en dirty
+@distractor-en garden
+
+@sentence
+@lu De Staubsauger ass séier, mee de Biesem ass lues.
+@en The vacuum cleaner is fast, but the broom is slow.
+@distractor-lu propper
+@distractor-lu Mopp
+@distractor-en clean
+@distractor-en mop
+
+@sentence
+@lu Ech probéieren de Chaos am Regal ze vermeiden.
+@en I try to avoid the chaos on the shelf.
+@distractor-lu Uerdnung
+@distractor-lu Gaart
+@distractor-en order
+@distractor-en garden
+
+@sentence
+@lu Eng stëbseg Wunneng ass de Géigendeel vu propper.
+@en A dusty apartment is the opposite of clean.
+@distractor-lu frësch
+@distractor-lu Freed
+@distractor-en fresh
+@distractor-en joy
+
+@sentence
+@lu Strecken ass fir mech ermiddend an onpraktesch.
+@en Ironing is tiring and impractical for me.
+@distractor-lu angeneem
+@distractor-lu friddlech
+@distractor-en pleasant
+@distractor-en peaceful

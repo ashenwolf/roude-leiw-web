@@ -29,6 +29,20 @@
 @word d'Ëmwelt = the environment
 @word de Bioprodukt = the organic product
 @word d'Faarf = the colour
+@word den Alldag = everyday life
+@word d'Gesellschaft = society
+@word d'Erwaardung = the expectation
+@word d'Automatisatioun = the automation
+@word de Roboter = the robot
+@word d'Maschinn = the machine
+@word d'Meenung = the opinion
+@word d'Erzéiung = the upbringing
+@word d'Onofhängegkeet = independence
+@word de Beitrag = the contribution
+@word de Beruff = the profession
+@word d'Kandheet = childhood
+@word de Fortschrëtt = progress
+@word de Verwalter = the building manager
 @word méien = to mow
 @word fidderen = to feed
 @word reparéieren = to repair
@@ -38,6 +52,22 @@
 @word hëllefen = to help
 @word ewechgeheien = to throw away
 @word plënneren = to move house
+@word preparéieren = to prepare
+@word erzéien = to bring up
+@word erwaarden = to expect
+@word verdeelen = to distribute
+@word ofwiesselen = to take turns
+@word investéieren = to invest
+@word ersetzen = to replace
+@word gerecht = fair
+@word gläich = equal
+@word automatesch = automatic
+@word zäitopwänneg = time-consuming
+@word zefridden = satisfied
+@word allerdéngs = however
+@word besonnesch = especially
+@word ongeféier = approximately
+@word dono = afterwards
 @word propper = clean
 @word knaschteg = dirty
 @word uerdentlech = tidy
@@ -175,3 +205,131 @@
 @distractor-lu Bett
 @distractor-en clean
 @distractor-en bed
+
+@sentence
+@lu Ech hunn dat Theema gewielt, well ech vum Alldag schwätze wollt.
+@en I chose this topic because I wanted to talk about everyday life.
+@distractor-lu Aarbecht
+@distractor-lu Musek
+@distractor-en work
+@distractor-en music
+
+@sentence
+@lu Ech maachen de Stot eleng zänter mengem siwwenzéinten Joer.
+@en I have been doing the household alone since my seventeenth year.
+@distractor-lu Woch
+@distractor-lu Elteren
+@distractor-en week
+@distractor-en parents
+
+@sentence
+@lu Am Studentenheem hu mir eis mam Kachen ofgewiesselt.
+@en In the student hall we took turns with the cooking.
+@distractor-lu eleng
+@distractor-lu Gaart
+@distractor-en alone
+@distractor-en garden
+
+@sentence
+@lu An der Gesellschaft sinn d'Hausaarbechten nach net gerecht verdeelt.
+@en In society the housework is not yet fairly distributed.
+@distractor-lu Gaart
+@distractor-lu propper
+@distractor-en garden
+@distractor-en clean
+
+@sentence
+@lu D'Erwaardungen un d'Frae sinn nach ze grouss.
+@en The expectations of women are still too big.
+@distractor-lu kleng
+@distractor-lu Freed
+@distractor-en small
+@distractor-en joy
+
+@sentence
+@lu Botzen ass net mäi Beruff, an ech ginn och net besser dran.
+@en Cleaning is not my profession, and I also do not get better at it.
+@distractor-lu Musek
+@distractor-lu propper
+@distractor-en music
+@distractor-en clean
+
+@sentence
+@lu Ech investéieren méi gär an meng Aarbecht wéi an d'Botzen.
+@en I prefer investing in my work rather than in cleaning.
+@distractor-lu Gaart
+@distractor-lu seelen
+@distractor-en garden
+@distractor-en rarely
+
+@sentence
+@lu Kanner sollen fréi e Beitrag an der Famill leeschten.
+@en Children should make a contribution in the family early.
+@distractor-lu spéider
+@distractor-lu Botzfra
+@distractor-en later
+@distractor-en cleaner
+
+@sentence
+@lu Hausaarbechte preparéieren d'Kanner op hir Onofhängegkeet.
+@en Housework prepares the children for their independence.
+@distractor-lu Musek
+@distractor-lu Botzfra
+@distractor-en music
+@distractor-en cleaner
+
+@sentence
+@lu Zänter menger Kandheet ass de Stot vill méi einfach.
+@en Since my childhood the household has become much easier.
+@distractor-lu schwéier
+@distractor-lu Freed
+@distractor-en difficult
+@distractor-en joy
+
+@sentence
+@lu Maschinnen huelen eis vill zäitopwänneg Aarbecht of.
+@en Machines take a lot of time-consuming work off us.
+@distractor-lu Botzfra
+@distractor-lu Musek
+@distractor-en cleaner
+@distractor-en music
+
+@sentence
+@lu Mir hunn e Roboter, allerdéngs ass hie schonn al.
+@en We have a robot, however it is already old.
+@distractor-lu nei
+@distractor-lu Freed
+@distractor-en new
+@distractor-en joy
+
+@sentence
+@lu Ech muss e neie Roboter kafen, well den ale ze schlecht botzt.
+@en I have to buy a new robot, because the old one cleans too badly.
+@distractor-lu gutt
+@distractor-lu Gaart
+@distractor-en good
+@distractor-en garden
+
+@sentence
+@lu Botzen ass ermiddend, mee Saache systematiséieren mécht Freed.
+@en Cleaning is tiring, but systematizing things brings joy.
+@distractor-lu langweileg
+@distractor-lu Gaart
+@distractor-en boring
+@distractor-en garden
+
+@sentence
+@lu Bei Stroum a Waasser ruffe mir de Verwalter vum Haus.
+@en For electricity and water we call the building manager.
+@distractor-lu Botzfra
+@distractor-lu Gaart
+@distractor-en cleaner
+@distractor-en garden
+
+@sentence
+@lu Ech wéinsche mir méi Automatisatioun am Stot.
+@en I wish for more automation in the household.
+@distractor-lu manner
+@distractor-lu Freed
+@distractor-en less
+@distractor-en joy

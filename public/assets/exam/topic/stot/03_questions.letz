@@ -52,8 +52,40 @@
 @word gewunnt = lived
 @word gehat = had
 @word midd = tired
+@word d'Stad = the city
+@word d'Persoun = the person
+@word de Kolleeg = the flatmate
+@word d'Rei = the turn
+@word d'Traditioun = the tradition
+@word d'Zukunft = the future
+@word d'Kontroll = control
+@word de Stress = stress
+@word d'Rou = calm
+@word den Elektriker = the electrician
+@word den Installateur = the plumber
+@word de Behälter = the container
+@word de Modell = the model
+@word d'Technik = technology
+@word gefouert = run
+@word gewielt = chosen
+@word geännert = changed
+@word erfëllend = fulfilling
+@word onofhängeg = independent
+@word bezuelbar = affordable
+@word bäibréngen = to teach
+@word iwwerhuelen = to take over
+@word funktionéieren = to work
 
 # --- The parents' household: the real exam's opening cluster ---
+
+@sentence
+@question Firwat hutt Dir dat Theema gewielt?
+@lu Ech hunn dat Theema gewielt, well ech vun alldeegleche Saache schwätze wollt.
+@distractor-lu Aarbecht
+@distractor-lu Musek
+@en I chose this topic because I wanted to talk about everyday things.
+@distractor-en work
+@distractor-en music
 
 @sentence
 @question Wéi laang hutt Dir mat Ären Eltere gewunnt?
@@ -119,6 +151,51 @@
 @distractor-en help
 
 # --- Today's household ---
+
+@sentence
+@question Vu wéi engem Alter un hutt Dir ugefaang, de Stot eleng ze maachen?
+@lu Vu siwwenzéng Joer un hunn ech de Stot komplett eleng gemaach.
+@distractor-lu Eltere
+@distractor-lu Botzfra
+@en From seventeen years of age on I did the household completely alone.
+@distractor-en parents
+@distractor-en cleaner
+
+@sentence
+@question Firwat hutt Dir da scho mat siwwenzéng eleng gewunnt?
+@lu Ech sinn an eng anere Stad geplënnert, fir op der Universitéit ze studéieren.
+@distractor-lu Aarbecht
+@distractor-lu Gaart
+@en I moved to another city in order to study at university.
+@distractor-en work
+@distractor-en garden
+
+@sentence
+@question Hutt Dir wärend Ärem Studium eleng gewunnt oder mat anere Studenten zesummen?
+@lu Ech hunn am Studentenheem mat zwee anere Studente gewunnt.
+@distractor-lu eleng
+@distractor-lu Eltere
+@en I lived in the student hall with two other students.
+@distractor-en alone
+@distractor-en parents
+
+@sentence
+@question Wéi hutt Dir de Stot ënnert Iech opgedeelt?
+@lu Mir hunn eis mat all Aufgab ofgewiesselt, an esou hat jidderee seng Rei.
+@distractor-lu Botzfra
+@distractor-lu Gaart
+@en We took turns with every task, and so everybody had their turn.
+@distractor-en cleaner
+@distractor-en garden
+
+@sentence
+@question Kënnt Dir e Beispill vun där Ofwiesslung ginn?
+@lu Ech hu haut gekacht, an eng anere Persoun huet muer gekacht.
+@distractor-lu gebotzt
+@distractor-lu gestreckt
+@en I cooked today, and another person cooked tomorrow.
+@distractor-en cleaned
+@distractor-en ironed
 
 @sentence
 @question Mat wiem wunnt Dir?
@@ -535,6 +612,161 @@
 @distractor-en never
 @distractor-en cleaner
 
+@sentence
+@question Wie rufft Dir, wann eppes am Haus futti ass?
+@lu Dat hängt vum Problem of: fir kleng Saachen hunn ech e Handwierker.
+@distractor-lu Botzfra
+@distractor-lu Gaart
+@en That depends on the problem: for small things I have a workman.
+@distractor-en cleaner
+@distractor-en garden
+
+@sentence
+@question A wann et de Stroum oder d'Waasser ass?
+@lu Beim Stroum an beim Waasser ruffen ech de Verwalter vum Haus.
+@distractor-lu Botzfra
+@distractor-lu Kaffi
+@en With the electricity and with the water I call the building manager.
+@distractor-en cleaner
+@distractor-en coffee
+
+# --- Opinions: fairness, a cleaner, children, and change ---
+
+@sentence
+@question Mengt Dir, dass d'Hausaarbechte gerecht tëscht Männer a Frae verdeelt sinn?
+@lu Nee, an der Gesellschaft erwaart een nach ze vill vun de Frae.
+@distractor-lu Jo
+@distractor-lu Männer
+@en No, in society one still expects too much of the women.
+@distractor-en Yes
+@distractor-en men
+
+@sentence
+@question Firwat ass dat esou?
+@lu Vill Männer ginn esou erzunn, dass eng anere Persoun déi Aarbecht mécht.
+@distractor-lu Frae
+@distractor-lu Botzfra
+@en Many men are brought up in such a way that another person does that work.
+@distractor-en women
+@distractor-en cleaner
+
+@sentence
+@question Wéi fannt Dir d'Iddi eng Botzfra anzestellen? Sinn dat gutt investéiert Suen?
+@lu Jo, dat sinn gutt investéiert Suen, well botzen mir keng Freed mécht.
+@distractor-lu Nee
+@distractor-lu Gaart
+@en Yes, that is money well invested, because cleaning brings me no joy.
+@distractor-en No
+@distractor-en garden
+
+@sentence
+@question An wouran investéiert Dir déi Zäit léiwer?
+@lu Ech investéiere léiwer a mäi Beruff, fir e bessere Fachmann ze ginn.
+@distractor-lu Botzen
+@distractor-lu Gaart
+@en I prefer investing in my profession, in order to become a better specialist.
+@distractor-en cleaning
+@distractor-en garden
+
+@sentence
+@question Ginn Dir mat der Zäit besser am Botzen?
+@lu Nee, botzen ass keng Kompetenz, an déi ech besser ginn.
+@distractor-lu Jo
+@distractor-lu Musek
+@en No, cleaning is not a skill in which I get better.
+@distractor-en Yes
+@distractor-en music
+
+@sentence
+@question Ass et eng gutt Iddi fir Kanner scho fréi Hausaarbechten ze ginn?
+@lu Jo, ech mengen, Kanner sollen fréi e Beitrag an der Famill leeschten.
+@distractor-lu Nee
+@distractor-lu spéider
+@en Yes, I think children should make a contribution in the family early.
+@distractor-en No
+@distractor-en later
+
+@sentence
+@question Wat léieren d'Kanner dobei?
+@lu Hausaarbechte preparéieren d'Kanner op hiert onofhängegt Liewen.
+@distractor-lu Botzfra
+@distractor-lu Musek
+@en Housework prepares the children for their independent life.
+@distractor-en cleaner
+@distractor-en music
+
+@sentence
+@question Wéi huet sech den Haushalt vun Ärer Kandheet bis haut geännert?
+@lu Vill Saache si méi einfach a manner zäitopwänneg gi wéi fréier.
+@distractor-lu schwéier
+@distractor-lu Gaart
+@en Many things have become easier and less time-consuming than before.
+@distractor-en difficult
+@distractor-en garden
+
+@sentence
+@question Wat huet sech konkret geännert?
+@lu Robote, Spullmaschinnen a modern Geräter huelen eis vill Aarbecht of.
+@distractor-lu Biesem
+@distractor-lu Botzfra
+@en Robots, dishwashers and modern devices take a lot of work off us.
+@distractor-en broom
+@distractor-en cleaner
+
+@sentence
+@question Gëtt Iech Hausaarbecht e Gefëll vu Rou a Kontroll, oder éischter Stress?
+@lu Meeschtens ass et ermiddend a langweileg, mee net direkt Stress.
+@distractor-lu angeneem
+@distractor-lu friddlech
+@en Mostly it is tiring and boring, but not directly stress.
+@distractor-en pleasant
+@distractor-en peaceful
+
+@sentence
+@question Gëtt et do keng Ausnam?
+@lu Chaos systematiséieren an al Saache ewechgeheien ass fir mech erfëllend.
+@distractor-lu strecken
+@distractor-lu Gaart
+@en Systematizing chaos and throwing old things away is fulfilling for me.
+@distractor-en ironing
+@distractor-en garden
+
+@sentence
+@question Wat géift Dir un der Aart a Weis änneren, wéi Äre Stot gefouert gëtt?
+@lu Ech géif méi automatiséieren an nach eng Botzfra dozou huelen.
+@distractor-lu manner
+@distractor-lu Gaart
+@en I would automate more and take a cleaning lady on top of that.
+@distractor-en less
+@distractor-en garden
+
+@sentence
+@question Hutt Dir en automateschen Staubsauger?
+@lu Jo, mir hunn e Roboter, mee hien ass al a botzt net gutt.
+@distractor-lu nei
+@distractor-lu Biesem
+@en Yes, we have a robot, but it is old and does not clean well.
+@distractor-en new
+@distractor-en broom
+
+@sentence
+@question Wat ass um ale Roboter net gutt?
+@lu Hie botzt de Buedem schlecht op, a säi Behälter fir de Stëbs ass ze kleng.
+@distractor-lu grouss
+@distractor-lu Gaart
+@en It mops badly, and its container for the dust is too small.
+@distractor-en big
+@distractor-en garden
+
+@sentence
+@question Wat plangt Dir dann?
+@lu Ech plangen e neie Roboter ze kafen, deen och besser opbotzt.
+@distractor-lu ale
+@distractor-lu Biesem
+@en I plan to buy a new robot, which also mops better.
+@distractor-en old
+@distractor-en broom
+
 # --- Reusable frames (@fill) ---
 
 @fill
@@ -632,3 +864,91 @@
 @distractor-lu vill
 @distractor-en more
 @distractor-en much
+
+@fill
+@lu An der Gesellschaft ass d'Hausaarbecht [nach] net gerecht verdeelt.
+@en In society the housework is [still] not fairly distributed.
+@distractor-lu ni
+@distractor-lu schonn
+@distractor-en never
+@distractor-en already
+
+@fill
+@lu Mir hunn e Roboter, [allerdéngs] botzt hien net gutt.
+@en We have a robot, [however] it does not clean well.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Ech investéieren léiwer an mäi Beruff, [fir] besser ze ginn.
+@en I prefer investing in my profession, [in order to] become better.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Am Studentenheem hu mir eis [ofgewiesselt].
+@en In the student hall we [took turns].
+@distractor-lu gestreckt
+@distractor-lu gekacht
+@distractor-en ironed
+@distractor-en cooked
+
+@fill
+@lu Botzen ass ermiddend, [besonnesch] de Buedem opbotzen.
+@en Cleaning is tiring, [especially] mopping the floor.
+@distractor-lu obwuel
+@distractor-lu ouni
+@distractor-en although
+@distractor-en without
+
+@fill
+@lu Vill Saache sinn haut [einfacher] wéi an menger Kandheet.
+@en Many things are [easier] today than in my childhood.
+@distractor-lu schwéierer
+@distractor-lu langweileg
+@distractor-en harder
+@distractor-en boring
+
+@fill
+@lu Ech maachen de Stot eleng, [zänter] ech siwwenzéng war.
+@en I do the household alone, [since] I was seventeen.
+@distractor-lu ouni
+@distractor-lu duerch
+@distractor-en without
+@distractor-en through
+
+@fill
+@lu Mir hu keng fest Reegel, [ausser] fir d'Wäsch.
+@en We have no fixed rule, [except] for the laundry.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu [Ongeféier] dräi Mol an der Woch maachen ech de Stot.
+@en [Approximately] three times a week I do the household.
+@distractor-lu Ni
+@distractor-lu Ausser
+@distractor-en Never
+@distractor-en Except
+
+@fill
+@lu Fir d'éischt raumen ech op, [dono] staubsaugen ech.
+@en First I tidy up, [afterwards] I vacuum.
+@distractor-lu ouni
+@distractor-lu ausser
+@distractor-en without
+@distractor-en except
+
+@fill
+@lu Kanner sollen fréi hëllefen, [well] si esou onofhängeg ginn.
+@en Children should help early, [because] they become independent that way.
+@distractor-lu ouni
+@distractor-lu ausser
+@distractor-en without
+@distractor-en except
