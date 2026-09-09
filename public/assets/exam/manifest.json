@@ -199,6 +199,16 @@
         { "id": "stot.02", "file": "topic/stot/02_phrases.letz", "title": "Key Phrases" },
         { "id": "stot.03", "file": "topic/stot/03_questions.letz", "title": "Talking About It" }
       ]
+    },
+    {
+      "id": "sproochen",
+      "kind": "topic",
+      "title": "Sproochen",
+      "subLessons": [
+        { "id": "sproochen.01", "file": "topic/sproochen/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "sproochen.02", "file": "topic/sproochen/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "sproochen.03", "file": "topic/sproochen/03_questions.letz", "title": "Talking About It" }
+      ]
     }
   ]
 }

@@ -1,0 +1,165 @@
+# Exam track — Theme: Sproochen — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# Sentences are grounded in the user's real answers, gathered by interview —
+# do not "improve" or genericize them in a later editing pass.
+#
+# Handout corrections applied after LOD verification: Preposition ->
+# Prepositioun, Italienesch -> Italieenesch, Kolleg -> Kolleeg,
+# Liiblingswuert -> Liblingswuert.
+
+@lesson L1.01 "Language Vocabulary"
+
+@word d'Sprooch = the language
+@word d'Mammesprooch = the mother tongue
+@word d'Friemsprooch = the foreign language
+@word de Wuertschatz = the vocabulary
+@word d'Grammatik = the grammar
+@word d'Aussprooch = the pronunciation
+@word de Saz = the sentence
+@word d'Wuert = the word
+@word de Feeler = the mistake
+@word den Dialekt = the dialect
+@word d'Iwwersetzung = the translation
+@word den Iwwersetzer = the translator
+@word den Ufänger = the beginner
+@word de Mammesproochler = the native speaker
+@word d'Sproocheschoul = the language school
+@word de Cours = the course
+@word d'Reegel = the rule
+@word d'Übung = the exercise
+@word de Dativ = the dative
+@word d'Prepositiounen = the prepositions
+@word d'Vokabelen = the vocables
+@word d'Karteikaarten = the index cards
+@word d'App = the app
+@word d'Wierderbuch = the dictionary
+@word de Noutfall = the emergency
+@word de Niveau = the level
+@word de Fortschrëtt = the progress
+@word d'Gedold = the patience
+@word d'Motivatioun = the motivation
+@word d'Disziplin = the discipline
+@word d'Kommunikatioun = the communication
+@word Lëtzebuergesch = Luxembourgish
+@word Ukrainesch = Ukrainian
+@word Englesch = English
+@word Franséisch = French
+@word Italieenesch = Italian
+@word Russesch = Russian
+@word schwätzen = to speak
+@word léieren = to learn
+@word verstoen = to understand
+@word lauschteren = to listen
+@word liesen = to read
+@word schreiwen = to write
+@word iwwersetzen = to translate
+@word erklären = to explain
+@word widderhuelen = to repeat
+@word benotzen = to use
+@word üben = to practise
+@word kommunizéieren = to communicate
+@word vergiessen = to forget
+@word notéieren = to note down
+@word fléissend = fluent
+@word nëtzlech = useful
+@word praktesch = practical
+@word exakt = accurate
+@word spannend = exciting
+@word komplizéiert = complicated
+
+@sentence
+@lu Meng Mammesprooch ass Ukrainesch.
+@en My mother tongue is Ukrainian.
+@distractor-lu Franséisch
+@distractor-lu Dialekt
+@distractor-en French
+@distractor-en dialect
+
+@sentence
+@lu Ech léiere Lëtzebuergesch säit bal engem Joer.
+@en I have been learning Luxembourgish for almost a year.
+@distractor-lu Englesch
+@distractor-lu Woch
+@distractor-en English
+@distractor-en week
+
+@sentence
+@lu D'Grammatik ass fir mech méi schwéier wéi de Wuertschatz.
+@en The grammar is more difficult for me than the vocabulary.
+@distractor-lu Aussprooch
+@distractor-lu einfach
+@distractor-en pronunciation
+@distractor-en easy
+
+@sentence
+@lu Ech maache Feeler mam Dativ a mat de Prepositiounen.
+@en I make mistakes with the dative and with the prepositions.
+@distractor-lu Wuert
+@distractor-lu Aussprooch
+@distractor-en word
+@distractor-en pronunciation
+
+@sentence
+@lu Ech benotzen eng App an heiansdo Karteikaarten.
+@en I use an app and sometimes index cards.
+@distractor-lu Wierderbuch
+@distractor-lu ni
+@distractor-en dictionary
+@distractor-en never
+
+@sentence
+@lu Ech schwätze gär mat Mammesproochler.
+@en I like speaking with native speakers.
+@distractor-lu Ufänger
+@distractor-lu schreiwen
+@distractor-en beginners
+@distractor-en write
+
+@sentence
+@lu Et brauch ee vill Gedold fir eng Sprooch ze léieren.
+@en You need a lot of patience to learn a language.
+@distractor-lu Zäit
+@distractor-lu vergiessen
+@distractor-en time
+@distractor-en forget
+
+@sentence
+@lu Ech widderhuele meng Vokabelen all Dag e puer Minutten.
+@en I review my vocables every day for a few minutes.
+@distractor-lu Woch
+@distractor-lu seelen
+@distractor-en week
+@distractor-en rarely
+
+@sentence
+@lu De Google-Iwwersetzer ass net ëmmer exakt.
+@en The Google translator is not always accurate.
+@distractor-lu Wierderbuch
+@distractor-lu praktesch
+@distractor-en dictionary
+@distractor-en practical
+
+@sentence
+@lu Ech verstinn e Text besser wéi eng séier Diskussioun.
+@en I understand a text better than a fast discussion.
+@distractor-lu Wuert
+@distractor-lu lues
+@distractor-en word
+@distractor-en slow
+
+@sentence
+@lu Meng Disziplin ass méi wichteg wéi mäi Niveau.
+@en My discipline is more important than my level.
+@distractor-lu Motivatioun
+@distractor-lu Feeler
+@distractor-en motivation
+@distractor-en mistake
+
+@sentence
+@lu Ech üben d'Aussprooch, well si komplizéiert ass.
+@en I practise the pronunciation because it is complicated.
+@distractor-lu Grammatik
+@distractor-lu einfach
+@distractor-en grammar
+@distractor-en easy

@@ -1,0 +1,622 @@
+# Exam track — Theme: Sproochen — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are the user's real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass. The point is that the learner
+# rehearses what they will actually say in the Sproochentest.
+#
+# Question order follows the official handout: general language biography
+# (mother tongue, which languages, at home, at school, the parents), then
+# learning Luxembourgish, then everyday habits, then the opinion block.
+#
+# Key personal facts: Ukrainian native, understands Russian but prefers not to
+# speak it, fluent English, basic Italian, French and Luxembourgish started;
+# Ukrainian at home and with Ukrainian friends, English at work, Luxembourgish
+# with the neighbours in Steinsel; learning for a bit under a year with pauses;
+# online school with a teacher plus his own Duolingo-like app, flashcards and
+# RTL news; wife learns with him and they will continue after the exam;
+# motivation is respect for the country; Ukrainian/Luxembourgish minority-
+# language parallel; hardest because there is little learning material and
+# teachers are expensive; main mistakes are cases/dative and prepositions;
+# favourite word Gromperekichelchen (also the hard one to pronounce, and close
+# to a Ukrainian dish eaten with sour cream instead of apple jam).
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional, obwuel-contrast, léiwer-wéi comparative, fir…ze purpose,
+# dofir inversion, wärenddeems-temporal, säit-duration, a frequency adverb, a
+# number, a past participle, and an Ech-mengen hedge.
+
+@lesson L1.03 "Talking About Languages"
+
+@word d'Fro = the question
+@word d'Äntwert = the answer
+@word d'Diskussioun = the discussion
+@word d'Gespréich = the conversation
+@word d'Theema = the topic
+@word d'Meenung = the opinion
+@word de Virdeel = the advantage
+@word den Nodeel = the disadvantage
+@word d'Integratioun = the integration
+@word de Bierger = the citizen
+@word d'Zukunft = the future
+@word d'Land = the country
+@word de Grond = the reason
+@word d'Sécherheet = the confidence
+@word d'Firma = the company
+@word de Beruff = the profession
+@word d'Stad = the city
+@word d'Gemeng = the commune
+@word d'Leit = the people
+@word d'Kand = the child
+@word d'Stonn = the hour
+@word d'Middegkeet = the tiredness
+@word d'Material = the material
+@word den Internet = the Internet
+@word d'Televisioun = the television
+@word de Radio = the radio
+@word den Zeitungsartikel = the newspaper article
+@word d'Reklamm = the advertisement
+@word d'Iddi = the idea
+@word roden = to advise
+@word bäibréngen = to teach
+@word studéieren = to study
+@word wunnen = to live
+@word schaffen = to work
+@word brauchen = to need
+@word hëllefen = to help
+@word veränneren = to change
+@word integréieren = to integrate
+@word offiziell = official
+@word international = international
+@word geléiert = qualified
+@word midd = tired
+@word schued = a pity
+@word absolut = absolutely
+
+# --- The general opening: languages, home, school, parents ---
+
+@sentence
+@question Firwat hutt Dir dat Theema gewielt?
+@lu Ech hunn dat Theema gewielt, well Sprooche mäi Liblingstheema sinn.
+@distractor-lu Aarbecht
+@distractor-lu langweileg
+@en I chose that topic because languages are my favourite topic.
+@distractor-en work
+@distractor-en boring
+
+@sentence
+@question Wat ass Är Mammesprooch?
+@lu Meng Mammesprooch ass Ukrainesch.
+@distractor-lu Russesch
+@distractor-lu Dialekt
+@en My mother tongue is Ukrainian.
+@distractor-en Russian
+@distractor-en dialect
+
+@sentence
+@question Wéi vill Sprooche schwätzt Dir? Wéi eng?
+@lu Ech schwätzen Ukrainesch an Englesch gutt, an ech léiere Franséisch a Lëtzebuergesch.
+@distractor-lu Italieenesch
+@distractor-lu ni
+@en I speak Ukrainian and English well, and I am learning French and Luxembourgish.
+@distractor-en Italian
+@distractor-en never
+
+@sentence
+@question Versteet Dir och Russesch?
+@lu Russesch verstinn ech, mee ech schwätzen et léiwer net.
+@distractor-lu Franséisch
+@distractor-lu gär
+@en I understand Russian, but I prefer not to speak it.
+@distractor-en French
+@distractor-en gladly
+
+@sentence
+@question Kënnt Dir Italieenesch?
+@lu Mäin Italieenesch ass ganz einfach, ech kann just e puer Sätze soen.
+@distractor-lu fléissend
+@distractor-lu Grammatik
+@en My Italian is very basic, I can say only a few sentences.
+@distractor-en fluent
+@distractor-en grammar
+
+@sentence
+@question Wat fir eng Sprooch schwätzt Dir doheem?
+@lu Doheem schwätze mir Ukrainesch.
+@distractor-lu Englesch
+@distractor-lu Aarbecht
+@en At home we speak Ukrainian.
+@distractor-en English
+@distractor-en work
+
+@sentence
+@question Wéi eng Sprooch schwätzt Dir mat Ärer Fra a mat Äre Frënn?
+@lu Mat menger Fra a mat eise ukrainesche Frënn schwätzen ech Ukrainesch.
+@distractor-lu Englesch
+@distractor-lu Noperen
+@en With my wife and with our Ukrainian friends I speak Ukrainian.
+@distractor-en English
+@distractor-en neighbours
+
+@sentence
+@question Wéi eng Sprooch schwätzt Dir op der Aarbecht?
+@lu Op der Aarbecht schwätze mir Englesch, well meng Firma international ass.
+@distractor-lu Lëtzebuergesch
+@distractor-lu kleng
+@en At work we speak English because my company is international.
+@distractor-en Luxembourgish
+@distractor-en small
+
+@sentence
+@question Mat wiem schwätzt Dir Lëtzebuergesch?
+@lu Mat de Noperen a mat de Leit an der Gemeng probéieren ech Lëtzebuergesch.
+@distractor-lu Kolleegen
+@distractor-lu ni
+@en With the neighbours and with the people in the commune I try Luxembourgish.
+@distractor-en colleagues
+@distractor-en never
+
+@sentence
+@question Wéi eng Sproochen hutt Dir an der Schoul geléiert?
+@lu An der Schoul hunn ech Ukrainesch, Russesch an Englesch geléiert.
+@distractor-lu Franséisch
+@distractor-lu Universitéit
+@en At school I learned Ukrainian, Russian and English.
+@distractor-en French
+@distractor-en university
+
+@sentence
+@question Wéi eng Sprooch hätt Dir gär op der Uni studéiert?
+@lu Ech hätt gär Franséisch op der Universitéit studéiert, mee ech hunn Informatik gewielt.
+@distractor-lu Russesch
+@distractor-lu Schoul
+@en I would have liked to study French at university, but I chose computer science.
+@distractor-en Russian
+@distractor-en school
+
+@sentence
+@question Wéi eng Sprooch hunn Är Eltere doheem geschwat?
+@lu Meng Eltere hu Russesch geschwat, mee mat der Zäit hu si op Ukrainesch gewiesselt.
+@distractor-lu Englesch
+@distractor-lu ni
+@en My parents spoke Russian, but over time they switched to Ukrainian.
+@distractor-en English
+@distractor-en never
+
+# --- Learning Luxembourgish ---
+
+@sentence
+@question Säit wéini léiert Dir Lëtzebuergesch?
+@lu Ech léiere Lëtzebuergesch säit bal engem Joer, mee mat Pausen.
+@distractor-lu Woch
+@distractor-lu ëmmer
+@en I have been learning Luxembourgish for almost a year, but with pauses.
+@distractor-en week
+@distractor-en always
+
+@sentence
+@question Wat motivéiert Iech fir Lëtzebuergesch ze léieren?
+@lu Fir mech ass Lëtzebuergesch e Zeeche vu Respekt fir d'Land an d'Kultur, wou mir wunnen.
+@distractor-lu Aarbecht
+@distractor-lu Angscht
+@en For me Luxembourgish is a sign of respect for the country and the culture where we live.
+@distractor-en work
+@distractor-en fear
+
+@sentence
+@question Gëtt et nach aner Leit an Ärem Ëmfeld, déi Lëtzebuergesch léieren?
+@lu Meng Fra léiert zesumme mat mir, an dofir üben ech doheem.
+@distractor-lu eleng
+@distractor-lu Kolleeg
+@en My wife learns together with me, and that is why I practise at home.
+@distractor-en alone
+@distractor-en colleague
+
+@sentence
+@question Gitt Dir nervös wann Dir eng nei Sprooch schwätzt? Firwat?
+@lu Ech gi bëssen nervös, well ech Angscht hu Feeler ze maachen.
+@distractor-lu roueg
+@distractor-lu Sécherheet
+@en I get a little nervous because I am afraid of making mistakes.
+@distractor-en calm
+@distractor-en confidence
+
+@sentence
+@question Wéi hutt Dir Lëtzebuergesch geléiert?
+@lu Ech léiere mat enger Léierin an engem Onlinecours a mat menger eegener App.
+@distractor-lu Schoul
+@distractor-lu eleng
+@en I learn with a teacher in an online course and with my own app.
+@distractor-en school
+@distractor-en alone
+
+@sentence
+@question Bleift Dir no dem Sproochentest weider am Cours?
+@lu Meng Fra an ech bleiwen no dem Sproochentest weider am Cours.
+@distractor-lu ophalen
+@distractor-lu Pause
+@en My wife and I stay in the course after the language test.
+@distractor-en stop
+@distractor-en pause
+
+@sentence
+@question War et schwéier Lëtzebuergesch ze léieren, am Verglach mat anere Sproochen?
+@lu Lëtzebuergesch war méi schwéier, well et wéineg Material gëtt an d'Léierinnen deier sinn.
+@distractor-lu einfach
+@distractor-lu bëlleg
+@en Luxembourgish was more difficult because there is little material and the teachers are expensive.
+@distractor-en easy
+@distractor-en cheap
+
+@sentence
+@question Wat ass déi schwieregst Sprooch, déi Dir jeemools geléiert hutt? Firwat?
+@lu Déi schwieregst Sprooch ass Lëtzebuergesch, well ech net vill gutt Bicher an Appe fannen.
+@distractor-lu Englesch
+@distractor-lu einfach
+@en The most difficult language is Luxembourgish because I do not find many good books and apps.
+@distractor-en English
+@distractor-en easy
+
+@sentence
+@question Léiert Dir gär nei Sproochen? Wéi eng wëllt Dir fir d'nächst léieren?
+@lu Ech léiere gär Sproochen, an no Lëtzebuergesch wëll ech mäi Franséisch verbesseren.
+@distractor-lu Russesch
+@distractor-lu vergiessen
+@en I like learning languages, and after Luxembourgish I want to improve my French.
+@distractor-en Russian
+@distractor-en forget
+
+# --- Everyday habits ---
+
+@sentence
+@question Wéi léiert Dir Lëtzebuergesch am Alldag?
+@lu All Dag investéieren ech op d'mannst fofzéng Minutten, meeschtens moies mat menger App.
+@distractor-lu Stonnen
+@distractor-lu seelen
+@en Every day I invest at least fifteen minutes, mostly in the morning with my app.
+@distractor-en hours
+@distractor-en rarely
+
+@sentence
+@question Benotzt Dir Appen oder Onlinecoursen? Wéi hëllefräich fannt Dir dat?
+@lu Ech hunn eng eege App geschriwwen, an ech fanne se méi hëllefräich wéi eng grouss App.
+@distractor-lu Zeitung
+@distractor-lu langweileg
+@en I wrote my own app, and I find it more helpful than a big app.
+@distractor-en newspaper
+@distractor-en boring
+
+@sentence
+@question Benotzt Dir och Karteikaarten?
+@lu Heiansdo benotzen ech Karteikaarten, wann ech nei Vokabele widderhuelen.
+@distractor-lu ëmmer
+@distractor-lu Grammatik
+@en Sometimes I use index cards when I review new vocables.
+@distractor-en always
+@distractor-en grammar
+
+@sentence
+@question A wat fir enger Sprooch kuckt oder liest Dir d'Noriichten?
+@lu Ech liesen d'Noriichten op Englesch an op Ukrainesch, a probéiere RTL op Lëtzebuergesch.
+@distractor-lu Franséisch
+@distractor-lu ni
+@en I read the news in English and in Ukrainian, and I try RTL in Luxembourgish.
+@distractor-en French
+@distractor-en never
+
+@sentence
+@question Kuckt Dir gär Filmer an der Originalversioun oder mat Ënnertitelen? Firwat?
+@lu Ech kucke Filmer an der Originalversioun mat Ënnertitelen, well ech da méi verstinn.
+@distractor-lu ouni
+@distractor-lu manner
+@en I watch films in the original version with subtitles because I then understand more.
+@distractor-en without
+@distractor-en less
+
+@sentence
+@question Wat maacht Dir, wann Dir eppes op Lëtzebuergesch net verstitt?
+@lu Ech froen d'Persoun lues a nach eng Kéier ze schwätzen, an ech roden aus dem Kontext.
+@distractor-lu séier
+@distractor-lu Wierderbuch
+@en I ask the person to speak slowly and once more, and I guess from the context.
+@distractor-en fast
+@distractor-en dictionary
+
+@sentence
+@question Wiesselt Dir dann op Englesch?
+@lu Op Englesch wiesselen ech just, wann ech guer näischt méi verstinn.
+@distractor-lu ëmmer
+@distractor-lu Franséisch
+@en I switch to English only when I no longer understand anything at all.
+@distractor-en always
+@distractor-en French
+
+@sentence
+@question Wat fir Feeler maacht Dir am heefegsten?
+@lu Meng heefegste Feeler sinn d'Fäll, besonnesch den Dativ, an d'Prepositiounen.
+@distractor-lu Aussprooch
+@distractor-lu Wuertschatz
+@en My most frequent mistakes are the cases, especially the dative, and the prepositions.
+@distractor-en pronunciation
+@distractor-en vocabulary
+
+@sentence
+@question Wéi eng Sproochen héiert Dir zu Lëtzebuerg am heefegsten?
+@lu Ech héieren am heefegste Franséisch, an an de Büroe vill Englesch.
+@distractor-lu Portugisesch
+@distractor-lu seelen
+@en I hear French most frequently, and in the offices a lot of English.
+@distractor-en Portuguese
+@distractor-en rarely
+
+@sentence
+@question Héiert Dir a Steinsel och Lëtzebuergesch?
+@lu A Steinsel héieren ech vill Lëtzebuergesch, an dat fannen ech wonnerbar.
+@distractor-lu Stad
+@distractor-lu seelen
+@en In Steinsel I hear a lot of Luxembourgish, and I find that wonderful.
+@distractor-en city
+@distractor-en rarely
+
+@sentence
+@question Wat ass Äert Liiblingswuert op Lëtzebuergesch? Firwat?
+@lu Mäi Liblingswuert ass Gromperekichelchen, well et lëschteg klengt a gutt schmaacht.
+@distractor-lu Sprooch
+@distractor-lu langweileg
+@en My favourite word is Gromperekichelchen because it sounds funny and tastes good.
+@distractor-en language
+@distractor-en boring
+
+@sentence
+@question Gëtt et e Wuert, wat Dir guer net ausschwätze kënnt?
+@lu Gromperekichelchen ass och dat Wuert, wat ech am schwéierste soen.
+@distractor-lu einfach
+@distractor-lu Apel
+@en Gromperekichelchen is also the word that I say with the most difficulty.
+@distractor-en easy
+@distractor-en apple
+
+@sentence
+@question Gëtt et dat Iessen och an Ärer Heemecht?
+@lu Mir hunn en änlecht Iessen an der Ukrain, mee mir iessen et mat Sauerram.
+@distractor-lu Gebeess
+@distractor-lu Apel
+@en We have a similar dish in Ukraine, but we eat it with sour cream.
+@distractor-en jam
+@distractor-en apple
+
+# --- The opinion block ---
+
+@sentence
+@question Ass et wichteg méi Sproochen ze schwätzen? Firwat?
+@lu Sprooche si wichteg, well ee sech besser integréiere kann an d'Kultur méi verstinn.
+@distractor-lu onwichteg
+@distractor-lu Reklamm
+@en Languages are important because one can integrate better and understand the culture more.
+@distractor-en unimportant
+@distractor-en advertisement
+
+@sentence
+@question Wat sinn d'Virdeeler an d'Nodeeler dovun, méi Sproochen ze kënnen?
+@lu De gréisste Virdeel ass d'Kommunikatioun, an den eenzege Nodeel ass déi vill Zäit.
+@distractor-lu Middegkeet
+@distractor-lu Angscht
+@en The biggest advantage is the communication, and the only disadvantage is the amount of time.
+@distractor-en tiredness
+@distractor-en fear
+
+@sentence
+@question Firwat ass et wichteg Lëtzebuergesch zu Lëtzebuerg ze léieren?
+@lu Ouni Lëtzebuergesch bleift ee bësse Gaascht, an ech wëll hei kee Gaascht sinn.
+@distractor-lu Bierger
+@distractor-lu Aarbecht
+@en Without Luxembourgish one remains a bit of a guest, and I do not want to be a guest here.
+@distractor-en citizen
+@distractor-en work
+
+@sentence
+@question Wat haalt Dir dovun, datt Lëtzebuerg dräi offiziell Sproochen huet?
+@lu Dräi offiziell Sprooche si praktesch, mee sou ass et och einfach Lëtzebuergesch ze evitéieren.
+@distractor-lu schwéier
+@distractor-lu Dialekt
+@en Three official languages are practical, but that way it is also easy to avoid Luxembourgish.
+@distractor-en difficult
+@distractor-en dialect
+
+@sentence
+@question Gleeft Dir, datt jidderee Lëtzebuergesch schwätze soll, deen hei wunnt?
+@lu Ech mengen, jidderee soll et op d'mannst probéieren, well et ëm Respekt geet.
+@distractor-lu keen
+@distractor-lu Reklamm
+@en I think everybody should at least try, because it is about respect.
+@distractor-en nobody
+@distractor-en advertisement
+
+@sentence
+@question Ass et néideg Lëtzebuergesch op der Aarbecht ze schwätzen? Firwat?
+@lu An der Informatik ass et net néideg, well eis Firmen Englesch benotzen, an dat ass schued.
+@distractor-lu Bank
+@distractor-lu gutt
+@en In IT it is not necessary because our companies use English, and that is a pity.
+@distractor-en bank
+@distractor-en good
+
+@sentence
+@question Wéi eng Sprooch ass Ärer Meenung no am wichtegsten zu Lëtzebuerg? Firwat?
+@lu Fir d'Aarbecht ass Englesch am wichtegsten, mee fir d'Land ass Lëtzebuergesch am wichtegsten.
+@distractor-lu Russesch
+@distractor-lu onwichteg
+@en For work English is the most important, but for the country Luxembourgish is the most important.
+@distractor-en Russian
+@distractor-en unimportant
+
+@sentence
+@question Gleeft Dir, datt d'Lëtzebuerger Sprooch an Zukunft méi oder manner geschwat gëtt?
+@lu Ech gleewen, si gëtt méi geschwat, well ëmmer méi Leit de Sproochentest maachen.
+@distractor-lu manner
+@distractor-lu Reklamm
+@en I believe it is spoken more because more and more people take the language test.
+@distractor-en less
+@distractor-en advertisement
+
+@sentence
+@question Ass d'Positioun vum Lëtzebuergesche wéi bei enger anerer Sprooch?
+@lu Ukrainesch an der Ukrain hat déiselwecht Positioun wéi Lëtzebuergesch hei.
+@distractor-lu Englesch
+@distractor-lu Dialekt
+@en Ukrainian in Ukraine had the same position as Luxembourgish here.
+@distractor-en English
+@distractor-en dialect
+
+@sentence
+@question Firwat léieren d'Leit d'Sprooch vum Land net?
+@lu Et ass einfach d'Sprooch vum groussen Noper ze benotzen, an dofir léiere vill Leit d'kleng Sprooch net.
+@distractor-lu schwéier
+@distractor-lu Kand
+@en It is easy to use the language of the big neighbour, and that is why many people do not learn the small language.
+@distractor-en difficult
+@distractor-en child
+
+@sentence
+@question Mengt Dir, datt et méi einfach ass, eng Sprooch als Kand oder als Erwuessenen ze léieren?
+@lu Als Kand ass et méi einfach, mee net wéinst dem Kapp: e Kand huet méi Zäit a manner Middegkeet.
+@distractor-lu Erwuessenen
+@distractor-lu Grammatik
+@en As a child it is easier, but not because of the brain: a child has more time and less tiredness.
+@distractor-en adult
+@distractor-en grammar
+
+@sentence
+@question Verännert sech Äre Charakter, wann Dir an enger anerer Sprooch schwätzt?
+@lu Et gëtt eng Theorie, datt d'Sprooch d'Denken verännert, an ech mengen, dat ass wouer.
+@distractor-lu Aussprooch
+@distractor-lu falsch
+@en There is a theory that language changes thinking, and I think that is true.
+@distractor-en pronunciation
+@distractor-en wrong
+
+@sentence
+@question Wat bedeit et fir Iech, eng Sprooch wierklech fléissend ze schwätzen?
+@lu Fléissend heescht fir mech, iwwer all Theema ze schwätzen ouni lang no engem Wuert ze sichen.
+@distractor-lu séier
+@distractor-lu Grammatik
+@en Fluent means for me to speak about any topic without searching long for a word.
+@distractor-en fast
+@distractor-en grammar
+
+@sentence
+@question Wat géift Dir engem roden, deen ugefaang huet Lëtzebuergesch ze léieren?
+@lu Sidd net faul: léiert all Dag fofzéng Minutten, well d'Widderhuelung méi wichteg ass wéi d'Talent.
+@distractor-lu Woch
+@distractor-lu Gléck
+@en Do not be lazy: learn fifteen minutes every day, because the repetition is more important than the talent.
+@distractor-en week
+@distractor-en luck
+
+@sentence
+@question Soll Lëtzebuergesch als Haaptsprooch an de Schoule bäibruecht ginn? Firwat?
+@lu Lëtzebuergesch soll absolut d'Haaptsprooch an de Schoule sinn, well d'Kanner d'Land da besser verstinn.
+@distractor-lu Franséisch
+@distractor-lu manner
+@en Luxembourgish should absolutely be the main language in the schools, because the children then understand the country better.
+@distractor-en French
+@distractor-en less
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech léiere Lëtzebuergesch, [well] et e Zeeche vu Respekt ass.
+@en I learn Luxembourgish [because] it is a sign of respect.
+@distractor-lu ouni
+@distractor-lu duerch
+@distractor-en without
+@distractor-en through
+
+@fill
+@lu [Wann] ech eppes net verstinn, froen ech nach eng Kéier.
+@en [When] I do not understand something, I ask once more.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu [Obwuel] ech Russesch verstinn, schwätzen ech et net.
+@en [Although] I understand Russian, I do not speak it.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu Ech liese léiwer en Text [wéi] eng séier Diskussioun.
+@en I prefer reading a text [to] a fast discussion.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech üben all Dag, [fir] méi fléissend ze schwätzen.
+@en I practise every day [in order to] speak more fluently.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu Meng Firma ass international, [dofir] schwätze mir Englesch.
+@en My company is international, [that is why] we speak English.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Ech lauschtere Podcasten, [wärenddeems] ech mam Hond spadséieren.
+@en I listen to podcasts [while] I walk with the dog.
+@distractor-lu obwuel
+@distractor-lu ouni
+@distractor-en although
+@distractor-en without
+
+@fill
+@lu Ech léiere Lëtzebuergesch [säit] bal engem Joer.
+@en I have been learning Luxembourgish [for] almost a year.
+@distractor-lu nodeems
+@distractor-lu bis
+@distractor-en after
+@distractor-en until
+
+@fill
+@lu Karteikaarte benotzen ech just [heiansdo].
+@en I use index cards only [sometimes].
+@distractor-lu ëmmer
+@distractor-lu ni
+@distractor-en always
+@distractor-en never
+
+@fill
+@lu All Dag léieren ech op d'mannst [fofzéng] Minutten.
+@en Every day I learn at least [fifteen] minutes.
+@distractor-lu zwee
+@distractor-lu honnert
+@distractor-en two
+@distractor-en hundred
+
+@fill
+@lu An der Schoul hunn ech dräi Sproochen zesumme [geléiert].
+@en At school I [learned] three languages together.
+@distractor-lu geschriwwen
+@distractor-lu vergiess
+@distractor-en written
+@distractor-en forgotten
+
+@fill
+@lu Ech mengen, d'Sprooch verännert d'[Denken].
+@en I think the language changes the [thinking].
+@distractor-lu Wuert
+@distractor-lu Land
+@distractor-en word
+@distractor-en country

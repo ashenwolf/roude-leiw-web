@@ -1,0 +1,248 @@
+# Exam track — Theme: Sproochen — Sub-lesson 2: Key Phrases
+# Plain @sentence blocks (no @question) — shorter restatements of the same
+# interview facts that sub-lesson 3 answers in full.
+#
+# These are the user's real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass.
+#
+# Handout corrections applied after LOD verification: Sauerrahm -> Sauerram,
+# Nobier -> Noper, Liiblingswuert -> Liblingswuert.
+
+@lesson L1.02 "Language Phrases"
+
+@word d'Noperen = the neighbours
+@word de Kolleeg = the colleague
+@word d'Léierin = the female teacher
+@word d'Schoul = the school
+@word d'Universitéit = the university
+@word d'Noriicht = the piece of news
+@word den Ënnertitel = the subtitle
+@word de Podcast = the podcast
+@word d'Zeitung = the newspaper
+@word d'Kultur = the culture
+@word de Respekt = the respect
+@word d'Heemecht = the native country
+@word d'Ukrain = Ukraine
+@word Lëtzebuerg = Luxembourg
+@word de Gromperekichelchen = the potato fritter
+@word d'Sauerram = the sour cream
+@word d'Gebeess = the jam
+@word den Apel = the apple
+@word d'Minutt = the minute
+@word d'Zäit = the time
+@word d'Fra = the wife
+@word d'Elteren = the parents
+@word d'Aarbecht = the work
+@word d'Angscht = the fear
+@word de Charakter = the character
+@word d'Theorie = the theory
+@word de Verglach = the comparison
+@word probéieren = to try
+@word ufänken = to start
+@word verbesseren = to improve
+@word investéieren = to invest
+@word wielen = to pick
+@word froen = to ask
+@word héieren = to hear
+@word denken = to think
+@word gleewen = to believe
+@word wiesselen = to switch
+@word wonnerbar = wonderful
+@word nervös = nervous
+@word éierlech = honest
+@word deier = expensive
+@word faul = lazy
+@word hëllefräich = helpful
+@word wichteg = important
+
+@sentence
+@lu Ech schwätzen Ukrainesch, Englesch a bësse Franséisch.
+@en I speak Ukrainian, English and a little French.
+@distractor-lu Russesch
+@distractor-lu ni
+@distractor-en Russian
+@distractor-en never
+
+@sentence
+@lu Meng Fra an ech schwätzen Ukrainesch doheem.
+@en My wife and I speak Ukrainian at home.
+@distractor-lu Englesch
+@distractor-lu Aarbecht
+@distractor-en English
+@distractor-en work
+
+@sentence
+@lu Op der Aarbecht schwätze mir Englesch.
+@en At work we speak English.
+@distractor-lu doheem
+@distractor-lu Schoul
+@distractor-en at home
+@distractor-en school
+
+@sentence
+@lu Mir probéiere Lëtzebuergesch mat de Noperen ze schwätzen.
+@en We try to speak Luxembourgish with the neighbours.
+@distractor-lu Kolleegen
+@distractor-lu Englesch
+@distractor-en colleagues
+@distractor-en English
+
+@sentence
+@lu Ech léiere Lëtzebuergesch aus Respekt fir dëst Land.
+@en I learn Luxembourgish out of respect for this country.
+@distractor-lu Aarbecht
+@distractor-lu Angscht
+@distractor-en work
+@distractor-en fear
+
+@sentence
+@lu Meng Fra léiert zesumme mat mir.
+@en My wife learns together with me.
+@distractor-lu eleng
+@distractor-lu Kolleeg
+@distractor-en alone
+@distractor-en colleague
+
+@sentence
+@lu Mir hunn eng Léierin an engem Onlinecours.
+@en We have a teacher in an online course.
+@distractor-lu Universitéit
+@distractor-lu ni
+@distractor-en university
+@distractor-en never
+
+@sentence
+@lu Ech hunn eng App fir Lëtzebuergesch geschriwwen.
+@en I wrote an app for Luxembourgish.
+@distractor-lu Zeitung
+@distractor-lu gelies
+@distractor-en newspaper
+@distractor-en read
+
+@sentence
+@lu Eng gutt Léierin ass hëllefräich, mee och deier.
+@en A good teacher is helpful, but also expensive.
+@distractor-lu bëlleg
+@distractor-lu App
+@distractor-en cheap
+@distractor-en app
+
+@sentence
+@lu Ech liese RTL online, obwuel et nach schwéier ass.
+@en I read RTL online, although it is still difficult.
+@distractor-lu einfach
+@distractor-lu Podcast
+@distractor-en easy
+@distractor-en podcast
+
+@sentence
+@lu Ech kucke Filmer op Englesch mat Ënnertitelen.
+@en I watch films in English with subtitles.
+@distractor-lu Franséisch
+@distractor-lu ouni
+@distractor-en French
+@distractor-en without
+
+@sentence
+@lu D'Noriichten aus der Ukrain liesen ech als Text.
+@en I read the news from Ukraine as a text.
+@distractor-lu Video
+@distractor-lu Zeitung
+@distractor-en video
+@distractor-en newspaper
+
+@sentence
+@lu Ech si bësse nervös, wann ech Lëtzebuergesch schwätzen.
+@en I am a little nervous when I speak Luxembourgish.
+@distractor-lu roueg
+@distractor-lu Englesch
+@distractor-en calm
+@distractor-en English
+
+@sentence
+@lu Ech froen d'Leit lues a nach eng Kéier ze schwätzen.
+@en I ask people to speak slowly and once more.
+@distractor-lu séier
+@distractor-lu schreiwen
+@distractor-en fast
+@distractor-en write
+
+@sentence
+@lu Englesch ass just meng lescht Léisung.
+@en English is only my last solution.
+@distractor-lu éischt
+@distractor-lu Fro
+@distractor-en first
+@distractor-en question
+
+@sentence
+@lu Mäi Liblingswuert ass Gromperekichelchen.
+@en My favourite word is potato fritter.
+@distractor-lu Sprooch
+@distractor-lu Apel
+@distractor-en language
+@distractor-en apple
+
+@sentence
+@lu Mir iesse Gromperekichelcher mat Sauerram an net mat Gebeess.
+@en We eat potato fritters with sour cream and not with jam.
+@distractor-lu Apel
+@distractor-lu Kultur
+@distractor-en apple
+@distractor-en culture
+
+@sentence
+@lu A Steinsel héieren ech vill Lëtzebuergesch, an dat ass wonnerbar.
+@en In Steinsel I hear a lot of Luxembourgish, and that is wonderful.
+@distractor-lu Stad
+@distractor-lu seelen
+@distractor-en city
+@distractor-en rarely
+
+@sentence
+@lu An der Stad héieren ech méi Franséisch wéi Lëtzebuergesch.
+@en In the city I hear more French than Luxembourgish.
+@distractor-lu manner
+@distractor-lu Englesch
+@distractor-en less
+@distractor-en English
+
+@sentence
+@lu Ech investéieren all Dag op d'mannst fofzéng Minutten.
+@en Every day I invest at least fifteen minutes.
+@distractor-lu Stonnen
+@distractor-lu ni
+@distractor-en hours
+@distractor-en never
+
+@sentence
+@lu Wie faul ass, léiert keng Sprooch.
+@en Whoever is lazy learns no language.
+@distractor-lu fléissend
+@distractor-lu Léierin
+@distractor-en fluent
+@distractor-en teacher
+
+@sentence
+@lu Meng Elteren hu fréier Russesch mat mir geschwat.
+@en My parents used to speak Russian with me.
+@distractor-lu Ukrainesch
+@distractor-lu Schoul
+@distractor-en Ukrainian
+@distractor-en school
+
+@sentence
+@lu Ech gleewen, datt eng Sprooch de Charakter verännert.
+@en I believe that a language changes the character.
+@distractor-lu Kultur
+@distractor-lu Theorie
+@distractor-en culture
+@distractor-en theory
+
+@sentence
+@lu Ukrainesch an der Ukrain ass wéi Lëtzebuergesch zu Lëtzebuerg.
+@en Ukrainian in Ukraine is like Luxembourgish in Luxembourg.
+@distractor-lu Englesch
+@distractor-lu Verglach
+@distractor-en English
+@distractor-en comparison
