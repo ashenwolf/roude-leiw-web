@@ -1,0 +1,660 @@
+# Exam track — Theme: Gesond Liewen — Sub-lesson 3: Talking About It
+# @question sentences: the examiner asks in Luxembourgish, the learner
+# assembles the Luxembourgish answer (always en→lu).
+#
+# These are Sergii's and his wife's real answers, gathered by interview over
+# several class rounds — do not "improve" or genericize them in a later editing
+# pass. The point is that the learner rehearses what they will actually say in
+# the Sproochentest.
+#
+# Where two rounds gave different answers the LATER round wins (user decision):
+# sport is Kendo plus dog walks and the bike — not tennis/squash; the disliked
+# childhood vegetable is Aubergine; the parents cooked Kniddelen, Nuddelen,
+# Grompere mat Fleesch, Pasta and Zoppen (all of them).
+#
+# Key personal facts: health means eating well, moving and sleeping well; eats
+# fruit and vegetables daily, cooks with a steam oven with his wife, buys organic
+# because it is not chemical; eats meat so pure vegetarian/vegan is impossible,
+# but finds vegetarian healthy; sweets are the weak point, plus occasional junk
+# food in front of the TV (crisps, salted nuts); breakfast yoghurt, apple,
+# coffee; as a child ate sweets and a Ukrainian filled sweet called "verréckt
+# Bei", disliked Aubergine then and still does; no gym — no time in the week, too
+# tired at the weekend; Kendo (Japanese fencing) two years in Kyiv fifteen years
+# ago and six months in Luxembourg four years ago, stopped for work, would like
+# to return to the Luxembourg Kendo club; football in a school class team; swam
+# in a university team; walks the dog at least twice a day, park in Steinsel,
+# Mullerthal footpaths; midnight bedtime, about eight hours, no phone two hours
+# before sleep; last ill seven or eight months ago with a cold, treats it with
+# tea, water and sleep; drinks about three cups of water a day, finds two litres
+# too much; drinks Crémant because avoiding alcohol in Luxembourg is hard.
+#
+# The @fill blocks carry frames that recur across any topic: well-causal,
+# wann-conditional, obwuel-contrast, wéi-comparative, fir…ze purpose, dofir
+# inversion, a general-pronoun "een" modal, a past-tense wéi clause, a frequency
+# adverb, a number, a past participle, and an Ech-mengen hedge.
+
+@lesson G1.03 "Talking About Healthy Living"
+
+@word d'Krankheet = the illness
+@word den Dokter = the doctor
+@word d'Spidol = the hospital
+@word d'Erkältung = the cold
+@word d'Medikament = the medicine
+@word de Kierper = the body
+@word d'Kandheet = the childhood
+@word d'Kannerzäit = the childhood years
+@word d'Groussmamm = the grandmother
+@word d'Elteren = the parents
+@word d'Kand = the child
+@word d'Leit = the people
+@word d'Fra = the wife
+@word d'Bei = the bee
+@word d'Gewunnecht = the habit
+@word de Virdeel = the advantage
+@word de Nodeel = the disadvantage
+@word d'Zukunft = the future
+@word de Grond = the reason
+@word d'Meenung = the opinion
+@word d'Theema = the topic
+@word d'Hausdéier = the pet
+@word de Fastfood = the fast food
+@word d'Glas = the glass
+@word de Mount = the month
+@word de Dag = the day
+@word d'Joer = the year
+@word d'Uni = the university
+@word mengen = to think
+@word denken = to consider
+@word benotzen = to use
+@word roden = to advise
+@word ziichten = to grow
+@word riechen = to smell
+@word krank = ill
+@word wichteg = important
+@word méiglech = possible
+@word onméiglech = impossible
+@word interessant = interesting
+@word schlecht = bad
+@word professionell = professional
+@word jonk = young
+@word ukrainesch = Ukrainian
+@word gefëllt = filled
+@word genuch = enough
+@word wéinstens = at least
+
+# --- Opening: why this topic, and what healthy living means ---
+
+@sentence
+@question Firwat hutt Dir dat Theema gewielt?
+@lu Ech hunn dat Theema gewielt, well ech et wichteg fanne gesond ze sinn.
+@distractor-lu langweileg
+@distractor-lu Aarbecht
+@en I chose that topic because I find it important to be healthy.
+@distractor-en boring
+@distractor-en work
+
+@sentence
+@question Firwat sollen d'Leit un e gesond Liewen denken?
+@lu Ech mengen, ech muss eppes Gesonds maachen, fir laang ze liewen an net an d'Spidol ze goen.
+@distractor-lu Dokter
+@distractor-lu kuerz
+@en I think I have to do something healthy in order to live long and not to go to the hospital.
+@distractor-en doctor
+@distractor-en short
+
+@sentence
+@question Wat heescht gesond liewe fir Iech?
+@lu Fir mech heescht gesond liewen Uebst iessen, Sport maachen a gutt schlofen.
+@distractor-lu Fastfood
+@distractor-lu schlecht
+@en For me healthy living means eating fruit, doing sport and sleeping well.
+@distractor-en burgers
+@distractor-en badly
+
+# --- Food and drink ---
+
+@sentence
+@question Wat iesst an drénkt Dir fir gesond ze bleiwen?
+@lu Ech probéiere manner Séissegkeeten a méi Geméis ze iessen, an och kee Fastfood.
+@distractor-lu Alkohol
+@distractor-lu Kuch
+@en I try to eat fewer sweets and more vegetables, and also no fast food.
+@distractor-en alcohol
+@distractor-en cake
+
+@sentence
+@question Wat hutt Dir dëse Moie giess?
+@lu De Moien hunn ech e Jugurt an en Apel giess, an e Kaffi gedronk.
+@distractor-lu Kuch
+@distractor-lu Téi
+@en This morning I ate a yoghurt and an apple, and drank a coffee.
+@distractor-en cake
+@distractor-en tea
+@sentence
+@question Wéi ee Geméis a wéi een Uebst iesst Dir gär?
+@lu Ech iessen all Dag vill Uebst, zum Beispill Äppel, Meloun a Kiischten.
+@distractor-lu Aubergine
+@distractor-lu seelen
+@en Every day I eat a lot of fruit, for example apples, melon and cherries.
+@distractor-en aubergine
+@distractor-en rarely
+
+@sentence
+@question Kacht Dir doheem? Wéi?
+@lu Meng Fra an ech kache vill mat engem Dampuewen doheem.
+@distractor-lu Restaurant
+@distractor-lu ni
+@en My wife and I cook a lot with a steam oven at home.
+@distractor-en restaurant
+@distractor-en never
+
+@sentence
+@question Wat kacht Dir?
+@lu Ech kache Grompere a vill Fleesch, mee dat ass net ganz gesond.
+@distractor-lu Zalot
+@distractor-lu ëmmer
+@en I cook potatoes and a lot of meat, but that is not very healthy.
+@distractor-en salad
+@distractor-en always
+
+@sentence
+@question Iesst Dir Bioprodukter?
+@lu Jo, ech probéieren ëmmer Bioprodukter ze iessen.
+@distractor-lu ni
+@distractor-lu Fastfood
+@en Yes, I always try to eat organic products.
+@distractor-en never
+@distractor-en burgers
+
+@sentence
+@question Mengt Dir Bioprodukter si besser fir d'Gesondheet? Firwat?
+@lu Bioprodukter si besser fir gesond ze liewen, well se net cheemesch sinn.
+@distractor-lu schlechter
+@distractor-lu deier
+@en Organic products are better for living healthily because they are not chemical.
+@distractor-en worse
+@distractor-en expensive
+
+@sentence
+@question Wat haalt Dir vu vegetareschem Iessen?
+@lu Ech hu Fleesch gär, an dofir kann ech net nëmme vegetaresch iessen, mee vegetaresch ass gesond.
+@distractor-lu Geméis
+@distractor-lu ongesond
+@en I like meat, and that is why I cannot eat only vegetarian, but vegetarian is healthy.
+@distractor-en vegetables
+@distractor-en unhealthy
+
+@sentence
+@question Wat haalt Dir vu veganem Iessen?
+@lu Fir mech ass et onméiglech just vegan ze iessen, well ech gär lecker Iessen hunn.
+@distractor-lu méiglech
+@distractor-lu Uebst
+@en For me it is impossible to eat only vegan, because I like having delicious food.
+@distractor-en possible
+@distractor-en fruit
+
+@sentence
+@question Iesst Dir Fastfood? Wa jo, wéini?
+@lu Jo, ech iessen heiansdo Fastfood, wann ech Tëlee kucken.
+@distractor-lu ni
+@distractor-lu Aarbecht
+@en Yes, I sometimes eat fast food when I watch television.
+@distractor-en never
+@distractor-en work
+
+@sentence
+@question Wat iesst Dir da gewéinlech?
+@lu Ech iesse gewéinlech Chipsen a salzeg Noss.
+@distractor-lu Zalot
+@distractor-lu Uebst
+@en I usually eat crisps and salty nuts.
+@distractor-en salad
+@distractor-en fruit
+
+@sentence
+@question Wéi beschreift Dir Är Ernärung?
+@lu Meng Ernärung ass net perfekt, well ech vill Séissegkeeten iessen.
+@distractor-lu Geméis
+@distractor-lu Zalot
+@en My diet is not perfect because I eat a lot of sweets.
+@distractor-en vegetables
+@distractor-en salad
+
+@sentence
+@question Wéi vill Waasser drénkt Dir gewéinlech pro Dag?
+@lu Ech probéieren dräi Taasse Waasser pro Dag ze drénken.
+@distractor-lu Liter
+@distractor-lu Woch
+@en I try to drink three cups of water per day.
+@distractor-en litres
+@distractor-en week
+
+@sentence
+@question Sinn zwee Liter pro Dag net recommandéiert?
+@lu Ech mengen, et gi zwee Liter recommandéiert, mee fir mech ass dat ze vill.
+@distractor-lu wéineg
+@distractor-lu Téi
+@en I think two litres are recommended, but for me that is too much.
+@distractor-en little
+@distractor-en tea
+
+@sentence
+@question Drénkt Dir Kaffi oder Alkohol?
+@lu Et ass schwéier keen Alkohol zu Lëtzebuerg ze drénken, well et hei immens gudde Crémant gëtt.
+@distractor-lu einfach
+@distractor-lu Waasser
+@en It is difficult to drink no alcohol in Luxembourg, because there is excellent crémant here.
+@distractor-en easy
+@distractor-en water
+
+# --- Childhood ---
+
+@sentence
+@question Wat hutt Dir als Kand gär giess?
+@lu Als Kand hunn ech gär Séissegkeete giess, a meng Groussmamm huet mir Kuch gebak.
+@distractor-lu Geméis
+@distractor-lu gekacht
+@en As a child I liked eating sweets, and my grandmother baked me cake.
+@distractor-en vegetables
+@distractor-en cooked
+
+@sentence
+@question Wéi eng Séissegkeete waren dat?
+@lu Et ware kleng ukrainesch Séissegkeeten, si heesche verréckt Bei a si mat Gebeess gefëllt.
+@distractor-lu grouss
+@distractor-lu Hunneg
+@en They were small Ukrainian sweets, they are called crazy bee and are filled with jam.
+@distractor-en big
+@distractor-en honey
+
+@sentence
+@question Wéi ee Geméis hat Dir net gär, wéi Dir jonk waart?
+@lu Ech hat Aubergine net gär, wéi ech jonk war, a haut hunn ech se nach ëmmer net gär.
+@distractor-lu Tomaten
+@distractor-lu Courgette
+@en I did not like aubergine when I was young, and today I still do not like it.
+@distractor-en tomatoes
+@distractor-en courgette
+
+@sentence
+@question Firwat hutt Dir dat Geméis net gär?
+@lu Fir mech richt d'Aubergine wierklech schlecht.
+@distractor-lu gutt
+@distractor-lu Courgette
+@en For me the aubergine really smells bad.
+@distractor-en good
+@distractor-en courgette
+
+@sentence
+@question Wat hunn Är Eltere gekacht, wéi Dir kleng waart?
+@lu Meng Eltere hu Kniddelen, Nuddelen, Grompere mat Fleesch, Pasta an Zoppe gekacht.
+@distractor-lu Fastfood
+@distractor-lu gebak
+@en My parents cooked dumplings, noodles, potatoes with meat, pasta and soups.
+@distractor-en burgers
+@distractor-en baked
+
+@sentence
+@question Hutt Dir als Kand gesond giess?
+@lu Ech menge jo, ech hunn als Kand gesond giess, well ech vill Uebst a Geméis giess hunn.
+@distractor-lu ongesond
+@distractor-lu Chipsen
+@en I think yes, as a child I ate healthily because I ate a lot of fruit and vegetables.
+@distractor-en unhealthily
+@distractor-en crisps
+
+# --- Sport and movement ---
+
+@sentence
+@question Maacht Dir haut Sport?
+@lu Ech maache kee Sport, well ech ze vill Aarbecht hunn a keng Zäit.
+@distractor-lu Fräizäit
+@distractor-lu Musek
+@en I do not do any sport because I have too much work and no time.
+@distractor-en leisure
+@distractor-en music
+
+@sentence
+@question Gitt Dir heiansdo an de Fitnessstudio? Firwat net?
+@lu Ech hu keng Zäit wärend der Woch, an um Weekend sinn ech ze midd.
+@distractor-lu vill
+@distractor-lu fit
+@en I have no time during the week, and at the weekend I am too tired.
+@distractor-en much
+@distractor-en fit
+
+@sentence
+@question Wéi ee Sport hutt Dir fréier gemaach?
+@lu Ech hu Kendo gemaach, an dat ass japanescht Fechten.
+@distractor-lu Fussball
+@distractor-lu franséisch
+@en I did Kendo, and that is Japanese fencing.
+@distractor-en football
+@distractor-en French
+
+@sentence
+@question Wou a wéi laang hutt Dir dat gemaach?
+@lu Ech hunn zwee Joer zu Kiew gemaach a sechs Mount zu Lëtzebuerg.
+@distractor-lu Japan
+@distractor-lu aacht
+@en I did two years in Kyiv and six months in Luxembourg.
+@distractor-en Japan
+@distractor-en eight
+
+@sentence
+@question Wat gefällt Iech un dësem Sport?
+@lu De Kendo ass kierperlech exigent, an dofir muss ech och intelligent sinn.
+@distractor-lu einfach
+@distractor-lu professionell
+@en Kendo is physically demanding, and that is why I also have to be intelligent.
+@distractor-en easy
+@distractor-en professional
+
+@sentence
+@question Firwat hutt Dir opgehalen?
+@lu Ech hat vill Aarbecht, an ech hat net vill Fräizäit.
+@distractor-lu wéineg
+@distractor-lu Zäit
+@en I had a lot of work, and I did not have much free time.
+@distractor-en little
+@distractor-en time
+
+@sentence
+@question Interesséiert Dir Iech nach fir e Veräin?
+@lu Jo, ech géif gär an de lëtzebuergesche Kendo-Club zeréckgoen.
+@distractor-lu ni
+@distractor-lu Fitnessstudio
+@en Yes, I would like to go back to the Luxembourgish Kendo club.
+@distractor-en never
+@distractor-en gym
+
+@sentence
+@question Hutt Dir an enger Schoulsportsekipp gespillt?
+@lu Wéi ech an der Schoul war, hunn ech gär Fussball gespillt, well all Klass eng Ekipp hat.
+@distractor-lu Uni
+@distractor-lu eleng
+@en When I was at school I liked playing football, because every class had a team.
+@distractor-en university
+@distractor-en alone
+
+@sentence
+@question Spillt Dir haut nach Fussball?
+@lu Nee, ech spille kee Fussball méi, an ech sinn och net an enger Ekipp.
+@distractor-lu ëmmer
+@distractor-lu Kendo
+@en No, I do not play football any more, and I am also not in a team.
+@distractor-en always
+@distractor-en Kendo
+
+@sentence
+@question Hutt Dir och op der Uni an engem Team gespillt?
+@lu Op der Uni sinn ech an engem Team geschwommen.
+@distractor-lu Schoul
+@distractor-lu gelaacht
+@en At university I swam in a team.
+@distractor-en school
+@distractor-en laughed
+
+@sentence
+@question Wat maacht Dir fir Iech ze beweegen?
+@lu Ech spadséiere vill mat mengem Mupp an ech fuere mam Vëlo.
+@distractor-lu Auto
+@distractor-lu ni
+@en I walk a lot with my dog and I ride my bike.
+@distractor-en car
+@distractor-en never
+
+@sentence
+@question Wéi oft gitt Dir am Dag spadséieren?
+@lu Ech muss op d'mannst zwee Mol pro Dag spadséieren.
+@distractor-lu Woch
+@distractor-lu seelen
+@en I have to go for a walk at least twice a day.
+@distractor-en week
+@distractor-en rarely
+
+@sentence
+@question Kënnt Dir schéin Trëppeltoure recommandéieren?
+@lu Zu Steesel gëtt et e schéine Park, a mir ginn och oft an de Mëllerdall.
+@distractor-lu Stad
+@distractor-lu ni
+@en In Steinsel there is a beautiful park, and we also often go to the Mullerthal.
+@distractor-en city
+@distractor-en never
+
+# --- Sleep, mental health and illness ---
+
+@sentence
+@question Wat recommandéiert Dir fir gesond ze liewen?
+@lu Ech mengen, kee Stress ass am wichtegsten, an de Schlof ass och wichteg.
+@distractor-lu Sport
+@distractor-lu onwichteg
+@en I think no stress is the most important, and the sleep is also important.
+@distractor-en sport
+@distractor-en unimportant
+
+@sentence
+@question Wat maacht Dir fir gutt ze schlofen?
+@lu Ech probéieren zwou Stonne virum Schlofe mäi Handy net ze benotzen.
+@distractor-lu Tëlee
+@distractor-lu ëmmer
+@en I try not to use my mobile phone two hours before sleeping.
+@distractor-en television
+@distractor-en always
+
+@sentence
+@question Wat kënnt Dir recommandéiere fir gutt ze schlofen?
+@lu Et soll een net ze spéit schlofen, an et soll een och net spéit iessen.
+@distractor-lu fréi
+@distractor-lu vill
+@en One should not sleep too late, and one should also not eat late.
+@distractor-en early
+@distractor-en much
+
+@sentence
+@question Wéi vill Stonne schlooft Dir gewéinlech?
+@lu Ech ginn ëm Mëtternuecht schlofen, an ech schlofe gewéinlech aacht Stonnen.
+@distractor-lu moies
+@distractor-lu dräi
+@en I go to sleep at midnight, and I usually sleep eight hours.
+@distractor-en morning
+@distractor-en three
+
+@sentence
+@question Wat maacht Dir fir Är mental Gesondheet ze stäerken?
+@lu Ech maachen eppes Relaxes, zum Beispill lauschteren ech Musek a spille Computerspiller.
+@distractor-lu Aarbecht
+@distractor-lu kierperlech
+@en I do something relaxing, for example I listen to music and play computer games.
+@distractor-en work
+@distractor-en physical
+
+@sentence
+@question Sinn Hausdéiere gutt fir d'Gesondheet? Wat mengt Dir?
+@lu Dat ass richteg, well ee mat engem Hausdéier vill spadséiere muss.
+@distractor-lu falsch
+@distractor-lu wéineg
+@en That is right, because with a pet one has to walk a lot.
+@distractor-en wrong
+@distractor-en little
+
+@sentence
+@question Muss ee mat engem Hausdéier organiséiert sinn?
+@lu Jo, mat engem Mupp muss ee och organiséiert sinn.
+@distractor-lu Fësch
+@distractor-lu faul
+@en Yes, with a dog one also has to be organized.
+@distractor-en fish
+@distractor-en lazy
+
+@sentence
+@question Wéini waart Dir fir d'lescht krank?
+@lu Ech mengen, et war viru siwen oder aacht Mount.
+@distractor-lu Deeg
+@distractor-lu gesond
+@en I think it was seven or eight months ago.
+@distractor-en days
+@distractor-en healthy
+
+@sentence
+@question Wat hat Dir?
+@lu Ech hat eng Erkältung, mee ech war net am Spidol.
+@distractor-lu Dokter
+@distractor-lu ëmmer
+@en I had a cold, but I was not in the hospital.
+@distractor-en doctor
+@distractor-en always
+
+@sentence
+@question Wat maacht Dir, wann Dir krank sidd?
+@lu Wann ech krank sinn, drénken ech vill Téi a Waasser, an ech schlofe vill.
+@distractor-lu Kaffi
+@distractor-lu wéineg
+@en When I am ill I drink a lot of tea and water, and I sleep a lot.
+@distractor-en coffee
+@distractor-en little
+
+@sentence
+@question Gitt Dir da bei den Dokter?
+@lu Bei den Dokter ginn ech just, wann d'Erkältung net besser gëtt.
+@distractor-lu ëmmer
+@distractor-lu Spidol
+@en I go to the doctor only when the cold does not get better.
+@distractor-en always
+@distractor-en hospital
+
+# --- Opinion block ---
+
+@sentence
+@question Wat ass de gréisste Virdeel vun engem gesonde Liewen?
+@lu De gréisste Virdeel ass, datt ech laang liewen an net oft krank sinn.
+@distractor-lu Nodeel
+@distractor-lu kuerz
+@en The biggest advantage is that I live long and am not often ill.
+@distractor-en disadvantage
+@distractor-en short
+
+@sentence
+@question Ass gesond iessen deier?
+@lu Bioprodukter si méi deier, mee fir mech ass d'Gesondheet méi wichteg wéi de Preis.
+@distractor-lu bëlleg
+@distractor-lu Fastfood
+@en Organic products are more expensive, but for me the health is more important than the price.
+@distractor-en cheap
+@distractor-en burgers
+
+@sentence
+@question Wëllt Dir Är Gewunnechten an Zukunft änneren?
+@lu An Zukunft wëll ech manner Séissegkeeten iessen a méi Sport maachen.
+@distractor-lu Fastfood
+@distractor-lu Chipsen
+@en In the future I want to eat fewer sweets and do more sport.
+@distractor-en burgers
+@distractor-en crisps
+
+@sentence
+@question Wat géift Dir engem roden, dee gesond liewe wëllt?
+@lu Ech géif engem roden all Dag ze spadséieren, well d'Beweegung méi wichteg ass wéi Kalorien.
+@distractor-lu Woch
+@distractor-lu Stress
+@en I would advise someone to walk every day, because the exercise is more important than calories.
+@distractor-en week
+@distractor-en stress
+
+# --- Reusable frames (@fill) ---
+
+@fill
+@lu Ech iesse Bioprodukter, [well] se net cheemesch sinn.
+@en I eat organic products [because] they are not chemical.
+@distractor-lu ouni
+@distractor-lu duerch
+@distractor-en without
+@distractor-en through
+
+@fill
+@lu [Wann] ech krank sinn, drénken ech vill Téi.
+@en [When] I am ill, I drink a lot of tea.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu [Obwuel] ech Fleesch gär hunn, iessen ech vill Geméis.
+@en [Although] I like meat, I eat a lot of vegetables.
+@distractor-lu Ouni
+@distractor-lu Duerch
+@distractor-en Without
+@distractor-en Through
+
+@fill
+@lu D'Beweegung ass méi wichteg [wéi] d'Kalorien.
+@en The exercise is more important [than] the calories.
+@distractor-lu an
+@distractor-lu oder
+@distractor-en and
+@distractor-en or
+
+@fill
+@lu Ech spadséiere vill, [fir] gesond ze bleiwen.
+@en I walk a lot [in order to] stay healthy.
+@distractor-lu well
+@distractor-lu wann
+@distractor-en because
+@distractor-en when
+
+@fill
+@lu Ech hu vill Aarbecht, [dofir] maachen ech kee Sport.
+@en I have a lot of work, [that is why] I do not do any sport.
+@distractor-lu well
+@distractor-lu obwuel
+@distractor-en because
+@distractor-en although
+
+@fill
+@lu Mat engem Hausdéier [muss] ee vill spadséieren.
+@en With a pet one [has to] walk a lot.
+@distractor-lu wëll
+@distractor-lu däerf
+@distractor-en wants to
+@distractor-en may
+
+@fill
+@lu [Wéi] ech jonk war, hunn ech Aubergine net gär giess.
+@en [When] I was young, I did not like eating aubergine.
+@distractor-lu Wann
+@distractor-lu Ob
+@distractor-en If
+@distractor-en Whether
+
+@fill
+@lu Fastfood iessen ech just [heiansdo].
+@en I eat fast food only [sometimes].
+@distractor-lu ëmmer
+@distractor-lu ni
+@distractor-en always
+@distractor-en never
+
+@fill
+@lu Ech schlofe gewéinlech [aacht] Stonnen.
+@en I usually sleep [eight] hours.
+@distractor-lu zwee
+@distractor-lu zwanzeg
+@distractor-en two
+@distractor-en twenty
+
+@fill
+@lu Meng Groussmamm huet mir dacks e Kuch [gebak].
+@en My grandmother often [baked] me a cake.
+@distractor-lu gekacht
+@distractor-lu gedronk
+@distractor-en cooked
+@distractor-en drunk
+
+@fill
+@lu Ech mengen, kee [Stress] ass am wichtegsten.
+@en I think no [stress] is the most important.
+@distractor-lu Sport
+@distractor-lu Uebst
+@distractor-en sport
+@distractor-en fruit

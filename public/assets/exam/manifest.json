@@ -219,6 +219,16 @@
         { "id": "summer.02", "file": "topic/summer/02_phrases.letz", "title": "Key Phrases" },
         { "id": "summer.03", "file": "topic/summer/03_questions.letz", "title": "Talking About It" }
       ]
+    },
+    {
+      "id": "gesondliewen",
+      "kind": "topic",
+      "title": "Gesond Liewen",
+      "subLessons": [
+        { "id": "gesondliewen.01", "file": "topic/gesondliewen/01_vocabulary.letz", "title": "Vocabulary" },
+        { "id": "gesondliewen.02", "file": "topic/gesondliewen/02_phrases.letz", "title": "Key Phrases" },
+        { "id": "gesondliewen.03", "file": "topic/gesondliewen/03_questions.letz", "title": "Talking About It" }
+      ]
     }
   ]
 }

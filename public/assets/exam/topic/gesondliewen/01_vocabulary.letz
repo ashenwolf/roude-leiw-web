@@ -1,0 +1,201 @@
+# Exam track — Theme: Gesond Liewen — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# These are Sergii's and his wife's real answers, gathered by interview — do not
+# "improve" or genericize them in a later editing pass. The point is that the
+# learner rehearses what they will actually say in the Sproochentest.
+#
+# This file owns FOOD and DRINK. Sub-lesson 2 owns sport, movement and sleep;
+# sub-lesson 3 owns illness, childhood and the opinion block. A later file must
+# never re-teach a word taught here.
+#
+# LOD corrections applied: Tasse -> Taass, backen -> baken, Bioprodukt (not
+# Bioprodukte), Vitaminn (not Vitamin). "Buchweizen" and "Bir" (pear) have no
+# LOD entry and were dropped from the recipe / fruit answers rather than
+# guessed; "Dampuewen" is a compound (bare LOD miss, Uewen + Damp both verified).
+# "Nëss" is not an LOD-verifiable plural of Noss (the spellchecker suggests
+# unrelated words), so the nut sentence stays with the verified singular.
+
+@lesson G1.01 "Healthy Living Vocabulary"
+
+@word d'Gesondheet = the health
+@word d'Liewen = the life
+@word d'Ernärung = the diet
+@word d'Uebst = the fruit
+@word d'Geméis = the vegetables
+@word d'Fleesch = the meat
+@word de Fësch = the fish
+@word d'Zalot = the salad
+@word d'Tomat = the tomato
+@word d'Tomaten = the tomatoes
+@word den Apel = the apple
+@word d'Äppel = the apples
+@word d'Meloun = the melon
+@word d'Kiischt = the cherry
+@word d'Kiischten = the cherries
+@word d'Gromper = the potato
+@word d'Grompere = the potatoes
+@word d'Nuddel = the noodle
+@word d'Nuddelen = the noodles
+@word d'Kniddel = the dumpling
+@word d'Kniddelen = the dumplings
+@word d'Pasta = the pasta
+@word d'Zopp = the soup
+@word d'Brout = the bread
+@word de Jugurt = the yoghurt
+@word de Kuch = the cake
+@word d'Séissegkeet = the sweet
+@word d'Séissegkeeten = the sweets
+@word d'Aubergine = the aubergine
+@word d'Courgette = the courgette
+@word d'Noss = the nut
+@word d'Chips = the crisp
+@word d'Chipsen = the crisps
+@word d'Gebeess = the jam
+@word den Hunneg = the honey
+@word den Zocker = the sugar
+@word d'Salz = the salt
+@word d'Waasser = the water
+@word den Téi = the tea
+@word de Kaffi = the coffee
+@word den Alkohol = the alcohol
+@word de Crémant = the crémant
+@word d'Taass = the cup
+@word de Liter = the litre
+@word d'Bioprodukt = the organic product
+@word d'Bioprodukter = the organic products
+@word d'Vitaminn = the vitamin
+@word d'Kalorie = the calorie
+@word de Kuelenhydrat = the carbohydrate
+@word d'Mëllechprodukt = the milk product
+@word den Dampuewen = the steam oven
+@word d'Rezept = the recipe
+@word d'Portioun = the portion
+@word iessen = to eat
+@word drénken = to drink
+@word kachen = to cook
+@word baken = to bake
+@word fëllen = to fill
+@word salzen = to salt
+@word probéieren = to try
+@word bleiwen = to stay
+@word gesond = healthy
+@word frësch = fresh
+@word lecker = delicious
+@word salzeg = salty
+@word vegetaresch = vegetarian
+@word vegan = vegan
+@word cheemesch = chemical
+@word réi = raw
+
+@sentence
+@lu Fir mech heescht Gesondheet gutt iessen a gutt schlofen.
+@en For me health means eating well and sleeping well.
+@distractor-lu schlecht
+@distractor-lu Alkohol
+@distractor-en badly
+@distractor-en alcohol
+
+@sentence
+@lu Ech iessen all Dag Uebst a Geméis.
+@en Every day I eat fruit and vegetables.
+@distractor-lu Fleesch
+@distractor-lu seelen
+@distractor-en meat
+@distractor-en rarely
+
+@sentence
+@lu Ech iesse gär Äppel a Kiischten.
+@en I like eating apples and cherries.
+@distractor-lu Chipsen
+@distractor-lu ni
+@distractor-en crisps
+@distractor-en never
+
+@sentence
+@lu Meng Fra an ech kache mat engem Dampuewen.
+@en My wife and I cook with a steam oven.
+@distractor-lu Mikrowell
+@distractor-lu Restaurant
+@distractor-en microwave
+@distractor-en restaurant
+
+@sentence
+@lu Ech probéiere manner Séissegkeeten ze iessen.
+@en I try to eat fewer sweets.
+@distractor-lu méi
+@distractor-lu Geméis
+@distractor-en more
+@distractor-en vegetables
+
+@sentence
+@lu D'Bioprodukter sinn net cheemesch.
+@en The organic products are not chemical.
+@distractor-lu Chipsen
+@distractor-lu deier
+@distractor-en crisps
+@distractor-en expensive
+
+@sentence
+@lu Ech drénke vill Waasser an Téi.
+@en I drink a lot of water and tea.
+@distractor-lu Alkohol
+@distractor-lu ni
+@distractor-en alcohol
+@distractor-en never
+
+@sentence
+@lu De Kaffi ass gutt, mee den Alkohol ass net gesond.
+@en The coffee is good, but the alcohol is not healthy.
+@distractor-lu Waasser
+@distractor-lu ëmmer
+@distractor-en water
+@distractor-en always
+
+@sentence
+@lu Ech hu Fleesch a Fësch gär.
+@en I like meat and fish.
+@distractor-lu Aubergine
+@distractor-lu ni
+@distractor-en aubergine
+@distractor-en never
+
+@sentence
+@lu Ech iessen Zalot mat Tomaten.
+@en I eat salad with tomatoes.
+@distractor-lu Kuch
+@distractor-lu Zocker
+@distractor-en cake
+@distractor-en sugar
+
+@sentence
+@lu En Apel ass besser wéi e Kuch.
+@en An apple is better than a cake.
+@distractor-lu schlechter
+@distractor-lu Chips
+@distractor-en worse
+@distractor-en crisp
+
+@sentence
+@lu Meng Fra kacht gär Zopp mat Geméis.
+@en My wife likes cooking soup with vegetables.
+@distractor-lu Fleesch
+@distractor-lu ni
+@distractor-en meat
+@distractor-en never
+
+@sentence
+@lu E Kuch mat Gebeess ass lecker, mee net gesond.
+@en A cake with jam is delicious, but not healthy.
+@distractor-lu Zalot
+@distractor-lu ëmmer
+@distractor-en salad
+@distractor-en always
+
+@sentence
+@lu Ech iesse Chipsen a salzeg Noss.
+@en I eat crisps and salty nuts.
+@distractor-lu Uebst
+@distractor-lu ni
+@distractor-en fruit
+@distractor-en never

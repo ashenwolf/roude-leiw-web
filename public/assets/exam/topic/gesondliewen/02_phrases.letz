@@ -1,0 +1,273 @@
+# Exam track — Theme: Gesond Liewen — Sub-lesson 2: Key Phrases
+# Plain @sentence blocks (no @question) — shorter restatements of the same
+# interview facts that sub-lesson 3 answers in full.
+#
+# These are Sergii's and his wife's real answers, gathered by interview — do not
+# "improve" or genericize them in a later editing pass.
+#
+# This file owns SPORT, MOVEMENT and SLEEP. Food and drink are taught in
+# sub-lesson 1; illness, childhood and the opinion block in sub-lesson 3.
+#
+# LOD corrections applied: Kendo has no LOD entry (kept as a proper noun, it is
+# the real sport), Fussballsteam -> d'Fussballekipp, Fitnessstudio (not
+# Fitnesssall), Bewegung -> d'Beweegung, recommendéieren -> recommandéieren,
+# Sportsaart -> d'Sportaart.
+
+@lesson G1.02 "Healthy Living Phrases"
+
+@word de Sport = the sport
+@word d'Sportaart = the kind of sport
+@word de Kampfsport = the martial art
+@word de Fussball = the football
+@word d'Ekipp = the team
+@word d'Fussballekipp = the football team
+@word de Veräin = the club
+@word de Sportsclub = the sports club
+@word d'Schoulklass = the school class
+@word de Fitnessstudio = the gym
+@word d'Beweegung = the exercise
+@word de Muskel = the muscle
+@word d'Kraaft = the strength
+@word de Mupp = the dog
+@word den Hond = the hound
+@word de Vëlo = the bike
+@word de Spadséiergank = the stroll
+@word d'Spadséiergäng = the strolls
+@word de Spadséierwee = the footpath
+@word de Wanderwee = the hiking trail
+@word den Trëppeltour = the hike
+@word de Park = the park
+@word de Schlof = the sleep
+@word d'Stonn = the hour
+@word d'Mëtternuecht = the midnight
+@word d'Bett = the bed
+@word d'Rou = the peace and quiet
+@word de Stress = the stress
+@word d'Musek = the music
+@word d'Spill = the game
+@word den Handy = the mobile phone
+@word d'Tëlee = the television
+@word d'Fräizäit = the free time
+@word d'Aarbecht = the work
+@word d'Zäit = the time
+@word de Weekend = the weekend
+@word d'Woch = the week
+@word de Moment = the moment
+@word d'Mol = the occasion
+@word spadséieren = to go for a walk
+@word spillen = to play
+@word fueren = to ride
+@word schwammen = to swim
+@word fechten = to fence
+@word trainéieren = to train
+@word lauschteren = to listen
+@word kucken = to watch
+@word beweegen = to move
+@word stäerken = to strengthen
+@word ufänken = to start
+@word ophalen = to stop
+@word zeréckgoen = to go back
+@word organiséieren = to organize
+@word recommandéieren = to recommend
+@word mental = mental
+@word kierperlech = physical
+@word exigent = demanding
+@word midd = tired
+@word fit = fit
+@word relax = relaxed
+@word japanesch = Japanese
+@word spéit = late
+@word gewéinlech = usually
+@word heiansdo = sometimes
+
+@sentence
+@lu Ech spadséiere vill mat mengem Mupp.
+@en I walk a lot with my dog.
+@distractor-lu eleng
+@distractor-lu Vëlo
+@distractor-en alone
+@distractor-en bike
+
+@sentence
+@lu Ech fuere gär mam Vëlo.
+@en I like riding my bike.
+@distractor-lu Auto
+@distractor-lu ni
+@distractor-en car
+@distractor-en never
+
+@sentence
+@lu Ech muss op d'mannst zwee Mol pro Dag spadséieren.
+@en I have to go for a walk at least twice a day.
+@distractor-lu Woch
+@distractor-lu seelen
+@distractor-en week
+@distractor-en rarely
+
+@sentence
+@lu Zu Steesel gëtt et e schéine Park.
+@en In Steinsel there is a beautiful park.
+@distractor-lu Stad
+@distractor-lu kee
+@distractor-en city
+@distractor-en no
+
+@sentence
+@lu Am Mëllerdall ginn et vill schéi Spadséierweeër.
+@en In the Mullerthal there are many beautiful footpaths.
+@distractor-lu Park
+@distractor-lu wéineg
+@distractor-en park
+@distractor-en few
+
+@sentence
+@lu Kendo ass e japanesche Kampfsport.
+@en Kendo is a Japanese martial art.
+@distractor-lu Fussball
+@distractor-lu franséisch
+@distractor-en football
+@distractor-en French
+
+@sentence
+@lu Ech hu Kendo zu Kiew ugefaangen.
+@en I started Kendo in Kyiv.
+@distractor-lu Lëtzebuerg
+@distractor-lu opgehalen
+@distractor-en Luxembourg
+@distractor-en stopped
+
+@sentence
+@lu De Kendo ass kierperlech exigent.
+@en Kendo is physically demanding.
+@distractor-lu einfach
+@distractor-lu mental
+@distractor-en easy
+@distractor-en mental
+
+@sentence
+@lu Ech hu Fussball an enger Schoulekipp gespillt.
+@en I played football in a school team.
+@distractor-lu Tennis
+@distractor-lu eleng
+@distractor-en tennis
+@distractor-en alone
+
+@sentence
+@lu De Moment spillen ech net an enger Ekipp.
+@en At the moment I do not play in a team.
+@distractor-lu ëmmer
+@distractor-lu Veräin
+@distractor-en always
+@distractor-en club
+
+@sentence
+@lu Ech maache kee Fitnessstudio, well ech keng Zäit hunn.
+@en I do not do any gym because I have no time.
+@distractor-lu vill
+@distractor-lu Musek
+@distractor-en much
+@distractor-en music
+
+@sentence
+@lu Um Weekend sinn ech ze midd fir Sport.
+@en At the weekend I am too tired for sport.
+@distractor-lu fit
+@distractor-lu Woch
+@distractor-en fit
+@distractor-en week
+
+@sentence
+@lu Ech géif gär an de Kendo-Veräin zeréckgoen.
+@en I would like to go back to the Kendo club.
+@distractor-lu Fitnessstudio
+@distractor-lu ophalen
+@distractor-en gym
+@distractor-en stop
+
+@sentence
+@lu Ech lauschtere Musek a spille Computerspiller.
+@en I listen to music and play computer games.
+@distractor-lu Tëlee
+@distractor-lu ni
+@distractor-en television
+@distractor-en never
+
+@sentence
+@lu Ech ginn ëm Mëtternuecht schlofen.
+@en I go to sleep at midnight.
+@distractor-lu moies
+@distractor-lu spéit
+@distractor-en morning
+@distractor-en late
+
+@sentence
+@lu Ech schlofe gewéinlech aacht Stonnen.
+@en I usually sleep eight hours.
+@distractor-lu zwou
+@distractor-lu ëmmer
+@distractor-en two
+@distractor-en always
+
+@sentence
+@lu Zwou Stonne virum Schlofe benotzen ech mäi Handy net.
+@en Two hours before sleeping I do not use my mobile phone.
+@distractor-lu Tëlee
+@distractor-lu ëmmer
+@distractor-en television
+@distractor-en always
+
+@sentence
+@lu Kee Stress ass fir mech am wichtegsten.
+@en No stress is the most important for me.
+@distractor-lu Sport
+@distractor-lu Rou
+@distractor-en sport
+@distractor-en quiet
+
+@sentence
+@lu Mat engem Mupp muss ee vill spadséieren.
+@en With a dog one has to walk a lot.
+@distractor-lu wéineg
+@distractor-lu Vëlo
+@distractor-en little
+@distractor-en bike
+
+@sentence
+@lu En Hausdéier hëlleft der mentaler Gesondheet.
+@en A pet helps the mental health.
+@distractor-lu Handy
+@distractor-lu kierperlech
+@distractor-en phone
+@distractor-en physical
+
+@sentence
+@lu Ech si fréier an engem Team op der Uni geschwommen.
+@en I used to swim in a team at university.
+@distractor-lu Schoul
+@distractor-lu eleng
+@distractor-en school
+@distractor-en alone
+
+@sentence
+@lu Mäi Kendo war zwee Joer an der Ukrain.
+@en My Kendo was two years in Ukraine.
+@distractor-lu Lëtzebuerg
+@distractor-lu sechs
+@distractor-en Luxembourg
+@distractor-en six
+
+@sentence
+@lu Ech hunn opgehalen, well ech vill Aarbecht hat.
+@en I stopped because I had a lot of work.
+@distractor-lu ugefaangen
+@distractor-lu Fräizäit
+@distractor-en started
+@distractor-en leisure
+
+@sentence
+@lu Am Mëllerdall maache mir gär en Trëppeltour.
+@en In the Mullerthal we like doing a hike.
+@distractor-lu Stad
+@distractor-lu ni
+@distractor-en city
+@distractor-en never
