@@ -1,0 +1,368 @@
+# Exam track — Theme: Summer — Sub-lesson 2: Key Phrases
+# Plain @sentence blocks (no @question) — shorter restatements of the same
+# interview facts that sub-lesson 3 answers in full.
+#
+# These are the learners' real answers, gathered by interview — do not "improve"
+# or genericize them in a later editing pass. Two speakers share the theme, so
+# some facts belong to one of them only (the December move vs the November move,
+# the summer birthday vs the spring one); both are kept as they were said.
+#
+# LOD corrections applied: recommendéieren -> recommandéieren, Éisterräich ->
+# Éisträich, besichen (to visit a person) -> besichtegen (to visit a place).
+# Participle normalised to the corpus-dominant `kaaft` (16 uses) over `kaf` (1).
+
+@lesson J1.02 "Summer Phrases"
+
+@word d'Vakanz = the holidays
+@word d'Rees = the trip
+@word d'Mier = the sea
+@word de Séi = the lake
+@word de Floss = the river
+@word de Bierg = the mountain
+@word d'Bierger = the mountains
+@word de Bësch = the forest
+@word d'Natur = the nature
+@word d'Landschaft = the landscape
+@word d'Schlass = the castle
+@word d'Schlässer = the castles
+@word d'Fest = the celebration
+@word d'Wäifest = the wine festival
+@word de Festival = the festival
+@word d'Terrass = the terrace
+@word d'Strooss = the street
+@word de Gaart = the garden
+@word d'Blumm = the flower
+@word den Hond = the dog
+@word d'Grousselteren = the grandparents
+@word d'Motorboot = the motorboat
+@word d'Attraktioun = the ride
+@word de Maart = the market
+@word de Kaffi = the coffee
+@word den Téi = the tea
+@word d'Appartement = the flat
+@word den Tourist = the tourist
+@word de Gebuertsdag = the birthday
+@word d'Aktivitéit = the activity
+@word de Mantel = the coat
+@word d'Ëmstellung = the adjustment
+@word d'Ukrain = Ukraine
+@word Lëtzebuerg = Luxembourg
+@word d'Schwäiz = Switzerland
+@word Frankräich = France
+@word Italien = Italy
+@word Éisträich = Austria
+@word plënneren = to move house
+@word kafen = to buy
+@word besichtegen = to visit
+@word bleiwen = to stay
+@word drénken = to drink
+@word verbréngen = to spend
+@word reesen = to travel
+@word deier = expensive
+@word wäit = far
+@word schéin = beautiful
+@word sechs = six
+
+@sentence
+@lu Ech kommen aus der Ukrain.
+@en I come from Ukraine.
+@distractor-lu Italien
+@distractor-lu wunnen
+@distractor-en Italy
+@distractor-en live
+
+@sentence
+@lu Ech liewe sechs Joer zu Lëtzebuerg.
+@en I have been living in Luxembourg for six years.
+@distractor-lu dräi
+@distractor-lu Frankräich
+@distractor-en three
+@distractor-en France
+
+@sentence
+@lu Mir sinn am Hierscht am November op Lëtzebuerg geplënnert.
+@en We moved to Luxembourg in the autumn, in November.
+@distractor-lu Summer
+@distractor-lu Juli
+@distractor-en summer
+@distractor-en July
+
+@sentence
+@lu Mir sinn aus Italien geplënnert, an do war et nach waarm.
+@en We moved from Italy, and there it was still warm.
+@distractor-lu Frankräich
+@distractor-lu kal
+@distractor-en France
+@distractor-en cold
+
+@sentence
+@lu Zu Lëtzebuerg misst ech mir e waarme Mantel kafen.
+@en In Luxembourg I had to buy myself a warm coat.
+@distractor-lu Blumm
+@distractor-lu verkafen
+@distractor-en flower
+@distractor-en sell
+
+@sentence
+@lu Et war eng grouss Ëmstellung fir mech.
+@en It was a big adjustment for me.
+@distractor-lu kleng
+@distractor-lu Aktivitéit
+@distractor-en small
+@distractor-en activity
+
+@sentence
+@lu Mäi Gebuertsdag ass am Summer.
+@en My birthday is in the summer.
+@distractor-lu Wanter
+@distractor-lu Gaart
+@distractor-en winter
+@distractor-en garden
+
+@sentence
+@lu Ech hunn de Summer gär, besonnesch zu Lëtzebuerg.
+@en I like the summer, especially in Luxembourg.
+@distractor-lu Hierscht
+@distractor-lu Italien
+@distractor-en autumn
+@distractor-en Italy
+
+@sentence
+@lu Am Summer si vill Leit an de Stroossen an op den Terrassen.
+@en In the summer many people are in the streets and on the terraces.
+@distractor-lu Bësch
+@distractor-lu wéineg
+@distractor-en forest
+@distractor-en few
+
+@sentence
+@lu Zu Lëtzebuerg gëtt et vill Evenementer a Wäifester.
+@en In Luxembourg there are many events and wine festivals.
+@distractor-lu Schlässer
+@distractor-lu seelen
+@distractor-en castles
+@distractor-en rarely
+
+@sentence
+@lu Sou kann ech mat mengem Hond spadséieren.
+@en That way I can go for a walk with my dog.
+@distractor-lu Gaart
+@distractor-lu schwammen
+@distractor-en garden
+@distractor-en swim
+
+@sentence
+@lu Moies fréi gi mir mam Hond spadséieren.
+@en Early in the morning we go for a walk with the dog.
+@distractor-lu owes
+@distractor-lu Terrass
+@distractor-en evening
+@distractor-en terrace
+
+@sentence
+@lu Fir mäin Hond war d'Hëtzt ganz schwéier.
+@en For my dog the heat was very difficult.
+@distractor-lu einfach
+@distractor-lu Reen
+@distractor-en easy
+@distractor-en rain
+
+@sentence
+@lu Ech mengen de Wanter an de Bierger, mat Schnéi a Sonn.
+@en I mean the winter in the mountains, with snow and sun.
+@distractor-lu Mier
+@distractor-lu Reen
+@distractor-en sea
+@distractor-en rain
+
+@sentence
+@lu Am Bësch ass et am Fréijoer naass an dreckeg.
+@en In the forest it is wet and dirty in the spring.
+@distractor-lu dréchen
+@distractor-lu Strooss
+@distractor-en dry
+@distractor-en street
+
+@sentence
+@lu Als Kand sinn ech dacks op d'Mier gaangen.
+@en As a child I often went to the sea.
+@distractor-lu Bierger
+@distractor-lu seelen
+@distractor-en mountains
+@distractor-en rarely
+
+@sentence
+@lu Meng Elteren hu geduecht, datt dat gutt fir d'Kanner ass.
+@en My parents thought that this is good for the children.
+@distractor-lu schlecht
+@distractor-lu Grousselteren
+@distractor-en bad
+@distractor-en grandparents
+
+@sentence
+@lu Ech schwamme gär, an dofir huet mir d'Mier gutt gefall.
+@en I like swimming, and that is why I liked the sea a lot.
+@distractor-lu Bierg
+@distractor-lu trëppelen
+@distractor-en mountain
+@distractor-en stroll
+
+@sentence
+@lu Et war deier fir mat engem Motorboot ze fueren.
+@en It was expensive to ride in a motorboat.
+@distractor-lu bëlleg
+@distractor-lu Vëlo
+@distractor-en cheap
+@distractor-en bike
+
+@sentence
+@lu Ech hu vill Zäit mat menge Grousseltere verbruecht.
+@en I spent a lot of time with my grandparents.
+@distractor-lu Elteren
+@distractor-lu wéineg
+@distractor-en parents
+@distractor-en little
+
+@sentence
+@lu Meng Grousselteren hatten en Haus ausserhalb vun der Stad.
+@en My grandparents had a house outside the city.
+@distractor-lu Appartement
+@distractor-lu bannen
+@distractor-en flat
+@distractor-en inside
+
+@sentence
+@lu Ech sinn do vill bei de Floss gaangen.
+@en There I often went to the river.
+@distractor-lu Séi
+@distractor-lu seelen
+@distractor-en lake
+@distractor-en rarely
+
+@sentence
+@lu Dëse Summer hunn ech zwou kuerz Reese gemaach.
+@en This summer I made two short trips.
+@distractor-lu lang
+@distractor-lu Vakanz
+@distractor-en long
+@distractor-en holidays
+
+@sentence
+@lu Eng Rees war a Frankräich an déi aner an Italien.
+@en One trip was to France and the other to Italy.
+@distractor-lu Éisträich
+@distractor-lu Schwäiz
+@distractor-en Austria
+@distractor-en Switzerland
+
+@sentence
+@lu Mir si ronderëm gaange fir Schlässer ze kucken.
+@en We went around to look at castles.
+@distractor-lu Terrassen
+@distractor-lu wäit
+@distractor-en terraces
+@distractor-en far
+
+@sentence
+@lu Ech sinn op d'Schueberfouer mat mengen Aarbechtskolleege gaangen.
+@en I went to the Schueberfouer with my work colleagues.
+@distractor-lu Grousselteren
+@distractor-lu Maart
+@distractor-en grandparents
+@distractor-en market
+
+@sentence
+@lu Mir sinn op e puer Attraktioune gaangen, a mir hunn zu Mëtteg giess.
+@en We went on a few rides, and we had lunch.
+@distractor-lu Festival
+@distractor-lu owes
+@distractor-en festival
+@distractor-en evening
+
+@sentence
+@lu Mir sinn op de Maart a Frankräich gaangen a mir hunn eng Klimaanlag kaaft.
+@en We went to the market in France and we bought an air conditioner.
+@distractor-lu Ventilator
+@distractor-lu verkaf
+@distractor-en fan
+@distractor-en sold
+
+@sentence
+@lu Ech hunn e klenge Gaart, an dat ass dat éischt Joer mat engem Gaart.
+@en I have a small garden, and this is the first year with a garden.
+@distractor-lu grousse
+@distractor-lu Terrass
+@distractor-en big
+@distractor-en terrace
+
+@sentence
+@lu Ech hunn nëmmen eng Blumm do, an ech si ganz stolz op si.
+@en I have only one flower there, and I am very proud of it.
+@distractor-lu Bam
+@distractor-lu traureg
+@distractor-en tree
+@distractor-en sad
+
+@sentence
+@lu Meng Blumm lieft sechs Joer bei mir.
+@en My flower has been living with me for six years.
+@distractor-lu dräi
+@distractor-lu Gaart
+@distractor-en three
+@distractor-en garden
+
+@sentence
+@lu Ech drénke gär e Kaffi oder en Téi am Gaart.
+@en I like drinking a coffee or a tea in the garden.
+@distractor-lu Waasser
+@distractor-lu Bësch
+@distractor-en water
+@distractor-en forest
+
+@sentence
+@lu Ech hunn Terrasse gär, an ech trëppele gär, wa gutt Wieder ass.
+@en I like terraces, and I like strolling when the weather is good.
+@distractor-lu Fënster
+@distractor-lu schlecht
+@distractor-en window
+@distractor-en bad
+
+@sentence
+@lu Ech recommandéieren engem Tourist déi kleng Schwäiz.
+@en I recommend the Little Switzerland to a tourist.
+@distractor-lu Frankräich
+@distractor-lu Strooss
+@distractor-en France
+@distractor-en street
+
+@sentence
+@lu Do ass eng schéin Natur, an et gëtt vill Wanderweeër.
+@en There is a beautiful nature, and there are many hiking trails.
+@distractor-lu Stad
+@distractor-lu deier
+@distractor-en city
+@distractor-en expensive
+
+@sentence
+@lu An der Ukrain kann et bis zu véierzeg Grad ginn.
+@en In Ukraine it can get up to forty degrees.
+@distractor-lu zwanzeg
+@distractor-lu Schnéi
+@distractor-en twenty
+@distractor-en snow
+
+@sentence
+@lu E groussen Deel vun der Ukrain ass ouni Mier.
+@en A large part of Ukraine is without a sea.
+@distractor-lu Bierger
+@distractor-lu mat
+@distractor-en mountains
+@distractor-en with
+
+@sentence
+@lu Dofir ass d'Klima do waarm an ze dréchen.
+@en That is why the climate there is warm and too dry.
+@distractor-lu naass
+@distractor-lu kal
+@distractor-en wet
+@distractor-en cold

@@ -1,0 +1,174 @@
+# Exam track — Theme: Summer — Sub-lesson 1: Vocabulary
+# Sproochentest oral-exam topic. Target level ~B1 (authoring guideline only).
+#
+# These are the learners' real answers, gathered by interview — two speakers
+# share this theme (Sergii and his wife Marie), so a few questions in
+# sub-lesson 3 carry two different, both genuine answers. Do not "improve",
+# merge or genericize them in a later editing pass.
+#
+# LOD corrections applied to the interview wording: Klimm -> d'Klimaanlag
+# (Klimm is not in LOD), Schatte -> de Schiet, Melon -> d'Meloun,
+# Sonnenhut -> de Sonnenhutt. Colloquial "Canicule" is kept because LOD lists
+# it as a noun in its own right, glossed apart from Hëtztwell so the two entries
+# stay distinguishable in word match.
+
+@lesson J1.01 "Summer Vocabulary"
+
+@word de Summer = the summer
+@word de Wanter = the winter
+@word d'Fréijoer = the spring
+@word den Hierscht = the autumn
+@word d'Joreszäit = the season
+@word d'Joreszäiten = the seasons
+@word de Mount = the month
+@word d'Méint = the months
+@word de Juni = June
+@word de Juli = July
+@word den August = August
+@word de Summerdag = the summer day
+@word d'Summervakanz = the summer holidays
+@word d'Fräizäit = the free time
+@word d'Wieder = the weather
+@word d'Temperatur = the temperature
+@word d'Temperaturen = the temperatures
+@word de Grad = the degree
+@word d'Hëtzt = the heat
+@word d'Hëtztwell = the heatwave
+@word d'Canicule = the hot spell
+@word d'Klimaanlag = the air conditioning
+@word de Ventilator = the fan
+@word d'Sonn = the sun
+@word de Schnéi = the snow
+@word de Reen = the rain
+@word d'Wollek = the cloud
+@word de Wand = the wind
+@word d'Loft = the air
+@word de Schiet = the shade
+@word d'Klima = the climate
+@word d'Sonnecrème = the suncream
+@word de Sonnenhutt = the sun hat
+@word de Sonnebrand = the sunburn
+@word d'Fënster = the window
+@word waarm = warm
+@word kal = cold
+@word naass = wet
+@word dréchen = dry
+@word sonneg = sunny
+@word frësch = fresh
+@word dreckeg = dirty
+@word héich = high
+@word typesch = typical
+@word reenen = to rain
+@word schwammen = to swim
+@word spadséieren = to go for a walk
+@word trëppelen = to stroll
+@word zoumaachen = to close
+@word benotzen = to use
+@word zwanzeg = twenty
+@word fënnefanzwanzeg = twenty-five
+@word véierzeg = forty
+@word dräi = three
+
+@sentence
+@lu Fir mech ass de Summer eng waarm Zäit.
+@en For me the summer is a warm time.
+@distractor-lu Wanter
+@distractor-lu kal
+@distractor-en winter
+@distractor-en cold
+
+@sentence
+@lu Zwanzeg bis fënnefanzwanzeg Grad si gutt fir mech.
+@en Twenty to twenty-five degrees are good for me.
+@distractor-lu véierzeg
+@distractor-lu schlecht
+@distractor-en forty
+@distractor-en bad
+
+@sentence
+@lu Ech hunn et net gär, wann et ze waarm ass.
+@en I do not like it when it is too warm.
+@distractor-lu kal
+@distractor-lu Schnéi
+@distractor-en cold
+@distractor-en snow
+
+@sentence
+@lu Dëse Summer hate mir dräi Hëtztwellen zu Lëtzebuerg.
+@en This summer we had three heatwaves in Luxembourg.
+@distractor-lu Wolleken
+@distractor-lu zwanzeg
+@distractor-en clouds
+@distractor-en twenty
+
+@sentence
+@lu D'Temperature waren ze héich fir mäin Hond.
+@en The temperatures were too high for my dog.
+@distractor-lu niddreg
+@distractor-lu Wand
+@distractor-en low
+@distractor-en wind
+
+@sentence
+@lu Ech hunn de Schnéi richteg gär.
+@en I really like the snow.
+@distractor-lu Reen
+@distractor-lu Hëtzt
+@distractor-en rain
+@distractor-en heat
+
+@sentence
+@lu Am Fréijoer an am spéiden Hierscht ass et dreckeg.
+@en In the spring and in the late autumn it is dirty.
+@distractor-lu Summer
+@distractor-lu propper
+@distractor-en summer
+@distractor-en clean
+
+@sentence
+@lu Ech maachen all Fënster zou, wann et ze waarm ass.
+@en I close every window when it is too warm.
+@distractor-lu Dier
+@distractor-lu kal
+@distractor-en door
+@distractor-en cold
+
+@sentence
+@lu Mat der Klimaanlag war et besser fir mech.
+@en With the air conditioning it was better for me.
+@distractor-lu Ventilator
+@distractor-lu Reen
+@distractor-en fan
+@distractor-en rain
+
+@sentence
+@lu Ech mengen, et ass net normal, datt de Summer sou waarm ass.
+@en I think it is not normal that the summer is so warm.
+@distractor-lu typesch
+@distractor-lu Wanter
+@distractor-en typical
+@distractor-en winter
+
+@sentence
+@lu D'Loft ass moies nach frësch.
+@en The air is still fresh in the morning.
+@distractor-lu owes
+@distractor-lu waarm
+@distractor-en evening
+@distractor-en warm
+
+@sentence
+@lu Am Summer ass d'Wieder zu Lëtzebuerg meeschtens gutt.
+@en In the summer the weather in Luxembourg is mostly good.
+@distractor-lu Wanter
+@distractor-lu seelen
+@distractor-en winter
+@distractor-en rarely
+
+@sentence
+@lu Ech benotzen eng Sonnecrème, well ech séier e Sonnebrand kréien.
+@en I use a suncream because I quickly get a sunburn.
+@distractor-lu Sonnenhutt
+@distractor-lu lues
+@distractor-en hat
+@distractor-en slowly
