@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useAuth } from "../../context/useAuth";
 import { computeStreak } from "../../lib/streak";
 import { buildMigrationChunks } from "../migration";
+import { clampSyncDuration } from "../sync-bounds";
 import { useGuestProgress, readGuestData } from "./use-guest-progress";
 import { useProgressSync } from "./use-progress-sync";
 
@@ -70,13 +71,18 @@ export const useProgress = (): ProgressState => {
     newlyUnlockedLessons: string[] = [],
     xpEarned = 0,
   ) => {
+    // Clamped once, here, so the optimistic local state and the POST carry the
+    // same number: an unclamped duration makes the server reject the whole batch
+    // (losing every word result in it) while local state kept the progress.
+    const duration = clampSyncDuration(durationSeconds);
+
     if (auth.status === "authenticated") {
       const today = new Date().toISOString().slice(0, 10);
-      applyStatsDelta(wordResults, durationSeconds, today, newlyUnlockedLessons);
+      applyStatsDelta(wordResults, duration, today, newlyUnlockedLessons);
       if (xpEarned > 0) applyXPDelta(xpEarned, today);
-      syncProgress({ wordResults, durationSeconds, newlyUnlockedLessons, xpEarned });
+      syncProgress({ wordResults, durationSeconds: duration, newlyUnlockedLessons, xpEarned });
     } else {
-      guest.syncBatch(wordResults, durationSeconds, newlyUnlockedLessons, xpEarned);
+      guest.syncBatch(wordResults, duration, newlyUnlockedLessons, xpEarned);
     }
   };
 

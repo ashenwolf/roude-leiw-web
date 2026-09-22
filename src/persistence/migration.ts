@@ -9,16 +9,20 @@
  * accepts dates in [today-2, today+1] UTC, so all guest progress is folded
  * into today's date on the server.
  */
+import { SYNC_BOUNDS } from "./sync-bounds";
+
 import type { WordStats } from "../context/auth";
 import type { WordResultMap } from "../exercise/WordMatch/types";
 import type { GuestData } from "./hooks/use-guest-progress";
 
-// Server-side per-request bounds, mirrored from worker/lib/validators.ts.
-// Kept in sync by hand — do not import from worker/ (separate bundle).
-const MAX_WORD_RESULTS_PER_CHUNK = 200;
-const MAX_COUNT_PER_RESULT = 100;
-const MAX_DURATION_PER_CHUNK = 3600;
-const MAX_XP_PER_CHUNK = 500;
+// Server-side per-request bounds live in one place (./sync-bounds), mirrored
+// there from worker/lib/validators.ts.
+const {
+  maxWordResults: MAX_WORD_RESULTS_PER_CHUNK,
+  maxCountPerResult: MAX_COUNT_PER_RESULT,
+  maxDurationSeconds: MAX_DURATION_PER_CHUNK,
+  maxXP: MAX_XP_PER_CHUNK,
+} = SYNC_BOUNDS;
 
 export type MigrationChunk = {
   wordResults: WordResultMap;
