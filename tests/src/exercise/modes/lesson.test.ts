@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { lessonSlotTypeDistribution, planLessonMode } from "../../../../src/exercise/modes/lesson.ts";
-import { LESSON, MASTERY_CORRECT_COUNT } from "../../../../src/exercise/constants.ts";
+import { LESSON, MASTERY_CORRECT_COUNT, MIN_WORD_MATCH_PAIRS } from "../../../../src/exercise/constants.ts";
 import { computeLessonProgress, phraseKey, wordKey } from "../../../../src/exercise/progression.ts";
 
 import type { FillEntry, Lesson, SentenceEntry } from "../../../../src/exercise/letz-parser.ts";
@@ -35,14 +35,48 @@ const fill = (en: string, lu: string): FillEntry => ({
   distractorsLu: ["falschA", "falschB"],
 });
 
-// RNG that always rolls below the word-match threshold (0.2) → always picks word-match
-const wordMatchRng = () => 0.1;
-// RNG that always rolls above word-match threshold → always picks sentence-builder
+// RNG that always rolls above word-match threshold → always picks sentence-builder.
+// Constant is safe here: it only ever decides a slot TYPE, never a pair index.
 const sentenceRng = () => 0.5;
 
-// Always rolls into the not-yet-mastered bucket (0.0 < 0.3) and picks index 0.
-// Used to force selection of the not-yet-mastered sub-pool inside word-match slots.
-const notYetMasteredRng = () => 0.0;
+// Deterministic PRNG — reproducible without freezing the draw.
+const seeded = (seed: number) => {
+  let s = seed >>> 0;
+  return () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32;
+};
+
+/**
+ * The rng for any test that expects real word-match Slots.
+ *
+ * A constant roll cannot serve: `pickUniquePairs` over-draws 20 times and indexes
+ * with `floor(rng() * len)`, so a fixed value picks the same entry every time and
+ * yields exactly ONE distinct pair (measured: 40 rolls, 1 pair). Since
+ * MIN_WORD_MATCH_PAIRS that Slot is not built at all, so a constant-driven test
+ * would assert a Session the planner cannot emit.
+ *
+ * Tests that need EVERY Slot to be word-match use a word-only fixture rather than a
+ * rigged roll: with no phrases in the pool the phrase branch re-rolls, so the slot
+ * type is decided by the content instead of by a magic number.
+ */
+const wordMatchRng = () => seeded(3);
+
+/**
+ * Rolls into the not-yet-mastered bucket (0.1 < 0.3) while varying the index.
+ *
+ * `pickPair` consumes two rolls — bucket, then index — so alternating pins the
+ * bucket while the index still moves. Forcing a bucket confines every draw to THAT
+ * bucket, so a fixture using this needs at least MIN_WORD_MATCH_PAIRS unmastered
+ * words; with fewer, no word-match Slot is buildable, which is the floor working.
+ */
+const notYetMasteredRng = () => {
+  const rand = seeded(5);
+  const state = { n: 0 };
+  return () => {
+    const isBucketRoll = state.n % 2 === 0;
+    state.n += 1;
+    return isBucketRoll ? 0.1 : rand();
+  };
+};
 
 const stats = (shown: number, correct = 0, incorrect = 0): WordStats =>
   ({ shown, correct, incorrect });
@@ -50,18 +84,21 @@ const stats = (shown: number, correct = 0, incorrect = 0): WordStats =>
 // ─── Basic shape ──────────────────────────────────────────────────────────────
 
 describe("planLessonMode — shape", () => {
+  // Each lesson carries at least MIN_WORD_MATCH_PAIRS words: a word-match Slot needs
+  // that many DISTINCT words to be failable at all, so a thinner fixture would
+  // assert a Slot the planner refuses to build.
   const lessons = [
     lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]], [sentence("Good morning", "Gudde Moien")]),
-    lesson("A1_02", [["Merci", "thanks"]], [sentence("Goodbye", "Äddi")]),
+    lesson("A1_02", [["Merci", "thanks"], ["Bitte", "please"]], [sentence("Goodbye", "Äddi")]),
   ];
 
   it("returns LESSON.totalSlots planned slots", () => {
-    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
+    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng());
     expect(config.plannedSlots).toBe(LESSON.totalSlots);
   });
 
   it("queue length matches planned slots when enough words available", () => {
-    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
+    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng());
     expect(config.queue.length).toBe(LESSON.totalSlots);
   });
 
@@ -87,8 +124,15 @@ describe("planLessonMode — shape", () => {
     expect(config.currentLessonId).toBe("A1_01");
   });
 
-  it("produces word-match slots when rng always picks word-match bucket", () => {
-    const config = planLessonMode(lessons, "A1_02", {}, wordMatchRng);
+  it("produces word-match slots when the pool has no phrases to offer", () => {
+    // Slot type decided by content, not by a rigged roll: with no phrases the
+    // phrase branch re-rolls, so every Slot must come out word-match.
+    const wordsOnly = [
+      lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]),
+      lesson("A1_02", [["Merci", "thanks"], ["Bitte", "please"]]),
+    ];
+    const config = planLessonMode(wordsOnly, "A1_02", {}, wordMatchRng());
+    expect(config.queue).toHaveLength(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
 });
@@ -102,7 +146,7 @@ describe("planLessonMode — upper-bound clamp", () => {
 
   it("clamps pool to lessons <= upperBoundId (lexicographic)", () => {
     // upperBound = A1_01 → only A1_01 is in pool → currentLessonId = A1_01
-    const config = planLessonMode([l01, l02, l03], "A1_01", {}, wordMatchRng);
+    const config = planLessonMode([l01, l02, l03], "A1_01", {}, wordMatchRng());
     expect(config.currentLessonId).toBe("A1_01");
   });
 
@@ -129,14 +173,24 @@ describe("planLessonMode — edge cases", () => {
 
   it("handles lesson with only words (no sentences) — falls back to word-match", () => {
     const noSentences = lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]);
-    // Force sentence-builder roll — should fall back to word-match since no sentences
-    const config = planLessonMode([noSentences], "A1_01", {}, sentenceRng);
-    expect(config.queue.length).toBeGreaterThan(0);
+    // No phrases in the pool, so the phrase branch re-rolls and every Slot lands on
+    // word-match — whatever the slot-type roll would have preferred.
+    const config = planLessonMode([noSentences], "A1_01", {}, wordMatchRng());
+    expect(config.queue).toHaveLength(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
 
-  it("planner is callable with no stats (defaults to empty record)", () => {
+  it("plans nothing from a single-word lesson rather than an unfailable Slot", () => {
+    // One distinct word cannot make a failable WordMatch Slot (matching is by
+    // value, so every pairing is correct and each free tap books a `correct`), and
+    // there are no phrases to schedule instead — so the Session is empty.
+    // See MIN_WORD_MATCH_PAIRS.
     const l = lesson("A1_01", [["Moien", "hi"]]);
+    expect(planLessonMode([l], "A1_01", {}, wordMatchRng()).queue).toHaveLength(0);
+  });
+
+  it("planner is callable with no stats (defaults to empty record)", () => {
+    const l = lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]);
     // No third arg → all entries treated as not-yet-mastered, but planner still runs.
     const config = planLessonMode([l], "A1_01");
     expect(config.queue.length).toBe(LESSON.totalSlots);
@@ -146,45 +200,58 @@ describe("planLessonMode — edge cases", () => {
 // ─── Not-yet-mastered bucket ──────────────────────────────────────────────────
 
 describe("planLessonMode — not-yet-mastered bucket", () => {
+  // These tests force the not-yet-mastered bucket, which confines every draw to it,
+  // so each fixture keeps at least MIN_WORD_MATCH_PAIRS unmastered words — fewer and
+  // no word-match Slot is buildable at all (see the floor tests below).
   it("biases word-match draws toward current-lesson entries with correct < MASTERY_CORRECT_COUNT", () => {
     const l = lesson("A1_01", [
       ["Moien", "hi"],
+      ["Gudden Owend", "good evening"],
       ["Äddi", "bye"],
       ["Merci", "thanks"],
     ]);
-    // "Moien" is not yet mastered; the others have cleared the gate (correct >= 3).
+    // "Moien" and "Gudden Owend" are unmastered; the others cleared the gate.
+    const unmastered = ["Moien", "Gudden Owend"];
     const userWords: Record<string, WordStats> = {
       [wordKey("Äddi", "bye")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
       [wordKey("Merci", "thanks")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
     };
-    const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng);
+    const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng());
 
     const pickedLu = config.queue
       .flatMap((b) => (b.type === "word-match" ? b.pairs : []))
       .map(([lu]) => lu);
 
     expect(pickedLu.length).toBeGreaterThan(0);
-    // Every pick is the unmastered entry — bucket forced it.
-    expect(pickedLu.every((lu) => lu === "Moien")).toBe(true);
+    // Every pick comes from the unmastered set — the bucket admitted nothing else.
+    expect(pickedLu.every((lu) => unmastered.includes(lu))).toBe(true);
   });
 
   it("keeps a well-shown-but-unmastered straggler in the bias pool", () => {
     // The regression this fix targets: shown many times, correct still < 3.
     // Under the old `shown < MIN_ANSWERS` rule this word dropped out of the
     // priority bucket and got abandoned; now it stays until correct >= 3.
-    const l = lesson("A1_01", [["Moien", "hi"], ["Äddi", "bye"]]);
+    const l = lesson("A1_01", [
+      ["Moien", "hi"],
+      ["Gudden Owend", "good evening"],
+      ["Äddi", "bye"],
+    ]);
     const userWords: Record<string, WordStats> = {
       // "Moien": shown 10×, only 2 correct → past MIN_ANSWERS but not mastered.
       [wordKey("Moien", "hi")]: stats(10, 2, 8),
+      // "Gudden Owend": also unmastered, so the forced bucket can fill a Slot.
+      [wordKey("Gudden Owend", "good evening")]: stats(4, 1, 3),
       // "Äddi": mastered.
       [wordKey("Äddi", "bye")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
     };
-    const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng);
+    const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng());
     const pickedLu = config.queue
       .flatMap((b) => (b.type === "word-match" ? b.pairs : []))
       .map(([lu]) => lu);
     expect(pickedLu.length).toBeGreaterThan(0);
-    expect(pickedLu.every((lu) => lu === "Moien")).toBe(true);
+    // The straggler is reachable, and the mastered word never crowds it out.
+    expect(pickedLu).toContain("Moien");
+    expect(pickedLu.every((lu) => lu !== "Äddi")).toBe(true);
   });
 
   it("re-rolls into another bucket when everything is mastered", () => {
@@ -194,9 +261,9 @@ describe("planLessonMode — not-yet-mastered bucket", () => {
       [wordKey("Moien", "hi")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
       [wordKey("Äddi", "bye")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
     };
-    // RNG always rolls into the not-yet-mastered bucket (0.0). Re-roll fallback
-    // must keep producing word-match slots from the current-lesson pool.
-    const config = planLessonMode([l], "A1_01", userWords, notYetMasteredRng);
+    // A plain seeded roll: this test is about the re-roll FALLBACK, not about bias,
+    // so pinning the bucket would only starve the draw.
+    const config = planLessonMode([l], "A1_01", userWords, wordMatchRng());
     expect(config.queue.length).toBe(LESSON.totalSlots);
     expect(config.queue.every((s) => s.type === "word-match")).toBe(true);
   });
@@ -367,11 +434,98 @@ describe("planLessonMode — adaptive split integration", () => {
     const userWords: Record<string, WordStats> = {
       [phraseKey("en-lu", "Hi")]: stats(MASTERY_CORRECT_COUNT, MASTERY_CORRECT_COUNT),
     };
-    // Roll 0.5 for slot-type: under 0.6 (MAX) → word-match, but over 0.2 (old MIN).
-    // Under the old fixed 0.2 split this same roll would have been sentence-builder.
-    const wordCount = planLessonMode([l], "A1_01", userWords, () => 0.5).queue
-      .filter((s) => s.type === "word-match").length;
-    expect(wordCount).toBe(LESSON.totalSlots);
+
+    // Asserted as a PROPERTY over seeds rather than by pinning rolls: the planner's
+    // rng cadence is not fixed (an empty bucket re-rolls), so a positional "this
+    // roll is the slot-type roll" model silently drifts. What matters is that the
+    // adaptive share sends far more Slots to word-match than the old fixed
+    // wordMatchShare.min would have.
+    const shares = [1, 2, 3, 4, 5, 6, 7, 8].map((seed) => {
+      const queue = planLessonMode([l], "A1_01", userWords, seeded(seed)).queue;
+      return queue.filter((s) => s.type === "word-match").length / queue.length;
+    });
+    const mean = shares.reduce((a, b) => a + b, 0) / shares.length;
+
+    expect(Math.min(...shares)).toBeGreaterThan(LESSON.wordMatchShare.min);
+    // Clamped at MAX for the roll, but a phrase roll re-rolls to word-match when the
+    // only phrase is out of budget, so the realised share runs above it.
+    expect(mean).toBeGreaterThan(LESSON.wordMatchShare.max);
+  });
+});
+
+// ─── Minimum word-match Slot size ────────────────────────────────────
+
+// WordMatch matches by displayed value, so a Slot of one distinct word cannot be
+// failed — every pairing is correct and each free tap still books a `correct`
+// toward the pass gate. Fix Errors has always applied MIN_WORD_MATCH_PAIRS for
+// this reason; Lesson Mode used `pairs.length > 0` and let such a Slot through.
+describe("planLessonMode — MIN_WORD_MATCH_PAIRS floor", () => {
+  const SEEDS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  it("never emits a sub-floor Slot, for any lesson size at or below the floor", () => {
+    // Swept over seeds AND over both word-match sites (the roll loop, and the
+    // no-phrase fallback reached when the pool holds no phrase to schedule).
+    const sizes = [1, MIN_WORD_MATCH_PAIRS - 1];
+    sizes.forEach((size) => {
+      const l = lesson(
+        "A1_01",
+        Array.from({ length: size }, (_, i) => [`lu${i}`, `en${i}`]),
+      );
+      SEEDS.forEach((seed) => {
+        const queue = planLessonMode([l], "A1_01", {}, seeded(seed)).queue;
+        queue.forEach((slot) => {
+          if (slot.type === "word-match") {
+            expect(
+              slot.pairs.length,
+              `size ${size}, seed ${seed} produced a ${slot.pairs.length}-pair Slot`,
+            ).toBeGreaterThanOrEqual(MIN_WORD_MATCH_PAIRS);
+          }
+        });
+        // Nothing else is schedulable either, so the Session is empty rather than
+        // full of unfailable Slots.
+        expect(queue).toHaveLength(0);
+      });
+    });
+  });
+
+  it("builds normally at exactly the floor", () => {
+    const atFloor = lesson(
+      "A1_01",
+      Array.from({ length: MIN_WORD_MATCH_PAIRS }, (_, i) => [`lu${i}`, `en${i}`]),
+    );
+    SEEDS.forEach((seed) => {
+      const queue = planLessonMode([atFloor], "A1_01", {}, seeded(seed)).queue;
+      expect(queue).toHaveLength(LESSON.totalSlots);
+      expect(queue.every((s) => s.type === "word-match")).toBe(true);
+    });
+  });
+
+  it("keeps the Session full from phrases when the word pool is below the floor", () => {
+    // A thin word pool must not shorten the Session: the word-match roll simply
+    // yields nothing and the Slot re-rolls into a phrase.
+    const l = lesson("A1_01", [["Moien", "hi"]], [sentence("Hello", "Moien")]);
+    SEEDS.forEach((seed) => {
+      const queue = planLessonMode([l], "A1_01", {}, seeded(seed)).queue;
+      expect(queue).toHaveLength(LESSON.totalSlots);
+      expect(queue.every((s) => s.type === "sentence-builder")).toBe(true);
+    });
+  });
+
+  it("a previous lesson's words lift a current lesson too thin on its own", () => {
+    // The floor is a property of the DRAW, and an unforced draw reaches the
+    // `current` and `previous` buckets — so one new word plus a reviewed lesson
+    // still makes failable Slots.
+    const prev = lesson("A1_01", [["Merci", "thanks"], ["Jo", "yes"], ["Nän", "no"]]);
+    const current = lesson("A1_02", [["Moien", "hi"]]);
+    SEEDS.forEach((seed) => {
+      const queue = planLessonMode([prev, current], "A1_02", {}, seeded(seed)).queue;
+      expect(queue).toHaveLength(LESSON.totalSlots);
+      queue.forEach((slot) => {
+        if (slot.type === "word-match") {
+          expect(slot.pairs.length).toBeGreaterThanOrEqual(MIN_WORD_MATCH_PAIRS);
+        }
+      });
+    });
   });
 });
 
@@ -385,7 +539,7 @@ describe("planLessonMode — deduplication", () => {
       (_, i) => [`lu${i}`, `en${i}`],
     );
     const l = lesson("A1_01", words);
-    const config = planLessonMode([l], "A1_01", {}, wordMatchRng);
+    const config = planLessonMode([l], "A1_01", {}, wordMatchRng());
     for (const slot of config.queue) {
       if (slot.type !== "word-match") continue;
       const keys = slot.pairs.map(([lu, en]) => `${lu}|${en}`);

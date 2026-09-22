@@ -2,7 +2,7 @@
 // Reads lessons + stats, emits a complete ModeConfig with every Slot pre-built.
 // See .claude/reference/mode-specs.md > Mode specs > Lesson.
 
-import { LESSON, MASTERY_CORRECT_COUNT } from "../constants";
+import { LESSON, MASTERY_CORRECT_COUNT, MIN_WORD_MATCH_PAIRS } from "../constants";
 import {
   buildFillExercise,
   buildSentenceExercise,
@@ -213,6 +213,26 @@ const claimPhrase = (budget: PhraseBudget, key: string): boolean => {
   return true;
 };
 
+/**
+ * A WordMatch Slot, or null when the draw yields too few distinct words for one.
+ *
+ * Matching is by displayed VALUE, so a Slot of one distinct word cannot be failed:
+ * every pairing between its tiles is correct and each free tap still books a
+ * `correct` toward the pass gate. `MIN_WORD_MATCH_PAIRS` is the smallest Slot in
+ * which a wrong pairing exists — the same floor Fix Errors applies.
+ *
+ * Gated on the DRAWN pairs, not on the pool: a draw reads one bucket while the
+ * pool spans all of them, so a pool-level count would still let a thin
+ * `not-yet-mastered` bucket emit an unfailable Slot.
+ */
+const wordMatchSlot = (
+  wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
+  rng: () => number,
+): Exercise | null => {
+  const pairs = pickUniquePairs(wordPools, LESSON.buckets.wordMatch, LESSON.wordMatchPairs, rng);
+  return pairs.length >= MIN_WORD_MATCH_PAIRS ? buildWordMatchExercise(pairs) : null;
+};
+
 const buildSlot = (
   wordPools: Record<WordBucketName, ReadonlyArray<WordEntry>>,
   phrasePools: Record<PhraseBucketName, ReadonlyArray<Lesson>>,
@@ -232,13 +252,8 @@ const buildSlot = (
       return buildPhraseExercise(picked.phrase, direction, lessonVocab);
     }
 
-    const pairs = pickUniquePairs(
-      wordPools,
-      LESSON.buckets.wordMatch,
-      LESSON.wordMatchPairs,
-      rng,
-    );
-    if (pairs.length > 0) return buildWordMatchExercise(pairs);
+    const slot = wordMatchSlot(wordPools, rng);
+    if (slot) return slot;
   }
 
   // Retries exhausted — every session phrase is out of budget. Accept a repeat
@@ -250,12 +265,7 @@ const buildSlot = (
     const direction = bucketedPick(rng(), LESSON.buckets.direction);
     return buildPhraseExercise(fallback.phrase, direction, lessonVocab);
   }
-  // No phrases at all in pool → fall back to word-match
-  const fallbackPairs = pickUniquePairs(
-    wordPools,
-    LESSON.buckets.wordMatch,
-    LESSON.wordMatchPairs,
-    rng,
-  );
-  return fallbackPairs.length > 0 ? buildWordMatchExercise(fallbackPairs) : null;
+  // No phrases at all in pool → fall back to word-match, still floored: a Session
+  // one Slot shorter beats a Slot that cannot be failed.
+  return wordMatchSlot(wordPools, rng);
 };
