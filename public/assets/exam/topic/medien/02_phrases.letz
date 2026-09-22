@@ -90,21 +90,25 @@
 @distractor-en advertisement
 @distractor-en newspaper
 
-@sentence
-@lu Meng Kandheet war gutt, well ech vill dobausse gespillt hunn.
-@en My childhood was good, because I played outside a lot.
-@distractor-lu langweileg
-@distractor-lu geféierlech
-@distractor-en boring
-@distractor-en dangerous
+@fill
+@lu Meng Kandheet [war] gutt, [well] ech vill dobausse [gespillt] hunn.
+@en My childhood [was] good, [because] I [played] outside a lot.
+@distractor-lu ass
+@distractor-lu ouni
+@distractor-lu spillen
+@distractor-en is
+@distractor-en without
+@distractor-en play
 
-@sentence
-@lu Ech hunn e Computer als Kand gehat, mee kee Handy.
-@en I had a computer as a child, but no mobile phone.
-@distractor-lu Tablet
-@distractor-lu Podcast
-@distractor-en tablet
-@distractor-en podcast
+@fill
+@lu Ech [hunn] e Computer als Kand [gehat], mee kee [Handy].
+@en I [had] a computer as a child, but no [mobile phone].
+@distractor-lu sinn
+@distractor-lu huet
+@distractor-lu Handyen
+@distractor-en am
+@distractor-en has
+@distractor-en mobile phones
 
 @sentence
 @lu Ech interesséiere mech fir de Weltraum a fir Physik.
@@ -114,21 +118,25 @@
 @distractor-en advertisement
 @distractor-en politics
 
-@sentence
-@lu Ech lauschtere Musek oder e Buch, wann ech mam Hond spadséieren.
-@en I listen to music or a book when I go walking with the dog.
-@distractor-lu Reklamm
-@distractor-lu Zeitung
-@distractor-en advertisement
-@distractor-en newspaper
+@fill
+@lu Ech [lauschtere] Musek oder e Buch, [wann] ech mam Hond [spadséieren].
+@en I [listen to] music or a book, [when] I [go walking] with the dog.
+@distractor-lu lauschtert
+@distractor-lu ouni
+@distractor-lu spadséiert
+@distractor-en listens to
+@distractor-en without
+@distractor-en walks
 
-@sentence
-@lu Ech filtere meng Quellen, an dat reduzéiert mäi Stress.
-@en I filter my sources, and that reduces my stress.
-@distractor-lu Fotoen
-@distractor-lu Bicher
-@distractor-en photos
-@distractor-en books
+@fill
+@lu Ech [filtere] meng [Quellen], an dat [reduzéiert] mäi Stress.
+@en I [filter] my [sources], and that [reduces] my stress.
+@distractor-lu filtert
+@distractor-lu Quell
+@distractor-lu reduzéieren
+@distractor-en filters
+@distractor-en source
+@distractor-en reduce
 
 @sentence
 @lu Fake News sinn haut e groussen Nodeel vum Internet.
@@ -138,13 +146,15 @@
 @distractor-en advantage
 @distractor-en podcast
 
-@sentence
-@lu Ech hunn eng App gebaut, fir Lëtzebuergesch ze léieren.
-@en I built an app in order to learn Luxembourgish.
-@distractor-lu Websäit
-@distractor-lu Zeitung
-@distractor-en website
-@distractor-en newspaper
+@fill
+@lu Ech [hunn] eng App [gebaut], [fir] Lëtzebuergesch ze léieren.
+@en I [built] an app [in order] to learn Luxembourgish.
+@distractor-lu sinn
+@distractor-lu bauen
+@distractor-lu ouni
+@distractor-en build
+@distractor-en building
+@distractor-en without
 
 @sentence
 @lu D'Bank huet mech ugeruff, an de Kredit war ugeholl.
