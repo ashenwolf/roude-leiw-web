@@ -5,6 +5,18 @@
 # (photography, hiking, rock music, dance, dioramas) rather than generic
 # statements — see .claude/memory/exam-track.md on why topic content should
 # stay personal even outside the @question file.
+#
+# Three sentences here are @fill rather than @sentence: their word order carried
+# more decisions than a learner can hold as loose tiles (V2 after a time
+# adverbial, a perfect bracket, a modal bracket).
+#
+# Distractors are deliberately FORM distractors — wrong tense, wrong person, wrong
+# auxiliary, wrong inflection of the right lemma. The prompt shows the complete
+# English sentence, so the MEANING is already given and a distractor that differs
+# only in meaning (`Kamera` where the prompt says "material") is eliminable by
+# vocabulary alone and tests nothing. What the learner must still choose is the
+# correct form, which is exactly what the exam marks.
+# See .claude/memory/fill-in-words-exercise.md § Second purpose.
 
 @lesson H1.02 "Hobbies Phrases"
 
@@ -27,13 +39,15 @@
 @word bauen = to build
 @word d'Material = the material
 
-@sentence
-@lu Am Summer wanderen ech gär dobaussen, an ech ginn oft op de Bierg.
-@en In summer I like being outdoors, and I often go up the mountain.
-@distractor-lu fotografeieren
-@distractor-lu Concert
-@distractor-en photograph
-@distractor-en concert
+@fill
+@lu Am Summer [wanderen] ech gär [dobaussen], an ech [ginn] oft op de Bierg.
+@en In summer I like [hiking] [outdoors], and I often [go] up the mountain.
+@distractor-lu wandert
+@distractor-lu doheem
+@distractor-lu geet
+@distractor-en hikes
+@distractor-en at home
+@distractor-en goes
 
 @sentence
 @lu Ech fotografeiere gär d'Landschaft mat menger Kamera.
@@ -51,13 +65,15 @@
 @distractor-en sport
 @distractor-en instrument
 
-@sentence
-@lu Ech hu wéi Kand gär gedanzt, mee haut spillen ech kee Instrument.
-@en As a child I liked dancing, but today I don't play an instrument.
-@distractor-lu Sport
-@distractor-lu Concert
-@distractor-en sport
-@distractor-en concert
+@fill
+@lu Ech [hu] wéi [Kand] gär [gedanzt], mee haut spillen ech kee Instrument.
+@en As a [child] I [liked] [dancing], but today I don't play an instrument.
+@distractor-lu sinn
+@distractor-lu Kanner
+@distractor-lu danzen
+@distractor-en am
+@distractor-en children
+@distractor-en dance
 
 @sentence
 @lu Ech reparéiere gär Saachen a menger neier Wunneng.
@@ -99,10 +115,12 @@
 @distractor-en music
 @distractor-en books
 
-@sentence
-@lu Ech hu scho Material fir Diorama doheem, mee ech muss nach Zäit fannen.
-@en I already have material for dioramas at home, but I still need to find time.
-@distractor-lu Musek
-@distractor-lu Sport
-@distractor-en music
-@distractor-en sport
+@fill
+@lu Ech [hu] scho Material fir Diorama doheem, mee ech [muss] nach Zäit [fannen].
+@en I already [have] material for dioramas at home, but I still [need] to [find] time.
+@distractor-lu sinn
+@distractor-lu mussen
+@distractor-lu fonnt
+@distractor-en am
+@distractor-en needs
+@distractor-en found

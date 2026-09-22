@@ -33,14 +33,16 @@
 @word héieren = to hear
 @word kafen = to buy
 
-@sentence
+@fill
 @question Wat maacht Dir gär doheem?
-@lu Ech leeë mech gär op de Canapé, an ech liese gär Bicher a kucke gär Tëlee.
-@en I like to lie down on the couch, and I like reading books and watching TV.
-@distractor-lu kafen
-@distractor-lu Musek
-@distractor-en buy
-@distractor-en music
+@lu Ech [leeë] mech gär op de Canapé, an ech [liese] gär Bicher a [kucke] gär Télée.
+@en I like to [lie down] on the couch, and I like [reading] books and [watching] TV.
+@distractor-lu leet
+@distractor-lu liest
+@distractor-lu kuckt
+@distractor-en lies down
+@distractor-en reads
+@distractor-en watches
 
 @sentence
 @question Hutt Dir e kreativen Hobby?
@@ -51,14 +53,16 @@
 @distractor-en music
 @distractor-en sport
 
-@sentence
+@fill
 @question Säit wéini maacht Dir Fotoen?
-@lu Ech maache Fotoe säit ech Kand sinn, well mäi Papp e Fotoapparat hat.
-@en I've been taking photos since I was a child, because my father had a camera.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech [maache] Fotoe säit ech [Kand] sinn, well mäi Papp e Fotoapparat [hat].
+@en I've been [taking] photos since I was a [child], because my father [had] a camera.
+@distractor-lu maacht
+@distractor-lu Kanner
+@distractor-lu huet
+@distractor-en takes
+@distractor-en children
+@distractor-en has
 
 @sentence
 @question Wéini maacht Dir Fotoen?
@@ -69,23 +73,27 @@
 @distractor-en music
 @distractor-en books
 
-@sentence
+@fill
 @question Beschreift Ären Hobby!
-@lu Ech maache gär Fotoe vu Bierger, a bei kloer Nuecht probéieren ech Stären ze fotografeieren.
-@en I like taking photos of mountains, and on clear nights I try to photograph stars.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech maache gär Fotoe vu [Bierger], a bei [kloer] Nuecht [probéieren] ech Stären ze fotografeieren.
+@en I like taking photos of [mountains], and on [clear] nights I [try] to photograph stars.
+@distractor-lu Bierg
+@distractor-lu kloren
+@distractor-lu probéiert
+@distractor-en mountain
+@distractor-en clearly
+@distractor-en tries
 
-@sentence
+@fill
 @question Firwat hutt Dir Ären Hobby gär?
-@lu Ech fotografeiere gär, fir Erënnerungen ze maachen an déi schéinste Plaze mat anerer ze deelen.
-@en I like taking photos, in order to make memories and share the most beautiful places with others.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech fotografeiere gär, fir [Erënnerungen] ze [maachen] an déi [schéinste] Plaze mat anerer ze deelen.
+@en I like taking photos, in order to [make] [memories] and share the [most beautiful] places with others.
+@distractor-lu Erënnerung
+@distractor-lu maacht
+@distractor-lu schéin
+@distractor-en memory
+@distractor-en makes
+@distractor-en more beautiful
 
 @sentence
 @question Wéi een anere kreativen Hobby géif Iech interesséieren?
@@ -105,104 +113,137 @@
 @distractor-en concert
 @distractor-en instrument
 
-@sentence
+@fill
 @question An zu Lëtzebuerg?
-@lu Wann ech laang Vakanz hunn, fueren ech a Frankräich oder an d'Schwäiz, mee de Weekend fueren ech an d'Mëllerdall zu Lëtzebuerg.
-@en If I have a long vacation, I go to France or Switzerland, but on the weekend I go to the Mëllerdall in Luxembourg.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Wann ech [laang] Vakanz [hunn], fueren ech a Frankräich oder an d'Schwäiz, mee de [Weekend] fueren ech an d'Mëllerdall.
+@en If I [have] a [long] vacation, I go to France or Switzerland, but on the [weekend] I go to the Mëllerdall.
+@distractor-lu laangen
+@distractor-lu sinn
+@distractor-lu Weekenden
+@distractor-en am
+@distractor-en longer
+@distractor-en weekends
 
-@sentence
+@fill
 @question Wat hutt Dir gär als Kand gemaach, a fir wéi laang?
-@lu Als Kand hunn ech gär gedanzt, an ech war fir siwe Joer an enger Danzschoul, wou mir Tango, Walzer a Rumba gedanzt hunn.
-@en As a child I liked dancing, and I was at a dance school for seven years, where we danced tango, waltz, and rumba.
-@distractor-lu Musek
-@distractor-lu Sport
-@distractor-en music
-@distractor-en sport
+@lu Als Kand [hunn] ech gär [gedanzt], an ech [war] fir siwe Joer an enger Danzschoul.
+@en As a child I [liked] [dancing], and I [was] at a dance school for seven years.
+@distractor-lu sinn
+@distractor-lu danzen
+@distractor-lu ass
+@distractor-en am
+@distractor-en dance
+@distractor-en is
 
-@sentence
+@fill
 @question Firwat hutt Dir opgehal, an interesséiert Iech dat haut nach?
-@lu Ech si geplënnert, an d'Danzschoul war ze wäit fort, mee ech sinn nach ëmmer e bësschen interesséiert.
-@en I moved, and the dance school was too far away, but I'm still a little interested today.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech [si] geplënnert, an d'Danzschoul [war] ze wäit fort, mee ech sinn nach ëmmer [interesséiert].
+@en I [moved], and the dance school [was] too far away, but I am still [interested].
+@distractor-lu hunn
+@distractor-lu ass
+@distractor-lu interesséieren
+@distractor-en have
+@distractor-en is
+@distractor-en interesting
 
-@sentence
+@fill
 @question Wéi eng Bicher liest Dir gär?
-@lu Ech liese gär Science-Fiction, an ech hu virun kuerzem Colony vum Max Kidruk gelies.
-@en I like reading science fiction, and I recently read Colony by Max Kidruk.
-@distractor-lu Musek
-@distractor-lu Fotoen
-@distractor-en music
-@distractor-en photos
+@lu Ech [liese] gär Science-Fiction, an ech [hu] virun kuerzem Colony vum Max Kidruk [gelies].
+@en I like [reading] science fiction, and I recently [read] Colony by Max Kidruk.
+@distractor-lu liest
+@distractor-lu sinn
+@distractor-lu liesen
+@distractor-en reads
+@distractor-en am
+@distractor-en will read
 
-@sentence
+@fill
 @question Wat gefält Iech u Bicher?
-@lu Ech interesséiere mech fir de Weltraum, an d'Auteure weisen dacks d'Probleemer vun haut an der Zukunft.
-@en I'm interested in space, and the authors often show today's problems in the future.
-@distractor-lu Bicher
-@distractor-lu Musek
-@distractor-en books
-@distractor-en music
+@lu Ech [interesséiere] mech fir de Weltraum, an d'Auteure [weisen] dacks d'Probleemer vun haut an der [Zukunft].
+@en I'm [interested] in space, and the authors often [show] today's problems in the [future].
+@distractor-lu interesséiert
+@distractor-lu weist
+@distractor-lu Vergangenheet
+@distractor-en interesting
+@distractor-en shows
+@distractor-en past
 
-@sentence
+@fill
 @question Lauschtert Dir Musek? Wéi eng Zort, a wéi oft gitt Dir op Concerten?
-@lu Jo, ech lauschtere gär Rockmusek, an ech ginn op d'mannst véier oder fënnef Mol am Joer an d'Rockhal.
-@en Yes, I like listening to rock music, and I go to the Rockhal at least four or five times a year.
-@distractor-lu Bicher
-@distractor-lu Sport
-@distractor-en books
-@distractor-en sport
+@lu Jo, ech [lauschtere] gär Rockmusek, an ech [ginn] op d'mannst [véier] oder fënnef Mol am Joer an d'Rockhal.
+@en Yes, I like [listening] to rock music, and I [go] to the Rockhal at least [four] or five times a year.
+@distractor-lu lauschtert
+@distractor-lu geet
+@distractor-lu véiert
+@distractor-en listens
+@distractor-en goes
+@distractor-en fourth
 
-@sentence
+@fill
 @question Op wéi ee Concert waart Dir fir d'lescht?
-@lu Mir sinn zulescht op e Concert vun Offspring gaangen, an dat ass eng interessant Punkrock Band aus Amerika.
-@en We most recently went to an Offspring concert, and that's an interesting punk rock band from America.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Mir [sinn] zulescht op e Concert vun Offspring [gaangen], an dat [ass] eng interessant Punkrock Band aus Amerika.
+@en We most recently [went] to an Offspring concert, and that [is] an interesting punk rock band from America.
+@distractor-lu hunn
+@distractor-lu komm
+@distractor-lu si
+@distractor-en have
+@distractor-en came
+@distractor-en are
 
-@sentence
-@question Wou war de Concert, a wéi huet e Iech gefall?
-@lu De Concert war op der Plaz bei der Luxexpo a ganz spannend, mee mir sinn ze spéit komm, dofir hu mir net all Lidder gehéiert.
-@en The concert was at the square near the Luxexpo and really exciting, but we arrived too late, so we didn't hear every song.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@fill
+@question Wou war de Concert?
+@lu De Concert [war] op der Plaz bei der Luxexpo a ganz [spannend].
+@en The concert [was] at the square near the Luxexpo and really [exciting].
+@distractor-lu ass
+@distractor-lu hunn
+@distractor-lu spannen
+@distractor-en is
+@distractor-en have
+@distractor-en excited
 
-@sentence
+@fill
+@question A wéi huet de Concert Iech gefall?
+@lu Mir [sinn] ze [spéit] komm, dofir [hu] mir net all Lidder [gehéiert].
+@en We [arrived] too [late], so we [did] not hear all the songs.
+@distractor-lu hunn
+@distractor-lu fréi
+@distractor-lu héieren
+@distractor-en have
+@distractor-en early
+@distractor-en hear
+
+@fill
 @question Spillt Dir en Instrument? Firwat net?
-@lu Nee, ech spille kee Instrument, an ech hu mir eng Gittar kaf, mee ech hu keng Gedold fir ze üben.
-@en No, I don't play an instrument, and I bought myself a guitar, but I don't have the patience to practice.
-@distractor-lu Musek
-@distractor-lu Concert
-@distractor-en music
-@distractor-en concert
+@lu Nee, ech [spille] kee Instrument, an ech hu mir eng Gittar [kaf], mee ech hu keng Gedold fir ze [üben].
+@en No, I don't [play] an instrument, and I [bought] myself a guitar, but I don't have the patience to [practice].
+@distractor-lu spillt
+@distractor-lu kaaft
+@distractor-lu übt
+@distractor-en plays
+@distractor-en buys
+@distractor-en practices
 
-@sentence
+@fill
 @question Wat sinn Är Pläng fir d'nächst Joer wat Är Fräizäit ugeet?
-@lu Ech plangen, fir d'nächst Joer op Norwegen ze fueren, an engem Camping ze wunnen a mat mengem Hond ze wanderen.
-@en I'm planning to go to Norway next year, live at a campsite, and hike with my dog.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech [plangen], fir d'nächst Joer op Norwegen ze fueren, an engem Camping ze [wunnen] a mat mengem Hond ze [wanderen].
+@en I'm [planning] to go to Norway next year, [live] at a campsite, and [hike] with my dog.
+@distractor-lu plangt
+@distractor-lu wunnt
+@distractor-lu wandert
+@distractor-en plans
+@distractor-en lives
+@distractor-en hikes
 
-@sentence
+@fill
 @question Kënnt Dir doheem en Apparat oder eng Maschinn reparéieren?
-@lu Mir hunn eng nei Wunneng, an ech muss vill doheem reparéieren, an ech muss Luuchten installéieren a Miwwelen zesummebauen.
-@en We have a new apartment, and I have to repair a lot at home, and I have to install lights and assemble furniture.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Mir [hunn] eng [nei] Wunneng, an ech [muss] vill doheem [reparéieren].
+@en We [have] a [new] apartment, and I [have to] [repair] a lot at home.
+@distractor-lu sinn
+@distractor-lu neien
+@distractor-lu reparéiert
+@distractor-en are
+@distractor-en newly
+@distractor-en repairs
 
 @sentence
 @question Wéi kann ee Kanner motivéieren méi kreativ ze sinn?
