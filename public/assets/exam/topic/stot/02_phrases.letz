@@ -182,21 +182,25 @@
 @distractor-en morning
 @distractor-en company
 
-@sentence
-@lu Mir kafe Bioprodukter, well si besser fir d'Ëmwelt sinn.
-@en We buy organic products because they are better for the environment.
-@distractor-lu bëlleg
-@distractor-lu Blummen
-@distractor-en cheap
-@distractor-en flowers
+@fill
+@lu Mir [kafe] Bioprodukter, well si besser fir d'Ëmwelt [sinn].
+@en We [buy] organic products, because they [are] better for the environment.
+@distractor-lu kaaft
+@distractor-lu ass
+@distractor-lu gekaaft
+@distractor-en buys
+@distractor-en is
+@distractor-en bought
 
-@sentence
-@lu Wann ech eppes net reparéiere kann, ruffe mir eng Firma.
-@en When I cannot repair something, we call a company.
-@distractor-lu Botzfra
-@distractor-lu Gaart
-@distractor-en cleaner
-@distractor-en garden
+@fill
+@lu Wann ech eppes net [reparéiere] [kann], ruffe mir eng Firma.
+@en When I [cannot] [repair] something, we call a company.
+@distractor-lu reparéiert
+@distractor-lu kënne
+@distractor-lu muss
+@distractor-en repairs
+@distractor-en can
+@distractor-en must
 
 @sentence
 @lu Meng schlecht Gewunnecht ass d'Geschier am Lavabo.
@@ -206,13 +210,15 @@
 @distractor-en clean
 @distractor-en bed
 
-@sentence
-@lu Ech hunn dat Theema gewielt, well ech vum Alldag schwätze wollt.
-@en I chose this topic because I wanted to talk about everyday life.
-@distractor-lu Aarbecht
-@distractor-lu Musek
-@distractor-en work
-@distractor-en music
+@fill
+@lu Ech [hunn] dat Theema [gewielt], well ech vum Alldag schwätze [wollt].
+@en I [chose] this topic, because I [wanted] to talk about everyday life.
+@distractor-lu sinn
+@distractor-lu wielt
+@distractor-lu wëll
+@distractor-en choose
+@distractor-en want
+@distractor-en chosen
 
 @sentence
 @lu Ech maachen de Stot eleng zänter mengem siwwenzéinten Joer.
@@ -230,13 +236,15 @@
 @distractor-en alone
 @distractor-en garden
 
-@sentence
-@lu An der Gesellschaft sinn d'Hausaarbechten nach net gerecht verdeelt.
-@en In society the housework is not yet fairly distributed.
-@distractor-lu Gaart
-@distractor-lu propper
-@distractor-en garden
-@distractor-en clean
+@fill
+@lu An der Gesellschaft [sinn] d'Hausaarbechten nach net gerecht [verdeelt].
+@en In society the household chores [are] not yet fairly [distributed].
+@distractor-lu ass
+@distractor-lu verdeelen
+@distractor-lu hunn
+@distractor-en is
+@distractor-en distribute
+@distractor-en have
 
 @sentence
 @lu D'Erwaardungen un d'Frae sinn nach ze grouss.
@@ -246,13 +254,15 @@
 @distractor-en small
 @distractor-en joy
 
-@sentence
-@lu Botzen ass net mäi Beruff, an ech ginn och net besser dran.
-@en Cleaning is not my profession, and I also do not get better at it.
-@distractor-lu Musek
-@distractor-lu propper
-@distractor-en music
-@distractor-en clean
+@fill
+@lu Botzen ass net mäi Beruff, an ech [ginn] och net [besser] dran.
+@en Cleaning is not my profession, and I do not [get] any [better] at it.
+@distractor-lu gitt
+@distractor-lu gutt
+@distractor-lu sinn
+@distractor-en gets
+@distractor-en good
+@distractor-en am
 
 @sentence
 @lu Ech investéieren méi gär an meng Aarbecht wéi an d'Botzen.
@@ -262,13 +272,15 @@
 @distractor-en garden
 @distractor-en rarely
 
-@sentence
-@lu Kanner sollen fréi e Beitrag an der Famill leeschten.
-@en Children should make a contribution in the family early.
-@distractor-lu spéider
-@distractor-lu Botzfra
-@distractor-en later
-@distractor-en cleaner
+@fill
+@lu Kanner [sollen] fréi e Beitrag an der Famill [leeschten].
+@en Children [should] [make] a contribution in the family early.
+@distractor-lu soll
+@distractor-lu leescht
+@distractor-lu kënnen
+@distractor-en shall
+@distractor-en makes
+@distractor-en can
 
 @sentence
 @lu Hausaarbechte preparéieren d'Kanner op hir Onofhängegkeet.
@@ -302,13 +314,15 @@
 @distractor-en new
 @distractor-en joy
 
-@sentence
-@lu Ech muss e neie Roboter kafen, well den ale ze schlecht botzt.
-@en I have to buy a new robot, because the old one cleans too badly.
-@distractor-lu gutt
-@distractor-lu Gaart
-@distractor-en good
-@distractor-en garden
+@fill
+@lu Ech [muss] e neie Roboter [kafen], well den ale ze schlecht [botzt].
+@en I [have to] [buy] a new robot, because the old one [cleans] too badly.
+@distractor-lu mussen
+@distractor-lu kaaft
+@distractor-lu botzen
+@distractor-en have
+@distractor-en buys
+@distractor-en clean
 
 @sentence
 @lu Botzen ass ermiddend, mee Saache systematiséieren mécht Freed.
