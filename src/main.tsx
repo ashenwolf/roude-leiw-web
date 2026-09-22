@@ -7,10 +7,17 @@ import { NavigationProvider } from "./context/NavigationContext.tsx";
 import posthog from "posthog-js";
 import { PostHogProvider } from "@posthog/react";
 
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-  defaults: "2026-01-30",
-});
+// The key is inlined at build time, so a build without it (e.g. CI, where the
+// gitignored .env is absent) would otherwise init the SDK with `undefined` and
+// fire doomed ingestion requests. Skip init instead — analytics goes dark, the
+// app doesn't.
+const posthogKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
+if (posthogKey) {
+  posthog.init(posthogKey, {
+    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+    defaults: "2026-01-30",
+  });
+}
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
