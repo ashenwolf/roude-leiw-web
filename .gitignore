@@ -48,3 +48,11 @@ public/assets/tmp/
 # Audio sneakernet archive — `npm run pack-audio` output. Regenerable from the
 # local mp3 corpus, so it is transferred by scp, never committed.
 /audio-transfer/
+
+# Zed dev-extension build output (repo clone + compiled wasm)
+zed-letz/grammars/
+
+# Raw learner interview answers. Real personal detail, kept local: the authoring
+# skills read it to avoid re-interviewing, the shipped .letz content is the
+# publishable form of it.
+/.claude/interview-answers.md
