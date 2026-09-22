@@ -26,7 +26,6 @@ const BLOCK_BOUNDARIES = [
   3 * LESSON.slotsPerBlock,
 ] as const;
 
-/** Same Session shape as Lesson, but completing it unlocks nothing. */
 const SHAPE: ModeShape = {
   plannedSlots: LESSON.totalSlots,
   blockBoundaries: BLOCK_BOUNDARIES,

@@ -2,16 +2,6 @@ import { IconButton, IconButtonSpacer } from "../ui/IconButton";
 import { SpeakerHighIcon } from "../ui/icons";
 import { usePromptAudio } from "./use-prompt-audio";
 
-/**
- * The prompt header shared by SentenceBuilder and FillBlank: the examiner
- * question, the sentence to work from, and the audio replay button.
- *
- * Extracted because a Q&A `@fill` needs exactly the same header a Q&A
- * `@sentence` has — the question read aloud above the prompt. Two copies would
- * drift in the one place a divergence is invisible in review: the audio
- * availability rules in `usePromptAudio`.
- */
-
 type PromptLineProps = {
   text: string;
   emphasis: "headline" | "sub" | "plain";
@@ -22,13 +12,9 @@ type PromptLineProps = {
 };
 
 /**
- * One prompt line, optionally with the audio replay button.
- *
- * Both sides of the flex row reserve the button's width — the visible control on
- * the right, an `IconButtonSpacer` on the left — so the text stays truly centered.
- * The reservation is driven by `hasAudioSlot`, not by whether the button renders,
- * so a load failure arriving after mount removes the icon without reflowing the
- * line under the learner's eyes.
+ * Both sides reserve the button's width so the text stays centred. Driven by
+ * `hasAudioSlot`, not by whether the button renders: a load failure arriving after
+ * mount then removes the icon without reflowing the line.
  */
 export const PromptLine = ({ text, emphasis, hasAudioSlot = false, onPlay }: PromptLineProps) => {
   const textClass = {
@@ -60,25 +46,16 @@ type ExercisePromptProps = {
   /** Prompt audio as resolved by the builder — the question, or the LU phrase. */
   audioUrl?: string;
   /**
-   * How loudly the prompt reads when there is no question above it.
-   *
-   * `plain` (default) for an exercise whose prompt IS the task — the sentence
-   * builder, where the learner reads it and assembles a translation. `sub` for one
-   * where the prompt is only reference and the work is elsewhere on screen: a fill's
-   * gapped frame is the task, so a loud prompt competes with it.
-   *
-   * Ignored when a question is present — the question is then the headline and the
-   * prompt is always its subordinate line.
+   * `plain` when the prompt IS the task (assemble this sentence); `sub` when the
+   * work is elsewhere on screen, as a fill's gapped frame is. Ignored under a
+   * question, which is always the headline.
    */
   promptEmphasis?: "plain" | "sub";
 };
 
 /**
- * The full two-line prompt header.
- *
- * The audio button rides the line the audio actually voices: the question for
- * Q&A, the prompt itself otherwise. Only one line ever carries it, because only
- * one mp3 is stamped per item.
+ * The audio button rides the line the audio voices — the question for Q&A, the
+ * prompt otherwise. Only one line carries it: one mp3 per item.
  */
 export const ExercisePrompt = ({
   question,

@@ -89,16 +89,11 @@ export const chunkIntoWordMatchExercises = (
 };
 
 /**
- * The direction an element carrying an examiner `question` must be presented in.
+ * An examiner `question` is answered in Luxembourgish, so it forces en→lu whatever
+ * the caller rolled. A property of the content, not the Mode, so every Mode gets it
+ * by going through here.
  *
- * A `question` is an examiner prompt: the learner answers it in Luxembourgish, so
- * the element is **always** presented en→lu regardless of what the caller rolled.
- * This is a property of the content, not of the Mode — every Mode gets the rule
- * for free by going through here.
- *
- * Takes the question rather than an entry so `@sentence` and `@fill` share it:
- * filling English blanks under a Luxembourgish question would invert the exercise
- * exactly as assembling an English sentence would.
+ * Takes the question rather than an entry so `@sentence` and `@fill` share one rule.
  */
 export const resolveQuestionDirection = (
   question: string | undefined,
@@ -245,13 +240,9 @@ export const stripBlankMarkers = (line: string): string => line.replace(BLANK_RX
  * ambiguity, and it is a deliberate divergence — do not "unify" the two builders
  * by tokenizing here (see .claude/memory/fill-in-words-exercise.md).
  *
- * A repeated blank answer is legal and shares ONE tile: `applySubmit` grades by
- * tile text, so a frame needing `gär` in two blanks is satisfiable from a single
- * `gär` tile. Deduplicating is therefore required, not an optimization — two
- * identical tiles would make one of them a free correct answer in either blank.
- *
- * `direction` is normalized through `resolveQuestionDirection`: a question-carrying
- * fill is en→lu, because the learner must produce the Luxembourgish answer.
+ * A repeated blank answer shares ONE tile, since `applySubmit` grades by text.
+ * Deduplicating is required, not an optimization: two identical tiles would make
+ * one of them a free correct answer in either blank.
  *
  * The prompt is the **source-language sentence with its markers stripped** — the
  * learner reads a complete sentence and reconstructs the gapped one in the target
@@ -290,8 +281,8 @@ export const buildFillExercise = (
     // direction, so the error pool can repeat the exact direction that failed.
     elementKey: fillKey(direction, entry.en),
     ...(entry.question !== undefined ? { question: entry.question } : {}),
-    // A fill's only prompt audio is the question. The frame is already visible, and
-    // in the en→lu direction a question forces, the LU line IS the answer.
+    // Only the question is ever voiced: in the forced en→lu direction the LU line
+    // is the answer.
     ...(entry.question !== undefined && entry.questionAudioUrl !== undefined
       ? { audioUrl: entry.questionAudioUrl }
       : {}),

@@ -1,13 +1,6 @@
 import type React from "react";
 
-/**
- * A quiet text-only control — the "Back" affordance, and anything else that must
- * be tappable without competing with the primary `Button`.
- *
- * In the system because the same class string had been hand-written at four call
- * sites across two pages, in two sizes, with the arrow glyph inconsistently part
- * of the label. `withArrow` owns the glyph so the spacing is decided once.
- */
+/** A text-only control that must not compete with the primary `Button`. */
 
 const ButtonTextSizeMap = {
   sm: "text-sm",
@@ -25,7 +18,7 @@ export const ButtonText = ({
   children: React.ReactNode;
   onClick: React.Dispatch<void>;
   size?: ButtonTextSize;
-  /** Prefix a back-arrow glyph — for navigation away from the current view. */
+  /** Prefix a back-arrow glyph, so its spacing is decided once. */
   withArrow?: boolean;
 }) => (
   <button

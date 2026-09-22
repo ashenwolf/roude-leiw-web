@@ -24,10 +24,7 @@ import { modeConfig } from "../mode-config";
 import type { ModeConfig, ModeShape } from "../mode-config";
 import type { Exercise } from "../types";
 
-/**
- * Exam covers one SubLesson exactly once, so its slot count and Block cuts are
- * derived from the content and passed per-plan; only the two flags are fixed.
- */
+/** Slot count and Block cuts are content-derived — passed per plan, not fixed here. */
 const SHAPE: ModeShape = {
   hasCorrectionBlock: true,
   completionEffect: "noop",
@@ -70,8 +67,6 @@ export const planExamMode = (
 
   const queue: Exercise[] = shuffle([...wordSlots, ...sentenceSlots, ...fillSlots], rng);
 
-  // Exam is the one Mode whose slot count and Block cuts come from the content
-  // rather than a constant, so both are passed rather than taken from SHAPE.
   return modeConfig(SHAPE, {
     lessons: [subLesson],
     queue,

@@ -173,7 +173,6 @@ type PhraseBudget = {
   readonly repeatAllowance: number;
 };
 
-/** What a Lesson Session always looks like, whatever it ends up scheduling. */
 const SHAPE: ModeShape = {
   plannedSlots: LESSON.totalSlots,
   blockBoundaries: BLOCK_BOUNDARIES,

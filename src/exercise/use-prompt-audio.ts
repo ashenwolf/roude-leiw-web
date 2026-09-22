@@ -1,26 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Owns the prompt's <audio> element and reports whether the file is actually
- * playable, so a missing mp3 renders no speaker button at all rather than a
- * control that does nothing.
+ * Plays the prompt once on arrival, stops on unmount, and reports playability so a
+ * missing mp3 draws no button rather than a dead one.
  *
- * Plays once on arrival and stops on unmount, so audio never bleeds into the
- * next Slot.
- *
- * The two failure modes must not be conflated:
- * - **`error` on the element** — the file is missing or undecodable (audio for
- *   this phrase was never generated, or the R2 sync skipped it). Unavailable:
- *   hide the button.
- * - **`play()` rejecting** — usually the browser's autoplay policy vetoing the
- *   first playback before any user gesture. The file is fine, and the button is
- *   exactly the recovery, so this must NOT hide it.
- *
- * Availability is therefore optimistic: it is derived by comparing the current
- * url against the one that last errored, so only a real `error` event withdraws
- * the button, and a new slot's url is trusted again without an effect having to
- * reset state. Waiting for `canplay` instead would flicker the button in on
- * every slot once the network resolves.
+ * The two failure modes must not be conflated: an `error` event means the file is
+ * missing, so hide the button; a rejected `play()` is usually the autoplay policy,
+ * and the button is the recovery, so keep it. Hence availability is derived from
+ * the last errored url rather than from `canplay`, which would flicker the button
+ * in on every slot once the network resolves.
  */
 export const usePromptAudio = (url: string | undefined) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);

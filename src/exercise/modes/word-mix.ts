@@ -19,7 +19,6 @@ const BLOCK_BOUNDARIES = Array.from({ length: BLOCK_COUNT }, (_, i) =>
   (i + 1) * WORD_MIX.slotsPerBlock,
 );
 
-/** Three one-Slot Blocks, no correction Block: a word-match Slot cannot fail. */
 const SHAPE: ModeShape = {
   plannedSlots: WORD_MIX.totalSlots,
   blockBoundaries: BLOCK_BOUNDARIES,

@@ -37,18 +37,12 @@ export const applyBlankTap = (state: FillGameState, blankIdx: number): FillGameS
     : { ...state, selectedBlank: state.selectedBlank === blankIdx ? null : blankIdx };
 
 /**
- * Places a tile into the target blank.
+ * A tile already in another blank normally MOVES; selection then clears, so
+ * left-to-right filling needs no blank taps at all.
  *
- * A tile already sitting in another blank normally *moves* (it is not duplicated),
- * and any tile displaced from the target blank returns to the pool. Selection
- * clears so the next tap flows to the next empty blank — which makes
- * left-to-right filling work with no blank taps at all.
- *
- * The exception is a tile whose text several blanks need: grading compares tile
- * text, so one tile legitimately serves every blank asking for that word and must
- * NOT be vacated from the earlier one. `demand` is how many blanks want this
- * tile's text; while fewer than that many are filled, placing it again copies
- * rather than moves.
+ * The exception is a tile several blanks need: grading compares text, so one tile
+ * serves all of them and must not be vacated from the earlier one. While fewer
+ * than `demand` blanks hold it, placing it again copies instead.
  */
 export const applyTokenTap = (
   state: FillGameState,
@@ -71,10 +65,8 @@ export const applyTokenTap = (
 };
 
 /**
- * How many blanks need the tile at `tokenIdx` — the copy budget for that tile.
- *
- * Derived from the item rather than stored: `blanks` is the gap list and may name
- * one answer twice, while `tokens` holds one tile per distinct answer.
+ * How many blanks need this tile. Derived, not stored: `blanks` may name one answer
+ * twice while `tokens` holds one tile per distinct answer.
  */
 export const tileDemand = (item: FillBlankItem, tokenIdx: number): number =>
   Math.max(
@@ -83,7 +75,7 @@ export const tileDemand = (item: FillBlankItem, tokenIdx: number): number =>
     1,
   );
 
-/** Whether every blank needing this tile is already filled by it. */
+/** Every blank needing this tile already holds it. */
 export const isTileSpent = (
   item: FillBlankItem,
   state: FillGameState,
