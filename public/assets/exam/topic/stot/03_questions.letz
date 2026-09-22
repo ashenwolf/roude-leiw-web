@@ -78,122 +78,145 @@
 
 # --- The parents' household: the real exam's opening cluster ---
 
-@sentence
+@fill
 @question Firwat hutt Dir dat Theema gewielt?
-@lu Ech hunn dat Theema gewielt, well ech vun alldeegleche Saache schwätze wollt.
-@distractor-lu Aarbecht
-@distractor-lu Musek
-@en I chose this topic because I wanted to talk about everyday things.
-@distractor-en work
-@distractor-en music
+@lu Ech [hunn] dat Theema [gewielt], well ech vun alldeegleche Saache schwätze [wollt].
+@en I [chose] this topic, because I [wanted] to talk about everyday things.
+@distractor-lu sinn
+@distractor-lu wielt
+@distractor-lu wëll
+@distractor-en was
+@distractor-en choose
+@distractor-en want
 
-@sentence
+@fill
 @question Wéi laang hutt Dir mat Ären Eltere gewunnt?
-@lu Ech hu bis siwwenzéng Joer mat mengen Eltere gewunnt.
-@distractor-lu Kanner
-@distractor-lu eleng
-@en I lived with my parents until seventeen years of age.
-@distractor-en children
-@distractor-en alone
+@lu Ech [hu] bis [siwwenzéng] Joer mat mengen Eltere [gewunnt].
+@en I [lived] with my parents until [seventeen] years of age.
+@distractor-lu sinn
+@distractor-lu drësseg
+@distractor-lu wunnen
+@distractor-en was
+@distractor-en thirty
+@distractor-en live
 
-@sentence
+@fill
 @question Wéini sidd Dir doheem erausgeplënnert?
-@lu Ech si mat siwwenzéng Joer erausgeplënnert, well ech op der Universitéit studéiert hunn.
-@distractor-lu geschafft
-@distractor-lu Aarbecht
-@en I moved out at seventeen years of age because I studied at university.
-@distractor-en worked
-@distractor-en work
+@lu Ech [si] mat siwwenzéng Joer [erausgeplënnert], well ech op der Universitéit [studéiert] hunn.
+@en I [moved out] at seventeen years of age, because I [studied] at university.
+@distractor-lu hat
+@distractor-lu plënneren
+@distractor-lu studéieren
+@distractor-en had
+@distractor-en move out
+@distractor-en study
 
-@sentence
+@fill
 @question Hutt Dir Ären Elteren am Stot gehollef?
-@lu Jo, ech hunn hinne gehollef, mee net all Dag.
-@distractor-lu Nee
+@lu Jo, ech [hunn] hinne [gehollef], mee net all [Dag].
+@en Yes, I [helped] them, but not every [day].
+@distractor-lu sinn
+@distractor-lu hëllefen
+@distractor-lu Woch
+@distractor-en am
+@distractor-en help
+@distractor-en week
+
+@fill
+@question Wéi eng Aufgaben hutt Dir am Stot gemaach, a wéi eng hunn Är Eltere gemaach?
+@lu Ech [hu] mäi Zëmmer [gebotzt], a meng Eltere hunn de Rescht vun der Wunneng [gemaach].
+@en I [cleaned] my room, and my parents [did] the rest of the apartment.
+@distractor-lu sinn
+@distractor-lu botzen
+@distractor-lu maachen
+@distractor-en am
+@distractor-en clean
+@distractor-en do
+
+@fill
+@question Hutt Dir bei Ären Elteren och gekacht?
+@lu Ech [hunn] [heiansdo] mat menger Mamm gekacht, mee ech hu [ni] eleng gekacht.
+@en I [sometimes] cooked with my mother, but I [never] cooked alone.
+@distractor-lu sinn
+@distractor-lu ëmmer
 @distractor-lu dacks
-@en Yes, I helped them, but not every day.
-@distractor-en No
+@distractor-en always
 @distractor-en often
 
-@sentence
-@question Wéi eng Aufgaben hutt Dir am Stot gemaach, a wéi eng hunn Är Eltere gemaach?
-@lu Ech hu mäi Zëmmer gebotzt, a meng Eltere hunn de Rescht vun der Wunneng gemaach.
-@distractor-lu Gaart
-@distractor-lu Botzfra
-@en I cleaned my room, and my parents did the rest of the apartment.
-@distractor-en garden
-@distractor-en cleaner
-
-@sentence
-@question Hutt Dir bei Ären Elteren och gekacht?
-@lu Ech hunn heiansdo mat menger Mamm gekacht, mee ech hu ni eleng gekacht.
-@distractor-lu ëmmer
-@distractor-lu gebotzt
-@en I sometimes cooked with my mother, but I never cooked alone.
-@distractor-en always
-@distractor-en cleaned
-
-@sentence
+@fill
 @question Wéi eng Aufgaben hutt Dir gär gemaach?
-@lu Ganz éierlech: ech hu keng Aufgab am Stot gär gemaach.
-@distractor-lu alles
-@distractor-lu kachen
-@en Quite honestly: I did not like doing any task in the household.
-@distractor-en everything
-@distractor-en cooking
+@lu Ganz éierlech: ech [hu] [keng] Aufgab am Stot gär [gemaach].
+@en Quite honestly: I did [not] like doing [any] task in the household.
+@distractor-lu sinn
+@distractor-lu kee
+@distractor-lu maachen
+@distractor-en no
+@distractor-en every
+@distractor-en do
 
-@sentence
+@fill
 @question Firwat hutt Dir de Stot deemools net gär gemaach?
-@lu Ech hunn de Stot gemaach, well et néideg war, an net well et Spaass mécht.
-@distractor-lu angeneem
-@distractor-lu Hëllef
-@en I did the household chores because it was necessary, and not because it is fun.
-@distractor-en pleasant
-@distractor-en help
+@lu Ech [hunn] de Stot [gemaach], well et néideg [war], an net well et Spaass mécht.
+@en I [did] the household chores because it [was] necessary, and not because it is fun.
+@distractor-lu sinn
+@distractor-lu ass
+@distractor-lu maachen
+@distractor-en am
+@distractor-en is
+@distractor-en do
 
 # --- Today's household ---
 
-@sentence
+@fill
 @question Vu wéi engem Alter un hutt Dir ugefaang, de Stot eleng ze maachen?
-@lu Vu siwwenzéng Joer un hunn ech de Stot komplett eleng gemaach.
-@distractor-lu Eltere
-@distractor-lu Botzfra
-@en From seventeen years of age on I did the household completely alone.
-@distractor-en parents
-@distractor-en cleaner
+@lu Vu [siwwenzéng] Joer un hunn ech de Stot [komplett] eleng [gemaach].
+@en From [seventeen] years of age on I did the household [completely] alone.
+@distractor-lu drësseg
+@distractor-lu komplet
+@distractor-lu maachen
+@distractor-en thirty
+@distractor-en complete
+@distractor-en do
 
-@sentence
+@fill
 @question Firwat hutt Dir da scho mat siwwenzéng eleng gewunnt?
-@lu Ech sinn an eng anere Stad geplënnert, fir op der Universitéit ze studéieren.
-@distractor-lu Aarbecht
-@distractor-lu Gaart
-@en I moved to another city in order to study at university.
-@distractor-en work
-@distractor-en garden
+@lu Ech [sinn] an eng anere Stad [geplënnert], fir op der Universitéit ze [studéieren].
+@en I [moved] to another city, in order to [study] at university.
+@distractor-lu hunn
+@distractor-lu plënneren
+@distractor-lu studéiert
+@distractor-en have
+@distractor-en move
+@distractor-en studied
 
-@sentence
+@fill
 @question Hutt Dir wärend Ärem Studium eleng gewunnt oder mat anere Studenten zesummen?
-@lu Ech hunn am Studentenheem mat zwee anere Studente gewunnt.
-@distractor-lu eleng
-@distractor-lu Eltere
-@en I lived in the student hall with two other students.
-@distractor-en alone
-@distractor-en parents
+@lu Ech [hunn] am Studentenheem mat [zwee] anere Studente [gewunnt].
+@en I [lived] in the student hall with [two] other students.
+@distractor-lu sinn
+@distractor-lu dräi
+@distractor-lu wunnen
+@distractor-en was
+@distractor-en three
+@distractor-en live
 
-@sentence
+@fill
 @question Wéi hutt Dir de Stot ënnert Iech opgedeelt?
-@lu Mir hunn eis mat all Aufgab ofgewiesselt, an esou hat jidderee seng Rei.
-@distractor-lu Botzfra
-@distractor-lu Gaart
-@en We took turns with every task, and so everybody had their turn.
-@distractor-en cleaner
-@distractor-en garden
+@lu Mir [hunn] eis mat all Aufgab [ofgewiesselt], an esou [hat] jidderee seng Rei.
+@en We [took turns] with every task, and so everybody [had] their turn.
+@distractor-lu sinn
+@distractor-lu ofwiesselen
+@distractor-lu huet
+@distractor-en are
+@distractor-en take turns
+@distractor-en has
 
 @sentence
 @question Kënnt Dir e Beispill vun där Ofwiesslung ginn?
 @lu Ech hu haut gekacht, an eng anere Persoun huet muer gekacht.
+@en I cooked today, and another person cooked tomorrow.
 @distractor-lu gebotzt
 @distractor-lu gestreckt
-@en I cooked today, and another person cooked tomorrow.
 @distractor-en cleaned
 @distractor-en ironed
 
@@ -233,23 +256,27 @@
 @distractor-en cleaner
 @distractor-en children
 
-@sentence
+@fill
 @question Wéi deelt Dir d'Aufgabe mat Ärer Fra?
-@lu Mir probéiere keng fest Trennung ze hunn, well mir déiselwecht Verantwortung wëllen.
-@distractor-lu Botzfra
-@distractor-lu deier
-@en We try not to have a fixed separation, because we want the same responsibility.
-@distractor-en cleaner
-@distractor-en expensive
+@lu Mir [probéiere] keng [fest] Trennung ze hunn, well mir déiselwecht Verantwortung [wëllen].
+@en We [try] not to have a [fixed] separation, because we [want] the same responsibility.
+@distractor-lu probéiert
+@distractor-lu festen
+@distractor-lu wëll
+@distractor-en tries
+@distractor-en firmly
+@distractor-en wants
 
-@sentence
+@fill
 @question Wat mécht Är Fra, a wat maacht Dir?
-@lu Meng Fra kacht méi, an ech maachen d'Reparaturen an droen de Dreck eraus.
-@distractor-lu strecken
-@distractor-lu Blummen
-@en My wife cooks more, and I do the repairs and carry the trash outside.
-@distractor-en irons
-@distractor-en flowers
+@lu Meng Fra [kacht] méi, an ech [maachen] d'Reparaturen an droen de Dreck [eraus].
+@en My wife [cooks] more, and I [do] the repairs and carry the trash [outside].
+@distractor-lu kachen
+@distractor-lu mécht
+@distractor-lu dreet
+@distractor-en cook
+@distractor-en does
+@distractor-en carries
 
 @sentence
 @question Botzt Dir zwee gläich vill?
@@ -260,155 +287,185 @@
 @distractor-en less
 @distractor-en boring
 
-@sentence
+@fill
 @question Wéini maacht Dir de Stot?
-@lu Ech maachen de Stot e puer Mol an der Woch owes, an de gréissten Deel de Weekend.
+@lu Ech [maachen] de Stot e puer Mol an der Woch [owes], an de [gréissten] Deel de Weekend.
+@en I [do] the household chores a few times a week in the [evening], and the [biggest] part at the weekend.
+@distractor-lu mécht
 @distractor-lu moies
-@distractor-lu ni
-@en I do the household chores a few times a week in the evening, and the biggest part at the weekend.
+@distractor-lu grouss
+@distractor-en does
 @distractor-en morning
-@distractor-en never
+@distractor-en big
 
-@sentence
+@fill
 @question Wéi dacks maacht Dir de Stot?
-@lu Dräi bis véier Mol an der Woch maachen ech eppes am Stot.
-@distractor-lu Joer
-@distractor-lu seelen
-@en Three to four times a week I do something in the household.
-@distractor-en year
-@distractor-en rarely
+@lu [Dräi] bis [véier] Mol an der Woch [maachen] ech eppes am Stot.
+@en [Three] to [four] times a week I [do] something in the household.
+@distractor-lu Zwee
+@distractor-lu fënnef
+@distractor-lu mécht
+@distractor-en Two
+@distractor-en five
+@distractor-en does
 
 # --- The cleaning lady: advantages and disadvantages ---
 
-@sentence
+@fill
 @question Hutt Dir eng Botzfra? Wann nee, firwat net?
-@lu Mir hu keng Botzfra méi, well mir no dem Plënneren nach keng gutt fonnt hunn.
-@distractor-lu Jo
-@distractor-lu Firma
-@en We no longer have a cleaning lady, because after the move we have not yet found a good one.
-@distractor-en Yes
-@distractor-en company
+@lu Mir hu keng Botzfra méi, well mir no dem Plënneren nach keng [gutt] [fonnt] hunn.
+@en We no longer have a cleaning lady, because after the move we did not yet [find] a [good] one.
+@distractor-lu sinn
+@distractor-lu fannen
+@distractor-lu guddes
+@distractor-en found
+@distractor-en searched
+@distractor-en better
 
-@sentence
+@fill
 @question Hutt Dir fréier eng Botzfra gehat?
-@lu Jo, an eiser aler Wunneng hate mir eng Botzfra.
-@distractor-lu Handwierker
-@distractor-lu ni
-@en Yes, in our old apartment we had a cleaning lady.
-@distractor-en workman
-@distractor-en never
+@lu Jo, an eiser [aler] Wunneng [hate] mir eng Botzfra.
+@en Yes, in our [old] apartment we [had] a cleaning lady.
+@distractor-lu al
+@distractor-lu hunn
+@distractor-lu haten
+@distractor-en older
+@distractor-en have
 
-@sentence
+@fill
 @question Wat sinn d'Virdeeler vun enger Botzfra?
-@lu De gréisste Virdeel ass, datt mir dann net botze mussen, well kee vun eis dat gär mécht.
-@distractor-lu Nodeel
-@distractor-lu bëlleg
-@en The biggest advantage is that we then do not have to clean, because neither of us likes doing that.
-@distractor-en disadvantage
-@distractor-en cheap
+@lu De [gréisste] Virdeel ass, datt mir dann net botze [mussen], well kee vun eis dat gär [mécht].
+@en The [biggest] advantage: we then do not [have to] clean, because neither of us [likes] doing that.
+@distractor-lu grouss
+@distractor-lu muss
+@distractor-lu maachen
+@distractor-en big
+@distractor-en has to
+@distractor-en like
 
-@sentence
+@fill
 @question Wat sinn d'Nodeeler vun enger Botzfra?
-@lu Eng Botzfra ass net bëlleg, dofir kënne mir se net all Woch bezuelen.
-@distractor-lu Virdeel
-@distractor-lu propper
-@en A cleaning lady is not cheap, that is why we cannot pay her every week.
-@distractor-en advantage
-@distractor-en clean
+@lu Eng Botzfra [ass] net bëlleg, dofir [kënne] mir se net all Woch [bezuelen].
+@en A cleaning lady [is] not cheap, so we [cannot] [pay] her every week.
+@distractor-lu sinn
+@distractor-lu kann
+@distractor-lu bezuelt
+@distractor-en are
+@distractor-en can
+@distractor-en pays
 
-@sentence
+@fill
 @question Wat huet Är Botzfra gemaach?
-@lu Si huet gestaubsaugt, de Buedem gebotzt an d'Buedzëmmer propper gemaach.
-@distractor-lu gekacht
-@distractor-lu Gaart
-@en She vacuumed, cleaned the floor and made the bathroom clean.
-@distractor-en cooked
-@distractor-en garden
+@lu Si [huet] [gestaubsaugt], de Buedem [gebotzt] an d'Buedzëmmer propper gemaach.
+@en She [vacuumed], [cleaned] the floor and [made] the bathroom clean.
+@distractor-lu hunn
+@distractor-lu staubsaugen
+@distractor-lu botzen
+@distractor-en vacuums
+@distractor-en cleans
+@distractor-en makes
 
-@sentence
+@fill
 @question Sicht Dir eng nei Botzfra?
-@lu Jo, mir sichen nach eng gutt Botzfra, mee bis dohinner botze mir selwer.
-@distractor-lu Handwierker
-@distractor-lu ni
-@en Yes, we are still looking for a good cleaning lady, but until then we clean ourselves.
-@distractor-en workman
-@distractor-en never
+@lu Jo, mir [sichen] nach eng gutt Botzfra, mee bis dohinner [botze] mir [selwer].
+@en Yes, we [are looking] for a good cleaning lady, but until then we clean [ourselves].
+@distractor-lu sicht
+@distractor-lu botzt
+@distractor-lu selwert
+@distractor-en look
+@distractor-en cleans
 
 # --- How cleaning feels ---
 
-@sentence
+@fill
 @question Maacht Dir gär de Stot? Firwat oder firwat net?
-@lu Ech maachen de Stot net gär, well et langweileg an ustrengend ass.
-@distractor-lu angeneem
-@distractor-lu spannend
-@en I do not like doing the household chores, because it is boring and exhausting.
-@distractor-en pleasant
-@distractor-en exciting
+@lu Ech [maachen] de Stot net gär, well et [langweileg] an ustrengend [ass].
+@en I do not like [doing] the household chores, because it [is] [boring] and exhausting.
+@distractor-lu mécht
+@distractor-lu langweilech
+@distractor-lu sinn
+@distractor-en does
+@distractor-en are
+@distractor-en bored
 
-@sentence
+@fill
 @question Wéi fillt Dir Iech, wann Dir gebotzt hutt?
-@lu No dem Botzen sinn ech midd, mee eng propper Wunneng mécht de Kapp fräi.
-@distractor-lu knaschteg
-@distractor-lu Stëbs
-@en After cleaning I am tired, but a clean apartment clears the head.
-@distractor-en dirty
-@distractor-en dust
+@lu No dem Botzen sinn ech [midd], mee eng [propper] Wunneng [mécht] de Kapp fräi.
+@en After cleaning I am [tired], but a [clean] apartment [clears] the head.
+@distractor-lu hunn
+@distractor-lu midden
+@distractor-lu proppert
+@distractor-en have
+@distractor-en tiring
+@distractor-en cleanly
 
-@sentence
+@fill
 @question Wéi eng Hausaarbecht fannt Dir ustrengend? Firwat?
-@lu Ech fannen de Buedem opbotzen a stëbsen ustrengend, well se lang daueren.
-@distractor-lu angeneem
-@distractor-lu séier
-@en I find mopping the floor and dusting exhausting, because they take long.
-@distractor-en pleasant
-@distractor-en fast
+@lu Ech [fannen] de Buedem opbotzen a stëbsen ustrengend, well se [lang] [daueren].
+@en I [find] mopping the floor and dusting exhausting, because they [take] [long].
+@distractor-lu fënnt
+@distractor-lu ustrengeg
+@distractor-lu dauert
+@distractor-en finds
+@distractor-en exhausted
+@distractor-en takes
 
-@sentence
+@fill
 @question Wat ass Är Liblingshausaarbecht? Firwat?
-@lu Ech raume gär Këschte mat ale Saachen op, well ech da vill ewechgeheien.
-@distractor-lu stëbsen
-@distractor-lu langweileg
-@en I like tidying up boxes with old things, because I then throw a lot away.
-@distractor-en dusting
-@distractor-en boring
+@lu Ech [raume] gär Këschte mat [ale] Saachen op, well ech da vill [ewechgeheien].
+@en I like [tidying up] boxes with [old] things, because I then [throw] a lot away.
+@distractor-lu raumt
+@distractor-lu al
+@distractor-lu ewechgehäit
+@distractor-en tidies up
+@distractor-en older
+@distractor-en throws
 
-@sentence
+@fill
 @question Lauschtert Dir Musek, wann Dir de Stot maacht?
-@lu Jo, ech lauschtere Musek oder e Podcast, mee net beim Staubsaugen.
-@distractor-lu ëmmer
-@distractor-lu Kopfhörer
-@en Yes, I listen to music or a podcast, but not while vacuuming.
-@distractor-en always
-@distractor-en headphones
+@lu Jo, ech [lauschtere] Musek oder e Podcast, mee net [beim] Staubsaugen.
+@en Yes, I [listen] to music or a podcast, but not [while] vacuuming.
+@distractor-lu lauschtert
+@distractor-lu bei
+@distractor-lu ouni
+@distractor-en listens
+@distractor-en during
+@distractor-en without
 
-@sentence
+@fill
 @question Firwat lauschtert Dir beim Staubsaugen keng Musek?
-@lu De Staubsauger mécht ze vill Kaméidi, dofir héieren ech déi Musek net.
-@distractor-lu roueg
-@distractor-lu Biesem
-@en The vacuum cleaner makes too much noise, that is why I do not hear the music.
-@distractor-en quiet
-@distractor-en broom
+@lu De Staubsauger [mécht] ze vill Kaméidi, dofir [héieren] ech déi Musek [net].
+@en The vacuum cleaner [makes] too much noise, that is why I do [not] [hear] the music.
+@distractor-lu maachen
+@distractor-lu héiert
+@distractor-lu nach
+@distractor-en make
+@distractor-en hears
+@distractor-en still
 
 # --- Dishwasher, laundry, ironing ---
 
-@sentence
+@fill
 @question Hutt Dir eng Spullmaschinn? Wie raumt se an an aus?
-@lu Mir hunn eng Spullmaschinn, a meeschtens raumen ech se an.
-@distractor-lu Fra
+@lu Mir [hunn] eng Spullmaschinn, a [meeschtens] [raumen] ech se an.
+@en We [have] a dishwasher, and [mostly] I [load] it.
+@distractor-lu sinn
 @distractor-lu ni
-@en We have a dishwasher, and mostly I load it.
-@distractor-en wife
+@distractor-lu raumt
+@distractor-en are
 @distractor-en never
+@distractor-en loads
 
-@sentence
+@fill
 @question Firwat raumt Dir d'Spullmaschinn an?
-@lu Ech raume se an, well ech d'Geschier méi effizient stellen.
-@distractor-lu lues
-@distractor-lu Fra
-@en I load it because I place the dishes more efficiently.
-@distractor-en slowly
-@distractor-en wife
+@lu Ech [raume] se an, well ech d'Geschier [méi] effizient [stellen].
+@en I [load] it, because I [place] the dishes [more] efficiently.
+@distractor-lu raumt
+@distractor-lu manner
+@distractor-lu stellt
+@distractor-en loads
+@distractor-en less
+@distractor-en places
 
 @sentence
 @question Wat sinn d'Virdeeler vun enger Spullmaschinn?
@@ -419,41 +476,49 @@
 @distractor-en more
 @distractor-en dust
 
-@sentence
+@fill
 @question Wéi dacks maacht Dir d'Wäsch?
-@lu Mir maachen d'Wäsch all zwee bis dräi Deeg, a meeschtens mécht meng Fra se.
+@lu Mir [maachen] d'Wäsch all zwee bis dräi [Deeg], a [meeschtens] mécht meng Fra se.
+@en We [do] the laundry every two to three [days], and [mostly] my wife does it.
+@distractor-lu mécht
 @distractor-lu Wochen
-@distractor-lu ech
-@en We do the laundry every two to three days, and mostly my wife does it.
-@distractor-en weeks
-@distractor-en I
-
-@sentence
-@question Wäscht Dir Är Kleeder separat? Wéi trennt Dir se?
-@lu Mir trennen d'Kleeder no Faarf an no Temperatur, mee net ganz genau.
 @distractor-lu ni
-@distractor-lu Këscht
-@en We separate the clothes by colour and by temperature, but not very exactly.
+@distractor-en does
+@distractor-en weeks
 @distractor-en never
-@distractor-en box
 
-@sentence
+@fill
+@question Wäscht Dir Är Kleeder separat? Wéi trennt Dir se?
+@lu Mir [trennen] d'Kleeder no Faarf an no Temperatur, mee [net] ganz [genau].
+@en We [separate] the clothes by colour and by temperature, but [not] very [exactly].
+@distractor-lu trennt
+@distractor-lu nach
+@distractor-lu genee
+@distractor-en separates
+@distractor-en still
+@distractor-en exact
+
+@fill
 @question Op wat muss ee beim Wäschen oppassen?
-@lu Ech passen op déi richteg Temperatur op, fir déi hell Kleeder net ze ruinéieren.
-@distractor-lu Bett
-@distractor-lu kachen
-@en I pay attention to the right temperature, in order not to ruin the light clothes.
-@distractor-en bed
-@distractor-en cook
+@lu Ech [passen] op déi [richteg] Temperatur op, fir déi hell Kleeder net ze [ruinéieren].
+@en I [pay attention] to the [right] temperature, in order not to [ruin] the light clothes.
+@distractor-lu passt
+@distractor-lu richtegen
+@distractor-lu ruinéiert
+@distractor-en pays attention
+@distractor-en rightly
+@distractor-en ruins
 
-@sentence
+@fill
 @question Streckt Dir? Wéi dacks? Streckt Dir gär?
-@lu Ech strecke seelen, an ech maachen dat guer net gär.
+@lu Ech [strecke] [seelen], an ech [maachen] dat guer net gär.
+@en I [iron] [rarely], and I do not like [doing] that at all.
+@distractor-lu streckt
 @distractor-lu dacks
-@distractor-lu Zäit
-@en I iron rarely, and I do not like doing that at all.
+@distractor-lu mécht
+@distractor-en irons
 @distractor-en often
-@distractor-en time
+@distractor-en does
 
 # --- Daily routine, weekend, and no time ---
 
