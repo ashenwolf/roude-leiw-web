@@ -8,8 +8,6 @@
 [
   "@lesson"
   "@word"
-  "@sentence"
-  "@fill"
   "@question"
   "@image"
   "@image-alt"
@@ -17,6 +15,13 @@
   "@en"
   "@distractor-lu"
   "@distractor-en"
+] @keyword
+
+; @sentence / @fill are whole rules whose body is a single literal, so
+; tree-sitter exposes only the named node — the literal is not a node type.
+[
+  (sentence_marker)
+  (fill_marker)
 ] @keyword
 
 (lesson_id) @type
