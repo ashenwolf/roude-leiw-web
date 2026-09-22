@@ -69,16 +69,34 @@ npm run deploy:workers
 
 ## Environment Variables
 
-If you need environment variables:
+`VITE_`-prefixed variables are **inlined into the bundle at build time**, so they must be
+present wherever the build runs. Local `.env` is gitignored, so a Pages CI build (Method A)
+does *not* see it — the variable has to be set on the Pages project.
 
-1. **Via Dashboard**: Cloudflare Pages → Your Project → Settings → Environment Variables
-2. **Via Wrangler**: Add to `wrangler.toml`:
+### Required for the frontend build
+
+| Variable | Value | Consequence if missing |
+|---|---|---|
+| `VITE_PUBLIC_POSTHOG_KEY` | PostHog project key (`phc_…` — public, write-only ingestion key) | Analytics silently off; `src/main.tsx` skips `posthog.init` |
+| `VITE_PUBLIC_POSTHOG_HOST` | PostHog API host, e.g. `https://eu.i.posthog.com` | Same as above |
+
+Set both in **Cloudflare Pages → Your Project → Settings → Variables and secrets**, for
+**Production *and* Preview** (Preview builds are separate; a var set only on Production
+leaves every PR preview tokenless). A Pages env-var change only takes effect on the *next*
+build — retry the latest deployment after saving.
+
+Keep the same two keys in your local `.env` so `npm run deploy` (Method B) and `npm run dev`
+behave like prod. If you add a new PostHog host, extend `script-src`/`connect-src` in
+`public/_headers` in the same change.
+
+Other options:
+
+1. **Via Wrangler** (`wrangler.toml`, non-sensitive values only):
    ```toml
    [vars]
    VITE_API_URL = "https://api.example.com"
    ```
-
-   Note: In Vite, environment variables must be prefixed with `VITE_` to be exposed to the client.
+2. **Worker secrets** (server-side, never `VITE_`-prefixed): `npx wrangler secret put NAME`.
 
 ## Custom Domain
 
