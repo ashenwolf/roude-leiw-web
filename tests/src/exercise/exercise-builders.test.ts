@@ -103,7 +103,7 @@ describe("buildSentenceExercise — en→lu direction", () => {
     const ex = buildSentenceExercise(entry, "lu-en", []);
     expect(ex.item.direction).toBe("en-lu");
     expect(ex.item.question).toBe("Wou fuert Dir?");
-    expect(ex.item.phraseKey).toBe("phrase:en-lu:We are going to France.");
+    expect(ex.item.elementKey).toBe("phrase:en-lu:We are going to France.");
   });
 
   it("leaves direction alone for sentences without a question", () => {
@@ -213,8 +213,8 @@ describe("buildSentenceExercise — en→lu direction", () => {
     const entry = sentence(["Good morning"], ["Gudde Moien"]);
     // Each presentation direction is tracked separately so the error pool can
     // repeat the exact direction the user failed.
-    expect(buildSentenceExercise(entry, "en-lu", []).item.phraseKey).toBe("phrase:en-lu:Good morning");
-    expect(buildSentenceExercise(entry, "lu-en", []).item.phraseKey).toBe("phrase:lu-en:Good morning");
+    expect(buildSentenceExercise(entry, "en-lu", []).item.elementKey).toBe("phrase:en-lu:Good morning");
+    expect(buildSentenceExercise(entry, "lu-en", []).item.elementKey).toBe("phrase:lu-en:Good morning");
   });
 
   it("sets direction field", () => {
@@ -407,15 +407,15 @@ describe("buildFillExercise", () => {
   });
 
   it("keys on the @en line and the presented direction", () => {
-    expect(buildFillExercise(entry, "en-lu").item.fillKey).toBe(`fill:en-lu:${entry.en}`);
-    expect(buildFillExercise(entry, "lu-en").item.fillKey).toBe(`fill:lu-en:${entry.en}`);
+    expect(buildFillExercise(entry, "en-lu").item.elementKey).toBe(`fill:en-lu:${entry.en}`);
+    expect(buildFillExercise(entry, "lu-en").item.elementKey).toBe(`fill:lu-en:${entry.en}`);
   });
 
   it("truncates the key identity to 64 chars to match the server validator", () => {
     const long = fill(`${"x".repeat(80)} [a]`, "[b]");
     const { item } = buildFillExercise(long, "en-lu");
-    expect(item.fillKey).toBe(`fill:en-lu:${long.en.slice(0, 64)}`);
-    expect(item.fillKey.length).toBe("fill:en-lu:".length + 64);
+    expect(item.elementKey).toBe(`fill:en-lu:${long.en.slice(0, 64)}`);
+    expect(item.elementKey.length).toBe("fill:en-lu:".length + 64);
   });
 
   it("keeps a multi-word blank as a single tile — no tokenization", () => {
@@ -502,7 +502,7 @@ describe("buildFillExercise — a fill carrying @question", () => {
   });
 
   it("keys on the forced direction, not the rolled one", () => {
-    expect(buildFillExercise(qa, "lu-en").item.fillKey).toBe(`fill:en-lu:${qa.en}`);
+    expect(buildFillExercise(qa, "lu-en").item.elementKey).toBe(`fill:en-lu:${qa.en}`);
   });
 
   it("plays the question audio when it was stamped", () => {

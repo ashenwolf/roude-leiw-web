@@ -28,8 +28,13 @@ export type SentenceBuilderItem = {
   tokens: string[];
   /** Which way the puzzle is presented — decides prompt/answer languages. */
   direction: "en-lu" | "lu-en";
-  /** Stat key for this phrase in this direction (`phrase:{direction}:{firstEn}`). */
-  phraseKey: string;
+  /**
+   * Stat key for this element in this direction (`phrase:{direction}:{firstEn}`).
+   * Named for the concept rather than the kind: FillBlankItem carries the same
+   * field, so every consumer reads one name and the `phrase:`/`fill:` prefix is
+   * what distinguishes them.
+   */
+  elementKey: string;
   /**
    * Examiner question in Luxembourgish, rendered above the prompt. Present only
    * for Q&A sentences, which are always assembled en→lu (see
@@ -81,8 +86,8 @@ export type FillBlankItem = {
   promptText: string;
   /** Which way the item is presented — decides prompt/answer languages. */
   direction: "en-lu" | "lu-en";
-  /** Stat key for this fill in this direction (`fill:{direction}:{firstEn}`). */
-  fillKey: string;
+  /** Stat key for this element in this direction (`fill:{direction}:{firstEn}`). */
+  elementKey: string;
   /**
    * Examiner question in Luxembourgish, rendered above the prompt. Present only
    * for Q&A fills, which are always en→lu (see `resolveQuestionDirection`) — the

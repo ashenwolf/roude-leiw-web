@@ -32,7 +32,7 @@ const item = (overrides: Partial<FillBlankItem> = {}): FillBlankItem => ({
   tokens: ["gesinn", "d'Rad", "ginn", "de Bus"],
   promptText: "In the background I see the Ferris wheel.",
   direction: "en-lu",
-  fillKey: "fill:en-lu:In the background I [see] the [Ferris wheel].",
+  elementKey: "fill:en-lu:In the background I [see] the [Ferris wheel].",
   ...overrides,
 });
 
@@ -255,14 +255,14 @@ describe("toWordResultMap", () => {
   it("emits exactly one entry, keyed by the item's fill key", () => {
     const it = item();
     const map = toWordResultMap(it, applySubmit(withPlaced(it, [0, 1]), it));
-    expect(Object.keys(map)).toEqual([it.fillKey]);
-    expect(map[it.fillKey]).toEqual({ shown: 1, correct: 1, incorrect: 0 });
+    expect(Object.keys(map)).toEqual([it.elementKey]);
+    expect(map[it.elementKey]).toEqual({ shown: 1, correct: 1, incorrect: 0 });
   });
 
   it("reports the failure on the same single key", () => {
     const it = item();
     const map = toWordResultMap(it, applySubmit(withPlaced(it, [3, 3]), it));
-    expect(map[it.fillKey]).toEqual({ shown: 1, correct: 0, incorrect: 1 });
+    expect(map[it.elementKey]).toEqual({ shown: 1, correct: 0, incorrect: 1 });
   });
 });
 
@@ -309,7 +309,7 @@ const repeatItem = (): FillBlankItem => ({
   tokens: ["hunn", "gär", "sinn"],
   promptText: "I like the terrace, and I like walking.",
   direction: "en-lu",
-  fillKey: "fill:en-lu:I [like] the terrace, and I [like] walking.",
+  elementKey: "fill:en-lu:I [like] the terrace, and I [like] walking.",
 });
 
 describe("a tile several blanks need", () => {

@@ -214,7 +214,7 @@ describe("planLessonMode — not-yet-mastered bucket", () => {
     const firstSlot = config.queue[0];
     expect(firstSlot.type).toBe("sentence-builder");
     if (firstSlot.type === "sentence-builder") {
-      expect(firstSlot.item.phraseKey).toBe(phraseKey("en-lu", "Good morning"));
+      expect(firstSlot.item.elementKey).toBe(phraseKey("en-lu", "Good morning"));
     }
   });
 
@@ -239,7 +239,7 @@ describe("planLessonMode — not-yet-mastered bucket", () => {
     expect(firstSlot.type).toBe("sentence-builder");
     if (firstSlot.type === "sentence-builder") {
       // Must be s1 — the only unmastered sentence
-      expect(firstSlot.item.phraseKey).toBe(phraseKey("en-lu", "Hello"));
+      expect(firstSlot.item.elementKey).toBe(phraseKey("en-lu", "Hello"));
     }
   });
 });
@@ -411,7 +411,7 @@ describe("planLessonMode — deduplication", () => {
     const config = planLessonMode([l], "A1_01", {}, seqRng);
     const keys = config.queue
       .filter((s) => s.type === "sentence-builder")
-      .map((s) => (s.type === "sentence-builder" ? s.item.phraseKey : ""));
+      .map((s) => (s.type === "sentence-builder" ? s.item.elementKey : ""));
     expect(keys.length).toBe(LESSON.totalSlots);
     expect(new Set(keys).size).toBe(keys.length);
   });
@@ -428,7 +428,7 @@ describe("planLessonMode — deduplication", () => {
     const config = planLessonMode([l], "A1_01", {}, seqRng);
     const keys = config.queue
       .filter((s) => s.type === "sentence-builder")
-      .map((s) => (s.type === "sentence-builder" ? s.item.phraseKey : ""));
+      .map((s) => (s.type === "sentence-builder" ? s.item.elementKey : ""));
     expect(new Set(keys).size).toBe(keys.length);
   });
 
@@ -519,7 +519,7 @@ describe("planLessonMode — endgame convergence", () => {
         const keys =
           ex.type === "word-match"
             ? ex.pairs.map(([lu, en]) => wordKey(lu, en))
-            : [ex.item.phraseKey];
+            : [ex.item.elementKey];
         return keys.reduce((inner, key) => {
           const c = inner[key] ?? { shown: 0, correct: 0, incorrect: 0 };
           return { ...inner, [key]: { ...c, shown: c.shown + 1, correct: c.correct + 1 } };

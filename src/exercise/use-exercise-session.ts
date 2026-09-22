@@ -46,8 +46,7 @@ const determineSlotOutcome = (
   results: WordResultMap,
 ): "success" | "mistake" => {
   if (batch.type === "word-match") return "success";
-  const key = batch.type === "sentence-builder" ? batch.item.phraseKey : batch.item.fillKey;
-  const r = results[key];
+  const r = results[batch.item.elementKey];
   return r && r.correct > 0 ? "success" : "mistake";
 };
 

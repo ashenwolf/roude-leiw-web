@@ -107,7 +107,7 @@ flowchart TD
     eprog["ProgressView\nsections[] from blockBoundaries + overflow\n(computeProgressView)"]
     wm["❮ word-match ❯\n· pairs: WordPair[]\n→ GameState · slots · wordResults\n(one progress tick per pair)"]
     sb["❮ sentence-builder ❯\n· item: SentenceBuilderItem\n→ SentenceGameState · result\n(one tick per submit)"]
-    fb["❮ fill-blank ❯\n· item: FillBlankItem\n  { frame, blanks, tokens, fillKey }\n→ FillGameState · result\n(one tick per submit)"]
+    fb["❮ fill-blank ❯\n· item: FillBlankItem\n  { frame, blanks, tokens, elementKey }\n→ FillGameState · result\n(one tick per submit)"]
   end
 
   words & lessons -->|"projectHomeLessonsView()"| hv
@@ -160,4 +160,4 @@ Transitions are dispatched via `multimethod` keyed on `[action.type, status]`. S
 - When a round completes, unmatched pairs reshuffle into remaining fading slots
 - Per-word `{shown, correct, incorrect}` accumulates in `GameState.wordResults`
 
-**SentenceGameState** (`src/exercise/SentenceBuilder/types.ts`, logic in `SentenceBuilder/sentence-logic.ts`) — **not** a state machine. It's an immutable accumulation record `{ assembled, checkResult, result }`. `checkResult` (`null → "correct" | "incorrect"`) acts as a one-way lock: once set, `applyTokenTap` / `applyAssembledTap` no-op. The single `result` (`WordResultEntry`) is folded into the session-level `WordResultMap` by `toWordResultMap`. If you need branching mid-puzzle behavior in the future, promote this to a real discriminated union — don't add ad-hoc flags.
+**SentenceGameState** (`src/exercise/SentenceBuilder/types.ts`, logic in `SentenceBuilder/sentence-logic.ts`, text comparison in `answer-text.ts`) — **not** a state machine. It's an immutable accumulation record `{ assembled, checkResult, result }`. `checkResult` (`null → "correct" | "incorrect"`) acts as a one-way lock: once set, `applyTokenTap` / `applyAssembledTap` no-op. The single `result` (`WordResultEntry`) is folded into the session-level `WordResultMap` by `toWordResultMap`. If you need branching mid-puzzle behavior in the future, promote this to a real discriminated union — don't add ad-hoc flags.

@@ -148,7 +148,7 @@ describe("planExamMode", () => {
     // compare the plan's shape: slot types, word pairs, and phrase identities.
     const shape = () =>
       planExamMode(subLesson(words(7), [sentence("Hi", "Moien")]), fakeRng(0.3, 0.7, 0.1))
-        .queue.map((ex) => (ex.type === "word-match" ? ex.pairs : ex.item.phraseKey));
+        .queue.map((ex) => (ex.type === "word-match" ? ex.pairs : ex.item.elementKey));
     expect(shape()).toEqual(shape());
   });
 
