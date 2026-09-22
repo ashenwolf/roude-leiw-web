@@ -115,6 +115,8 @@ These are the ones worth naming, because moving or bypassing them breaks somethi
 | `src/lib/stats-merge.ts` + `worker/lib/user.ts` | client and server merges must stay byte-identical; a test enforces it |
 | `src/lib/streak.ts` | the one module imported by both client and worker |
 | `src/ui/PinnedBottomBar.tsx` | encodes the `<main>`-has-no-bottom-padding contract |
+| `src/exercise/answer-text.ts` | the ONE definition of "same text" — tile identity, answer grading, and `@fill`/`@sentence` disjointness all compare through `normalizeAnswer`. Layer 1, so both mechanics and the builders can reach it downward; it previously lived inside `SentenceBuilder/` and was imported sideways |
+| `src/exercise/mode-config.ts` | the Layer-3 contract plus `modeConfig()` — every planner assembles its result there, so a new field lands once per Mode |
 | `src/ui/index.ts` | the design system's public surface — a component not exported here is not part of it |
 | `src/exercise/ExerciseLayout.tsx` | encodes the constant-height rule (nothing may grow on tap) |
 | `src/exercise/ExercisePrompt.tsx` | the ONE prompt header (question + prompt + audio) both SentenceBuilder and FillBlank render |

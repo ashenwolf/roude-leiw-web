@@ -15,7 +15,9 @@ import { bucketedPick, pickUniquePairs } from "../selection";
 import type { WordStats } from "../../context/auth";
 import type { FillError, PhraseError } from "../error-pool";
 import type { Lesson, WordEntry } from "../letz-parser";
-import type { ModeConfig } from "../mode-config";
+import { modeConfig } from "../mode-config";
+
+import type { ModeConfig, ModeShape } from "../mode-config";
 import type { Exercise } from "../types";
 
 const BLOCK_BOUNDARIES = [
@@ -23,6 +25,14 @@ const BLOCK_BOUNDARIES = [
   2 * LESSON.slotsPerBlock,
   3 * LESSON.slotsPerBlock,
 ] as const;
+
+/** Same Session shape as Lesson, but completing it unlocks nothing. */
+const SHAPE: ModeShape = {
+  plannedSlots: LESSON.totalSlots,
+  blockBoundaries: BLOCK_BOUNDARIES,
+  hasCorrectionBlock: true,
+  completionEffect: "noop",
+};
 
 // Single-bucket pool — all draws come from the error pool.
 const ERRORS_ONLY_BUCKET = [{ name: "errors" as const, upTo: 1.0 }];
@@ -51,15 +61,7 @@ export const planFixErrorsMode = (
     errorPool.phrases.length === 0 &&
     errorPool.fills.length === 0;
   if (empty) {
-    return {
-      lessons,
-      queue: [],
-      plannedSlots: LESSON.totalSlots,
-      currentLessonId,
-      blockBoundaries: BLOCK_BOUNDARIES,
-      hasCorrectionBlock: true,
-      completionEffect: "noop",
-    };
+    return modeConfig(SHAPE, { lessons, queue: [], currentLessonId });
   }
 
   const wordPools = { errors: errorPool.words };
@@ -80,15 +82,7 @@ export const planFixErrorsMode = (
     if (slot) queue.push(slot);
   }
 
-  return {
-    lessons,
-    queue,
-    plannedSlots: LESSON.totalSlots,
-    currentLessonId,
-    blockBoundaries: BLOCK_BOUNDARIES,
-    hasCorrectionBlock: true,
-    completionEffect: "noop",
-  };
+  return modeConfig(SHAPE, { lessons, queue, currentLessonId });
 };
 
 // ─── Internal ─────────────────────────────────────────────────────────────────

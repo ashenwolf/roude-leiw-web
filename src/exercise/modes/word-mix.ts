@@ -9,13 +9,23 @@ import { pickPair } from "../selection";
 
 import type { WordStats } from "../../context/auth";
 import type { Lesson, WordEntry } from "../letz-parser";
-import type { ModeConfig } from "../mode-config";
+import { modeConfig } from "../mode-config";
+
+import type { ModeConfig, ModeShape } from "../mode-config";
 import type { Exercise } from "../types";
 
 // Word Mix: 3 Blocks × 1 Slot each → milestones at 1, 2, 3
 const BLOCK_BOUNDARIES = Array.from({ length: BLOCK_COUNT }, (_, i) =>
   (i + 1) * WORD_MIX.slotsPerBlock,
 );
+
+/** Three one-Slot Blocks, no correction Block: a word-match Slot cannot fail. */
+const SHAPE: ModeShape = {
+  plannedSlots: WORD_MIX.totalSlots,
+  blockBoundaries: BLOCK_BOUNDARIES,
+  hasCorrectionBlock: false,
+  completionEffect: "noop",
+};
 
 /**
  * Plans a Word Mix Session.
@@ -40,15 +50,7 @@ export const planWordMixMode = (
   const pool = lessons.filter((l) => l.meta.id <= frontierId);
 
   if (pool.length === 0) {
-    return {
-      lessons,
-      queue: [],
-      plannedSlots: WORD_MIX.totalSlots,
-      currentLessonId,
-      blockBoundaries: BLOCK_BOUNDARIES,
-      hasCorrectionBlock: false,
-      completionEffect: "noop",
-    };
+    return modeConfig(SHAPE, { lessons, queue: [], currentLessonId });
   }
 
   const currentLesson = pool.find((l) => l.meta.id === currentLessonId) ?? pool[pool.length - 1];
@@ -69,15 +71,7 @@ export const planWordMixMode = (
     () => buildWordMatchExercise(buildPairs(wordPools, rng)),
   );
 
-  return {
-    lessons,
-    queue,
-    plannedSlots: WORD_MIX.totalSlots,
-    currentLessonId,
-    blockBoundaries: BLOCK_BOUNDARIES,
-    hasCorrectionBlock: false,
-    completionEffect: "noop",
-  };
+  return modeConfig(SHAPE, { lessons, queue, currentLessonId });
 };
 
 // ─── Internal ─────────────────────────────────────────────────────────────────

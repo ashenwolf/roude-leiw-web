@@ -14,7 +14,9 @@ import { bucketedPick, phrasesOf, pickPhrase, pickUniquePairs } from "../selecti
 
 import type { WordStats } from "../../context/auth";
 import type { Lesson, WordEntry } from "../letz-parser";
-import type { ModeConfig } from "../mode-config";
+import { modeConfig } from "../mode-config";
+
+import type { ModeConfig, ModeShape } from "../mode-config";
 import type { Exercise } from "../types";
 import type { Bucket, Phrase } from "../selection";
 
@@ -73,15 +75,7 @@ export const planLessonMode = (
 ): ModeConfig => {
   const pool = lessons.filter((l) => l.meta.id <= upperBoundId);
   if (pool.length === 0) {
-    return {
-      lessons,
-      queue: [],
-      plannedSlots: LESSON.totalSlots,
-      currentLessonId: "",
-      blockBoundaries: BLOCK_BOUNDARIES,
-      hasCorrectionBlock: true,
-      completionEffect: "unlock-check",
-    };
+    return modeConfig(SHAPE, { lessons, queue: [], currentLessonId: "" });
   }
 
   const currentLesson = pool[pool.length - 1];
@@ -135,15 +129,7 @@ export const planLessonMode = (
     () => buildSlot(wordPools, phrasePools, slotTypeDistribution, lessonVocab, rng, budget),
   ).filter((slot): slot is Exercise => slot !== null);
 
-  return {
-    lessons,
-    queue,
-    plannedSlots: LESSON.totalSlots,
-    currentLessonId: currentLesson.meta.id,
-    blockBoundaries: BLOCK_BOUNDARIES,
-    hasCorrectionBlock: true,
-    completionEffect: "unlock-check",
-  };
+  return modeConfig(SHAPE, { lessons, queue, currentLessonId: currentLesson.meta.id });
 };
 
 // ─── Internal ─────────────────────────────────────────────────────────────────
@@ -185,6 +171,14 @@ type PhraseBudget = {
   readonly uses: Map<string, number>;
   readonly notYetMastered: ReadonlySet<string>;
   readonly repeatAllowance: number;
+};
+
+/** What a Lesson Session always looks like, whatever it ends up scheduling. */
+const SHAPE: ModeShape = {
+  plannedSlots: LESSON.totalSlots,
+  blockBoundaries: BLOCK_BOUNDARIES,
+  hasCorrectionBlock: true,
+  completionEffect: "unlock-check",
 };
 
 /**

@@ -19,8 +19,19 @@ import {
 import { bucketedPick } from "../selection";
 
 import type { Lesson } from "../letz-parser";
-import type { ModeConfig } from "../mode-config";
+import { modeConfig } from "../mode-config";
+
+import type { ModeConfig, ModeShape } from "../mode-config";
 import type { Exercise } from "../types";
+
+/**
+ * Exam covers one SubLesson exactly once, so its slot count and Block cuts are
+ * derived from the content and passed per-plan; only the two flags are fixed.
+ */
+const SHAPE: ModeShape = {
+  hasCorrectionBlock: true,
+  completionEffect: "noop",
+};
 
 /** Block boundaries: BLOCK_COUNT near-equal cuts, deduplicated for tiny queues. */
 const examBlockBoundaries = (slotCount: number): number[] =>
@@ -59,13 +70,13 @@ export const planExamMode = (
 
   const queue: Exercise[] = shuffle([...wordSlots, ...sentenceSlots, ...fillSlots], rng);
 
-  return {
+  // Exam is the one Mode whose slot count and Block cuts come from the content
+  // rather than a constant, so both are passed rather than taken from SHAPE.
+  return modeConfig(SHAPE, {
     lessons: [subLesson],
     queue,
-    plannedSlots: queue.length,
     currentLessonId: subLesson.meta.id,
+    plannedSlots: queue.length,
     blockBoundaries: examBlockBoundaries(queue.length),
-    hasCorrectionBlock: true,
-    completionEffect: "noop",
-  };
+  });
 };
