@@ -37,21 +37,25 @@
 @distractor-en radio
 @distractor-en school
 
-@sentence
-@lu Ech kenne vill Genren, mee Volleksmusek hunn ech am léifsten.
-@en I know many genres, but I like folk music the most.
-@distractor-lu danzen
-@distractor-lu Radio
-@distractor-en dance
-@distractor-en radio
+@fill
+@lu Ech [kenne] vill Genren, mee Volleksmusek [hunn] ech am [léifsten].
+@en I [know] many genres, but I [like] folk music the [most].
+@distractor-lu kennt
+@distractor-lu sinn
+@distractor-lu léif
+@distractor-en knows
+@distractor-en am
+@distractor-en dear
 
-@sentence
-@lu De Museker spillt Gittar, mee hie kann net sangen.
-@en The musician plays the guitar, but he cannot sing.
-@distractor-lu Schoul
-@distractor-lu Auto
-@distractor-en school
-@distractor-en car
+@fill
+@lu De Museker [spillt] Gittar, mee hie [kann] net [sangen].
+@en The musician [plays] the guitar, but he [cannot] [sing].
+@distractor-lu spillen
+@distractor-lu kënne
+@distractor-lu séngt
+@distractor-en play
+@distractor-en could not
+@distractor-en sings
 
 @sentence
 @lu Al Lidder brénge mir dacks Erënnerungen.

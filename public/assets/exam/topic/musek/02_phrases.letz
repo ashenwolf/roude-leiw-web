@@ -23,13 +23,15 @@
 @word Englesch = English
 @word Ukrainesch = Ukrainian
 
-@sentence
-@lu Musek ass wichteg fir mech, well se mir Energie gëtt.
-@en Music is important to me, because it gives me energy.
-@distractor-lu Reen
-@distractor-lu Schoul
-@distractor-en rain
-@distractor-en school
+@fill
+@lu Musek [ass] [wichteg] fir mech, [well] se mir Energie gëtt.
+@en Music [is] [important] to me, [because] it gives me energy.
+@distractor-lu sinn
+@distractor-lu wichtegen
+@distractor-lu ouni
+@distractor-en are
+@distractor-en importantly
+@distractor-en without
 
 @sentence
 @lu Ech lauschtere Musek mat Kopfhörer, wann ech schaffen.
@@ -55,13 +57,15 @@
 @distractor-en books
 @distractor-en rain
 
-@sentence
-@lu Als Kand hunn ech Musek meeschtens am Radio gelauschtert.
-@en As a child I mostly listened to music on the radio.
-@distractor-lu Kino
-@distractor-lu Schoul
-@distractor-en cinema
-@distractor-en school
+@fill
+@lu Als Kand [hunn] ech Musek [meeschtens] am Radio [gelauschtert].
+@en As a child I [mostly] [listened] to music on the radio.
+@distractor-lu sinn
+@distractor-lu seelen
+@distractor-lu lauschtere
+@distractor-en am
+@distractor-en rarely
+@distractor-en listening
 
 @sentence
 @lu Ech lauschtere gär Musek op Englesch an op Ukrainesch.

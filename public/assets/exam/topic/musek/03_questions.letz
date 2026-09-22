@@ -33,23 +33,27 @@
 @word typesch = typical
 @word fréier = in the past
 
-@sentence
+@fill
 @question Lauschtert Dir gär Musek? Firwat?
-@lu Jo, ech lauschteren immens gär Musek, well se mir Energie gëtt.
-@en Yes, I really like listening to music, because it gives me energy.
-@distractor-lu Kino
-@distractor-lu Reen
-@distractor-en cinema
-@distractor-en rain
+@lu Jo, ech [lauschteren] immens gär Musek, [well] se mir Energie [gëtt].
+@en Yes, I really like [listening] to music, [because] it [gives] me energy.
+@distractor-lu lauschtert
+@distractor-lu ouni
+@distractor-lu ginn
+@distractor-en listens
+@distractor-en without
+@distractor-en give
 
-@sentence
+@fill
 @question Ass Musek wichteg fir Iech? Firwat?
-@lu Jo, Musek ass ganz wichteg fir mech, well se mir heiansdo al Erënnerunge bréngt.
-@en Yes, music is very important to me, because it sometimes brings back old memories.
-@distractor-lu Suen
-@distractor-lu Kino
-@distractor-en money
-@distractor-en cinema
+@lu Jo, Musek [ass] ganz [wichteg] fir mech, [well] se mir heiansdo al Erënnerunge bréngt.
+@en Yes, music [is] very [important] to me, [because] it sometimes brings back old memories.
+@distractor-lu sinn
+@distractor-lu wichtegen
+@distractor-lu ouni
+@distractor-en are
+@distractor-en importantly
+@distractor-en without
 
 @sentence
 @question Wéi dacks lauschtert Dir Musek a fir wéi laang?
@@ -60,50 +64,60 @@
 @distractor-en never
 @distractor-en rarely
 
-@sentence
+@fill
 @question Wéini lauschtert Dir Musek?
-@lu Ech lauschtere Musek, wann ech schaffen a wann ech mam Hond spadséiere ginn.
-@en I listen to music when I work and when I go for a walk with the dog.
-@distractor-lu danzen
-@distractor-lu Kino
-@distractor-en dance
-@distractor-en cinema
+@lu Ech [lauschtere] Musek, wann ech [schaffen] a wann ech mam Hond spadséiere [ginn].
+@en I [listen to] music when I [work] and when I [go] for a walk with the dog.
+@distractor-lu lauschtert
+@distractor-lu schafft
+@distractor-lu gitt
+@distractor-en listens to
+@distractor-en works
+@distractor-en goes
 
-@sentence
+@fill
 @question Wou lauschtert Dir gär Musek?
-@lu Ech lauschtere gär Musek am Auto, op der Aarbecht an dobausse mam Hond.
-@en I like listening to music in the car, at work and outside with the dog.
-@distractor-lu Schoul
-@distractor-lu Kino
-@distractor-en school
-@distractor-en cinema
+@lu Ech [lauschtere] gär Musek am [Auto], op der Aarbecht an dobausse mam [Hond].
+@en I like [listening] to music in the [car], at work and outside with the [dog].
+@distractor-lu lauschtert
+@distractor-lu Autoen
+@distractor-lu Hënn
+@distractor-en listens
+@distractor-en cars
+@distractor-en dogs
 
-@sentence
+@fill
 @question Nennt zwee Museksgenren, déi Dir gär hutt.
-@lu Ech lauschtere gär Rock a Metal, an heiansdo och Volleksmusek an Elektro.
-@en I like listening to rock and metal, and sometimes also folk music and electro.
-@distractor-lu Bicher
-@distractor-lu Sport
-@distractor-en books
-@distractor-en sport
+@lu Ech [lauschtere] gär [Rock] a Metal, an heiansdo och [Volleksmusek] an Elektro.
+@en I like [listening] to [rock] and metal, and sometimes also [folk music] and electro.
+@distractor-lu lauschtert
+@distractor-lu Jazz
+@distractor-lu Klassik
+@distractor-en listens
+@distractor-en jazz
+@distractor-en classical
 
-@sentence
+@fill
 @question A wéi enger Sprooch lauschtert Dir Musek?
-@lu Meeschtens op Englesch an op Ukrainesch, heiansdo och op Däitsch oder op Franséisch.
-@en Mostly in English and in Ukrainian, sometimes also in German or in French.
-@distractor-lu Spuenesch
-@distractor-lu Portugisesch
-@distractor-en Spanish
-@distractor-en Portuguese
+@lu [Meeschtens] op [Englesch] an op Ukrainesch, heiansdo och op [Däitsch] oder op Franséisch.
+@en [Mostly] in [English] and in Ukrainian, sometimes also in [German] or in French.
+@distractor-lu Seelen
+@distractor-lu Franséisch
+@distractor-lu Italieenesch
+@distractor-en Rarely
+@distractor-en French
+@distractor-en Italian
 
-@sentence
+@fill
 @question Wéi ee Kënschtler lauschtert Dir de Moment?
-@lu De Moment lauschteren ech vill In Flames, dat ass eng Metalband aus Schweden.
-@en At the moment I listen to In Flames a lot, that is a metal band from Sweden.
-@distractor-lu Radio
-@distractor-lu Gittar
-@distractor-en radio
-@distractor-en guitar
+@lu De Moment [lauschteren] ech vill In Flames, dat [ass] eng [Metalband] aus Schweden.
+@en At the moment I [listen to] In Flames a lot, that [is] a [metal band] from Sweden.
+@distractor-lu lauschtert
+@distractor-lu sinn
+@distractor-lu Metalbands
+@distractor-en listens to
+@distractor-en are
+@distractor-en metal bands
 
 @sentence
 @question Wéi lauschtert Dir am léifste Musek?
@@ -114,23 +128,27 @@
 @distractor-en cassettes
 @distractor-en TV
 
-@sentence
+@fill
 @question Lauschtert Dir de Radio?
-@lu Nee, ech lauschtere kee Radio, ech streame meng Musek léiwer.
-@en No, I don't listen to the radio, I prefer streaming my music.
-@distractor-lu Tëlee
-@distractor-lu Kino
-@distractor-en TV
-@distractor-en cinema
+@lu Nee, ech [lauschtere] kee Radio, ech [streame] meng Musek [léiwer].
+@en No, I don't [listen to] the radio, I [prefer] [streaming] my music.
+@distractor-lu lauschtert
+@distractor-lu streamt
+@distractor-lu gär
+@distractor-en listens to
+@distractor-en streams
+@distractor-en gladly
 
-@sentence
+@fill
 @question Benotzt Dir eng Streaming-Plattform, fir Musek ze lauschteren?
-@lu Jo, ech benotze bal ëmmer Spotify, fir Musek ze streamen.
-@en Yes, I almost always use Spotify to stream music.
-@distractor-lu Radio
-@distractor-lu Kassetten
-@distractor-en radio
-@distractor-en cassettes
+@lu Jo, ech [benotze] bal [ëmmer] Spotify, [fir] Musek ze streamen.
+@en Yes, I almost [always] [use] Spotify [in order] to stream music.
+@distractor-lu benotzt
+@distractor-lu ni
+@distractor-lu ouni
+@distractor-en uses
+@distractor-en never
+@distractor-en without
 
 @sentence
 @question Wat ass besser: Apple Music oder Spotify?
@@ -141,41 +159,49 @@
 @distractor-en radio
 @distractor-en expensive
 
-@sentence
+@fill
 @question Wéi hutt Dir fréier Musek gelauschtert?
-@lu Fréier hunn ech Musek op Kassetten, op CDen an als MP3 gelauschtert.
-@en In the past I listened to music on cassettes, on CDs and as MP3.
-@distractor-lu Computer
-@distractor-lu Telefon
-@distractor-en computer
-@distractor-en telephone
+@lu Fréier [hunn] ech Musek op [Kassetten], op CDen an als MP3 [gelauschtert].
+@en In the past I [listened] to music on [cassettes], on CDs and as MP3.
+@distractor-lu sinn
+@distractor-lu Kassett
+@distractor-lu lauschtere
+@distractor-en listen
+@distractor-en cassette
+@distractor-en listening
 
-@sentence
+@fill
 @question Hutt Dir als Kand gär Musek gelauschtert? Wa jo, wéi eng Musek?
-@lu Jo, ech hu gär Musek gelauschtert, mee nëmmen déi Lidder, déi am Radio waren.
-@en Yes, I liked listening to music, but only the songs that were on the radio.
-@distractor-lu Concerten
-@distractor-lu Tëlee
-@distractor-en concerts
-@distractor-en TV
+@lu Jo, ech [hu] gär Musek [gelauschtert], mee nëmmen déi [Lidder], déi am Radio waren.
+@en Yes, I [liked] [listening to] music, but only the [songs] that were on the radio.
+@distractor-lu sinn
+@distractor-lu lauschtere
+@distractor-lu Lidd
+@distractor-en like
+@distractor-en listened to
+@distractor-en song
 
-@sentence
+@fill
 @question Hutt Dir an der Schoul sange geléiert?
-@lu Nee, an der Schoul hunn ech net sange geléiert.
-@en No, I did not learn to sing at school.
-@distractor-lu danzen
-@distractor-lu molen
-@distractor-en dance
-@distractor-en paint
+@lu Nee, an der Schoul [hunn] ech net [sange] [geléiert].
+@en No, I did not [learn] to [sing] at school.
+@distractor-lu sinn
+@distractor-lu séngt
+@distractor-lu léieren
+@distractor-en learned
+@distractor-en sings
+@distractor-en learning
 
-@sentence
+@fill
 @question Spillt Dir en Instrument? Wann net, firwat net?
-@lu Nee, ech spille keen Instrument, well ech keng Gedold hu fir ze üben.
-@en No, I don't play an instrument, because I have no patience to practise.
-@distractor-lu Radio
-@distractor-lu Kino
-@distractor-en radio
-@distractor-en cinema
+@lu Nee, ech [spille] keen Instrument, [well] ech keng Gedold [hu] fir ze üben.
+@en No, I don't [play] an instrument, [because] I [have] no patience to practise.
+@distractor-lu spillt
+@distractor-lu ouni
+@distractor-lu huet
+@distractor-en plays
+@distractor-en without
+@distractor-en has
 
 @sentence
 @question Wëllt Dir en Instrument léieren?
@@ -186,77 +212,93 @@
 @distractor-en radio
 @distractor-en concert
 
-@sentence
+@fill
 @question Gitt Dir dacks op Concerten?
-@lu Jo, ech gi véier oder fënnef Mol am Joer op e Concert, dacks an d'Rockhal.
-@en Yes, I go to a concert four or five times a year, often to the Rockhal.
-@distractor-lu Kino
-@distractor-lu seelen
-@distractor-en cinema
-@distractor-en rarely
+@lu Jo, ech [gi] [véier] oder fënnef Mol am Joer op e Concert, dacks an d'Rockhal.
+@en Yes, I [go] to a concert [four] or five times a year, often to the Rockhal.
+@distractor-lu gitt
+@distractor-lu dräi
+@distractor-lu ginn
+@distractor-en goes
+@distractor-en three
+@distractor-en gone
 
-@sentence
+@fill
 @question Op wéi engem Concert waart Dir fir d'lescht?
-@lu Fir d'lescht ware mir op engem Concert vun Offspring bei der Luxexpo.
-@en Last time we were at a concert by Offspring near the Luxexpo.
-@distractor-lu Festival
-@distractor-lu Kino
-@distractor-en festival
-@distractor-en cinema
+@lu Fir d'lescht [ware] mir op engem [Concert] vun Offspring bei der Luxexpo.
+@en Last time we [were] at a [concert] by Offspring near the Luxexpo.
+@distractor-lu war
+@distractor-lu Concerten
+@distractor-lu sinn
+@distractor-en was
+@distractor-en concerts
+@distractor-en are
 
-@sentence
+@fill
 @question Hutt Dir schonn eemol e Museksfestival besicht? Wou?
-@lu Jo, ech war schonn op ville Festivallen, fir d'lescht op Rock am Ring.
-@en Yes, I have already been to many festivals, most recently at Rock am Ring.
-@distractor-lu Tëlee
-@distractor-lu Radio
-@distractor-en TV
-@distractor-en radio
+@lu Jo, ech [war] schonn op [ville] Festivallen, fir d'lescht op Rock am Ring.
+@en Yes, I [have] already been to [many] festivals, most recently at Rock am Ring.
+@distractor-lu sinn
+@distractor-lu vill
+@distractor-lu ass
+@distractor-en has
+@distractor-en much
+@distractor-en had
 
-@sentence
+@fill
 @question Wéi eng Band wëllt Dir onbedéngt live gesinn?
-@lu Ech wëll onbedéngt Metallica, Rammstein a Muse live gesinn.
-@en I absolutely want to see Metallica, Rammstein and Muse live.
-@distractor-lu Kino
-@distractor-lu Radio
-@distractor-en cinema
-@distractor-en radio
+@lu Ech [wëll] [onbedéngt] Metallica, Rammstein a Muse live [gesinn].
+@en I [absolutely] [want] to [see] Metallica, Rammstein and Muse live.
+@distractor-lu wëlle
+@distractor-lu villäicht
+@distractor-lu gesäin
+@distractor-en wants
+@distractor-en maybe
+@distractor-en sees
 
-@sentence
+@fill
 @question Wat ass typesch Musek aus Ärem Heemechtsland?
-@lu Aus der Ukrain ass Pop-Rock wéi Okean Elzy typesch, mee nei Bands mësche Folk mat Elektro.
-@en From Ukraine, pop-rock like Okean Elzy is typical, but new bands mix folk with electro.
-@distractor-lu Gittar
-@distractor-lu Concert
-@distractor-en guitar
-@distractor-en concert
+@lu Aus der Ukrain ass Pop-Rock [wéi] Okean Elzy [typesch], mee nei Bands [mësche] Folk mat Elektro.
+@en From Ukraine pop-rock [like] Okean Elzy is [typical], but new bands [mix] folk with electro.
+@distractor-lu wann
+@distractor-lu typeschen
+@distractor-lu mëscht
+@distractor-en when
+@distractor-en typically
+@distractor-en mixes
 
-@sentence
+@fill
 @question Kennt Dir lëtzebuergesch Museker?
-@lu Jo, ech kenne ROME, an hie kënnt aus Lëtzebuerg.
-@en Yes, I know ROME, and he comes from Luxembourg.
-@distractor-lu Sänger
-@distractor-lu Radio
-@distractor-en singer
-@distractor-en radio
+@lu Jo, ech [kenne] ROME, an hie [kënnt] aus [Lëtzebuerg].
+@en Yes, I [know] ROME, and he [comes] from [Luxembourg].
+@distractor-lu kennt
+@distractor-lu kommen
+@distractor-lu Frankräich
+@distractor-en knows
+@distractor-en come
+@distractor-en France
 
-@sentence
+@fill
 @question Ass Musek lauschteren Ärer Meenung no en Hobby?
-@lu Jo, ech mengen, datt Musek lauschteren en Hobby ass.
-@en Yes, I think that listening to music is a hobby.
-@distractor-lu Sport
-@distractor-lu Aarbecht
-@distractor-en sport
-@distractor-en work
+@lu Jo, ech [mengen], [datt] Musek lauschteren en Hobby [ass].
+@en Yes, I [think] [that] listening to music [is] a hobby.
+@distractor-lu mengt
+@distractor-lu wann
+@distractor-lu sinn
+@distractor-en thinks
+@distractor-en when
+@distractor-en are
 
-@sentence
+@fill
 @question Wéi a wou fannt Dir nei Musek?
-@lu Ech fannen nei Musek meeschtens op Spotify, an heiansdo héieren ech nei Bands op engem Festival.
-@en I mostly find new music on Spotify, and sometimes I hear new bands at a festival.
-@distractor-lu Kino
-@distractor-lu Tëlee
-@distractor-en cinema
-@distractor-en TV
+@lu Ech [fannen] nei Musek [meeschtens] op Spotify, an heiansdo [héieren] ech nei Bands op engem Festival.
+@en I [find] new music [mostly] on Spotify, and sometimes I [hear] new bands at a festival.
+@distractor-lu fënnt
+@distractor-lu seelen
+@distractor-lu héiert
+@distractor-en finds
+@distractor-en rarely
+@distractor-en hears
 
 # --- Reusable frames (@fill) ---
 
