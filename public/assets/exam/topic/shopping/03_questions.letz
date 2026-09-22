@@ -100,9 +100,13 @@
 @distractor-lu dacks
 @distractor-lu Geld
 
-@sentence
+@fill
 @question Wat maacht Dir, wann e Buttek zou ass?
-@lu Da ginn ech an d'Tankstell, do ass ëmmer op.
-@en Then I go to the petrol station, it is always open.
-@distractor-lu zou
-@distractor-lu Bäckerei
+@lu Da [ginn] ech an d'[Tankstell], do [ass] ëmmer op.
+@en Then I [go] to the [petrol station], it [is] always open.
+@distractor-lu gitt
+@distractor-lu Tankstellen
+@distractor-lu sinn
+@distractor-en goes
+@distractor-en petrol stations
+@distractor-en are

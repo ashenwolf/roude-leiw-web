@@ -59,14 +59,16 @@
 @distractor-en go
 @distractor-en live
 
-@sentence
+@fill
 @question Wéi ass d'Wieder an Ärem Heemechtsland?
-@lu D'Wieder ass heiansdo extrem, de Wanter ass kal an de Summer ass waarm.
-@en The weather is sometimes extreme, the winter is cold and the summer is warm.
-@distractor-lu schéin
-@distractor-lu frësch
-@distractor-en beautiful
-@distractor-en fresh
+@lu D'Wieder ass [heiansdo] [extrem], de Wanter ass [kal] an de Summer ass waarm.
+@en The weather is [sometimes] [extreme], the winter is [cold] and the summer is warm.
+@distractor-lu ëmmer
+@distractor-lu extremen
+@distractor-lu waarm
+@distractor-en always
+@distractor-en extremely
+@distractor-en warm
 
 @sentence
 @question Wéi ass d'Natur an Ärem Heemechtsland?
@@ -95,23 +97,27 @@
 @distractor-en east
 @distractor-en few
 
-@sentence
+@fill
 @question Ass Äert Heemechtsland touristefrëndlech? Firwat, firwat net?
-@lu Jo, d'Land ass touristefrëndlech, well d'Leit ganz frëndlech sinn.
-@en Yes, the country is tourist-friendly, because the people are very friendly.
-@distractor-lu geféierlech
-@distractor-lu ni
-@distractor-en dangerous
-@distractor-en never
+@lu Jo, d'Land [ass] [touristefrëndlech], [well] d'Leit ganz frëndlech sinn.
+@en Yes, the country [is] [tourist-friendly], [because] the people are very friendly.
+@distractor-lu sinn
+@distractor-lu touristefrëndlechen
+@distractor-lu ouni
+@distractor-en are
+@distractor-en tourist-friendlily
+@distractor-en without
 
-@sentence
+@fill
 @question Ginn et geféierlech Plazen an Ärem Heemechtsland?
-@lu Fréier war et méi geféierlech, mee virum Krich war et zimmlech sécher.
-@en In the past it was more dangerous, but before the war it was quite safe.
-@distractor-lu ëmmer
-@distractor-lu wäit
-@distractor-en always
-@distractor-en far
+@lu Fréier [war] et méi [geféierlech], mee virum Krich [war] et zimmlech sécher.
+@en In the past it [was] more [dangerous], but before the war it [was] quite safe.
+@distractor-lu ass
+@distractor-lu geféierlechen
+@distractor-lu sinn
+@distractor-en is
+@distractor-en dangerously
+@distractor-en are
 
 @sentence
 @question Wourop muss een als Tourist an Ärem Heemechtsland oppassen?
@@ -149,14 +155,16 @@
 @distractor-en winter
 @distractor-en expensive
 
-@sentence
+@fill
 @question Wat sinn déi populärst Stied an Ärem Heemechtsland fir Touristen?
-@lu Déi populärst Stied si Lwiw, Kiew, Charkiw an Odessa.
-@en The most popular cities are Lviv, Kyiv, Kharkiv, and Odesa.
-@distractor-lu Dierfer
-@distractor-lu Bëscher
-@distractor-en villages
-@distractor-en forests
+@lu Déi [populärst] Stied [si] [Lwiw], Kiew, Charkiw an Odessa.
+@en The [most popular] cities [are] [Lviv], Kyiv, Kharkiv, and Odesa.
+@distractor-lu populär
+@distractor-lu ass
+@distractor-lu Roum
+@distractor-en popular
+@distractor-en is
+@distractor-en Rome
 
 @sentence
 @question Wat sollen Touristen an Ärem Heemechtsland besichen?
@@ -167,14 +175,16 @@
 @distractor-en buy
 @distractor-en beaches
 
-@sentence
+@fill
 @question Woufir ass Äert Heemechtsland bekannt?
-@lu D'Ukrain ass bekannt fir d'Iessen, fir Tschernobyl a fir al slawesch Monumenter.
-@en Ukraine is known for the food, for Chernobyl, and for old Slavic landmarks.
+@lu D'Ukrain ass [bekannt] fir d'Iessen, fir [Tschernobyl] a fir al slawesch [Monumenter].
+@en Ukraine is [known] for the food, for [Chernobyl], and for old Slavic [landmarks].
 @distractor-lu onbekannt
-@distractor-lu Autoen
+@distractor-lu Kiew
+@distractor-lu Monument
 @distractor-en unknown
-@distractor-en cars
+@distractor-en Kyiv
+@distractor-en landmark
 
 @sentence
 @question Wat sollen Touristen an Ärem Heemechtsland onbedéngt schmaachen?
@@ -194,14 +204,16 @@
 @distractor-en none
 @distractor-en sold
 
-@sentence
+@fill
 @question Wéi verännert den Tourismus d'Wirtschaft an Ärem Heemechtsland?
-@lu Den Tourismus ass net grouss, well d'Ukrain fir vill Leit onbekannt ass.
-@en Tourism is not big, because Ukraine is unknown to many people.
+@lu Den Tourismus ass net [grouss], [well] d'Ukrain fir vill Leit [onbekannt] ass.
+@en Tourism is not [big], [because] Ukraine is [unknown] to many people.
+@distractor-lu kleng
+@distractor-lu ouni
 @distractor-lu bekannt
-@distractor-lu deier
-@distractor-en famous
-@distractor-en expensive
+@distractor-en small
+@distractor-en without
+@distractor-en known
 
 @sentence
 @question Wat sinn déi bekanntste Festivaller oder Evenementer an Ärem Heemechtsland?
@@ -212,14 +224,16 @@
 @distractor-en museums
 @distractor-en expensive
 
-@sentence
+@fill
 @question Wéi ass den Transport an Ärem Heemechtsland?
-@lu Den Nuetszuch ass flott, mee de Bus ass manner gutt an d'Flich sinn deier.
-@en The night train is nice, but the bus is less good and the flights are expensive.
-@distractor-lu bëlleg
-@distractor-lu Kaffi
-@distractor-en cheap
-@distractor-en coffee
+@lu Den Nuetszuch ass [flott], mee de [Bus] ass [manner] gutt an d'Flich sinn deier.
+@en The night train is [nice], but the [bus] is [less] good and the flights are expensive.
+@distractor-lu flotten
+@distractor-lu Zuch
+@distractor-lu méi
+@distractor-en nicely
+@distractor-en train
+@distractor-en more
 
 @sentence
 @question Wéi vill Hoteller oder Wunnenge sinn an Ärem Heemechtsland verfügbar fir Touristen?
@@ -239,32 +253,38 @@
 @distractor-en expensive
 @distractor-en never
 
-@sentence
+@fill
 @question Ginn et Plazen, déi méi wéineg besicht ginn, mee interessant fir Touriste sinn?
-@lu Jo, d'Schlässer am Weste vum Land si manner bekannt, mee ganz interessant.
-@en Yes, the castles in the west of the country are less known, but very interesting.
-@distractor-lu Plagen
-@distractor-lu deier
-@distractor-en beaches
-@distractor-en expensive
+@lu Jo, d'Schlässer am Weste vum Land [si] manner [bekannt], mee ganz [interessant].
+@en Yes, the castles in the west of the country [are] less [known], but very [interesting].
+@distractor-lu ass
+@distractor-lu onbekannt
+@distractor-lu interessanten
+@distractor-en is
+@distractor-en unknown
+@distractor-en interestingly
 
-@sentence
+@fill
 @question Wat denkt Dir iwwert de Wuesstum vum Tourismus an Ärem Heemechtsland?
-@lu De Wuesstum ass nach kleng, well vill Leit d'Ukrain net kennen.
-@en The growth is still small, because many people don't know Ukraine.
+@lu De Wuesstum [ass] nach [kleng], [well] vill Leit d'Ukrain net [kennen].
+@en The growth [is] still [small], [because] many people don't [know] Ukraine.
+@distractor-lu sinn
 @distractor-lu grouss
-@distractor-lu deier
+@distractor-lu kennt
+@distractor-en are
 @distractor-en big
-@distractor-en expensive
+@distractor-en knows
 
-@sentence
+@fill
 @question Gëtt et Sproochbarrière fir Touristen, déi Äert Heemechtsland besichen?
-@lu D'Sprooch kann eng Barrière sinn, mee et gëtt ëmmer besser.
-@en The language can be a barrier, but it is getting better.
-@distractor-lu Kichen
-@distractor-lu ni
-@distractor-en cuisine
-@distractor-en never
+@lu D'Sprooch [kann] eng [Barrière] sinn, mee et [gëtt] ëmmer besser.
+@en The language [can] be a [barrier], but it [is] getting better.
+@distractor-lu kënne
+@distractor-lu Barrièren
+@distractor-lu ginn
+@distractor-en could
+@distractor-en barriers
+@distractor-en are
 
 @sentence
 @question Wéi kënnen Touristen eng richteg Erfarung mat der lokaler Kultur maachen?
@@ -275,14 +295,16 @@
 @distractor-en sell
 @distractor-en never
 
-@sentence
+@fill
 @question Wat fir Rotschléi hutt Dir fir Touristen, déi fir déi éischt Kéier an Äert Heemechtsland reesen?
-@lu Probéiert de Kaffi zu Kiew an zu Lwiw, well en néierens sou gutt ass.
-@en Try the coffee in Kyiv and in Lviv, because it is nowhere as good.
-@distractor-lu Zopp
-@distractor-lu deier
-@distractor-en soup
-@distractor-en expensive
+@lu [Probéiert] de [Kaffi] zu Kiew an zu Lwiw, [well] en néierens sou gutt ass.
+@en [Try] the [coffee] in Kyiv and in Lviv, [because] it is nowhere as good.
+@distractor-lu Probéieren
+@distractor-lu Téi
+@distractor-lu ouni
+@distractor-en Tries
+@distractor-en tea
+@distractor-en without
 
 # --- Reusable frames (@fill) ---
 

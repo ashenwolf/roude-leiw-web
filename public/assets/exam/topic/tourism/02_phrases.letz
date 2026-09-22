@@ -44,13 +44,15 @@
 @distractor-en cities
 @distractor-en expensive
 
-@sentence
-@lu Mir hunn eng gesond Mëschung vu Sonn a Wolleken.
-@en We have a healthy mixture of sun and clouds.
-@distractor-lu Gepäck
-@distractor-lu Muséeën
-@distractor-en luggage
-@distractor-en museums
+@fill
+@lu Mir [hunn] eng [gesond] Mëschung vu Sonn a [Wolleken].
+@en We [have] a [healthy] mixture of sun and [clouds].
+@distractor-lu sinn
+@distractor-lu gesonden
+@distractor-lu Wollek
+@distractor-en are
+@distractor-en healthily
+@distractor-en cloud
 
 @sentence
 @lu D'Leit am Weste si besonnesch frëndlech.

@@ -64,14 +64,16 @@
 @distractor-en children
 @distractor-en has
 
-@sentence
+@fill
 @question Wéini maacht Dir Fotoen?
-@lu Ech maache Fotoen, wa mir reesen oder Vakanz hunn.
-@en I take photos when we travel or when we're on vacation.
-@distractor-lu Musek
-@distractor-lu Bicher
-@distractor-en music
-@distractor-en books
+@lu Ech [maache] Fotoen, wa mir [reesen] oder [Vakanz] hunn.
+@en I [take] photos when we [travel] or when we're on [vacation].
+@distractor-lu maacht
+@distractor-lu reest
+@distractor-lu Vakanzen
+@distractor-en takes
+@distractor-en travels
+@distractor-en vacations
 
 @fill
 @question Beschreift Ären Hobby!
@@ -95,14 +97,16 @@
 @distractor-en makes
 @distractor-en more beautiful
 
-@sentence
+@fill
 @question Wéi een anere kreativen Hobby géif Iech interesséieren?
-@lu Ech géif gär Diorama maachen, an dat si Miniature vun Dierfer.
-@en I would like to make dioramas, and those are miniatures of villages.
-@distractor-lu Musek
-@distractor-lu Sport
-@distractor-en music
-@distractor-en sport
+@lu Ech [géif] gär Diorama [maachen], an dat [si] Miniature vun Dierfer.
+@en I [would] like to [make] dioramas, and those [are] miniatures of villages.
+@distractor-lu géife
+@distractor-lu maacht
+@distractor-lu ass
+@distractor-en will
+@distractor-en makes
+@distractor-en is
 
 @sentence
 @question Wat fir Aktivitéiten maacht Dir gär am Summer dobaussen?
