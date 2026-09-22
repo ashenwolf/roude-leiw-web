@@ -1,22 +1,8 @@
+import { joinAssembled, normalizeAnswer } from "../answer-text";
+
 import type { SentenceBuilderItem } from "../types";
 import type { WordResultMap } from "../WordMatch/types";
 import type { SentenceGameState } from "./types";
-
-export const normalizeAnswer = (s: string): string =>
-  s
-    .replace(/[.,!?;:'"''"]+/g, "")
-    .trim()
-    .replace(/\s+/g, " ")
-    .toLowerCase();
-
-export const joinAssembled = (tokens: string[]): string =>
-  tokens.reduce((acc, token, i) => {
-    if (i === 0) return token;
-    const glue = token.startsWith("'") || token.startsWith("'") || acc.endsWith("'") || acc.endsWith("'")
-      ? ""
-      : " ";
-    return acc + glue + token;
-  }, "");
 
 export const initSentenceGame = (): SentenceGameState => ({
   assembled: [],
@@ -49,5 +35,5 @@ export const applySubmit = (state: SentenceGameState, item: SentenceBuilderItem)
 };
 
 export const toWordResultMap = (item: SentenceBuilderItem, state: SentenceGameState): WordResultMap => ({
-  [item.phraseKey]: state.result,
+  [item.elementKey]: state.result,
 });

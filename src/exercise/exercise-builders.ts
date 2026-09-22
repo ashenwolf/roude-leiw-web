@@ -7,7 +7,7 @@
 import { shuffle } from "../lib/shuffle";
 import { fillKey, phraseKey } from "./progression";
 import { entriesToWordPairs } from "./letz-parser";
-import { normalizeAnswer } from "./SentenceBuilder/sentence-logic";
+import { normalizeAnswer } from "./answer-text";
 
 import type { FillEntry, SentenceEntry, WordEntry } from "./letz-parser";
 import type {
@@ -175,7 +175,7 @@ export const buildSentenceExercise = (
     direction,
     // Record under the actual presented direction so the error pool can later
     // repeat the exact direction the user struggled with.
-    phraseKey: phraseKey(direction, entry.enVariants[0]),
+    elementKey: phraseKey(direction, entry.enVariants[0]),
     ...(entry.question !== undefined ? { question: entry.question } : {}),
     // Prompt audio: the question for Q&A (always en→lu), the Luxembourgish
     // phrase when it IS the prompt (lu→en). Plain en→lu gets none — the
@@ -288,7 +288,7 @@ export const buildFillExercise = (
     direction,
     // Keyed on the @en line verbatim (brackets included) and on the presented
     // direction, so the error pool can repeat the exact direction that failed.
-    fillKey: fillKey(direction, entry.en),
+    elementKey: fillKey(direction, entry.en),
     ...(entry.question !== undefined ? { question: entry.question } : {}),
     // A fill's only prompt audio is the question. The frame is already visible, and
     // in the en→lu direction a question forces, the LU line IS the answer.

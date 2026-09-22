@@ -120,7 +120,7 @@ the R3 equality check.
 ### `normalizeAnswer` — the exact spec
 
 The single comparison function for tile identity, answer grading, and
-`@fill`/`@sentence` disjointness (`src/exercise/SentenceBuilder/sentence-logic.ts`):
+`@fill`/`@sentence` disjointness (`src/exercise/answer-text.ts`):
 
 ```ts
 s.replace(/[.,!?;:'"''""]+/g, "").trim().replace(/\s+/g, " ").toLowerCase()

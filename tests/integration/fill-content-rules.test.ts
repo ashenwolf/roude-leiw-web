@@ -6,7 +6,7 @@ import { describe, it, expect } from "vitest";
 
 import { buildFillExercise, parseFillLine } from "../../src/exercise/exercise-builders.ts";
 import { parseLetz } from "../../src/lib/letz-parser/index.ts";
-import { normalizeAnswer } from "../../src/exercise/SentenceBuilder/sentence-logic.ts";
+import { normalizeAnswer } from "../../src/exercise/answer-text.ts";
 
 import type { FillEntry } from "../../src/exercise/letz-parser.ts";
 
@@ -318,7 +318,7 @@ describe("@fill content rules", () => {
     for (const { file, content } of files) {
       const fills = parseLetz(content, file).fills;
       const keys = fills.flatMap((f) => {
-        const perFill = DIRECTIONS.map((d) => buildFillExercise(f, d).item.fillKey);
+        const perFill = DIRECTIONS.map((d) => buildFillExercise(f, d).item.elementKey);
         return [...new Set(perFill)];
       });
       expect(new Set(keys).size, `${file}: fill stat key collision`).toBe(keys.length);

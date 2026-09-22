@@ -1,4 +1,4 @@
-import { normalizeAnswer } from "../SentenceBuilder/sentence-logic";
+import { normalizeAnswer } from "../answer-text";
 
 import type { FillBlankItem } from "../types";
 import type { WordResultMap } from "../WordMatch/types";
@@ -134,7 +134,7 @@ export const applySubmit = (state: FillGameState, item: FillBlankItem): FillGame
 
 /** One graded decision per item, so exactly one stat entry — one tick per Slot. */
 export const toWordResultMap = (item: FillBlankItem, state: FillGameState): WordResultMap => ({
-  [item.fillKey]: state.result,
+  [item.elementKey]: state.result,
 });
 
 /**
