@@ -211,14 +211,16 @@
 @distractor-en take turns
 @distractor-en has
 
-@sentence
+@fill
 @question Kënnt Dir e Beispill vun där Ofwiesslung ginn?
-@lu Ech hu haut gekacht, an eng anere Persoun huet muer gekacht.
-@en I cooked today, and another person cooked tomorrow.
-@distractor-lu gebotzt
-@distractor-lu gestreckt
-@distractor-en cleaned
-@distractor-en ironed
+@lu Ech hu [haut] gekacht, an eng [anere] [Persoun] huet muer gekacht.
+@en I cooked [today], and [another] [person] cooked tomorrow.
+@distractor-lu muer
+@distractor-lu aner
+@distractor-lu Persounen
+@distractor-en tomorrow
+@distractor-en other
+@distractor-en persons
 
 @sentence
 @question Mat wiem wunnt Dir?
@@ -229,32 +231,38 @@
 @distractor-en alone
 @distractor-en cat
 
-@sentence
+@fill
 @question Wunnt Dir eleng?
-@lu Nee, ech wunnen net eleng, mee mir hu keng Kanner.
-@distractor-lu Jo
-@distractor-lu Eltere
-@en No, I do not live alone, but we have no children.
-@distractor-en Yes
-@distractor-en parents
+@lu Nee, ech [wunnen] net [eleng], mee mir [hu] keng Kanner.
+@en No, I do not [live] [alone], but we [have] no children.
+@distractor-lu wunnt
+@distractor-lu zesummen
+@distractor-lu huet
+@distractor-en lives
+@distractor-en together
+@distractor-en has
 
-@sentence
+@fill
 @question Wéi eng Aufgabe gëtt et bei Iech am Stot?
-@lu Bei eis gëtt et botzen, kachen, d'Wäsch, d'Geschier an de Gaart.
-@distractor-lu strecken
-@distractor-lu Botzfra
-@en At our place there is cleaning, cooking, the laundry, the dishes and the garden.
-@distractor-en ironing
-@distractor-en cleaner
+@lu Bei eis [gëtt] et [botzen], [kachen], d'Wäsch, d'Geschier an de Gaart.
+@en At our place there [is] [cleaning], [cooking], the laundry, the dishes and the garden.
+@distractor-lu ginn
+@distractor-lu botzt
+@distractor-lu kacht
+@distractor-en are
+@distractor-en cleans
+@distractor-en cooks
 
-@sentence
+@fill
 @question Wien hëlleft Iech de Stot ze maachen?
-@lu Meng Fra an ech maachen de Stot zesummen, a keen hëlleft eis.
-@distractor-lu Botzfra
-@distractor-lu Kanner
-@en My wife and I do the household chores together, and nobody helps us.
-@distractor-en cleaner
-@distractor-en children
+@lu Meng [Fra] an ech [maachen] de Stot [zesummen], a keen hëlleft eis.
+@en My [wife] and I [do] the household chores [together], and nobody helps us.
+@distractor-lu Mann
+@distractor-lu maacht
+@distractor-lu eleng
+@distractor-en husband
+@distractor-en does
+@distractor-en alone
 
 @fill
 @question Wéi deelt Dir d'Aufgabe mat Ärer Fra?
@@ -278,14 +286,16 @@
 @distractor-en does
 @distractor-en carries
 
-@sentence
+@fill
 @question Botzt Dir zwee gläich vill?
-@lu Mir botze gläich vill, an dat fanne mir wichteg.
+@lu Mir [botze] [gläich] vill, an dat [fanne] mir wichteg.
+@en We [clean] [equally] much, and we [find] that important.
+@distractor-lu botzt
 @distractor-lu manner
-@distractor-lu langweileg
-@en We clean equally much, and we find that important.
+@distractor-lu fënnt
+@distractor-en cleans
 @distractor-en less
-@distractor-en boring
+@distractor-en finds
 
 @fill
 @question Wéini maacht Dir de Stot?
@@ -467,14 +477,16 @@
 @distractor-en less
 @distractor-en places
 
-@sentence
+@fill
 @question Wat sinn d'Virdeeler vun enger Spullmaschinn?
-@lu Ech verléiere keng Zäit mam Geschier, an ech mengen, si brauch manner Waasser wéi ech.
-@distractor-lu méi
-@distractor-lu Stëbs
-@en I lose no time with the dishes, and I think it needs less water than I do.
-@distractor-en more
-@distractor-en dust
+@lu Ech [verléiere] keng Zäit mam Geschier, an ech [mengen], si [brauch] manner Waasser wéi ech.
+@en I [lose] no time with the dishes, and I [think] it [needs] less water than I do.
+@distractor-lu verléiert
+@distractor-lu mengt
+@distractor-lu brauchen
+@distractor-en loses
+@distractor-en thinks
+@distractor-en need
 
 @fill
 @question Wéi dacks maacht Dir d'Wäsch?
@@ -522,23 +534,27 @@
 
 # --- Daily routine, weekend, and no time ---
 
-@sentence
+@fill
 @question Nennt dräi Saachen, déi Dir all Dag am Stot maacht.
-@lu All Dag maachen ech de Kaffi, ech raumen d'Spullmaschinn an an ech fiddere den Hond.
-@distractor-lu strecken
-@distractor-lu weekends
-@en Every day I make the coffee, I load the dishwasher and I feed the dog.
-@distractor-en iron
-@distractor-en Saturday
+@lu All Dag [maachen] ech de Kaffi, ech [raumen] d'Spullmaschinn an an ech [fiddere] den Hond.
+@en Every day I [make] the coffee, I [load] the dishwasher and I [feed] the dog.
+@distractor-lu maacht
+@distractor-lu raumt
+@distractor-lu fiddert
+@distractor-en makes
+@distractor-en loads
+@distractor-en feeds
 
-@sentence
+@fill
 @question Wéi eng Hausaarbechte maacht Dir just de Weekend?
-@lu De Weekend staubsaugen ech, ech botzen de Buedem, ech maachen d'Wäsch an ech schaffen am Gaart.
-@distractor-lu moies
-@distractor-lu Kaffi
-@en At the weekend I vacuum, I clean the floor, I do the laundry and I work in the garden.
-@distractor-en morning
-@distractor-en coffee
+@lu De Weekend [staubsaugen] ech, ech [botzen] de Buedem, ech maachen d'Wäsch an ech [schaffen] am Gaart.
+@en At the weekend I [vacuum], I [clean] the floor, I do the laundry and I [work] in the garden.
+@distractor-lu staubsaugt
+@distractor-lu botzt
+@distractor-lu schafft
+@distractor-en vacuums
+@distractor-en cleans
+@distractor-en works
 
 @sentence
 @question Wéi oft staubsaugt Dir d'Wunneng?
@@ -558,32 +574,38 @@
 @distractor-en week
 @distractor-en often
 
-@sentence
+@fill
 @question Wat maacht Dir, wann Dir keng Zäit hutt fir ze botzen?
-@lu Wann ech keng Zäit hunn, botzen ech just iwwerflächlech, an de Rescht waart op de Weekend.
-@distractor-lu ëmmer
-@distractor-lu Botzfra
-@en When I have no time, I clean only superficially, and the rest waits for the weekend.
-@distractor-en always
-@distractor-en cleaner
+@lu Wann ech keng Zäit hunn, [botzen] ech just [iwwerflächlech], an de Rescht [waart] op de Weekend.
+@en When I have no time, I [clean] only [superficially], and the rest [waits] for the weekend.
+@distractor-lu botzt
+@distractor-lu iwwerflächlechen
+@distractor-lu waarden
+@distractor-en cleans
+@distractor-en superficial
+@distractor-en wait
 
-@sentence
+@fill
 @question Wéi haalt Dir Är Wunneng propper?
-@lu Ech raume kleng Saache jeden Dag op, an de Weekend botze mir d'ganz Wunneng am Fong.
-@distractor-lu knaschteg
-@distractor-lu Gaart
-@en I tidy up small things every day, and at the weekend we clean the whole apartment thoroughly.
-@distractor-en dirty
-@distractor-en garden
+@lu Ech [raume] kleng Saache jeden Dag op, an de Weekend [botze] mir d'ganz Wunneng am [Fong].
+@en I [tidy] up small things every day, and at the weekend we [clean] the whole apartment [thoroughly].
+@distractor-lu raumt
+@distractor-lu botzt
+@distractor-lu iwwerflächlech
+@distractor-en tidies
+@distractor-en cleans
+@distractor-en superficially
 
-@sentence
+@fill
 @question Wat braucht Dir fir de Stot ze maachen?
-@lu Ech brauche de Staubsauger, d'Mopp, en Eemer a gutt Botzmëttel.
-@distractor-lu Streckeisen
-@distractor-lu Musek
-@en I need the vacuum cleaner, the mop, a bucket and good cleaning agents.
-@distractor-en iron
-@distractor-en music
+@lu Ech [brauche] de [Staubsauger], d'Mopp, en Eemer a gutt [Botzmëttel].
+@en I [need] the [vacuum cleaner], the mop, a bucket and good [cleaning agents].
+@distractor-lu brauch
+@distractor-lu Staubsaugere
+@distractor-lu Botzmëttelen
+@distractor-en needs
+@distractor-en vacuum cleaners
+@distractor-en cleaning agent
 
 @sentence
 @question Wat braucht Dir fir d'Buedzëmmer ze botzen?
@@ -596,68 +618,82 @@
 
 # --- Shopping, garden, repairs, bad habits ---
 
-@sentence
+@fill
 @question Wie geet akafen a mécht d'Kommissiounen?
-@lu Mir gi meeschtens zesummen akafen, an dat gefält mir besser.
-@distractor-lu eleng
-@distractor-lu Botzfra
-@en We mostly go shopping together, and I like that better.
-@distractor-en alone
-@distractor-en cleaner
+@lu Mir [gi] [meeschtens] zesummen akafen, an dat [gefält] mir besser.
+@en We [go] shopping [mostly] together, and I [like] that better.
+@distractor-lu gitt
+@distractor-lu seelen
+@distractor-lu gefalen
+@distractor-en goes
+@distractor-en rarely
+@distractor-en likes
 
-@sentence
+@fill
 @question Wou maacht Dir d'Kommissiounen?
-@lu Mir kafen am Pall Center nieft dem Haus oder am Cactus an.
-@distractor-lu Maart
-@distractor-lu online
-@en We shop at the Pall Center next to the house or at Cactus.
-@distractor-en market
-@distractor-en online
+@lu Mir [kafen] am [Pall Center] nieft dem Haus oder am [Cactus] an.
+@en We [shop] at the [Pall Center] next to the house or at [Cactus].
+@distractor-lu kaaft
+@distractor-lu Auchan
+@distractor-lu Delhaize
+@distractor-en shops
+@distractor-en Auchan
+@distractor-en Delhaize
 
-@sentence
+@fill
 @question Kaaft Dir och online? Wat sinn d'Virdeeler?
-@lu Ech bestellen eng Partie Saachen op Amazon, well dat Zäit spuert.
-@distractor-lu Nodeel
-@distractor-lu Maart
-@en I order a number of things on Amazon, because that saves time.
-@distractor-en disadvantage
-@distractor-en market
+@lu Ech [bestellen] eng Partie Saachen op Amazon, [well] dat Zäit [spuert].
+@en I [order] a number of things on Amazon, [because] that [saves] time.
+@distractor-lu bestellt
+@distractor-lu ouni
+@distractor-lu spueren
+@distractor-en orders
+@distractor-en without
+@distractor-en save
 
-@sentence
+@fill
 @question Kaaft Dir och Bioprodukter? Firwat oder firwat net?
-@lu Mir probéiere Bioprodukter ze kafen, obwuel se méi deier sinn.
-@distractor-lu bëlleg
-@distractor-lu ni
-@en We try to buy organic products, although they are more expensive.
-@distractor-en cheap
-@distractor-en never
+@lu Mir [probéiere] Bioprodukter ze [kafen], [obwuel] se méi deier sinn.
+@en We [try] to [buy] organic products, [although] they are more expensive.
+@distractor-lu probéiert
+@distractor-lu kaaft
+@distractor-lu well
+@distractor-en tries
+@distractor-en buys
+@distractor-en because
 
-@sentence
+@fill
 @question Hutt Dir e Gaart? Wie schafft am Gaart?
-@lu Mir hunn e ganz klenge Gaart: meng Fra këmmert sech ëm d'Blummen, an ech méien d'Gras.
-@distractor-lu grouss
-@distractor-lu Bett
-@en We have a very small garden: my wife takes care of the flowers, and I mow the grass.
-@distractor-en big
-@distractor-en bed
+@lu Mir hunn e ganz [klenge] Gaart: meng Fra [këmmert] sech ëm d'Blummen, an ech [méien] d'Gras.
+@en We have a very [small] garden: my wife [takes care] of the flowers, and I [mow] the grass.
+@distractor-lu kleng
+@distractor-lu këmmeren
+@distractor-lu méit
+@distractor-en smally
+@distractor-en take care
+@distractor-en mows
 
-@sentence
+@fill
 @question Wat maacht Dir, wann eppes am Haus futti ass?
-@lu Wann ech eppes selwer reparéiere kann, maachen ech dat, soss ruffe mir eng Firma.
-@distractor-lu Botzfra
-@distractor-lu ni
-@en When I can repair something myself, I do that, otherwise we call a company.
-@distractor-en cleaner
-@distractor-en never
+@lu [Wann] ech eppes selwer [reparéiere] kann, [maachen] ech dat, soss ruffe mir eng Firma.
+@en [When] I [can] [repair] something myself, I do that, otherwise we call a company.
+@distractor-lu Ouni
+@distractor-lu reparéiert
+@distractor-lu maacht
+@distractor-en Without
+@distractor-en could
+@distractor-en repairs
 
-@sentence
+@fill
 @question Wat maacht Dir am oder fir d'Haus ausser botzen?
-@lu Ausser botze maachen ech kleng Reparaturen, ech schaffen am Gaart an ech gi mam Hond spadséieren.
-@distractor-lu strecken
-@distractor-lu Kaffi
-@en Apart from cleaning I do small repairs, I work in the garden and I go walking with the dog.
-@distractor-en iron
-@distractor-en coffee
+@lu Ausser botze [maachen] ech kleng [Reparaturen], ech [schaffen] am Gaart an ech gi mam Hond spadséieren.
+@en Apart from cleaning I [do] small [repairs], I [work] in the garden and I go walking with the dog.
+@distractor-lu maacht
+@distractor-lu Reparatur
+@distractor-lu schafft
+@distractor-en does
+@distractor-en repair
+@distractor-en works
 
 @sentence
 @question Wéi eng schlecht Gewunnechten hutt Dir am Stot?
@@ -668,23 +704,27 @@
 @distractor-en always
 @distractor-en clean
 
-@sentence
+@fill
 @question Wien ass bei Iech responsabel fir ze kachen?
-@lu Meng Fra kacht méi dacks, mee ech hëllefen, an de Weekend kache mir zesummen.
-@distractor-lu ni
-@distractor-lu Botzfra
-@en My wife cooks more often, but I help, and at the weekend we cook together.
-@distractor-en never
-@distractor-en cleaner
+@lu Meng Fra [kacht] méi [dacks], mee ech [hëllefen], an de Weekend kache mir zesummen.
+@en My wife [cooks] more [often], but I [help], and at the weekend we cook together.
+@distractor-lu kachen
+@distractor-lu seelen
+@distractor-lu hëlleft
+@distractor-en cook
+@distractor-en rarely
+@distractor-en helps
 
-@sentence
+@fill
 @question Wie rufft Dir, wann eppes am Haus futti ass?
-@lu Dat hängt vum Problem of: fir kleng Saachen hunn ech e Handwierker.
-@distractor-lu Botzfra
-@distractor-lu Gaart
-@en That depends on the problem: for small things I have a workman.
-@distractor-en cleaner
-@distractor-en garden
+@lu Dat [hängt] vum [Problem] of: fir [kleng] Saachen hunn ech e Handwierker.
+@en That [depends] on the [problem]: for [small] things I have a workman.
+@distractor-lu hängen
+@distractor-lu Problemer
+@distractor-lu klengen
+@distractor-en depend
+@distractor-en problems
+@distractor-en smally
 
 @sentence
 @question A wann et de Stroum oder d'Waasser ass?
@@ -697,59 +737,73 @@
 
 # --- Opinions: fairness, a cleaner, children, and change ---
 
-@sentence
+@fill
 @question Mengt Dir, dass d'Hausaarbechte gerecht tëscht Männer a Frae verdeelt sinn?
-@lu Nee, an der Gesellschaft erwaart een nach ze vill vun de Frae.
-@distractor-lu Jo
-@distractor-lu Männer
-@en No, in society one still expects too much of the women.
-@distractor-en Yes
-@distractor-en men
+@lu Nee, an der Gesellschaft [erwaart] een nach ze [vill] vun de [Frae].
+@en No, in society one still [expects] too [much] of the [women].
+@distractor-lu erwaarden
+@distractor-lu wéineg
+@distractor-lu Fra
+@distractor-en expect
+@distractor-en little
+@distractor-en woman
 
-@sentence
+@fill
 @question Firwat ass dat esou?
-@lu Vill Männer ginn esou erzunn, dass eng anere Persoun déi Aarbecht mécht.
-@distractor-lu Frae
-@distractor-lu Botzfra
-@en Many men are brought up in such a way that another person does that work.
-@distractor-en women
-@distractor-en cleaner
+@lu Vill [Männer] ginn esou [erzunn], dass eng [anere] Persoun déi Aarbecht [mécht].
+@en Many [men] are brought up in such a way that [another] person [does] that work.
+@distractor-lu Mann
+@distractor-lu erzéien
+@distractor-lu aner
+@distractor-lu maachen
+@distractor-en man
+@distractor-en bringing
+@distractor-en other
+@distractor-en do
 
-@sentence
+@fill
 @question Wéi fannt Dir d'Iddi eng Botzfra anzestellen? Sinn dat gutt investéiert Suen?
-@lu Jo, dat sinn gutt investéiert Suen, well botzen mir keng Freed mécht.
-@distractor-lu Nee
-@distractor-lu Gaart
-@en Yes, that is money well invested, because cleaning brings me no joy.
-@distractor-en No
-@distractor-en garden
+@lu Jo, dat [sinn] gutt [investéiert] Suen, [well] botzen mir keng Freed mécht.
+@en Yes, that [is] money well [invested], [because] cleaning brings me no joy.
+@distractor-lu ass
+@distractor-lu investéieren
+@distractor-lu ouni
+@distractor-en are
+@distractor-en investing
+@distractor-en without
 
-@sentence
+@fill
 @question An wouran investéiert Dir déi Zäit léiwer?
-@lu Ech investéiere léiwer a mäi Beruff, fir e bessere Fachmann ze ginn.
-@distractor-lu Botzen
-@distractor-lu Gaart
-@en I prefer investing in my profession, in order to become a better specialist.
-@distractor-en cleaning
-@distractor-en garden
+@lu Ech [investéiere] [léiwer] a mäi Beruff, [fir] e bessere Fachmann ze ginn.
+@en I [prefer] [investing] in my profession, [in order] to become a better specialist.
+@distractor-lu investéiert
+@distractor-lu gär
+@distractor-lu ouni
+@distractor-en prefers
+@distractor-en gladly
+@distractor-en without
 
-@sentence
+@fill
 @question Ginn Dir mat der Zäit besser am Botzen?
-@lu Nee, botzen ass keng Kompetenz, an déi ech besser ginn.
-@distractor-lu Jo
-@distractor-lu Musek
-@en No, cleaning is not a skill in which I get better.
-@distractor-en Yes
-@distractor-en music
+@lu Nee, botzen ass keng [Kompetenz], an déi ech [besser] [ginn].
+@en No, cleaning is not a [skill] in which I [get] [better].
+@distractor-lu Kompetenzen
+@distractor-lu gutt
+@distractor-lu gitt
+@distractor-en skills
+@distractor-en good
+@distractor-en gets
 
-@sentence
+@fill
 @question Ass et eng gutt Iddi fir Kanner scho fréi Hausaarbechten ze ginn?
-@lu Jo, ech mengen, Kanner sollen fréi e Beitrag an der Famill leeschten.
-@distractor-lu Nee
-@distractor-lu spéider
-@en Yes, I think children should make a contribution in the family early.
-@distractor-en No
-@distractor-en later
+@lu Jo, ech [mengen], Kanner [sollen] fréi e Beitrag an der Famill [leeschten].
+@en Yes, I [think] children [should] [make] a contribution in the family early.
+@distractor-lu mengt
+@distractor-lu soll
+@distractor-lu leescht
+@distractor-en thinks
+@distractor-en shall
+@distractor-en makes
 
 @sentence
 @question Wat léieren d'Kanner dobei?
@@ -769,14 +823,16 @@
 @distractor-en difficult
 @distractor-en garden
 
-@sentence
+@fill
 @question Wat huet sech konkret geännert?
-@lu Robote, Spullmaschinnen a modern Geräter huelen eis vill Aarbecht of.
-@distractor-lu Biesem
-@distractor-lu Botzfra
-@en Robots, dishwashers and modern devices take a lot of work off us.
-@distractor-en broom
-@distractor-en cleaner
+@lu [Robote], [Spullmaschinnen] a modern Geräter [huelen] eis vill Aarbecht of.
+@en [Robots], [dishwashers] and modern devices [take] a lot of work off us.
+@distractor-lu Roboter
+@distractor-lu Spullmaschinn
+@distractor-lu hëlt
+@distractor-en Robot
+@distractor-en dishwasher
+@distractor-en takes
 
 @sentence
 @question Gëtt Iech Hausaarbecht e Gefëll vu Rou a Kontroll, oder éischter Stress?
@@ -805,32 +861,38 @@
 @distractor-en less
 @distractor-en garden
 
-@sentence
+@fill
 @question Hutt Dir en automateschen Staubsauger?
-@lu Jo, mir hunn e Roboter, mee hien ass al a botzt net gutt.
+@lu Jo, mir [hunn] e [Roboter], mee hien ass [al] a botzt net gutt.
+@en Yes, we [have] a [robot], but it is [old] and does not clean well.
+@distractor-lu sinn
+@distractor-lu Roboteren
 @distractor-lu nei
-@distractor-lu Biesem
-@en Yes, we have a robot, but it is old and does not clean well.
+@distractor-en are
+@distractor-en robots
 @distractor-en new
-@distractor-en broom
 
-@sentence
+@fill
 @question Wat ass um ale Roboter net gutt?
-@lu Hie botzt de Buedem schlecht op, a säi Behälter fir de Stëbs ass ze kleng.
-@distractor-lu grouss
-@distractor-lu Gaart
-@en It mops badly, and its container for the dust is too small.
-@distractor-en big
-@distractor-en garden
+@lu Hie [botzt] de Buedem [schlecht] op, a säi Behälter fir de Stëbs [ass] ze kleng.
+@en It [mops] [badly], and its container for the dust [is] too small.
+@distractor-lu botzen
+@distractor-lu gutt
+@distractor-lu sinn
+@distractor-en mop
+@distractor-en well
+@distractor-en are
 
-@sentence
+@fill
 @question Wat plangt Dir dann?
-@lu Ech plangen e neie Roboter ze kafen, deen och besser opbotzt.
-@distractor-lu ale
-@distractor-lu Biesem
-@en I plan to buy a new robot, which also mops better.
-@distractor-en old
-@distractor-en broom
+@lu Ech [plangen] e [neie] Roboter ze [kafen], deen och besser opbotzt.
+@en I [plan] to [buy] a [new] robot, which also mops better.
+@distractor-lu plangt
+@distractor-lu nei
+@distractor-lu kaaft
+@distractor-en plans
+@distractor-en newly
+@distractor-en buys
 
 # --- Reusable frames (@fill) ---
 
