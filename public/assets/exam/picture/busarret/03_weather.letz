@@ -119,13 +119,15 @@
 @distractor-en at night
 @distractor-en evening
 
-@sentence
-@lu Vill Leit waarden op de Bus, well si schaffen.
-@en A lot of people are waiting for the bus, because they work.
-@distractor-lu spillen
-@distractor-lu Kanner
-@distractor-en play
-@distractor-en children
+@fill
+@lu Vill Leit [waarden] op de [Bus], [well] si schaffen.
+@en A lot of people are [waiting] for the [bus], [because] they work.
+@distractor-lu waart
+@distractor-lu Bussen
+@distractor-lu ouni
+@distractor-en waits
+@distractor-en buses
+@distractor-en without
 
 @sentence
 @lu Den Dag ass warscheinlech normal a net besonnesch.

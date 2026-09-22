@@ -127,12 +127,14 @@
 @distractor-en woman
 @distractor-en know
 
-@sentence
-@lu De Mann ass lénks an hie gesäit jonk aus.
-@en The man is on the left and he looks young.
+@fill
+@lu De Mann ass [lénks] an hie [gesäit] [jonk] aus.
+@en The man is on the [left] and he [looks] [young].
 @distractor-lu riets
+@distractor-lu gesinn
 @distractor-lu al
 @distractor-en right
+@distractor-en look
 @distractor-en old
 
 @sentence

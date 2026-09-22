@@ -119,14 +119,16 @@
 @distractor-en dangerously
 @distractor-en are
 
-@sentence
+@fill
 @question Wourop muss een als Tourist an Ärem Heemechtsland oppassen?
-@lu Net op vill, well d'Land virum Krich sécher war.
-@en Not much, because the country was safe before the war.
-@distractor-lu alles
-@distractor-lu Wieder
-@distractor-en everything
-@distractor-en weather
+@lu Net op vill, [well] d'Land virum [Krich] [sécher] war.
+@en Not much, [because] the country was [safe] before the [war].
+@distractor-lu ouni
+@distractor-lu Kricher
+@distractor-lu séchere
+@distractor-en without
+@distractor-en wars
+@distractor-en safely
 
 @sentence
 @question Ginn et vill Touristenattraktiounen an Ärem Heemechtsland?

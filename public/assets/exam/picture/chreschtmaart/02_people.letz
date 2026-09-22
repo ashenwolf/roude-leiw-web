@@ -79,13 +79,17 @@
 @distractor-en waiting
 @distractor-en children
 
-@sentence
-@lu De Mann lénks huet e Mantel un an de Mantel ass donkel.
-@en The man on the left is wearing a coat and the coat is dark.
+@fill
+@lu De Mann lénks [huet] e Mantel [un] an de Mantel [ass] [donkel].
+@en The man on the left [is wearing] a coat, and the coat [is] [dark].
+@distractor-lu hunn
+@distractor-lu aus
+@distractor-lu sinn
 @distractor-lu hell
-@distractor-lu Kaputz
+@distractor-en are wearing
+@distractor-en off
+@distractor-en are
 @distractor-en light
-@distractor-en hood
 
 @sentence
 @lu Hir Box ass hell.
@@ -103,13 +107,15 @@
 @distractor-en man
 @distractor-en stall
 
-@sentence
-@lu D'Meedchen huet eng blo Jackett mat enger Kaputz un.
-@en The girl is wearing a blue jacket with a hood.
-@distractor-lu giel
-@distractor-lu Box
-@distractor-en yellow
-@distractor-en trousers
+@fill
+@lu D'Meedchen huet eng [blo] [Jackett] mat enger [Kaputz] un.
+@en The girl is wearing a [blue] [jacket] with a [hood].
+@distractor-lu bloen
+@distractor-lu Jacketten
+@distractor-lu Kaputzen
+@distractor-en bluely
+@distractor-en jackets
+@distractor-en hoods
 
 @sentence
 @lu D'Kand niewent hir huet eng giel Jackett un.

@@ -125,13 +125,15 @@
 @distractor-en shine
 @distractor-en trees
 
-@sentence
-@lu Ech mengen, et ass den Dag, net den Owend.
-@en I think it is daytime, not evening.
-@distractor-lu nuets
-@distractor-lu Wieder
-@distractor-en at night
-@distractor-en weather
+@fill
+@lu Ech [mengen], et [ass] den Dag, [net] den Owend.
+@en I [think] it [is] daytime, [not] evening.
+@distractor-lu mengt
+@distractor-lu sinn
+@distractor-lu ouni
+@distractor-en thinks
+@distractor-en are
+@distractor-en without
 
 @sentence
 @lu De Chrëschtmaart ass am Chrëschtmount.

@@ -157,13 +157,15 @@
 @distractor-en walking
 @distractor-en cars
 
-@sentence
-@lu Et ass wierklech richteg, datt vill Leit an der Strooss sinn.
-@en It is really true that a lot of people are in the street.
-@distractor-lu falsch
-@distractor-lu Butteker
-@distractor-en false
-@distractor-en shops
+@fill
+@lu Et [ass] wierklech [richteg], [datt] vill Leit an der Strooss sinn.
+@en It [is] really [true] [that] a lot of people are in the street.
+@distractor-lu sinn
+@distractor-lu richtegen
+@distractor-lu wann
+@distractor-en are
+@distractor-en rightly
+@distractor-en when
 
 @sentence
 @lu Hannen an der Strooss gesinn ech Beem an Autoen.
