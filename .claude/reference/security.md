@@ -73,6 +73,8 @@ Don't remove either.
 
 **Test the CSP in preview before prod** — a missing directive shows up as a blocked-resource error in the browser console, not as a server error.
 
+**Edge-injected scripts can't be allowlisted.** Cloudflare's *JavaScript Detections* / Bot Fight Mode injects an inline `window.__CF$cv$params` bootstrap into the served HTML *after* `_headers` is applied, so `script-src 'self'` blocks it. Its per-request token makes the hash unstable, so `'sha256-…'` won't work either and `'unsafe-inline'` would defeat the whole directive. Resolution: JS Detections is **off** in the dashboard (Security → Bots). If a `blocked an inline script … web.roudeleiw.app:<line>` error reappears, check whether that setting got re-enabled before touching the CSP. Inline-script violations attributed to `content.js` are browser extensions, not the site.
+
 ## Secrets handling
 
 - Secrets live in Cloudflare Worker secrets (`npx wrangler secret put NAME`), not in `wrangler.toml` and not in env files.
