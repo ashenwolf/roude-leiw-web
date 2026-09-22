@@ -9,13 +9,67 @@ Authoring rules and bounds: the `letz-content-generator` skill and its
 
 ## What it is for
 
-Most of a sentence is already in place; the learner drops 1–4 words into the
+Most of a sentence is already in place; the learner drops 1–5 words into the
 blanks. The purpose is **not** more sentence practice — it teaches the **typical
 phrases** used to describe a picture or answer a topic question, plus the **topic
 and positional words** that slot into them.
 
 The frame carries the pattern; the blanks carry the vocabulary. That division
 should drive every authoring decision.
+
+## Second purpose (Sep 2026): the escape hatch for a long sentence
+
+A `@sentence` makes the learner order every tile, and a tile-reordering task loads
+working memory **per tile**. The replicated capacity figure is ~4 chunks (Cowan;
+Miller's 7±2 does not survive once rehearsal and grouping are stripped out), and
+L2 learners chunk *worse*, not better. A banked cloze is recognition plus local
+slotting against a fixed frame, so it tolerates a far longer sentence — the 16–20
+word readability optimum applies to *reading* prose, which a filled frame is.
+
+So a long exam answer is not a sentence-builder problem to be tuned; it is the
+wrong mechanic. 36% of exam `@sentence` blocks were ≥11 LU tokens (max 25), 279 of
+those carrying `@question` — a ~23-tile pool for one graded decision.
+
+**The selection signal is structure, not length.** What makes assembly a lottery is
+the number of independent ordering decisions: a split perfect bracket
+(`sinn … gaangen`), a modal bracket, `fir … ze <inf>`, a comma-introduced
+verb-final clause, a stranded separable prefix, 3+ clauses. A flat 10-token
+coordination (`Zwee Leit si jonk an zwee Leit sinn al`) repeats one easy decision
+and is fine to assemble; a 9-token verb-final clause hides the most-failed rule in
+the language.
+
+`npm run check-conversion` encodes exactly that and is **advisory**, like
+`check-content`: `FILL` (≥12 tokens, or two traps stacked), `?` (one trap at 9–11
+tokens — read it and decide), or keep. It is deliberately not a build gate, because
+structure only *predicts* difficulty. Thresholds: ≤6 always builder, ≥12 always
+fill, 7–8 almost always builder.
+
+**Converting costs recorded progress.** The stat key changes `phrase:` → `fill:`,
+so a converted element's history is orphaned, and disjointness means conversion is
+replacement rather than addition (Element count stays flat — no throughput change).
+That is why this is a per-file human pass, not a bulk rewrite.
+
+### The distractor rule for a converted sentence (user, Sep 2026)
+
+**Form, not meaning.** `promptText` is the complete source-language sentence with
+brackets stripped, so the learner reads the English answer key and the *meaning* is
+never in question. A distractor must therefore be the wrong **form** of the right
+idea: wrong person (`leeë`/`leet`), wrong tense (`war`/`ass`), wrong auxiliary
+(`sinn`/`hunn`), wrong inflection (`kloer`/`kloren`, `Kand`/`Kanner`).
+
+A distractor that differs only in meaning — `Kamera` where the prompt says
+"material", `Musek` where it says "books" — is eliminable by vocabulary alone. It
+makes the exercise *easier* while testing nothing the Sproochentest marks.
+
+**Correction to an earlier draft of this file:** two blanks of the same word class
+were recorded here as automatically ambiguous. They are not. `Ech [si] geplënnert`
+under "I **moved**" has `hunn` as a distractor, and that is the aux-selection
+lesson (movement verbs take `sinn`), not a second valid answer — the English pins
+it. Judge ambiguity against the prompt, not against the Luxembourgish alone.
+
+The practical consequence is that a form distractor needs its **lemma visible** in
+the frame to contrast against, which naturally settles converted fills at 3–4
+blanks rather than 5.
 
 ## `@fill` is scoped to *reusable* material, not to a level
 
@@ -66,6 +120,26 @@ B1 material *happens* to fit `@fill` well, for the mechanical reason in
   **not** tokenized — a multi-word blank is one tile. This eliminates within-blank
   ordering ambiguity outright and is a deliberate divergence from the sentence
   builder. Do not "unify" the two by routing fill tiles through `tokenizeSentence`.
+- **Two blanks may share one answer, and share ONE tile** (Sep 2026).
+  `Ech [hunn] Terrasse [gär], an ech trëppele [gär]` is legal: `applySubmit`
+  already graded by tile *text* rather than index, so the runtime supported this
+  before the content rule did — only R1 forbade it. The builder emits one tile per
+  **distinct** answer and `applyTokenTap` copies instead of moving while a blank
+  still needs it (`tileDemand`). A second identical tile would be a free correct
+  answer in either blank, so R1 still requires tiles distinct; what changed is that
+  a repeated *answer* no longer implies a repeated *tile*.
+- **Up to 5 blanks, and never more than 4 distractors.** The ceiling is the whole
+  reason to prefer a fill: a 5-blank frame with 5 distractors is a 10-tile pool,
+  i.e. the load the mechanic exists to avoid. Past 5 blanks the frame stops
+  carrying the structure and this degrades into a builder with a cosmetic frame.
+- **A `@fill` may carry `@question`, which forces en→lu** (Sep 2026). The grammar
+  always parsed it (shared `sentenceTag`); the visitor dropped it and a test banned
+  it. Now `resolveQuestionDirection` — shared with `@sentence`, hence taking the
+  question rather than an entry — pins the direction, because the learner must
+  *produce* Luxembourgish. A Q&A fill therefore has ONE presented direction and ONE
+  stat key; its `@en` brackets are never displayed, though the `@en` line remains
+  the key identity. It plays the examiner's question audio and no LU audio (the LU
+  line is the answer). Picture themes still forbid it.
 - **Blank counts may differ between `@lu` and `@en`** because word order does. The
   two presentations are graded and keyed independently; no cross-language blank
   correspondence is implied.

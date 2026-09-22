@@ -58,7 +58,7 @@ unmatchable by reasoning. LU synonyms the dictionary translates identically
 |---|---|---|---|
 | `[` count == `]` count, per line | — | F | `unbalanced brackets in "…"` |
 | no nesting (`[[x]]`, `[a[b]`) | — | F | `nested brackets in "…"` |
-| blanks per direction | **1–4** | F | `(${direction}): N blanks` |
+| blanks per direction | **1–5** | F | `(${direction}): N blanks` |
 | no empty blank (`[]`) | — | F | `(${direction}): empty blank` |
 
 `BLANK_RX` is `/\[([^[\]]*)\]/g` — non-greedy by construction. Unbalanced
@@ -73,9 +73,32 @@ presentations are graded independently.
 | Bound | Value | Test | Failure message |
 |---|---|---|---|
 | all tiles distinct under `normalizeAnswer` | — | F | `(${direction}): duplicate tile text` |
-| **surviving** distractors per direction | **≥ 2** | F | `(${direction}): only N usable distractors` |
+| **surviving** distractors per direction | **2–4** | F | `only N usable distractors` / `N distractors` |
 | no distractor equals any blank answer | — | F | `distractor "x" is a correct answer` |
 | no blank answer appears as a whole word in the frame | — | F | `answer "x" is already visible in the frame` |
+
+### The distractor CEILING is as binding as the floor
+
+Four is the maximum, whatever the blank count. The whole reason to prefer a fill
+to a sentence builder is a smaller tile pool: a 5-blank frame with 5 distractors
+is a 10-tile pool, which is the reordering load the mechanic exists to avoid.
+With 5 blanks, author **3** distractors; with 1–2 blanks, 3 is still the sweet
+spot (2 after an accidental collision leaves no margin).
+
+### A repeated blank answer shares ONE tile
+
+Two blanks may carry the same answer — `Ech [hunn] Terrasse [gär], an ech
+trëppele [gär]`. Grading compares tile **text**, not tile index, so the builder
+emits one tile per *distinct* answer and the UI keeps that tile tappable until
+every blank needing it is filled (`tileDemand` / `isTileSpent` in `fill-logic.ts`).
+
+Consequences for authoring and for counting:
+- `blanks.length` is the number of **gaps**; `tokens.length` is
+  `distinct answers + distractors`. The ≤5 cap is on gaps.
+- R1 still requires every tile distinct — a *second* identical tile would be a
+  free correct answer in either blank.
+- The distractor floor counts against **distinct** answers, so a repeat does not
+  consume distractor budget.
 
 ### The distractor trap — count *after* the builder drops collisions
 
@@ -145,10 +168,31 @@ put a comma before the blank (which is why two-clause frames —
 | Bound | Test | Failure message |
 |---|---|---|
 | exactly **one** `@lu` and **one** `@en` per block | F | `${file}: @lu count` / `@en count` |
-| no `@question` inside a `@fill` | F | `@fill must not carry @question` |
+| a `@question`, if present, is non-empty | F | `empty @question on a @fill` |
+| a Q&A fill's **LU** line carries 1–5 blanks | F | `Q&A fill needs LU blanks` |
 | no `@fill` shares a sentence with a `@sentence` in the same file | F | `"…" exists as both a @fill and a @sentence` |
 | no two `@fill` blocks in a file teach the same sentence | F | `duplicate @fill sentence` |
 | fill stat keys unique per file after truncation | F | `fill stat key collision` |
+
+### `@question` on a `@fill` — built Sep 2026
+
+A fill **may** carry `@question`, and for a long exam answer it is the preferred
+shape: the examiner asks, and the learner slots 2–5 words into a frame instead of
+ordering fifteen loose tiles.
+
+- **A question forces en→lu**, exactly as it does on a `@sentence`
+  (`resolveQuestionDirection`). The learner must *produce* Luxembourgish, so
+  filling English blanks under a Luxembourgish prompt would invert the exercise.
+- Therefore a Q&A fill has **one** presented direction and **one** stat key, not
+  two. Its `@en` line is still the key identity and the prompt text, but its
+  brackets are never shown — do not shuffle them, since that re-keys the Element.
+- It gets the examiner's question audio (same mp3 as a sentence sharing that
+  question text) and no LU audio: in the forced direction, the LU line is the
+  answer.
+- **Track-scoped:** allowed on topic themes; **forbidden in picture themes**, same
+  as for sentences (M: `fill "…" must not carry @question`). A `03_questions` file
+  legitimately holds both kinds — Q&A fills (answers) and question-free reusable
+  frames — so "every fill has a question" is *not* a rule there.
 
 The grammar shares `sentenceTag` with `@sentence`, so a second `@lu` line parses
 fine and the visitor silently keeps the first. Accepted variants *are* ambiguity
@@ -237,7 +281,8 @@ Lexer facts that bite while authoring:
 |---|---|
 | `@fill` is allowed on **both** tracks | Lesson Mode schedules fill Slots when the lesson declares `@fill` (`hasFills` in `lessonSlotTypeDistribution`), so those Elements do reach the mastery gate. Before Sep 2026 the planner had no fill branch and a course fill made its lesson unpassable — that is fixed, not merely tolerated. |
 | `@fill` is **not** level-scoped | Its criterion is *reuse across topics*; A1 frames are first-class. |
-| `@sentence` stays assemblable | The learner builds every tile: main clauses and short two-clause sentences; attributive adjectives only on feminine nouns (uninflected). |
+| `@sentence` stays assemblable | The learner builds every tile, and a tile-reordering task loads working memory **per tile** — the replicated capacity figure is ~4 chunks (Cowan), not Miller's 7±2. So: main clauses and short two-clause sentences; attributive adjectives only on feminine nouns (uninflected). |
+| A long or order-heavy sentence belongs in a `@fill` | The frame carries the ordering decisions the learner would otherwise have to make tile by tile. Run `npm run check-conversion` — advisory, it flags `@sentence` blocks whose structure (split verb bracket, modal bracket, `fir … ze`, comma-introduced verb-final clause, stranded separable prefix, 3+ clauses) makes assembly a word-order lottery. It reports `FILL` / `?` / keep, and you adjudicate the `?` band. |
 | Declined attributives and verb-final subordinate clauses → `@fill` frames | The learner reads the frame rather than assembling it. |
 
 ## 10. Before committing

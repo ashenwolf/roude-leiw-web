@@ -40,6 +40,12 @@ Bounds and error messages: `content-contract.md`. Grammar facts:
 
 Run all four. The first two are one command each.
 
+- [ ] **`npm run check-conversion`** — before authoring, on any file you are
+      editing: flags `@sentence` blocks whose word-order load makes tile-by-tile
+      assembly a lottery and that should be `@fill` frames instead. Advisory, with a
+      judgement band (`?`) you adjudicate. See [[fill-in-words-exercise]] § Second
+      purpose for the structural signals and what converting costs.
+
 - [ ] **`npx vitest run tests/integration`** — bracket balance, blank/distractor
       counts, tile distinctness, R5 adjacency, `@fill`/`@sentence` disjointness,
       stat-key collisions, theme contracts, image budget, duplicate `@word` within a
@@ -81,6 +87,7 @@ Run all four. The first two are one command each.
 |---|---|---|
 | bracket/blank/distractor counts, disjointness, key collisions, theme contracts, image budget, duplicate `@word` | integration tests | exactly decidable → gate the build |
 | Eifeler-Regel n-drop | `scripts/check-content.mjs` | heuristic with unavoidable false positives (stem-final `-nn`, proper names) → a build gate would need an allowlist growing with every file |
+| builder-vs-fill choice | `scripts/check-conversion.mjs` | structure predicts difficulty but does not decide it — a flat coordination is assemblable at 10 tokens, a verb-final clause is not at 9 |
 | distractor survival | throwaway harness | needs the real builder over content that changes shape per theme |
 | LOD verification | MCP tools, by hand | network-dependent and needs human judgement on polysemy |
 
@@ -94,3 +101,12 @@ proven otherwise: **if you extend them, re-plant a probe.**
 ambiguity bugs in the first authored fills were invisible to every build gate and
 surfaced only by dumping the tiles the builder actually produces — see
 [[fill-in-words-exercise]] § First content shipped.
+
+**Distractors for a converted sentence are FORM distractors** — wrong person,
+tense, auxiliary or inflection of the right lemma (`leeë`/`leet`, `hunn`/`sinn`,
+`Kand`/`Kanner`, `kloer`/`kloren`). The prompt shows the complete sentence in the
+source language, so the **meaning is already given**: a distractor that differs
+only in meaning (`Kamera` where the prompt says "material") is eliminable by
+vocabulary alone and tests nothing. What the learner must still choose is the
+correct form, which is what the exam marks. This also means two blanks of the same
+word class are **not** automatically ambiguous — the English pins which is which.

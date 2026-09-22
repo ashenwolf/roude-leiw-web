@@ -122,18 +122,20 @@ be root-relative and same-origin: `img-src` is `'self'` and a test enforces it.
 ```
 
 - Optional examiner question in Luxembourgish, rendered above the prompt.
-- A sentence carrying `@question` is **always** presented en→lu (assemble the LU
-  answer) — enforced in `resolveSentenceDirection`, so it behaves the same on
-  both tracks.
-- **Exam-track scoping:** required throughout topic-theme `03_questions` files;
-  **forbidden in picture-description themes** (those are pure description). See
-  the exam-track authoring split in the SKILL.
+- A sentence **or fill** carrying `@question` is **always** presented en→lu
+  (assemble, or fill, the LU answer) — enforced in `resolveQuestionDirection`, so it
+  behaves the same on both tracks and for both mechanics.
+- **Exam-track scoping:** required on every `@sentence` in a topic-theme
+  `03_questions` file; **forbidden in picture-description themes** (those are pure
+  description), for fills as well as sentences. A `03_questions` file's *fills* may
+  carry one or not — a Q&A fill is an answer, a question-free fill is a reusable
+  frame, and both belong there. See the exam-track authoring split in the SKILL.
 
 ### `@fill` — BUILT (Aug 2026)
 
-Fill-in-words: most of the sentence is fixed, the learner drops 1–4 words into
+Fill-in-words: most of the sentence is fixed, the learner drops 1–5 words into
 bracketed blanks. Safe to emit. The content-level checks (balanced non-nested
-brackets, 1–4 blanks per direction, ≥2 *surviving* distractors, no blank text
+brackets, 1–5 blanks per direction, 2–4 *surviving* distractors, no blank text
 repeated in the frame, R5 Eifeler-Regel adjacency, no sentence shared with a
 `@sentence`, stat-key collisions after 64-char truncation) **are** enforced by
 `tests/integration/fill-content-rules.test.ts` — so `npm run build` will fail on
@@ -164,10 +166,20 @@ why it said "exam only".
   are ambiguity in this exercise.
 - **One blank = one tile, verbatim.** A multi-word blank (`[Ferris wheel]`) is a
   single tile; bracket contents and distractor lines are NOT tokenized.
-- 1–4 blanks per direction; ≥2 distractors per direction — counted **after** the
-  builder drops any distractor equal to an answer, so author 3 for margin. Blank
-  count may differ between `@lu` and `@en` (word order differs) — that is fine, the
-  two presentations are graded independently.
+- **Two blanks may share one answer** — `Ech [hunn] Terrasse [gär], an ech
+  trëppele [gär]`. Grading compares tile text, so ONE tile fills both, and it
+  stays tappable until both are filled. Count gaps, not tiles, against the cap.
+- 1–5 blanks per direction; **2–4** distractors per direction — counted **after**
+  the builder drops any distractor equal to an answer, so author 3 for margin.
+  Four is a hard ceiling: a 5-blank frame with 5 distractors is a 10-tile pool,
+  i.e. the reordering load this mechanic exists to avoid. Blank count may differ
+  between `@lu` and `@en` (word order does) — the two presentations are graded
+  independently.
+- **`@question` is allowed, and forces en→lu.** A Q&A fill lets an examiner
+  question be answered by slotting 2–5 words into a frame instead of assembling a
+  fifteen-tile sentence — the preferred shape for a long answer. It has one
+  presented direction and one stat key; its `@en` brackets are never shown.
+  Forbidden in picture themes, same as on `@sentence`.
 - **The `@en` line is the element's identity.** `fillKey` is built from it raw,
   brackets included, truncated to 64 chars — so moving a bracket in `@en` changes
   the stat key and orphans recorded progress.
@@ -176,6 +188,20 @@ why it said "exam only".
 - **A `@fill` must never carry the same sentence as a `@sentence`** — pick a
   pattern worth reusing, don't re-teach an already-assembled sentence.
 - **The one-correct-form rules** — see the SKILL's "Authoring @fill blocks".
+
+```
+@fill
+@question Wat hutt Dir am Summer gekaaft?
+@lu Mir [sinn] op de Maart [gaangen] an hu eng Klimaanlag kaaft.
+@en We [went] to the market and [bought] an air conditioner.
+@distractor-lu hunn
+@distractor-lu gesënn
+@distractor-lu Kaffi
+```
+
+A Q&A fill: 2 gaps + 3 distractors = 5 tiles, against ~20 for the same sentence in
+the builder. The blanks take the **grammar skeleton** (aux + participle), not the
+vocabulary WordMatch already drills.
 
 ## Formatting rules
 

@@ -71,6 +71,37 @@ A manifest id is authoritative for progression; the in-file `@lesson` id is cosm
 track. Audio lives under `lessons/**/audio/`, gitignored, with R2 as the source of truth
 ([audio-pipeline.md](../memory/audio-pipeline.md)).
 
+## The design system is `src/ui/` — use it or extend it
+
+**No feature code writes a raw `<button>` or hand-rolls a control's classes.** If the
+system cannot express what you need, *extend the system* in the same change and use
+the new component — do not inline "just this once". An inlined control is invisible
+to every later change: the four hand-written "Back" links drifted into two sizes and
+two different arrow conventions before anyone noticed, and the audio button's
+36px touch target was duplicated as three separate `w-9 h-9` literals that had to
+stay in sync by luck.
+
+The surface, and what each is *for* (the distinction is the point — picking by
+appearance is how a system rots):
+
+| Component | For |
+|---|---|
+| `Button` | the primary action — full-width label pill carrying a `UiColor` |
+| `ButtonText` | a quiet text control that must not compete with it (`Back`) |
+| `IconButton` / `IconButtonSpacer` | an icon-only secondary control; the spacer reserves its exact width so centred text does not shift when the control appears |
+| `Pill` | a word tile, standalone (`sm`/`md`/`lg`) or inline in running text (`inline`) |
+| `PillGap` | the *empty* counterpart of an inline `Pill` — a gap in a sentence, rendered as an underline |
+| `PillTile` | one tile in a pool: tappable, or spent and holding its space |
+
+`PillGap` and `Pill` must keep identical geometry — they alternate in the same
+position as a `@fill` blank is filled, and a mismatch moves the sentence under the
+learner's finger. That is why the gap lives in `src/ui/` beside the pill rather
+than in the exercise that uses it.
+
+Colour and size live in the lookup maps at the top of each component
+(`UiColorMap`, `PillStatusColors`, `*SizeMap`). Add a key there; never pass a
+Tailwind colour in from a call site.
+
 ## Files whose location is load-bearing
 
 These are the ones worth naming, because moving or bypassing them breaks something non-obvious.
@@ -84,5 +115,7 @@ These are the ones worth naming, because moving or bypassing them breaks somethi
 | `src/lib/stats-merge.ts` + `worker/lib/user.ts` | client and server merges must stay byte-identical; a test enforces it |
 | `src/lib/streak.ts` | the one module imported by both client and worker |
 | `src/ui/PinnedBottomBar.tsx` | encodes the `<main>`-has-no-bottom-padding contract |
+| `src/ui/index.ts` | the design system's public surface — a component not exported here is not part of it |
 | `src/exercise/ExerciseLayout.tsx` | encodes the constant-height rule (nothing may grow on tap) |
+| `src/exercise/ExercisePrompt.tsx` | the ONE prompt header (question + prompt + audio) both SentenceBuilder and FillBlank render |
 | `public/_headers` | CSP/HSTS; extend it when adding an external origin ([security.md](security.md)) |

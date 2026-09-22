@@ -92,9 +92,9 @@ Context-based router (`src/context/`). Pages: `"home"` | `"exercise"` | `"word-m
 
 Custom DSL parsed by Chevrotain. Course files: `public/assets/lessons/{level}/{filename}.letz`. Exam files: `public/assets/exam/{kind}/{theme}/{file}.letz` — `{kind}` is `topic` or `picture`, mirroring the manifest's `kind` discriminator (in-file `@lesson` id is a cosmetic label there; the manifest id is authoritative).
 
-Directives: `@lesson`, `@word` (→ `entries[]`), `@sentence` + `@lu`/`@en`/`@question`/`@distractor-en`/`@distractor-lu` (→ `sentences[]`, used by `SentenceBuilder`), `@fill` + `@lu`/`@en`/`@distractor-*` with `[bracketed]` blanks (→ `fills[]`, used by `FillBlank`), `@image`/`@image-alt` (lesson-level, quoted values). The parser hard-errors on unknown `@`-tokens — adding a directive means touching `lexer.ts`/`parser.ts`/`visitor.ts` together, and a new directive that's also a new **Element kind** is the wider change flagged in [`.claude/reference/mode-specs.md`](.claude/reference/mode-specs.md).
+Directives: `@lesson`, `@word` (→ `entries[]`), `@sentence` + `@lu`/`@en`/`@question`/`@distractor-en`/`@distractor-lu` (→ `sentences[]`, used by `SentenceBuilder`), `@fill` + `@lu`/`@en`/`@question`/`@distractor-*` with `[bracketed]` blanks (→ `fills[]`, used by `FillBlank`), `@image`/`@image-alt` (lesson-level, quoted values). The parser hard-errors on unknown `@`-tokens — adding a directive means touching `lexer.ts`/`parser.ts`/`visitor.ts` together, and a new directive that's also a new **Element kind** is the wider change flagged in [`.claude/reference/mode-specs.md`](.claude/reference/mode-specs.md).
 
-`@fill` is a **distinct Element kind** from `@sentence` (own stat key `fill:{direction}:{firstEn}`, own error pool) — one blank = one tile verbatim, exactly one `@lu`/`@en` per block, no `@question`, never the same sentence as a `@sentence`. **Exam SubLessons only** — `planLessonMode` schedules no fill Slots, so `@fill` under `public/assets/lessons/` would be unpassable.
+`@fill` is a **distinct Element kind** from `@sentence` (own stat key `fill:{direction}:{firstEn}`, own error pool) — one blank = one tile verbatim, exactly one `@lu`/`@en` per block, never the same sentence as a `@sentence`. Up to **5** blanks and at most **4** distractors; two blanks may share an answer and then share one tile. It **may** carry `@question`, which forces en→lu (so a Q&A fill has one direction and one stat key) — the preferred shape for a long exam answer, since the frame carries the word order instead of a ~20-tile pool. Legal on **both tracks**: `planLessonMode` schedules fills as phrases. `npm run check-conversion` flags `@sentence` blocks that should become fills (advisory).
 
 **Full syntax, every mechanized bound, and authoring procedure live in the `letz-content-generator` skill** — read `references/letz-format.md` (syntax), `references/content-contract.md` (every bound + failing test, don't read the tests instead), and `references/luxembourgish-grammar.md` (connectors, inversion, homograph traps) before authoring. Design rationale: [fill-in-words-exercise](.claude/memory/fill-in-words-exercise.md), [picture-description-theme](.claude/memory/picture-description-theme.md), [exam-track](.claude/memory/exam-track.md).
 
@@ -106,6 +106,10 @@ Tests run with **Vitest** (`npx vitest run`), and the pipeline architecture mean
 
 - Try to analyze several ideas and provide options to human to pick from.
 - With every implementation check if it can be generalized and reused.
+
+### Design system
+
+Everything in `src/ui/` (exported from `src/ui/index.ts`). **No feature code writes a raw `<button>` or hand-rolls a control's classes** — if the system can't express it, extend the system in the same change. `Button` (primary action) / `ButtonText` (quiet text control) / `IconButton` + `IconButtonSpacer` (icon-only, plus its exact-width reservation) / `Pill` (word tile, `inline` for running text) / `PillGap` (the empty counterpart, geometry-matched to `Pill`) / `PillTile` (pool tile, tappable or spent). Colour and size live in each component's lookup map. Full rules and the why: [project-structure.md](.claude/reference/project-structure.md) § The design system.
 
 ### Icons
 
