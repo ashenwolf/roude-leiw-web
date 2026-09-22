@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
+import { IconButton, IconButtonSpacer } from "../../ui/IconButton";
 import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
+import { PillTile } from "../../ui/PillGap";
 import { SpeakerHighIcon } from "../../ui/icons";
 import { toWordResultMap } from "./sentence-logic";
 import { useSentenceGame } from "./use-sentence-game";
@@ -129,7 +131,7 @@ type PromptLineProps = {
  * One prompt line, optionally with the audio replay button.
  *
  * Both sides of the flex row reserve the button's width — the visible control on
- * the right, an invisible mirror on the left — so the text stays truly centered.
+ * the right, an `IconButtonSpacer` on the left — so the text stays truly centered.
  * The reservation is driven by `hasAudioSlot`, not by whether the button renders,
  * so a load failure arriving after mount removes the icon without reflowing the
  * line under the learner's eyes.
@@ -145,19 +147,12 @@ const PromptLine = ({ text, emphasis, hasAudioSlot = false, onPlay }: PromptLine
 
   return (
     <div className="flex items-center justify-center gap-2 px-2">
-      <div aria-hidden="true" className="shrink-0 w-9 h-9" />
+      <IconButtonSpacer />
       <p className={textClass}>{text}</p>
       {onPlay === undefined ? (
-        <div aria-hidden="true" className="shrink-0 w-9 h-9" />
+        <IconButtonSpacer />
       ) : (
-        <button
-          type="button"
-          onClick={onPlay}
-          aria-label="Play prompt audio"
-          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-50 active:bg-sky-100"
-        >
-          <SpeakerHighIcon className="w-6 h-6" />
-        </button>
+        <IconButton icon={SpeakerHighIcon} label="Play prompt audio" onClick={onPlay} />
       )}
     </div>
   );
@@ -225,20 +220,11 @@ export const SentenceBuilder = ({ item, onResult, onInteraction }: Props) => {
       </ExerciseAnswerArea>
 
       <ExerciseTilePool className="gap-2">
-        {item.tokens.map((token, idx) =>
-          usedSet.has(idx) ? (
-            <div
-              key={idx}
-              className="h-10 px-4 rounded-lg border-2 border-gray-200 bg-gray-100 flex items-center"
-            >
-              <span className="text-sm text-transparent select-none" aria-hidden="true">{token}</span>
-            </div>
-          ) : (
-            <Pill key={idx} size="sm" status="blanc" onClick={() => handleTapToken(idx)}>
-              {token}
-            </Pill>
-          )
-        )}
+        {item.tokens.map((token, idx) => (
+          <PillTile key={idx} spent={usedSet.has(idx)} onClick={() => handleTapToken(idx)}>
+            {token}
+          </PillTile>
+        ))}
       </ExerciseTilePool>
 
       <PinnedBottomBar>

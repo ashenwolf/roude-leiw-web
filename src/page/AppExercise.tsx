@@ -15,6 +15,7 @@ import { mergeWordStats } from "../lib/stats-merge";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { refreshGuestProgress } from "../persistence/hooks/use-guest-progress";
 import { Button } from "../ui/Button";
+import { ButtonText } from "../ui/ButtonText";
 import { LessonImage } from "../ui/LessonImage";
 import { ProgressBar } from "../ui/ProgressBar";
 import { MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "../ui/Popup";
@@ -94,9 +95,9 @@ const ExerciseReady = ({ totalSlots, onStart, onBack, mode, lessonImage }: Exerc
     <div className="w-full max-w-xs">
       <Button onClick={onStart}>Start</Button>
     </div>
-    <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors">
+    <ButtonText onClick={onBack} size="md">
       Back
-    </button>
+    </ButtonText>
   </div>
 );
 
@@ -196,9 +197,9 @@ const ExerciseActive = ({
     )}
 
     <div>
-      <button onClick={onBack} className="text-gray-500 hover:text-gray-700 transition-colors text-sm">
-        ← Back
-      </button>
+      <ButtonText onClick={onBack} withArrow>
+        Back
+      </ButtonText>
     </div>
 
     <MilestonePopup

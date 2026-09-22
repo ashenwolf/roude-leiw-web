@@ -6,6 +6,7 @@ import { loadExamMeta, fetchSubLesson } from "../exam/exam-catalog";
 import { computeExamView, selectSubLessonsToLoad } from "../exam/exam-progression";
 import { useProgress } from "../persistence/hooks/use-progress";
 import { Button } from "../ui/Button";
+import { ButtonText } from "../ui/ButtonText";
 import { GraduationCapIcon, ImageIcon } from "../ui/icons";
 import { SubLessonPath } from "../ui/SubLessonPath";
 
@@ -118,12 +119,11 @@ export const AppExam = () => {
           </Button>
         </div>
 
-        <button
-          onClick={() => navigateTo("home")}
-          className="text-gray-500 hover:text-gray-700 transition-colors text-sm self-start"
-        >
-          ← Back to Home
-        </button>
+        <div className="self-start">
+          <ButtonText onClick={() => navigateTo("home")} withArrow>
+            Back to Home
+          </ButtonText>
+        </div>
       </div>
     );
   }
@@ -152,12 +152,11 @@ export const AppExam = () => {
         ))
       )}
 
-      <button
-        onClick={() => setSelectedKind(null)}
-        className="text-gray-500 hover:text-gray-700 transition-colors text-sm self-start"
-      >
-        ← Back
-      </button>
+      <div className="self-start">
+        <ButtonText onClick={() => setSelectedKind(null)} withArrow>
+          Back
+        </ButtonText>
+      </div>
     </div>
   );
 };

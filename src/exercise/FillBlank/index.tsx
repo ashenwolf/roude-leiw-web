@@ -4,6 +4,7 @@ import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
 import { Button } from "../../ui/Button";
 import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
+import { PillGap, PillTile } from "../../ui/PillGap";
 import { isComplete, targetBlank, toWordResultMap } from "./fill-logic";
 import { useFillGame } from "./use-fill-game";
 
@@ -57,17 +58,6 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
   const filledStatus: PillStatus =
     state.checkResult === null ? "blanc" : state.checkResult === "correct" ? "success" : "fail";
 
-  // An empty blank is a gap in a sentence, not a tile: it reads as an underline,
-  // the same quiet affordance the sentence builder's empty assembled row uses.
-  // Type size is inherited from the sentence container (as it is for `size="inline"`
-  // pills), and the px-2 + 2px border match the filled pill, so a blank sits in the
-  // reading flow at one size and dropping a tile in changes no geometry.
-  const emptyBlankClass = (blankIdx: number): string =>
-    [
-      "align-middle leading-tight px-2 border-2 border-transparent cursor-pointer transition",
-      blankIdx === aimed ? "border-b-sky-400" : "border-b-gray-300",
-    ].join(" ");
-
   return (
     <div className="flex flex-col flex-1">
       <ExerciseAnswerArea className="gap-4">
@@ -96,13 +86,9 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
                     {item.tokens[state.placed[i] as number]}
                   </Pill>
                 ) : (
-                  <button className={emptyBlankClass(i)} onClick={() => handleTapBlank(i)}>
-                    {/* Sized to the answer so the layout doesn't jump when filled,
-                        while keeping the answer itself invisible. */}
-                    <span className="text-transparent select-none" aria-hidden="true">
-                      {item.blanks[i]}
-                    </span>
-                  </button>
+                  <PillGap aimed={i === aimed} onClick={() => handleTapBlank(i)}>
+                    {item.blanks[i]}
+                  </PillGap>
                 ))}
             </span>
           ))}
@@ -110,20 +96,11 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
       </ExerciseAnswerArea>
 
       <ExerciseTilePool className="gap-2.5">
-        {item.tokens.map((token, idx) =>
-          usedSet.has(idx) ? (
-            <div
-              key={idx}
-              className="h-10 px-4 rounded-lg border-2 border-gray-200 bg-gray-100 flex items-center"
-            >
-              <span className="text-sm text-transparent select-none" aria-hidden="true">{token}</span>
-            </div>
-          ) : (
-            <Pill key={idx} size="sm" status="blanc" onClick={() => handleTapToken(idx)}>
-              {token}
-            </Pill>
-          )
-        )}
+        {item.tokens.map((token, idx) => (
+          <PillTile key={idx} spent={usedSet.has(idx)} onClick={() => handleTapToken(idx)}>
+            {token}
+          </PillTile>
+        ))}
       </ExerciseTilePool>
 
       <PinnedBottomBar>

@@ -8,7 +8,10 @@ export const UiColorMap = {
 export type UiColor = keyof typeof UiColorMap;
 
 export { Button } from "./Button";
+export { ButtonText } from "./ButtonText";
+export { IconButton, IconButtonSpacer } from "./IconButton";
 export { Pill } from "./Pill";
+export { PillGap, PillSpent, PillTile } from "./PillGap";
 export { AppWrapper } from "./AppWrapper";
 export { Popup, MilestonePopup, SectionMilestonePopup, CelebrationPopup } from "./Popup";
 export { ProgressBar } from "./ProgressBar";
