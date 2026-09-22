@@ -127,13 +127,15 @@
 @distractor-en cheap
 @distractor-en app
 
-@sentence
-@lu Ech liese RTL online, obwuel et nach schwéier ass.
-@en I read RTL online, although it is still difficult.
-@distractor-lu einfach
-@distractor-lu Podcast
-@distractor-en easy
-@distractor-en podcast
+@fill
+@lu Ech [liese] RTL online, [obwuel] et nach [schwéier] ass.
+@en I [read] RTL online, [although] it is still [difficult].
+@distractor-lu liest
+@distractor-lu well
+@distractor-lu schwéieren
+@distractor-en reads
+@distractor-en because
+@distractor-en difficulty
 
 @sentence
 @lu Ech kucke Filmer op Englesch mat Ënnertitelen.
@@ -159,13 +161,15 @@
 @distractor-en calm
 @distractor-en English
 
-@sentence
-@lu Ech froen d'Leit lues a nach eng Kéier ze schwätzen.
-@en I ask people to speak slowly and once more.
+@fill
+@lu Ech [froen] d'Leit [lues] a nach eng Kéier ze [schwätzen].
+@en I [ask] people to [speak] [slowly] and once more.
+@distractor-lu frot
 @distractor-lu séier
-@distractor-lu schreiwen
-@distractor-en fast
-@distractor-en write
+@distractor-lu schwätzt
+@distractor-en asks
+@distractor-en quickly
+@distractor-en speaks
 
 @sentence
 @lu Englesch ass just meng lescht Léisung.
@@ -191,13 +195,15 @@
 @distractor-en apple
 @distractor-en culture
 
-@sentence
-@lu A Steinsel héieren ech vill Lëtzebuergesch, an dat ass wonnerbar.
-@en In Steinsel I hear a lot of Luxembourgish, and that is wonderful.
-@distractor-lu Stad
-@distractor-lu seelen
-@distractor-en city
-@distractor-en rarely
+@fill
+@lu A Steinsel [héieren] ech vill Lëtzebuergesch, an dat [ass] [wonnerbar].
+@en In Steinsel I [hear] a lot of Luxembourgish, and that [is] [wonderful].
+@distractor-lu héiert
+@distractor-lu sinn
+@distractor-lu wonnerbaren
+@distractor-en hears
+@distractor-en are
+@distractor-en wonderfully
 
 @sentence
 @lu An der Stad héieren ech méi Franséisch wéi Lëtzebuergesch.

@@ -116,13 +116,15 @@
 @distractor-en beginners
 @distractor-en write
 
-@sentence
-@lu Et brauch ee vill Gedold fir eng Sprooch ze léieren.
-@en You need a lot of patience to learn a language.
-@distractor-lu Zäit
-@distractor-lu vergiessen
-@distractor-en time
-@distractor-en forget
+@fill
+@lu Et [brauch] ee vill Gedold fir eng Sprooch ze [léieren].
+@en You [need] a lot of patience to [learn] a language.
+@distractor-lu brauchen
+@distractor-lu léiert
+@distractor-lu huet
+@distractor-en needs
+@distractor-en learns
+@distractor-en has
 
 @sentence
 @lu Ech widderhuele meng Vokabelen all Dag e puer Minutten.
