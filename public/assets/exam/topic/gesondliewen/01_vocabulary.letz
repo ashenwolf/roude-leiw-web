@@ -144,13 +144,15 @@
 @distractor-en alcohol
 @distractor-en never
 
-@sentence
-@lu De Kaffi ass gutt, mee den Alkohol ass net gesond.
-@en The coffee is good, but the alcohol is not healthy.
-@distractor-lu Waasser
-@distractor-lu ëmmer
-@distractor-en water
-@distractor-en always
+@fill
+@lu De Kaffi ass [gutt], mee den Alkohol ass net [gesond].
+@en The coffee is [good], but the alcohol is not [healthy].
+@distractor-lu schlecht
+@distractor-lu gesonden
+@distractor-lu gudde
+@distractor-en bad
+@distractor-en healthily
+@distractor-en well
 
 @sentence
 @lu Ech hu Fleesch a Fësch gär.
@@ -184,13 +186,15 @@
 @distractor-en meat
 @distractor-en never
 
-@sentence
-@lu E Kuch mat Gebeess ass lecker, mee net gesond.
-@en A cake with jam is delicious, but not healthy.
-@distractor-lu Zalot
-@distractor-lu ëmmer
-@distractor-en salad
-@distractor-en always
+@fill
+@lu E Kuch mat Gebeess [ass] [lecker], mee net gesond.
+@en A cake with jam [is] [delicious], but not healthy.
+@distractor-lu sinn
+@distractor-lu leckeren
+@distractor-lu hunn
+@distractor-en are
+@distractor-en deliciously
+@distractor-en have
 
 @sentence
 @lu Ech iesse Chipsen a salzeg Noss.

@@ -96,13 +96,15 @@
 @distractor-en car
 @distractor-en never
 
-@sentence
-@lu Ech muss op d'mannst zwee Mol pro Dag spadséieren.
-@en I have to go for a walk at least twice a day.
-@distractor-lu Woch
-@distractor-lu seelen
-@distractor-en week
-@distractor-en rarely
+@fill
+@lu Ech [muss] op d'mannst [zwee] Mol pro Dag [spadséieren].
+@en I [have to] go for a walk [twice] a day at least.
+@distractor-lu mussen
+@distractor-lu dräi
+@distractor-lu spadséiert
+@distractor-en has to
+@distractor-en three times
+@distractor-en walks
 
 @sentence
 @lu Zu Steesel gëtt et e schéine Park.
@@ -160,13 +162,15 @@
 @distractor-en always
 @distractor-en club
 
-@sentence
-@lu Ech maache kee Fitnessstudio, well ech keng Zäit hunn.
-@en I do not do any gym because I have no time.
-@distractor-lu vill
-@distractor-lu Musek
-@distractor-en much
-@distractor-en music
+@fill
+@lu Ech [maache] kee Fitnessstudio, [well] ech keng Zäit [hunn].
+@en I do not go to any gym, [because] I [have] no time.
+@distractor-lu maacht
+@distractor-lu ouni
+@distractor-lu huet
+@distractor-en go
+@distractor-en without
+@distractor-en has
 
 @sentence
 @lu Um Weekend sinn ech ze midd fir Sport.
@@ -240,13 +244,15 @@
 @distractor-en phone
 @distractor-en physical
 
-@sentence
-@lu Ech si fréier an engem Team op der Uni geschwommen.
-@en I used to swim in a team at university.
-@distractor-lu Schoul
-@distractor-lu eleng
-@distractor-en school
-@distractor-en alone
+@fill
+@lu Ech [si] fréier an engem Team op der Uni [geschwommen].
+@en I used to [swim] in a team at university.
+@distractor-lu hunn
+@distractor-lu schwammen
+@distractor-lu ass
+@distractor-en swam
+@distractor-en swimming
+@distractor-en had
 
 @sentence
 @lu Mäi Kendo war zwee Joer an der Ukrain.
