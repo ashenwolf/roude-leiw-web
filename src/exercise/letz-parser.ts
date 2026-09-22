@@ -62,7 +62,7 @@ export type SentenceEntry = {
 };
 
 /**
- * A fill-in-words item: a mostly-complete sentence with 1–4 `[bracketed]` blanks
+ * A fill-in-words item: a mostly-complete sentence with 1–5 `[bracketed]` blanks
  * the learner drops tiles into. Structurally like a `SentenceEntry` but a
  * DISTINCT Element kind — its own stat key (`fill:`), its own error pool, its own
  * contribution to lesson progress.

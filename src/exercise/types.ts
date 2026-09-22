@@ -69,9 +69,13 @@ export type FillBlankItem = {
    * The correct tile for each blank, in order. One blank = one tile taken
    * verbatim, so a multi-word blank (`[Ferris wheel]`) is a single entry — never
    * tokenized (see .claude/memory/fill-in-words-exercise.md).
+   *
+   * Two blanks may carry the SAME answer; grading compares tile text, so both are
+   * satisfied from one tile in `tokens`. `blanks.length` is the number of gaps,
+   * not the number of tiles.
    */
   blanks: string[];
-  /** Shuffled tiles: the blank answers plus distractors. */
+  /** Shuffled tiles: one per distinct blank answer, plus distractors. */
   tokens: string[];
   /** The complete sentence in the source language, shown as the prompt. */
   promptText: string;

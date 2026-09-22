@@ -37,23 +37,59 @@ export const applyBlankTap = (state: FillGameState, blankIdx: number): FillGameS
     : { ...state, selectedBlank: state.selectedBlank === blankIdx ? null : blankIdx };
 
 /**
- * Places a tile into the target blank. A tile already sitting in another blank
- * moves (it is not duplicated), and any tile displaced from the target blank
- * returns to the pool. Selection clears so the next tap flows to the next empty
- * blank — which makes left-to-right filling work with no blank taps at all.
+ * Places a tile into the target blank.
+ *
+ * A tile already sitting in another blank normally *moves* (it is not duplicated),
+ * and any tile displaced from the target blank returns to the pool. Selection
+ * clears so the next tap flows to the next empty blank — which makes
+ * left-to-right filling work with no blank taps at all.
+ *
+ * The exception is a tile whose text several blanks need: grading compares tile
+ * text, so one tile legitimately serves every blank asking for that word and must
+ * NOT be vacated from the earlier one. `demand` is how many blanks want this
+ * tile's text; while fewer than that many are filled, placing it again copies
+ * rather than moves.
  */
-export const applyTokenTap = (state: FillGameState, tokenIdx: number): FillGameState => {
+export const applyTokenTap = (
+  state: FillGameState,
+  tokenIdx: number,
+  demand = 1,
+): FillGameState => {
   const blankIdx = targetBlank(state);
   if (isLocked(state) || blankIdx === null) return state;
+
+  const placedElsewhere = state.placed.filter((p, i) => p === tokenIdx && i !== blankIdx).length;
+  const copies = placedElsewhere + 1 <= demand;
 
   return {
     ...state,
     placed: state.placed.map((placed, i) =>
-      i === blankIdx ? tokenIdx : placed === tokenIdx ? null : placed,
+      i === blankIdx ? tokenIdx : !copies && placed === tokenIdx ? null : placed,
     ),
     selectedBlank: null,
   };
 };
+
+/**
+ * How many blanks need the tile at `tokenIdx` — the copy budget for that tile.
+ *
+ * Derived from the item rather than stored: `blanks` is the gap list and may name
+ * one answer twice, while `tokens` holds one tile per distinct answer.
+ */
+export const tileDemand = (item: FillBlankItem, tokenIdx: number): number =>
+  Math.max(
+    item.blanks.filter((blank) => normalizeAnswer(blank) === normalizeAnswer(item.tokens[tokenIdx]))
+      .length,
+    1,
+  );
+
+/** Whether every blank needing this tile is already filled by it. */
+export const isTileSpent = (
+  item: FillBlankItem,
+  state: FillGameState,
+  tokenIdx: number,
+): boolean =>
+  state.placed.filter((p) => p === tokenIdx).length >= tileDemand(item, tokenIdx);
 
 /** Clears one blank, returning its tile to the pool. */
 export const applyBlankClear = (state: FillGameState, blankIdx: number): FillGameState =>

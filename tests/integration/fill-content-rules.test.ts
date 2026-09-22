@@ -28,8 +28,15 @@ const assetsDir = join(__dirname, "../../public/assets");
 
 const DIRECTIONS = ["en-lu", "lu-en"] as const;
 const MIN_BLANKS = 1;
-const MAX_BLANKS = 4;
+// 5 blanks: a converted long sentence needs the whole grammar skeleton in play
+// (aux + participle + a content noun, or two verb brackets), which 4 cannot hold.
+// The ceiling exists so a "fill" cannot degrade into a sentence builder with a
+// cosmetic frame — past 5 the frame stops carrying the structure.
+const MAX_BLANKS = 5;
 const MIN_DISTRACTORS = 2;
+// With 5 blanks a 5th distractor makes a 10-tile pool, which is the reordering
+// load this mechanic exists to avoid. Sergii's bound: never more than 4.
+const MAX_DISTRACTORS = 4;
 
 const letzFilesIn = (dir: string): string[] =>
   readdirSync(dir).flatMap((name) => {
@@ -96,7 +103,7 @@ describe("@fill content rules", () => {
     }
   });
 
-  it("has 1–4 blanks per direction", () => {
+  it("has 1–5 blanks per direction", () => {
     for (const { file, fill } of fillSites) {
       for (const direction of DIRECTIONS) {
         const { blanks } = parseFillLine(lineOf(fill, direction));
@@ -120,7 +127,14 @@ describe("@fill content rules", () => {
 
   // ─── R1 — every tile text distinct within one presentation ──────────────────
 
-  it("R1: all tiles in one presentation are distinct under normalizeAnswer", () => {
+  // ─── R1 — no tile is unmissable ───────────────────────────────────────
+
+  // Every tile must be DISTINCT, even when two blanks share an answer: grading
+  // compares tile text, so one `gär` tile fills both its blanks (the builder emits
+  // one tile per distinct answer, and the UI keeps it tappable until both are
+  // filled). A second identical tile would therefore be a free correct answer in
+  // either blank — which is what this forbids.
+  it("R1: all tiles are distinct under normalizeAnswer", () => {
     for (const { file, fill } of fillSites) {
       for (const direction of DIRECTIONS) {
         const { tokens } = buildFillExercise(fill, direction).item;
@@ -138,9 +152,28 @@ describe("@fill content rules", () => {
         // Counted AFTER the builder drops collisions with a blank answer — an
         // authored distractor that duplicates the answer is not a distractor.
         const { tokens, blanks } = buildFillExercise(fill, direction).item;
-        const surviving = tokens.length - blanks.length;
+        // A repeated answer occupies two blanks with one tile, so the tile count
+        // must be compared against DISTINCT answers or a legitimate repeat would
+        // read as a missing distractor.
+        const distinctAnswers = new Set(blanks.map(normalizeAnswer)).size;
+        const surviving = tokens.length - distinctAnswers;
         expect(surviving, `${file} (${direction}): only ${surviving} usable distractors`)
           .toBeGreaterThanOrEqual(MIN_DISTRACTORS);
+      }
+    }
+  });
+
+  // The ceiling is the whole point of preferring a fill to a sentence builder: the
+  // tile pool is what the learner holds in working memory, and a 5-blank frame with
+  // 5 distractors is a 10-tile pool — the load a builder already imposes. Four is
+  // the hard cap regardless of blank count.
+  it("offers at most four distractors per direction", () => {
+    for (const { file, fill } of fillSites) {
+      for (const direction of DIRECTIONS) {
+        const { tokens, blanks } = buildFillExercise(fill, direction).item;
+        const surviving = tokens.length - new Set(blanks.map(normalizeAnswer)).size;
+        expect(surviving, `${file} (${direction}): ${surviving} distractors`)
+          .toBeLessThanOrEqual(MAX_DISTRACTORS);
       }
     }
   });

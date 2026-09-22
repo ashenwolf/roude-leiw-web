@@ -10,6 +10,8 @@ import {
   applySubmit,
   toWordResultMap,
   correctSentence,
+  tileDemand,
+  isTileSpent,
 } from "../../../../src/exercise/FillBlank/fill-logic.ts";
 
 import type { FillBlankItem } from "../../../../src/exercise/types.ts";
@@ -287,5 +289,68 @@ describe("correctSentence", () => {
     expect(correctSentence(item({ frame: ["Nothing to fill."], blanks: [] }))).toBe(
       "Nothing to fill.",
     );
+  });
+});
+
+// ============================================================================
+// Repeated blank answer — one tile serves several blanks
+//
+// "Ech [hunn] Terrasse [gär], an ech trëppele [gär]."
+//   blanks = ["hunn", "gär", "gär"]   ← three gaps
+//   tokens = ["hunn", "gär", "sinn"]  ← two answer tiles + one distractor
+//
+// Grading compares tile TEXT, so the single "gär" tile legitimately fills both
+// its blanks. Emitting it twice instead would make one copy unmissable.
+// ============================================================================
+
+const repeatItem = (): FillBlankItem => ({
+  frame: ["Ech ", " Terrasse ", ", an ech trëppele ", "."],
+  blanks: ["hunn", "gär", "gär"],
+  tokens: ["hunn", "gär", "sinn"],
+  promptText: "I like the terrace, and I like walking.",
+  direction: "en-lu",
+  fillKey: "fill:en-lu:I [like] the terrace, and I [like] walking.",
+});
+
+describe("a tile several blanks need", () => {
+  it("reports its demand from the blank list", () => {
+    const it = repeatItem();
+    expect(tileDemand(it, 1)).toBe(2);   // "gär" — two blanks
+    expect(tileDemand(it, 0)).toBe(1);   // "hunn" — one blank
+    expect(tileDemand(it, 2)).toBe(1);   // distractor — floor of 1, never 0
+  });
+
+  it("copies rather than moves while a blank still needs it", () => {
+    const it = repeatItem();
+    // Place "gär" in blank 1, then in blank 2: the first placement must survive.
+    const afterFirst = applyTokenTap(withPlaced(it, [0, null, null]), 1, tileDemand(it, 1));
+    expect(afterFirst.placed).toEqual([0, 1, null]);
+
+    const afterSecond = applyTokenTap(afterFirst, 1, tileDemand(it, 1));
+    expect(afterSecond.placed).toEqual([0, 1, 1]);
+  });
+
+  it("still MOVES a tile whose demand is already met", () => {
+    const it = repeatItem();
+    // "hunn" has demand 1 and sits in blank 0; aiming it at blank 1 must vacate 0.
+    const state = { ...withPlaced(it, [0, null, null]), selectedBlank: 1 };
+    expect(applyTokenTap(state, 0, tileDemand(it, 0)).placed).toEqual([null, 0, null]);
+  });
+
+  it("is spent only once every blank needing it is filled", () => {
+    const it = repeatItem();
+    expect(isTileSpent(it, withPlaced(it, [0, 1, null]), 1)).toBe(false);
+    expect(isTileSpent(it, withPlaced(it, [0, 1, 1]), 1)).toBe(true);
+    expect(isTileSpent(it, withPlaced(it, [0, null, null]), 0)).toBe(true);
+  });
+
+  it("grades a correctly repeated answer as correct", () => {
+    const it = repeatItem();
+    expect(applySubmit(withPlaced(it, [0, 1, 1]), it).checkResult).toBe("correct");
+  });
+
+  it("grades a distractor in a repeated blank as incorrect", () => {
+    const it = repeatItem();
+    expect(applySubmit(withPlaced(it, [0, 1, 2]), it).checkResult).toBe("incorrect");
   });
 });

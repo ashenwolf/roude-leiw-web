@@ -474,3 +474,30 @@ describe("buildFillExercise", () => {
     }
   });
 });
+
+// ─── buildFillExercise: repeated blank answers ────────────────────────────────
+
+describe("buildFillExercise — a repeated blank answer", () => {
+  // Three gaps, two distinct answers: "gär" is needed twice.
+  const repeated = fill(
+    "I [like] the terrace, and I [like] walking when the weather [is] good.",
+    "Ech hunn Terrasse [gär], an ech trëppele [gär], wa gutt Wieder [ass].",
+    ["sinn", "hunn", "war"],
+    ["am", "have", "was"],
+  );
+
+  it("keeps every gap in `blanks` but emits ONE tile per distinct answer", () => {
+    const { item } = buildFillExercise(repeated, "en-lu");
+    expect(item.blanks).toEqual(["gär", "gär", "ass"]);
+    // 2 distinct answers + 3 distractors — never a second "gär", which would be an
+    // unmissable free tile in either of its blanks.
+    expect(item.tokens.filter((t) => t === "gär")).toHaveLength(1);
+    expect(item.tokens).toHaveLength(5);
+  });
+
+  it("drops a distractor colliding with the repeated answer", () => {
+    const withCollision = { ...repeated, distractorsLu: ["gär", "sinn", "hunn"] };
+    const { item } = buildFillExercise(withCollision, "en-lu");
+    expect(item.tokens.filter((t) => t === "gär")).toHaveLength(1);
+  });
+});

@@ -235,6 +235,11 @@ export const stripBlankMarkers = (line: string): string => line.replace(BLANK_RX
  * ambiguity, and it is a deliberate divergence — do not "unify" the two builders
  * by tokenizing here (see .claude/memory/fill-in-words-exercise.md).
  *
+ * A repeated blank answer is legal and shares ONE tile: `applySubmit` grades by
+ * tile text, so a frame needing `gär` in two blanks is satisfiable from a single
+ * `gär` tile. Deduplicating is therefore required, not an optimization — two
+ * identical tiles would make one of them a free correct answer in either blank.
+ *
  * `direction` is honoured as requested; there is no question-carrying override,
  * because a `@fill` has no `@question` (the frame itself is the prompt).
  *
@@ -259,10 +264,15 @@ export const buildFillExercise = (
     .map((d) => d.trim())
     .filter((d) => d.length > 0 && !blankSet.has(normalizeAnswer(d)));
 
+  // One tile per DISTINCT answer — see the repeated-answer note above.
+  const answerTiles = blanks.filter(
+    (blank, i) => blanks.findIndex((b) => normalizeAnswer(b) === normalizeAnswer(blank)) === i,
+  );
+
   const item: FillBlankItem = {
     frame,
     blanks,
-    tokens: shuffle([...blanks, ...distractors]),
+    tokens: shuffle([...answerTiles, ...distractors]),
     promptText: stripBlankMarkers(sourceLine),
     direction,
     // Keyed on the @en line verbatim (brackets included) and on the presented
