@@ -83,6 +83,19 @@ export type FillBlankItem = {
   direction: "en-lu" | "lu-en";
   /** Stat key for this fill in this direction (`fill:{direction}:{firstEn}`). */
   fillKey: string;
+  /**
+   * Examiner question in Luxembourgish, rendered above the prompt. Present only
+   * for Q&A fills, which are always en→lu (see `resolveQuestionDirection`) — the
+   * learner answers by slotting words into a frame instead of assembling every
+   * tile, which is what makes a long answer practisable.
+   */
+  question?: string;
+  /**
+   * Pre-generated audio of the examiner question. Only Q&A fills have any: the
+   * frame is already on screen, and in the forced en→lu direction the Luxembourgish
+   * line is the answer, so voicing it would leak it.
+   */
+  audioUrl?: string;
 };
 
 /** Drop tiles into a sentence's blanks. One Step per submit (all-or-nothing). */

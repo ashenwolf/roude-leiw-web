@@ -72,9 +72,10 @@ export const extractLuPhrases = (content) =>
 
 /**
  * Extract every `@question` line (examiner prompts, always Luxembourgish).
- * Position-independent: a `@question` belongs to its `@sentence` block, but
- * for audio we only need the text, so a flat line scan is enough. Comments
- * (`#…`) are ignored — content files quote `@question` in prose comments.
+ * Position-independent by design: a `@question` belongs to its `@sentence` or
+ * `@fill` block, but for audio only the text matters, so a flat line scan covers
+ * both kinds without tracking block state. Comments (`#…`) are ignored — content
+ * files quote `@question` in prose comments.
  */
 export const extractQuestions = (content) =>
   content

@@ -89,17 +89,27 @@ export const chunkIntoWordMatchExercises = (
 };
 
 /**
- * The direction a Sentence must be presented in.
+ * The direction an element carrying an examiner `question` must be presented in.
  *
- * A Sentence carrying a `question` is an examiner prompt: the learner answers
- * it in Luxembourgish, so it is **always** assembled en→lu regardless of what
- * the caller rolled. This is a property of the content, not of the Mode — every
- * Mode that schedules sentences gets the rule for free by going through here.
+ * A `question` is an examiner prompt: the learner answers it in Luxembourgish, so
+ * the element is **always** presented en→lu regardless of what the caller rolled.
+ * This is a property of the content, not of the Mode — every Mode gets the rule
+ * for free by going through here.
+ *
+ * Takes the question rather than an entry so `@sentence` and `@fill` share it:
+ * filling English blanks under a Luxembourgish question would invert the exercise
+ * exactly as assembling an English sentence would.
  */
+export const resolveQuestionDirection = (
+  question: string | undefined,
+  rolled: "en-lu" | "lu-en",
+): "en-lu" | "lu-en" => (question !== undefined ? "en-lu" : rolled);
+
+/** The same rule for a Sentence — the name the Mode planners and their tests use. */
 export const resolveSentenceDirection = (
   entry: SentenceEntry,
   rolled: "en-lu" | "lu-en",
-): "en-lu" | "lu-en" => (entry.question !== undefined ? "en-lu" : rolled);
+): "en-lu" | "lu-en" => resolveQuestionDirection(entry.question, rolled);
 
 /**
  * Builds a sentence-builder exercise from a single sentence entry.
@@ -240,8 +250,8 @@ export const stripBlankMarkers = (line: string): string => line.replace(BLANK_RX
  * `gär` tile. Deduplicating is therefore required, not an optimization — two
  * identical tiles would make one of them a free correct answer in either blank.
  *
- * `direction` is honoured as requested; there is no question-carrying override,
- * because a `@fill` has no `@question` (the frame itself is the prompt).
+ * `direction` is normalized through `resolveQuestionDirection`: a question-carrying
+ * fill is en→lu, because the learner must produce the Luxembourgish answer.
  *
  * The prompt is the **source-language sentence with its markers stripped** — the
  * learner reads a complete sentence and reconstructs the gapped one in the target
@@ -250,8 +260,9 @@ export const stripBlankMarkers = (line: string): string => line.replace(BLANK_RX
  */
 export const buildFillExercise = (
   entry: FillEntry,
-  direction: "en-lu" | "lu-en",
+  requestedDirection: "en-lu" | "lu-en",
 ): FillBlankBatch => {
+  const direction = resolveQuestionDirection(entry.question, requestedDirection);
   const isEnToLu = direction === "en-lu";
   const targetLine = isEnToLu ? entry.lu : entry.en;
   const sourceLine = isEnToLu ? entry.en : entry.lu;
@@ -278,6 +289,12 @@ export const buildFillExercise = (
     // Keyed on the @en line verbatim (brackets included) and on the presented
     // direction, so the error pool can repeat the exact direction that failed.
     fillKey: fillKey(direction, entry.en),
+    ...(entry.question !== undefined ? { question: entry.question } : {}),
+    // A fill's only prompt audio is the question. The frame is already visible, and
+    // in the en→lu direction a question forces, the LU line IS the answer.
+    ...(entry.question !== undefined && entry.questionAudioUrl !== undefined
+      ? { audioUrl: entry.questionAudioUrl }
+      : {}),
   };
 
   return { type: "fill-blank", item };

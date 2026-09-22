@@ -111,6 +111,14 @@ describe("exam manifest .letz files parse cleanly", () => {
             `${sub.id}: sentence "${s.enVariants[0]}" must not carry @question`,
           ).toBeUndefined();
         }
+        // Fills carry questions on the topic track; the picture contract forbids
+        // them for the same reason it forbids them on sentences.
+        for (const f of parsed.fills) {
+          expect(
+            f.question,
+            `${sub.id}: fill "${f.en}" must not carry @question`,
+          ).toBeUndefined();
+        }
       }
     }
   });
@@ -224,6 +232,17 @@ describe("exam manifest .letz files parse cleanly", () => {
       for (const s of parsed.sentences) {
         expect(s.question, `${sub.id}: sentence "${s.enVariants[0]}" missing @question`).toBeDefined();
       }
+      // Fills in a Q&A file split into two deliberate roles: an ANSWER to an
+      // examiner question (carries @question, replaces a long sentence the learner
+      // would otherwise have to order tile by tile) and a reusable FRAME that is not
+      // an answer to anything (no @question, e.g. "Ech mengen, [dacks] ...").
+      // Both are wanted, so this file's rule cannot be "every fill has a question".
+      // What is enforced: a fill whose LU line is a full first-person answer should
+      // say which question it answers — not mechanizable, so it stays authoring
+      // judgement, and only emptiness is checked in fill-content-rules.test.ts.
+      expect(parsed.fills.every((f) => f.question === undefined || f.question.length > 0)).toBe(
+        true,
+      );
     }
   });
 });

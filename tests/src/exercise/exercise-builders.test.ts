@@ -475,7 +475,53 @@ describe("buildFillExercise", () => {
   });
 });
 
-// ─── buildFillExercise: repeated blank answers ────────────────────────────────
+// ─── buildFillExercise: Q&A fills and repeated answers ────────────────────────
+
+describe("buildFillExercise — a fill carrying @question", () => {
+  const qa: FillEntry = {
+    question: "Wat hutt Dir am Summer gekaaft?",
+    en: "We [went] to the market and [bought] an air conditioner.",
+    lu: "Mir [sinn] op de Maart [gaangen] an hu eng Klimaanlag kaaft.",
+    distractorsLu: ["hunn", "gesinn", "Kaffi"],
+    distractorsEn: ["have", "saw", "coffee"],
+  };
+
+  // Same rule as a Q&A @sentence: the examiner asks in Luxembourgish and the
+  // learner must PRODUCE Luxembourgish, so filling English blanks would invert it.
+  it("forces en→lu even when lu→en was rolled", () => {
+    expect(buildFillExercise(qa, "lu-en").item.direction).toBe("en-lu");
+    expect(buildFillExercise(qa, "en-lu").item.direction).toBe("en-lu");
+  });
+
+  it("gaps the LU line regardless of the rolled direction", () => {
+    expect(buildFillExercise(qa, "lu-en").item.blanks).toEqual(["sinn", "gaangen"]);
+  });
+
+  it("carries the question through to the item", () => {
+    expect(buildFillExercise(qa, "en-lu").item.question).toBe("Wat hutt Dir am Summer gekaaft?");
+  });
+
+  it("keys on the forced direction, not the rolled one", () => {
+    expect(buildFillExercise(qa, "lu-en").item.fillKey).toBe(`fill:en-lu:${qa.en}`);
+  });
+
+  it("plays the question audio when it was stamped", () => {
+    const stamped = { ...qa, questionAudioUrl: "/assets/exam/topic/x/audio/questions/q.mp3" };
+    expect(buildFillExercise(stamped, "en-lu").item.audioUrl).toBe(
+      "/assets/exam/topic/x/audio/questions/q.mp3",
+    );
+  });
+
+  it("has no audio without a question — the LU line would leak the answer", () => {
+    const plain = fill("I [see] it.", "Ech [gesinn] et.", ["ginn", "sinn"], ["give", "am"]);
+    expect(buildFillExercise(plain, "en-lu").item.audioUrl).toBeUndefined();
+  });
+
+  it("leaves a question-free fill's rolled direction alone", () => {
+    const plain = fill("I [see] it.", "Ech [gesinn] et.", ["ginn", "sinn"], ["give", "am"]);
+    expect(buildFillExercise(plain, "lu-en").item.direction).toBe("lu-en");
+  });
+});
 
 describe("buildFillExercise — a repeated blank answer", () => {
   // Three gaps, two distinct answers: "gär" is needed twice.

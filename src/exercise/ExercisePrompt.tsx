@@ -59,6 +59,18 @@ type ExercisePromptProps = {
   promptText: string;
   /** Prompt audio as resolved by the builder — the question, or the LU phrase. */
   audioUrl?: string;
+  /**
+   * How loudly the prompt reads when there is no question above it.
+   *
+   * `plain` (default) for an exercise whose prompt IS the task — the sentence
+   * builder, where the learner reads it and assembles a translation. `sub` for one
+   * where the prompt is only reference and the work is elsewhere on screen: a fill's
+   * gapped frame is the task, so a loud prompt competes with it.
+   *
+   * Ignored when a question is present — the question is then the headline and the
+   * prompt is always its subordinate line.
+   */
+  promptEmphasis?: "plain" | "sub";
 };
 
 /**
@@ -68,7 +80,12 @@ type ExercisePromptProps = {
  * Q&A, the prompt itself otherwise. Only one line ever carries it, because only
  * one mp3 is stamped per item.
  */
-export const ExercisePrompt = ({ question, promptText, audioUrl }: ExercisePromptProps) => {
+export const ExercisePrompt = ({
+  question,
+  promptText,
+  audioUrl,
+  promptEmphasis = "plain",
+}: ExercisePromptProps) => {
   const { play, isAvailable } = usePromptAudio(audioUrl);
   const hasQuestion = question !== undefined;
 
@@ -84,7 +101,7 @@ export const ExercisePrompt = ({ question, promptText, audioUrl }: ExercisePromp
       )}
       <PromptLine
         text={promptText}
-        emphasis={hasQuestion ? "sub" : "plain"}
+        emphasis={hasQuestion ? "sub" : promptEmphasis}
         hasAudioSlot={!hasQuestion && audioUrl !== undefined}
         onPlay={!hasQuestion && isAvailable ? play : undefined}
       />

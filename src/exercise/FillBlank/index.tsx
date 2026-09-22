@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 
 import { ExerciseAnswerArea, ExerciseTilePool } from "../ExerciseLayout";
+import { ExercisePrompt } from "../ExercisePrompt";
 import { Button } from "../../ui/Button";
 import { PinnedBottomBar } from "../../ui/PinnedBottomBar";
 import { Pill } from "../../ui/Pill";
 import { PillGap, PillTile } from "../../ui/PillGap";
-import { isComplete, targetBlank, toWordResultMap } from "./fill-logic";
+import { isComplete, isTileSpent, targetBlank, toWordResultMap } from "./fill-logic";
 import { useFillGame } from "./use-fill-game";
 
 import type { PillStatus } from "../../ui/Pill";
@@ -51,7 +52,6 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
   }, [state.checkResult]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const aimed = state.checkResult === null ? targetBlank(state) : null;
-  const usedSet = new Set(state.placed.filter((p): p is number => p !== null));
 
   // Only filled blanks are pills, and a filled blank is never the aim point
   // (tapping one clears it), so there is no "selected" case here.
@@ -61,7 +61,12 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
   return (
     <div className="flex flex-col flex-1">
       <ExerciseAnswerArea className="gap-4">
-        <p className="text-center text-sm italic text-gray-500 px-2">{item.promptText}</p>
+        <ExercisePrompt
+          question={item.question}
+          promptText={item.promptText}
+          audioUrl={item.audioUrl}
+          promptEmphasis="sub"
+        />
 
         {/* The gapped sentence. This is a *paragraph*, not a flex row: normal inline
             flow left-aligned, so a sentence that wraps reads as continuous prose with
@@ -97,7 +102,13 @@ export const FillBlank = ({ item, onResult, onInteraction }: Props) => {
 
       <ExerciseTilePool className="gap-2.5">
         {item.tokens.map((token, idx) => (
-          <PillTile key={idx} spent={usedSet.has(idx)} onClick={() => handleTapToken(idx)}>
+          // Spent, not merely placed: a tile two blanks need stays tappable until
+          // both are filled.
+          <PillTile
+            key={idx}
+            spent={isTileSpent(item, state, idx)}
+            onClick={() => handleTapToken(idx)}
+          >
             {token}
           </PillTile>
         ))}

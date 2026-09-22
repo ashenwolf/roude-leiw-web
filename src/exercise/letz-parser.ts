@@ -80,6 +80,19 @@ export type FillEntry = {
   lu: string;
   /** English sentence with blanks marked in place. */
   en: string;
+  /**
+   * Examiner-style question (in Luxembourgish) this fill answers — exam-track Q&A,
+   * same role as `SentenceEntry.question`. Its presence forces en→lu, because the
+   * learner must produce Luxembourgish; filling English blanks under a
+   * Luxembourgish prompt would invert the exercise.
+   */
+  question?: string;
+  /**
+   * URL of the question's pre-generated audio, stamped by `fetchLetzFile` — never
+   * by the parser, which does not know where the file was served from. Same
+   * derivation and same optimistic contract as `SentenceEntry.questionAudioUrl`.
+   */
+  questionAudioUrl?: string;
   distractorsEn?: string[];
   distractorsLu?: string[];
 };

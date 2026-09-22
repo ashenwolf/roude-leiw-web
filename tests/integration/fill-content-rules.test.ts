@@ -245,9 +245,29 @@ describe("@fill content rules", () => {
     }
   });
 
-  it("never uses @question inside a @fill block — the frame is the prompt", () => {
-    for (const { file, raw } of fillSites) {
-      expect(/^\s*@question\b/m.test(raw), `${file}: @fill must not carry @question`).toBe(false);
+  // A Q&A fill is the point of the mechanic for long answers: the examiner asks,
+  // and the learner slots words into a frame instead of ordering fifteen tiles.
+  // What must hold is that a question, when present, is non-empty — an `@question`
+  // line with nothing after it parses to "" and would render an empty headline.
+  // Whether a question is REQUIRED or FORBIDDEN is track-scoped and lives in
+  // exam-manifest-letz.test.ts, where the manifest says which contract applies.
+  it("never carries an empty @question", () => {
+    for (const { file, fill } of fillSites) {
+      if (fill.question === undefined) continue;
+      expect(fill.question.length, `${file}: empty @question on a @fill`).toBeGreaterThan(0);
+    }
+  });
+
+  // A question forces en→lu (resolveQuestionDirection), so only the LU line is ever
+  // gapped for the learner. The EN line is still the stat-key identity and still the
+  // prompt text, so it must parse — but its brackets are never presented, and
+  // requiring them would invite bracket-shuffling that silently re-keys the Element.
+  it("a Q&A fill blanks the LU line — the one direction it is ever shown in", () => {
+    for (const { file, fill } of fillSites) {
+      if (fill.question === undefined) continue;
+      const { blanks } = parseFillLine(fill.lu);
+      expect(blanks.length, `${file}: Q&A fill needs LU blanks`).toBeGreaterThanOrEqual(MIN_BLANKS);
+      expect(blanks.length, `${file}: ${blanks.length} LU blanks`).toBeLessThanOrEqual(MAX_BLANKS);
     }
   });
 
@@ -289,12 +309,18 @@ describe("@fill content rules", () => {
   // Every fill Element is keyed on its @en line truncated to 64 chars (matching
   // the server validator). Two fills whose English agrees for 64 chars would
   // silently share one stat key.
+  //
+  // A Q&A fill is en→lu in BOTH directions (resolveQuestionDirection forces it), so
+  // it contributes one key, not two. Deduping the requested directions per fill is
+  // therefore the correct expected count — comparing against `2 × fills` would read
+  // a forced direction as a collision.
   it("fill stat keys are unique per file after 64-char truncation", () => {
     for (const { file, content } of files) {
       const fills = parseLetz(content, file).fills;
-      const keys = fills.flatMap((f) =>
-        DIRECTIONS.map((d) => buildFillExercise(f, d).item.fillKey),
-      );
+      const keys = fills.flatMap((f) => {
+        const perFill = DIRECTIONS.map((d) => buildFillExercise(f, d).item.fillKey);
+        return [...new Set(perFill)];
+      });
       expect(new Set(keys).size, `${file}: fill stat key collision`).toBe(keys.length);
     }
   });

@@ -395,3 +395,44 @@ describe("parseLetz", () => {
     expect(parseLetz('@lesson A1.01 "G"\n@word Moien = hi\n', "A1.01").fills).toEqual([]);
   });
 });
+
+describe("@question inside a @fill block", () => {
+  it("keeps the question on the fill entry", () => {
+    const parsed = parseLetz(
+      [
+        '@lesson H1.03 "Talking About Hobbies"',
+        "",
+        "@fill",
+        "@question Wat hutt Dir am Summer gekaaft?",
+        "@lu Mir [sinn] op de Maart [gaangen].",
+        "@en We [went] to the market.",
+        "@distractor-lu hunn",
+        "@distractor-lu gesinn",
+        "@distractor-en have",
+        "@distractor-en saw",
+      ].join("\n"),
+      "H1.03",
+    );
+
+    expect(parsed.fills).toHaveLength(1);
+    expect(parsed.fills[0].question).toBe("Wat hutt Dir am Summer gekaaft?");
+  });
+
+  it("omits the field entirely for a question-free fill", () => {
+    const parsed = parseLetz(
+      [
+        '@lesson P1.01 "Describing"',
+        "",
+        "@fill",
+        "@lu Am Hannergrond [gesinn] ech d'Rad.",
+        "@en In the background I [see] the Ferris wheel.",
+        "@distractor-lu ginn",
+        "@distractor-en give",
+      ].join("\n"),
+      "P1.01",
+    );
+
+    expect(parsed.fills).toHaveLength(1);
+    expect(parsed.fills[0]).not.toHaveProperty("question");
+  });
+});

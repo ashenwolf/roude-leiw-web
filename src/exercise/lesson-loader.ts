@@ -130,6 +130,15 @@ export const fetchLetzFile = async (url: string, fallbackId: string): Promise<Le
         ? { luAudioUrl: sentenceAudioUrl(letzDir, sentence.luVariants[0]) }
         : {}),
     })),
+    // A Q&A fill gets the same question audio a Q&A sentence does — the mp3 is keyed
+    // on the question text, so a question shared with a sentence reuses one file.
+    // No `luAudioUrl`: a fill's LU line carries [brackets] and is the answer.
+    fills: lesson.fills.map((fill) => ({
+      ...fill,
+      ...(fill.question !== undefined
+        ? { questionAudioUrl: questionAudioUrl(letzDir, fill.question) }
+        : {}),
+    })),
   };
 };
 
