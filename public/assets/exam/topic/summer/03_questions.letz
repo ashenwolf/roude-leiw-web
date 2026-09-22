@@ -112,32 +112,38 @@
 
 # --- What summer means, and when it is ---
 
-@sentence
+@fill
 @question Firwat hutt Dir dëst Theema gewielt?
-@lu Ech hunn de Summer gär, och wann et net meng Liblingsjoreszäit ass.
-@distractor-lu Wanter
-@distractor-lu Fro
-@en I like the summer, even if it is not my favourite season.
-@distractor-en winter
-@distractor-en question
+@lu Ech [hunn] de Summer gär, och [wann] et net meng Liblingsjoreszäit ass.
+@en I [like] the summer, even [if] it is not my favourite season.
+@distractor-lu sinn
+@distractor-lu ouni
+@distractor-lu huet
+@distractor-en am
+@distractor-en without
+@distractor-en liked
 
-@sentence
+@fill
 @question Wéini ass de Summer?
-@lu De Summer ass dräi Méint: Juni, Juli an August.
-@distractor-lu zwielef
-@distractor-lu Dezember
-@en The summer is three months: June, July and August.
-@distractor-en twelve
-@distractor-en December
+@lu De Summer [ass] [dräi] Méint: Juni, Juli an August.
+@en The summer [is] [three] months: June, July and August.
+@distractor-lu sinn
+@distractor-lu zwee
+@distractor-lu hunn
+@distractor-en are
+@distractor-en two
+@distractor-en have
 
-@sentence
+@fill
 @question Wat heescht Summer fir Iech?
-@lu Fir mech ass de Summer eng Zäit fir Vakanz, wann ech an d'Bierger oder bei e Séi fuere kann.
-@distractor-lu Aarbecht
-@distractor-lu Stad
-@en For me the summer is a time for holidays, when I can drive to the mountains or to a lake.
-@distractor-en job
-@distractor-en city
+@lu Fir mech [ass] de Summer eng Zäit fir Vakanz, [wann] ech an d'Bierger oder bei e Séi fuere [kann].
+@en For me the summer [is] a time for holidays, [when] I [can] drive to the mountains or to a lake.
+@distractor-lu sinn
+@distractor-lu ouni
+@distractor-lu kënne
+@distractor-en are
+@distractor-en without
+@distractor-en could
 
 @sentence
 @question Wat maacht Dir am léifsten am Summer?
@@ -148,34 +154,40 @@
 @distractor-en colleague
 @distractor-en little
 
-@sentence
+@fill
 @question Wéi eng Temperature sinn ze waarm fir Iech?
-@lu Zwanzeg bis fënnefanzwanzeg Grad sinn ideal, an alles driwwer ass ze waarm.
-@distractor-lu véierzeg
-@distractor-lu kal
-@en Twenty to twenty-five degrees are ideal, and everything above that is too warm.
-@distractor-en forty
-@distractor-en cold
+@lu Zwanzeg bis fënnefanzwanzeg Grad [sinn] [ideal], an alles driwwer ass ze waarm.
+@en Twenty to twenty-five degrees [are] [ideal], and everything above that is too warm.
+@distractor-lu ass
+@distractor-lu idealen
+@distractor-lu hunn
+@distractor-en is
+@distractor-en ideally
+@distractor-en have
 
-@sentence
+@fill
 @question Firwat sinn zwanzeg bis fënnefanzwanzeg Grad ideal?
-@lu Bei där Temperatur kann ech mat mengem Mupp spadséiere goen.
-@distractor-lu Schnéi
-@distractor-lu Vëlo
-@en At that temperature I can go for a walk with my pooch.
-@distractor-en snow
-@distractor-en bike
+@lu Bei där Temperatur [kann] ech mat mengem Mupp [spadséiere] goen.
+@en At that temperature I [can] [go] for a walk with my pooch.
+@distractor-lu kënne
+@distractor-lu spadséiert
+@distractor-lu muss
+@distractor-en could
+@distractor-en goes
+@distractor-en must
 
 # --- Favourite and least favourite season ---
 
-@sentence
+@fill
 @question Wat ass Är Liblingsjoreszäit a firwat?
-@lu Meng Liblingsjoreszäit ass d'Fréijoer, well ech da mäi Gebuertsdag hunn.
-@distractor-lu Hierscht
-@distractor-lu Aarbecht
-@en My favourite season is the spring, because that is when I have my birthday.
-@distractor-en autumn
-@distractor-en job
+@lu Meng Liblingsjoreszäit ass d'Fréijoer, [well] ech da mäi Gebuertsdag [hunn].
+@en My favourite season is the spring, [because] that is when I [have] my birthday.
+@distractor-lu ouni
+@distractor-lu huet
+@distractor-lu sinn
+@distractor-en without
+@distractor-en has
+@distractor-en am
 
 @sentence
 @question Ass d'Fréijoer fir Iech eng schéi Joreszäit?
@@ -186,14 +198,16 @@
 @distractor-en winter
 @distractor-en dirty
 
-@sentence
+@fill
 @question A wéi eng Joreszäit hutt Dir am léifsten no dem Wieder?
-@lu Ech mengen, et ass net typesch, mee ech hunn de Wanter gär.
-@distractor-lu Summer
-@distractor-lu Reen
-@en I think it is not typical, but I like the winter.
-@distractor-en summer
-@distractor-en rain
+@lu Ech [mengen], et ass net typesch, mee ech [hunn] de Wanter gär.
+@en I [think] it is not typical, but I [like] the winter.
+@distractor-lu mengt
+@distractor-lu sinn
+@distractor-lu huet
+@distractor-en thinks
+@distractor-en am
+@distractor-en liked
 
 @sentence
 @question Firwat hutt Dir de Wanter gär?
@@ -204,41 +218,49 @@
 @distractor-en rain
 @distractor-en autumn
 
-@sentence
+@fill
 @question Wat ass Är Liblingsjoreszäit, wann Dir un d'Wieder denkt?
-@lu Dat ass eng schwiereg Fro: mäi Gebuertsdag ass am Summer, mee d'Wieder hunn ech am léifste am Wanter.
-@distractor-lu einfach
-@distractor-lu Hierscht
-@en That is a demanding question: my birthday is in the summer, but the weather I like best in the winter.
-@distractor-en easy
-@distractor-en autumn
+@lu Dat ass eng [schwiereg] Fro: mäi Gebuertsdag ass am Summer, mee d'Wieder [hunn] ech am léifste am Wanter.
+@en That is a [demanding] question: my birthday is in the summer, but the weather I [like] best in the winter.
+@distractor-lu schwiereger
+@distractor-lu huet
+@distractor-lu sinn
+@distractor-en demandingly
+@distractor-en likes
+@distractor-en am
 
-@sentence
+@fill
 @question Wéi ee Wanter mengt Dir?
-@lu Ech mengen net de lëtzebuergesche Wanter, mee de Wanter an de Bierger mat Schnéi a Sonn.
+@lu Ech [mengen] net de lëtzebuergesche Wanter, mee de Wanter an de Bierger mat [Schnéi] a Sonn.
+@en I do not [mean] the Luxembourgish winter, but the winter in the mountains with [snow] and sun.
+@distractor-lu mengt
 @distractor-lu Reen
-@distractor-lu Strand
-@en I do not mean the Luxembourgish winter, but the winter in the mountains with snow and sun.
+@distractor-lu denken
+@distractor-en means
 @distractor-en rain
-@distractor-en beach
+@distractor-en meant
 
-@sentence
+@fill
 @question Wéi eng Joreszäit hutt Dir am mannste gär?
-@lu Ech hunn et net gär, wann et wierklech dreckeg ass, an dat ass oft am Fréijoer an am spéiden Hierscht.
-@distractor-lu propper
-@distractor-lu Summer
-@en I do not like it when it is really dirty, and that is often in the spring and in the late autumn.
-@distractor-en clean
-@distractor-en summer
+@lu Ech [hunn] et net gär, [wann] et wierklech dreckeg ass, an dat ass oft am Fréijoer an am [spéiden] Hierscht.
+@en I do not [like] it [when] it is really dirty, and that is often in the spring and in the [late] autumn.
+@distractor-lu huet
+@distractor-lu ouni
+@distractor-lu spéit
+@distractor-en likes
+@distractor-en without
+@distractor-en lately
 
-@sentence
+@fill
 @question Wat mengt Dir mat "dreckeg"?
-@lu Dann ass et schwéier fir an de Bësch ze goen, well am Bësch naass an dreckeg ass.
-@distractor-lu einfach
-@distractor-lu Stad
-@en Then it is difficult to go into the forest, because in the forest it is wet and dirty.
-@distractor-en easy
-@distractor-en city
+@lu Dann ass et [schwéier] fir an de Bësch ze [goen], well am Bësch naass an dreckeg ass.
+@en Then it is [difficult] to [go] into the forest, because in the forest it is wet and dirty.
+@distractor-lu schwéieren
+@distractor-lu geet
+@distractor-lu hunn
+@distractor-en difficulty
+@distractor-en goes
+@distractor-en have
 
 # --- Arriving in Luxembourg ---
 
@@ -260,41 +282,49 @@
 @distractor-en three
 @distractor-en week
 
-@sentence
+@fill
 @question A wéi eng Joreszäit sidd Dir op Lëtzebuerg geplënnert?
-@lu Ech sinn am Dezember geplënnert, an et war keng schéi Joreszäit.
-@distractor-lu August
-@distractor-lu waarm
-@en I moved in December, and it was not a beautiful season.
-@distractor-en August
-@distractor-en warm
+@lu Ech [sinn] am Dezember [geplënnert], an et war keng schéi Joreszäit.
+@en I [moved] in December, and it was not a beautiful season.
+@distractor-lu hunn
+@distractor-lu plënneren
+@distractor-lu ass
+@distractor-en move
+@distractor-en moving
+@distractor-en had
 
-@sentence
+@fill
 @question Wéi war d'Wieder, wéi Dir am Dezember ukomm sidd?
-@lu Et war Wanter, kal, an et huet vill gereent.
-@distractor-lu Summer
-@distractor-lu dréchen
-@en It was winter, cold, and it rained a lot.
-@distractor-en summer
-@distractor-en dry
-
-@sentence
-@question A wat fir enger Joreszäit sidd Dir op Lëtzebuerg komm?
-@lu Mir sinn am Hierscht am November komm, an ech erënnere mech, datt et ganz kal war.
-@distractor-lu Fréijoer
+@lu Et [war] Wanter, [kal], an et huet vill [gereent].
+@en It [was] winter, [cold], and it rained [a lot].
+@distractor-lu ass
 @distractor-lu waarm
-@en We came in the autumn, in November, and I remember that it was very cold.
-@distractor-en spring
+@distractor-lu reenen
+@distractor-en is
 @distractor-en warm
+@distractor-en little
 
-@sentence
+@fill
+@question A wat fir enger Joreszäit sidd Dir op Lëtzebuerg komm?
+@lu Mir [sinn] am Hierscht am November [komm], an ech erënnere mech, [datt] et ganz kal war.
+@en We [came] in the autumn, in November, and I remember [that] it was very cold.
+@distractor-lu hunn
+@distractor-lu kommen
+@distractor-lu wann
+@distractor-en come
+@distractor-en coming
+@distractor-en when
+
+@fill
 @question Firwat sidd Dir op Lëtzebuerg geplënnert?
-@lu Mäi Mann krut eng Aarbecht ugebueden, a mir hu geduecht, datt dat eng gutt Iddi war.
-@distractor-lu Fra
-@distractor-lu schlecht
-@en My husband was offered a job, and we thought that this was a good idea.
-@distractor-en wife
-@distractor-en bad
+@lu Mäi Mann krut eng [Aarbecht] [ugebueden], a mir hu [geduecht], datt dat eng gutt Iddi war.
+@en My husband was [offered] a [job], and we [thought] that this was a good idea.
+@distractor-lu Aarbechten
+@distractor-lu ubidden
+@distractor-lu denken
+@distractor-en jobs
+@distractor-en offers
+@distractor-en think
 
 @sentence
 @question War dat eng einfach Entscheedung?
@@ -305,43 +335,51 @@
 @distractor-en holidays
 @distractor-en always
 
-@sentence
+@fill
 @question Wéi huet Iech dës Joreszäit gefall?
-@lu Et war ok, well alles zu Lëtzebuerg nei fir mech war, awer et war definitiv ze kal an naass.
-@distractor-lu al
+@lu Et war ok, well alles zu Lëtzebuerg [nei] fir mech war, awer et war [definitiv] ze [kal] an naass.
+@en It was OK, because everything in Luxembourg was [new] for me, but it was [definitely] too [cold] and wet.
+@distractor-lu neien
+@distractor-lu villäicht
 @distractor-lu waarm
-@en It was OK, because everything in Luxembourg was new for me, but it was definitely too cold and wet.
-@distractor-en old
+@distractor-en newly
+@distractor-en maybe
 @distractor-en warm
 
-@sentence
+@fill
 @question Vu wou sidd Dir op Lëtzebuerg geplënnert?
-@lu Mir sinn aus Italien komm, an do war et am November nach waarm.
-@distractor-lu Frankräich
+@lu Mir [sinn] aus Italien komm, an do [war] et am November nach [waarm].
+@en We [came] from Italy, and there it [was] still [warm] in November.
+@distractor-lu hunn
+@distractor-lu ass
 @distractor-lu kal
-@en We came from Italy, and there it was still warm in November.
-@distractor-en France
+@distractor-en come
+@distractor-en is
 @distractor-en cold
 
-@sentence
+@fill
 @question War dat eng grouss Ëmstellung fir Iech?
-@lu Et war eng grouss Ëmstellung, an zu Lëtzebuerg misst ech mir wierklech e waarme Mantel kafen.
-@distractor-lu kleng
-@distractor-lu Glace
-@en It was a big adjustment, and in Luxembourg I really had to buy myself a warm coat.
-@distractor-en small
-@distractor-en snow
+@lu Et [war] eng grouss Ëmstellung, an zu Lëtzebuerg [misst] ech mir wierklech e waarme Mantel [kafen].
+@en It [was] a big adjustment, and in Luxembourg I really [had to] [buy] myself a warm coat.
+@distractor-lu ass
+@distractor-lu muss
+@distractor-lu kaaft
+@distractor-en is
+@distractor-en have to
+@distractor-en bought
 
 # --- Summer in Luxembourg ---
 
-@sentence
+@fill
 @question Wéi gefält Iech de Summer zu Lëtzebuerg?
-@lu Ech hunn de Summer hei gär, well vill Leit an de Stroossen an op den Terrasse sinn.
-@distractor-lu wéineg
-@distractor-lu Bësch
-@en I like the summer here, because there are many people in the streets and on the terraces.
-@distractor-en few
-@distractor-en forest
+@lu Ech [hunn] de Summer hei gär, well vill [Leit] an de Stroossen an op den Terrasse sinn.
+@en I [like] the summer here, because there are many [people] in the streets and on the terraces.
+@distractor-lu huet
+@distractor-lu Leiten
+@distractor-lu sinn
+@distractor-en liked
+@distractor-en person
+@distractor-en am
 
 @sentence
 @question Wat gëtt et nach am Summer zu Lëtzebuerg?
@@ -352,23 +390,27 @@
 @distractor-en snow
 @distractor-en rarely
 
-@sentence
+@fill
 @question Wéi gefält Iech d'Wieder vum Summer?
-@lu Normalerweis ass d'Wieder gutt, awer dëse Summer war et ze waarm.
+@lu Normalerweis [ass] d'Wieder [gutt], awer dëse Summer war et ze waarm.
+@en Normally the weather [is] [good], but this summer it was too warm.
+@distractor-lu sinn
 @distractor-lu schlecht
-@distractor-lu kal
-@en Normally the weather is good, but this summer it was too warm.
+@distractor-lu hunn
+@distractor-en are
 @distractor-en bad
-@distractor-en cold
+@distractor-en were
 
-@sentence
+@fill
 @question Wéi vill Hëtztwelle hate mir dëse Summer?
-@lu Mir hate dräi Hëtztwellen zu Lëtzebuerg, an dat ass vill.
-@distractor-lu zwielef
-@distractor-lu wéineg
-@en We had three heatwaves in Luxembourg, and that is a lot.
-@distractor-en twelve
-@distractor-en little
+@lu Mir [hate] [dräi] Hëtztwellen zu Lëtzebuerg, an dat ass vill.
+@en We [had] [three] heatwaves in Luxembourg, and that is a lot.
+@distractor-lu hunn
+@distractor-lu zwou
+@distractor-lu sinn
+@distractor-en have
+@distractor-en two
+@distractor-en are
 
 @sentence
 @question Wat hutt Dir wärend den Hëtztwelle gemaach?
@@ -379,88 +421,106 @@
 @distractor-en outside
 @distractor-en open
 
-@sentence
+@fill
 @question Hutt Dir och eng Klimaanlag benotzt?
-@lu Mat der Klimaanlag war et ok, mee ech denken, dat ass net normal.
-@distractor-lu Fënster
-@distractor-lu typesch
-@en With the air conditioning it was OK, but I think that this is not normal.
-@distractor-en window
-@distractor-en typical
+@lu Mat der Klimaanlag [war] et ok, mee ech [denken], dat ass net normal.
+@en With the air conditioning it [was] OK, but I [think] that this is not normal.
+@distractor-lu ass
+@distractor-lu denkt
+@distractor-lu sinn
+@distractor-en is
+@distractor-en thinks
+@distractor-en are
 
-@sentence
+@fill
 @question Wéi war d'Hëtztwell fir Iech zu Lëtzebuerg?
-@lu Fir mech war et gutt, well ech dëse Summer vill Aktivitéite gemaach hunn.
-@distractor-lu schlecht
-@distractor-lu wéineg
-@en For me it was good, because I did a lot of activities this summer.
-@distractor-en bad
-@distractor-en little
+@lu Fir mech [war] et gutt, well ech dëse Summer vill Aktivitéite [gemaach] hunn.
+@en For me it [was] good, because I [did] a lot of activities this summer.
+@distractor-lu ass
+@distractor-lu maachen
+@distractor-lu sinn
+@distractor-en is
+@distractor-en do
+@distractor-en done
 
-@sentence
+@fill
 @question Wat hutt Dir dann alles gemaach?
-@lu Ech sinn an de Bësch gaangen, an ech hu vill Schlässer gesinn.
-@distractor-lu Strand
-@distractor-lu Bam
-@en I went into the forest, and I saw many castles.
-@distractor-en beach
-@distractor-en tree
+@lu Ech [sinn] an de Bësch [gaangen], an ech hu vill Schlässer [gesinn].
+@en I [went] into the forest, and I [saw] many castles.
+@distractor-lu hunn
+@distractor-lu goen
+@distractor-lu gesäin
+@distractor-en go
+@distractor-en see
+@distractor-en gone
 
-@sentence
+@fill
 @question Et war net ze waarm fir Iech?
-@lu Dach, dat hunn ech vergiess: et war natierlech schwéier, dofir hat ech doheem eng Klimaanlag.
-@distractor-lu einfach
-@distractor-lu dobaussen
-@en Yes it was, I forgot that: it was of course difficult, that is why I had air conditioning at home.
-@distractor-en easy
-@distractor-en outside
+@lu Dach, dat hunn ech [vergiess]: et war natierlech [schwéier], dofir [hat] ech doheem eng Klimaanlag.
+@en Yes it was, I [forgot] that: it was of course [difficult], that is why I [had] air conditioning at home.
+@distractor-lu vergiessen
+@distractor-lu schwéieren
+@distractor-lu huet
+@distractor-en forget
+@distractor-en difficulty
+@distractor-en has
 
-@sentence
+@fill
 @question A wéi war et fir Ären Hond?
-@lu Fir mäin Hond war et ganz schwéier, an ech misst moies fréi mat him spadséiere goen.
+@lu Fir mäin Hond war et ganz [schwéier], an ech [misst] moies fréi mat him spadséiere goen.
+@en For my dog it was very [difficult], and I [had to] go for a walk with him early in the morning.
+@distractor-lu schwéieren
+@distractor-lu muss
 @distractor-lu einfach
-@distractor-lu owes
-@en For my dog it was very difficult, and I had to go for a walk with him early in the morning.
+@distractor-en difficulty
+@distractor-en have to
 @distractor-en easy
-@distractor-en evening
 
-@sentence
+@fill
 @question Firwat sidd Dir moies sou fréi gaangen?
-@lu D'Temperature waren de ganzen Dag ze héich fir en Hond.
+@lu D'Temperature [waren] de ganzen Dag ze [héich] fir en Hond.
+@en The temperatures [were] too [high] for a dog all day long.
+@distractor-lu war
 @distractor-lu niddreg
-@distractor-lu Kand
-@en The temperatures were too high for a dog all day long.
+@distractor-lu sinn
+@distractor-en was
 @distractor-en low
-@distractor-en child
+@distractor-en are
 
-@sentence
+@fill
 @question Wéi vill Zäit verbréngt Dir am Summer dobaussen?
-@lu Ech verbrénge vill Zäit dobaussen, well ech Terrasse gär hunn.
-@distractor-lu bannen
-@distractor-lu wéineg
-@en I spend a lot of time outside, because I like terraces.
-@distractor-en inside
-@distractor-en little
+@lu Ech [verbrénge] vill Zäit dobaussen, well ech Terrasse gär [hunn].
+@en I [spend] a lot of time outside, because I [like] terraces.
+@distractor-lu verbréngt
+@distractor-lu sinn
+@distractor-lu verbruecht
+@distractor-en spends
+@distractor-en am
+@distractor-en spent
 
-@sentence
+@fill
 @question Wat maacht Dir nach gär dobaussen?
-@lu Ech drénken och gär e Kaffi am Gaart, an ech trëppelen och gär, wa gutt Wieder ass.
-@distractor-lu Schwämm
-@distractor-lu schlecht
-@en I also like drinking a coffee in the garden, and I also like strolling when the weather is good.
-@distractor-en pool
-@distractor-en bad
+@lu Ech [drénken] och gär e Kaffi am Gaart, an ech [trëppelen] och gär, [wa] gutt Wieder ass.
+@en I also like [drinking] a coffee in the garden, and I also like [strolling] [when] the weather is good.
+@distractor-lu drénkt
+@distractor-lu trëppelt
+@distractor-lu ouni
+@distractor-en drinks
+@distractor-en strolls
+@distractor-en without
 
 # --- Last summer and this summer ---
 
-@sentence
+@fill
 @question War Dir de leschte Summer zu Lëtzebuerg?
-@lu Jo, ech war de leschte Summer och zu Lëtzebuerg, an dacks gi mir am August a Frankräich.
-@distractor-lu Italien
-@distractor-lu ni
-@en Yes, I was also in Luxembourg last summer, and in August we often go to France.
-@distractor-en Italy
-@distractor-en never
+@lu Jo, ech [war] de [leschte] Summer och zu Lëtzebuerg, an dacks gi mir am August a Frankräich.
+@en Yes, I [was] also in Luxembourg [last] summer, and in August we often go to France.
+@distractor-lu ass
+@distractor-lu lescht
+@distractor-lu sinn
+@distractor-en is
+@distractor-en lastly
+@distractor-en are
 
 @sentence
 @question A wat maacht Dir am Juni an am Juli?
@@ -471,14 +531,16 @@
 @distractor-en December
 @distractor-en travel
 
-@sentence
+@fill
 @question Wat hutt Dir dëse Summer zu Lëtzebuerg gemaach?
-@lu Dëse Summer si mir an en neit Appartement geplënnert, an dofir si mir net wäit gaangen.
-@distractor-lu al
-@distractor-lu Haus
-@en This summer we moved into a new flat, and that is why we did not go far.
-@distractor-en old
-@distractor-en house
+@lu Dëse Summer si mir an en neit Appartement [geplënnert], an dofir si mir net [wäit] [gaangen].
+@en This summer we [moved] into a new flat, and that is why we did not [go] [far].
+@distractor-lu plënneren
+@distractor-lu no
+@distractor-lu goen
+@distractor-en moving
+@distractor-en near
+@distractor-en gone
 
 @sentence
 @question Sidd Dir da guer net ënnerwee gewiescht?
@@ -489,41 +551,49 @@
 @distractor-en beach
 @distractor-en home
 
-@sentence
+@fill
 @question Hutt Dir de leschte Summer eppes Besonnesches gemaach?
-@lu De leschte Summer si meng Fra an ech geplënnert, a mir hunn eist neit Appartement kaaft.
-@distractor-lu verkaaft
-@distractor-lu Vëlo
-@en Last summer my wife and I moved, and we bought our new flat.
-@distractor-en sold
-@distractor-en bike
+@lu De leschte Summer [si] meng Fra an ech [geplënnert], a mir hunn eist [neit] Appartement kaaft.
+@en Last summer my wife and I [moved], and we bought our [new] flat.
+@distractor-lu hunn
+@distractor-lu plënneren
+@distractor-lu neien
+@distractor-en move
+@distractor-en moving
+@distractor-en newly
 
-@sentence
+@fill
 @question Wéi war d'Wieder de leschte Summer?
-@lu De leschte Summer war ze waarm: et huet net gereent, an et war ze dréchen.
+@lu De leschte Summer war ze [waarm]: et huet net [gereent], an et war ze [dréchen].
+@en Last summer was too [warm]: it did not [rain], and it was too [dry].
 @distractor-lu kal
+@distractor-lu reenen
 @distractor-lu naass
-@en Last summer was too warm: it did not rain, and it was too dry.
 @distractor-en cold
+@distractor-en rained
 @distractor-en wet
 
-@sentence
+@fill
 @question Wat hutt Dir géint d'Canicule gemaach?
-@lu Mir sinn op de Maart a Frankräich gefuer, a mir hunn eng Klimaanlag kaaft.
-@distractor-lu Schwämm
-@distractor-lu verkaaft
-@en We drove to the market in France, and we bought an air conditioner.
-@distractor-en pool
-@distractor-en sold
+@lu Mir [sinn] op de Maart a Frankräich [gefuer], a mir hunn eng Klimaanlag [kaaft].
+@en We [drove] to the market in France, and we [bought] an air conditioner.
+@distractor-lu hunn
+@distractor-lu fueren
+@distractor-lu kafen
+@distractor-en drive
+@distractor-en driving
+@distractor-en buy
 
-@sentence
+@fill
 @question Wuer sidd Dir dëse Summer gefuer?
-@lu Dëse Summer sinn ech zu Lëtzebuerg bliwwen, mee ech hunn zwou kuerz Reese gemaach.
-@distractor-lu lang
-@distractor-lu Weekend
-@en This summer I stayed in Luxembourg, but I made two short trips.
+@lu Dëse Summer [sinn] ech zu Lëtzebuerg [bliwwen], mee ech hunn zwou [kuerz] Reese gemaach.
+@en This summer I [stayed] in Luxembourg, but I made two [short] trips.
+@distractor-lu hunn
+@distractor-lu bleiwen
+@distractor-lu laang
+@distractor-en stay
+@distractor-en staying
 @distractor-en long
-@distractor-en weekend
 
 @sentence
 @question Wuer sinn déi zwou Reese gaangen?
@@ -534,14 +604,16 @@
 @distractor-en Austria
 @distractor-en Ukraine
 
-@sentence
+@fill
 @question Wat hutt Dir op deene Reese gemaach?
-@lu Ech hunn e bësse Zäit um Mier an an de Bierger verbruecht, an ech si vill gelaf a geschwommen.
-@distractor-lu Stad
-@distractor-lu wéineg
-@en I spent a bit of time at the sea and in the mountains, and I ran and swam a lot.
-@distractor-en city
-@distractor-en little
+@lu Ech [hunn] e bësse Zäit um Mier an an de Bierger [verbruecht], an ech si vill gelaf a [geschwommen].
+@en I [spent] a bit of time at the sea and in the mountains, and I ran and [swam] a lot.
+@distractor-lu sinn
+@distractor-lu verbréngen
+@distractor-lu schwammen
+@distractor-en spend
+@distractor-en spending
+@distractor-en swim
 
 @sentence
 @question Sidd Dir op d'Schueberfouer gaangen?
@@ -552,79 +624,95 @@
 @distractor-en parents
 @distractor-en never
 
-@sentence
+@fill
 @question Wat hutt Dir op der Schueberfouer gemaach?
-@lu Mir sinn op e puer Attraktioune gaangen, a mir hunn zu Mëtteg giess.
-@distractor-lu Wanderwee
-@distractor-lu owes
-@en We went on a few rides, and we had lunch.
-@distractor-en trail
-@distractor-en evening
+@lu Mir [sinn] op e puer Attraktioune [gaangen], a mir hunn zu Mëtteg [giess].
+@en We [went] on a few rides, and we had [lunch].
+@distractor-lu hunn
+@distractor-lu goen
+@distractor-lu iessen
+@distractor-en go
+@distractor-en gone
+@distractor-en eat
 
 # --- Childhood summers ---
 
-@sentence
+@fill
 @question Wuer sidd Dir als Kand an d'Vakanz gaangen?
-@lu Als Kand sinn ech dacks op d'Mier gaangen, an ech weess net wierklech firwat.
-@distractor-lu Bierger
-@distractor-lu ni
-@en As a child I often went to the sea, and I do not really know why.
-@distractor-en mountains
-@distractor-en never
+@lu Als Kand [sinn] ech dacks op d'Mier [gaangen], an ech [weess] net wierklech firwat.
+@en As a child I often [went] to the sea, and I do not really [know] why.
+@distractor-lu hunn
+@distractor-lu goen
+@distractor-lu wësst
+@distractor-en go
+@distractor-en gone
+@distractor-en knows
 
-@sentence
+@fill
 @question Wie huet dat entscheet?
-@lu Meng Eltere hu geduecht, datt d'Mier gutt fir d'Kanner ass.
-@distractor-lu Grousselteren
-@distractor-lu schlecht
-@en My parents thought that the sea is good for the children.
-@distractor-en grandparents
-@distractor-en bad
+@lu Meng Eltere hu [geduecht], [datt] d'Mier gutt fir d'Kanner [ass].
+@en My parents [thought] [that] the sea [is] good for the children.
+@distractor-lu denken
+@distractor-lu wann
+@distractor-lu sinn
+@distractor-en think
+@distractor-en when
+@distractor-en are
 
-@sentence
+@fill
 @question Huet Iech dat gefall?
-@lu Et huet mir ganz gutt gefall, well ech gär schwammen.
-@distractor-lu schlecht
-@distractor-lu lafen
-@en I liked it very much, because I like swimming.
-@distractor-en badly
-@distractor-en run
+@lu Et [huet] mir ganz gutt [gefall], [well] ech gär schwammen.
+@en I [liked] it very much, [because] I like swimming.
+@distractor-lu hunn
+@distractor-lu gefalen
+@distractor-lu ouni
+@distractor-en like
+@distractor-en liking
+@distractor-en without
 
-@sentence
+@fill
 @question Wat hutt Dir als Kand am Summer gemaach?
-@lu Ech hat Motorbooter immens gär, a mir konnten zwou oder dräi Kéiere domat fueren.
-@distractor-lu Vëloen
-@distractor-lu ni
-@en I liked motorboats enormously, and we could ride in one two or three times.
-@distractor-en bikes
-@distractor-en never
+@lu Ech [hat] Motorbooter immens gär, a mir [konnten] zwou oder dräi Kéiere domat [fueren].
+@en I [liked] motorboats enormously, and we [could] [ride] in one two or three times.
+@distractor-lu hunn
+@distractor-lu kënne
+@distractor-lu fuert
+@distractor-en like
+@distractor-en can
+@distractor-en rides
 
-@sentence
+@fill
 @question Wéi war dat fir Iech?
-@lu Ech erënnere mech, datt ech ganz opgereegt war, mee et war deier domat ze fueren.
-@distractor-lu roueg
+@lu Ech erënnere mech, [datt] ech ganz [opgereegt] war, mee et war [deier] domat ze fueren.
+@en I remember [that] I was very [excited], but it was [expensive] to ride in it.
+@distractor-lu wann
+@distractor-lu opgereegten
 @distractor-lu bëlleg
-@en I remember that I was very excited, but it was expensive to ride in it.
-@distractor-en calm
+@distractor-en when
+@distractor-en excitedly
 @distractor-en cheap
 
-@sentence
+@fill
 @question A wat hutt Dir normalerweis als Kand am Summer gemaach?
-@lu Ech hu vill Zäit mat menge Grousselteren am Haus ausserhalb vun der Stad verbruecht.
-@distractor-lu Elteren
-@distractor-lu Appartement
-@en I spent a lot of time with my grandparents in the house outside the city.
-@distractor-en parents
-@distractor-en flat
+@lu Ech [hu] vill Zäit mat menge Grousselteren am Haus ausserhalb vun der Stad [verbruecht].
+@en I [spent] a lot of time with my grandparents in the house outside the city.
+@distractor-lu sinn
+@distractor-lu verbréngen
+@distractor-lu huet
+@distractor-en spend
+@distractor-en spending
+@distractor-en had
 
-@sentence
+@fill
 @question Wat hutt Dir do gemaach?
-@lu Ech si vill bei de Floss gaangen, well ech gär geschwomme sinn.
-@distractor-lu Strooss
-@distractor-lu gelaf
-@en I often went to the river, because I liked swimming.
-@distractor-en street
-@distractor-en ran
+@lu Ech [si] vill bei de Floss [gaangen], [well] ech gär geschwomme sinn.
+@en I often [went] to the river, [because] I liked swimming.
+@distractor-lu hunn
+@distractor-lu goen
+@distractor-lu ouni
+@distractor-en go
+@distractor-en gone
+@distractor-en without
 
 # --- Holidays, places, and recommendations ---
 
@@ -637,23 +725,27 @@
 @distractor-en winter
 @distractor-en job
 
-@sentence
+@fill
 @question Wou ass et schéin am Summer?
-@lu Ech mengen, et ass schéin an de Bierger an op dem Mier.
-@distractor-lu Stad
-@distractor-lu dreckeg
-@en I think it is beautiful in the mountains and at the sea.
-@distractor-en city
-@distractor-en dirty
+@lu Ech [mengen], et [ass] [schéin] an de Bierger an op dem Mier.
+@en I [think] it [is] [beautiful] in the mountains and at the sea.
+@distractor-lu mengt
+@distractor-lu sinn
+@distractor-lu schéinen
+@distractor-en thinks
+@distractor-en are
+@distractor-en beautifully
 
-@sentence
+@fill
 @question Wéi eng Plazen hutt Dir am Summer scho besichtegt?
-@lu Dëse Summer si mir an d'Dolomitte gefuer, an dat war déi schéinste Landschaft, déi ech gesinn hunn.
-@distractor-lu Strand
-@distractor-lu dréchen
-@en This summer we drove to the Dolomites, and that was the most beautiful landscape that I have seen.
-@distractor-en beach
-@distractor-en dry
+@lu Dëse Summer [si] mir an d'Dolomitte [gefuer], an dat war déi [schéinste] Landschaft, déi ech gesinn hunn.
+@en This summer we [drove] to the Dolomites, and that was the [most beautiful] landscape that I have seen.
+@distractor-lu hunn
+@distractor-lu fueren
+@distractor-lu schéin
+@distractor-en drive
+@distractor-en driving
+@distractor-en beautiful
 
 @sentence
 @question A wéi eng Länner hutt Dir am Summer scho gesinn?
@@ -664,14 +756,16 @@
 @distractor-en Ukraine
 @distractor-en pool
 
-@sentence
+@fill
 @question Sidd Dir och op d'Mier gereest?
-@lu Ech sinn op d'Mier an Nordfrankräich gereest, an ech sinn do vill geschwommen.
-@distractor-lu Bierger
-@distractor-lu gelaf
-@en I travelled to the sea in northern France, and I swam a lot there.
-@distractor-en mountains
-@distractor-en ran
+@lu Ech sinn op d'Mier an Nordfrankräich [gereest], an ech sinn do [vill] [geschwommen].
+@en I [travelled] to the sea in northern France, and I [swam] [a lot] there.
+@distractor-lu reesen
+@distractor-lu wéineg
+@distractor-lu schwammen
+@distractor-en travelling
+@distractor-en a little
+@distractor-en swim
 
 @sentence
 @question Gitt Dir och zu Lëtzebuerg an d'Natur?
@@ -682,32 +776,38 @@
 @distractor-en south
 @distractor-en city
 
-@sentence
+@fill
 @question Wat kann een zu Lëtzebuerg am Summer maachen?
-@lu Mir hunn immens Bëscher, an et kann een do spadséiere goen.
-@distractor-lu Stroossen
-@distractor-lu schwammen
-@en We have enormous forests, and one can go for a walk there.
-@distractor-en streets
-@distractor-en swim
+@lu Mir [hunn] immens Bëscher, an et [kann] een do spadséiere [goen].
+@en We [have] enormous forests, and one [can] [go] for a walk there.
+@distractor-lu sinn
+@distractor-lu kënne
+@distractor-lu geet
+@distractor-en are
+@distractor-en could
+@distractor-en goes
 
-@sentence
+@fill
 @question Wat recommandéiert Dir engem Tourist am Summer zu Lëtzebuerg?
-@lu Ech mengen, si mussen déi kleng Schwäiz besichtegen, well do eng schéin Natur ass.
-@distractor-lu Stad
-@distractor-lu dreckeg
-@en I think they have to visit the Little Switzerland, because there is a beautiful nature there.
-@distractor-en city
-@distractor-en dirty
+@lu Ech [mengen], si [mussen] déi kleng Schwäiz [besichtegen], well do eng schéin Natur ass.
+@en I [think] they [have to] [visit] the Little Switzerland, because there is a beautiful nature there.
+@distractor-lu mengt
+@distractor-lu muss
+@distractor-lu besicht
+@distractor-en thinks
+@distractor-en has to
+@distractor-en visits
 
-@sentence
+@fill
 @question Vergläicht de Summer zu Lëtzebuerg mam Summer an Ärem Heemechtsland!
-@lu Dëse Summer war net wierklech anescht, well de Summer an der Ukrain och ze waarm ass.
-@distractor-lu kal
-@distractor-lu Wanter
-@en This summer was not really different, because the summer in Ukraine is too warm as well.
-@distractor-en cold
-@distractor-en winter
+@lu Dëse Summer [war] net wierklech [anescht], [well] de Summer an der Ukrain och ze waarm ass.
+@en This summer [was] not really [different], [because] the summer in Ukraine is too warm as well.
+@distractor-lu ass
+@distractor-lu aneschten
+@distractor-lu ouni
+@distractor-en is
+@distractor-en differently
+@distractor-en without
 
 @sentence
 @question Wéi waarm gëtt et an der Ukrain?
@@ -718,61 +818,73 @@
 @distractor-en twenty
 @distractor-en cloud
 
-@sentence
+@fill
 @question Firwat ass d'Klima an der Ukrain sou waarm?
-@lu E groussen Deel vum Land ass ouni Mier, an dofir ass d'Klima waarm an ze dréchen.
+@lu E [groussen] Deel vum Land ass [ouni] Mier, an dofir ass d'Klima waarm an ze [dréchen].
+@en A [large] part of the country is [without] a sea, and that is why the climate is warm and too [dry].
+@distractor-lu grouss
+@distractor-lu mat
 @distractor-lu naass
-@distractor-lu Bierger
-@en A large part of the country is without a sea, and that is why the climate is warm and too dry.
+@distractor-en largely
+@distractor-en with
 @distractor-en wet
-@distractor-en mountains
 
 # --- The garden ---
 
-@sentence
+@fill
 @question Hutt Dir e Gaart?
-@lu Jo, ech hunn e klenge Gaart, an dëst Joer ass dat éischt Joer mat engem Gaart.
-@distractor-lu grousse
-@distractor-lu Terrass
-@en Yes, I have a small garden, and this year is the first year with a garden.
-@distractor-en big
-@distractor-en terrace
+@lu Jo, ech [hunn] e [klenge] Gaart, an dëst Joer ass dat [éischt] Joer mat engem Gaart.
+@en Yes, I [have] a [small] garden, and this year is the [first] year with a garden.
+@distractor-lu sinn
+@distractor-lu kleng
+@distractor-lu éischten
+@distractor-en am
+@distractor-en smally
+@distractor-en firstly
 
-@sentence
+@fill
 @question Wat maacht Dir am Gaart?
-@lu Ech hunn nëmmen eng Blumm do, an dat sinn Hortensien.
-@distractor-lu Bam
-@distractor-lu Wiss
-@en I have only one flower there, and those are hydrangeas.
-@distractor-en tree
-@distractor-en meadow
-
-@sentence
-@question Firwat just eng Blumm?
-@lu Ech si ganz stolz op déi Blumm, well si mat mir geplënnert ass.
-@distractor-lu traureg
-@distractor-lu Bam
-@en I am very proud of that flower, because it moved house with me.
-@distractor-en sad
-@distractor-en tree
-
-@sentence
-@question Wéi laang hutt Dir déi Blumm schonn?
-@lu Si lieft sechs Joer bei mir, an dat ass eng schéin Erënnerung.
-@distractor-lu dräi
-@distractor-lu Woch
-@en It has been living with me for six years, and that is a beautiful memory.
-@distractor-en three
-@distractor-en week
-
-@sentence
-@question Wéi vill Zäit verbréngt Dir a Ärem Gaart?
-@lu Ech verbréngen nëmmen e bësse Zäit a mengem Gaart, oft just fir e Kaffi oder en Téi.
+@lu Ech [hunn] [nëmmen] eng Blumm do, an dat [sinn] Hortensien.
+@en I [have] [only] one flower there, and those [are] hydrangeas.
+@distractor-lu huet
 @distractor-lu vill
-@distractor-lu Glace
-@en I spend only a bit of time in my garden, often just for a coffee or a tea.
-@distractor-en much
-@distractor-en water
+@distractor-lu ass
+@distractor-en am
+@distractor-en many
+@distractor-en is
+
+@fill
+@question Firwat just eng Blumm?
+@lu Ech si ganz [stolz] op déi Blumm, [well] si mat mir [geplënnert] ass.
+@en I am very [proud] of that flower, [because] it [moved] house with me.
+@distractor-lu stolzen
+@distractor-lu ouni
+@distractor-lu plënneren
+@distractor-en proudly
+@distractor-en without
+@distractor-en moving
+
+@fill
+@question Wéi laang hutt Dir déi Blumm schonn?
+@lu Si [lieft] [sechs] Joer bei mir, an dat ass eng [schéin] Erënnerung.
+@en It [has been living] with me for [six] years, and that is a [beautiful] memory.
+@distractor-lu liewen
+@distractor-lu siwe
+@distractor-lu schéinen
+@distractor-en lives
+@distractor-en seven
+@distractor-en beautifully
+
+@fill
+@question Wéi vill Zäit verbréngt Dir a Ärem Gaart?
+@lu Ech [verbréngen] [nëmmen] e bësse Zäit a mengem Gaart, [oft] just fir e Kaffi oder en Téi.
+@en I [spend] [only] a bit of time in my garden, [often] just for a coffee or a tea.
+@distractor-lu verbréngt
+@distractor-lu vill
+@distractor-lu selten
+@distractor-en spends
+@distractor-en many
+@distractor-en rarely
 
 # --- Reusable frames (@fill) ---
 

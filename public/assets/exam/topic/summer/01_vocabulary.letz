@@ -85,13 +85,15 @@
 @distractor-en forty
 @distractor-en bad
 
-@sentence
-@lu Ech hunn et net gär, wann et ze waarm ass.
-@en I do not like it when it is too warm.
+@fill
+@lu Ech hunn et net gär, [wann] et ze [waarm] ass.
+@en I do not like it [when] it is too [warm].
+@distractor-lu ouni
+@distractor-lu waarme
 @distractor-lu kal
-@distractor-lu Schnéi
+@distractor-en without
+@distractor-en warmly
 @distractor-en cold
-@distractor-en snow
 
 @sentence
 @lu Dëse Summer hate mir dräi Hëtztwellen zu Lëtzebuerg.
@@ -125,13 +127,15 @@
 @distractor-en summer
 @distractor-en clean
 
-@sentence
-@lu Ech maachen all Fënster zou, wann et ze waarm ass.
-@en I close every window when it is too warm.
-@distractor-lu Dier
-@distractor-lu kal
-@distractor-en door
-@distractor-en cold
+@fill
+@lu Ech [maachen] all Fënster zou, [wann] et ze waarm ass.
+@en I [close] every window [when] it is too warm.
+@distractor-lu mécht
+@distractor-lu ouni
+@distractor-lu opmaachen
+@distractor-en closes
+@distractor-en without
+@distractor-en open
 
 @sentence
 @lu Mat der Klimaanlag war et besser fir mech.
@@ -141,13 +145,15 @@
 @distractor-en fan
 @distractor-en rain
 
-@sentence
-@lu Ech mengen, et ass net normal, datt de Summer sou waarm ass.
-@en I think it is not normal that the summer is so warm.
-@distractor-lu typesch
-@distractor-lu Wanter
-@distractor-en typical
-@distractor-en winter
+@fill
+@lu Ech [mengen], et ass net normal, [datt] de Summer sou waarm ass.
+@en I [think] it is not normal [that] the summer is so warm.
+@distractor-lu mengt
+@distractor-lu wann
+@distractor-lu ouni
+@distractor-en thinks
+@distractor-en when
+@distractor-en without
 
 @sentence
 @lu D'Loft ass moies nach frësch.
@@ -165,10 +171,12 @@
 @distractor-en winter
 @distractor-en rarely
 
-@sentence
-@lu Ech benotzen eng Sonnecrème, well ech séier e Sonnebrand kréien.
-@en I use a suncream because I quickly get a sunburn.
-@distractor-lu Sonnenhutt
-@distractor-lu lues
-@distractor-en hat
-@distractor-en slowly
+@fill
+@lu Ech [benotzen] eng Sonnecrème, well ech séier e Sonnebrand [kréien].
+@en I [use] a suncream, because I quickly [get] a sunburn.
+@distractor-lu benotzt
+@distractor-lu kritt
+@distractor-lu ginn
+@distractor-en uses
+@distractor-en gets
+@distractor-en give

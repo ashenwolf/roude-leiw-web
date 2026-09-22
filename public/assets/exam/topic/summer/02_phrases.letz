@@ -79,21 +79,25 @@
 @distractor-en three
 @distractor-en France
 
-@sentence
-@lu Mir sinn am Hierscht am November op Lëtzebuerg geplënnert.
-@en We moved to Luxembourg in the autumn, in November.
-@distractor-lu Summer
-@distractor-lu Juli
-@distractor-en summer
-@distractor-en July
+@fill
+@lu Mir [sinn] am Hierscht am November op Lëtzebuerg [geplënnert].
+@en We [moved] to Luxembourg in the autumn, in November.
+@distractor-lu hunn
+@distractor-lu plënneren
+@distractor-lu ass
+@distractor-en move
+@distractor-en moving
+@distractor-en had
 
-@sentence
-@lu Mir sinn aus Italien geplënnert, an do war et nach waarm.
-@en We moved from Italy, and there it was still warm.
-@distractor-lu Frankräich
-@distractor-lu kal
-@distractor-en France
-@distractor-en cold
+@fill
+@lu Mir [sinn] aus Italien geplënnert, an do [war] et nach waarm.
+@en We [moved] from Italy, and there it [was] still warm.
+@distractor-lu hunn
+@distractor-lu ass
+@distractor-lu plënneren
+@distractor-en move
+@distractor-en is
+@distractor-en had
 
 @sentence
 @lu Zu Lëtzebuerg misst ech mir e waarme Mantel kafen.
@@ -127,13 +131,15 @@
 @distractor-en autumn
 @distractor-en Italy
 
-@sentence
-@lu Am Summer si vill Leit an de Stroossen an op den Terrassen.
-@en In the summer many people are in the streets and on the terraces.
-@distractor-lu Bësch
-@distractor-lu wéineg
-@distractor-en forest
-@distractor-en few
+@fill
+@lu Am Summer [si] vill Leit an de [Stroossen] an op den Terrassen.
+@en In the summer many people [are] in the [streets] and on the terraces.
+@distractor-lu ass
+@distractor-lu Strooss
+@distractor-lu hunn
+@distractor-en is
+@distractor-en street
+@distractor-en have
 
 @sentence
 @lu Zu Lëtzebuerg gëtt et vill Evenementer a Wäifester.
@@ -191,29 +197,35 @@
 @distractor-en mountains
 @distractor-en rarely
 
-@sentence
-@lu Meng Elteren hu geduecht, datt dat gutt fir d'Kanner ass.
-@en My parents thought that this is good for the children.
-@distractor-lu schlecht
-@distractor-lu Grousselteren
-@distractor-en bad
-@distractor-en grandparents
+@fill
+@lu Meng Elteren hu [geduecht], [datt] dat gutt fir d'Kanner ass.
+@en My parents [thought] [that] this is good for the children.
+@distractor-lu denken
+@distractor-lu wann
+@distractor-lu ouni
+@distractor-en think
+@distractor-en when
+@distractor-en without
 
-@sentence
-@lu Ech schwamme gär, an dofir huet mir d'Mier gutt gefall.
-@en I like swimming, and that is why I liked the sea a lot.
-@distractor-lu Bierg
-@distractor-lu trëppelen
-@distractor-en mountain
-@distractor-en stroll
+@fill
+@lu Ech [schwamme] gär, an dofir [huet] mir d'Mier gutt gefall.
+@en I like [swimming], and that is why I [liked] the sea a lot.
+@distractor-lu schwëmmt
+@distractor-lu hunn
+@distractor-lu sinn
+@distractor-en swims
+@distractor-en like
+@distractor-en had
 
-@sentence
-@lu Et war deier fir mat engem Motorboot ze fueren.
-@en It was expensive to ride in a motorboat.
-@distractor-lu bëlleg
-@distractor-lu Vëlo
-@distractor-en cheap
-@distractor-en bike
+@fill
+@lu Et [war] deier fir mat engem Motorboot ze [fueren].
+@en It [was] expensive to [ride] in a motorboat.
+@distractor-lu ass
+@distractor-lu fuert
+@distractor-lu sinn
+@distractor-en is
+@distractor-en rides
+@distractor-en rode
 
 @sentence
 @lu Ech hu vill Zäit mat menge Grousseltere verbruecht.
@@ -271,37 +283,45 @@
 @distractor-en grandparents
 @distractor-en market
 
-@sentence
-@lu Mir sinn op e puer Attraktioune gaangen, a mir hunn zu Mëtteg giess.
-@en We went on a few rides, and we had lunch.
-@distractor-lu Festival
-@distractor-lu owes
-@distractor-en festival
-@distractor-en evening
+@fill
+@lu Mir [sinn] op e puer Attraktioune [gaangen], a mir hunn zu Mëtteg giess.
+@en We [went] on a few rides, and we had lunch.
+@distractor-lu hunn
+@distractor-lu goen
+@distractor-lu ass
+@distractor-en go
+@distractor-en gone
+@distractor-en are
 
-@sentence
-@lu Mir sinn op de Maart a Frankräich gaangen a mir hunn eng Klimaanlag kaaft.
-@en We went to the market in France and we bought an air conditioner.
-@distractor-lu Ventilator
-@distractor-lu verkaf
-@distractor-en fan
-@distractor-en sold
+@fill
+@lu Mir [sinn] op de Maart a Frankräich [gaangen] a mir hunn eng Klimaanlag [kaaft].
+@en We [went] to the market in France and we [bought] an air conditioner.
+@distractor-lu goen
+@distractor-lu kaufen
+@distractor-lu ass
+@distractor-en go
+@distractor-en gone
+@distractor-en buy
 
-@sentence
-@lu Ech hunn e klenge Gaart, an dat ass dat éischt Joer mat engem Gaart.
-@en I have a small garden, and this is the first year with a garden.
-@distractor-lu grousse
-@distractor-lu Terrass
-@distractor-en big
-@distractor-en terrace
+@fill
+@lu Ech [hunn] e klenge Gaart, an dat ass dat [éischt] Joer mat engem Gaart.
+@en I [have] a small garden, and this is the [first] year with a garden.
+@distractor-lu sinn
+@distractor-lu éischten
+@distractor-lu huet
+@distractor-en am
+@distractor-en firstly
+@distractor-en has
 
-@sentence
-@lu Ech hunn nëmmen eng Blumm do, an ech si ganz stolz op si.
-@en I have only one flower there, and I am very proud of it.
-@distractor-lu Bam
-@distractor-lu traureg
-@distractor-en tree
-@distractor-en sad
+@fill
+@lu Ech [hunn] nëmmen eng Blumm do, an ech si ganz [stolz] op si.
+@en I [have] only one flower there, and I am very [proud] of it.
+@distractor-lu sinn
+@distractor-lu stolzen
+@distractor-lu huet
+@distractor-en am
+@distractor-en proudly
+@distractor-en has
 
 @sentence
 @lu Meng Blumm lieft sechs Joer bei mir.
@@ -319,13 +339,15 @@
 @distractor-en water
 @distractor-en forest
 
-@sentence
-@lu Ech hunn Terrasse gär, an ech trëppele gär, wa gutt Wieder ass.
-@en I like terraces, and I like strolling when the weather is good.
-@distractor-lu Fënster
-@distractor-lu schlecht
-@distractor-en window
-@distractor-en bad
+@fill
+@lu Ech [hunn] Terrasse gär, an ech [trëppele] gär, wa gutt Wieder ass.
+@en I [enjoy] terraces, and I [enjoy] [strolling], when the weather is good.
+@distractor-lu sinn
+@distractor-lu trëppelt
+@distractor-lu ouni
+@distractor-en enjoys
+@distractor-en strolls
+@distractor-en enjoyed
 
 @sentence
 @lu Ech recommandéieren engem Tourist déi kleng Schwäiz.
@@ -343,13 +365,15 @@
 @distractor-en city
 @distractor-en expensive
 
-@sentence
-@lu An der Ukrain kann et bis zu véierzeg Grad ginn.
-@en In Ukraine it can get up to forty degrees.
+@fill
+@lu An der Ukrain kann et bis zu [véierzeg] Grad [ginn].
+@en In Ukraine it can [get] up to [forty] degrees.
 @distractor-lu zwanzeg
-@distractor-lu Schnéi
+@distractor-lu gitt
+@distractor-lu kënne
 @distractor-en twenty
-@distractor-en snow
+@distractor-en gets
+@distractor-en could
 
 @sentence
 @lu E groussen Deel vun der Ukrain ass ouni Mier.
