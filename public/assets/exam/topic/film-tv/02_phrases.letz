@@ -55,13 +55,15 @@
 @distractor-en exciting
 @distractor-en sad
 
-@sentence
-@lu Science-Fiction weist vill Fantasie, an dat fannen ech erstaunlech.
-@en Science fiction shows a lot of imagination, and I find that amazing.
-@distractor-lu Comedie
-@distractor-lu langweileg
-@distractor-en comedy
-@distractor-en boring
+@fill
+@lu Science-Fiction weist vill [Fantasie], an dat [fannen] ech [erstaunlech].
+@en Science fiction shows a lot of [imagination], and I [find] that [amazing].
+@distractor-lu Fantasien
+@distractor-lu fënnt
+@distractor-lu erstaunlechen
+@distractor-en imaginations
+@distractor-en finds
+@distractor-en amazingly
 
 @sentence
 @lu De Film Inception ass fir mech e Klassiker.
@@ -71,13 +73,15 @@
 @distractor-en thriller
 @distractor-en musical
 
-@sentence
-@lu Ech kucke gär Comedien, wa se wierklech witzeg sinn.
-@en I like watching comedies, when they are really funny.
-@distractor-lu Krimi
-@distractor-lu fad
-@distractor-en thriller
-@distractor-en dull
+@fill
+@lu Ech [kucke] gär Comedien, [wa] se wierklech [witzeg] sinn.
+@en I like [watching] comedies, [when] they are really [funny].
+@distractor-lu kuckt
+@distractor-lu ouni
+@distractor-lu witzegen
+@distractor-en watches
+@distractor-en without
+@distractor-en funnily
 
 @sentence
 @lu Serien erzielen d'Geschicht besser wéi Filmer.
