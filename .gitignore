@@ -56,3 +56,8 @@ zed-letz/grammars/
 # skills read it to avoid re-interviewing, the shipped .letz content is the
 # publishable form of it.
 /.claude/interview-answers.md
+
+# Internal business and product thinking — market sizing, pricing, revenue models,
+# competitor analysis, next-iteration plans. Not documentation of how the app works
+# (that is CLAUDE.md and .claude/reference/), and not for publication.
+/growth/
