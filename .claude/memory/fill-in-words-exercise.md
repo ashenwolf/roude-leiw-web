@@ -156,6 +156,17 @@ distinctness, distractor ≠ answer, the Eifeler-Regel adjacency rule); two are
 authoring judgement no test can see — no two blanks grammatically interchangeable,
 and **a distractor must be wrong in *every* blank**, not just the nearest one.
 
+**Two blanks of the same word class are not automatically ambiguous** — the prompt
+shows the complete source sentence, so it pins which is which. What makes two
+blanks interchangeable is that the *sentence* would stay grammatical with them
+swapped, and that is rarer than matching word classes.
+
+**A repeated word cannot host a blank at all.** `answer-visible-in-frame` is a
+whole-frame check, not a look-behind: in `Et soll een net ze spéit schlofen, an et
+soll een och net spéit iessen`, every candidate blank is answered by the sentence's
+own second half. A sentence symmetric enough that only its two verbs are unique
+cannot reach three blanks and stays a builder.
+
 **Keeping determiners and prepositions in the fixed frame is the load-bearing
 one.** With `d'` outside the blank, masculine tiles are grammatically impossible
 there and exactly one assignment survives.
@@ -164,6 +175,27 @@ there and exactly one assignment survives.
 distractors, which makes a fill item a weaker test of comprehension than a
 sentence builder item. Accepted — uniqueness is the hard constraint, and the fixed
 frame is precisely the reusable pattern the exercise exists to teach.
+
+## The four rules interact, which is why authoring needs a pre-flight pass
+
+R5 adjacency, answer-visible-in-frame, distractor-equals-answer and
+`@fill`/`@sentence` disjointness each perturb the others: moving a blank off an
+`-n`-final word exposes an answer elsewhere in the frame, and retuning that
+distractor collides with a different blank. The integration tests are the gate but
+report **one** failure per run, so a batch authored against them costs one build
+per violation. `scripts/check-fill.mjs` reports every violation in every block in
+one pass; drafting a theme into a scratch `.letz` and running it to silence before
+touching real content turned a five-build-per-file loop into zero.
+
+What it cannot see: three interchangeable verb forms (its word-class heuristic
+reads them as distinct classes), so a builder dump over the real content is still
+required. It also reads `dobaussen` as an infinitive — a known false positive, as
+are proper nouns under the `n-drop?` advisory rule.
+
+**Where a noun blank is blocked, blank the verb bracket.** In the picture themes a
+repeated noun plus an Eifeler adjacency can rule out every noun position; the
+auxiliary, the separable prefix and the predicate adjective are then the three
+legal gaps, and they teach the bracket the exam actually marks.
 
 ## Two-clause frames are the *safer* shape
 
@@ -267,6 +299,37 @@ source:
   plausibly govern in this sense at all, not just things the narrator didn't
   mean. **When the frame's fixed verb is a generic do/have/make verb, audit
   every noun distractor for its own idiom with that verb before trusting it.**
+
+## The corpus-wide pass — Sep 2026
+
+The exam track's `@sentence` blocks were audited theme by theme and every one the
+flagger called order-heavy became a `@fill`: **310 conversions across 14 themes**,
+leaving the corpus at 597 fills to 469 builders. The `?` band was converted too
+— a 9–11 token sentence with one structural trap hides exactly the rule the
+Sproochentest marks, so "read it and decide" resolved to "convert it" nearly every
+time.
+
+Three sentences resisted and stay builders, each for a different structural reason
+worth keeping:
+
+- **film-tv `03_questions`** hit the per-sub-lesson mix invariant, not a fill rule.
+  `tests/integration/exam-manifest-letz.test.ts` requires ≥3 `@sentence` blocks per
+  sub-lesson; converting every candidate left two. **Check a file's `@sentence`
+  count against that floor before converting, not after** — and pick a
+  question-bearing block to leave behind, since 'Talking About It' sub-lessons must
+  use `@question` throughout.
+- **gesondliewen's `Et soll een net ze spéit schlofen…`** repeats both `soll` and
+  `spéit` (see the repeated-word rule above).
+- **shopping's `Nee, dat dauert ze laang fir mech`** is seven tokens — three blanks
+  would leave the frame as the answer.
+
+One earlier verdict was **wrong**: `Ech hu haut gekacht, an eng anere Persoun huet
+muer gekacht` was recorded as unconvertible because it repeats `gekacht`. It
+converts fine — blank the two *time adverbs* and the subject instead of the verb.
+A repeated verb blocks blanks on that verb, not on the sentence.
+
+**A 25-token sentence becomes two fills, not one.** A single frame cannot hold
+three clauses without being the same wall of decisions the builder was.
 
 ## The remaining gap
 

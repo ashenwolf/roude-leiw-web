@@ -46,6 +46,16 @@ Run all four. The first two are one command each.
       judgement band (`?`) you adjudicate. See [[fill-in-words-exercise]] § Second
       purpose for the structural signals and what converting costs.
 
+- [ ] **`npm run check-fill <file-or-draft>`** — after authoring, before the real
+      build: reports **every** violation in **every** `@fill` block at once (blank and
+      distractor counts, tile distinctness, R5 adjacency, answer-visible-in-frame,
+      distractor-equals-answer). The integration tests enforce the same rules but
+      report one failure per run, and these four rules interact — moving a blank off
+      an `-n` word exposes an answer in the frame, and retuning that distractor
+      collides with another blank. Author a batch into a scratch `.letz`, run this
+      until it is silent, then apply. Rules suffixed `?` are advisory and do not
+      fail it.
+
 - [ ] **`npx vitest run tests/integration`** — bracket balance, blank/distractor
       counts, tile distinctness, R5 adjacency, `@fill`/`@sentence` disjointness,
       stat-key collisions, theme contracts, image budget, duplicate `@word` within a
@@ -88,6 +98,7 @@ Run all four. The first two are one command each.
 | bracket/blank/distractor counts, disjointness, key collisions, theme contracts, image budget, duplicate `@word` | integration tests | exactly decidable → gate the build |
 | Eifeler-Regel n-drop | `scripts/check-content.mjs` | heuristic with unavoidable false positives (stem-final `-nn`, proper names) → a build gate would need an allowlist growing with every file |
 | builder-vs-fill choice | `scripts/check-conversion.mjs` | structure predicts difficulty but does not decide it — a flat coordination is assemblable at 10 tokens, a verb-final clause is not at 9 |
+| all `@fill` violations at once, pre-build | `scripts/check-fill.mjs` | the tests are the gate but report one failure per run; authoring a batch needs every violation in one pass because each fix perturbs the others |
 | distractor survival | throwaway harness | needs the real builder over content that changes shape per theme |
 | LOD verification | MCP tools, by hand | network-dependent and needs human judgement on polysemy |
 
