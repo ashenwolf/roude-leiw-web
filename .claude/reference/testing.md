@@ -38,3 +38,20 @@ Tests should call pure functions with hand-built fixtures. Do not introduce `vi.
 - `fakeRng(...values)` for deterministic RNG in mode planner tests (see `selection.test.ts`)
 
 Reuse these helpers; don't re-invent fixture shapes.
+
+**Never drive a planner with a constant rng where a failable WordMatch is expected.**
+`pickUniquePairs` over-draws and indexes with `floor(rng() * len)`, so a constant roll
+picks the same entry every time, yields one distinct pair, and falls below
+`MIN_WORD_MATCH_PAIRS`: the planner builds no word-match Slot at all. Use the seeded
+rng in `modes/lesson.test.ts` and assert a property over several seeds rather than
+pinning which roll is the slot-type roll — an empty bucket re-rolls, so the rng
+cadence is not fixed.
+
+## Dependency bumps
+
+Green CI never starts the local Worker emulator, and a `@cloudflare/vite-plugin`
+bump can pull a new Miniflare with it. Smoke-test such a PR in a throwaway
+worktree: `npm ci`, start `npx vite --port <free port>`, probe `/`, `/api/auth/me`
+(anonymous: 200 `{"user":null}`), `/assets/exam/manifest.json` and one real `.letz`
+asset, read the dev log, then stop Vite and remove the worktree. The macOS
+inspector-port fallback warning is harmless.

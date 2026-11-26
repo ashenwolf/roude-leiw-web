@@ -1,12 +1,13 @@
 # Audio pipeline — Sproochmaschinn TTS, R2 as source of truth
 
 **Status: audio is live — generated, backed up, and played by the app.**
-SentenceBuilder auto-plays prompt audio on arrival and offers a replay button
-(`usePromptAudio` in `src/exercise/SentenceBuilder/index.tsx`): the examiner
-question for Q&A sentences, the Luxembourgish phrase for lu→en. Plain en→lu gets
-NO audio — the Luxembourgish is the answer and hearing it would leak the tiles
-(rule + tests live in `buildSentenceExercise`). The `prebuild` hook is restored
-over the full content tree.
+The exercise prompt header (`ExercisePrompt`, hook `usePromptAudio` in
+`src/exercise/use-prompt-audio.ts`) auto-plays prompt audio on arrival and offers
+a replay button, for SentenceBuilder and FillBlank alike: the examiner question for
+Q&A items, the Luxembourgish phrase for a lu→en sentence. Plain en→lu gets NO
+audio — the Luxembourgish is the answer and hearing it would leak the tiles (rule +
+tests live in `buildSentenceExercise` and `buildFillExercise`). The `prebuild` hook
+is restored over the full content tree.
 
 Commands are in CLAUDE.md; scripts are `scripts/{generate,sync}-audio.mjs`.
 
@@ -24,6 +25,10 @@ Two generators, one shared client (`scripts/lib/sproochmaschinn.mjs`):
   topic themes (picture themes forbid it), but the extractor is track-agnostic —
   a course lesson adopting `@question` is covered without a script change.
 
+Both generators skip files that already exist, so a rerun resumes. Before calling
+a theme's question audio done, compare its distinct `@question` lines against the
+local mp3s under `audio/questions/`; picture themes have none by contract.
+
 Each `@lu` variant gets its own file: variants are different phrasings (formal vs
 informal) and warrant separate audio.
 
@@ -34,8 +39,8 @@ fill was voiced — reading the answer aloud, and keyed to a slug (brackets vani
 in slugification) that no sentence lookup can ever request. That produced 371 dead
 files across A1 before it was caught. `BLOCK_BOUNDARIES` in
 `scripts/lib/letz-audio.mjs` is the fix; `tests/scripts/letz-audio.test.ts` pins
-it. FillBlank has no audio wiring at all — voicing a gapped sentence is an open
-design question, not an oversight.
+it. A Q&A fill plays its question audio like a Q&A sentence; voicing the gapped
+line itself is an open design question, not an oversight.
 
 ## Layout: audio/ flat for sentences, audio/questions/ for prompts
 

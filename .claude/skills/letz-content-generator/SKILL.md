@@ -66,6 +66,14 @@ Use the pdf-reading skill or the content already in context. Extract every Luxem
 - Fill-in-the-blank exercises (use the completed/answered version when available)
 - Conversation scripts between characters
 
+**Image-only slide decks** (the Learn Luxembourgish A2 decks) bake vocabulary and dialogues into slide rasters. `pdftotext -layout` returns only the floating annotations, which look plausible, and the local Tesseract has no Luxembourgish model, so it mangles `ë/é/ä`. Instead:
+
+1. Render every page: `pdftoppm -r 110 -png <deck>.pdf <scratch>/<slug>`.
+2. Read each PNG visually, title and "empty" pages included. Colour code: blue = m, red = f, green = n, grey = plural, underline = stress.
+3. Save a raw transcription per lesson under `.agents/scratchpad/` before authoring. Handouts contain real spelling errors: LOD and shipped content win.
+
+A2 lessons are dense: about 40–55 `@sentence` and 18–25 `@fill` each, several examples per grammar rule, awkward sentences dropped, about 80–95 Elements in total (the past-tense lesson runs larger). Fills focus on prepositions, conjunctions and verb forms, because word-match already owns nouns. In an adjective lesson, distract with competing inflections of the same adjective (m `-en`, n `-t`, f/pl bare).
+
 ### 2. Determine lesson metadata
 
 Derive the `@lesson` line:
@@ -208,7 +216,7 @@ Example: `A1_01_greetings_and_introductions.letz`
 
 ### 7. Output
 
-Save the `.letz` file to `/mnt/user-data/outputs/` and present it to the user.
+Save the `.letz` file under `public/assets/lessons/{level}/{section}/`, register it in `public/assets/lessons/manifest.json`, and present it to the user.
 
 After presenting, briefly summarize what was generated: how many `@word` entries, how many `@sentence` entries, and flag anything that was ambiguous or skipped with a reason.
 
@@ -254,8 +262,8 @@ exam-track files (`exam-track.md`, `picture-description-theme.md`,
 `fill-in-words-exercise.md`) — don't duplicate those into a new spot; update them
 in place if a bound or frame changes.
 
-`@fill` (fill-in-words) is legal on the exam track only — never under
-`public/assets/lessons/`, since Lesson Mode schedules no fill Slots. Its full
+`@fill` (fill-in-words) is legal on both tracks: Lesson Mode schedules a fill as a
+phrase, exactly like a `@sentence`. Its full
 authoring rules (R1–R7, the selection test, the frame library) are covered in
 both exam skills; see `references/content-contract.md` §§2–5 for the mechanized
 half.

@@ -27,6 +27,13 @@ The pass gate was once `correct >= 4 AND shown >= 5`. It is now **just a correct
 count** — no ratio, no minimum-shown. That simplification is what makes progress
 monotonic, since `correct` only grows.
 
+It also means the gate measures **exposure, not accuracy**. A failed Slot
+requeues until it is answered correctly, so every appearance ends in one more
+`correct`: a learner at 20% accuracy and one at 100% unlock in the same number of
+Sessions, and only the Session length differs. Tuning difficulty or accuracy
+thresholds therefore cannot speed up or slow down unlock; content size can
+([[lesson-throughput]] §4).
+
 ## Derive, don't store
 
 Storing a `masteredKeys` set was considered and rejected: `correct >= N` is

@@ -72,6 +72,15 @@ Schemas live in `worker/types.ts` (`UserData`, `WordStats`, `DailySession`, `Ses
 
 8. **Guest store mirrors the auth schema; migration is chunked, clear-on-success.** `GuestData = { words, dailySessions, unlockedLessons }` (`UserData` minus `profile`). Lifetime guest totals routinely exceed the per-request validator bounds, so `buildMigrationChunks` (`src/persistence/migration.ts`, pure) splits them into in-bounds payloads that reconstruct exact totals via the additive server merge. Chunks POST sequentially; `localStorage` clears **only when every chunk succeeded**. See [persistence-and-sync](../memory/persistence-and-sync.md) for the accepted failure-mode tradeoffs (partial-chunk double-count, streak-history loss on migration).
 
+## Sync batch bounds
+
+`worker/lib/validators.ts` rejects the **whole** batch when one field is out of bounds or one key matches no known family, so a single bad value loses every result in that Session. The bound values are in [security.md](security.md); the rules that keep the client inside them:
+
+- The validator must admit every prefix in `KEYED_ELEMENT_PREFIXES` ([mastery-and-unlock](../memory/mastery-and-unlock.md) § key family).
+- `src/persistence/sync-bounds.ts` mirrors the validator's bounds by hand, because `worker/` is a separate bundle. Change both in the same commit.
+- A live Session **clamps** an out-of-bounds duration (`clampSyncDuration`), losing only time studied past the cap rather than every word result. The guest migration **splits** instead (`buildMigrationChunks`), because it must be lossless.
+- The `wordResults` length cap is an authoring bound too: Exam Mode plans every Element of a sub-lesson once, so a sub-lesson's distinct stat keys must fit one batch. `tests/integration/session-sync-capacity.test.ts` counts them through the real planner.
+
 ## Client read/write pattern
 
 `useProgress` (`src/persistence/hooks/use-progress.ts`) is the single read entry point — it returns `{ words, dailySessions, streak, syncBatch, isAuthenticated }` regardless of auth status. Consumers never branch on `auth.status` themselves; that's `useProgress`'s job.

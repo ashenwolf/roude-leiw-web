@@ -25,10 +25,10 @@ lesson (~0.04 picks/session in a 193-element lesson). Now both use
 `correct < MASTERY_CORRECT_COUNT`, so an Element leaves the pool only once it has
 actually passed.
 
-**The sentence pool is a synthetic lesson** containing only the unmastered
-sentences, not the whole current lesson — otherwise, once most sentences are
+**The phrase pool is a synthetic lesson** containing only the unmastered
+phrases, not the whole current lesson — otherwise, once most sentences are
 mastered, hitting the bucket still lands on an already-mastered one. This keeps
-`pickSentence` generic; the rejected alternative (a sentence-level filter
+`pickPhrase` generic; the rejected alternative (a phrase-level filter
 parameter) breaks Layer-1 uniformity.
 
 **Rejected: weighted `1/(1+shown)` picks inside the bucket.** The gate is itself a

@@ -18,15 +18,19 @@ npm run sync-audio:upload -- [path]                  # push local mp3s to R2
 npm run sync-audio:download -- [path]                # pull mp3s from R2 (auto-runs in prebuild)
 npm run pack-audio -- [out.tar]                      # tar all mp3s (repo-relative paths) to move between hosts
 npm run prune-audio -- [--delete]                    # delete R2 objects no .letz expects (needs CLOUDFLARE_* env)
+
+npm run check-content                                # advisory Eifeler-Regel audit for .letz changes; you adjudicate its flags
 ```
 
-Audio files are gitignored. R2 is the source of truth. SentenceBuilder plays prompt audio (question for Q&A, Luxembourgish phrase for lu→en — never for en→lu, which would leak the answer). See [`.claude/memory/audio-pipeline.md`](.claude/memory/audio-pipeline.md).
+`prebuild` pulls audio from R2 before the gate runs. Missing credentials only warn, but any other wrangler failure exits before Vitest starts: then run `npx vitest run`, `npm run lint`, `npx tsc -b` and `npx vite build` separately. Those four steps are also what CI (`.github/workflows/ci.yml`, no secrets) runs on every push and PR; deploys are separate Cloudflare Pages git builds. Don't pipe `npm run build` into `tail`: the pipe's exit status hides the failure.
+
+Audio files are gitignored. R2 is the source of truth. SentenceBuilder and FillBlank play prompt audio (question for Q&A, Luxembourgish phrase for a lu→en sentence — never for en→lu, which would leak the answer). See [`.claude/memory/audio-pipeline.md`](.claude/memory/audio-pipeline.md).
 
 Tests run with `npx vitest run` (config in `vitest.config.ts`). Tests live under `tests/` mirroring the source tree. Full coverage table and the no-mocks rule: [`.claude/reference/testing.md`](.claude/reference/testing.md).
 
 ## What This App Is
 
-**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations across levels (A1–C2), build sentences from token tiles, and revisit content they've struggled with. Three exercise Modes from Home: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
+**Roude Leiw** is a Luxembourgish language learning SPA. Users match Luxembourgish words to their English translations, build sentences from token tiles, and revisit content they've struggled with. Three exercise Modes from Home: **Lesson** (focused practice within one lesson and its prerequisites), **Word Mix** (broader pair matching across all unlocked words), and **Fix Errors** (drills on the user's struggling Elements).
 
 A separate **Exam track** ("Sproochentest Prep", reachable from Home) prepares for the Luxembourgish citizenship speaking exam. It is theme-scoped (Vacation, Family, … — mirroring the Sproochentest/TWAL oral-exam topics), has no level dimension, and progresses Duolingo-style: each Theme is a short path of SubLessons (vocabulary → phrases → Q&A) unlocked sequentially — a SubLesson opens the next once it is **fully passed**, the same mastery gate the course track uses between lessons. Exam content is a parallel catalog — it never enters Word Mix or Home's stats. **Fix Errors is the one global Mode**: its error pool spans both tracks.
 
@@ -106,6 +110,9 @@ Tests run with **Vitest** (`npx vitest run`), and the pipeline architecture mean
 
 - Try to analyze several ideas and provide options to human to pick from.
 - With every implementation check if it can be generalized and reused.
+- A change to v1 behaviour needs the owner's explicit approval. A plan, a growth note or a backlog card is not approval.
+- `growth/` (gitignored) holds business notes and next-iteration ideas. It never describes current behaviour (this file and `.claude/reference/` do) and is never staged.
+- PRs land as merge commits once they are clean, current with `main` and green. Other sessions may share this checkout: stage explicit paths, check `git diff --cached --name-only` before each commit and `git show --name-only --format='' HEAD` after it, and stop if someone else's file landed in yours. Never pull into a dirty checkout. A direct push to `main`, or a `rebase --autostash` of a shared checkout, needs the owner's go.
 
 ### Design system
 

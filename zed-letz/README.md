@@ -56,6 +56,10 @@ point `repository` at `https://github.com/ashenwolf/roude-leiw-web` and push.
 cd zed-letz/grammar
 find ../../public/assets -name '*.letz' \
   -exec npx -y tree-sitter-cli@0.25.8 parse -q {} +   # -q: only report errors
+npx -y tree-sitter-cli@0.25.8 query ../languages/letz/highlights.scm <sample.letz>
 ```
 
-All 60 content files parse with zero `ERROR`/`MISSING` nodes as of this commit.
+Every content file must parse with zero `ERROR`/`MISSING` nodes. `@sentence` and
+`@fill` are named nodes, so `highlights.scm` captures them as
+`[(sentence_marker) (fill_marker)] @keyword`. Listing the literals instead fails
+with `Invalid node type "@sentence"`, and Zed then stops loading the language.

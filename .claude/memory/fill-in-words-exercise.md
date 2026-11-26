@@ -1,8 +1,9 @@
 # `@fill` — why the mechanic is shaped this way
 
-**Status: mechanic built; first content shipped in the Schueberfouer picture
-theme, so the ambiguity rules are now enforced over real content.** No course
-lesson carries `@fill` — see "The remaining gap" below for why one can't yet.
+**Status: mechanic built and live on both tracks: every course lesson and 15 of
+the 17 exam themes carry `@fill`, so the ambiguity rules run over real
+content.** See "Lesson Mode schedules fills as phrases" below for how a course
+fill reaches the gate.
 
 Authoring rules and bounds: the `letz-content-generator` skill and its
 `references/content-contract.md`. This file is the *why*.
@@ -309,6 +310,10 @@ leaving the corpus at 597 fills to 469 builders. The `?` band was converted too
 Sproochentest marks, so "read it and decide" resolved to "convert it" nearly every
 time.
 
+The pass covered `02_phrases` as well as `03_questions`. A sentence stays a
+builder when fewer than three legal blanks remain, or when a blank would force
+rewording the learner's own answer: blanks move, the answer's words do not.
+
 Three sentences resisted and stay builders, each for a different structural reason
 worth keeping:
 
@@ -329,9 +334,11 @@ converts fine — blank the two *time adverbs* and the subject instead of the ve
 A repeated verb blocks blanks on that verb, not on the sentence.
 
 **A 25-token sentence becomes two fills, not one.** A single frame cannot hold
-three clauses without being the same wall of decisions the builder was.
+three clauses without being the same wall of decisions the builder was. Split it
+only where the examiner's questions split naturally too, so each half is a Q&A
+fill answering its own question.
 
-## The remaining gap
+## Lesson Mode schedules fills as phrases
 
 **`planLessonMode` schedules fills as *phrases*** (Sep 2026). A `@sentence` and a
 `@fill` are the same Element to every stage that schedules one — one Slot, one

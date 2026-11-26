@@ -4,9 +4,9 @@ A Luxembourgish language learning SPA. The name "Roude Leiw" (Red Lion) referenc
 
 ## What It Does
 
-Two parallel tracks. The **course** track teaches CEFR levels from A1 up, lesson by lesson. The
-**exam** track ("Sproochentest Prep") drills the Luxembourgish citizenship speaking exam — themed
-paths of sub-lessons, no level dimension.
+Two parallel tracks. The **course** track teaches CEFR levels lesson by lesson: 33 lessons from
+A1.1 to A2.1. The **exam** track ("Sproochentest Prep") drills the Luxembourgish citizenship
+speaking exam — 17 themes (12 topic, 5 picture) of three sub-lessons each, no level dimension.
 
 Four Modes run sessions over that content:
 
@@ -17,7 +17,7 @@ Four Modes run sessions over that content:
 
 Three exercise types fill the slots: **Word Match** (match Lux ↔ English pairs), **Sentence
 Builder** (assemble a translation from token tiles), and **Fill Blank** (drop words into a fixed
-sentence frame — exam track only).
+sentence frame).
 
 Progress is tracked per element (`shown / correct / incorrect`). Lesson unlock and error pool are derived from stats — nothing extra is stored.
 
@@ -117,8 +117,8 @@ For local dev, add `http://localhost:5173/api/auth/callback` to your Google OAut
 ```
 
 Distractors are **single words** — the sentence builder tokenizes a multi-word distractor into that
-many loose tiles. The exam track adds `@question` (forces en→lu presentation) and `@fill`
-(bracketed blanks over a fixed frame); both are documented in the `letz-content-generator` skill.
+many loose tiles. `@question` (forces en→lu presentation) and `@fill` (bracketed blanks over a
+fixed frame) are documented in the `letz-content-generator` skill.
 
 Course files live at `public/assets/lessons/{level}/{section}/{filename}.letz`; exam files at
 `public/assets/exam/{topic|picture}/{theme}/{filename}.letz`. Register new files in the matching

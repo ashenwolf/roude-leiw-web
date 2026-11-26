@@ -72,9 +72,11 @@ git.
 ## Code style
 
 - **No `let`, no `for` loops.** `map`/`filter`/`reduce`/chaining/recursion, in
-  every layer — worker, React, utilities. Imperative style only where functional
-  becomes genuinely unreadable (almost never).
+  every layer — worker, React, utilities, `scripts/*.mjs`. Imperative style only
+  where functional becomes genuinely unreadable (almost never).
 - **Entry points stay thin** — wiring and routing, no business logic.
+- **A source comment states one short, non-obvious invariant.** The investigation
+  behind it goes in the matching memory file.
 
 ## Recording decisions — a correction worth keeping
 

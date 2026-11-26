@@ -68,14 +68,20 @@ tmp/                      gitignored image staging — never commit, never delet
 ```
 
 A manifest id is authoritative for progression; the in-file `@lesson` id is cosmetic on the exam
-track. Audio lives under `lessons/**/audio/`, gitignored, with R2 as the source of truth
+track. Count content from the manifests (`lessons[].file`, `subLessons[].file`), never from
+directory names: the Schueberfouer theme's id is `picture`, under `picture/schueberfouer/`. Never
+rename a manifest id: `unlockedLessons` persists them, so a rename drops sticky unlock and the
+exam played marker ([persistence.md](persistence.md) § Core principles 7). Audio lives under
+`lessons/**/audio/`, gitignored, with R2 as the source of truth
 ([audio-pipeline.md](../memory/audio-pipeline.md)).
 
 ## The design system is `src/ui/` — use it or extend it
 
 **No feature code writes a raw `<button>` or hand-rolls a control's classes.** If the
 system cannot express what you need, *extend the system* in the same change and use
-the new component — do not inline "just this once". An inlined control is invisible
+the new component — do not inline "just this once". Audit:
+`grep -rn "<button" src --include='*.tsx' | grep -v '^src/ui/'` prints nothing. An inlined
+control is invisible
 to every later change: the four hand-written "Back" links drifted into two sizes and
 two different arrow conventions before anyone noticed, and the audio button's
 36px touch target was duplicated as three separate `w-9 h-9` literals that had to

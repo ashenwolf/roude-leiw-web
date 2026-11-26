@@ -11,7 +11,7 @@ Layer 3: SessionMachine              one reducer (Block/Slot transitions, popups
                                      ↓ consumes
 Layer 2: Exercises (plug-in)         WordMatchExercise, SentenceBuilderExercise, …
                                      ↓ built from
-Layer 1: Selection primitives        bucketedPick(roll, buckets), pickPair, pickSentence,
+Layer 1: Selection primitives        bucketedPick(roll, buckets), pickPair, pickUniquePairs, pickPhrase,
                                      buildWordMatchExercise, buildSentenceExercise,
                                      chunkIntoWordMatchExercises, resolveSentenceDirection
                                      ↓ reading from
@@ -38,7 +38,7 @@ All three Modes share the same SessionMachine; they differ only in what `ModeCon
 - Shape: `BLOCK_COUNT` Blocks × `LESSON.slotsPerBlock` Slots + optional correction Block.
 - Slot type roll: **adaptive**, not fixed — `lessonSlotTypeDistribution` scales the word-match share with how word-heavy the current lesson's remaining backlog is, clamped by `LESSON.wordMatchShare`. See [lesson-throughput](../memory/lesson-throughput.md) for why.
 - Upper bound is a single lesson id, compared **lexicographically**; pool = all lessons where `lesson.id <= upperBoundId`. "Start Learning" sets it to the **cursor** — the first unlocked lesson that has not passed, *not* the frontier; picking a specific lesson sets it to that lesson (clamps the pool — picking A1.03 when A1.05 is unlocked draws only from A1.01–A1.03). The clamp is load-bearing: the straggler apparatus (not-yet-mastered bucket + adaptive slot-type split) is scoped to the pool's last lesson, so a frontier-based bound left every earlier unfinished lesson reachable only via the thin `previous` bucket.
-- WordMatch Slot: `LESSON.wordMatchPairs` pairs, each drawn by an independent roll over the **three** `LESSON.buckets.wordMatch` buckets — `not-yet-mastered` (current-lesson Elements below the gate) first, then `current`, then `previous`. Re-roll on empty bucket.
+- WordMatch Slot: up to `LESSON.wordMatchPairs` pairs, each drawn by an independent roll over the **three** `LESSON.buckets.wordMatch` buckets — `not-yet-mastered` (current-lesson Elements below the gate) first, then `current`, then `previous`. Re-roll on empty bucket. Pairs are **distinct within the Slot** and may repeat across Slots, for the reason given under Fix Errors. Below `MIN_WORD_MATCH_PAIRS` distinct drawn pairs no word-match Slot is built and the Slot re-rolls its type — the same floor Fix Errors applies. The floor reads the drawn pairs, not the pool: a draw reads one bucket, so a thin `not-yet-mastered` bucket can fall short while the pool does not.
 - SentenceBuilder / FillBlank Slot: one **phrase** (a `@sentence` or a `@fill`) via `LESSON.buckets.phraseLesson`; `pickPhrase` picks a lesson from the bucket, then one phrase uniformly within it; direction from `LESSON.buckets.direction`.
 - **Bucket weights live in `constants.ts` — read them there.** They are tuned per-Mode and change; restating them here has drifted before.
 - Outcomes: WordMatch always success (failed pairs → stats only). SentenceBuilder fail → enqueue Slot into correction Block.

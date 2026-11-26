@@ -65,12 +65,25 @@ Luxembourgish word and every inflected form inside a sentence.
 **Never invent an answer.** For each examiner question, get the user's real
 answer:
 
+- Ask **one question per turn**: no batch questionnaire and no pre-filled
+  guesses, even for a final round of short gaps.
 - Use `AskUserQuestion` when the answer has a natural closed set (yes/no, a
   specific choice among a handful of likely options).
 - Ask conversationally in plain text for open-ended answers (a job title, a
   hobby, a reason).
-- If the user already gave an answer earlier in this conversation, reuse it —
-  don't re-ask.
+- Read the recorded answers first: `.claude/interview-answers.md` and
+  `growth/exam-theme-interview-answers.md` (both gitignored, local only). If the
+  user already gave an answer there or earlier in this conversation, reuse it —
+  don't re-ask. Carry a correction they made (e.g. `UA`, not `US`) into the
+  content without reconfirming it.
+- A complete answer bank the user supplies, even from two people, satisfies the
+  interview: author from it directly. Keep each person's factual variant as its
+  own `@question` sentence and say so in the header note of all three files. Keep
+  their wording, apart from verified spelling or grammar fixes, which the header
+  note lists.
+- A class handout is a coverage reference, not licence for generic model
+  answers: add a `@question` only after collecting the user's real answer, and
+  handout vocabulary only where it supports those answers.
 - Record in the file's header comment that the answers are personal — e.g.
   `# These are <name>'s real answers, gathered by interview — do not
   "improve" or genericize them in a later editing pass.` A later session without
@@ -169,6 +182,12 @@ collocation, e.g. `Sport` is a bad distractor next to `maachen`). A `@fill` must
 never repeat a sentence a `@sentence` in this file already teaches. Run the
 distractor-survival dump (step 7.5) over every fill before calling this step
 done, not just the `@sentence` blocks.
+
+Before growing an existing `03_questions.letz`, count its Elements against the
+sibling themes' `03` files. Exam Mode plans every Element once, so a sub-lesson
+must fit one sync batch; `tests/integration/session-sync-capacity.test.ts` fails
+the build when it does not (bound in `.claude/reference/persistence.md` § Sync
+batch bounds).
 
 ### 6. Update the manifest
 

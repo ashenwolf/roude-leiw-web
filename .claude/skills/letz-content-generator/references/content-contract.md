@@ -77,6 +77,10 @@ presentations are graded independently.
 | no distractor equals any blank answer | — | F | `distractor "x" is a correct answer` |
 | no blank answer appears as a whole word in the frame | — | F | `answer "x" is already visible in the frame` |
 
+The visible-answer check compares exact normalized words, so an Eifeler variant of
+the answer slips past it: `Ech hu … [hunn]` shows the answer as `hu`. Check
+those by eye.
+
 ### The distractor CEILING is as binding as the floor
 
 Four is the maximum, whatever the blank count. The whole reason to prefer a fill
@@ -161,7 +165,8 @@ Mechanics of the check, which determine how to satisfy it:
 
 Two ways to fix a violation: reword so the preceding word isn't `-n`-final, or
 put a comma before the blank (which is why two-clause frames —
-`Ech mengen, et ass [Summer]` — are the safer shape).
+`Ech mengen, et ass [Summer]` — are the safer shape). Plural nouns ending in
+`-n` count as well, so a verb blank directly after one usually needs the comma.
 
 ## 5. `@fill` — block-level rules
 
@@ -271,7 +276,8 @@ Lexer facts that bite while authoring:
 - `Text` is `/[^=\r\n#@]+/` — a value containing `=`, `#` or `@` **cannot** be
   unquoted. That's why `@image` / `@image-alt` values must be in double quotes.
 - `#` starts a comment **anywhere on a line**, so no inline `#` in content.
-- `LessonId` is `/[A-Za-z]\d+\.\d+/` — `P1.03` is legal, `picture.01` is not.
+- `LessonId` is `/[A-Za-z]\d+\.\d+/` — one letter, then digits: `P1.03` and
+  `W1.03` are legal, `ST1.03` and `picture.01` are not.
   The in-file `@lesson` id is a cosmetic label on the exam track; the manifest id
   is authoritative.
 
@@ -279,7 +285,7 @@ Lexer facts that bite while authoring:
 
 | Rule | Why |
 |---|---|
-| `@fill` is allowed on **both** tracks | Lesson Mode schedules fill Slots when the lesson declares `@fill` (`hasFills` in `lessonSlotTypeDistribution`), so those Elements do reach the mastery gate. Before Sep 2026 the planner had no fill branch and a course fill made its lesson unpassable — that is fixed, not merely tolerated. |
+| `@fill` is allowed on **both** tracks | Lesson Mode schedules a `@fill` as a *phrase*, exactly like a `@sentence` (one slot type, one bucket table, one repeat budget), so its Elements reach the mastery gate. Before Sep 2026 the planner had no fill branch and a course fill made its lesson unpassable — that is fixed, not merely tolerated. |
 | `@fill` is **not** level-scoped | Its criterion is *reuse across topics*; A1 frames are first-class. |
 | `@sentence` stays assemblable | The learner builds every tile, and a tile-reordering task loads working memory **per tile** — the replicated capacity figure is ~4 chunks (Cowan), not Miller's 7±2. So: main clauses and short two-clause sentences; attributive adjectives only on feminine nouns (uninflected). |
 | A long or order-heavy sentence belongs in a `@fill` | The frame carries the ordering decisions the learner would otherwise have to make tile by tile. Run `npm run check-conversion` — advisory, it flags `@sentence` blocks whose structure (split verb bracket, modal bracket, `fir … ze`, comma-introduced verb-final clause, stranded separable prefix, 3+ clauses) makes assembly a word-order lottery. It reports `FILL` / `?` / keep, and you adjudicate the `?` band. |

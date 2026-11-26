@@ -26,10 +26,15 @@ Bounds and error messages: `content-contract.md`. Grammar facts:
       sentence.** The sentences are where the mistakes hide. "Zero results **with**
       suggestions" is the error signal; a bare `found: 0` is normal for legitimate
       plurals (`Grompere`, `Bicher`, `Kanner`, `Beem`) and compounds
-      (`Keessebong`, `Wiesselgeld`).
+      (`Keessebong`, `Wiesselgeld`). LOD checks forms, not syntax, so proofread
+      each clause separately — a separable prefix strands at the end
+      (`Hie botzt de Buedem … op`, never `Hien opbotzt`).
 - [ ] **Watch the German-cognate traps** — `Vierdergrond` not `Virdergrond`,
-      `warscheinlech` not `wahrscheinlech`. See `luxembourgish-grammar.md` § 4 for
-      the homograph list too.
+      `warscheinlech` not `wahrscheinlech`, `gewielt` not `gewählt`, `grouss` not
+      `groß`; also `Meenung`, `Iddi`, `erfëllend`, `Ofwiesslung`, `preparéieren`.
+      Some everyday words are absent from LOD: for `Syndic`/`Hausmeeschter` write
+      `de Verwalter`, for `Studentenhaus` write `d'Studentenheem`, and avoid
+      `kabellos`. See `luxembourgish-grammar.md` § 4 for the homograph list too.
 - [ ] **Distinct EN gloss per entry**, even for LU synonyms the dictionary
       translates identically (`d'Geld` / `de Su` both "the money" → one becomes "the
       coin").
@@ -62,7 +67,9 @@ Run all four. The first two are one command each.
       theme. Fails the build, names the file.
 - [ ] **`npm run check-content`** — the Eifeler-Regel n-drop audit. Advisory: it
       over-reports and you adjudicate. Known false positives are printed with the
-      results.
+      results; nominalized infinitives (`No dem Botzen`, `beim Staubsaugen`) are
+      one more it does not print. Real fixes it has caught: `hinnen gehollef` →
+      `hinne gehollef`, `an meng` → `a meng`, `kafen Bioprodukter` → `kafe …`.
 - [ ] **Distractor audit through the real builder.** `buildSentenceExercise`
       silently drops any distractor token colliding with an answer token, so a
       multi-word EN distractor like "at the top" against an answer containing
@@ -77,6 +84,8 @@ Run all four. The first two are one command each.
         tokenized, so multi-word tiles are fine there.) `grep -n
         "^@distractor-\(en\|lu\) .* " <files>` lists the offenders.
       - Signature: `(entry, requestedDirection, lessonVocab)` — no rng argument.
+        `buildFillExercise(entry, requestedDirection)` returns a
+        `FillBlankBatch` whose tiles are on `.item` (singular), not `.items`.
       - Build the accepted-token set with the exported `tokenizeSentence(answer,
         lang)`, **not** a whitespace split, or `d'Posch`-style tokens make the dump
         over-report.

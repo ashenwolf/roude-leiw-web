@@ -143,9 +143,8 @@ the duplicate-`@word` integration test are what prove that mechanically.
   returned 403 from a remote CI environment when those were authored). `shopping`
   and the picture theme are verified. Genders, plurals, and Eifeler-Regel forms are
   the risk areas.
-- Theme-completion/readiness stat; audio playback on prompts; a self-graded
-  speaking-prompt Exercise type; more themes (work, free time, housing, health,
-  past/future, Luxembourg).
+- Theme-completion/readiness stat; a self-graded speaking-prompt Exercise type;
+  more themes (work, free time, housing, health, past/future, Luxembourg).
 - **Licensing:** committed photos are a redistribution and this repo deploys
   publicly. Use own or clearly-licensed images.
 
