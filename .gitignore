@@ -61,3 +61,5 @@ zed-letz/grammars/
 # competitor analysis, next-iteration plans. Not documentation of how the app works
 # (that is CLAUDE.md and .claude/reference/), and not for publication.
 /growth/
+.playwright-mcp/
+playwright-responses/
